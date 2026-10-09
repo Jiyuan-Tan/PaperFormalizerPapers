@@ -4,6 +4,7 @@ import { cpSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { checkPr } from "../checks/check_pr.mjs";
+import { trustedSharer } from "../checks/trusted_sharer.mjs";
 import { copyFixture, FIXTURE, git, readJson, ROOT, SLUG, tmp, writeJson } from "./helpers.mjs";
 
 /** A repository with a base commit (after `before(dir)`) and a head commit (after `change(dir)`). */
@@ -96,4 +97,33 @@ test("a file name is never a command", () => {
   const r = repo((dir) => { add(dir); cpSync(path.join(FIXTURE, "MATCH.md"), path.join(dir, "papers", SLUG, "$(touch pwned);`id`.md")); });
   const problems = checkPr({ ...r, author: "fixture-user" });
   has(problems, /outside the layout of a paper folder/u);
+});
+
+test("the tree holds plain files only: a submodule, a symbolic link or an executable entry is refused, whatever the checkout shows", () => {
+  // entries written into the index alone: the working tree holds the paper as the check wants it
+  const entry = (mode, file) => {
+    const r = repo((dir) => add(dir));
+    const blob = git(r.cwd, "rev-parse", `:papers/${SLUG}/MATCH.md`);
+    git(r.cwd, "update-index", "--add", "--cacheinfo", `${mode},${mode === "160000" ? "1".repeat(40) : blob},papers/${SLUG}/${file}`);
+    git(r.cwd, "commit", "-q", "-m", "one more entry");
+    return { ...r, head: git(r.cwd, "rev-parse", "HEAD") };
+  };
+  const sub = entry("160000", "lean/sub");
+  has(checkPr({ ...sub, author: "fixture-user" }), /^"papers\/cns_simple_dml\/lean\/sub": a submodule — a paper folder holds plain files of git mode 100644 only$/u);
+  has(checkPr({ ...entry("120000", "README.md"), author: "fixture-user" }), /^"papers\/cns_simple_dml\/README\.md": a symbolic link/u);
+  has(checkPr({ ...entry("100755", "MATCH.md"), author: "fixture-user" }), /^"papers\/cns_simple_dml\/MATCH\.md": an executable file/u);
+});
+
+test("who merges without the owner: the logins of TRUSTED_SHARERS, or everyone with *; nobody when it is unset", () => {
+  assert.equal(trustedSharer("alice", undefined), false);
+  assert.equal(trustedSharer("alice", ""), false);
+  assert.equal(trustedSharer("alice", "bob, Alice"), true);
+  assert.equal(trustedSharer("alice", "bob,alice-2"), false);
+  assert.equal(trustedSharer("alice", " * "), true);
+  assert.equal(trustedSharer("", "*"), false);
+  const cli = (env) => spawnSync("node", [path.join(ROOT, "checks", "trusted_sharer.mjs")], { encoding: "utf8", env: { PATH: process.env.PATH, ...env } }).stdout;
+  assert.equal(cli({ PR_AUTHOR: "alice" }), "trusted=false\n");
+  assert.equal(cli({ PR_AUTHOR: "alice", TRUSTED_SHARERS: "alice" }), "trusted=true\n");
+  // a login is a value, never a line of shell or of the output file
+  assert.equal(cli({ PR_AUTHOR: "x\ntrusted=true", TRUSTED_SHARERS: "alice" }), "trusted=false\n");
 });

@@ -12,7 +12,21 @@ Nobody clones this repository to share a paper: the tool does it through GitHub.
 1. On a finished run, the user presses **Share** on the paper's page.
 2. The tool opens a pull request from the user's GitHub account that adds one folder, `papers/<slug>/`.
 3. An automatic check runs on the pull request (`.github/workflows/check.yml`).
-4. If it passes, the pull request merges itself, and Cloudflare Pages rebuilds the site from `main`.
+4. If it passes and the author is a trusted sharer (below), the pull request merges itself;
+   otherwise it waits for the owner to merge it. Cloudflare Pages rebuilds the site from `main`.
+
+## Who can get a paper in
+
+The seal is a checksum, not a signature: everything in it is computed on the sharer's machine, so
+any GitHub account can fabricate a bundle that is consistent with its own seal and passes the
+check — with content TheoremChecker never produced. The check keeps a folder well-formed and
+harmless to serve; it does not vouch for what the folder says.
+
+So a pull request merges without the owner only when its author is named in the repository
+variable `TRUSTED_SHARERS` (Settings → Secrets and variables → Actions → Variables): a
+comma-separated list of GitHub logins, or `*` to let every passing pull request merge itself.
+With the variable unset — the default — the check still runs on every pull request, and each one
+waits for the owner to read and merge it.
 
 ## A paper folder
 
@@ -47,9 +61,13 @@ and no Lean:
 - the pull request adds or changes files under exactly one `papers/<slug>/`, and nothing else;
 - `share.json` is well-formed, `shared_by` is the pull request's author, and a paper already in the
   registry is changed only by the person who shared it;
-- the required files are there and nothing is outside the layout above: no dotfile, no executable,
-  no symbolic link, no `.html` or `.js` file;
-- the folder is under 60 MB and no file is over 30 MB;
+- in the pull request's tree every entry of the folder is a plain file of git mode 100644: no
+  submodule, no symbolic link, no executable;
+- the required files are there and nothing is outside the layout above: no dotfile, no `.html`,
+  `.htm`, `.xhtml`, `.xht`, `.xml`, `.js` or `.mjs` file (a figure may be an `.svg`: the site's
+  headers keep one from running anything);
+- the folder is under 60 MB and 3000 files, and no file is over 24 MB (the static host's per-file
+  limit);
 - `page/page.json` parses, has `schema` 1 and the folder's slug;
 - **the seal holds**: the code in `f4_seal.json` is the hash of the seal's own contents, both
   reviewers passed every statement, and `f4_reviews.log` and every file under `lean/`,
@@ -99,7 +117,8 @@ Git), production branch `main`, and set:
 - Framework preset: none
 
 No `wrangler` file is needed. The build writes `dist/_headers`, which tells Cloudflare that nothing
-under `/papers/` may run a script: a bundle's files are served as data.
+under `/papers/` may run a script or load anything from elsewhere, and that each file is sandboxed
+(it has none of the site's origin): a bundle's files are served as data.
 
 ## Owner setup, once
 
@@ -108,6 +127,8 @@ The workflow can only merge a pull request when the repository lets it:
 1. **Settings → General → Pull Requests → Allow auto-merge**: on (with squash merging allowed).
 2. **Settings → Branches**: protect `main` and **require the status check `check`**. Without it a
    failing pull request could be merged, and auto-merge has nothing to wait for.
+3. Optionally, **Settings → Secrets and variables → Actions → Variables**: `TRUSTED_SHARERS`
+   ("Who can get a paper in"). Unset, every pull request waits for you.
 
 The workflow uses `pull_request_target`, so it always runs the scripts of `main` and only reads the
 pull request's files. Keep it that way: never add a step that installs, builds or runs anything from

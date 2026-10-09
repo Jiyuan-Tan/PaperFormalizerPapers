@@ -6,6 +6,8 @@
 //   - adds or changes files under exactly ONE folder papers/<slug>/, and nothing else;
 //   - names its author in that folder's share.json (`shared_by` = PR_AUTHOR), and, when the paper
 //     is already in the registry, is from the person who shared it;
+//   - holds, in <head>'s tree, only plain non-executable files under that folder (git mode 100644:
+//     no submodule, no symbolic link, no executable);
 //   - holds a folder that passes check_paper.
 // The pull request is DATA: this script and check_paper come from the base branch, git is asked for
 // names only (no shell, no diff driver), and nothing of the pull request is run.
@@ -20,6 +22,20 @@ const git = (cwd, args) => execFileSync("git", args, { cwd, encoding: "utf8", ma
 /** The paths the pull request changes: what <head> holds differently from where it left <base>. */
 export function changedPaths(cwd, base, head) {
   return git(cwd, ["diff", "--name-only", "-z", "--no-renames", "--no-ext-diff", "--no-textconv", `${base}...${head}`, "--"]).split("\0").filter(Boolean);
+}
+
+/** The entries of `folder` in the tree of `head` that are not a plain non-executable file. The
+ *  tree is what merges: a submodule entry is no file of the checkout, and a mode is the tree's. */
+export function treeProblems(cwd, head, folder) {
+  const problems = [];
+  for (const entry of git(cwd, ["ls-tree", "-r", "-z", head, "--", folder]).split("\0").filter(Boolean)) {
+    const [meta, file] = [entry.slice(0, entry.indexOf("\t")), entry.slice(entry.indexOf("\t") + 1)];
+    const [mode, type] = meta.split(" ");
+    if (mode === "100644" && type === "blob") continue;
+    const what = mode === "160000" ? "a submodule" : mode === "120000" ? "a symbolic link" : mode === "100755" ? "an executable file" : `a ${type} of mode ${mode}`;
+    problems.push(`${JSON.stringify(file)}: ${what} — a paper folder holds plain files of git mode 100644 only`);
+  }
+  return problems;
 }
 
 /** What keeps the pull request `base`…`head` of the checkout at `cwd` from merging; empty when nothing does. */
@@ -45,6 +61,11 @@ export function checkPr({ cwd, base, head, author }) {
   const [slug] = slugs;
   if (!SLUG.test(slug)) return [`the folder name ${JSON.stringify(slug)} is not a slug (lower-case letters, digits, _ and -)`];
   const dir = path.join(cwd, "papers", slug);
+  try {
+    problems.push(...treeProblems(cwd, head, `papers/${slug}`));
+  } catch (err) {
+    return [`cannot list the files of papers/${slug} (${String(err.stderr || err.message).trim()})`];
+  }
   problems.push(...checkPaper(dir).map((p) => (p.endsWith("no such folder") ? `papers/${slug}: removed by the pull request — the owner removes a paper, not a pull request` : `papers/${slug}: ${p}`)));
 
   const sharedBy = (text) => {

@@ -45,7 +45,8 @@ test("the index lists the fixture paper with its badges", () => {
   for (const s of ['href="REPORT.md"', 'href="MATCH.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4"]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
   assert.ok(existsSync(path.join(outDir, "papers", SLUG, "f4_seal.json")));
   assert.ok(readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8").includes('href="Papers/CnsSimpleDml/TVar.lean"'));
-  assert.match(readFileSync(path.join(outDir, "_headers"), "utf8"), /^\/papers\/\*\n {2}Content-Security-Policy: script-src 'none'/u);
+  assert.match(readFileSync(path.join(outDir, "_headers"), "utf8"), /^\/papers\/\*\n {2}Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'[^;\n]*; font-src [^;\n]*; sandbox\n/u);
+  assert.ok(index.includes("A share always carries the whole bundle") && !index.includes("You choose"));
 });
 
 test("a bundle's strings are escaped, and its rendered HTML is never used", () => {

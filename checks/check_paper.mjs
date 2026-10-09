@@ -8,8 +8,9 @@ import { fileURLToPath } from "node:url";
 import { ARXIV_ID, checkSeal, REVIEWS_FILE, SEAL_FILE, SEALED_DIRS } from "./seal.mjs";
 
 export const MAX_TOTAL_BYTES = 60 * 1024 * 1024;
-export const MAX_FILE_BYTES = 30 * 1024 * 1024;
-export const MAX_FILES = 5000;
+// (the static host's per-file limit is 25 MiB, and it serves a bounded number of files)
+export const MAX_FILE_BYTES = 24 * 1024 * 1024;
+export const MAX_FILES = 3000;
 
 export const SLUG = /^[a-z0-9][a-z0-9_-]{0,63}$/u;
 export const GITHUB_LOGIN = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/u;
@@ -19,8 +20,9 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-
 const REQUIRED = ["share.json", "bundle.json", SEAL_FILE, "page/page.json", "REPORT.md", "MATCH.md", "lean", "corrected_paper"];
 const TOP_FILES = new Set(["share.json", "bundle.json", SEAL_FILE, REVIEWS_FILE, "REPORT.md", "MATCH.md", "README.md"]);
 const TOP_DIRS = new Set(SEALED_DIRS);
-/** Types a browser runs when the site serves them: never part of a bundle. */
-const ACTIVE_EXT = new Set([".html", ".htm", ".xhtml", ".js", ".mjs"]);
+/** Types a browser runs when the site serves them: never part of a bundle. (A figure of the paper
+ *  may be an `.svg`: the site's headers for /papers/ keep one from running anything.) */
+export const ACTIVE_EXT = new Set([".html", ".htm", ".xhtml", ".xht", ".xml", ".js", ".mjs"]);
 const SHARE_KEYS = ["shared_by", "shared_at", "arxiv"];
 
 /** The regular files of `dir` by path from it, with each entry that is not a plain file or folder

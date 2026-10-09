@@ -5,7 +5,8 @@
 //   dist/papers/<slug>/            the paper's folder as shared, plus
 //   dist/papers/<slug>/index.html  a placeholder paper page (the interactive page is not built yet)
 //   dist/papers/<slug>/lean/index.html   the list of the Lean files (a static host lists no folder)
-//   dist/_headers                  Cloudflare Pages: nothing under /papers/ may run a script
+//   dist/_headers                  Cloudflare Pages: nothing under /papers/ may run a script, load
+//                                  anything from elsewhere (the pages' fonts apart) or act on the site
 //
 // A bundle is UNTRUSTED input. Every string taken from one is escaped; the main page shows plain
 // text only (the rendered HTML fields of page.json — paper.html, comments[].html, texHtml — are
@@ -301,6 +302,8 @@ const SCRIPT = `
 })();
 `;
 
+const PAPERS_CSP = "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; sandbox";
+
 const head = (title, extra = "") => `<!doctype html>
 <html lang="en">
 <head>
@@ -334,7 +337,7 @@ export function indexHtml(papers) {
   <section id="share" class="share">
     <div>
       <div class="t">Share a paper you checked</div>
-      <div class="d">On a finished run, press <em>Share</em> on the paper's page. The bundle is checked automatically and published here under your GitHub name. You choose whether the corrected source is included.</div>
+      <div class="d">On a finished run, press <em>Share</em> on the paper's page. The bundle is checked automatically and published here under your GitHub name. A share always carries the whole bundle: the corrected paper's TeX source and PDF, the findings, the Lean code and the report.</div>
     </div>
     <a class="btn" href="#how">How sharing works</a>
   </section>
@@ -420,7 +423,7 @@ function copyTree(from, to, rel = "") {
   mkdirSync(path.join(to, rel), { recursive: true });
   for (const e of readdirSync(path.join(from, rel), { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1))) {
     const r = rel ? `${rel}/${e.name}` : e.name;
-    if (e.name.startsWith(".") || e.isSymbolicLink() || /\.(?:x?html?|m?js)$/iu.test(e.name)) continue;
+    if (e.name.startsWith(".") || e.isSymbolicLink() || /\.(?:x?html?|xht|xml|m?js)$/iu.test(e.name)) continue;
     if (e.isDirectory()) out.push(...copyTree(from, to, r));
     else if (e.isFile()) {
       copyFileSync(path.join(from, r), path.join(to, r));
@@ -470,8 +473,10 @@ export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.joi
     papers.push(p);
   }
   writeFileSync(path.join(outDir, "index.html"), indexHtml(papers));
-  // Cloudflare Pages: a file of a bundle is served as data — no script runs from it
-  writeFileSync(path.join(outDir, "_headers"), "/papers/*\n  Content-Security-Policy: script-src 'none'\n  X-Content-Type-Options: nosniff\n");
+  // Cloudflare Pages: a file of a bundle is served as data — no script runs from it (an SVG figure
+  // included), and it is sandboxed: it has no origin of the site's. The font hosts are for the
+  // pages written above, which are under /papers/ too.
+  writeFileSync(path.join(outDir, "_headers"), `/papers/*\n  Content-Security-Policy: ${PAPERS_CSP}\n  X-Content-Type-Options: nosniff\n`);
   log(`built ${papers.length} paper(s) into ${outDir}`);
   return papers;
 }

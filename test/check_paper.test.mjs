@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
-import { chmodSync, cpSync, renameSync, rmSync, symlinkSync, writeFileSync, appendFileSync } from "node:fs";
+import { chmodSync, cpSync, renameSync, rmSync, symlinkSync, truncateSync, writeFileSync, appendFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
-import { checkPaper } from "../checks/check_paper.mjs";
+import { checkPaper, MAX_FILE_BYTES, MAX_FILES } from "../checks/check_paper.mjs";
 import { sealCode } from "../checks/seal.mjs";
 import { copyFixture, FIXTURE, readJson, reseal, ROOT, writeJson } from "./helpers.mjs";
 
@@ -126,4 +126,16 @@ test("a paper without its corrected source", () => {
   const problems = checkPaper(dir);
   has(problems, /^corrected_paper: missing$/u);
   has(problems, /corrected_paper\/main\.tex: missing from the bundle/u);
+});
+
+test("what a browser would run is refused, an SVG figure is not; a file over the host's limit is", () => {
+  const dir = copyFixture();
+  for (const f of ["a.xml", "b.XHT", "c.htm", "d.mjs"]) writeFileSync(path.join(dir, "corrected_paper", f), "x");
+  writeFileSync(path.join(dir, "corrected_paper", "fig.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"/>");
+  truncateSync(path.join(dir, "corrected_paper", "main.pdf"), MAX_FILE_BYTES + 1);
+  const problems = checkPaper(dir);
+  for (const [f, ext] of [["a.xml", "xml"], ["b.XHT", "xht"], ["c.htm", "htm"], ["d.mjs", "mjs"]]) has(problems, new RegExp(`"corrected_paper/${f}": a \\.${ext} file is not part of a bundle`, "u"));
+  assert.ok(!problems.some((p) => /fig\.svg.*not part of a bundle/u.test(p)));
+  has(problems, /"corrected_paper\/main\.pdf": 25165825 bytes, over the limit of 25165824 for one file/u);
+  assert.equal(MAX_FILES, 3000);
 });
