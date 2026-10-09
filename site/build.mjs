@@ -30,6 +30,8 @@
 //   cited results         f4_seal.json cited: the distinct node_id (results taken from the
 //                         literature as cited, not proved here)
 //   filter "Rests on cited results"   cited > 0, or page.json buckets.conditional > 0
+//   tokens                page.json tokens (the run's own ledger: total tokens and model calls of
+//                         the pipeline's stages; absent in a bundle written before it was recorded)
 //   What the check found  REPORT.md: its first paragraph after the verdict line (the report's own
 //                         count sentence). The bundle holds no short prose headline of the main
 //                         correction, so none is shown.
@@ -66,6 +68,7 @@ export function plain(v, max = 400) {
   return s.length > max ? `${s.slice(0, max).trimEnd()}…` : s;
 }
 const count = (n, one, many = `${one}s`) => `${n} ${n === 1 ? one : many}`;
+const compact = (n) => (n >= 1e9 ? `${(n / 1e9).toFixed(1)}B` : n >= 1e6 ? `${(n / 1e6).toFixed(n >= 1e8 ? 0 : 1)}M` : n >= 1e3 ? `${Math.round(n / 1e3)}k` : String(n));
 /** A path of a bundle as a relative link: plain segments only, each encoded; null otherwise. */
 const href = (rel) => (typeof rel === "string" && rel.split("/").every((s) => s && s !== "." && s !== ".." && !/[\\\p{Cc}]/u.test(s)) ? rel.split("/").map(encodeURIComponent).join("/") : null);
 const isFile = (p) => { try { return lstatSync(p).isFile(); } catch { return false; } };
@@ -113,6 +116,7 @@ export function paperData(dir, slug) {
     clarifications: comments.filter((c) => text(obj(c).kind).startsWith("reading")).length,
     cited,
     restsOnCited: cited > 0 || obj(page.buckets).conditional > 0,
+    tokens: Number.isFinite(obj(page.tokens).total) && obj(page.tokens).total > 0 ? { total: obj(page.tokens).total, calls: Number.isFinite(obj(page.tokens).calls) ? obj(page.tokens).calls : null } : null,
     summary,
     findings: errors.map((r) => ({
       name: plain(names[r.id], 80) || plain(`${text(r.kind)} ${text(r.label) || text(r.id)}`, 80),
@@ -137,6 +141,7 @@ function badges(p) {
   if (p.errors === 0) out.push('<span class="badge grey">No error found</span>');
   if (p.clarifications > 0) out.push(`<span class="badge blue">${count(p.clarifications, "clarification")}</span>`);
   if (p.cited > 0) out.push(`<span class="badge grey">${count(p.cited, "cited result")} taken as stated</span>`);
+  if (p.tokens) out.push(`<span class="badge grey" title="${p.tokens.total.toLocaleString("en-US")} tokens${p.tokens.calls ? ` in ${p.tokens.calls.toLocaleString("en-US")} model calls` : ""}, as the run's own ledger counted them">${compact(p.tokens.total)} tokens</span>`);
   return `<div class="badges">${out.join("")}</div>`;
 }
 

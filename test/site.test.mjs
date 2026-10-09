@@ -97,7 +97,7 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
   const clean = copyFixture("clean_paper", path.dirname(dir));
   const cleanPage = readJson(path.join(clean, "page", "page.json"));
   for (const r of cleanPage.results) Object.assign(r, { state: "ok", repair: null, paperError: null });
-  writeJson(path.join(clean, "page", "page.json"), { ...cleanPage, slug: "clean_paper", title: "A clean paper" });
+  writeJson(path.join(clean, "page", "page.json"), { ...cleanPage, slug: "clean_paper", title: "A clean paper", tokens: { calls: 412, uncounted: 0, input: 1_180_000_000, cached: 900_000_000, output: 20_500_000, total: 1_200_500_000 } });
   writeJson(path.join(clean, "share.json"), { shared_by: "fixture-user", shared_at: "2026-10-01", arxiv: null });
   const { index, papers } = site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
@@ -109,10 +109,13 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
     "refuted, no repair, not proved in Lean</li>",
     '<span class="badge grey">No error found</span>',
     'data-flags="clean cited"',
+    // the run's token total, when the bundle records it (the fixture paper's does not: no badge)
+    '1,200,500,000 tokens in 412 model calls, as the run\'s own ledger counted them">1.2B tokens</span>',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   // newest first: the featured entry is the fixture, then the clean paper
   assert.ok(index.indexOf("A Simple and General") < index.indexOf("A clean paper"));
   assert.equal(index.match(/class="paper featured"/gu).length, 1);
+  assert.equal(index.match(/ tokens<\/span>/gu).length, 1);
 });
 
 test("an empty registry, and a folder that is no bundle", () => {
