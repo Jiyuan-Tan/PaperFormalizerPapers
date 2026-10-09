@@ -1,0 +1,28 @@
+===== reviewer convergence/dual :: high :: lemma-batch[prop:resid,prop:resid-alt,prop:delta] =====
+--- codex stdout ---
+{
+  "status": "ok",
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:resid",
+      "verdict": "matched",
+      "note": "Unfolding gives the three exact thresholds and pinned unconditional simultaneous probability bound under the frozen population and training setup; ConfidenceIntervalClosedReading is definitionally true, and the unused Preading premise is discharged by choosing alphaProjectedRisk."
+    },
+    {
+      "obj_id": "prop:resid-alt",
+      "verdict": "matched",
+      "note": "Both directions preserve the stated hypotheses, epsilon domain, simultaneous probability, and projected-product minimum; alphaProjectedRisk conditions on W1 as pinned, and the symbol specification explicitly requires the estimator envelope for every fold."
+    },
+    {
+      "obj_id": "prop:delta",
+      "verdict": "matched",
+      "note": "Unfolding yields the exact Delta formula, including the absolute signed sum of residual means; equal-fold normalization matches the frozen setup, and oracleSigma is the population score moment scale specified by the core."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"status":"ok","statement_verdicts":[{"obj_id":"prop:resid","verdict":"matched","note":"Conclusion matches pin-9 exactly: for fixed l, 1 - eps/L ≤ sampleLaw-probability of the joint event, with nu = sampleLaw (unconditional) and eps > 0 (bk-1). Unfolded: delta1/2/3 = sqrt(n/L)·foldAverage of m(W,u) − α0min·u, v·(Y−γ0), −u·v with u = ĝ_l − γ0, v = â_l − α0min, as in prop:taylor (n_l = n/L by EqualFolds, L∣n). threshold1 = sqrt(6L/eps)·sqrt(Qbar+alphabar²)·R(ĝ)^(q/2); threshold2 = sqrt(n_l)·|μ_l| + sqrt(3L/eps)·sqrt(sigmabar²·R(â) − μ_l²); threshold3 = 3·sqrt(L)/eps·sqrt(n·R(ĝ)·R(â)); residualMean and trainingMSE are the training-conditional population integrals at fixed s. All seven listed hypotheses are present. Extras judged non-restrictive: PopulationModelDomain makes explicit the standing framework (α0min exists as the symbol presupposes; regression/projection/inverse model with the standing exact identification and pin-49); GammaZeroMem is the symbol space γ0 ∈ Γ; EqualFolds is def:fixed-fold-size; TrainingOnlyFits is training-only fitting plus measurability bookkeeping; ConfidenceIntervalClosedReading is true by definition; InverseMSEReading constrains a free Preading absent from the c
+[FIXTURE (TheoremCheckerPapers test data): trimmed from a real bundle; not a complete bundle.]

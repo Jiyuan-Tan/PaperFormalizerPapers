@@ -1,0 +1,12 @@
+{
+  "name": "theoremchecker-papers",
+  "private": true,
+  "description": "TheoremChecker — Shared Papers: the registry of papers checked by TheoremChecker, and the site built from it.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "check": "node checks/check_paper.mjs",
+    "build": "node site/build.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}
