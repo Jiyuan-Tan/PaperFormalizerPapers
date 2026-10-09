@@ -1,0 +1,63 @@
+# Checks a pull request that shares a paper, and lets it merge itself when it passes.
+#
+# WHY pull_request_target. A shared paper arrives from a fork (the Share button opens the pull
+# request from the user's own account). On `pull_request` a fork's run has a read-only token, which
+# cannot enable auto-merge, and it runs the workflow as the pull request edits it. `pull_request_target`
+# runs THIS file as it is on the base branch, with a token that can merge.
+#
+# THE RULE THAT MAKES IT SAFE: the pull request is data. The scripts that run are the base branch's
+# (checked out into trusted/); the pull request's files are checked out into pr/ and only READ —
+# nothing in pr/ is run, installed or sourced, and no file name or content of it reaches a shell
+# line (values go through env). Do not add a step that breaks this (no `npm install`, no build of pr/).
+#
+# OWNER SETUP (repository settings):
+#   1. General → Pull Requests → "Allow auto-merge": on (and "Allow squash merging").
+#   2. Branches → protect `main` → "Require status checks to pass" → require the check named `check`.
+#      Without it a failing pull request could still be merged, and `--auto` has nothing to wait for.
+name: check
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write        # merge the pull request
+  pull-requests: write   # enable auto-merge on it
+
+concurrency:
+  group: check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+      BASE_SHA: ${{ github.sha }}   # the base branch as it is now
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: The base branch's scripts (trusted)
+        uses: actions/checkout@v4
+        with:
+          path: trusted
+      - name: The pull request's files (data, never run)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check the pull request
+        working-directory: pr
+        run: node ../trusted/checks/check_pr.mjs "$BASE_SHA" "$HEAD_SHA"
+      - name: Merge when the required checks pass
+        run: gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --auto --squash --match-head-commit "$HEAD_SHA"
+      - name: A failed check takes auto-merge off
+        if: failure()
+        run: gh pr merge "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --disable-auto || true
