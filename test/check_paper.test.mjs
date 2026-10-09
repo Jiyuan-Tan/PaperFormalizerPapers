@@ -110,20 +110,20 @@ test("share.json", () => {
   const file = path.join(dir, "share.json");
   writeFileSync(file, "{ not json");
   has(checkPaper(dir), /share\.json: does not parse as JSON/u);
-  writeJson(file, { shared_by: "no such login!", shared_at: "yesterday", arxiv: "nope", source_included: "yes", extra: 1 });
+  writeJson(file, { shared_by: "no such login!", shared_at: "yesterday", arxiv: "nope", source_included: true });
   const problems = checkPaper(dir);
-  for (const re of [/shared_by is not a GitHub login/u, /shared_at is not an ISO date/u, /arxiv is neither/u, /source_included is not true or false/u, /unknown field\(s\) "extra"/u]) has(problems, re);
+  for (const re of [/shared_by is not a GitHub login/u, /shared_at is not an ISO date/u, /arxiv is neither/u, /unknown field\(s\) "source_included"/u]) has(problems, re);
   // the arXiv identifier is the sealed one
-  writeJson(file, { shared_by: "fixture-user", shared_at: "2026-10-09T12:00:00Z", arxiv: "2105.15197", source_included: true });
+  writeJson(file, { shared_by: "fixture-user", shared_at: "2026-10-09T12:00:00Z", arxiv: "2105.15197" });
   has(checkPaper(dir), /share\.json: arxiv "2105\.15197" is not the seal's \(null\)/u);
   reseal(dir, (seal) => { seal.arxiv = "2105.15197"; });
   assert.deepEqual(checkPaper(dir), []);
 });
 
-test("a paper shared without its source", () => {
+test("a paper without its corrected source", () => {
   const dir = copyFixture();
   rmSync(path.join(dir, "corrected_paper"), { recursive: true });
-  has(checkPaper(dir), /source_included is true, and corrected_paper\/ is absent/u);
-  writeJson(path.join(dir, "share.json"), { ...readJson(path.join(dir, "share.json")), source_included: false });
-  assert.deepEqual(checkPaper(dir), []);
+  const problems = checkPaper(dir);
+  has(problems, /^corrected_paper: missing$/u);
+  has(problems, /corrected_paper\/main\.tex: missing from the bundle/u);
 });

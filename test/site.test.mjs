@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { build, esc, plain } from "../site/build.mjs";
@@ -38,7 +38,6 @@ test("the index lists the fixture paper with its badges", () => {
     'data-flags="repaired cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   assert.ok(!index.includes("No error found</span>"));
-  assert.ok(!index.includes("source not shared"));
   assert.ok(!index.includes(">Subject<"), "no paper records a subject: no Subject button");
   // the paper's folder is copied, with the placeholder page and the list of the Lean files
   const paper = readFileSync(path.join(outDir, "papers", SLUG, "index.html"), "utf8");
@@ -65,7 +64,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   const bundle = readJson(path.join(dir, "bundle.json"));
   bundle.names.bad = `Theorem ${X}`;
   writeJson(path.join(dir, "bundle.json"), bundle);
-  writeJson(path.join(dir, "share.json"), { shared_by: X, shared_at: X, arxiv: X, source_included: true, subject: `stat.ML ${X}` });
+  writeJson(path.join(dir, "share.json"), { shared_by: X, shared_at: X, arxiv: X, subject: `stat.ML ${X}` });
   writeJson(path.join(dir, "f4_seal.json"), { ...readJson(path.join(dir, "f4_seal.json")), arxiv: X, code: X });
   writeFileSync(path.join(dir, "REPORT.md"), `# Report\n\n**Verdict: X**\n\nSummary ${X}\n\n## Next\n`);
   writeFileSync(path.join(dir, "lean", "<img src=x onerror=alert(4)>.lean"), "x");
@@ -85,7 +84,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   assert.equal(plain("A \\emph{simple} bound \\label{x}for $n$~points"), "A simple bound for n points");
 });
 
-test("the other outcomes: no error found, a refuted result, source not shared, an arXiv id", () => {
+test("the other outcomes: no error found, a refuted result, an arXiv id", () => {
   const dir = copyFixture();
   const file = path.join(dir, "page", "page.json");
   const page = readJson(file);
@@ -93,25 +92,23 @@ test("the other outcomes: no error found, a refuted result, source not shared, a
   errors[0].repair = "none";
   errors[0].proved = false;
   writeJson(file, page);
-  rmSync(path.join(dir, "corrected_paper"), { recursive: true });
   writeJson(path.join(dir, "f4_seal.json"), { ...readJson(path.join(dir, "f4_seal.json")), arxiv: "2105.15197" });
   const clean = copyFixture("clean_paper", path.dirname(dir));
   const cleanPage = readJson(path.join(clean, "page", "page.json"));
   for (const r of cleanPage.results) Object.assign(r, { state: "ok", repair: null, paperError: null });
   writeJson(path.join(clean, "page", "page.json"), { ...cleanPage, slug: "clean_paper", title: "A clean paper" });
-  writeJson(path.join(clean, "share.json"), { shared_by: "fixture-user", shared_at: "2026-10-01", arxiv: null, source_included: true });
+  writeJson(path.join(clean, "share.json"), { shared_by: "fixture-user", shared_at: "2026-10-01", arxiv: null });
   const { index, papers } = site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
   for (const s of [
     "1 result refuted, no repair keeps it",
     "39 of 41 results proved in Lean 4",
     "21 corrections",
-    '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-09 by @fixture-user · source not shared',
+    '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-09 by @fixture-user</',
     "refuted, no repair, not proved in Lean</li>",
     '<span class="badge grey">No error found</span>',
     'data-flags="clean cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
-  assert.equal(index.match(/Corrected PDF/gu).length, 1, "only the paper with its source links a PDF");
   // newest first: the featured entry is the fixture, then the clean paper
   assert.ok(index.indexOf("A Simple and General") < index.indexOf("A clean paper"));
   assert.equal(index.match(/class="paper featured"/gu).length, 1);

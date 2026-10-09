@@ -26,14 +26,17 @@ Nobody clones this repository to share a paper: the tool does it through GitHub.
       README.md         the bundle's own note (optional)
       page/page.json    the snapshot the paper's page is drawn from
       lean/             the Lean code, a standalone Lake project
-      corrected_paper/  the corrected TeX, its PDF and TODO.md — absent when the author
-                        chose not to share the source
+      corrected_paper/  the corrected TeX, its PDF and TODO.md
+
+A share always carries the whole bundle, the corrected paper's TeX source and PDF included. Every
+file is stored non-executable (git mode 100644): the share command writes them so, whatever mode
+the file had on the sharer's machine, and the check rejects an executable file.
 
 `share.json`:
 
-    { "shared_by": "<github login>", "shared_at": "<ISO date>", "arxiv": "<id or null>", "source_included": true }
+    { "shared_by": "<github login>", "shared_at": "<ISO date>", "arxiv": "<id or null>" }
 
-`subject` (a short string, e.g. the arXiv subject) is accepted as an optional fifth field; the tool
+`subject` (a short string, e.g. the arXiv subject) is accepted as an optional fourth field; the tool
 does not write it yet.
 
 ## What the check verifies
@@ -66,11 +69,9 @@ computed on the machine of the person who shares, and someone determined could c
 files of their own. Nothing here runs Lean either; to confirm the proofs, build `lean/` yourself
 (`lean/README.md` says how).
 
-Three smaller limits:
+Two smaller limits:
 
 - `REPORT.md`, `MATCH.md`, `bundle.json` and `README.md` are outside the seal.
-- When the source is not shared, the hashes of `corrected_paper/` stay in the seal but cannot be
-  recomputed here.
 - The arXiv identifier is the one the owner declared; nothing compares it with arXiv.
 
 ## Run the checks and build the site

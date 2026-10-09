@@ -16,12 +16,12 @@ export const GITHUB_LOGIN = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?$/u;
 
 /** The layout of a paper folder: what must be there, and what else may be. */
-const REQUIRED = ["share.json", "bundle.json", SEAL_FILE, "page/page.json", "REPORT.md", "MATCH.md", "lean"];
+const REQUIRED = ["share.json", "bundle.json", SEAL_FILE, "page/page.json", "REPORT.md", "MATCH.md", "lean", "corrected_paper"];
 const TOP_FILES = new Set(["share.json", "bundle.json", SEAL_FILE, REVIEWS_FILE, "REPORT.md", "MATCH.md", "README.md"]);
 const TOP_DIRS = new Set(SEALED_DIRS);
 /** Types a browser runs when the site serves them: never part of a bundle. */
 const ACTIVE_EXT = new Set([".html", ".htm", ".xhtml", ".js", ".mjs"]);
-const SHARE_KEYS = ["shared_by", "shared_at", "arxiv", "source_included"];
+const SHARE_KEYS = ["shared_by", "shared_at", "arxiv"];
 
 /** The regular files of `dir` by path from it, with each entry that is not a plain file or folder
  *  reported. Links are never followed. */
@@ -62,7 +62,6 @@ export function shareProblems(share) {
   if (typeof share.shared_by !== "string" || !GITHUB_LOGIN.test(share.shared_by)) problems.push("share.json: shared_by is not a GitHub login");
   if (typeof share.shared_at !== "string" || !ISO_DATE.test(share.shared_at) || Number.isNaN(Date.parse(share.shared_at))) problems.push("share.json: shared_at is not an ISO date");
   if (share.arxiv !== null && (typeof share.arxiv !== "string" || !ARXIV_ID.test(share.arxiv))) problems.push("share.json: arxiv is neither an arXiv identifier nor null");
-  if (typeof share.source_included !== "boolean") problems.push("share.json: source_included is not true or false");
   if ("subject" in share && (typeof share.subject !== "string" || share.subject.length === 0 || share.subject.length > 80)) problems.push("share.json: subject is not a short string");
   return problems;
 }
@@ -87,7 +86,7 @@ export function checkPaper(dir) {
     const [head, ...rest] = f.split("/");
     if (rest.length === 0 ? !TOP_FILES.has(head) : !TOP_DIRS.has(head)) problems.push(`${JSON.stringify(f)}: outside the layout of a paper folder`);
   }
-  for (const r of REQUIRED) if (r === "lean" ? ![...files.keys()].some((f) => f.startsWith("lean/")) : !files.has(r)) problems.push(`${r}: missing`);
+  for (const r of REQUIRED) if (TOP_DIRS.has(r) ? ![...files.keys()].some((f) => f.startsWith(`${r}/`)) : !files.has(r)) problems.push(`${r}: missing`);
   const total = [...files.values()].reduce((a, b) => a + b, 0);
   if (total > MAX_TOTAL_BYTES) problems.push(`the folder holds ${total} bytes, over the limit of ${MAX_TOTAL_BYTES}`);
   if (files.size > MAX_FILES) problems.push(`the folder holds ${files.size} files, over the limit of ${MAX_FILES}`);
@@ -95,10 +94,6 @@ export function checkPaper(dir) {
   // share.json
   const share = files.has("share.json") ? readJson(dir, "share.json", problems) : null;
   if (share !== null) problems.push(...shareProblems(share));
-  const hasSource = [...files.keys()].some((f) => f.startsWith("corrected_paper/"));
-  if (share && typeof share.source_included === "boolean" && share.source_included !== hasSource) {
-    problems.push(`share.json: source_included is ${share.source_included}, and corrected_paper/ is ${hasSource ? "there" : "absent"}`);
-  }
 
   // page/page.json and bundle.json
   const page = files.has("page/page.json") ? readJson(dir, "page/page.json", problems) : null;
@@ -111,7 +106,7 @@ export function checkPaper(dir) {
 
   // the seal
   if (files.has(SEAL_FILE)) {
-    const { seal, problems: sealProblems } = checkSeal(dir, { absent: hasSource ? [] : ["corrected_paper"] });
+    const { seal, problems: sealProblems } = checkSeal(dir);
     problems.push(...sealProblems);
     if (seal) {
       if (seal.slug !== slug) problems.push(`${SEAL_FILE}: its slug ${JSON.stringify(seal.slug)} is not the folder's (${slug})`);

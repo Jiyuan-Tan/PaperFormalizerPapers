@@ -67,12 +67,8 @@ export function sealCode(s) {
   ]));
 }
 
-/**
- * What keeps the seal of the bundle at `dir` from holding; empty when it holds. `absent`: a sealed
- * folder the bundle was shared without (the corrected source, when the author kept it): the files
- * the seal names there are not looked for — their hashes stay in the seal, unchecked.
- */
-export function checkSeal(dir, { absent = [] } = {}) {
+/** What keeps the seal of the bundle at `dir` from holding; empty when it holds. */
+export function checkSeal(dir) {
   let seal;
   try {
     seal = JSON.parse(readFileSync(path.join(dir, SEAL_FILE), "utf8"));
@@ -103,7 +99,6 @@ export function checkSeal(dir, { absent = [] } = {}) {
   // Only a regular file of the bundle itself is read: a link, or a path through one, counts as missing.
   const root = realpathSync(dir);
   for (const f of seal.files) {
-    if (absent.includes(f.path.split("/")[0])) continue;
     const full = path.join(dir, f.path);
     let plain = false;
     try {

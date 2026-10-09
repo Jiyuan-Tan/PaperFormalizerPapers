@@ -19,7 +19,6 @@
 //                         is normally absent and then left out, with the "Subject" sort button).
 //                         TODO: record the arXiv primary subject at share time (not fetched here).
 //   shared date, @login   share.json      shared_at, shared_by
-//   "source not shared"   the folder has no corrected_paper/
 //   k of n proved         page.json results: n = results.length (the paper's results and those a
 //                         correction split off them), k = those with proved === true
 //   corrections           results with state === "error" and repair "statement" or "proof"
@@ -105,7 +104,6 @@ export function paperData(dir, slug) {
     subject: plain(share.subject, 80) || null,
     sharedAt,
     sharedBy: /^[A-Za-z0-9-]{1,39}$/u.test(text(share.shared_by)) ? share.shared_by : null,
-    sourceShared: isDir(path.join(dir, "corrected_paper")),
     total: results.length,
     proved: results.filter((r) => r.proved === true).length,
     errors: errors.length,
@@ -141,14 +139,13 @@ function badges(p) {
   return `<div class="badges">${out.join("")}</div>`;
 }
 
-/** The meta line: arXiv id · subject · shared date by @login · source not shared — each when known. */
+/** The meta line: arXiv id · subject · shared date by @login — each when known. */
 function meta(p) {
   const shared = [p.sharedAt ? `shared ${esc(p.sharedAt.slice(0, 10))}` : "", p.sharedBy ? `${p.sharedAt ? "" : "shared "}by @${esc(p.sharedBy)}` : ""].filter(Boolean).join(" ");
   return [
     p.arxiv ? `<a href="https://arxiv.org/abs/${esc(p.arxiv)}">arXiv:${esc(p.arxiv)}</a>` : "",
     p.subject ? esc(p.subject) : "",
     shared,
-    p.sourceShared ? "" : "source not shared",
   ].filter(Boolean).join(" · ");
 }
 
