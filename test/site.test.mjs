@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
-import { build, esc, plain } from "../site/build.mjs";
+import { build, CSP, esc, plain } from "../site/build.mjs";
 import { copyFixture, FIXTURE, readJson, SLUG, tmp, writeJson } from "./helpers.mjs";
 
 const site = (papersDir) => {
@@ -39,14 +39,30 @@ test("the index lists the fixture paper with its badges", () => {
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   assert.ok(!index.includes("No error found</span>"));
   assert.ok(!index.includes(">Subject<"), "no paper records a subject: no Subject button");
-  // the paper's folder is copied, with the placeholder page and the list of the Lean files
+  // the paper's folder is copied, with its page (the viewer's, drawn from page/page.json, over a
+  // plain summary) and the list of the Lean files
   const paper = readFileSync(path.join(outDir, "papers", SLUG, "index.html"), "utf8");
-  assert.ok(paper.includes("The interactive page (findings beside the text, Lean statements) is not built yet."));
-  for (const s of ['href="REPORT.md"', 'href="MATCH.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4"]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
+  for (const s of [
+    '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
+    '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
+    "<title>A Simple and General Debiased Machine Learning Theorem with Finite Sample Guarantees — TheoremChecker</title>",
+    'href="REPORT.md"', 'href="MATCH.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4",
+  ]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
+  assert.ok(!paper.includes("{{"), "every field of the template is filled");
   assert.ok(existsSync(path.join(outDir, "papers", SLUG, "f4_seal.json")));
   assert.ok(readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8").includes('href="Papers/CnsSimpleDml/TVar.lean"'));
-  assert.match(readFileSync(path.join(outDir, "_headers"), "utf8"), /^\/papers\/\*\n {2}Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'[^;\n]*; font-src [^;\n]*; sandbox\n/u);
-  assert.ok(index.includes("A share always carries the whole bundle") && !index.includes("You choose"));
+  // the viewer is copied beside the papers (its template apart); GitHub Pages: no header file, no Jekyll
+  for (const f of ["app.js", "app.css", "purify.min.js", "katex/katex.min.js", "katex/katex.min.css", "pdfjs/pdf.min.mjs", "pdfjs/pdf.worker.min.mjs", "VERSION"]) assert.ok(existsSync(path.join(outDir, "viewer", f)), `dist/viewer lacks ${f}`);
+  assert.ok(!existsSync(path.join(outDir, "viewer", "page.html")) && !existsSync(path.join(outDir, "_headers")) && existsSync(path.join(outDir, ".nojekyll")));
+  // every page carries its policy in a <meta>, and runs no inline script
+  const leanIndex = readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8");
+  for (const html of [index, paper, leanIndex]) {
+    assert.match(html, /<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; [^"]*base-uri 'none'; form-action 'none'">/u);
+    assert.ok(!/<script(?![^>]*\ssrc=)[^>]*>/u.test(html), "an inline script");
+  }
+  assert.ok(paper.includes(`content="${CSP.replace("font-src 'self' data:", "font-src 'self' data: https://cdn.jsdelivr.net")}"`), "the paper's page: the strict policy, the code font's host apart");
+  assert.ok(index.includes('<script src="site.js"></script>') && readFileSync(path.join(outDir, "site.js"), "utf8").includes("document.documentElement.className = 'js'"));
+  assert.ok(index.includes("A share carries the whole bundle") && !index.includes("You choose"));
 });
 
 test("a bundle's strings are escaped, and its rendered HTML is never used", () => {
@@ -69,6 +85,10 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   writeJson(path.join(dir, "f4_seal.json"), { ...readJson(path.join(dir, "f4_seal.json")), arxiv: X, code: X });
   writeFileSync(path.join(dir, "REPORT.md"), `# Report\n\n**Verdict: X**\n\nSummary ${X}\n\n## Next\n`);
   writeFileSync(path.join(dir, "lean", "<img src=x onerror=alert(4)>.lean"), "x");
+  // files a browser would run are not served: a page, a script, an SVG
+  for (const f of ["index.html", "x.js", "fig.svg"]) writeFileSync(path.join(dir, "corrected_paper", f), "<script>alert(5)</script>");
+  page.title = `{{CSP}} {{FALLBACK}} ${page.title}`;
+  writeJson(file, page);
   const { outDir, index } = site(path.dirname(dir));
   const pages = [index, readFileSync(path.join(outDir, "papers", SLUG, "index.html"), "utf8"), readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8")];
   for (const html of pages) {
@@ -76,6 +96,9 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
     assert.ok(!/<img/u.test(html), "a tag of the bundle reached a page");
   }
   assert.ok(index.includes("Title &lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(2)&gt;"));
+  for (const f of ["index.html", "x.js", "fig.svg"]) assert.ok(!existsSync(path.join(outDir, "papers", SLUG, "corrected_paper", f)), `${f} was copied`);
+  // the template's fields are filled in one pass: a field's text is never read as another field
+  assert.ok(pages[1].includes("{{CSP}} {{FALLBACK}} Title"), "the title is written as it reads");
   assert.ok(index.includes("Summary &lt;script&gt;"));
   assert.ok(index.includes("<li>Theorem &lt;script&gt;"));
   assert.ok(index.includes("stat.ML &lt;script&gt;") && index.includes(">Subject<"));
@@ -126,4 +149,29 @@ test("an empty registry, and a folder that is no bundle", () => {
   const { papers, outDir } = site(path.dirname(dir));
   assert.equal(papers.length, 0);
   assert.ok(!existsSync(path.join(outDir, "papers", SLUG)));
+});
+
+test("only a file of a type no browser runs is copied into the site; the page builds without the rest", () => {
+  const dir = copyFixture();
+  const refused = ["x.shtml", "y.xsl", "z.xsd", "w.rng", "m.mml", "e.ecma", "F.SVG", "P.Html", "q.out"];
+  const kept = ["a.tex", "b.bib", "c.bbl", "d.sty", "e.cls", "f.bst", "fig.PNG", "g.jpg", "h.pdf", "notes.md", "i.txt", "j.json", "LICENSE"];
+  for (const f of [...refused, ...kept]) writeFileSync(path.join(dir, "corrected_paper", f), "<script>alert(1)</script>");
+  writeFileSync(path.join(dir, "lean", "lean-toolchain"), "leanprover/lean4:v4.33.0\n");
+  const { outDir, papers } = site(path.dirname(dir));
+  assert.equal(papers.length, 1);
+  const at = (f) => path.join(outDir, "papers", SLUG, "corrected_paper", f);
+  for (const f of refused) assert.ok(!existsSync(at(f)), `${f} was copied`);
+  for (const f of kept) assert.ok(existsSync(at(f)), `${f} was not copied`);
+  assert.ok(existsSync(path.join(outDir, "papers", SLUG, "lean", "lean-toolchain")));
+  assert.ok(existsSync(path.join(outDir, "papers", SLUG, "index.html")));
+});
+
+test("a slug of up to 80 characters, as the check allows, is on the site", () => {
+  const long = `p${"a".repeat(79)}`;
+  const dir = copyFixture(long);
+  const page = readJson(path.join(dir, "page", "page.json"));
+  writeJson(path.join(dir, "page", "page.json"), { ...page, slug: long });
+  const { papers, outDir } = site(path.dirname(dir));
+  assert.equal(papers.length, 1);
+  assert.ok(existsSync(path.join(outDir, "papers", long, "index.html")));
 });

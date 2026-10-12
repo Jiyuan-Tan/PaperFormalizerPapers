@@ -1,0 +1,52 @@
+# Takes in a paper shared through the Worker (worker/): the sharer pressed Share, signed in with
+# GitHub on the Worker's page and confirmed; the Worker then sent a `share` repository_dispatch with
+# the upload's id. checks/ingest.mjs fetches the upload from the Worker, checks it, and either
+# commits it on main (a sharer named in TRUSTED_SHARERS) and rebuilds the site, or opens a pull
+# request for the owner. Its result goes back to the Worker, where the sharer's tool reads it.
+#
+# The upload is DATA: the scripts that run are main's, the archive is read in memory and written as
+# plain files, and nothing of it is run, installed or sourced.
+#
+# OWNER SETUP (repository settings):
+#   - Secrets → Actions: INGEST_SECRET, the same value as the Worker's secret of that name.
+#   - Variables → Actions: TRUSTED_SHARERS (comma-separated logins, or *; unset: every share waits
+#     for the owner as a pull request); WORKER_URL and SITE_URL only to change the defaults.
+#   - Actions → General → Workflow permissions: "Allow GitHub Actions to create and approve pull
+#     requests" (for the pull request of a sharer who is not trusted).
+name: ingest
+
+on:
+  repository_dispatch:
+    types: [share]
+
+permissions:
+  contents: write        # commit the paper on main, or push its branch
+  pull-requests: write   # open the pull request of a sharer who is not trusted
+  actions: write         # start pages.yml (a push made with this run's token starts no workflow)
+
+# one run per upload (a repeated delivery waits, then finds the upload handled); different uploads
+# run side by side, and a push that loses a race to main is tried again on the new main
+concurrency:
+  group: ingest-${{ github.event.client_payload.id }}
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Take in the shared paper
+        env:
+          SHARE_ID: ${{ github.event.client_payload.id }}
+          INGEST_SECRET: ${{ secrets.INGEST_SECRET }}
+          TRUSTED_SHARERS: ${{ vars.TRUSTED_SHARERS }}
+          WORKER_URL: ${{ vars.WORKER_URL }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          GH_TOKEN: ${{ github.token }}
+        run: node checks/ingest.mjs --id "$SHARE_ID"

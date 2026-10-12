@@ -12,7 +12,7 @@ export const MAX_TOTAL_BYTES = 60 * 1024 * 1024;
 export const MAX_FILE_BYTES = 24 * 1024 * 1024;
 export const MAX_FILES = 3000;
 
-export const SLUG = /^[a-z0-9][a-z0-9_-]{0,63}$/u;
+export const SLUG = /^[a-z0-9][a-z0-9_-]{0,79}$/u;
 export const GITHUB_LOGIN = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?$/u;
 
@@ -20,10 +20,14 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-
 const REQUIRED = ["share.json", "bundle.json", SEAL_FILE, "page/page.json", "REPORT.md", "MATCH.md", "lean", "corrected_paper"];
 const TOP_FILES = new Set(["share.json", "bundle.json", SEAL_FILE, REVIEWS_FILE, "REPORT.md", "MATCH.md", "README.md"]);
 const TOP_DIRS = new Set(SEALED_DIRS);
-/** Types a browser runs when the site serves them: never part of a bundle. (A figure of the paper
- *  may be an `.svg`: the site's headers for /papers/ keep one from running anything.) */
-export const ACTIVE_EXT = new Set([".html", ".htm", ".xhtml", ".xht", ".xml", ".js", ".mjs"]);
+/** Types a browser runs when the site serves them: never part of a bundle. An `.svg` is one: opened
+ *  on its own it runs its scripts, and GitHub Pages, which serves the site, sets no header that
+ *  would keep it from doing so. */
+export const ACTIVE_EXT = new Set([".html", ".htm", ".xhtml", ".xht", ".xml", ".js", ".mjs", ".svg"]);
 const SHARE_KEYS = ["shared_by", "shared_at", "arxiv"];
+/** Optional fields of `share.json`: `shared_by_id`, the sharer's numeric GitHub account id (written
+ *  by the ingest; a login can be renamed and taken by someone else, the id cannot), and `subject`. */
+const SHARE_OPTIONAL = ["shared_by_id", "subject"];
 
 /** The regular files of `dir` by path from it, with each entry that is not a plain file or folder
  *  reported. Links are never followed. */
@@ -59,11 +63,12 @@ function readJson(dir, rel, problems) {
 export function shareProblems(share) {
   if (share === null || typeof share !== "object" || Array.isArray(share)) return ["share.json: not an object"];
   const problems = [];
-  const extra = Object.keys(share).filter((k) => !SHARE_KEYS.includes(k) && k !== "subject");
+  const extra = Object.keys(share).filter((k) => !SHARE_KEYS.includes(k) && !SHARE_OPTIONAL.includes(k));
   if (extra.length > 0) problems.push(`share.json: unknown field(s) ${extra.map((k) => JSON.stringify(k)).join(", ")}`);
   if (typeof share.shared_by !== "string" || !GITHUB_LOGIN.test(share.shared_by)) problems.push("share.json: shared_by is not a GitHub login");
   if (typeof share.shared_at !== "string" || !ISO_DATE.test(share.shared_at) || Number.isNaN(Date.parse(share.shared_at))) problems.push("share.json: shared_at is not an ISO date");
   if (share.arxiv !== null && (typeof share.arxiv !== "string" || !ARXIV_ID.test(share.arxiv))) problems.push("share.json: arxiv is neither an arXiv identifier nor null");
+  if ("shared_by_id" in share && !(Number.isSafeInteger(share.shared_by_id) && share.shared_by_id > 0)) problems.push("share.json: shared_by_id is not a GitHub account id (a positive integer)");
   if ("subject" in share && (typeof share.subject !== "string" || share.subject.length === 0 || share.subject.length > 80)) problems.push("share.json: subject is not a short string");
   return problems;
 }

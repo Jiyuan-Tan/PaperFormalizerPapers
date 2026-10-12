@@ -118,6 +118,13 @@ test("share.json", () => {
   has(checkPaper(dir), /share\.json: arxiv "2105\.15197" is not the seal's \(null\)/u);
   reseal(dir, (seal) => { seal.arxiv = "2105.15197"; });
   assert.deepEqual(checkPaper(dir), []);
+  // the sharer's account id, as the ingest writes it
+  writeJson(file, { shared_by: "fixture-user", shared_by_id: 4242, shared_at: "2026-10-09T12:00:00Z", arxiv: "2105.15197" });
+  assert.deepEqual(checkPaper(dir), []);
+  for (const bad of [0, -3, 1.5, "4242"]) {
+    writeJson(file, { shared_by: "fixture-user", shared_by_id: bad, shared_at: "2026-10-09", arxiv: "2105.15197" });
+    has(checkPaper(dir), /shared_by_id is not a GitHub account id/u);
+  }
 });
 
 test("a paper without its corrected source", () => {
@@ -128,14 +135,14 @@ test("a paper without its corrected source", () => {
   has(problems, /corrected_paper\/main\.tex: missing from the bundle/u);
 });
 
-test("what a browser would run is refused, an SVG figure is not; a file over the host's limit is", () => {
+test("what a browser would run is refused, an SVG figure too; a file over the host's limit is", () => {
   const dir = copyFixture();
   for (const f of ["a.xml", "b.XHT", "c.htm", "d.mjs"]) writeFileSync(path.join(dir, "corrected_paper", f), "x");
   writeFileSync(path.join(dir, "corrected_paper", "fig.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"/>");
   truncateSync(path.join(dir, "corrected_paper", "main.pdf"), MAX_FILE_BYTES + 1);
   const problems = checkPaper(dir);
   for (const [f, ext] of [["a.xml", "xml"], ["b.XHT", "xht"], ["c.htm", "htm"], ["d.mjs", "mjs"]]) has(problems, new RegExp(`"corrected_paper/${f}": a \\.${ext} file is not part of a bundle`, "u"));
-  assert.ok(!problems.some((p) => /fig\.svg.*not part of a bundle/u.test(p)));
+  has(problems, /"corrected_paper\/fig\.svg": a \.svg file is not part of a bundle/u);
   has(problems, /"corrected_paper\/main\.pdf": 25165825 bytes, over the limit of 25165824 for one file/u);
   assert.equal(MAX_FILES, 3000);
 });

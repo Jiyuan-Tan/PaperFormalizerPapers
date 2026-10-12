@@ -86,6 +86,19 @@ test("a paper someone else shared cannot be taken over", () => {
   assert.deepEqual(checkPr({ ...own, author: "fixture-user" }), []);
 });
 
+test("a paper shared with an account id is changed by that account only, whatever its login now", () => {
+  const withId = (dir, id, login = "fixture-user") => { const f = path.join(dir, "papers", SLUG, "share.json"); writeJson(f, { ...readJson(f), shared_by: login, shared_by_id: id }); };
+  // the login was renamed and taken by someone else: the id tells them apart
+  const taken = repo((dir) => withId(dir, 99), (dir) => { add(dir); withId(dir, 42); });
+  has(checkPr({ ...taken, author: "fixture-user", authorId: "99" }), /already shared by "fixture-user" — only they can change it/u);
+  // the account that shared it, under a new login
+  const renamed = repo((dir) => withId(dir, 42, "new-name"), (dir) => { add(dir); withId(dir, 42); });
+  assert.deepEqual(checkPr({ ...renamed, author: "new-name", authorId: "42" }), []);
+  // share.json names an id that is not the author's
+  const forged = repo((dir) => { add(dir); withId(dir, 42); });
+  has(checkPr({ ...forged, author: "fixture-user", authorId: "7" }), /shared_by_id is 42, and the pull request's author has the id "7"/u);
+});
+
 test("the folder must pass the paper check, and cannot be removed", () => {
   const bad = repo((dir) => { add(dir); writeFileSync(path.join(dir, "papers", SLUG, "lean", "Check.lean"), "-- tampered\n"); });
   has(checkPr({ ...bad, author: "fixture-user" }), /^papers\/cns_simple_dml: lean\/Check\.lean: changed after the seal was written/u);

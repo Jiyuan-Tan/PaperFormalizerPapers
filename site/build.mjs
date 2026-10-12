@@ -1,16 +1,23 @@
 #!/usr/bin/env node
 // Builds the static site, dist/, from papers/*/ :   node site/build.mjs [--papers <dir>] [--out <dir>]
 //
-//   dist/index.html                the main page: every paper, newest first
+//   dist/index.html                the main page: every paper, newest first (its script: dist/site.js)
+//   dist/viewer/                   the paper viewer: site/viewer/ as TheoremChecker's
+//                                  tools/scripts/sync_viewer.mjs copied it (never edited here)
 //   dist/papers/<slug>/            the paper's folder as shared, plus
-//   dist/papers/<slug>/index.html  a placeholder paper page (the interactive page is not built yet)
+//   dist/papers/<slug>/index.html  the paper's page: the viewer draws it from page/page.json, as the
+//                                  local UI draws a finished run; the summary below stands without it
 //   dist/papers/<slug>/lean/index.html   the list of the Lean files (a static host lists no folder)
-//   dist/_headers                  Cloudflare Pages: nothing under /papers/ may run a script, load
-//                                  anything from elsewhere (the pages' fonts apart) or act on the site
 //
-// A bundle is UNTRUSTED input. Every string taken from one is escaped; the main page shows plain
-// text only (the rendered HTML fields of page.json — paper.html, comments[].html, texHtml — are
-// never written into a page here); a link into a bundle is built from checked path segments.
+// The site is served by GitHub Pages under /<repository>/: every link is relative, and since the
+// host sets no header, each page carries its Content-Security-Policy in a <meta> (`CSP`).
+//
+// A bundle is UNTRUSTED input. Every string taken from one is escaped; the pages written here show
+// plain text only (the rendered HTML fields of page.json — paper.html, comments[].html, texHtml —
+// are never written into a page here: the viewer inserts them in the browser, through DOMPurify,
+// under the CSP); a link into a bundle is built from checked path segments; only a file of a type no
+// browser runs is copied into the site (`SERVED_EXT`, an allowlist: GitHub Pages types a file by its
+// extension and renders HTML and every XML type, with no CSP of ours on it). Git keeps the rest.
 //
 // WHERE EACH ELEMENT OF THE MAIN PAGE COMES FROM (one paper = one folder papers/<slug>/):
 //
@@ -42,15 +49,30 @@
 //   Corrected PDF         page.json paper.pdf, when that file is in the folder
 //   Lean code, Report     lean/ and REPORT.md, when they are in the folder
 //   seal                  f4_seal.json code
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, cpSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { SLUG } from "../checks/check_paper.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TOOL_URL = "https://github.com/Jiyuan-Tan/TheoremChecker";
+const VIEWER = path.join(ROOT, "site", "viewer");
+/** The policy of every page: scripts and data of the site only, no form, no <base>, no plugin. */
+export const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'";
+/** The pages written here (no HTML of a bundle in them) take their fonts from Google Fonts too. */
+const CSP_FONTS = CSP.replace("style-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com").replace("font-src 'self' data:", "font-src 'self' data: https://fonts.gstatic.com");
+/** The paper's page: the local UI's stylesheet takes its code font (JuliaMono) from jsDelivr. */
+const CSP_VIEWER = CSP.replace("font-src 'self' data:", "font-src 'self' data: https://cdn.jsdelivr.net");
 const FONTS = "https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap";
 const PAGE_SIZE = 20;
-const SLUG = /^[a-z0-9][a-z0-9_-]{0,63}$/u;
+/** The extensions of the bundle files copied into the site (lower case; a file with none is served
+ *  as octet-stream, a download): types a browser shows as data or offers to save, never runs. */
+export const SERVED_EXT = new Set(["pdf", "png", "jpg", "jpeg", "gif", "webp", "eps", "ps", "tex", "bib", "bbl", "bst", "sty", "cls", "md", "txt", "log", "json", "lean", "toml", "py", "sh"]);
+/** Whether the bundle file `name` is copied into the site. */
+export function served(name) {
+  const dot = name.lastIndexOf(".");
+  return dot <= 0 || SERVED_EXT.has(name.slice(dot + 1).toLowerCase());
+}
 const ARXIV_ID = /^(?:\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Za-z-]+)?\/\d{7})(?:v\d+)?$/u;
 
 export const esc = (s) => String(s).replace(/[&<>"']/gu, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -259,8 +281,8 @@ code,.mono{font-family:'IBM Plex Mono',monospace}
 
 // Search, sort, filter and paging over the entries' data attributes. Without it the page is the
 // plain list, newest first.
-const SCRIPT = `
-(function () {
+const SCRIPT = `document.documentElement.className = 'js';
+document.addEventListener('DOMContentLoaded', function () {
   var list = document.getElementById('papers'); if (!list) return;
   var items = [].slice.call(list.querySelectorAll('.paper'));
   var q = document.getElementById('q'), pager = document.getElementById('pager'), none = document.getElementById('none');
@@ -304,15 +326,15 @@ const SCRIPT = `
   });
   q.addEventListener('input', function () { state.page = 1; draw(); });
   draw();
-})();
+});
 `;
-
-const PAPERS_CSP = "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; sandbox";
 
 const head = (title, extra = "") => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="${CSP_FONTS}">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <link rel="stylesheet" href="${FONTS}">
@@ -322,7 +344,7 @@ const head = (title, extra = "") => `<!doctype html>
 export function indexHtml(papers) {
   const sorted = [...papers].sort((a, b) => (a.sharedAt ?? "") < (b.sharedAt ?? "") ? 1 : (a.sharedAt ?? "") > (b.sharedAt ?? "") ? -1 : a.slug < b.slug ? -1 : 1);
   const pill = (set, value, label, on) => `<button type="button" class="pill" data-set="${set}" data-value="${value}" aria-pressed="${on}">${label}</button>`;
-  return `${head("TheoremChecker — checked papers", "\n<script>document.documentElement.className='js'</script>")}
+  return `${head("TheoremChecker — checked papers", '\n<script src="site.js"></script>')}
 <body>
 <div class="wrap">
 
@@ -335,14 +357,14 @@ export function indexHtml(papers) {
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
     <h1>Checked papers</h1>
-    <p class="lede">Each paper here was read by TheoremChecker: every theorem, lemma and assumption was refereed against the paper's own proof, each error found was repaired by the smallest change that keeps the claim, and the corrected results were proved in Lean 4. Open a paper to see every finding beside the sentence it concerns, and the Lean statement behind each result.</p>
-    <p class="lede">Papers are shared by the people who ran the check, signed in with GitHub. A page shows what was checked, what was not, and what each result still takes from the literature.</p>
+    <p class="lede">TheoremChecker checks the theorems of a paper. It reads each theorem, lemma and assumption against the paper's own proof, fixes the errors it finds while keeping each result as close to the original as it can, and then proves the corrected statements in Lean 4.</p>
+    <p class="lede">The papers below were checked and shared by people who ran TheoremChecker on them. On a paper's page, the findings sit next to the text they refer to, and each result links to its Lean statement.</p>
   </header>
 
   <section id="share" class="share">
     <div>
       <div class="t">Share a paper you checked</div>
-      <div class="d">On a finished run, press <em>Share</em> on the paper's page. The bundle is checked automatically and published here under your GitHub name. A share always carries the whole bundle: the corrected paper's TeX source and PDF, the findings, the Lean code and the report.</div>
+      <div class="d">Share your checked work to help other people: readers see what the check found, and others can build on its Lean proofs. On a finished run, press <em>Share</em> on the paper's page and sign in with GitHub; the paper is checked automatically and appears here under your GitHub name. A share carries the whole bundle, including the corrected paper's TeX source and PDF.</div>
     </div>
     <a class="btn" href="#how">How sharing works</a>
   </section>
@@ -376,7 +398,7 @@ export function indexHtml(papers) {
   <section id="how" class="how">
     <h2>How a paper is checked, and shared</h2>
     <p>TheoremChecker reads a paper's LaTeX source. Every result is refereed against the paper's own proof; an error is repaired by the smallest change that keeps the claim; the corrected statements are stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
-    <p>Pressing <em>Share</em> on a finished run opens a pull request to this registry from your GitHub account, holding the run's bundle. An automatic check confirms the bundle is complete and unchanged since the run wrote it; when it passes, the pull request merges and the paper appears here.</p>
+    <p>Pressing <em>Share</em> on a finished run sends its bundle and opens a GitHub sign-in that asks for your public name and nothing else. You confirm the share on the page that follows; an automatic check then confirms the bundle is complete and unchanged since the run wrote it, and the paper appears here, after the registry owner's review unless you are a trusted sharer.</p>
   </section>
 
   <footer>
@@ -384,53 +406,54 @@ export function indexHtml(papers) {
   </footer>
 
 </div>
-<script>${SCRIPT}</script>
 </body>
 </html>
 `;
 }
 
-/** The placeholder paper page, dist/papers/<slug>/index.html. */
-export function paperHtml(p) {
+/** The paper's summary, plain text only: what its page shows until the viewer has drawn it (and
+ *  all it shows where the browser runs no script). */
+function paperSummary(p) {
   const links = [
     p.report ? '<li><a href="REPORT.md">REPORT.md</a> — the report: what was wrong, what was done, what was proved</li>' : "",
     p.match ? '<li><a href="MATCH.md">MATCH.md</a> — each result beside its Lean declaration</li>' : "",
     p.pdf ? `<li><a href="${p.pdf}">Corrected PDF</a> — the paper as it reads after the corrections</li>` : "",
     p.lean ? '<li><a href="lean/">lean/</a> — the Lean code</li>' : "",
   ].filter(Boolean);
-  return `${head(`${p.title} — TheoremChecker`)}
-<body>
-<div class="wrap">
-  <header>
-    <div class="kicker">TheoremChecker · Verified papers</div>
-    <nav><a href="../../">Checked papers</a></nav>
-    <h1>${esc(p.title)}</h1>
-    ${p.authors ? `<div class="authors">${esc(p.authors)}</div>` : ""}
-    <div class="meta">${meta(p)}</div>
-    ${badges(p)}
-  </header>
+  // (styled here: the viewer's stylesheet knows none of it, and the viewer replaces it)
+  return `<style>.snap-summary{max-width:46rem;margin:2rem auto;padding:0 1rem}.snap-summary .badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.snap-summary .badge{padding:2px 8px;border-radius:3px;background:#f1eee7;font-size:.8rem}.snap-summary .seal{font-family:monospace;font-size:.75rem;overflow-wrap:anywhere}</style>
+<div class="page snap-summary">
+  <p><a href="../../">Checked papers</a></p>
+  <h1>${esc(p.title)}</h1>
+  ${p.authors ? `<div class="authors">${esc(p.authors)}</div>` : ""}
+  <div class="meta">${meta(p)}</div>
+  ${badges(p)}
   ${p.summary ? `<p class="found"><strong>What the check found.</strong> ${esc(p.summary)}</p>` : ""}
   <ul class="links">
     ${links.join("\n    ")}
   </ul>
-  <p class="legend">The interactive page (findings beside the text, Lean statements) is not built yet.</p>
-  ${p.seal ? `<footer>seal <span class="mono">${p.seal}</span> — a checksum of the reviewers' verdicts and every file of the bundle. It shows the bundle is complete and unchanged; it does not show who ran the check.</footer>` : ""}
-</div>
-</body>
-</html>
-`;
+  ${p.seal ? `<p class="seal">seal ${p.seal} — a checksum of the reviewers' verdicts and every file of the bundle. It shows the bundle is complete and unchanged; it does not show who ran the check.</p>` : ""}
+  <noscript><p>The page with every finding beside the text and the Lean of each result needs JavaScript.</p></noscript>
+</div>`;
 }
 
-/** The regular files and folders of `from`, copied to `to`; anything else is left behind. Returns
- *  the files copied, by path from `from`. */
+/** The paper's page, dist/papers/<slug>/index.html: the viewer's page (`viewer/page.html`) for it. */
+export function paperHtml(p, template) {
+  const fields = { CSP: CSP_VIEWER, TITLE: esc(`${p.title} — TheoremChecker`), VIEWER: "../../viewer/", HOME: "../../", FALLBACK: paperSummary(p) };
+  // one pass: a field's value is never read for another field
+  return template.replace(/\{\{(CSP|TITLE|VIEWER|HOME|FALLBACK)\}\}/gu, (_, k) => fields[k]);
+}
+
+/** The regular files and folders of `from`, copied to `to`; anything else, and a file not `served`,
+ *  is left behind. Returns the files copied, by path from `from`. */
 function copyTree(from, to, rel = "") {
   const out = [];
   mkdirSync(path.join(to, rel), { recursive: true });
   for (const e of readdirSync(path.join(from, rel), { withFileTypes: true }).sort((a, b) => (a.name < b.name ? -1 : 1))) {
     const r = rel ? `${rel}/${e.name}` : e.name;
-    if (e.name.startsWith(".") || e.isSymbolicLink() || /\.(?:x?html?|xht|xml|m?js)$/iu.test(e.name)) continue;
+    if (e.name.startsWith(".") || e.isSymbolicLink()) continue;
     if (e.isDirectory()) out.push(...copyTree(from, to, r));
-    else if (e.isFile()) {
+    else if (e.isFile() && served(e.name)) {
       copyFileSync(path.join(from, r), path.join(to, r));
       out.push(r);
     }
@@ -458,9 +481,13 @@ function leanIndexHtml(p, files) {
 }
 
 /** Builds the site of the papers under `papersDir` into `outDir`; returns the papers it shows. */
-export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.join(ROOT, "dist"), log = console.log } = {}) {
+export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.join(ROOT, "dist"), viewerDir = VIEWER, log = console.log } = {}) {
+  const pageFile = path.join(viewerDir, "page.html");
+  if (!isFile(pageFile)) throw new Error(`${pageFile} is missing: copy the viewer with TheoremChecker's \`node tools/scripts/sync_viewer.mjs <this repository>\``);
+  const template = readFileSync(pageFile, "utf8");
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(path.join(outDir, "papers"), { recursive: true });
+  cpSync(viewerDir, path.join(outDir, "viewer"), { recursive: true, filter: (f) => path.basename(f) !== "page.html" });
   const papers = [];
   const slugs = existsSync(papersDir) ? readdirSync(papersDir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort() : [];
   for (const slug of slugs) {
@@ -472,16 +499,15 @@ export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.joi
     }
     const out = path.join(outDir, "papers", slug);
     const files = copyTree(dir, out);
-    writeFileSync(path.join(out, "index.html"), paperHtml(p));
+    writeFileSync(path.join(out, "index.html"), paperHtml(p, template));
     const lean = files.filter((f) => f.startsWith("lean/") && href(f)).map((f) => f.slice("lean/".length));
     if (p.lean) writeFileSync(path.join(out, "lean", "index.html"), leanIndexHtml(p, lean));
     papers.push(p);
   }
   writeFileSync(path.join(outDir, "index.html"), indexHtml(papers));
-  // Cloudflare Pages: a file of a bundle is served as data — no script runs from it (an SVG figure
-  // included), and it is sandboxed: it has no origin of the site's. The font hosts are for the
-  // pages written above, which are under /papers/ too.
-  writeFileSync(path.join(outDir, "_headers"), `/papers/*\n  Content-Security-Policy: ${PAPERS_CSP}\n  X-Content-Type-Options: nosniff\n`);
+  writeFileSync(path.join(outDir, "site.js"), SCRIPT);
+  // served as built: no Jekyll pass over the folders (it would drop those whose name starts with _)
+  writeFileSync(path.join(outDir, ".nojekyll"), "");
   log(`built ${papers.length} paper(s) into ${outDir}`);
   return papers;
 }

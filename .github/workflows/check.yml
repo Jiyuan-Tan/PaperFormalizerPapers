@@ -1,8 +1,10 @@
 # Checks a pull request that shares a paper, and lets it merge itself when it passes and its author
 # is one of the repository's trusted sharers.
 #
-# WHY pull_request_target. A shared paper arrives from a fork (the Share button opens the pull
-# request from the user's own account). On `pull_request` a fork's run has a read-only token, which
+# A paper shared with the Share button does not come this way: the Worker hands it to ingest.yml,
+# which checks it itself. This workflow is for a pull request a person opens by hand.
+#
+# WHY pull_request_target. Such a pull request arrives from a fork. On `pull_request` a fork's run has a read-only token, which
 # cannot enable auto-merge, and it runs the workflow as the pull request edits it. `pull_request_target`
 # runs THIS file as it is on the base branch, with a token that can merge.
 #
@@ -43,6 +45,7 @@ jobs:
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
       PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+      PR_AUTHOR_ID: ${{ github.event.pull_request.user.id }}
       BASE_SHA: ${{ github.sha }}   # the base branch as it is now
       HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
