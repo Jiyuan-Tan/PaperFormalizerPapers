@@ -1,0 +1,31 @@
+@misc{baileySizeNoiseTradeoffsGenerative2018,
+  title = {Size-{{Noise Tradeoffs}} in {{Generative Networks}}},
+  author = {Bailey, Bolton and Telgarsky, Matus},
+  year = {2018},
+  month = oct,
+  number = {arXiv:1810.11158},
+  eprint = {1810.11158},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.1810.11158},
+  urldate = {2023-12-07},
+  abstract = {This paper investigates the ability of generative networks to convert their input noise distributions into other distributions. Firstly, we demonstrate a construction that allows ReLU networks to increase the dimensionality of their noise distribution by implementing a "space-filling" function based on iterated tent maps. We show this construction is optimal by analyzing the number of affine pieces in functions computed by multivariate ReLU networks. Secondly, we provide efficient ways (using polylog \$(1/{\textbackslash}epsilon)\$ nodes) for networks to pass between univariate uniform and normal distributions, using a Taylor series approximation and a binary search gadget for computing function inverses. Lastly, we indicate how high dimensional distributions can be efficiently transformed into low dimensional distributions.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning}
+}
+
+@misc{perekrestenkoHighDimensionalDistributionGeneration2022a,
+  title = {High-{{Dimensional Distribution Generation Through Deep Neural Networks}}},
+  author = {Perekrestenko, Dmytro and Eberhard, L{\'e}andre and B{\"o}lcskei, Helmut},
+  year = {2022},
+  month = aug,
+  number = {arXiv:2107.12466},
+  eprint = {2107.12466},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2107.12466},
+  urldate = {2023-12-06},
+  abstract = {We show that every \$d\$-dimensional probability distribution of bounded support can be generated through deep ReLU networks out of a \$1\$-dimensional uniform input distribution. What is more, this is possible without incurring a cost - in terms of approximation error measured in Wasserstein-distance - relative to generating the \$d\$-dimensional target distribution from \$d\$ independent random variables. This is enabled by a vast generalization of the space-filling approach discovered in (Bailey \& Telgarsky, 2018). The construction we propose elicits the importance of network depth in driving the Wasserstein distance between the target distribution and its neural network approximation to zero. Finally, we find that, for histogram target distributions, the number of bits needed to encode the corresponding generative network equals the fundamental limit for encoding probability distributions as dictated by quantization theory.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning}
+}

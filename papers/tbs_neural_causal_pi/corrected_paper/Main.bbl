@@ -1,0 +1,263 @@
+\begin{thebibliography}{10}
+
+\bibitem{angrist1995identification}
+J.~Angrist and G.~Imbens.
+\newblock Identification and estimation of local average treatment effects, 1995.
+
+\bibitem{anthony1999neural}
+M.~Anthony, P.~L. Bartlett, P.~L. Bartlett, et~al.
+\newblock {\em Neural network learning: Theoretical foundations}, volume~9.
+\newblock cambridge university press Cambridge, 1999.
+
+\bibitem{balazadehPartialIdentificationTreatment2022}
+V.~Balazadeh, V.~Syrgkanis, and R.~G. Krishnan.
+\newblock Partial identification of treatment effects with implicit generative models, Oct. 2022.
+
+\bibitem{balkeCounterfactualProbabilitiesComputational1994}
+A.~Balke and J.~Pearl.
+\newblock Counterfactual probabilities: Computational methods, bounds and applications.
+\newblock In {\em Uncertainty Proceedings 1994}, pages 46--54. Elsevier, 1994.
+
+\bibitem{balkeBoundsTreatmentEffects1997}
+A.~Balke and J.~Pearl.
+\newblock Bounds on treatment effects from studies with imperfect compliance.
+\newblock {\em Journal of the American Statistical Association}, 92(439):1171--1176, Sept. 1997.
+
+\bibitem{bartlett2019nearly}
+P.~L. Bartlett, N.~Harvey, C.~Liaw, and A.~Mehrabian.
+\newblock Nearly-tight vc-dimension and pseudodimension bounds for piecewise linear neural networks.
+\newblock {\em Journal of Machine Learning Research}, 20(63):1--17, 2019.
+
+\bibitem{bellot2023towards}
+A.~Bellot.
+\newblock Towards bounding causal effects under markov equivalence.
+\newblock {\em arXiv preprint arXiv:2311.07259}, 2023.
+
+\bibitem{bonetInstrumentalityTestsRevisited2013}
+B.~Bonet.
+\newblock Instrumentality tests revisited, Jan. 2013.
+
+\bibitem{bottou2013counterfactual}
+L.~Bottou, J.~Peters, J.~Qui{\~n}onero-Candela, D.~X. Charles, D.~M. Chickering, E.~Portugaly, D.~Ray, P.~Simard, and E.~Snelson.
+\newblock Counterfactual reasoning and learning systems: The example of computational advertising.
+\newblock {\em Journal of Machine Learning Research}, 14(11), 2013.
+
+\bibitem{bungertCLIPCheapLipschitz2021}
+L.~Bungert, R.~Raab, T.~Roith, L.~Schwinn, and D.~Tenbrinck.
+\newblock {{CLIP}}: {{Cheap Lipschitz Training}} of {{Neural Networks}}.
+\newblock In A.~Elmoataz, J.~Fadili, Y.~Qu{\'e}au, J.~Rabin, and L.~Simon, editors, {\em Scale {{Space}} and {{Variational Methods}} in {{Computer Vision}}}, volume 12679, pages 307--319, {Cham}, 2021. {Springer International Publishing}.
+
+\bibitem{chernozhukov2007estimation}
+V.~Chernozhukov, H.~Hong, and E.~Tamer.
+\newblock Estimation and confidence regions for parameter sets in econometric models 1.
+\newblock {\em Econometrica}, 75(5):1243--1284, 2007.
+
+\bibitem{chizat2020faster}
+L.~Chizat, P.~Roussillon, F.~L{\'e}ger, F.-X. Vialard, and G.~Peyr{\'e}.
+\newblock Faster wasserstein distance estimation with the sinkhorn divergence.
+\newblock {\em Advances in Neural Information Processing Systems}, 33:2257--2269, 2020.
+
+\bibitem{cisse2017parseval}
+M.~Cisse, P.~Bojanowski, E.~Grave, Y.~Dauphin, and N.~Usunier.
+\newblock Parseval networks: Improving robustness to adversarial examples.
+\newblock In {\em International conference on machine learning}, pages 854--863. PMLR, 2017.
+
+\bibitem{duarteAutomatedApproachCausal2021}
+G.~Duarte, N.~Finkelstein, D.~Knox, J.~Mummolo, and I.~Shpitser.
+\newblock An automated approach to causal inference in discrete settings, Sept. 2021.
+
+\bibitem{feydy2020geometric}
+J.~Feydy.
+\newblock Geometric data analysis, beyond convolutions.
+\newblock {\em Applied Mathematics}, 2020.
+
+\bibitem{feydy2019interpolating}
+J.~Feydy, T.~S{\'e}journ{\'e}, F.-X. Vialard, S.-i. Amari, A.~Trouve, and G.~Peyr{\'e}.
+\newblock Interpolating between optimal transport and mmd using sinkhorn divergences.
+\newblock In {\em The 22nd International Conference on Artificial Intelligence and Statistics}, pages 2681--2690, 2019.
+
+\bibitem{fournier2015rate}
+N.~Fournier and A.~Guillin.
+\newblock On the rate of convergence in wasserstein distance of the empirical measure.
+\newblock {\em Probability theory and related fields}, 162(3-4):707--738, 2015.
+
+\bibitem{frauen2023estimating}
+D.~Frauen, T.~Hatt, V.~Melnychuk, and S.~Feuerriegel.
+\newblock Estimating average causal effects from patient trajectories.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial Intelligence}, volume~37, pages 7586--7594, 2023.
+
+\bibitem{frauenNeuralFrameworkGeneralized2024}
+D.~Frauen, F.~Imrie, A.~Curth, V.~Melnychuk, S.~Feuerriegel, and M.~{van der Schaar}.
+\newblock A {{Neural Framework}} for {{Generalized Causal Sensitivity Analysis}}, Apr. 2024.
+
+\bibitem{freedman2010statistical}
+D.~A. Freedman.
+\newblock {\em Statistical models and causal inference: a dialogue with the social sciences}.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{gottlieb2017efficient}
+L.-A. Gottlieb, A.~Kontorovich, and R.~Krauthgamer.
+\newblock Efficient regression in metric spaces via approximate lipschitz extension.
+\newblock {\em IEEE Transactions on Information Theory}, 63(8):4838--4849, 2017.
+
+\bibitem{goukRegularisationNeuralNetworks2021}
+H.~Gouk, E.~Frank, B.~Pfahringer, and M.~J. Cree.
+\newblock Regularisation of neural networks by enforcing {{Lipschitz}} continuity.
+\newblock {\em Machine Learning}, 110(2):393--416, Feb. 2021.
+
+\bibitem{gouk2021regularisation}
+H.~Gouk, E.~Frank, B.~Pfahringer, and M.~J. Cree.
+\newblock Regularisation of neural networks by enforcing lipschitz continuity.
+\newblock {\em Machine Learning}, 110:393--416, 2021.
+
+\bibitem{gunsiliusPathsamplingMethodPartially2020}
+F.~Gunsilius.
+\newblock A path-sampling method to partially identify causal effects in instrumental variable models, June 2020.
+
+\bibitem{hamiltonCompactHilbertIndices2007}
+C.~H. Hamilton and A.~Rau-Chaplin.
+\newblock Compact hilbert indices for multi-dimensional data.
+\newblock In {\em First International Conference on Complex, Intelligent and Software Intensive Systems (CISIS'07)}, pages 139--146. IEEE.
+
+\bibitem{han2024computational}
+S.~Han and S.~Yang.
+\newblock A computational approach to identification of treatment effects for policy evaluation.
+\newblock {\em Journal of Econometrics}, 240(1):105680, 2024.
+
+\bibitem{heckmanInstrumentalVariablesSelection2001}
+J.~J. Heckman and E.~J. Vytlacil.
+\newblock Instrumental variables, selection models, and tight bounds on the average treatment effect.
+\newblock In W.~Franz, M.~Lechner, and F.~Pfeiffer, editors, {\em Econometric Evaluation of Labour Market Policies}, volume~13, pages 1--15. Physica-Verlag HD, Heidelberg, 2001.
+
+\bibitem{hilbert1935stetige}
+D.~Hilbert.
+\newblock {\"U}ber die stetige abbildung einer linie auf ein fl{\"a}chenst{\"u}ck.
+\newblock {\em Dritter Band: Analysis{\textperiodcentered} Grundlagen der Mathematik{\textperiodcentered} Physik Verschiedenes: Nebst Einer Lebensgeschichte}, pages 1--2, 1935.
+
+\bibitem{huGenerativeAdversarialFramework2021}
+Y.~Hu, Y.~Wu, L.~Zhang, and X.~Wu.
+\newblock A generative adversarial framework for bounding confounded causal effects.
+\newblock {\em Proceedings of the AAAI Conference on Artificial Intelligence}, 35(13):12104--12112, May 2021.
+
+\bibitem{hu2021generative}
+Y.~Hu, Y.~Wu, L.~Zhang, and X.~Wu.
+\newblock A generative adversarial framework for bounding confounded causal effects.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial Intelligence}, volume~35, pages 12104--12112, 2021.
+
+\bibitem{Jang2016CategoricalRW}
+E.~Jang, S.~Gu, and B.~Poole.
+\newblock Categorical reparameterization with gumbel-softmax.
+\newblock {\em ArXiv}, abs/1611.01144, 2016.
+
+\bibitem{kilbertusClassAlgorithmsGeneral2020}
+N.~Kilbertus, M.~J. Kusner, and R.~Silva.
+\newblock A class of algorithms for general instrumental variable models, Oct. 2020.
+
+\bibitem{kocaoglu2017causalgan}
+M.~Kocaoglu, C.~Snyder, A.~G. Dimakis, and S.~Vishwanath.
+\newblock Causalgan: Learning causal implicit generative models with adversarial training.
+\newblock {\em arXiv preprint arXiv:1709.02023}, 2017.
+
+\bibitem{lotfollahi2021compositional}
+M.~Lotfollahi, A.~K. Susmelj, C.~De~Donno, Y.~Ji, I.~L. Ibarra, F.~A. Wolf, N.~Yakubova, F.~J. Theis, and D.~Lopez-Paz.
+\newblock Compositional perturbation autoencoder for single-cell response modeling.
+\newblock {\em BioRxiv}, 2021.
+
+\bibitem{luiseDifferentialPropertiesSinkhorn2018}
+G.~Luise, A.~Rudi, M.~Pontil, and C.~Ciliberto.
+\newblock Differential {{Properties}} of {{Sinkhorn Approximation}} for {{Learning}} with {{Wasserstein Distance}}, May 2018.
+
+\bibitem{maddisonConcreteDistributionContinuous2017}
+C.~J. Maddison, A.~Mnih, and Y.~W. Teh.
+\newblock The {{Concrete Distribution}}: {{A Continuous Relaxation}} of {{Discrete Random Variables}}, Mar. 2017.
+
+\bibitem{manski1990nonparametric}
+C.~F. Manski.
+\newblock Nonparametric bounds on treatment effects.
+\newblock {\em The American Economic Review}, 80(2):319--323, 1990.
+
+\bibitem{maoGenerativeInterventionsCausal2021}
+C.~Mao, A.~Cha, A.~Gupta, H.~Wang, J.~Yang, and C.~Vondrick.
+\newblock Generative interventions for causal learning.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}, pages 3947--3956, 2021.
+
+\bibitem{melnychukPartialCounterfactualIdentification2023a}
+V.~Melnychuk, D.~Frauen, and S.~Feuerriegel.
+\newblock Partial {{Counterfactual Identification}} of {{Continuous Outcomes}} with a {{Curvature Sensitivity Model}}.
+\newblock {\em Advances in Neural Information Processing Systems}, 36:32020--32060, Dec. 2023.
+
+\bibitem{milesPartialIdentificationPure2015}
+C.~H. Miles, P.~Kanki, S.~Meloni, and E.~J.~T. Tchetgen.
+\newblock On {{Partial Identification}} of the {{Pure Direct Effect}}, Sept. 2015.
+
+\bibitem{padhStochasticCausalProgramming2023}
+K.~Padh, J.~Zeitler, D.~Watson, M.~Kusner, R.~Silva, and N.~Kilbertus.
+\newblock Stochastic causal programming for bounding treatment effects.
+\newblock In {\em Conference on Causal Learning and Reasoning}, pages 142--176. PMLR, 2023.
+
+\bibitem{pauliTrainingRobustNeural2021}
+P.~Pauli, A.~Koch, J.~Berberich, P.~Kohler, and F.~Allg{\"o}wer.
+\newblock Training robust neural networks using {{Lipschitz}} bounds.
+\newblock {\em IEEE Control Systems Letters}, 6:121--126, 2021.
+
+\bibitem{perekrestenkoHighDimensionalDistributionGeneration2022a}
+D.~Perekrestenko, L.~Eberhard, and H.~B{\"o}lcskei.
+\newblock High-{{Dimensional Distribution Generation Through Deep Neural Networks}}, Aug. 2022.
+
+\bibitem{ramsahaiCausalBoundsObservable2012}
+R.~R. Ramsahai.
+\newblock Causal bounds and observable constraints for non-deterministic models.
+\newblock {\em Journal of Machine Learning Research}, 13(29):829--848, 2012.
+
+\bibitem{richardsonNonparametricBoundsSensitivity2014}
+A.~Richardson, M.~G. Hudgens, P.~B. Gilbert, and J.~P. Fine.
+\newblock Nonparametric {{Bounds}} and {{Sensitivity Analysis}} of {{Treatment Effects}}.
+\newblock {\em Statistical Science}, 29(4), Nov. 2014.
+
+\bibitem{sachsGeneralMethodDeriving2021}
+M.~C. Sachs, G.~Jonzon, A.~Sj{\"o}lander, and E.~E. Gabriel.
+\newblock A general method for deriving tight symbolic bounds on causal effects, Dec. 2021.
+
+\bibitem{Shchepin2010OnHM}
+E.~Shchepin.
+\newblock On hölder maps of cubes.
+\newblock {\em Mathematical Notes}, 87:757--767, 2010.
+
+\bibitem{tianTestableImplicationsCausal2002}
+J.~Tian and J.~Pearl.
+\newblock On the testable implications of causal models with hidden variables, Dec. 2002.
+
+\bibitem{virmauxLipschitzRegularityDeep2018a}
+A.~Virmaux and K.~Scaman.
+\newblock Lipschitz regularity of deep neural networks: Analysis and efficient estimation.
+\newblock {\em Advances in Neural Information Processing Systems}, 31, 2018.
+
+\bibitem{xiaCausalNeuralConnectionExpressiveness2022}
+K.~Xia, K.-Z. Lee, Y.~Bengio, and E.~Bareinboim.
+\newblock The causal-neural connection: Expressiveness, learnability, and inference, Oct. 2022.
+
+\bibitem{xia2022neural}
+K.~Xia, Y.~Pan, and E.~Bareinboim.
+\newblock Neural causal models for counterfactual identification and estimation.
+\newblock {\em arXiv preprint arXiv:2210.00035}, 2022.
+
+\bibitem{Yarotsky2018OptimalAO}
+D.~Yarotsky.
+\newblock Optimal approximation of continuous functions by very deep relu networks.
+\newblock {\em ArXiv}, abs/1802.03620, 2018.
+
+\bibitem{zhangBoundingCausalEffects2021}
+J.~Zhang and E.~Bareinboim.
+\newblock Bounding causal effects on continuous outcome.
+\newblock {\em Proceedings of the AAAI Conference on Artificial Intelligence}, 35(13):12207--12215, May 2021.
+
+\bibitem{zhangNonparametricMethodsPartial2021}
+J.~Zhang and E.~Bareinboim.
+\newblock Non-parametric methods for partial identification of causal effects.
+\newblock {\em Columbia CausalAI Laboratory Technical Report}, 2021.
+
+\bibitem{zhangPartialCounterfactualIdentification2021a}
+J.~Zhang, J.~Tian, and E.~Bareinboim.
+\newblock Partial counterfactual identification from observational and experimental data, Oct. 2021.
+
+\end{thebibliography}

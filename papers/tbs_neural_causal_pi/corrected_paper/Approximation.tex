@@ -1,0 +1,527 @@
+\subsection{Approximating Mixed Distributions by  Neural Networks}\label{sec:wide_nn}
+
+
+% Pattern Info
+ 
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_4hkgau9fs}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_4hkgau9fs}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% Pattern Info
+
+
+
+% Pattern Info
+ \begin{figure}[!tb]
+\centering
+\begin{minipage}[t]{0.49\textwidth}
+\resizebox{1\textwidth}{0.6\textwidth}{
+
+
+
+
+% Pattern Info
+ 
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_pjmb3795g}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_pjmb3795g}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% Pattern Info
+ 
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_vmm649169}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_vmm649169}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% Pattern Info
+ 
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_j1uup8dh3}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_j1uup8dh3}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+
+% Pattern Info
+ 
+\tikzset{
+pattern size/.store in=\mcSize, 
+pattern size = 5pt,
+pattern thickness/.store in=\mcThickness, 
+pattern thickness = 0.3pt,
+pattern radius/.store in=\mcRadius, 
+pattern radius = 1pt}
+\makeatletter
+\pgfutil@ifundefined{pgf@pattern@name@_h20rw4t9u}{
+\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_h20rw4t9u}
+{\pgfqpoint{0pt}{0pt}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{\pgfpoint{\mcSize}{\mcSize}}
+{
+\pgfsetcolor{\tikz@pattern@color}
+\pgfsetlinewidth{\mcThickness}
+\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+\pgfusepath{stroke}
+}}
+\makeatother
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,466); %set diagram left start at 0, and has height of 466
+
+%Shape: Rectangle [id:dp08188922999893511] 
+\draw  [fill={rgb, 255:red, 50; green, 205; blue, 50 }  ,fill opacity=0.27 ][dash pattern={on 4.5pt off 4.5pt}] (426.32,115.17) -- (565.84,115.17) -- (565.84,379.14) -- (426.32,379.14) -- cycle ;
+%Shape: Rectangle [id:dp8730782272312783] 
+\draw  [fill={rgb, 255:red, 0; green, 123; blue, 255 }  ,fill opacity=0.31 ][dash pattern={on 4.5pt off 4.5pt}] (235.56,109.65) -- (419.11,109.65) -- (419.11,379.13) -- (235.56,379.13) -- cycle ;
+%Shape: Rectangle [id:dp7294623448069186] 
+\draw  [fill={rgb, 255:red, 255; green, 215; blue, 0 }  ,fill opacity=0.28 ][dash pattern={on 4.5pt off 4.5pt}] (116.08,103.43) -- (232.96,103.43) -- (232.96,420.09) -- (116.08,420.09) -- cycle ;
+%Shape: Ellipse [id:dp9723029850693525] 
+\draw   (125.88,174.79) .. controls (125.88,169.77) and (130.36,165.7) .. (135.88,165.7) .. controls (141.41,165.7) and (145.88,169.77) .. (145.88,174.79) .. controls (145.88,179.81) and (141.41,183.88) .. (135.88,183.88) .. controls (130.36,183.88) and (125.88,179.81) .. (125.88,174.79) -- cycle ;
+%Straight Lines [id:da44121511458372664] 
+\draw    (143.08,181.28) -- (189.1,212.56) ;
+%Straight Lines [id:da10664291090341216] 
+\draw    (144.39,178.65) -- (189.1,190.38) ;
+%Straight Lines [id:da8645544903935076] 
+\draw    (144.56,170.36) -- (188.7,160.56) ;
+%Straight Lines [id:da8458563231796126] 
+\draw    (140.28,166.06) -- (189.5,138.01) ;
+%Shape: Rectangle [id:dp6632045877851285] 
+\draw  [pattern=_pjmb3795g,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 0; green, 0; blue, 0}] (189.9,112.33) -- (223.71,112.33) -- (223.71,224.84) -- (189.9,224.84) -- cycle ;
+%Shape: Ellipse [id:dp31922605789346514] 
+\draw   (126.65,296.37) .. controls (126.65,291.35) and (131.13,287.28) .. (136.65,287.28) .. controls (142.18,287.28) and (146.66,291.35) .. (146.66,296.37) .. controls (146.66,301.39) and (142.18,305.46) .. (136.65,305.46) .. controls (131.13,305.46) and (126.65,301.39) .. (126.65,296.37) -- cycle ;
+%Straight Lines [id:da6951469946336994] 
+\draw    (143.86,302.87) -- (189.88,334.14) ;
+%Straight Lines [id:da6432200991103603] 
+\draw    (145.17,300.23) -- (189.88,311.96) ;
+%Straight Lines [id:da9087793817652474] 
+\draw    (145.33,291.94) -- (189.48,282.14) ;
+%Straight Lines [id:da8200135966246651] 
+\draw    (141.06,287.64) -- (190.28,259.59) ;
+%Shape: Rectangle [id:dp38275362480078456] 
+\draw  [pattern=_vmm649169,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 0; green, 0; blue, 0}] (189.9,239.36) -- (223.71,239.36) -- (223.71,351.87) -- (189.9,351.87) -- cycle ;
+%Shape: Ellipse [id:dp4127470205661177] 
+\draw   (542.19,172.37) .. controls (542.19,167.34) and (546.66,163.27) .. (552.19,163.27) .. controls (557.71,163.27) and (562.19,167.34) .. (562.19,172.37) .. controls (562.19,177.39) and (557.71,181.46) .. (552.19,181.46) .. controls (546.66,181.46) and (542.19,177.39) .. (542.19,172.37) -- cycle ;
+%Shape: Ellipse [id:dp8206050819323283] 
+\draw   (542.98,215.92) .. controls (542.98,210.9) and (547.46,206.83) .. (552.98,206.83) .. controls (558.51,206.83) and (562.98,210.9) .. (562.98,215.92) .. controls (562.98,220.94) and (558.51,225.01) .. (552.98,225.01) .. controls (547.46,225.01) and (542.98,220.94) .. (542.98,215.92) -- cycle ;
+%Shape: Ellipse [id:dp8612753636083601] 
+\draw   (542.98,265.82) .. controls (542.98,260.8) and (547.46,256.73) .. (552.98,256.73) .. controls (558.51,256.73) and (562.98,260.8) .. (562.98,265.82) .. controls (562.98,270.84) and (558.51,274.91) .. (552.98,274.91) .. controls (547.46,274.91) and (542.98,270.84) .. (542.98,265.82) -- cycle ;
+%Shape: Ellipse [id:dp4646765555274579] 
+\draw   (543.77,307.56) .. controls (543.77,302.54) and (548.25,298.47) .. (553.77,298.47) .. controls (559.3,298.47) and (563.77,302.54) .. (563.77,307.56) .. controls (563.77,312.58) and (559.3,316.65) .. (553.77,316.65) .. controls (548.25,316.65) and (543.77,312.58) .. (543.77,307.56) -- cycle ;
+%Straight Lines [id:da6983902567305997] 
+\draw    (457.86,138.83) -- (542.19,172.37) ;
+%Straight Lines [id:da9915483267591334] 
+\draw    (458.17,161.93) -- (542.98,215.92) ;
+%Straight Lines [id:da9018526867737267] 
+\draw    (459.1,188.69) -- (542.98,265.82) ;
+%Straight Lines [id:da9396593475326205] 
+\draw    (459.41,213.2) -- (543.77,307.56) ;
+%Straight Lines [id:da14901068083379654] 
+\draw    (458.64,260.41) -- (542.19,172.37) ;
+%Straight Lines [id:da6972386114471343] 
+\draw    (458.94,283.51) -- (542.98,215.92) ;
+%Straight Lines [id:da5000842904526515] 
+\draw    (459.87,310.27) -- (542.98,265.82) ;
+%Straight Lines [id:da4037484327121441] 
+\draw    (460.18,334.78) -- (543.77,307.56) ;
+%Shape: Rectangle [id:dp524409935530016] 
+\draw  [pattern=_j1uup8dh3,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 0; green, 0; blue, 0}] (240.16,159.52) -- (407.26,159.52) -- (407.26,201.25) -- (240.16,201.25) -- cycle ;
+%Shape: Ellipse [id:dp4892029298346454] 
+\draw   (436.79,138.83) .. controls (436.79,133.81) and (441.27,129.74) .. (446.8,129.74) .. controls (452.32,129.74) and (456.8,133.81) .. (456.8,138.83) .. controls (456.8,143.85) and (452.32,147.92) .. (446.8,147.92) .. controls (441.27,147.92) and (436.79,143.85) .. (436.79,138.83) -- cycle ;
+%Straight Lines [id:da24123522953999488] 
+\draw    (407.26,159.52) -- (436.79,138.83) ;
+%Shape: Ellipse [id:dp8537144188027805] 
+\draw   (437.1,161.93) .. controls (437.1,156.91) and (441.58,152.84) .. (447.11,152.84) .. controls (452.63,152.84) and (457.11,156.91) .. (457.11,161.93) .. controls (457.11,166.95) and (452.63,171.02) .. (447.11,171.02) .. controls (441.58,171.02) and (437.1,166.95) .. (437.1,161.93) -- cycle ;
+%Straight Lines [id:da22923146089677404] 
+\draw    (408.99,170.4) -- (437.1,161.93) ;
+%Shape: Ellipse [id:dp5412403841858424] 
+\draw   (438.03,188.69) .. controls (438.03,183.67) and (442.51,179.6) .. (448.03,179.6) .. controls (453.56,179.6) and (458.04,183.67) .. (458.04,188.69) .. controls (458.04,193.71) and (453.56,197.78) .. (448.03,197.78) .. controls (442.51,197.78) and (438.03,193.71) .. (438.03,188.69) -- cycle ;
+%Straight Lines [id:da3743613883674364] 
+\draw    (406.4,184.01) -- (438.03,188.69) ;
+%Shape: Ellipse [id:dp07991930897220945] 
+\draw   (438.34,213.2) .. controls (438.34,208.18) and (442.82,204.1) .. (448.34,204.1) .. controls (453.87,204.1) and (458.34,208.18) .. (458.34,213.2) .. controls (458.34,218.22) and (453.87,222.29) .. (448.34,222.29) .. controls (442.82,222.29) and (438.34,218.22) .. (438.34,213.2) -- cycle ;
+%Straight Lines [id:da5133483152773983] 
+\draw    (407.26,201.25) -- (438.34,213.2) ;
+%Straight Lines [id:da46338079951062006] 
+\draw    (223.71,139.55) -- (240.16,159.52) ;
+%Straight Lines [id:da17579768262610496] 
+\draw    (222.85,161.33) -- (240.16,173.13) ;
+%Straight Lines [id:da12954884513463116] 
+\draw    (222.85,190.37) -- (241.03,185.83) ;
+%Straight Lines [id:da39814930119261427] 
+\draw    (224.58,210.33) -- (240.16,201.25) ;
+%Shape: Rectangle [id:dp2606009274925065] 
+\draw  [pattern=_h20rw4t9u,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 0; green, 0; blue, 0}] (241.03,281.1) -- (408.13,281.1) -- (408.13,322.84) -- (241.03,322.84) -- cycle ;
+%Shape: Ellipse [id:dp8474307058686932] 
+\draw   (437.66,260.41) .. controls (437.66,255.39) and (442.14,251.32) .. (447.66,251.32) .. controls (453.19,251.32) and (457.67,255.39) .. (457.67,260.41) .. controls (457.67,265.43) and (453.19,269.5) .. (447.66,269.5) .. controls (442.14,269.5) and (437.66,265.43) .. (437.66,260.41) -- cycle ;
+%Straight Lines [id:da23989494479250806] 
+\draw    (408.13,281.1) -- (437.66,260.41) ;
+%Shape: Ellipse [id:dp06594299779891055] 
+\draw   (437.97,283.51) .. controls (437.97,278.49) and (442.45,274.42) .. (447.97,274.42) .. controls (453.5,274.42) and (457.98,278.49) .. (457.98,283.51) .. controls (457.98,288.53) and (453.5,292.6) .. (447.97,292.6) .. controls (442.45,292.6) and (437.97,288.53) .. (437.97,283.51) -- cycle ;
+%Straight Lines [id:da6742131118977523] 
+\draw    (409.86,291.99) -- (437.97,283.51) ;
+%Shape: Ellipse [id:dp9925989221704901] 
+\draw   (438.89,310.27) .. controls (438.89,305.25) and (443.37,301.18) .. (448.9,301.18) .. controls (454.42,301.18) and (458.9,305.25) .. (458.9,310.27) .. controls (458.9,315.29) and (454.42,319.36) .. (448.9,319.36) .. controls (443.37,319.36) and (438.89,315.29) .. (438.89,310.27) -- cycle ;
+%Straight Lines [id:da8522793691029158] 
+\draw    (407.26,305.6) -- (438.89,310.27) ;
+%Shape: Ellipse [id:dp6392784749984819] 
+\draw   (439.2,334.78) .. controls (439.2,329.76) and (443.68,325.69) .. (449.21,325.69) .. controls (454.73,325.69) and (459.21,329.76) .. (459.21,334.78) .. controls (459.21,339.8) and (454.73,343.87) .. (449.21,343.87) .. controls (443.68,343.87) and (439.2,339.8) .. (439.2,334.78) -- cycle ;
+%Straight Lines [id:da9899179362151214] 
+\draw    (408.13,322.84) -- (439.2,334.78) ;
+%Straight Lines [id:da8728095382892269] 
+\draw    (224.58,261.14) -- (241.03,281.1) ;
+%Straight Lines [id:da6220868534874218] 
+\draw    (223.71,282.91) -- (241.03,294.71) ;
+%Straight Lines [id:da4706328177310575] 
+\draw    (223.71,311.95) -- (241.89,307.41) ;
+%Straight Lines [id:da16224775402784464] 
+\draw    (225.44,331.91) -- (241.03,322.84) ;
+%Shape: Brace [id:dp10517105112105707] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (111.17,174.5) .. controls (106.5,174.47) and (104.16,176.78) .. (104.13,181.45) -- (103.81,227.96) .. controls (103.76,234.63) and (101.41,237.94) .. (96.74,237.91) .. controls (101.41,237.94) and (103.72,241.29) .. (103.67,247.96)(103.69,244.96) -- (103.36,294.48) .. controls (103.33,299.15) and (105.64,301.49) .. (110.31,301.52) ;
+%Shape: Brace [id:dp09595319892472154] 
+\draw   (410.16,155.84) .. controls (410.21,151.17) and (407.9,148.82) .. (403.23,148.77) -- (336.45,148.03) .. controls (329.78,147.96) and (326.47,145.59) .. (326.52,140.92) .. controls (326.47,145.59) and (323.12,147.88) .. (316.45,147.81)(319.45,147.85) -- (249.66,147.08) .. controls (244.99,147.03) and (242.63,149.33) .. (242.58,154) ;
+%Shape: Brace [id:dp3804553538473594] 
+\draw   (226.79,107.98) .. controls (226.81,103.31) and (224.49,100.97) .. (219.82,100.96) -- (217.5,100.95) .. controls (210.83,100.92) and (207.51,98.58) .. (207.52,93.91) .. controls (207.51,98.58) and (204.17,100.9) .. (197.5,100.88)(200.5,100.89) -- (195.18,100.87) .. controls (190.51,100.85) and (188.17,103.17) .. (188.16,107.84) ;
+%Shape: Brace [id:dp778621825393218] 
+\draw   (563.12,104.15) .. controls (563.19,99.48) and (560.89,97.12) .. (556.22,97.06) -- (505.68,96.38) .. controls (499.01,96.29) and (495.71,93.91) .. (495.78,89.24) .. controls (495.71,93.91) and (492.35,96.2) .. (485.69,96.11)(488.69,96.15) -- (435.15,95.43) .. controls (430.48,95.36) and (428.12,97.66) .. (428.06,102.33) ;
+
+% Text Node
+\draw (177.12,381.92) node   [align=left] {\begin{minipage}[lt]{79.48pt}\setlength\topsep{0pt}
+\begin{center}
+{\fontfamily{ptm}\selectfont {\large Space-filling Curve }}
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (141.05,218.31) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{{\Huge ...}}};
+% Text Node
+\draw (504,367.4) node   [align=left] {\begin{minipage}[lt]{109.51pt}\setlength\topsep{0pt}
+{\fontfamily{ptm}\selectfont {\large Gumbel-Softmax }}
+\end{minipage}};
+% Text Node
+\draw (301.23,221.03) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{{\Huge ...}}};
+% Text Node
+\draw (334.43,368.24) node   [align=left] {\begin{minipage}[lt]{140.63pt}\setlength\topsep{0pt}
+{\fontfamily{ptm}\selectfont { Lipschitz Homeomorphism}}
+\end{minipage}};
+% Text Node
+\draw (52.29,245.72) node   [align=left] {\begin{minipage}[lt]{75.35pt}\setlength\topsep{0pt}
+\begin{center}
+$\displaystyle N_{C}$= \#Connected components of latent dist. 
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (329.01,130.46) node   [align=left] {\begin{minipage}[lt]{99.62pt}\setlength\topsep{0pt}
+\begin{center}
+Width: $\displaystyle W_{2}$ Depth $\displaystyle L_{2}$
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (207.38,65.26) node   [align=left] {\begin{minipage}[lt]{73pt}\setlength\topsep{0pt}
+\begin{center}
+Width: $\displaystyle W_{1}$ \\Depth $\displaystyle L_{1}$
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (432.97,50.1) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{82.66pt}\setlength\topsep{0pt}
+\begin{center}
+Randomly output \\one component
+\end{center}
+
+\end{minipage}};
+
+
+\end{tikzpicture}
+
+}
+\caption{Architecture of neural network for $ 4-$dimensional output. The first (yellow) part approximates the distribution on different connected components of the support using the results from \cite{perekrestenkoHighDimensionalDistributionGeneration2022a}. The width and depth of each block in this part are $W_1$ and $L_1$. The second (blue) part transforms the distributions on the unit cube to the distributions on the support. The width and depth of each block in the blue part are $W_2$ and $L_2$. The third (green) part is the Gumbel-Softmax layer. It combines the distributions on different connected components of the support together and outputs the final distribution. }
+\label{fig:wide_nn}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.49\textwidth}
+\resizebox{0.9\textwidth}{0.5\textwidth}
+{
+
+\noindent\textit{Remark (notation).} $W_1$ is the integer width of each component network $\hat{g}_1^j\in\mathcal{NN}_{1,d_j^C}(W_1,L_1)$, $j\in[N_C]$, rather than the combined width of all parallel component networks. In a result cited in the proof of Theorem~\ref{thm:wide_nn}: For each component of positive dimension $q=d_i^C$, the construction takes $W_1\geqslant A_q2^q$ and $n=\lfloor(W_1/A_q)^{1/q}\rfloor$, where $A_q\geqslant1$ depends only on $q$ and bounds the clipped network width by $A_qn^q$. $W_2$ is the integer width of each component network $\hat{g}_2^j\in\mathcal{NN}_{d_j^C,d}(W_2,L_2)$, $j\in[N_C]$. $L_1$ is the integer depth of each component network $\hat{g}_1^j\in\mathcal{NN}_{1,d_j^C}(W_1,L_1)$, $j\in[N_C]$. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: At sample size $n$, the first-block depth is $L_{1,n}$, with $L_{1,n}=\Theta(m_n^{d_{\max}^U/(2d_{\max}^U+4)})$; the architectural order uses sufficiently large fixed constant factors supplied by the network constructions. In Corollary~\ref{corollary:deep_nn}: The displayed error bound is asymptotic as $L_0,L_1,L_2\to\infty$ and $\tau\downarrow0$, with $R$ and the causal model fixed; $R>0$ is fixed before choosing $\hat{\mathcal M}$. The implicit constant is independent of the intervention and the network budgets, but may depend on $R$ and the fixed causal model. $L_2$ is the integer depth of each component network $\hat{g}_2^j\in\mathcal{NN}_{d_j^C,d}(W_2,L_2)$, $j\in[N_C]$. In a result cited in the proof of Theorem~\ref{thm:wide_nn}: $L_2$ is also the depth of each scalar coordinate approximant $\hat{g}_2^{i,j}$ used to form $\hat{g}_2^i=(\hat{g}_2^{i,1},\ldots,\hat{g}_2^{i,d})$. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: At sample size $n$, the second-block depth is $L_{2,n}$, with $L_{2,n}=\Theta(m_n^{d_{\max}^U/(2d_{\max}^U+4)})$; the architectural order uses sufficiently large fixed constant factors supplied by the network constructions. In Corollary~\ref{corollary:deep_nn}: The displayed error bound is asymptotic as $L_0,L_1,L_2\to\infty$ and $\tau\downarrow0$, with $R$ and the causal model fixed; $R>0$ is fixed before choosing $\hat{\mathcal M}$. The implicit constant is independent of the intervention and the network budgets, but may depend on $R$ and the fixed causal model.
+
+
+
+
+
+
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,335); %set diagram left start at 0, and has height of 335
+
+%Shape: Rectangle [id:dp15930122249892342] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 0; green, 123; blue, 255 }  ,fill opacity=0.31 ][dash pattern={on 4.5pt off 4.5pt}] (363.16,35.31) -- (552.02,35.31) -- (552.02,325.93) -- (363.16,325.93) -- cycle ;
+%Shape: Rectangle [id:dp9986917405631817] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 215; blue, 0 }  ,fill opacity=0.28 ][dash pattern={on 4.5pt off 4.5pt}] (123.16,35.31) -- (339.02,35.31) -- (339.02,327.12) -- (123.16,327.12) -- cycle ;
+%Straight Lines [id:da26489669286703244] 
+\draw    (137.02,128.85) -- (208.02,128.85) ;
+%Straight Lines [id:da9888477499089534] 
+\draw    (137.02,128.85) -- (137.02,111.85) ;
+%Straight Lines [id:da2730093828070803] 
+\draw    (208.02,128.85) -- (208.02,111.85) ;
+%Straight Lines [id:da5717948289754777] 
+\draw    (137.02,179.85) -- (208.02,179.85) ;
+%Straight Lines [id:da5953442554223825] 
+\draw    (137.02,179.85) -- (137.02,162.85) ;
+%Straight Lines [id:da6324631776083152] 
+\draw    (208.02,179.85) -- (208.02,162.85) ;
+%Straight Lines [id:da8348154802152368] 
+\draw    (137.02,224.85) -- (208.02,224.85) ;
+%Straight Lines [id:da5026006821299596] 
+\draw    (137.02,224.85) -- (137.02,207.85) ;
+%Straight Lines [id:da5989217517467482] 
+\draw    (208.02,224.85) -- (208.02,207.85) ;
+%Straight Lines [id:da8194431543259233] 
+\draw    (137.02,266.85) -- (208.02,266.85) ;
+%Straight Lines [id:da3884338087659025] 
+\draw    (137.02,266.85) -- (137.02,249.85) ;
+%Straight Lines [id:da5105817541521418] 
+\draw    (208.02,266.85) -- (208.02,249.85) ;
+%Shape: Polygon Curved [id:ds050110039454926314] 
+\draw  [color={rgb, 255:red, 255; green, 69; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 69; blue, 0 }  ,fill opacity=1 ] (411,61) .. controls (431,51) and (521,41) .. (501,61) .. controls (481,81) and (539.98,150.15) .. (501,121) .. controls (462.02,91.85) and (439.98,92.15) .. (411,121) .. controls (382.02,149.85) and (391,71) .. (411,61) -- cycle ;
+%Curve Lines [id:da2609994038248238] 
+\draw [color={rgb, 255:red, 255; green, 69; blue, 0 }  ,draw opacity=1 ]   (381.02,177.85) .. controls (398.99,164.37) and (427.26,171.89) .. (453.67,180.01) .. controls (480.07,188.12) and (480.02,124.7) .. (520,175) ;
+%Shape: Circle [id:dp047849516898298416] 
+\draw  [color={rgb, 255:red, 255; green, 69; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 69; blue, 0 }  ,fill opacity=1 ] (470.15,310.35) .. controls (470.15,308.42) and (471.71,306.85) .. (473.65,306.85) .. controls (475.58,306.85) and (477.15,308.42) .. (477.15,310.35) .. controls (477.15,312.29) and (475.58,313.85) .. (473.65,313.85) .. controls (471.71,313.85) and (470.15,312.29) .. (470.15,310.35) -- cycle ;
+%Curve Lines [id:da37224530912069054] 
+\draw [color={rgb, 255:red, 138; green, 43; blue, 226 }  ,draw opacity=1 ]   (172.52,128.85) .. controls (181.43,71.43) and (216.31,71.31) .. (269.4,89.75) ;
+\draw [shift={(271.02,90.31)}, rotate = 199.38] [color={rgb, 255:red, 138; green, 43; blue, 226 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da8010124660438036] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (172.52,266.85) .. controls (234.39,300.97) and (237.95,297.39) .. (284.59,275) ;
+\draw [shift={(286.02,274.31)}, rotate = 154.4] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Curve Lines [id:da2374364900264201] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (172.52,179.85) .. controls (199.02,149.41) and (206.09,139.36) .. (272.02,165.91) ;
+\draw [shift={(273.02,166.31)}, rotate = 202.03] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Polygon Curved [id:ds2277785699514534] 
+\draw  [color={rgb, 255:red, 255; green, 69; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 69; blue, 0 }  ,fill opacity=1 ] (409.02,228.85) .. controls (381.02,202.85) and (443.04,239.71) .. (494.02,217.85) .. controls (545,196) and (480,220) .. (500,250) .. controls (520,280) and (511.98,247.15) .. (410,250) .. controls (308.02,252.85) and (437.02,254.85) .. (409.02,228.85) -- cycle ;
+%Curve Lines [id:da8327407583075901] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (172.52,224.85) .. controls (202.87,199.44) and (206.12,186.39) .. (273.99,218.82) ;
+\draw [shift={(275.02,219.31)}, rotate = 205.64] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Square [id:dp7698616097738606] 
+\draw  [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 215; blue, 0 }  ,fill opacity=1 ] (273.02,69.31) -- (323.02,69.31) -- (323.02,119.31) -- (273.02,119.31) -- cycle ;
+%Shape: Square [id:dp47706693737043326] 
+\draw  [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 215; blue, 0 }  ,fill opacity=1 ] (278.02,200.31) -- (328.02,200.31) -- (328.02,250.31) -- (278.02,250.31) -- cycle ;
+%Shape: Circle [id:dp003438441013369875] 
+\draw  [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 255; green, 215; blue, 0 }  ,fill opacity=1 ] (281.52,269.81) .. controls (281.52,267.33) and (283.53,265.31) .. (286.02,265.31) .. controls (288.5,265.31) and (290.52,267.33) .. (290.52,269.81) .. controls (290.52,272.3) and (288.5,274.31) .. (286.02,274.31) .. controls (283.53,274.31) and (281.52,272.3) .. (281.52,269.81) -- cycle ;
+%Straight Lines [id:da2344664098443705] 
+\draw [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][line width=2.25]    (278.02,171.31) -- (319.02,171.31) ;
+%Straight Lines [id:da6947502424292837] 
+\draw [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][line width=2.25]    (278.02,158.31) -- (278.02,171.31) ;
+%Straight Lines [id:da20815314130597984] 
+\draw [color={rgb, 255:red, 255; green, 215; blue, 0 }  ,draw opacity=1 ][line width=3]    (319.02,158.31) -- (319.02,171.31) ;
+%Straight Lines [id:da2895948921678664] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (324.02,94.31) -- (390.02,97.23) ;
+\draw [shift={(392.02,97.31)}, rotate = 182.53] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9851760758564494] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (323.02,166.31) -- (380.02,167.28) ;
+\draw [shift={(382.02,167.31)}, rotate = 180.97] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da04661030541261035] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (330.02,226.31) -- (387.02,227.28) ;
+\draw [shift={(389.02,227.31)}, rotate = 180.97] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da11563606750531141] 
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (290.52,269.81) -- (468.2,309.91) ;
+\draw [shift={(470.15,310.35)}, rotate = 192.72] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Shape: Brace [id:dp7095582501561211] 
+\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ] (117.17,124.5) .. controls (112.5,124.47) and (110.16,126.78) .. (110.13,131.45) -- (109.81,177.96) .. controls (109.76,184.63) and (107.41,187.94) .. (102.74,187.91) .. controls (107.41,187.94) and (109.72,191.29) .. (109.67,197.96)(109.69,194.96) -- (109.36,244.48) .. controls (109.33,249.15) and (111.64,251.49) .. (116.31,251.52) ;
+
+% Text Node
+\draw (510.01,293.35) node  [font=\Large] [align=left] {\begin{minipage}[lt]{36.73pt}\setlength\topsep{0pt}
+$\displaystyle \mathbb{P}(\boldsymbol{U})$
+\end{minipage}};
+% Text Node
+\draw (220,310) node  [font=\Large] [align=left] {$\displaystyle Z_{i} \sim \text{Unif(0,1)}$};
+% Text Node
+\draw (55.29,195.72) node   [align=left] {\begin{minipage}[lt]{75.35pt}\setlength\topsep{0pt}
+\begin{center}
+$\displaystyle N_{C}$= \#Connected components of latent dist. 
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (149,100) node [anchor=north west][inner sep=0.75pt]    {$Z_{1}$};
+% Text Node
+\draw (150,160) node [anchor=north west][inner sep=0.75pt]    {$Z_{2}$};
+% Text Node
+\draw (158,248) node [anchor=north west][inner sep=0.75pt]    {$Z_{N_{C}}$};
+% Text Node
+\draw (151.39,200) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{{\Huge ...}}};
+% Text Node
+\draw (434.39,200) node [anchor=north west][inner sep=0.75pt]   [align=left] {\textbf{{\Huge ...}}};
+\end{tikzpicture}
+}
+\caption{ This figure demonstrates the first two parts of our architecture. Each interval in the yellow box corresponds to one coordinate of input in the left figure. We first push forward uniform distributions to different cubes. Then, using \cref{assump:support}, we adapt the shape of the support and push the measure from unit cubes to the original support of $P(\boldsymbol{U})$. In this way, we can approximate complicated measures by pushing forward uniform variables. }
+\label{fig:pf-2}
+\end{minipage}
+\end{figure}
+
+\noindent\textit{Remark (notation).} $N_C$ denotes the finite number of connected components of $\operatorname{supp}(\mathbb P)$, indexed by $i\in[N_C]$. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: The finite component count of each latent generator architecture in $\mathcal F_{1,n}$ is fixed as $n$ varies.
+
+
+
+In this subsection, we will extend the results in \cite{perekrestenkoHighDimensionalDistributionGeneration2022a} to construct a neural network as the push-forward map. It turns out that to get a good approximation of the targeted distribution, the shape of the support is essential. We introduce the following two assumptions for our latent distribution.
+\begin{assumption}[Mixed Distribution]\label{assump:support}
+    The support of measure $ \mathbb{P}$ has finite connected components $ C_{1} ,C_{2} \cdots C_{N_C} $, i.e., $ {\text{supp}(\mathbb{P})} =\bigcup _{i=1}^{N_C} C_{i}$, and each component $ C_{i}$ satisfies $\mathcal{H}([0,1]^{d^C_i},C_i) \cap \mathcal{F}_L([0,1]^{d^C_i},C_i) \neq \emptyset$ for some $d_i^C \geqslant 0$. Recall that $\mathcal{H}(K_1,K_2)$ is the set of homeomorphisms from $K_1$ to $K_2$ defined at the end of  \cref{sec:preliminary}. 
+\end{assumption}
+
+\noindent\textit{Remark (notation).} For $i\in[N_C]$, $d_i^C$ is a nonnegative integer such that $\mathcal{H}([0,1]^{d_i^C},C_i)\cap\mathcal{F}_L([0,1]^{d_i^C},C_i)\neq\emptyset$; $d_i^C=0$ corresponds to a singleton component. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: The component cube dimensions of each latent generator architecture in $\mathcal F_{1,n}$ are fixed as $n$ varies.
+
+ \cref{assump:support} encompasses almost all natural distributions. For example, distributions supported on $ [0,1]^d $ and closed balls, finitely supported distributions and mixtures of them all satisfy this assumption. \cref{assump:support} allows us to transform the support of the targeted distribution into unit cubes and the nice geometric properties of unit cubes facilitate our construction. The next assumption is slightly than \cref{assump:support}, but we will show later that it can give us a better rate.\par   
+
+\begin{assumption}[Lower Bound]\label{assumption:lower_bound}
+Suppose that $ \mathbb{P}$ is supported on a compact set $ K\subset \mathbb{R}^{D}$, there exists a constant $ C_{f}  >0$, $ f\in \mathcal{H}([0,1]^{d},K) \cap \mathcal{F}_L([0,1]^{d},K)$,  such that for any measurable set $ B\subset [ 0,1]^{d}$, $ \mathbb{P}\left( f( B)\right) \geqslant C_{f} \lambda ( B)$. Besides, if $d>0$, $(f^{-1})_{\#}\mathbb P$ vanishes on the boundary $\partial[0,1]^d$.
+\end{assumption}
+
+\noindent\textit{Remark (notation).} $C_f$ is a positive domination constant associated with the particular measure $\mathbb{P}$ and chosen homeomorphism $f$ in the lower-bound assumption.
+
+\cref{assumption:lower_bound} implies that $d \lambda /d (f^{-1}_{\#}\mathbb{P})$ exists and is lowered bounded by a constant $C_f$. We show in the appendix (\cref{prop:holder_curve}) that under \cref{assumption:lower_bound}, it is possible to simulate any distribution on the unit cubes with Hölder continuous curves and uniform distribution on $ [ 0,1]$. \cref{prop:holder_curve} can be viewed as an extension of the Skorohod representation theorem. 
+
+Now, we briefly explain the construction of the push-forward maps. An example is provided in \cref{sec:nn_example} to illustrate the construction. The NN architecture consists of three parts (see \cref{fig:wide_nn}). The input dimension is the same as the number of connected components of the support $ N_C $. For each component $ C_i $, let $ H_i\in \mathcal{H}([0,1]^{d^C_i},C_i) \cap \mathcal{F}_L([0,1]^{d^C_i},C_i) $, where $d_i^C$ is the dimension of component $C_i$ in \cref{assump:support}. By $ \mathbb{P} = (H_i)_{\#}(H_i^{-1})_{\#} \mathbb{P} $ on $ C_i $, we can approximate $ (H_i^{-1})_{\#} \mathbb{P} $ first, which is supported on a unit cube. \cite{perekrestenkoHighDimensionalDistributionGeneration2022a} constructs a wide NN $ \hat{g}$ of width $ W $ and constant depth such that $ W(\hat{g}_{\#} \lambda,(H_i)^{-1}_{\#}\mathbb{P})\leqslant O(W^{-1/d_i^C}) $ where $ \lambda $ is the uniform measure on $ [0,1] $. Then, we approximate the Lipschitz map $ H_i $ to $C_i$ to pull the distribution back to $ C_i $. These are the first two parts (yellow and blue blocks in \cref{fig:wide_nn}) of the architecture. \par 
+
+Suppose that the output of $i$-th coordinate in the first two parts is $ \Vec{v}_i $, the Gumbel-softmax layer in the third part (green box) combines different components of the support. In particular, we want to output $ \Vec{v}_i $ with probability $ p_i = \mathbb{P}(C_i) $. Let $ V = [\Vec{v}_1,\cdots,\Vec{v}_i] $, this can be achieved by outputting  $ V X $, where $ X = (X_1,\cdots,X_{N_C})^\mathsf{T}  $ is a one-hot random vector with $ \mathbb{P}({X}_i = 1) =  p_i$. To use backpropagation in training, we use the Gumbel-Softmax trick \cite{Jang2016CategoricalRW} to (approximately) simulate such a random vector, 
+ $\hat{X}^\tau_i = \frac{\exp((\log p_i +G_i)/\tau)}{\sum_{k=1}^{N_C}\exp((\log p_k +G_k)/\tau)}, $
+where $ \tau>0 $ is the temperature parameter (a hyperparameter) and $ G_i\sim \text{Gumbel}(0,1) $ are i.i.d. standard Gumbel variables. As $\tau \rightarrow 0$, the distribution of $\hat{X}^\tau$ converges almost surely to the categorical distribution \cite[Proposition 1]{maddisonConcreteDistributionContinuous2017}. In particular, when $ \tau = 0$, we denote $\hat{X}_i^0 = \mathbb{I}_{i = \arg\max_j \{\log p_i + G_i\}}$. The output of the last layer is $V\hat{X}^\tau$. Note that the Gumbel-softmax function is differentiable with respect to parameter $ \{\log (p_i)\}_{i=1,\cdots,N_C}$. Therefore, we can train the network with common gradient-based algorithms. 
+
+\noindent\textit{Remark (notation).} $G_k$ is the $k$th standard Gumbel coordinate, with density $x\mapsto\exp(-x-\exp(-x))$ on $\mathbb{R}$, in the relevant Gumbel-softmax vector. In Lemma~\ref{lemma:gumbel_err}: The coordinate index is $k\in[n]$. In Theorem~\ref{thm:wide_nn}: $G_k$, $k\in[N_C]$, are the independent standard Gumbel coordinates of the mixing layer, one per connected support component, independent of the uniform inputs used by the deterministic blocks; their randomness is included in $\hat g_{\#}\lambda$. In the result split from Theorem~\ref{thm:wide_nn}: $G_k$, $k\in[N_C]$, are the independent standard Gumbel coordinates of the mixing layer, one per connected support component, independent of the uniform inputs used by the deterministic blocks; their randomness is included in $\hat g_{\#}\lambda$. $\tau>0$ is the Gumbel-softmax temperature hyperparameter; a superscript $0$ on a softmax output or layer denotes the limit as $\tau\rightarrow0$, rather than evaluation of the positive-temperature formula at zero. In Lemma~\ref{lemma:gumbel_err}: The temperature satisfies $0<\tau<1$. In Theorem~\ref{thm:wide_nn}: The error estimate is asymptotic as the network budgets tend to infinity and $\tau\downarrow0$, with constants independent of the budgets and $\tau$; the proof uses the Gumbel-softmax estimate for $0<\tau<1$. In Theorem~\ref{thm:consistency}: The temperature is the positive sequence $\tau_n$ appearing in $\mathcal{F}_{1,n}$, with $\tau_n\rightarrow0$. In the result split from Theorem~\ref{thm:wide_nn}: The error estimate is asymptotic as the network budgets tend to infinity and $\tau\downarrow0$, with constants independent of the budgets and $\tau$; the proof uses the Gumbel-softmax estimate for $0<\tau<1$. In Corollary~\ref{cor:rate}: The generator temperature is the positive sequence $\tau_n$ in $\mathcal F_{1,n}$ and in the approximation term $\tau_n(1-\log\tau_n)$. In Corollary~\ref{corollary:deep_nn}: The displayed error bound is asymptotic as $L_0,L_1,L_2\to\infty$ and $\tau\downarrow0$, with $R>0$ and the causal model fixed. The implicit constant is independent of the intervention and the network budgets, but may depend on $R$ and the fixed causal model.
+
+
+In summary, our construction has the form $ \hat{g} =\hat{g}_{3}^{\tau } \circ \hat{g}_{2} \circ \hat{g}_{1} $, where $ \hat{g}_{i} ,i=1,2$ have the separable form $ \left(\hat{g}_{i}^{1}( x_{1}) ,\cdots ,\hat{g}_{i}^{N_{C}}( x_{N_{C}})\right)$ and $ \hat{g}_{1}^{j} \in \mathcal{NN}_{1,d_j^C}( W_{1} , L_1)$, $ \ \hat{g}_{2}^{j} \in \mathcal{NN}_{d_j^C,d}(W_2 ,L_{2}) ,\ j\in [ N_{C}]$; $ \{d_j^C\} $ are the dimension of cubes in \cref{assump:support}. $ \hat{g}_{3}^{\tau }$ is the Gumbel-Softmax layer with temperature parameter $ \tau>0 $. We slightly abuse the notations and denote this class of neural nets by  $\mathcal{NN}(W_1,L_1,W_2,L_2,\tau) $. Putting things together, we obtain the following theorem.
+\begin{theorem}\label{thm:wide_nn}
+Given any probability measure $\mathbb P$ on $\mathbb R^d$ that satisfies \cref{assump:support}, let $\lambda$ be the Lebesgue measure on $[0,1]^{N_C}$, where $N_C$ is defined in \cref{assump:support}. Write $D_C=\max\{1,\max_i d_i^C\}$. 
+  \begin{enumerate}
+\item There exists a neural network $\hat g\in\mathcal{NN}(W_1,\Theta(D_C),\Theta(d\cdot D_C),L_2,\tau)$ with the above architecture (\cref{fig:wide_nn}) such that
+\begin{equation*}
+W(\hat g_{\#}\lambda,\mathbb P)\leqslant O\left(\mathbb I_{\{\max_i d_i^C>0\}}\left(W_1^{-1/D_C}+L_2^{-2/D_C}\right)+(\tau-\tau\log\tau)\right).
+\end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\noindent\textit{Remark.} A network in $\mathcal{NN}_{k_1,k_2}(W,L)$ has $L$ hidden layers, each of width at most $W$, followed by the affine output layer (width at most $W$ and exactly $W$ give the same class of functions: a narrower layer is padded with zero units). The covering number $\mathcal{N}(\epsilon,S,\|\cdot\|_1)$ is that of the cited source (Anthony and Bartlett): the least size of a subset $C\subseteq S$ such that every point of $S$ lies at $\ell_1$ distance strictly less than $\epsilon$ from some point of $C$. The law $\hat g_{\#}\lambda$ includes the independent standard Gumbel variables used in the mixing layer. The error estimates are asymptotic as the network budgets tend to infinity and $\tau\downarrow0$, with constants independent of these budgets and of $\tau$. A component with $d_i^C=0$ is a singleton, and its two deterministic blocks are the unique map to $[0,1]^0$ and a constant affine map to that singleton. In the proposition entitled ``Deep distribution approximation'', the multiplicative width factors in $\Theta(D_C)$ and $\Theta(dD_C)$ are absolute numerical constants, independent of the measure, chart constants, dimensions, and component count. $f\in\mathcal{H}(K_1,K_2)$ means that $f:K_1\rightarrow K_2$ is bijective and both $f$ and $f^{-1}:K_2\rightarrow K_1$ are continuous. A network in $\mathcal{NN}_{k_1,k_2}(W,L)$ has $L$ hidden ReLU layers of width at most $W$, followed by an affine output layer of dimension $k_2$. The layer uses $V=[\Vec{v}_1,\ldots,\Vec{v}_{N_C}]$ and the same Gumbel draws for all $\tau>0$, with $\lim_{\tau\downarrow0}\hat{X}^{\tau}_i=\hat{X}^{0}_i=\mathbb{I}_{\{i=\arg\max_{j\in[N_C]}(\log p_j+G_j)\}}$ almost surely for every $i\in[N_C]$. For each component of positive dimension $q=d_i^C$, the application of Theorem VIII.1 of \cite{perekrestenkoHighDimensionalDistributionGeneration2022a} uses integer depth parameter $s=1$, quantization parameter $\delta=1/\lceil\sqrt q(q+1)n(n-1)\rceil$, and quantization mesh $\delta/n$. The refinement integer is $n=\lfloor(W_1/A_q)^{1/q}\rfloor$ for $W_1\geqslant A_q2^q$, where $A_q\geqslant1$ depends only on $q$ and bounds the clipped network width by $A_qn^q$.
+
+\noindent\textit{Remark (notation).} This is the three-part generator class with component count $N_C$, component cube dimensions $d_j^C$, and output dimension $d$ suppressed from its arguments; $W_1,L_1$ and $W_2,L_2$ specify the respective component-network widths and depths, and $\tau>0$ specifies the mixing temperature. In Corollary~\ref{corollary:deep_nn}: The four-argument generator-class occurrence suppresses the temperature argument; the latent generators retain the Gumbel-softmax temperature $\tau$ appearing in the bound. The multiplicative width factors in $\Theta(d_{\max}^U)$ and $\Theta((d_{\max}^U)^2)$ can be chosen as absolute numerical constants, independent of the causal model, $R$, all dimensions, and all category and component counts. In Theorem~\ref{thm:consistency}: The class used is its truncated version $\mathcal{NN}^{\infty,K}(\Theta(d_{\max}^U),L_{1,n},\Theta((d_{\max}^U)^2),L_{2,n},\tau_n)$; the superscript $\infty$ imposes no finite Lipschitz bound, while $K$ specifies coordinatewise output truncation, and the finite component counts and component cube dimensions of the latent generator architectures are fixed as $n$ varies. In Theorem~\ref{thm:wide_nn}, the result split from Theorem~\ref{thm:wide_nn}: The architecture includes components with $d_i^C=0$: their first deterministic block is the unique map to $[0,1]^0$, and their second deterministic block is a constant affine map to the corresponding singleton. In Corollary~\ref{cor:rate}: The latent generator class is the truncated class $\mathcal F_{1,n}=\mathcal{NN}^{\infty,K}(\Theta(d_{\max}^U),L_{1,n},\Theta((d_{\max}^U)^2),L_{2,n},\tau_n)$; the superscript $\infty$ imposes no finite Lipschitz bound, $K$ specifies coordinatewise output truncation, and the finite component counts and component cube dimensions are fixed as $n$ varies. In the result split from Theorem~\ref{thm:wide_nn}: The multiplicative width factors in $\Theta(D_C)$ and $\Theta(dD_C)$ are absolute numerical constants, independent of the measure, chart constants, dimensions, and component count. Each coordinate block $\hat{g}_1^j$ uses one scalar input to generate coordinates in the cube $[0,1]^{d_j^C}$ associated with component $j$, without mixing inputs from different components. In Theorem~\ref{thm:wide_nn}, the result split from Theorem~\ref{thm:wide_nn}: Writing $\mu_j=\mathbb{P}_{C_j}/\mathbb{P}(C_j)$, for $d_j^C\geqslant1$ the first block approximates the cube law $((g_2^j)^{-1})_{\#}\mu_j$ by the law of $\hat{g}_1^j(U_j)$; for $d_j^C=0$, it is the unique map to $[0,1]^0$. Each coordinate block $\hat{g}_2^j$ maps the $d_j^C$-dimensional cube coordinates for component $j$ into $\mathbb{R}^d$, without mixing inputs from different components. In Theorem~\ref{thm:wide_nn}, the result split from Theorem~\ref{thm:wide_nn}: For $d_j^C\geqslant1$, the block $\hat{g}_2^j$ approximates a map $g_2^j\in\mathcal{H}([0,1]^{d_j^C},C_j)\cap\mathcal{F}_L([0,1]^{d_j^C},C_j)$; for $d_j^C=0$, it is a constant affine map to the singleton $C_j$. $\hat{g}_3^\tau$ mixes the $N_C$ component outputs using the Gumbel-softmax coefficient vector, with $\tau>0$; the notation $\hat{g}_3^0$ denotes its almost-sure hard-selection limit as $\tau\rightarrow0$. In Theorem~\ref{thm:wide_nn}: The mixing weights are $p_k=\mathbb{P}(C_k)$ for the connected components $C_k$ of the target support. In Corollary~\ref{corollary:deep_nn}: The layer is used separately for each latent generator, with mixing weights given by the masses of the connected components of that latent variable's target law. In Theorem~\ref{thm:consistency}: At sample size $n$, the generator class uses temperature $\tau_n>0$ and truncates the resulting generator output coordinatewise to $[-K,K]$. In the result split from Theorem~\ref{thm:wide_nn}: The mixing weights are $p_k=\mathbb{P}(C_k)$ for the connected components $C_k$ of the target support.
+
+\begin{corollary}[Deep distribution approximation]\label{thm:cor-fix-3c402872}
+Given any probability measure $\mathbb P$ on $\mathbb R^d$ that satisfies \cref{assump:support}, let $\lambda$ be the Lebesgue measure on $[0,1]^{N_C}$, where $N_C$ is defined in \cref{assump:support}, and write $D_C=\max\{1,\max_i d_i^C\}$. Suppose in addition that $\mathbb P$ constrained to each component satisfies \cref{assumption:lower_bound}. There exists a neural network $\hat g\in\mathcal{NN}(\Theta(D_C),L_1,\Theta(d\cdot D_C),L_2,\tau)$ with the architecture of \cref{fig:wide_nn} such that
+
+\[
+W(\hat g_{\#}\lambda,\mathbb P)\leqslant O\left(\mathbb I_{\{\max_i d_i^C>0\}}\left(L_1^{-2/D_C}+L_2^{-2/D_C}\right)+(\tau-\tau\log\tau)\right).
+\]
+\end{corollary}
+
+
+Note that $\hat{g}^\tau_3$ (the Gumbel-softmax layer) is actually a random function since the coefficient vector $\hat{X}^\tau$ is a random variable. In this sense, $\hat{g}_{\#} \lambda$ can be viewed as pushing forward uniform and Gumbel variables using a neural net. 
+
+The second conclusion of \cref{thm:wide_nn} shows that under one additional assumption on the distribution, deep ReLU networks have a stronger approximation power in approximating distributions, which means we can use fewer computational units to achieve the same worst-case theoretical approximation error. 
+
+\subsection{NCM Construction}\label{sec:ncm_const}
+Now, we can use the previous distribution approximation results to construct NCM approximations. For simplicity, we omit the input and output dimensions of the neural network. As we mention in previous sections, our construction (\ref{eq:structure_equation_hat}) consists of two parts, $ \hat{f}_{i}$ approximating the structural functions $f_i$ in (\ref{eq:structure_equation}), and $ \hat{g}_{j}(Z_j) $ approximating the latent variables $U_j$. Let $ \text{NCM}_{\mathcal{G}}(\mathcal{F}_0,\mathcal{F}_1)$ be a collection of NCMs with structural equation (\ref{eq:structure_equation_hat}) and $ \hat{f}_{i} \in \mathcal{F}_0, \hat{g} \in \mathcal{F}_1. $ 
+By combining \cref{thm:approximation} and \cref{thm:wide_nn}, we have the following corollary. 
+
+\noindent\textit{Remark (notation).} $\text{NCM}_{\mathcal{G}}(\mathcal{F}_0,\mathcal{F}_1)$ is the collection of models on $\mathcal{G}$ with structural equations (\ref{eq:structure_equation_hat}), in which every structural network belongs to $\mathcal{F}_0$ and every component-specific latent generator belongs to $\mathcal{F}_1$, with compatible dimensions suppressed. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: At sample size $n$, the candidate class is $\text{NCM}_{\mathcal G}(\mathcal F_{0,n},\mathcal F_{1,n})$, with the architecture and truncation specified in Theorem~\ref{thm:consistency}, restricted so that every categorical raw structural network $q$ satisfies $q(x)\in[0,\infty)^{n_i}$, $\|q(x)\|_1>0$ for every structural input $x$, and $\operatorname{Lip}(x\mapsto q(x)/\|q(x)\|_1)\leqslant\hat L_f$. In Theorem~\ref{thm:consistency}: The empirical optimization ranges over network representations in the restricted candidate class; representations with the same latent population laws remain distinct candidates and may yield different common-draw empirical distributions. Every admitted continuous structural network additionally satisfies $\sup_x\|\hat f_i(x)\|_1\leqslant K$ on its full structural input domain. In Corollary~\ref{cor:rate}: Candidates are evaluated as network representations on the same $m_n$ exogenous simulation draws; representations with identical latent population laws can yield different empirical distributions on these common draws. Every admitted continuous structural network additionally satisfies $\sup_x\|\hat f_i(x)\|_1\leqslant K$ on its full structural input domain. $\mathcal{F}_0$ is the structural-network class supplied to $\text{NCM}_{\mathcal{G}}(\mathcal{F}_0,\mathcal{F}_1)$, with the input and output dimensions appropriate to each node omitted from the notation. In Theorem~\ref{thm:consistency}: The class is $\mathcal{F}_{0,n}=\mathcal{NN}^{\hat L_f,K}(W_{0,n},\Theta(\log d_{\max}^{\text{in}}))$, where $\hat L_f=\sqrt{d_{\max}^{\text{in}}d_{\max}^{\text{out}}}L_f$; it consists of coordinatewise truncations to $[-K,K]$ of networks whose Lipschitz constant is at most $\hat L_f$, and varies with $n$. When $d_{\max}^{\text{in}}=1$, the depth expression uses $\Theta(1+\log d_{\max}^{\text{in}})$. Continuous structural networks admitted to the optimization additionally satisfy $\sup_x\|\hat f_i(x)\|_1\leqslant K$ on their full structural input domains. Categorical raw networks admitted to the optimization additionally satisfy $q(x)\in[0,\infty)^{n_i}$, $\|q(x)\|_1>0$ for every structural input $x$, and $\operatorname{Lip}(x\mapsto q(x)/\|q(x)\|_1)\leqslant\hat L_f$.
+
+
+\begin{corollary}\label{corollary:deep_nn}
+Given a causal model $\mathcal M^*\in\mathcal M(\mathcal G,\mathcal F_L,\boldsymbol U)$, suppose that Assumptions \ref{assump:independence_u}-\ref{assump:Lip_and_bounded} hold and the distributions of $U_C$ for all $C^2$-component satisfy the assumptions of the proposition entitled ``Deep distribution approximation''. Let $d_{\max}^{\text{in}}$ and $d_{\max}^{\text{out}}$ be the largest input and output dimension of $f_i$ in (\ref{eq:structure_equation}) and $d_{\max}^U$ be the largest dimension of all latent variables. Suppose in addition that $d_{\max}^{\text{in}}>0$ and $d_{\max}^U>0$. Fix any $R>0$. There exists a neural causal model 
+  $$\hat{\mathcal{M}} \in \text{NCM}_{\mathcal{G}} ( \mathcal{NN}(\Theta( d^{\text{in}}_{\max}d^{\text{out}}_{\max}) ,L_{0}) , \mathcal{NN}(\Theta(d_{\max}^U),L_1,\Theta((d_{\max}^U)^2),L_2))$$ with structure equations (\ref{eq:structure_equation_hat}). For any intervention $\boldsymbol{T}=\boldsymbol{t}$ such that $\|t_i\|_\infty\leqslant R$ for each continuous treatment variable $T_i$, $\hat{\mathcal M}$ satisfies
+\begin{equation*}
+W\left(P^{\mathcal M^*}(\boldsymbol V(\boldsymbol t)),P^{\hat{\mathcal M}}(\boldsymbol V(\boldsymbol t))\right)\leqslant O\left(L_0^{-2/d_{\max}^{\text{in}}}+L_1^{-2/d_{\max}^U}+L_2^{-2/d_{\max}^U}+(\tau-\tau\log\tau)\right).
+\end{equation*}
+The implicit constant is independent of the intervention and the network budgets, but may depend on $R$ and the fixed causal model.
+
+\emph{Additional condition.} In the categorical structural equations, $\arg\max$ selects the smallest maximizing label when there is a tie. This is a measurable completion on ties; under the stipulated independent standard Gumbel noises and nonnegative propensity weights of positive total, it leaves every fixed-intervention law unchanged.
+\end{corollary}
+
+\noindent\textit{Remark.} In Corollary~\ref{corollary:deep_nn}, for $m_i=d_i^{\text{in}}>0$, the symbol $\hat f_i$ denotes $q_i\circ\Pi_i$ for a continuous variable and the vector $\bigl(\max\{\epsilon_i,(q_i\circ\Pi_i)_k\}\bigr)_{k=1}^{n_i}$ for a categorical variable, where $q_i$, $\Pi_i$, and $\epsilon_i=A_iL_0^{-2/m_i}$ are chosen in its proof. In Corollary~\ref{corollary:deep_nn}, for $m_i=0$, the symbol $\hat f_i$ denotes the exact constant function $f_i$. The error estimate is asymptotic as $L_0,L_1,L_2\to\infty$ and $\tau\downarrow0$, for fixed $R$ and fixed causal model. The latent generator class in the statement uses the same temperature $\tau$ as the displayed error estimate. The multiplicative width factors in $\Theta(d_{\max}^{\text{in}}d_{\max}^{\text{out}})$, $\Theta(d_{\max}^U)$, and $\Theta((d_{\max}^U)^2)$ can be chosen as absolute numerical constants, independent of the causal model, $R$, all dimensions, and all category and component counts. For each latent law $P(U_C)$, the assumptions of the proposition entitled ``Deep distribution approximation'' require the support charts of \cref{assump:support} and \cref{assumption:lower_bound} on each normalized component law $\mu_i=P(U_C)|_{C_i}/P(U_C\in C_i)$, with $(f^{-1})_{\#}\mu_i(\partial[0,1]^{d_i^C})=0$ when $d_i^C>0$. The phrase ``uniform cubes'' denotes the unit cube domains $[0,1]^m$ used for deterministic uniform function approximation; it imposes no uniform probability law on structural inputs. For each categorical $V_i$, the noise in equation (\ref{eq:structure_equation_hat}) satisfies $g_k=g_k^{V_i}$ for $k\in[n_i]$. Membership in $\text{NCM}_{\mathcal G}(\mathcal F_0,\mathcal F_1)$ requires $\hat f_i\in\mathcal F_0$ for every observed node and $\hat g_j\in\mathcal F_1$ for every latent component, with the compatible input and output dimensions understood separately for each network. $d_{\max}^U=\max_{j\in[n_U]}d_j^U$ ranges over non-Gumbel latent variables, while $d_{\max}^{\mathrm{in}}=\max_i d_i^{\mathrm{in}}$ and $d_{\max}^{\mathrm{out}}=\max_i d_i^{\mathrm{out}}$, with $d_i^{\mathrm{out}}=n_i$ for categorical nodes.
+
+\noindent\textit{Remark (notation).} $d_{\max}^{\text{in}}=\max_{i\in[n_V]}d_i^{\text{in}}$, where $d_i^{\text{in}}$ is the input dimension of $f_i(\text{Pa}(V_i),\boldsymbol{U}_{V_i})$ in the canonical structural equations. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: $d_{\max}^{\text{in}}\geqslant1$; when $d_{\max}^{\text{in}}=1$, the structural-network depth expression $\Theta(\log d_{\max}^{\text{in}})$ means $\Theta(1+\log d_{\max}^{\text{in}})$. In Corollary~\ref{corollary:deep_nn}: $d_{\max}^{\text{in}}>0$. $d_{\max}^{\text{out}}=\max_{i\in[n_V]}d_i^{\text{out}}$, where $d_i^{\text{out}}=d_i$ for a continuous structural function and $d_i^{\text{out}}=n_i$ for a categorical propensity vector. $d_{\max}^U=\max_{j\in[n_U]}d_j^U$, where $d_j^U$ is the dimension of a canonical latent variable $U_j$ whose distribution is approximated by a generator, distinct from the separately supplied categorical Gumbel noises. In Theorem~\ref{thm:consistency}, Corollary~\ref{cor:rate}: $d_{\max}^U\geqslant1$; it remains the maximum individual non-Gumbel latent dimension, distinct from the total dimension $D_U=\sum_{j=1}^{n_U}d_j^U$ and $D=\max\{1,D_U\}$. In Corollary~\ref{corollary:deep_nn}: $d_{\max}^U>0$.
+
+ Similar approximation results also hold for wide NN approximation (the first construction in \cref{thm:wide_nn}), as presented in \cref{sec:wide_nn}. The proof can be easily adapted to the wide NNs architecture. \cref{cor:rate} gives an explicit construction of NCM for a given SCM, which shows the expressivity of NCMs for SCM with mixed variables. This result can be viewed as a generalization of the expressivity result in \cite{xia2022neural}, but our construction is completely different from \cite{xia2022neural}.
+ 

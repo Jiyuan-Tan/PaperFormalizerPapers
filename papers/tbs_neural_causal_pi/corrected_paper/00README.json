@@ -1,0 +1,28 @@
+{
+   "stamp" : true,
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "Main.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "Exported_Items.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "ims.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "library.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "ref.bib"
+      }
+   ],
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}
