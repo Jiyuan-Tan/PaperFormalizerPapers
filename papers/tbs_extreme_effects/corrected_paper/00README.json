@@ -1,0 +1,20 @@
+{
+   "stamp" : true,
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "Arxiv_template.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "ims.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "reference.bib"
+      }
+   ],
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

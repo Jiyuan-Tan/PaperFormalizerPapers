@@ -1,0 +1,169 @@
+\begin{thebibliography}{30}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Avella-Medina et~al.(2022)Avella-Medina, Davis, and Samorodnitsky]{avella2022kernel}
+Marco Avella-Medina, Richard~A Davis, and Gennady Samorodnitsky.
+\newblock Kernel pca for multivariate extremes.
+\newblock \emph{arXiv preprint arXiv:2211.13172}, 2022.
+
+\bibitem[Bang and Robins(2005)]{bang2005doubly}
+Heejung Bang and James~M. Robins.
+\newblock Doubly robust estimation in missing data and causal inference models.
+\newblock \emph{Biometrics}, 61\penalty0 (4):\penalty0 962--973, 2005.
+\newblock \doi{10.1111/j.1541-0420.2005.00377.x}.
+
+\bibitem[Bingham et~al.(1989)Bingham, Goldie, and Teugels]{bingham1989regular}
+Nicholas~H Bingham, Charles~M Goldie, and Jef~L Teugels.
+\newblock \emph{Regular variation}, volume~27.
+\newblock Cambridge university press, 1989.
+
+\bibitem[Bodik et~al.(2023)Bodik, Pawlas, and Palu{\v s}]{bodikCausalityExtremesTime2023}
+Juraj Bodik, Zbyn{\v e}k Pawlas, and Milan Palu{\v s}.
+\newblock Causality in extremes of time series, August 2023.
+
+\bibitem[Boucheron and Thomas(2015)]{boucheron2015tail}
+St{\'e}phane Boucheron and Maud Thomas.
+\newblock Tail index estimation, concentration and adaptivity.
+\newblock 2015.
+
+\bibitem[Chernozhukov and Du(2006)]{chernozhukovExtremalQuantilesValueRisk2006}
+Victor Chernozhukov and Songzi Du.
+\newblock Extremal {{Quantiles}} and {{Value-at-Risk}}, May 2006.
+
+\bibitem[Chernozhukov and Fern{\'a}ndez-Val(2011)]{chernozhukov2011inference}
+Victor Chernozhukov and Iv{\'a}n Fern{\'a}ndez-Val.
+\newblock Inference for extremal conditional quantile models, with an application to market and birthweight risks.
+\newblock \emph{The Review of Economic Studies}, 78\penalty0 (2):\penalty0 559--589, 2011.
+
+\bibitem[Chernozhukov et~al.(2016)Chernozhukov, Chetverikov, Demirer, Duflo, Hansen, Newey, and Robins]{chernozhukov2016double}
+Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins.
+\newblock Double/debiased machine learning for treatment and causal parameters.
+\newblock \emph{arXiv preprint arXiv:1608.00060}, 2016.
+
+\bibitem[Chernozhukov et~al.(2017)Chernozhukov, Chetverikov, Demirer, Duflo, Hansen, Newey, and Robins]{chernozhukov2017double}
+Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins.
+\newblock Double/debiased machine learning for treatment and structural parameters.
+\newblock Technical Report 23564, National Bureau of Economic Research, 2017.
+
+\bibitem[Chernozhukov et~al.(2018)Chernozhukov, Chetverikov, Demirer, Duflo, Hansen, Newey, and Robins]{chernozhukov2018double}
+Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian Hansen, Whitney Newey, and James Robins.
+\newblock Double/debiased machine learning for treatment and structural parameters.
+\newblock \emph{Econometrics Journal}, 21\penalty0 (1):\penalty0 C1--C68, 2018.
+
+\bibitem[Coles et~al.(2001)Coles, Bawa, Trenner, and Dorazio]{coles2001introduction}
+Stuart Coles, Joanna Bawa, Lesley Trenner, and Pat Dorazio.
+\newblock \emph{An introduction to statistical modeling of extreme values}, volume 208.
+\newblock Springer, 2001.
+
+\bibitem[Davison and Smith(1990)]{davisonModelsExceedancesHigh1990}
+Anthony~C. Davison and Richard~L. Smith.
+\newblock Models for exceedances over high thresholds.
+\newblock \emph{Journal of the Royal Statistical Society Series B: Statistical Methodology}, 52\penalty0 (3):\penalty0 393--425, 1990.
+
+\bibitem[Deuber et~al.(2024)Deuber, Li, Engelke, and Maathuis]{deuberEstimationInferenceExtremal2024}
+David Deuber, Jinzhou Li, Sebastian Engelke, and Marloes~H. Maathuis.
+\newblock Estimation and {{Inference}} of {{Extremal Quantile Treatment Effects}} for {{Heavy-Tailed Distributions}}.
+\newblock \emph{Journal of the American Statistical Association}, 119\penalty0 (547):\penalty0 2206--2216, July 2024.
+\newblock ISSN 0162-1459.
+\newblock \doi{10.1080/01621459.2023.2252141}.
+
+\bibitem[Foster and Syrgkanis(2023)]{foster2023orthogonal}
+Dylan~J Foster and Vasilis Syrgkanis.
+\newblock Orthogonal statistical learning.
+\newblock \emph{The Annals of Statistics}, 51\penalty0 (3):\penalty0 879--908, 2023.
+
+\bibitem[Gissibl and Kl{\"u}ppelberg(2018)]{NadineMaxLinear}
+Nadine Gissibl and Claudia Kl{\"u}ppelberg.
+\newblock {Max-linear models on directed acyclic graphs}.
+\newblock \emph{Bernoulli}, 24\penalty0 (4A):\penalty0 2693 -- 2720, 2018.
+\newblock \doi{10.3150/17-BEJ941}.
+\newblock URL \url{https://doi.org/10.3150/17-BEJ941}.
+
+\bibitem[Gnecco et~al.(2021)Gnecco, Meinshausen, Peters, and Engelke]{gnecco2021causal}
+Nicola Gnecco, Nicolai Meinshausen, Jonas Peters, and Sebastian Engelke.
+\newblock Causal discovery in heavy-tailed models.
+\newblock \emph{The Annals of Statistics}, 49\penalty0 (3):\penalty0 1755--1778, 2021.
+
+\bibitem[Kang and Schafer(2007)]{kang2007demystifying}
+Joseph~D.Y. Kang and Joseph~L. Schafer.
+\newblock Demystifying double robustness: A comparison of alternative strategies for estimating a population mean from incomplete data.
+\newblock \emph{Statistical Science}, 22\penalty0 (4):\penalty0 523--539, 2007.
+\newblock \doi{10.1214/07-STS227}.
+
+\bibitem[Leadbetter(1991)]{leadbetterBasisPeaksThreshold1991}
+M.~R. Leadbetter.
+\newblock On a basis for `{{Peaks}} over {{Threshold}}' modeling.
+\newblock \emph{Statistics \& Probability Letters}, 12\penalty0 (4):\penalty0 357--362, October 1991.
+\newblock ISSN 0167-7152.
+\newblock \doi{10.1016/0167-7152(91)90107-3}.
+
+\bibitem[Mhalla et~al.(2020)Mhalla, Chavez-Demoulin, and Dupuis]{mhalla2020causal}
+Linda Mhalla, Val{\'e}rie Chavez-Demoulin, and Debbie~J Dupuis.
+\newblock Causal mechanism of extreme river discharges in the upper danube basin network.
+\newblock \emph{Journal of the Royal Statistical Society Series C: Applied Statistics}, 69\penalty0 (4):\penalty0 741--764, 2020.
+
+\bibitem[Nguyen(2014)]{nguyen2014tail}
+Quang~Huy Nguyen.
+\newblock \emph{Tail distribution of the sums of regularly varying random variables, computations and simulations}.
+\newblock PhD thesis, Lyon 1, 2014.
+
+\bibitem[Pickands~III(1975)]{pickandsiiiStatisticalInferenceUsing1975}
+James Pickands~III.
+\newblock Statistical inference using extreme order statistics.
+\newblock \emph{the Annals of Statistics}, pages 119--131, 1975.
+
+\bibitem[Rosenbaum and Rubin(1983)]{rosenbaum1983central}
+Paul~R. Rosenbaum and Donald~B. Rubin.
+\newblock The central role of the propensity score in observational studies for causal effects.
+\newblock \emph{Biometrika}, 70\penalty0 (1):\penalty0 41--55, 1983.
+\newblock \doi{10.1093/biomet/70.1.41}.
+
+\bibitem[Rubin(1974)]{rubin1974estimating}
+Donald~B. Rubin.
+\newblock Estimating causal effects of treatments in randomized and nonrandomized studies.
+\newblock \emph{Journal of Educational Psychology}, 66\penalty0 (5):\penalty0 688--701, 1974.
+\newblock \doi{10.1037/h0037350}.
+
+\bibitem[Smith(1989)]{smithExtremeValueAnalysis1989}
+Richard~L. Smith.
+\newblock Extreme value analysis of environmental time series: An application to trend detection in ground-level ozone.
+\newblock \emph{Statistical Science}, pages 367--377, 1989.
+
+\bibitem[Su et~al.(2023)Su, Mou, Ding, and Wainwright]{su2023estimated}
+Fangzhou Su, Wenlong Mou, Peng Ding, and Martin~J Wainwright.
+\newblock When is the estimated propensity score better? high-dimensional analysis and bias correction.
+\newblock \emph{arXiv preprint arXiv:2303.17102}, 2023.
+
+\bibitem[Tuganishuri et~al.(2024)Tuganishuri, Yune, Adhikari, Lee, Kim, and Yum]{tuganishuri2024prediction}
+J{\'e}r{\'e}mie Tuganishuri, Chan-Young Yune, Manik~Das Adhikari, Seung~Woo Lee, Gihong Kim, and Sang-Guk Yum.
+\newblock Prediction of volume of shallow landslides due to rainfall using data-driven models.
+\newblock \emph{Natural Hazards and Earth System Sciences Discussions}, 2024:\penalty0 1--26, 2024.
+
+\bibitem[van~der Laan and Rubin(2006)]{vanderlaan2006targeted}
+Mark~J. van~der Laan and Daniel Rubin.
+\newblock Targeted maximum likelihood learning.
+\newblock \emph{International Journal of Biostatistics}, 2\penalty0 (1), 2006.
+\newblock \doi{10.2202/1557-4679.1043}.
+
+\bibitem[Zhai and Jiang(2014)]{zhai2014dependence}
+Alice~R Zhai and Jonathan~H Jiang.
+\newblock Dependence of us hurricane economic loss on maximum wind speed and storm size.
+\newblock \emph{Environmental Research Letters}, 9\penalty0 (6):\penalty0 064019, 2014.
+
+\bibitem[Zhang et~al.(2023)Zhang, Blanchet, Marzouk, Nguyen, and Wang]{zhang2023wasserstein}
+Xuhui Zhang, Jose Blanchet, Youssef Marzouk, Viet~Anh Nguyen, and Sven Wang.
+\newblock Wasserstein-based minimax estimation of dependence in multivariate regularly varying extremes.
+\newblock \emph{arXiv preprint arXiv:2312.09862}, 2023.
+
+\bibitem[Zhang(2018)]{zhangExtremalQuantileTreatment2018}
+Yichong Zhang.
+\newblock Extremal quantile treatment effects.
+\newblock \emph{The Annals of Statistics}, 46\penalty0 (6B):\penalty0 3707--3740, December 2018.
+\newblock ISSN 0090-5364, 2168-8966.
+\newblock \doi{10.1214/17-AOS1673}.
+
+\end{thebibliography}
