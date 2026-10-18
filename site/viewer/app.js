@@ -175,7 +175,7 @@ function typeset(s, macros, plain) {
   return out.join("");
 }
 // LaTeX commands KaTeX lacks (as in the server's renderer)
-const KATEX_GAPS = { "\\mbox": "\\text{#1}", "\\hbox": "\\text{#1}", "\\makebox": "\\text{#1}", "\\normalfont": "", "\\offinterlineskip": "", "\\strut": "", "\\mathstrut": "\\vphantom{(}", "\\textsc": "\\text{#1}", "\\protect": "", "\\hfill": "\\quad", "\\mathbbm": "\\mathbb{#1}", "\\mathds": "\\mathbb{#1}" };
+const KATEX_GAPS = { "\\xspace": "", "\\Vec": "\\vec{#1}", "\\mbox": "\\text{#1}", "\\hbox": "\\text{#1}", "\\makebox": "\\text{#1}", "\\normalfont": "", "\\offinterlineskip": "", "\\strut": "", "\\mathstrut": "\\vphantom{(}", "\\textsc": "\\text{#1}", "\\protect": "", "\\hfill": "\\quad", "\\mathbbm": "\\mathbb{#1}", "\\mathds": "\\mathbb{#1}" };
 /** The number the paper prints for a label (the paper's own numbering), or null when it has none. */
 function refNumber(label) {
   const key = label.replace(/&amp;/g, "&");
@@ -185,7 +185,7 @@ function texText(t) {
   // an index outside a formula is no TeX: Unicode mathematics (`subsup`) — a label is a name, left as written
   return t.split(/(\\(?:eqref|ref|cref|Cref|autoref|cite[pt]?)\{[^{}]*\})/).map((part, k) => (k % 2 ? esc(part) : subsup(part))).join("")
     .replace(/\\(?:emph|textit)\{([^{}]*)\}/g, "<em>$1</em>").replace(/\\textbf\{([^{}]*)\}/g, "<strong>$1</strong>")
-    .replace(/\\(eqref|ref|cref|Cref|autoref)\{([^{}]*)\}/g, (_, cmd, label) => { const n = refNumber(label); return n === null ? `<span class="cite">${label}</span>` : cmd === "eqref" ? `(${esc(n)})` : esc(n); })
+    .replace(/\\(eqref|ref|cref|Cref|autoref)\{([^{}]*)\}/g, (_, cmd, label) => { const n = refNumber(label); const named = ["cref", "Cref", "autoref"].includes(cmd) ? P.paper?.envs?.find((e) => e.label === label)?.heading : null; return n === null ? `<span class="cite">${label}</span>` : cmd === "eqref" ? `(${esc(n)})` : esc(named ?? n); })
     .replace(/\\cite[pt]?\{([^{}]*)\}/g, "[$1]").replace(/``/g, "“").replace(/''/g, "”").replace(/~/g, "&nbsp;").replace(/\\\\/g, "<br>");
 }
 
@@ -221,6 +221,7 @@ function onChange(scope) {
   flushT = setTimeout(async () => {
     const scopes = pending; pending = new Set();
     try {
+      if (scopes.has("demo")) await refreshTour();
       if ([...scopes].some((s) => s === "toolkit" || s.startsWith("run:"))) await refreshInbox();
       if (S.view === "toolkit" && [...scopes].some((s) => s === "toolkit" || s.startsWith("run:"))) await showToolkit(false);
       if (S.view === "library" && scopes.has("library")) await showLibrary(false);
@@ -280,6 +281,7 @@ function wake() {
   if (document.hidden) return;
   if (C.es && C.es.readyState === 2) connect(); // closed for good (the server refused it): try again
   refetch();
+  if (TOUR.on) refreshTour();
 }
 
 /* ── inbox ────────────────────────────────────────────────────────────── */
@@ -370,11 +372,14 @@ async function showToolkit(first) {
       <section class="sec"><h2>Waiting for you <span class="sub" id="wait-sub"></span></h2><div class="waiting" id="waiting"></div></section>
       <section class="sec"><h2>Papers <span class="sub">one verify run per paper · live</span></h2>
         <div class="tools"><label class="sr" for="runs-q">Search papers</label><input id="runs-q" type="search" placeholder="Search title, author or run name" autocomplete="off"><span class="seg" id="runs-filter" role="group" aria-label="Filter"></span></div>
-        <div class="tbl-wrap"><table class="runs"><thead><tr><th>Paper</th><th>Progress</th><th>Status</th><th>Updated</th><th>Share</th></tr></thead><tbody id="runs-body"></tbody></table></div>
+        <div class="tbl-wrap"><table class="runs"><colgroup><col class="c-paper"><col class="c-prog"><col class="c-st"><col class="c-up"><col class="c-sh"></colgroup><thead><tr><th>Paper</th><th>Progress</th><th>Status</th><th>Updated</th><th>Share</th></tr></thead><tbody id="runs-body"></tbody></table></div>
         <div class="pager" id="runs-pager"></div></section>
       <section class="sec"><h2>Verify a paper <span class="sub">an agent session runs it; this page follows it</span></h2><div id="start-how"></div></section>
     </div>`;
-    $("#runs-q").addEventListener("input", (e) => { T.q = e.target.value.trim(); T.page = 0; drawRuns(); });
+    $("#runs-q").value = T.q;
+    const search = (e) => { T.q = e.target.value.trim(); T.page = 0; drawRuns(); };
+    $("#runs-q").addEventListener("input", search);
+    $("#runs-q").addEventListener("search", search);
     $("#runs-filter").addEventListener("click", (e) => { const b = e.target.closest("[data-f]"); if (b) { T.f = b.dataset.f; T.page = 0; drawRuns(); } });
     $("#runs-pager").addEventListener("click", (e) => { const b = e.target.closest("[data-pg]"); if (b && !b.disabled) { T.page = +b.dataset.pg; drawRuns(); } });
     $("#runs-body").addEventListener("click", (e) => {
@@ -479,11 +484,7 @@ function drawLib() {
       ${ds.length ? ds.map((d) => declCard(d, m, false)).join("") : `<p class="empty-note">No declaration here passes the filter.</p>`}`;
   } else {
     const mods = LIB.modules.filter((m) => m.decls.some((d) => passes(d, m)));
-    const papers = LIB.papers;
-    const ab = (p) => p.replace(/[a-z0-9]+/g, "").slice(0, 4) || p.slice(0, 3);
-    main.innerHTML = `<h2>Modules</h2><table class="mtable"><thead><tr><th>Module</th><th class="n">Decls</th><th class="n">Papers</th></tr></thead><tbody>${mods.map((m) => `<tr data-lmod="${esc(m.path)}"><td>${mixed(m.title || m.path)}<small>${esc(m.module)}</small></td><td class="n">${m.decls.length}</td><td class="n">${new Set(m.decls.flatMap((d) => d.papers)).size}</td></tr>`).join("")}</tbody></table>
-      <h2 style="margin-top:2rem">Reuse across papers</h2><div class="reuse-wrap"><table class="reuse"><thead><tr><th></th>${papers.map((p) => `<th title="${esc(p)}">${esc(ab(p))}</th>`).join("")}</tr></thead><tbody>${mods.map((m) => `<tr><th class="rowh" title="${esc(m.title)}">${esc(m.path.split("/").pop())}</th>${papers.map((p) => { const n = m.decls.filter((d) => d.papers.includes(p)).length; const a = Math.min(1, 0.18 + n / 10); return n ? `<td class="h${a > 0.6 ? " strong" : ""}" style="--a:${a.toFixed(2)}" data-lmod="${esc(m.path)}" title="${n} of its declarations used in ${esc(p)}">${n}</td>` : `<td class="z">·</td>`; }).join("")}</tr>`).join("")}</tbody></table></div>
-      <p class="pm-note">${papers.map((p) => `<b>${esc(ab(p))}</b> ${esc(p)}`).join(" · ")}</p>`;
+    main.innerHTML = `<h2>Modules</h2><table class="mtable"><thead><tr><th>Module</th><th class="n">Decls</th><th class="n">Papers</th></tr></thead><tbody>${mods.map((m) => `<tr data-lmod="${esc(m.path)}"><td>${mixed(m.title || m.path)}<small>${esc(m.module)}</small></td><td class="n">${m.decls.length}</td><td class="n">${new Set(m.decls.flatMap((d) => d.papers)).size}</td></tr>`).join("")}</tbody></table>`;
   }
 }
 /* A docstring: its mathematics and its code as `mixed` has them, each linked phrase a span naming its rows. */
@@ -946,6 +947,7 @@ function drawStatus() {
   const caret = typing && { rid: typing.closest(".review").dataset.rid, from: typing.selectionStart, to: typing.selectionEnd };
   const writing = document.activeElement?.matches?.("#status [data-msg-text]") ? { from: document.activeElement.selectionStart, to: document.activeElement.selectionEnd } : null;
   const listTop = $(".thread-list", host)?.scrollTop ?? 0;
+  const askTop = new Map($$(".ask-list", host).map((l) => [l.dataset.ask, [l.scrollTop, l.childElementCount]]));
   markRead();
   drawStatusBox();
   const s = P.detail.summary;
@@ -956,7 +958,7 @@ function drawStatus() {
   const asks = (s.requests ?? []).map((q) => {
     const on = said.filter((m) => askOf(m) === q.id);
     const foot = P.msg.re === q.id ? composeHTML() : `<div class="row"><button class="btn btn-primary" type="button" data-msg="open" data-re="${esc(q.id)}">Reply</button><button class="btn" type="button" data-dismiss="${esc(q.id)}" title="It is answered: take it off the page">Dismiss</button>${s.orch ? "" : `<span class="hint">No agent session is attached: reply here (it is delivered once one is), or answer in a session.</span>`}</div>`;
-    return `<div class="ask-banner"><div><b>The agent asks you:</b> ${tex(q.text, P.paper?.macros)}</div>${on.map(messageHTML).join("")}${foot}</div>`;
+    return `<div class="ask-banner"><div class="ask-list" data-ask="${esc(q.id)}"><div><b>The agent asks you:</b> ${tex(q.text, P.paper?.macros)}</div>${on.map(messageHTML).join("")}</div>${foot}</div>`;
   }).join("");
   // The thread ends with the box to write on in — unless the owner is replying on a request above
   // (a reply to a request cleared meanwhile is written on here: its words are kept). It scrolls
@@ -969,7 +971,8 @@ function drawStatus() {
   const thread = threadHidden()
     ? `<section class="thread thread-hidden"><h3>Ask the agent${news ? ` <span class="msg-new">${news} new</span>` : ""}<span class="thread-tools">${hide}</span></h3></section>`
     : `<section class="thread"><h3>Ask the agent${news ? ` <span class="msg-new">${news} new</span>` : ""}<span class="thread-tools">${said.length ? `<button class="linkbtn" type="button" data-msg="clear" title="Archive this conversation in the run's folder and start afresh">Clear conversation</button>` : ""}${hide}</span></h3>${clearing}${rest.length ? `<div class="thread-list">${rest.map(messageHTML).join("")}</div>` : ""}${loose ? composeHTML() : `<div class="row"><button class="btn" type="button" data-msg="open">Write to the agent here</button><span class="hint">You are replying to its request above.</span></div>`}</section>`;
-  const who = s.orch ? `<span class="orch on">● ${esc(s.orch.agent)} attached — it acts at each halt</span>` : `<span class="orch">○ No agent attached <button class="linkbtn" type="button" id="orch-how">start one</button></span>`;
+  const who = (s.orch ? `<span class="orch on">● ${esc(s.orch.agent)} attached — it acts at each halt</span>` : `<span class="orch">○ No agent attached <button class="linkbtn" type="button" id="orch-how">start one</button></span>`) +
+    (s.fullAuto ? `<span class="orch on" title="Started with --full-auto: the repairs that would weaken a main result and the promotion rounds take the agent's recommendations; each appears under “Review the agent's decisions”. You may still decide an item first.">full auto — your decisions take the agent's recommendations, for your review after</span>` : "");
   // rulings the agent made at halts, for the owner's review: approve, or reject with guidance (the agent acts on it)
   const reviews = (s.reviews ?? []).map((r) => `<div class="review" data-rid="${esc(r.id)}"><div><b>The agent decided</b> on ${esc(envOf(r.node)?.heading ?? r.node)} <span class="meta">${esc(ago(Date.parse(r.at)))}</span></div><div class="review-b">${tex(r.text, P.paper?.macros)}</div><div class="actions"><button class="btn btn-primary" type="button" data-review="approve">Approve</button><button class="btn" type="button" data-review="reject">Reject</button></div><div class="ask" hidden><label class="mono" style="font-size:var(--fs-2xs);color:var(--ink-faint)">What should the agent do instead?</label><textarea></textarea><div class="row" style="justify-content:flex-end"><button class="btn btn-ghost" type="button" data-review="cancel">Cancel</button><button class="btn btn-primary" type="button" data-review="send">Send to the agent</button></div></div></div>`).join("");
   host.insertAdjacentHTML("afterbegin", asks + (reviews ? `<section class="reviews"><h3>Review the agent's decisions</h3>${reviews}</section>` : ""));
@@ -983,6 +986,8 @@ function drawStatus() {
   const list = $(".thread-list", host);
   if (list) list.scrollTop = P.threadN === rest.length ? listTop : list.scrollHeight;
   P.threadN = rest.length;
+  // a request's exchange the same way: where the owner had scrolled to, the newest entry when one arrives
+  for (const l of $$(".ask-list", host)) { const [top, n] = askTop.get(l.dataset.ask) ?? [0, -1]; l.scrollTop = n === l.childElementCount ? top : l.scrollHeight; }
   if (writing) { const ta = $("[data-msg-text]", host); if (ta) { ta.focus({ preventScroll: true }); ta.setSelectionRange(writing.from, writing.to); } }
   for (const [rid, text] of drafts) {
     const box = $(`.review[data-rid="${CSS.escape(rid)}"]`, host); if (!box) continue;
@@ -1594,7 +1599,8 @@ function drawMap() {
   // as the paper names it (Thm 2, Lem 1); a result the page cannot place keeps its kind
   // a corollary a repair split off has no number of its own: it is named after its result, also before the paper shows its block
   const split = (r) => shortHeading(splitHeading(r));
-  const label = (r) => { const h = r.splitFrom ? null : envOf(r.id)?.heading ?? P.paper?.anchorHeadings?.[r.id]; return fit(r.splitFrom ? split(r) : h ? shortHeading(h) : `${shortHeading(r.kind.charAt(0).toUpperCase() + r.kind.slice(1))} ?`); };
+  // a citation a proof invokes is named by its citation ([Ber]); it has no environment of its own
+  const label = (r) => { if (r.citedIn) return fit(`[${r.cites}]`); const h = r.splitFrom ? null : envOf(r.id)?.heading ?? P.paper?.anchorHeadings?.[r.id]; return fit(r.splitFrom ? split(r) : h ? shortHeading(h) : `${shortHeading(r.kind.charAt(0).toUpperCase() + r.kind.slice(1))} ?`); };
   MAP_USES = uses;
   // an arrow reads "used by": from a result up to the one whose proof uses it
   const svgE = edges.map(([a, b]) => { const [x1, y1] = pos[a], [x2, y2] = pos[b]; return `<path class="pm-edge" data-a="${esc(a)}" data-b="${esc(b)}" marker-end="url(#pm-a)" d="M${x2},${y2 - CH / 2} C${x2},${y2 - CH / 2 - 10} ${x1},${y1 + CH / 2 + 10} ${x1},${y1 + CH / 2 + 1}"></path>`; }).join("");
@@ -2269,7 +2275,7 @@ async function runAction(action, title, what = "", ok = "Continue", before = nul
     if (!(await confirmRun(title, `${what}<p>This runs in the background; the page updates as it goes.</p>${cmdBox(pv.command)}`, ok))) return false;
     if (before) await before();
     const r = await post(`/api/runs/${encodeURIComponent(S.slug)}/action`, { action });
-    toast(`Started — log: ${r.log}`);
+    toast(r.demo ? "Sent to the demo run" : r.queued ? "Sent to the agent's job, which starts it" : `Started — log: ${r.log}`);
     setTimeout(() => onChange(`run:${S.slug}`), 800);
     return true;
   } catch (err) {
@@ -2378,6 +2384,78 @@ async function shareRun(slug = S.slug) {
   shareRedraw(slug);
 }
 
+/* ── the demo's tour (`theoremchecker demo`): the step, what it points at, its Next ── */
+const TOUR = { on: false, v: null, folded: false, step: null };
+const tourHref = (v) => (v.current.view === "paper" ? `#/paper/${encodeURIComponent(v.slug)}` : v.current.view === "library" ? "#/library" : "#/");
+async function refreshTour() {
+  let r;
+  try { r = await fetch("/api/demo", { credentials: "same-origin" }); } catch { return; }
+  if (!r.ok) { TOUR.on = false; return; }
+  TOUR.on = true; TOUR.v = await r.json();
+  // a step begun (Next, or what the page sent): its view is opened
+  if (TOUR.step !== null && TOUR.step !== TOUR.v.step && !TOUR.v.busy) location.hash = tourHref(TOUR.v);
+  if (!TOUR.v.busy) TOUR.step = TOUR.v.step;
+  drawTour();
+}
+function drawTour() {
+  const v = TOUR.v; if (!TOUR.on || !v) return;
+  let host = $("#tour");
+  if (!host) { host = document.createElement("aside"); host.id = "tour"; host.setAttribute("aria-label", "Demo tour"); document.body.append(host); }
+  const c = v.current, away = (location.hash || "#/") !== tourHref(v);
+  host.className = TOUR.folded ? "tour folded" : "tour";
+  const wait = v.expect === "rule-repairs" ? "Waiting for your decisions on the repairs" : v.expect ? "Waiting for you to apply the round" : "";
+  host.innerHTML = TOUR.folded
+    ? `<button class="btn" type="button" data-tour="unfold">Demo · step ${v.step + 1} of ${v.total}</button>`
+    : `<div class="tour-head"><span class="pill b-agent">Demo</span><span class="meta">step ${v.step + 1} of ${v.total}</span><span class="grow"></span><button class="linkbtn" type="button" data-tour="fold" title="Fold the tour away">Hide</button></div>
+      <h3>${esc(c.title)}</h3><div class="tour-body">${c.body}</div>
+      ${v.busy ? `<p class="meta tour-busy">The run is at work…</p>` : ""}
+      <div class="tour-actions">${away ? `<a class="btn" href="${tourHref(v)}">Show me</a>` : ""}<button class="linkbtn" type="button" data-tour="restart">Start over</button><span class="grow"></span>${wait ? `<span class="meta">${wait}</span>` : v.step + 1 < v.total ? `<button class="btn btn-primary" type="button" data-tour="next" ${v.busy ? "disabled" : ""}>Next</button>` : `<span class="meta">The end of the tour</span>`}</div>`;
+  markTour();
+}
+/* the step's target, marked on the page as drawn (the page redraws itself as the run changes) */
+function markTour() {
+  $$(".tour-target").forEach((e) => e.classList.remove("tour-target"));
+  const sel = TOUR.on && !TOUR.folded && !TOUR.v?.busy ? TOUR.v?.current.target : null;
+  let els = [];
+  if (sel) { try { els = $$(sel); } catch { /* not on this view */ } }
+  els.forEach((e) => e.classList.add("tour-target"));
+  // the spotlight goes on the first one drawn; the page scrolls to it once per step
+  TOUR.el = els.find((e) => e.getClientRects().length) ?? null;
+  if (TOUR.el && TOUR.scrolled !== TOUR.v.current.id) { TOUR.scrolled = TOUR.v.current.id; TOUR.el.scrollIntoView({ behavior: "smooth", block: "center" }); }
+  placeSpot();
+}
+/* the spotlight: the page dimmed around the step's target, a ring on it (clicks pass through) */
+function placeSpot() {
+  const el = TOUR.el?.isConnected ? TOUR.el : null, r = el?.getBoundingClientRect();
+  let spot = $("#tour-spot");
+  if (!el || !r.width || !r.height) { spot?.remove(); placeTour(null); return; }
+  if (!spot) { spot = document.createElement("div"); spot.id = "tour-spot"; spot.setAttribute("aria-hidden", "true"); document.body.append(spot); }
+  const pad = 6;
+  Object.assign(spot.style, { top: `${r.top - pad}px`, left: `${r.left - pad}px`, width: `${r.width + 2 * pad}px`, height: `${r.height + 2 * pad}px` });
+  placeTour(r);
+}
+/* the tour's box in the corner that hides least of the target `r` (bottom right when there is none) */
+function placeTour(r) {
+  const host = $("#tour"); if (!host || TOUR.folded) return;
+  const corners = ["br", "bl", "tr", "tl"], cls = { bl: "at-bl", tr: "at-tr", tl: "at-tl" };
+  host.classList.remove(...Object.values(cls));
+  if (!r) return;
+  const w = host.offsetWidth, h = host.offsetHeight, vw = window.innerWidth, vh = window.innerHeight, m = 16, top = 60;
+  const box = { br: [vw - m - w, vh - m - h], bl: [m, vh - m - h], tr: [vw - m - w, top], tl: [m, top] };
+  const hidden = (c) => { const [x, y] = box[c]; return Math.max(0, Math.min(x + w, r.right) - Math.max(x, r.left)) * Math.max(0, Math.min(y + h, r.bottom) - Math.max(y, r.top)); };
+  const best = corners.reduce((a, c) => (hidden(c) < hidden(a) ? c : a), "br");
+  if (cls[best]) host.classList.add(cls[best]);
+}
+window.addEventListener("scroll", () => { if (TOUR.el) requestAnimationFrame(placeSpot); }, { capture: true, passive: true });
+window.addEventListener("resize", () => { if (TOUR.el) placeSpot(); });
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-tour]"); if (!b) return;
+  const what = b.dataset.tour;
+  if (what === "fold" || what === "unfold") { TOUR.folded = what === "fold"; drawTour(); return; }
+  if (what === "restart" && !window.confirm("Start the demo over from its first step?")) return;
+  try { TOUR.v = await post(`/api/demo/${what}`, {}); if (what === "restart") { TOUR.step = 0; location.hash = tourHref(TOUR.v); } drawTour(); } catch (err) { toast(err.message, true); }
+});
+
 /* ── boot ─────────────────────────────────────────────────────────────── */
 if (SNAP) {
   // a shared paper: drawn once from its snapshot; what the build wrote in #app stays if that fails
@@ -2387,6 +2465,9 @@ if (SNAP) {
 connect();
 refreshInbox().catch(() => {});
 route();
+refreshTour();
+window.addEventListener("hashchange", drawTour);
+new MutationObserver(() => { if (TOUR.on) { clearTimeout(TOUR.t); TOUR.t = setTimeout(markTour, 100); } }).observe(app, { childList: true, subtree: true });
 document.addEventListener("visibilitychange", wake);
 window.addEventListener("pageshow", wake);
 window.addEventListener("online", wake);
