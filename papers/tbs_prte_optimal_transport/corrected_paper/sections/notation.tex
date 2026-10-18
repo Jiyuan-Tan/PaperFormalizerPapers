@@ -1,0 +1,88 @@
+﻿% \section{Notation} is supplied by sections/online_appendix.tex, which
+% \input{}s this file. That holds in BOTH trees, so this file is shared
+% byte-for-byte; do not add a \section here or the heading will be duplicated.
+{
+% The description column is sized relative to \textwidth so the table fits both
+% the wider article layout of "Paper Draft" and the 6in econsocart text block.
+% The 5.6cm allowance covers the widest symbol in column 1 plus intercolumn glue.
+\begin{longtable}{lp{\dimexpr\textwidth-5.6cm\relax}}
+\caption{Important Variables and Mathematical Symbols}
+\label{tab:symbols} \\
+
+% --- HEADER FOR THE VERY FIRST PAGE ---
+\hline
+\textbf{Symbol} & \textbf{Description} \\
+\hline
+\endfirsthead
+
+% --- HEADER FOR ALL SUBSEQUENT PAGES ---
+\multicolumn{2}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\hline
+\textbf{Symbol} & \textbf{Description} \\
+\hline
+\endhead
+
+% --- FOOTER FOR ALL PAGES EXCEPT THE LAST ---
+\hline \multicolumn{2}{r}{{Continued on next page}} \\
+\endfoot
+
+% --- FOOTER FOR THE VERY LAST PAGE ---
+\hline
+\endlastfoot
+
+% --- TABLE CONTENTS ---
+$W$ & Treatment variable (binary, discrete, or continuous), taking values in $\mathcal{W}$ \\
+$Z$ & Instrumental variable, taking values in $\mathcal{Z}$ \\
+$X$ & Covariates, taking values in $\mathcal{X}$ \\
+$Y$ & Observed outcome variable, taking values in $\mathcal{Y}$ \\
+$Y(w)$ & Potential outcome under counterfactual treatment $W=w$ \\
+$U$ & Unobserved latent heterogeneity (resistance type), normalized to $U\mid X \sim \text{Unif}(0,1)$ \\
+$p(Z,X)$ & Baseline conditional propensity score or threshold function, $\mathbb{P}(W=1\mid Z,X)$ \\
+$q(Z,X)$ & Counterfactual policy propensity score \\
+$\omega(x,u)$ & Policy-specific weight function for the target parameter \\
+$\theta_{\omega}$ & Target causal estimand (e.g., Policy-Relevant Treatment Effect) \\
+$\underline{\theta}_{\omega,1}, \overline{\theta}_{\omega,1}$ & Sharp lower and upper bounds for the $W=1$ component of the target parameter \\
+$y_{\min}, y_{\max}$ & Lower and upper logical/support bounds of the potential outcome \\
+$\pi_w$ & Structural joint distribution (probability measure) of $(Y(w), U, X)$ \\
+$\mathcal{R}_w(p)$ & Latent region selected into arm $w$ at propensity $p$: $\mathcal{R}_1(p)=(0,p]$, $\mathcal{R}_0(p)=(p,1]$ \\
+$\mathbb{P}_{\text{obs}}$ & The true observed joint distribution of the data $(Y, W, Z, X)$ \\
+$H_{w,x}(p,\cdot)$ & Canonical observed sub-measure $\mathbb{P}_{\text{obs}}(Y\in\cdot\,,W=w\mid P=p,X=x)$; written $H_w$ without covariates \\
+$g_1^{\mathrm{c}}(p,x)$ & Canonical treated regression $\int_{\mathcal{Y}} y\,H_{1,x}(p,\mathrm{d}y)=\mathbb{E}_{\text{obs}}[YW\mid P=p,X=x]$; written $g_1$ in \cref{sec:est_inf} \\
+$p_k$ & $k$-th smallest unique positive value in the range of $p(z)$ or $p(z,x)$ for $k\geqslant1$; $p_0:=0$ is the structural boundary \\
+$I_i, I_i(x)$ & A disjoint sub-interval $(p_i, p_{i+1}]$ of the latent variable space for $U$ \\
+$\mu_{1,i}$ & Identified conditional probability measure of $Y(1)$ on the interval $I_i$ \\
+$Q_{Y,i}(t)$ & Quantile function of the identified conditional distribution $\mu_{1,i}$ \\
+$Q_{\omega,i}(t)$ & Quantile function of the random variable $\omega(U)$ when $U \sim \operatorname{Unif}(p_i, p_{i+1})$ \\
+$\underline{p}(x), \overline{p}(x)$ & Conditional lower and upper endpoints of the connected propensity-score support, $\inf_z p(z,x)$ and $\sup_z p(z,x)$ \\
+$q^{\mathrm{tr}}(z,x)$ & Policy propensity truncated to the identified support, $\min\{\overline{p}(x),\max\{\underline{p}(x),q(z,x)\}\}$ \\
+$\mu_{1,\underline{p}\mid x}, Q_{1,\underline{p}\mid x}$ & Treated outcome law at the lower propensity boundary $\underline{p}(x)$ and its quantile function \\
+$\underline{p}_k(x), \overline{p}_k(x)$ & Endpoints of the $k$-th connected component of the conditional propensity-score range \\
+$L_k(x), G_k(x)$ & $k$-th identified LIV interval and adjacent OT gap in the general continuous-IV decomposition \\
+$\mu_{1,k\mid x}$ & Identified conditional probability measure of $Y(1)$ on the gap $G_k(x)$ \\
+$q_{j,i}(x)$ & $j$-th smallest alternative-policy value in $[p_i(x),p_{i+1}(x))$, with the final bin closed at $1$ \\
+$S_k$ & Baseline instrument level set, $\{z \in \mathcal{Z} : p(z,x) = p_k(x)\}$ \\
+$T_{j,k}$ & Alternative instrument level set, $\{z \in \mathcal{Z} : q(z,x) = q_{j,k}(x)\}$ \\
+$\tau_{j,k}(x)$ & Conditional probability $\mathbb P(Z\in T_{j,k}\mid X=x)$ of an alternative-policy level set \\
+$a_{j,k}(z,x)$ & Conditional assignment share $\mathbb P(Z=z\mid Z\in T_{j,k},X=x)$ within an alternative-policy level set \\
+$c_{\text{gap}}$ & Minimal gap separating true propensity score levels \\
+$\kappa_{j,i}(x)$ & Relative quantile position within the $i$-th baseline interval, $\frac{q_{j,i}(x)-p_i(x)}{p_{i+1}(x)-p_i(x)}$ \\
+$\nu_{j,i}(x)$ & Conditional quantile function of the outcome evaluated at $\kappa_{j,i}(x)$ \\
+$\gamma_{\text{full},i}(X), \gamma_{j,i}(X), \gamma_K(X)$ & Weights attached to instruments spanning or terminating within specific intervals; $\gamma_{j,i},\gamma_K\in[0,1]$ are conditional probabilities, whereas $\gamma_{\text{full},i}\in[-1,1]$ differences two of them \\
+$J_{\text{full},i}(X), J_{j,i}(X)$ & Conditional expectations/integrals of the outcome within specific quantile bounds \\
+$\psi$ & Neyman-orthogonal score function used for Double Machine Learning estimation \\
+$R_{q,j,k}$ & Pooled influence residual for the common policy level $q_{j,k}$ \\
+$I_1, I_2$ (samples) & Auxiliary (nuisance) and main estimation samples for the discrete-instrument DML split; the continuous-instrument estimator adds a propensity sample $I_0$. Not to be confused with the latent sub-intervals $I_i$ above \\
+$K(\cdot), h_n$ & One-dimensional kernel function and bandwidth sequence used for localized machine learning \\
+$\mathcal{F}_n$ & Machine learning hypothesis class \\
+$r_{p,n}$ & Sup-norm convergence rate for the estimated propensity score \\
+$r_{g,n}, r_{\mu,n}$ & Targeted rates for the continuous-instrument regression evaluations and treated boundary law \\
+$r_{g,\mathrm{loc},n}, r_{Q,n}$ & Learner-level $L_1$ rates for the localized evaluation of $\hat g_1$ and for the boundary quantile grid fit \\
+$\delta_n, M_g, M_Q$ & Boundary-localization bandwidth, regression grid size, and quantile grid size \\
+$F_{W\mid Z,X}^{-1}$ & Conditional quantile function of the treatment $W$ (structural equation for continuous $W$) \\
+$\mathcal{U}_{\text{id}}(x,w)$ & Identifiable region (union of supports of $U$) for the continuous/multi-valued treatment \\
+$I_{x,w}(z)$ & Interval support of the latent variable for a multi-valued treatment \\
+$J_{x,w}(z)$ & Isolated, disjoint sub-region of $I_{x,w}(z)$ derived from the inclusion DAG \\
+$P_{1,k}(X)$ & Conditional expectation $\mathbb{E}_{\text{obs}}[YW \mid Z \in S_k, X]$ in the discrete outcome case; in the binary case, $J_{\text{full},k}(X) = P_{1,k+1}(X) - P_{1,k}(X)$ \\
+$h_{j,k}^{-}(X),\, h_{j,k}^{+}(X)$ & Binary-specialized integrals for the lower and upper bounds in the discrete outcome case \\
+\end{longtable}}

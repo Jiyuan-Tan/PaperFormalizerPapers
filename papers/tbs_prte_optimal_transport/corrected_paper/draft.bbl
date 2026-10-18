@@ -1,0 +1,297 @@
+\begin{thebibliography}{42}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Angrist and Imbens(1995)]{angrist1995identification}
+Joshua~D. Angrist and Guido~W. Imbens.
+\newblock Identification and estimation of local average treatment effects.
+\newblock Technical Working Paper 118, National Bureau of Economic Research,
+  Cambridge, MA, 1995.
+
+\bibitem[Athey et~al.(2019)Athey, Tibshirani, and Wager]{athey2019generalized}
+Susan Athey, Julie Tibshirani, and Stefan Wager.
+\newblock Generalized random forests.
+\newblock \emph{The Annals of Statistics}, 47\penalty0 (2):\penalty0
+  1148--1178, 2019.
+
+\bibitem[Balazadeh~Meresht et~al.(2022)Balazadeh~Meresht, Syrgkanis, and
+  Krishnan]{balazadeh_meresht_syrgkanis_krishnan2022}
+Vahid Balazadeh~Meresht, Vasilis Syrgkanis, and Rahul~G. Krishnan.
+\newblock Partial identification of treatment effects with implicit generative
+  models.
+\newblock In \emph{Advances in Neural Information Processing Systems 35
+  (NeurIPS)}, 2022.
+\newblock URL \url{https://openreview.net/pdf?id=8cUGfg-zUnh}.
+
+\bibitem[Balke and Pearl(1997)]{balke_pearl1997bounds}
+Alexander Balke and Judea Pearl.
+\newblock Bounds on treatment effects from studies with imperfect compliance.
+\newblock \emph{Journal of the American Statistical Association}, 92\penalty0
+  (439):\penalty0 1171--1176, 1997.
+
+\bibitem[Belloni et~al.(2015)Belloni, Chernozhukov, Chetverikov, and
+  Kato]{belloni2015series}
+Alexandre Belloni, Victor Chernozhukov, Denis Chetverikov, and Kengo Kato.
+\newblock Some new asymptotic theory for least squares series: Pointwise and
+  uniform results.
+\newblock \emph{Journal of Econometrics}, 186\penalty0 (2):\penalty0 345--366,
+  2015.
+\newblock \doi{10.1016/j.jeconom.2015.02.014}.
+
+\bibitem[Belloni et~al.(2019)Belloni, Chernozhukov, Chetverikov, and
+  Fern{\'a}ndez-Val]{belloni2019conditional}
+Alexandre Belloni, Victor Chernozhukov, Denis Chetverikov, and Iv{\'a}n
+  Fern{\'a}ndez-Val.
+\newblock Conditional quantile processes based on series or many regressors.
+\newblock \emph{Journal of Econometrics}, 213\penalty0 (1):\penalty0 4--29,
+  2019.
+
+\bibitem[Carneiro et~al.(2010)Carneiro, Heckman, and
+  Vytlacil]{carneiro2010evaluating}
+Pedro Carneiro, James~J Heckman, and Edward~J Vytlacil.
+\newblock Evaluating marginal policy changes and the average effect of
+  treatment for individuals at the margin.
+\newblock \emph{Econometrica}, 78\penalty0 (1):\penalty0 377--394, 2010.
+
+\bibitem[Carneiro et~al.(2011)Carneiro, Heckman, and
+  Vytlacil]{carneiro2011estimating}
+Pedro Carneiro, James~J Heckman, and Edward~J Vytlacil.
+\newblock Estimating marginal returns to education.
+\newblock \emph{American Economic Review}, 101\penalty0 (6):\penalty0
+  2754--2781, 2011.
+
+\bibitem[Chernozhukov et~al.(2007)Chernozhukov, Hong, and
+  Tamer]{chernozhukov_hong_tamer2007}
+Victor Chernozhukov, Han Hong, and Elie Tamer.
+\newblock Estimation and confidence regions for parameter sets in econometric
+  models.
+\newblock \emph{Econometrica}, 75\penalty0 (5):\penalty0 1243--1284, 2007.
+
+\bibitem[Chernozhukov et~al.(2018)Chernozhukov, Chetverikov, Demirer, Duflo,
+  Hansen, Newey, and Robins]{chernozhukov2018double}
+Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duflo, Christian
+  Hansen, Whitney Newey, and James Robins.
+\newblock Double/debiased machine learning for treatment and structural
+  parameters.
+\newblock \emph{The Econometrics Journal}, 21\penalty0 (1):\penalty0 C1--C68,
+  2018.
+\newblock \doi{10.1111/ectj.12097}.
+
+\bibitem[Duarte et~al.(2024)Duarte, Finkelstein, Knox, Mummolo, and
+  Shpitser]{duarte2024automated}
+Guilherme Duarte, Noam Finkelstein, Dean Knox, Jonathan Mummolo, and Ilya
+  Shpitser.
+\newblock An automated approach to causal inference in discrete settings.
+\newblock \emph{Journal of the American Statistical Association}, 119\penalty0
+  (547):\penalty0 1778--1793, 2024.
+
+\bibitem[Dupas(2014)]{dupas2014subsidies}
+Pascaline Dupas.
+\newblock Short-run subsidies and long-run adoption of new health products:
+  Evidence from a field experiment.
+\newblock \emph{Econometrica}, 82\penalty0 (1):\penalty0 197--228, 2014.
+
+\bibitem[Fan et~al.(2017)Fan, Guerre, and Zhu]{fan_guerre_zhu2017partial}
+Yanqin Fan, Emmanuel Guerre, and Dongming Zhu.
+\newblock Partial identification of functionals of the joint distribution of
+  ``potential outcomes''.
+\newblock \emph{Journal of Econometrics}, 197\penalty0 (1):\penalty0 42--59,
+  2017.
+
+\bibitem[Fan et~al.(2025)Fan, Pass, and Shi]{fan_pass_shi2025}
+Yanqin Fan, Brendan Pass, and Xuetao Shi.
+\newblock Partial identification in moment models with incomplete data via
+  optimal transport, 2025.
+
+\bibitem[Galichon(2016)]{galichon2016optimal}
+Alfred Galichon.
+\newblock \emph{Optimal transport methods in economics}.
+\newblock Princeton University Press, 2016.
+
+\bibitem[Gunsilius(2025)]{gunsilius2025primer}
+Florian Gunsilius.
+\newblock A primer on optimal transport for causal inference with observational
+  data, 2025.
+
+\bibitem[Guo et~al.(2022)Guo, Yin, Wang, and Jordan]{guo_yin_wang_jordan2022}
+Wenshuo Guo, Mingzhang Yin, Yixin Wang, and Michael~I. Jordan.
+\newblock Partial identification with noisy covariates: A robust optimization
+  approach.
+\newblock In \emph{Proceedings of CLeaR 2022}, 2022.
+\newblock URL \url{https://proceedings.mlr.press/v177/guo22a/guo22a.pdf}.
+\newblock Also available as arXiv:2202.10665.
+
+\bibitem[Han and Yang(2024)]{han_yang2024computational}
+Sukjin Han and Shenshen Yang.
+\newblock A computational approach to identification of treatment effects for
+  policy evaluation.
+\newblock \emph{Journal of Econometrics}, 240\penalty0 (1):\penalty0 105680,
+  2024.
+
+\bibitem[Heckman and Vytlacil(2005)]{heckman2005structural}
+James~J Heckman and Edward Vytlacil.
+\newblock Structural equations, treatment effects, and econometric policy
+  evaluation.
+\newblock \emph{Econometrica}, 73\penalty0 (3):\penalty0 669--738, 2005.
+\newblock \doi{10.1111/j.1468-0262.2005.00594.x}.
+
+\bibitem[Heckman and Vytlacil(1999)]{heckman1999local}
+James~J Heckman and Edward~J Vytlacil.
+\newblock Local instrumental variables and latent variable models for
+  identifying and bounding treatment effects.
+\newblock \emph{Proceedings of the National Academy of Sciences}, 96\penalty0
+  (8):\penalty0 4730--4734, 1999.
+\newblock \doi{10.1073/pnas.96.8.4730}.
+
+\bibitem[Heckman and Vytlacil(2001)]{heckman2001instrumental}
+James~J Heckman and Edward~J Vytlacil.
+\newblock Instrumental variables, selection models, and tight bounds on the
+  average treatment effect.
+\newblock In \emph{Econometric Evaluation of Labour Market Policies}, pages
+  1--15. Springer, 2001.
+
+\bibitem[Heckman et~al.(2006)Heckman, Urzua, and
+  Vytlacil]{heckman2006understanding}
+James~J Heckman, Sergio Urzua, and Edward Vytlacil.
+\newblock Understanding instrumental variables in models with essential
+  heterogeneity.
+\newblock \emph{The Review of Economics and Statistics}, 88\penalty0
+  (3):\penalty0 389--432, 2006.
+
+\bibitem[Imbens and Rubin(1997)]{imbens1997estimating}
+Guido~W Imbens and Donald~B Rubin.
+\newblock Estimating outcome distributions for compliers in instrumental
+  variables models.
+\newblock \emph{The Review of Economic Studies}, 64\penalty0 (4):\penalty0
+  555--574, 1997.
+
+\bibitem[Ji et~al.(2024)Ji, Lei, and Spector]{ji_lei_spector2024}
+Wenlong Ji, Lihua Lei, and Asher Spector.
+\newblock Model-agnostic covariate-assisted inference on partially identified
+  causal effects, 2024.
+
+\bibitem[Kennedy(2023)]{kennedy2023towards}
+Edward~H. Kennedy.
+\newblock Towards optimal doubly robust estimation of heterogeneous causal
+  effects.
+\newblock \emph{Electronic Journal of Statistics}, 17\penalty0 (2):\penalty0
+  3008--3049, 2023.
+
+\bibitem[Lee(2018)]{lee2018partial_mean}
+Ying-Ying Lee.
+\newblock Partial mean processes with generated regressors: Continuous
+  treatment effects and nonseparable models.
+\newblock \emph{arXiv preprint arXiv:1811.00157}, 2018.
+
+\bibitem[Levis et~al.(2025)Levis, Bonvini, Zeng, Keele, and
+  Kennedy]{levis2025covariate}
+Alexander~W Levis, Matteo Bonvini, Zhenghao Zeng, Luke Keele, and Edward~H
+  Kennedy.
+\newblock Covariate-assisted bounds on causal effects with instrumental
+  variables.
+\newblock \emph{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 87\penalty0 (5):\penalty0 1508--1527, 2025.
+
+\bibitem[Lin et~al.(2025{\natexlab{a}})Lin, Gao, Blanchet, and
+  Glynn]{lin2025estimation}
+Sirui Lin, Zijun Gao, Jose Blanchet, and Peter Glynn.
+\newblock Estimation of optimal causal bounds via covariate-assisted optimal
+  transport.
+\newblock \emph{arXiv preprint arXiv:2506.00257}, 2025{\natexlab{a}}.
+
+\bibitem[Lin et~al.(2025{\natexlab{b}})Lin, Gao, Blanchet, and
+  Glynn]{lin2025tightening}
+Sirui Lin, Zijun Gao, Jos{\'e} Blanchet, and Peter Glynn.
+\newblock Tightening causal bounds via covariate-aware optimal transport.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning}, volume 267 of \emph{Proceedings of Machine Learning Research},
+  pages 37815--37845. PMLR, 2025{\natexlab{b}}.
+\newblock URL \url{https://proceedings.mlr.press/v267/lin25f.html}.
+
+\bibitem[Mammen et~al.(2012)Mammen, Rothe, and
+  Schienle]{mammen_rothe_schienle2012}
+Enno Mammen, Christoph Rothe, and Melanie Schienle.
+\newblock Nonparametric regression with nonparametrically generated covariates.
+\newblock \emph{The Annals of Statistics}, 40\penalty0 (2):\penalty0
+  1132--1170, 2012.
+\newblock \doi{10.1214/12-AOS995}.
+
+\bibitem[Manski(1990)]{manski1990nonparametric}
+Charles~F. Manski.
+\newblock Nonparametric bounds on treatment effects.
+\newblock \emph{American Economic Review}, 80\penalty0 (2):\penalty0 319--323,
+  1990.
+
+\bibitem[Manski(1997)]{manski1997monotone}
+Charles~F. Manski.
+\newblock Monotone treatment response.
+\newblock \emph{Econometrica}, 65\penalty0 (6):\penalty0 1311--1334, 1997.
+
+\bibitem[Manski and Pepper(2000)]{manski_pepper2000monotone}
+Charles~F. Manski and John~V. Pepper.
+\newblock Monotone instrumental variables: With an application to the returns
+  to schooling.
+\newblock \emph{Econometrica}, 68\penalty0 (4):\penalty0 997--1010, 2000.
+
+\bibitem[Marx(2024)]{marx2024sharp}
+Philip Marx.
+\newblock Sharp bounds in the latent index selection model.
+\newblock \emph{Journal of Econometrics}, 238\penalty0 (2):\penalty0 105561,
+  2024.
+\newblock \doi{10.1016/j.jeconom.2023.105561}.
+
+\bibitem[Mogstad and Torgovitsky(2018)]{mogstad2018identification}
+Magne Mogstad and Alexander Torgovitsky.
+\newblock Identification and extrapolation of causal effects with instrumental
+  variables.
+\newblock \emph{Annual Review of Economics}, 10:\penalty0 577--613, 2018.
+
+\bibitem[Mogstad et~al.(2018)Mogstad, Santos, and Torgovitsky]{magne2018using}
+Magne Mogstad, Andres Santos, and Alexander Torgovitsky.
+\newblock Using instrumental variables for inference about policy relevant
+  treatment parameters.
+\newblock \emph{Econometrica}, 86\penalty0 (5):\penalty0 1589--1619, 2018.
+\newblock \doi{10.3982/ECTA15463}.
+
+\bibitem[Mourifi{\'e} and Wan(2017)]{mourifie2017testing}
+Ismael Mourifi{\'e} and Yuanyuan Wan.
+\newblock Testing local average treatment effect assumptions.
+\newblock \emph{Review of Economics and Statistics}, 99\penalty0 (2):\penalty0
+  305--313, 2017.
+\newblock \doi{10.1162/REST_a_00622}.
+
+\bibitem[Ober-Reynolds(2023)]{oberreynolds2023estimating}
+Daniel Ober-Reynolds.
+\newblock Estimating functionals of the joint distribution of potential
+  outcomes with optimal transport.
+\newblock \emph{arXiv preprint arXiv:2311.09435}, 2023.
+
+\bibitem[Tamer(2010)]{tamer2010partial}
+Elie Tamer.
+\newblock Partial identification in econometrics.
+\newblock \emph{Annual Review of Economics}, 2\penalty0 (1):\penalty0 167--195,
+  2010.
+
+\bibitem[Tan et~al.(2024)Tan, Blanchet, and Syrgkanis]{tan2024consistency}
+Jiyuan Tan, Jose Blanchet, and Vasilis Syrgkanis.
+\newblock Consistency of neural causal partial identification.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  37:\penalty0 68956--68999, 2024.
+
+\bibitem[Villani(2021)]{villani2021topics}
+C{\'e}dric Villani.
+\newblock \emph{Topics in optimal transportation}, volume~58 of \emph{Graduate
+  Studies in Mathematics}.
+\newblock American Mathematical Society, reprint edition, 2021.
+\newblock \doi{10.1090/gsm/058}.
+
+\bibitem[Vytlacil(2002)]{vytlacil2002independence}
+Edward Vytlacil.
+\newblock Independence, monotonicity, and latent index models: An equivalence
+  result.
+\newblock \emph{Econometrica}, 70\penalty0 (1):\penalty0 331--341, 2002.
+
+\end{thebibliography}

@@ -1,0 +1,120 @@
+\section{Extension to General Joint Functionals of Potential Outcomes}\label{sec:general_func}
+
+The PRTE target $\theta_\omega$ studied in \cref{sec:pid} is a linear functional of the MTE and is hence \emph{separable} in the two potential outcomes: the CCOT problem in (\ref{eq:ot_formulation}) decomposes into two independent sub-problems, one for $\pi_1$ and one for $\pi_0$, because the objective depends on $Y(1)$ and $Y(0)$ only through their expectations. Many policy-relevant quantities, however, depend on the \emph{joint} distribution of $(Y(1), Y(0))$ and cannot be expressed as separable functionals. Examples include
+\begin{align*}
+    \mathrm{Var}(Y(1) - Y(0)), \qquad \mathbb{P}(Y(1) > Y(0)), \qquad F_{\Delta}(\delta) = \mathbb{P}(Y(1) - Y(0) \leqslant \delta),\qquad \mathrm{Cov}(Y(1), Y(0)).
+\end{align*}
+These quantities depend on the coupling of $(Y(1), Y(0))$ conditional on the latent resistance, which is fundamentally unidentified because each individual is observed under at most one treatment regime. \citet{marx2024sharp} explicitly raises this as an open problem in his \S 3.4.2: his SSD-on-MTE framework acts on the conditional mean $\mathbb{E}[Y(w) \mid U = u]$, a first-moment object, and hence loses the coupling information required to characterize $F_\Delta$ sharply. He shows by counter-example that the SSD bounds combined with the classical Makarov bounds of \citet{fan_park2010sharp} are not sharp, and notes that a sharp characterization of the identified set for $F_\Delta$ ``remains an open problem.''
+
+In this section, we extend the CCOT framework of \cref{sec:pid} to bound general joint functionals
+\begin{equation}\label{eq:gf_target}
+    \theta_f = \mathbb{E}[f(Y(1), Y(0))]
+\end{equation}
+for a bounded measurable cost $f: \mathcal{Y}^2 \to \mathbb{R}$. The key idea is to promote the decision variable from the marginal kernel $\pi_w(\diff y \mid u, x)$ to the \emph{joint} conditional kernel $\pi(\diff y_1, \diff y_0 \mid u, x)$ of both potential outcomes given $(U, X)$. Under this enlarged primitive, the observational constraints continue to act only on the two marginals of $\pi$, leaving the coupling as a free decision variable. The interval decomposition of \cref{sec:pid} still applies, but the nature of each sub-problem changes: within intervals where both outcome marginals are identified, the sub-problem reduces to a \emph{standard two-marginal OT} between the identified marginals of $Y(1)$ and $Y(0)$, with $U$ averaged out. The boundary intervals, where only one marginal is identified, reduce to a pointwise optimization against the unidentified outcome. As a corollary, we resolve the Marx (2024) open problem by sharply characterizing the identified set of $F_\Delta$, and we obtain closed-form bounds for covariances, variances of the treatment effect, and other super/submodular functionals via monotone rearrangement.
+
+Throughout this section, we maintain \cref{asp:structure} and \cref{asp:bounded_y} from \cref{sec:pre}, and state all results with covariates. For expositional clarity we focus on the discrete-instrument case in the main development; the continuous-instrument extension is recorded as \cref{rmk:gf_continuous} and the formal statement is given in \cref{sec:proofs_gf}.
+
+\subsection{CCOT Formulation with Joint Primitive}\label{subsec:gf_setup}
+
+Let $\pi_x$ denote the joint probability measure of $(Y(1), Y(0), U) \mid X = x$, and let $\pi(\diff y_1, \diff y_0 \mid u, x)$ be the conditional distribution of $(Y(1), Y(0))$ given $(U = u, X = x)$. We denote the $Y(1)$- and $Y(0)$-marginals of $\pi(\cdot \mid u, x)$ by
+\begin{equation}\label{eq:gf_marginals}
+    \pi_{Y(1)}(A \mid u, x) := \pi(A \times \mathcal{Y} \mid u, x),\qquad
+    \pi_{Y(0)}(A \mid u, x) := \pi(\mathcal{Y} \times A \mid u, x),
+\end{equation}
+for measurable $A \subseteq \mathcal{Y}$. Adapting the derivation in \cref{subsec:ot_formulation} to the joint primitive, we obtain the following CCOT formulation of the partial identification of $\theta_f$:
+\begin{equation}\label{eq:gf_ccot}
+    \begin{split}
+        \max_{\pi}\, /\, \min_{\pi} \quad & \mathbb{E}_X\!\left[\int_0^1 \int_{\mathcal{Y}^2} f(y_1, y_0)\, \pi(\diff y_1, \diff y_0 \mid u, X)\, \diff u\right] \\
+        \text{subject to} \quad & \int_0^{p(z,x)} \pi_{Y(1)}(\diff y \mid u, x)\, \diff u = \mathbb{P}_{obs}(\diff y, W=1 \mid p(Z,X) = p(z,x), X = x), \\
+        & \int_{p(z,x)}^1 \pi_{Y(0)}(\diff y \mid u, x)\, \diff u = \mathbb{P}_{obs}(\diff y, W=0 \mid p(Z,X) = p(z,x), X = x),\\
+        & \quad \forall z \in \mathcal{Z},\ \forall x \in \mathcal{X},\\
+        & \pi_x(\diff u) = \diff u,\quad \pi_x \text{ is supported on } \mathcal{Y}^2 \times [0,1].
+    \end{split}
+\end{equation}
+The constraints in (\ref{eq:gf_ccot}) pin down the two marginals $\pi_{Y(1)}$ and $\pi_{Y(0)}$ separately (in the same integral sense as in \cref{sec:pid}) but leave the coupling between $Y(1)$ and $Y(0)$ conditional on $(U, X)$ entirely free. This is the key structural difference from the PRTE formulation in (\ref{eq:ot_formulation}): for PRTE the objective depends on each marginal separately and the coupling is irrelevant, whereas here the coupling is the central decision variable.
+
+The sharpness of (\ref{eq:gf_ccot}) follows by the same lifting argument as in \cref{prop:sharpness}: any feasible joint kernel $\pi$ can be completed to a valid data-generating process that satisfies \cref{asp:structure} and reproduces $\mathbb{P}_{obs}$. The only additional step is that, given $\pi_x$, one draws $(Y(1), Y(0)) \mid (U, X)$ from $\pi$, independently of $(Z, W)$ conditional on $(U, X)$, and defines $W = \indicator(U \leqslant p(Z,X))$ and $Y = W Y(1) + (1 - W) Y(0)$. We state the result as follows.
+
+\begin{proposition}[Sharpness for General Functional CCOT]\label{prop:gf_sharpness}
+    Suppose $\mathbb{P}_{obs}$ is generated by a true structural model satisfying \cref{asp:structure}. Let $\Gamma_f(\mathbb{P}_{obs})$ be the set of joint kernels $\{\tilde{\pi}_x\}_{x \in \mathcal{X}}$ satisfying the constraints of (\ref{eq:gf_ccot}). For any $\{\tilde{\pi}_x\} \in \Gamma_f(\mathbb{P}_{obs})$, there exists a joint distribution of $(Y(1), Y(0), U, X, Z, W)$ such that: (i) the conditional law of $(Y(1), Y(0), U) \mid X = x$ is exactly $\tilde{\pi}_x$; (ii) \cref{asp:structure} holds for $(Y(1), Y(0), U, X, Z, W)$; and (iii) the induced distribution of $(Z, X, W, Y)$ exactly matches $\mathbb{P}_{obs}$. Consequently, the maximum and minimum values of $\theta_f$ in (\ref{eq:gf_ccot}) are the sharp upper and lower bounds on $\theta_f$.
+\end{proposition}
+
+The proof mirrors that of \cref{prop:sharpness}, with the key difference that $(Y(1), Y(0)) \mid (U, X)$ is drawn jointly from $\tilde{\pi}_x$ rather than from the independent product $\tilde{\pi}_0 \otimes \tilde{\pi}_1$, preserving the coupling information. The full argument is given in \cref{sec:proofs_gf}.
+
+\subsection{Discrete Instrument with Covariates}\label{subsec:gf_discrete}
+
+Fix $x \in \mathcal{X}$ with $\mathrm{Range}(p(z, x)) = \{p_1(x), \dots, p_K(x)\}$, where $0 = p_0(x) \leqslant p_1(x) < \dots < p_K(x) \leqslant p_{K+1}(x) = 1$. Let $I_i(x) = (p_i(x), p_{i+1}(x)]$ for $i = 0, \dots, K$. We drop the argument $x$ where no confusion arises.
+
+The same telescoping argument that produced (\ref{eq:y_identified_measure}) in \cref{sec:pid}, applied separately to the $W=1$ and $W=0$ observational constraints in (\ref{eq:gf_ccot}), identifies the conditional distribution $\mu_{1, i}(\cdot \mid x)$ of $Y(1) \mid U \in I_i(x), X = x$ for $i \in \{0, \dots, K-1\}$, and the distribution $\mu_{0, i}(\cdot \mid x)$ of $Y(0) \mid U \in I_i(x), X = x$ for $i \in \{1, \dots, K\}$; explicit formulas are given in (\ref{eq:gf_mu1}) and (\ref{eq:gf_mu0}) in \cref{sec:proofs_gf}. The structural feature of the joint primitive is an \emph{asymmetry across intervals}: on the complier intervals $i \in \{1, \dots, K-1\}$ both marginals are identified, whereas on the two boundary intervals $I_0(x)$ and $I_K(x)$ only one is---individuals with $U < p_1(x)$ are never observed under $W = 0$, and those with $U \geqslant p_K(x)$ are never observed under $W = 1$. The objective in (\ref{eq:gf_ccot}) decomposes additively across intervals and the per-interval constraints reduce to disjoint marginal constraints on $\pi_{Y(w)}$; the formal statement is \cref{prop:gf_decomposition} in \cref{sec:proofs_gf}.
+
+\paragraph{Complier intervals: reduction to two-marginal OT.} Because $f$ does not depend on $u$, the $U$-dimension averages out on each complier interval, and the sub-problem reduces to a \emph{standard two-marginal optimal transport} between the identified marginals $\mu_{1,i}$ and $\mu_{0,i}$. This is the central structural pivot relative to \cref{sec:pid}: the PRTE cost $y \cdot \omega(x, u)$ forced each sub-problem to be a 1D OT between $Y(w)$ and $U$, whereas the $u$-free cost $f(y_1, y_0)$ produces an OT between the two potential outcomes themselves.
+
+\begin{theorem}[Reduction to Two-Marginal OT on Complier Intervals]\label{thm:gf_reduction}
+    Fix $x \in \mathcal{X}$ and $i \in \{1, \dots, K-1\}$. Under \cref{asp:structure}, the restriction of (\ref{eq:gf_ccot}) to $I_i(x)$---optimizing $\mathbb{E}[f(Y(1), Y(0)) \mid U \in I_i(x), X = x]$ over joint kernels $\pi(\cdot \mid u, x)$ whose $U$-averaged marginals on $I_i(x)$ coincide with $\mu_{1,i}(\cdot \mid x)$ and $\mu_{0,i}(\cdot \mid x)$---is equivalent to the two-marginal optimal transport problem
+    \begin{equation}\label{eq:gf_two_marginal}
+        \mathcal{W}_f^{\mp}\!\bigl(\mu_{1, i}(\cdot \mid x),\, \mu_{0, i}(\cdot \mid x)\bigr) := \operatorname*{ext}_{\gamma \in \Pi(\mu_{1, i}(\cdot \mid x),\, \mu_{0, i}(\cdot \mid x))}\ \int_{\mathcal{Y}^2} f(y_1, y_0)\, \diff\gamma(y_1, y_0),
+    \end{equation}
+    where the extremum is a minimum for $\mathcal{W}_f^-$ and a maximum for $\mathcal{W}_f^+$, and $\Pi(\mu, \nu)$ is the set of couplings of $\mu$ and $\nu$ defined in \cref{subsec:ot_primer}. The proof is given in \cref{sec:proofs_gf}.
+\end{theorem}
+
+\paragraph{Boundary intervals: pointwise optimization.} On $I_0(x)$ only $\mu_{1,0}$ is identified and the $Y(0)$-marginal is free; pointwise optimization of the $u$-free cost yields
+\[
+    \min\, /\, \max\ \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_0(x), X = x] = \int_{\mathcal{Y}} \min_{y_0}\, /\, \max_{y_0}\ f(y_1, y_0)\, \mu_{1,0}(\diff y_1 \mid x),
+\]
+with the pointwise optimum taken over $y_0 \in [y_{\min}, y_{\max}]$; the symmetric statement holds on $I_K(x)$. A formal statement and proof are given as \cref{lem:gf_boundary} in \cref{sec:proofs_gf}. Contrast this with the PRTE framework, where the boundary contribution depends only on the sign of $\omega(u)$ and discards all distributional information: here the identified marginal still enters the bound through its interaction with the pointwise optimum, yielding strictly richer boundary terms.
+
+\paragraph{Main bound theorem.} Assembling the complier-interval OT costs and the boundary pointwise terms, weighted by interval lengths and averaged over $X$, yields the main identification result.
+
+\begin{theorem}[Sharp Bounds on $\theta_f$, Discrete Instrument with Covariates]\label{thm:gf_discrete}
+    Suppose \cref{asp:structure} and \cref{asp:bounded_y} hold, and $\mathcal{Z}$ is finite. The sharp lower bound for $\theta_f = \mathbb{E}[f(Y(1), Y(0))]$ is
+    \begin{equation}\label{eq:gf_discrete_lower}
+        \begin{split}
+            \underline{\theta}_f = \mathbb{E}_X\Bigg[\ & p_1(X) \int_{\mathcal{Y}} \min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{1,0}(\diff y_1 \mid X) \\
+            &+ \sum_{i=1}^{K-1}\bigl(p_{i+1}(X) - p_i(X)\bigr)\, \mathcal{W}_f^-\!\bigl(\mu_{1,i}(\cdot \mid X),\, \mu_{0,i}(\cdot \mid X)\bigr)\\
+            &+ (1 - p_K(X)) \int_{\mathcal{Y}} \min_{y_1 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{0,K}(\diff y_0 \mid X)\ \Bigg].
+        \end{split}
+    \end{equation}
+    The sharp upper bound $\overline{\theta}_f$ is obtained by replacing $\min$ with $\max$ and $\mathcal{W}_f^-$ with $\mathcal{W}_f^+$ throughout. The proof, which assembles the components above, is given in \cref{sec:proofs_gf}.
+\end{theorem}
+
+\begin{remark}[Continuous instrument]\label{rmk:gf_continuous}
+    The discrete analysis extends to the continuous instrument setting. When $\mathrm{Range}(p(z, x)) = [\underline{p}(x), \overline{p}(x)]$, differentiating the observational constraints in $p$ pointwise identifies the full conditional marginals $\pi_w(\cdot \mid u, x)$ at each $u$ in the LIV region---replacing the discrete interval averages with pointwise conditional distributions. The discrete complier sub-problems are correspondingly replaced by a pointwise two-marginal OT at each $u$, whose cost is integrated over the LIV region; the two boundary tails contribute pointwise terms exactly as in the discrete case (\cref{thm:gf_continuous} in \cref{sec:proofs_gf}). This exposes a sharp structural contrast with the PRTE case: for PRTE, the LIV integrand $\omega(x, u)\,\mathrm{MTE}(x, u)$ is point-identified at each $u$ because the objective depends on the potential outcomes only through their conditional \emph{means}, so on a fully-supported propensity PRTE becomes fully point-identified; for $\theta_f$, even with pointwise marginal identification, the joint law of $(Y(1), Y(0)) \mid U = u, X = x$ remains unidentified, so each $u$ contributes a non-degenerate OT cost and $\theta_f$ is partially identified even when $[\underline{p}(X), \overline{p}(X)] = [0, 1]$ almost surely. This irreducible width reflects the fundamental information loss from never observing both potential outcomes for the same individual.
+\end{remark}
+
+\subsection{Closed-Form Solutions via Monotone Rearrangement}\label{subsec:gf_closedform}
+
+The sub-problem $\mathcal{W}_f^\mp(\mu_{1,i}, \mu_{0,i})$ in \cref{thm:gf_discrete} is a two-marginal OT with general cost $f$. Closed-form solutions are available whenever $f$ has definite cross-curvature (super- or submodularity), via monotone rearrangement. Recall that $f : \mathbb{R}^2 \to \mathbb{R}$ is \emph{supermodular} if $f(a, c) + f(b, d) \geqslant f(a, d) + f(b, c)$ for all $a \leqslant b$ and $c \leqslant d$; equivalently, $\partial^2 f / \partial y_1 \partial y_0 \geqslant 0$ when $f$ is twice differentiable. It is \emph{submodular} if the reverse inequality holds. The product cost $f(y_1, y_0) = y_1 y_0$ is supermodular, and the squared-difference cost $f(y_1, y_0) = (y_1 - y_0)^2$ is submodular. The following proposition generalizes \cref{thm:1d_ot} from product cost to super/submodular cost.
+
+\begin{proposition}[Two-Marginal OT with Super/Submodular Cost]\label{prop:gf_rearrangement}
+    Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}$ with quantile functions $Q_\mu$ and $Q_\nu$. For any super/submodular cost $f$ with $\int |f(Q_\mu(t), Q_\nu(s))|\, \diff t\, \diff s < \infty$:
+    \begin{enumerate}
+        \item[\textup{(i)}] If $f$ is supermodular, $\mathcal{W}_f^-(\mu, \nu) = \int_0^1 f(Q_\mu(t), Q_\nu(1-t))\, \diff t$ (countermonotonic coupling) and $\mathcal{W}_f^+(\mu, \nu) = \int_0^1 f(Q_\mu(t), Q_\nu(t))\, \diff t$ (comonotonic coupling).
+        \item[\textup{(ii)}] If $f$ is submodular, the roles of $\min$ and $\max$ are swapped: $\mathcal{W}_f^-(\mu, \nu) = \int_0^1 f(Q_\mu(t), Q_\nu(t))\, \diff t$ and $\mathcal{W}_f^+(\mu, \nu) = \int_0^1 f(Q_\mu(t), Q_\nu(1-t))\, \diff t$.
+    \end{enumerate}
+\end{proposition}
+
+\cref{prop:gf_rearrangement} is a classical result in optimal transport theory; see e.g. \citet[Chapter 4]{galichon2016optimal} and \citet{villani2021topics}. Substituting \cref{prop:gf_rearrangement} into \cref{thm:gf_discrete} gives fully closed-form expressions for the complier-interval contributions whenever $f$ is super- or submodular. We record two illustrative applications.
+
+\begin{example}[Bounds on $\mathrm{Cov}(Y(1), Y(0))$]\label{ex:gf_cov}
+    Take $f(y_1, y_0) = y_1 y_0$, which is supermodular. Let $Q_{1, i}(t \mid x)$ and $Q_{0, i}(t \mid x)$ denote the quantile functions of $\mu_{1, i}(\cdot \mid x)$ and $\mu_{0, i}(\cdot \mid x)$. By \cref{thm:gf_discrete} and \cref{prop:gf_rearrangement}(i), the sharp lower bound on $\mathbb{E}[Y(1) Y(0)]$ is
+    \[
+        \underline{\mathbb{E}[Y(1)Y(0)]} = \mathbb{E}_X\Bigl[\sum_{i=1}^{K-1}(p_{i+1}(X) - p_i(X)) \int_0^1 Q_{1,i}(t \mid X)\, Q_{0,i}(1-t \mid X)\, \diff t + \text{boundary terms}\Bigr],
+    \]
+    where the boundary terms are $p_1(X) \int \min_{y_0 \in [y_{\min}, y_{\max}]} y_1 y_0\, \mu_{1,0}(\diff y_1 \mid X)$ and $(1 - p_K(X)) \int \min_{y_1 \in [y_{\min}, y_{\max}]} y_1 y_0\, \mu_{0, K}(\diff y_0 \mid X)$. The upper bound uses the comonotonic coupling on compliers and the pointwise maximizer on boundaries. Combining these bounds with bounds on $\mathbb{E}[Y(1)]$ and $\mathbb{E}[Y(0)]$ (from the main PRTE framework with $\omega \equiv 1$) yields sharp bounds on the covariance $\mathrm{Cov}(Y(1), Y(0)) = \mathbb{E}[Y(1) Y(0)] - \mathbb{E}[Y(1)]\mathbb{E}[Y(0)]$.
+\end{example}
+
+\begin{example}[Bounds on $\mathrm{Var}(Y(1) - Y(0))$]\label{ex:gf_var}
+    Take $f(y_1, y_0) = (y_1 - y_0)^2$. The cross-derivative is $\partial^2 f / \partial y_1 \partial y_0 = -2 < 0$, so $f$ is submodular. By \cref{prop:gf_rearrangement}(ii), the complier-interval minimum is attained by the comonotonic coupling and equals $\int_0^1 (Q_{1,i}(t \mid x) - Q_{0,i}(t \mid x))^2\, \diff t$, while the maximum is attained by the countermonotonic coupling and equals $\int_0^1 (Q_{1,i}(t \mid x) - Q_{0,i}(1 - t \mid x))^2\, \diff t$. Together with bounds on $\mathbb{E}[Y(1) - Y(0)]$ from the PRTE framework, this delivers sharp bounds on $\mathrm{Var}(Y(1) - Y(0)) = \mathbb{E}[(Y(1) - Y(0))^2] - (\mathbb{E}[Y(1) - Y(0)])^2$, the variance of the individual treatment effect.
+\end{example}
+
+\begin{remark}[Costs without definite cross-curvature]\label{rmk:gf_general_cost}
+    When $f$ is neither super- nor submodular---for instance $f(y_1, y_0) = \indicator(y_1 - y_0 \leqslant \delta)$ used to characterize $F_\Delta(\delta)$---no closed-form solution via monotone rearrangement is available. The sub-problem $\mathcal{W}_f^\mp(\mu_{1,i}, \mu_{0,i})$ remains a well-posed two-marginal OT, solvable computationally: with discretized marginals of sizes $n_1, n_0$, each sub-problem is a finite-dimensional linear program with $O(n_1 n_0)$ variables, solvable via the network simplex in $O((n_1 n_0)^{3/2})$ time, or with entropic regularization via the Sinkhorn algorithm. The $K-1$ sub-problems are independent and can be solved in parallel. Crucially, \cref{thm:gf_discrete} still provides a sharp \emph{characterization} of the identified set in this case; the only loss is the absence of a closed-form analytic solution.
+\end{remark}
+
+\subsection{Resolution of the Open Problem in \texorpdfstring{\citet{marx2024sharp}}{Marx (2024)}}\label{subsec:gf_marx}
+
+\citet{marx2024sharp}[\S 3.4.2] studies bounds on the distribution of the individual treatment effect $F_\Delta(\delta) = \mathbb{P}(Y(1) - Y(0) \leqslant \delta)$ and notes that the SSD-type bounds of \citet{fan_park2010sharp}, even combined with the classical Makarov bounds, are \emph{not sharp} in the full sense; he writes that characterizing the sharp set of the distribution of treatment effects ``remains an open problem.''
+
+\cref{thm:gf_discrete} (and its continuous-instrument counterpart in \cref{rmk:gf_continuous}) resolves this open problem as a sharp characterization. Taking $f(y_1, y_0) = \indicator(y_1 - y_0 \leqslant \delta)$, the target $\theta_f$ is exactly $F_\Delta(\delta)$, so the identified set for $F_\Delta(\delta)$ is the interval $[\underline{\theta}_f, \overline{\theta}_f]$ given by (\ref{eq:gf_discrete_lower}). The indicator cost is neither super- nor submodular, so the complier-interval contributions do not admit closed-form solutions via monotone rearrangement (\cref{rmk:gf_general_cost}); nevertheless, the OT characterization is sharp and is computationally tractable via network simplex or Sinkhorn.
+
+The reason the SSD-on-MTE route of \citet{marx2024sharp} cannot deliver this sharp characterization is structural rather than technical. The SSD formulation places distributional constraints on the marginal treatment \emph{effect} function $\mathrm{MTE}(x, u) = \mathbb{E}[Y(1) - Y(0) \mid U = u, X = x]$---a conditional \emph{mean} object---and hence operates entirely within the space of first moments of the potential outcome distributions. But $F_\Delta$ depends on the joint law of $(Y(1), Y(0))$ through its coupling, information that is lost in the projection to conditional means. The CCOT framework developed here retains the joint conditional law $\pi(\diff y_1, \diff y_0 \mid u, x)$ as the primitive decision variable, and the coupling between $Y(1)$ and $Y(0)$ is recovered as the argument of the 2-marginal OT in \cref{thm:gf_reduction}. Recasting the sharp identification problem as optimal transport over the joint primitive is thus not merely a presentational choice: it is the mechanism by which the coupling information, discarded by any method that operates on conditional means, is retained.

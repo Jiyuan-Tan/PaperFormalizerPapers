@@ -1,0 +1,131 @@
+{
+  "slug": "tbs_prte_optimal_transport",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "draft.tex",
+    "pdf": "draft.pdf",
+    "pages": 130,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 432,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Analysis.Calculus.AbsolutelyContinuous",
+      "Toolkit.Foundations.Probability.Conditioning.FiniteValuedConditionalExpectation",
+      "Toolkit.Tricks.Probability.Moments.ClippedCouplings",
+      "Toolkit.Tricks.Probability.Moments.ProductCouplingBounds",
+      "Toolkit.Tricks.Probability.Moments.QuantileVersions",
+      "Toolkit.Tricks.Probability.Moments.SymmetricClipping"
+    ],
+    "requires": [
+      {
+        "name": "Causalean",
+        "form": "git",
+        "git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "rev": "a7085d88d2e4b30003db7097ca374f4718da0f01"
+      },
+      {
+        "name": "StatLean",
+        "form": "vendored",
+        "path": "vendor/StatLean"
+      },
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [
+      {
+        "name": "Causalean",
+        "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+        "uncommitted": 0,
+        "changed": [],
+        "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+        "files": {
+          "Causalean/Mathlib/Analysis/ClipInterval.lean": "bff314e81bc4b6f6a3148c32be723a0c2493648b",
+          "Causalean/Mathlib/Analysis/SignedTailRepresentation.lean": "020a11d7707c2f68f8d193645ad0b8f9bdf1889a",
+          "Causalean/Mathlib/MeasureTheory/Function/Analytic/UniversalMeasurability/Capacity.lean": "ce9966976cb32fb190868a3150efa251b53a6f35",
+          "Causalean/Mathlib/MeasureTheory/Function/Analytic/UniversalMeasurability/UniversalMeasurability.lean": "258628ee3bf887f193b27c68e0ca8f98f97767f0",
+          "Causalean/Mathlib/MeasureTheory/Function/LpSeminorm/Measurable.lean": "78e84fe5e3850a7de487c30d1102b4c542b7627f",
+          "Causalean/Mathlib/Probability/ConvergenceInDistribution.lean": "27da99611b68f3c2317b21df53fcffb07510c0c5",
+          "Causalean/Mathlib/Probability/IdentDistrib/CenteredSum.lean": "e35b3bda8dca0c49ad64b4238fcfb2d0084a66c0",
+          "Causalean/Mathlib/Probability/Independence/Integral.lean": "5bafcbfa2a2017597269a4b535a8461e4d7536d1",
+          "Causalean/Mathlib/Probability/Kernel/CondDistribWitness.lean": "87c96aee7dd0319011e9f3010663631f61e0270d",
+          "Causalean/Stat/CLT/AsymptoticLinearity.lean": "590b0aeffb3d844f447bd33ccc4c74bcaf7534f8",
+          "Causalean/Stat/Coupling/Basic.lean": "454bf74d83ec9e42c81488dddb410e52b37b5ee3",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/Coupling.lean": "dd3346ade864524f5024c3dde0471e82ec31dee3",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/FrechetHoeffding.lean": "54b9e58fb4a790c5226100dc0771737ed4e318ff",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/FrechetHoeffdingAttainment.lean": "bd90c967339e54966643be89cbec61e44d322d7d",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/Hoeffding.lean": "460a8f9c92a101322def329ae5a79b9b45d16185",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/HoeffdingFubini.lean": "7d21e84268f9e96a17e1d9a92b4a5aa76aa666da",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/HoeffdingFubiniIntegrability.lean": "58d27aa80553fca86747700165228cafed1faceb",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/Optimality.lean": "f48a27d713c6175f6efffba870a3e4757f671920",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/PIT.lean": "9b8e7d4c21f02091e71b6f278b8d3b26037a7657",
+          "Causalean/Stat/Coupling/Monotone/ProductLoss/Survival.lean": "3ae81e08590fd387ae410f83a9e6e30b1a4e0dfd",
+          "Causalean/Stat/EmpiricalProcess/CrossFitRate.lean": "65d0d2935e74b6c42f9c8afd0c1071728bf0d9a4",
+          "Causalean/Stat/Limit/ContinuousMapping.lean": "a4c6dcdfa09584df51e31cb1432167c8dca76b48",
+          "Causalean/Stat/Limit/Convergence.lean": "b5f4e3a17b8f8766ed3383578ce1897f227f493d",
+          "Causalean/Stat/Limit/ConvergenceVec.lean": "c36f2acd1956ace3b134180c44412f4a163d81a4",
+          "Causalean/Stat/Limit/Modes.lean": "05ebcda43f09241403f043b2a4fff7489307e31e",
+          "Causalean/Stat/Limit/ProbabilityTransfer.lean": "59a904040a68ca2af74b9c2ed7d05e3356d72c1c",
+          "Causalean/Stat/Limit/StochasticOrder.lean": "bc96a54c6694f9aa06740f705faff20700d77336",
+          "Causalean/Stat/Limit/StochasticOrderEnvelope.lean": "fcff581ed8c40792d16a95e1de031f97eb416f95",
+          "Causalean/Stat/Limit/WLLN.lean": "afa84349416e72cc3f0f3aece40b9f47b148ddc8",
+          "Causalean/Stat/Quantile/Quantile.lean": "064b4c814336de1284f2bcf5bcc51f8c51af1ecd",
+          "Causalean/Stat/Quantile/Transport.lean": "e428ce2f7ec6c681b58a32a66b2264701fc9cd23",
+          "Causalean/Stat/Sample.lean": "04083e8b79ea8d0669f52e44dbc37bba46b88d9d",
+          "Causalean/Stat/SampleSplit/FiniteSelector.lean": "4795a3ad69e4d8835e0128578724291fb8abb501",
+          "Causalean/Stat/SampleSplit/OneShot.lean": "751986595c21fdd48e0d8980480bec150ffd863e",
+          "Causalean/Tactic/Attr.lean": "ea7f7d8d1320b7b0e491af41e84f3acc9d904099",
+          "Causalean/Tactic/IntegralLinearity.lean": "f4eac70bc1f97bcc31431e164cd7f4ad61219ec3"
+        },
+        "status": "unverified",
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      }
+    ],
+    "warnings": [],
+    "notes": [
+      "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+    ]
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "609539a4bcc0b670b98f3bb7d2a3aabce0327957ddff7cf38f776d04f42e96f4",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:1d-ot": "Theorem 2.3",
+    "prop:sharpness": "Proposition 3.1",
+    "thm:discrete-lower-bound": "Theorem 3.4",
+    "thm:continuous-lower-bound": "Theorem 3.7",
+    "thm:covariate-continuous-lower-bound": "Theorem 3.8",
+    "prop:discrete-reduction": "Proposition 4.3",
+    "prop:j-specialization": "Proposition 4.4",
+    "thm:dml-normality": "Theorem 4.7",
+    "prop:continuous-reduction": "Proposition 4.8",
+    "thm:continuous-rate": "Theorem 4.10",
+    "lem:orthogonality-discrete": "Lemma D.1",
+    "thm:continuous-primitive-rate": "Corollary O5.1"
+  },
+  "todo_items": []
+}

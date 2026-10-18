@@ -1,0 +1,156 @@
+﻿\documentclass[12pt]{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{styles/natbib}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+\usepackage{placeins} % \FloatBarrier in sections/experiments.tex
+\usepackage{fullpage}
+\usepackage{longtable}
+\usepackage{caption}
+\captionsetup[table]{singlelinecheck=false, justification=centering}
+\renewcommand{\baselinestretch}{1.25}
+\usepackage{enumitem}
+\usepackage[breaklinks,colorlinks,
+            linkcolor=red,
+            anchorcolor=blue,
+            citecolor=blue
+            ]{hyperref}
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+
+\newtheorem{remark}[theorem]{Remark}
+% \newcommand\perp{\protect\mathpalette{\protect\perp}{\perp}}
+% \def\perp#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+\usepackage[disable,textsize=tiny]{todonotes}
+%\usepackage[textsize=tiny]{todonotes}
+
+
+\usepackage{relsize}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{url}            % simple URL typesetting
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{styles/smile}
+\usepackage{dsfont}
+\usepackage{xcolor}
+\usepackage{tikz}
+\def \d {\text{d}}
+\def \mcs{\mathcal{S}}
+\def \mcm{\mathcal{M}}
+\def \mbp{\mathbb{P}}
+\def \mcd{\mathcal{D}}
+\newcommand{\diff}{{\rm d}}
+\newcommand{\indep}{\perp\!\!\!\perp}
+% \input{styles/style}
+
+\NewDocumentCommand{\indicator}{}{\mathds{1}}
+\newcommand{\jiyuan}[1]{[\textcolor{cyan}{Jiyuan: #1}]}
+
+% The Econometrica class (econsocart) uppercases \section titles via textcase's
+% \MakeTextUppercase, which would mangle the \cref{} keys inside appendix section
+% headings. Those headings are wrapped in \NoCaseChange so they survive there;
+% here the article class needs a no-op definition so the shared sections/*.tex
+% files stay byte-identical between "Paper Draft" and "Econometrica Submission".
+\providecommand{\NoCaseChange}[1]{#1}
+
+% Same purpose: the shared sections name the place where the main proofs, the
+% algorithms, and the full Section 4 development live. In the
+% Econometrica submission that is a separate document with S-prefixed numbering;
+% here everything is inline, so it is simply the appendix and there is no prefix.
+\newcommand{\supplocation}{the Appendix}
+\newcommand{\suppnumnote}{}
+
+% The Online Appendix holds the notation table and routine verifications: the
+% algebraic reduction proofs, the term-by-term Neyman-orthogonality calculations,
+% and the learner conditions for the concrete continuous-instrument estimator.
+% In the Econometrica submission it is a separate document; here it is the tail
+% of this one, set apart by the O-prefixed section numbering it carries in both
+% trees. The name is therefore the same everywhere, and shared sections may
+% write \oalocation for it.
+\newcommand{\oalocation}{the Online Appendix}
+
+\title{Partial Identification of Policy-Relevant Treatment Effects with Instrumental Variables via Optimal Transport}
+\author{Jiyuan Tan \quad Jose Blanchet \quad Vasilis Syrgkanis \\ \texttt{\{jiyuantan, jose.blanchet, vsyrgk\}@stanford.edu} \\ Management Science and Engineering, Stanford University}
+
+\begin{document}
+\maketitle
+
+
+\begin{abstract}
+    Policy-Relevant Treatment Effects (PRTEs) are generally not point-identified under standard instrumental variable (IV) assumptions when the instrument generates limited support in treatment propensity. Existing approaches optimize over marginal treatment response functions subject to moment restrictions and can discard identifying distributional information. We show that PRTE partial identification in the generalized Roy model can instead be formulated as a Constrained Conditional Optimal Transport (CCOT) problem, which reduces analytically to separable one-dimensional OT problems with product costs, yielding sharp closed-form bounds. We also develop estimation and inference procedures: for discrete instruments, a Double Machine Learning approach based on Neyman-orthogonal scores that accommodates high-dimensional covariates while achieving the parametric $\sqrt{n}$ rate and asymptotic normality; for continuous instruments, we characterize the nonparametric convergence rates. The framework accommodates covariates as well as discrete and continuous instruments. In simulations and a bed-net subsidy application, our bounds are substantially tighter than existing moment-relaxation methods.
+\end{abstract}
+
+
+
+
+\input{sections/introduction}
+
+\input{sections/preliminaries}
+
+\input{sections/pid}
+
+\section{Estimation and Inference}\label{sec:est_inf}
+\input{sections/est_inf}
+
+
+
+\section{Simulation}\label{sec:simulation}
+\input{sections/experiments}
+
+
+\section{Conclusion}\label{sec:conclusion}
+\input{sections/conclusion}
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{ref}
+
+
+\newpage
+\appendix
+% Main identification and inference proofs, algorithms, and score constructions.
+\input{sections/appendix}
+
+% ---------------------------------------------------------------------------
+% Online Appendix. Section numbers restart with the prefix O so that they match
+% the separate Online Appendix document of the Econometrica submission and so
+% that a \cref{} into this material reads the same in both trees.
+% ---------------------------------------------------------------------------
+\newpage
+\setcounter{section}{0}
+\renewcommand{\thesection}{O\arabic{section}}
+% Keep hyperref destinations distinct from the preceding A-, B-, ... appendices.
+\renewcommand{\theHsection}{O\arabic{section}}
+\begin{center}
+    {\Large\bfseries Online Appendix}
+\end{center}
+\input{sections/online_appendix}
+\end{document}

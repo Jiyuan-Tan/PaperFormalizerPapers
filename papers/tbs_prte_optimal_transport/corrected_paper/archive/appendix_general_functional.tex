@@ -1,0 +1,180 @@
+\section{Proofs in \cref{sec:general_func}}\label{sec:proofs_gf}
+
+\subsection{Proof of \cref{prop:gf_sharpness}}
+
+\begin{proof}[Proof of \cref{prop:gf_sharpness}]
+    Let $\{\tilde{\pi}_x\}_{x \in \mathcal{X}} \in \Gamma_f(\mathbb{P}_{\text{obs}})$ be an arbitrary feasible family of joint kernels. By the constraints in (\ref{eq:gf_ccot}), each $\tilde{\pi}_x$ is a probability measure on $\mathcal{Y}^2 \times [0,1]$ such that, denoting the regular conditional kernel $\tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)$ of $(Y(1), Y(0))$ given $U = u$ (and $X = x$), and letting $\tilde{\pi}_{Y(1)}(\cdot \mid u, x)$ and $\tilde{\pi}_{Y(0)}(\cdot \mid u, x)$ denote the corresponding marginals as in (\ref{eq:gf_marginals}), the following hold for $\mathbb{P}_{\text{obs}}$-a.e.\ $x$:
+    \begin{enumerate}
+        \item[(G1)] $\displaystyle \int_0^{p(z,x)} \tilde{\pi}_{Y(1)}(\mathrm{d}y \mid u, x)\,\mathrm{d}u = \mathbb{P}_{\text{obs}}(\mathrm{d}y, W\!=\!1 \mid p(Z,X)\!=\!p(z,x),\, X\!=\!x)$, for every $z \in \mathcal{Z}$;
+        \item[(G2)] $\displaystyle \int_{p(z,x)}^{1} \tilde{\pi}_{Y(0)}(\mathrm{d}y \mid u, x)\,\mathrm{d}u = \mathbb{P}_{\text{obs}}(\mathrm{d}y, W\!=\!0 \mid p(Z,X)\!=\!p(z,x),\, X\!=\!x)$, for every $z \in \mathcal{Z}$;
+        \item[(G3)] the $U$-marginal of $\tilde{\pi}_x$ is $\mathrm{d}u$ on $[0,1]$, and $\tilde{\pi}_x$ is supported on $\mathcal{Y}^2 \times [0,1]$.
+    \end{enumerate}
+    Existence of the regular conditional kernel $\tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)$ follows from Polishness of $\mathcal{Y}^2 \subseteq \mathbb{R}^2$.
+
+    \medskip
+    \noindent\textbf{Construction.}
+    We construct the joint distribution $\mathbb{P}$ of $(Y(1), Y(0), U, X, Z, W)$ on $\mathcal{Y}^2 \times [0,1] \times \mathcal{X} \times \mathcal{Z} \times \{0,1\}$ via the disintegration
+    \begin{equation}\label{eq:gf_sharp_construct}
+        \begin{split}
+            \mathbb{P}(\mathrm{d}y_1, \mathrm{d}y_0, \mathrm{d}u, \mathrm{d}x, \mathrm{d}z, \{w\})
+            = \;& \tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \mathrm{d}u\, \mathbb{P}_{\text{obs}}(\mathrm{d}z \mid x)\, \mathbb{P}_{\text{obs}}(\mathrm{d}x)\\
+                & \cdot \delta_{\indicator(u \leqslant p(z,x))}(\{w\}),
+        \end{split}
+    \end{equation}
+    where $\delta_{\indicator(u \leqslant p(z,x))}(\{w\})$ places all mass on $w = \indicator(u \leqslant p(z,x))$, enforcing the threshold-crossing selection rule deterministically. Crucially, the potential outcomes $(Y(1), Y(0))$ are \emph{not} drawn independently: they are drawn jointly from $\tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)$, so that their coupling conditional on $(U, X)$ is exactly that prescribed by $\tilde{\pi}_x$. This is exactly the lifting used in the proof of \cref{prop:sharpness}, and is the mechanism by which the joint coupling is preserved; the only difference here is that the coupling is itself a decision variable, constrained through its two marginals in (G1)--(G2). The measure in (\ref{eq:gf_sharp_construct}) is well-defined since each factor is a regular conditional probability measure.
+
+    \medskip
+    \noindent\textbf{Verification of (i): joint marginal distribution.}
+    We show that the conditional distribution of $(Y(1), Y(0), U) \mid X = x$ under $\mathbb{P}$ is exactly $\tilde{\pi}_x$. Marginalizing (\ref{eq:gf_sharp_construct}) over $(Z, W)$:
+    \begin{align*}
+        \mathbb{P}(\mathrm{d}y_1, \mathrm{d}y_0, \mathrm{d}u, \mathrm{d}x)
+        &= \tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \mathrm{d}u\, \mathbb{P}_{\text{obs}}(\mathrm{d}x) \cdot \underbrace{\sum_{w \in \{0,1\}} \int_{\mathcal{Z}} \delta_{\indicator(u \leqslant p(z,x))}(\{w\})\, \mathbb{P}_{\text{obs}}(\mathrm{d}z \mid x)}_{=\,1}\\
+        &= \tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \mathrm{d}u\, \mathbb{P}_{\text{obs}}(\mathrm{d}x).
+    \end{align*}
+    By (G3), $\tilde{\pi}_x(\mathrm{d}u) = \mathrm{d}u$, so the right-hand side equals $\tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \tilde{\pi}_x(\mathrm{d}u)\, \mathbb{P}_{\text{obs}}(\mathrm{d}x) = \tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0, \mathrm{d}u)\, \mathbb{P}_{\text{obs}}(\mathrm{d}x)$, verifying that conditional on $X = x$ the law of $(Y(1), Y(0), U)$ under $\mathbb{P}$ is exactly $\tilde{\pi}_x$.
+
+    \medskip
+    \noindent\textbf{Verification of (ii): structural assumptions.}
+    We verify each part of \cref{asp:structure}.
+    \begin{itemize}
+        \item \emph{Consistency.} Define $Y := W Y(1) + (1 - W) Y(0)$, which holds trivially by construction.
+        \item \emph{Conditional instrumental exogeneity.} By (\ref{eq:gf_sharp_construct}), conditional on $X = x$, the variables $(Y(1), Y(0), U)$ are drawn from $\tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \mathrm{d}u$, and $Z$ is drawn independently from $\mathbb{P}_{\text{obs}}(\mathrm{d}z \mid x)$. These appear as independent factors, so $Z \indep (U, Y(0), Y(1)) \mid X$.
+        \item \emph{Threshold crossing.} The selection equation $W = \indicator(U \leqslant p(Z, X))$ holds $\mathbb{P}$-a.s.\ by the Dirac mass in (\ref{eq:gf_sharp_construct}). By (G3), $U \mid X \sim \mathrm{Unif}(0,1)$.
+        \item \emph{Common instrument support.} Inherited from $\mathbb{P}_{\text{obs}}(\mathrm{d}z \mid x)$, which by assumption has support $\mathcal{Z}$ not depending on $x$.
+    \end{itemize}
+
+    \medskip
+    \noindent\textbf{Verification of (iii): observational equivalence.}
+    We must verify that the distribution of $(Z, X, W, Y)$ induced by $\mathbb{P}$ equals $\mathbb{P}_{\text{obs}}$. Since the marginal of $(Z, X)$ under $\mathbb{P}$ is $\mathbb{P}_{\text{obs}}(\mathrm{d}z, \mathrm{d}x)$ by construction, it suffices to verify the conditional law of $(Y, W) \mid (Z, X)$. Fix $(z, x) \in \mathcal{Z} \times \mathcal{X}$ and a measurable $A \subseteq \mathcal{Y}$.
+
+    For $W = 1$, the Dirac factor in (\ref{eq:gf_sharp_construct}) selects the region $\{u \leqslant p(z, x)\}$; conditional on $W = 1$, consistency gives $Y = Y(1)$, so
+    \begin{align*}
+        \mathbb{P}(Y \in A,\, W = 1 \mid Z = z,\, X = x)
+        &= \int_0^{p(z,x)} \int_{\mathcal{Y}^2} \indicator(y_1 \in A)\, \tilde{\pi}_x(\mathrm{d}y_1, \mathrm{d}y_0 \mid u)\, \mathrm{d}u\\
+        &= \int_0^{p(z,x)} \tilde{\pi}_{Y(1)}(A \mid u, x)\, \mathrm{d}u.
+    \end{align*}
+    In the second step we used the definition of the $Y(1)$-marginal in (\ref{eq:gf_marginals}). By constraint (G1), this equals $\mathbb{P}_{\text{obs}}(Y \in A,\, W = 1 \mid p(Z, X) = p(z, x),\, X = x)$, and since instruments sharing the same propensity share the same right-hand side, this equals $\mathbb{P}_{\text{obs}}(Y \in A,\, W = 1 \mid Z = z,\, X = x)$.
+
+    Symmetrically, for $W = 0$, we have $Y = Y(0)$ and $U > p(z, x)$, so
+    \begin{align*}
+        \mathbb{P}(Y \in A,\, W = 0 \mid Z = z,\, X = x)
+        &= \int_{p(z,x)}^{1} \tilde{\pi}_{Y(0)}(A \mid u, x)\, \mathrm{d}u,
+    \end{align*}
+    which by constraint (G2) equals $\mathbb{P}_{\text{obs}}(Y \in A,\, W = 0 \mid Z = z,\, X = x)$.
+
+    Since the conditional laws of $(Y, W) \mid (Z, X)$ agree for both values of $W$, the induced distribution of $(Z, X, W, Y)$ under $\mathbb{P}$ coincides with $\mathbb{P}_{\text{obs}}$, completing the proof of (iii).
+
+    \medskip
+    \noindent\textbf{Sharpness of the bounds.}
+    Since every element $\{\tilde{\pi}_x\} \in \Gamma_f(\mathbb{P}_{\text{obs}})$ corresponds to a valid data-generating process via (\ref{eq:gf_sharp_construct}), the extremum of $\theta_f$ over $\Gamma_f(\mathbb{P}_{\text{obs}})$ equals the extremum over all structural models in \cref{asp:structure} that are observationally equivalent to $\mathbb{P}_{\text{obs}}$. Therefore the supremum and infimum of (\ref{eq:gf_ccot}) are the sharp upper and lower bounds of the identified set for $\theta_f$.
+\end{proof}
+
+\subsection{Formal Statements for the Discrete Case}\label{subsec:proofs_gf_discrete}
+
+This subsection records the per-interval identification results that underlie \cref{thm:gf_discrete} in the body. For brevity, write
+\begin{equation}\label{eq:gf_shorthand}
+    \mathbb{P}_{obs}^w(\diff y \mid p, x) := \mathbb{P}_{obs}(\diff y, W=w \mid p(Z,X) = p, X = x).
+\end{equation}
+
+\paragraph{Identified interval marginals.} For the $W = 1$ side, the observational constraints in (\ref{eq:gf_ccot}) telescope to yield the identified measures
+\begin{equation}\label{eq:gf_mu1}
+    \mu_{1, i}(\diff y \mid x) = \begin{cases}
+        \dfrac{\mathbb{P}_{obs}^1(\diff y \mid p_1(x), x)}{p_1(x)}, & i = 0, \\[10pt]
+        \dfrac{\mathbb{P}_{obs}^1(\diff y \mid p_{i+1}(x), x) - \mathbb{P}_{obs}^1(\diff y \mid p_{i}(x), x)}{p_{i+1}(x) - p_i(x)}, & 0 < i < K,
+    \end{cases}
+\end{equation}
+which is the distribution of $Y(1) \mid U \in I_i(x), X = x$. Symmetrically, the $W = 0$ constraints telescope to
+\begin{equation}\label{eq:gf_mu0}
+    \mu_{0, i}(\diff y \mid x) = \begin{cases}
+        \dfrac{\mathbb{P}_{obs}^0(\diff y \mid p_{i}(x), x) - \mathbb{P}_{obs}^0(\diff y \mid p_{i+1}(x), x)}{p_{i+1}(x) - p_i(x)}, & 1 \leqslant i < K, \\[10pt]
+        \dfrac{\mathbb{P}_{obs}^0(\diff y \mid p_K(x), x)}{1 - p_K(x)}, & i = K,
+    \end{cases}
+\end{equation}
+the distribution of $Y(0) \mid U \in I_i(x), X = x$. The measure $\mu_{0, i}(\cdot \mid x)$ is a valid probability distribution: using $\mathbb{P}_{obs}(W=0 \mid p(Z,X) = p, X=x) = 1 - p$, $\mu_{0,i}(\mathcal{Y} \mid x) = \bigl((1-p_i(x)) - (1-p_{i+1}(x))\bigr)/(p_{i+1}(x) - p_i(x)) = 1$, and nonnegativity follows from the monotonicity of $p \mapsto \mathbb{P}_{obs}^0(\diff y \mid p, x)$. Thus $\mu_{1, i}(\cdot \mid x)$ is identified for $i \in \{0, \dots, K-1\}$ and $\mu_{0, i}(\cdot \mid x)$ is identified for $i \in \{1, \dots, K\}$.
+
+\paragraph{Interval decomposition.}
+
+\begin{proposition}[Interval Decomposition, Joint Primitive]\label{prop:gf_decomposition}
+    Under \cref{asp:structure}, the integral constraints in (\ref{eq:gf_ccot}) are equivalent to the following system of per-interval marginal constraints on the joint kernel $\pi(\cdot \mid u, x)$: for each $x \in \mathcal{X}$,
+    \begin{enumerate}
+        \item[\textup{(i)}] For each $i \in \{0, 1, \dots, K-1\}$:
+        \begin{equation}\label{eq:gf_constraint_y1}
+            \frac{1}{p_{i+1}(x) - p_i(x)} \int_{I_i(x)} \pi_{Y(1)}(\diff y_1 \mid u, x)\, \diff u = \mu_{1, i}(\diff y_1 \mid x);
+        \end{equation}
+        \item[\textup{(ii)}] For each $i \in \{1, 2, \dots, K\}$:
+        \begin{equation}\label{eq:gf_constraint_y0}
+            \frac{1}{p_{i+1}(x) - p_i(x)} \int_{I_i(x)} \pi_{Y(0)}(\diff y_0 \mid u, x)\, \diff u = \mu_{0, i}(\diff y_0 \mid x);
+        \end{equation}
+        \item[\textup{(iii)}] On $I_0(x)$ the $Y(0)$-marginal of $\pi$ is unconstrained within $\mathcal{Y}$; on $I_K(x)$ the $Y(1)$-marginal of $\pi$ is unconstrained within $\mathcal{Y}$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof of \cref{prop:gf_decomposition}]
+    The derivation mirrors the PRTE interval decomposition leading to (\ref{eq:y_identified_measure}) in \cref{sec:pid}, applied separately to $\pi_{Y(1)}$ and $\pi_{Y(0)}$. Differencing the $W = 1$ observational constraint in (\ref{eq:gf_ccot}) at consecutive propensity values $p_i(x) < p_{i+1}(x)$ yields (\ref{eq:gf_constraint_y1}) for $i \in \{1, \dots, K-1\}$, and the constraint at $p_1(x)$ alone yields the case $i = 0$. The $W = 0$ derivation is symmetric: differencing at consecutive $p_i(x) < p_{i+1}(x)$ yields (\ref{eq:gf_constraint_y0}) for $i \in \{1, \dots, K-1\}$, and the constraint at $p_K(x)$ yields $i = K$. Conversely, given per-interval constraints (\ref{eq:gf_constraint_y1})--(\ref{eq:gf_constraint_y0}), summing across intervals recovers the original integral constraints in (\ref{eq:gf_ccot}). For (iii), no instrument value $z$ with $p(z, x) \in (0, p_1(x))$ exists, so no $W = 0$ observational constraint is placed on $I_0(x)$, leaving $\pi_{Y(0)}(\cdot \mid u, x)$ free there; symmetrically for $I_K(x)$.
+\end{proof}
+
+Combined with the additive decomposition of the objective,
+\begin{equation}\label{eq:gf_obj_decomp}
+    \int_0^1 \int_{\mathcal{Y}^2} f(y_1, y_0)\, \pi(\diff y_1, \diff y_0 \mid u, x)\, \diff u = \sum_{i=0}^{K} (p_{i+1}(x) - p_i(x))\, \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_i(x), X = x],
+\end{equation}
+\cref{prop:gf_decomposition} reduces the global problem to $K + 1$ independent sub-problems, one per interval.
+
+\paragraph{Boundary intervals.}
+
+\begin{lemma}[Boundary Intervals]\label{lem:gf_boundary}
+    Under \cref{asp:structure} and \cref{asp:bounded_y}, the following hold for every $x \in \mathcal{X}$.
+    \begin{enumerate}
+        \item[\textup{(i)}] On $I_0(x)$,
+        \begin{align*}
+            \min \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_0(x), X = x]
+                &= \int_{\mathcal{Y}} \min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{1,0}(\diff y_1 \mid x),\\
+            \max \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_0(x), X = x]
+                &= \int_{\mathcal{Y}} \max_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{1,0}(\diff y_1 \mid x).
+        \end{align*}
+        The minimizer is achieved by the degenerate coupling $\gamma(\diff y_1, \diff y_0) = \mu_{1,0}(\diff y_1 \mid x)\, \delta_{y_0^*(y_1)}(\diff y_0)$, where $y_0^*(y_1) \in \arg\min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)$.
+        \item[\textup{(ii)}] On $I_K(x)$,
+        \begin{align*}
+            \min \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_K(x), X = x]
+                &= \int_{\mathcal{Y}} \min_{y_1 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{0,K}(\diff y_0 \mid x),\\
+            \max \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_K(x), X = x]
+                &= \int_{\mathcal{Y}} \max_{y_1 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{0,K}(\diff y_0 \mid x),
+        \end{align*}
+        with the symmetric pointwise optimizer in $y_1$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof of \cref{lem:gf_boundary}]
+    Fix $x$ and consider $I_0(x)$; the $I_K(x)$ case is symmetric. By \cref{prop:gf_decomposition}(iii), the $Y(0)$-marginal of $\pi(\cdot \mid u, x)$ is unconstrained on $I_0(x)$: for each $u \in I_0(x)$, any probability measure on $[y_{\min}, y_{\max}]$ is admissible. Since $f$ does not depend on $u$,
+    \begin{align*}
+        \inf_{\pi} \mathbb{E}[f(Y(1), Y(0)) \mid U \in I_0(x), X = x]
+        &= \inf_{\pi} \frac{1}{p_1(x)} \int_{I_0(x)} \int_{\mathcal{Y}^2} f(y_1, y_0)\, \pi(\diff y_1, \diff y_0 \mid u, x)\, \diff u\\
+        &\geqslant \frac{1}{p_1(x)} \int_{I_0(x)} \int_{\mathcal{Y}} \min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \pi_{Y(1)}(\diff y_1 \mid u, x)\, \diff u\\
+        &= \int_{\mathcal{Y}} \min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{1,0}(\diff y_1 \mid x),
+    \end{align*}
+    where the last equality uses the $Y(1)$-marginal constraint (\ref{eq:gf_constraint_y1}) for $i = 0$. The bound is attained by the coupling $\gamma_u(\diff y_1, \diff y_0) = \pi_{Y(1)}(\diff y_1 \mid u, x)\, \delta_{y_0^*(y_1)}(\diff y_0)$ at each $u \in I_0(x)$, which is feasible because the $Y(1)$-marginal is preserved and the $Y(0)$-marginal is unconstrained. The $\max$ case is analogous, with $y_0^*(y_1) \in \arg\max f(y_1, y_0)$.
+\end{proof}
+
+\subsection{Continuous Instrument: Formal Statement}\label{subsec:proofs_gf_continuous}
+
+In the continuous instrument setting, $\mathrm{Range}(p(z, x)) = [\underline{p}(x), \overline{p}(x)]$, and the observational constraints in (\ref{eq:gf_ccot}) are indexed by a continuum of propensity values. Differentiating these constraints in $p$ pointwise identifies the conditional marginals on the LIV region: for $u \in [\underline{p}(x), \overline{p}(x)]$,
+\begin{equation}\label{eq:gf_liv_marginals}
+    \begin{split}
+        \pi_1(\diff y \mid u, x) &= \left.\frac{\partial}{\partial p}\, \mathbb{P}_{obs}^1(\diff y \mid p, x)\right|_{p = u}, \\
+        \pi_0(\diff y \mid u, x) &= -\left.\frac{\partial}{\partial p}\, \mathbb{P}_{obs}^0(\diff y \mid p, x)\right|_{p = u}.
+    \end{split}
+\end{equation}
+Unlike the discrete case, where interior-interval constraints identify only the \emph{averaged} conditional marginals over $I_i(x)$, the continuous LIV region identifies the full conditional marginal $\pi_w(\cdot \mid u, x)$ at each $u$. The \emph{joint} distribution of $(Y(1), Y(0)) \mid U = u, X = x$ nevertheless remains unidentified, so the conditional problem at each $u$ is a two-marginal OT between $\pi_1(\cdot \mid u, x)$ and $\pi_0(\cdot \mid u, x)$, and the LIV region contributes an integral of OT costs.
+
+\begin{theorem}[Sharp Bounds on $\theta_f$, Continuous Instrument with Covariates]\label{thm:gf_continuous}
+    Suppose \cref{asp:structure} and \cref{asp:bounded_y} hold, and $\mathrm{Range}(p(z, x)) = [\underline{p}(x), \overline{p}(x)]$ with $p \mapsto \mathbb{P}_{obs}^1(\diff y \mid p, x)$ continuously differentiable on $[\underline{p}(x), \overline{p}(x)]$ for each $x$. Define $\mu_{1, \underline{p}}(\diff y \mid x) = \mathbb{P}_{obs}^1(\diff y \mid \underline{p}(x), x)/\underline{p}(x)$ and $\mu_{0, \overline{p}}(\diff y \mid x) = \mathbb{P}_{obs}^0(\diff y \mid \overline{p}(x), x)/(1 - \overline{p}(x))$. The sharp lower bound for $\theta_f = \mathbb{E}[f(Y(1), Y(0))]$ is
+    \begin{equation}\label{eq:gf_continuous_lower}
+        \begin{split}
+            \underline{\theta}_f = \mathbb{E}_X\Bigg[\ & \underline{p}(X) \int_{\mathcal{Y}} \min_{y_0 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{1, \underline{p}}(\diff y_1 \mid X)\\
+            & + \int_{\underline{p}(X)}^{\overline{p}(X)} \mathcal{W}_f^-\!\bigl(\pi_1(\cdot \mid u, X),\, \pi_0(\cdot \mid u, X)\bigr)\, \diff u\\
+            & + (1 - \overline{p}(X)) \int_{\mathcal{Y}} \min_{y_1 \in [y_{\min}, y_{\max}]} f(y_1, y_0)\, \mu_{0, \overline{p}}(\diff y_0 \mid X)\ \Bigg].
+        \end{split}
+    \end{equation}
+    The sharp upper bound $\overline{\theta}_f$ is obtained by replacing $\min$ with $\max$ and $\mathcal{W}_f^-$ with $\mathcal{W}_f^+$ throughout.
+\end{theorem}
+
+The proof extends the discrete-case assembly to the continuum of propensity values, in parallel to the passage from the discrete to the continuous setting in \cref{sec:pid}.

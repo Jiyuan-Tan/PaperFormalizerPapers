@@ -1,0 +1,126 @@
+﻿\section{Preliminaries} \label{sec:pre}
+\subsection{IV Model and Policy-Relevant Treatment Effects}\label{subsec:iv_prte}
+For most of this paper, we work with the generalized Roy model \citep{heckman2005structural}. In the model, the observable variables are treatment $W\in \mathcal{W} = \{0,1\}$, instrument $Z \in \mathcal{Z}$, covariates $X\in\mathcal{X}$, and outcome $Y \in \mathcal{Y}$, where $\mathcal{X} \subset\mathbb{R}^{d_X}$, $\mathcal{Z}$, and $\mathcal{Y} \subset \mathbb{R}$ are the domains of the corresponding variables. We consider both discrete and continuous instrument settings in this paper. Throughout the paper, we assume that all domains are compact, carry their Borel $\sigma$-fields, and are standard Borel spaces. Write $y_{\min}=\min\mathcal Y$ and $y_{\max}=\max\mathcal Y$; compactness guarantees that these extrema exist, and we treat the outcome domain and hence its feasible endpoints as known. The unobservables are the potential outcomes $Y(0), Y(1)$, and the variable $U$ in the selection equation (\ref{eq:thresh_xing}). Thus, $Z$ is the instrument, $W$ is the treatment, $X$ is observed covariate information, $Y$ is the observed outcome, and $U$ is an unobserved latent resistance variable.
+\begin{assumption}[Structural Assumptions] \label{asp:structure}
+    We impose the following structural assumptions on our IV model. Throughout, we assume $Y(w) \in \mathcal{Y}$ almost surely.
+    \begin{enumerate}
+        \item (Consistency) $Y = WY(1) + (1-W)Y(0)$.
+        \item (Conditional Instrumental Exogeneity) $Z \indep (U,Y(0),Y(1)) \mid X$, where $\indep$ denotes statistical independence.
+        \item (Threshold Crossing) The treatment is selected by
+        \begin{align}\label{eq:thresh_xing}
+            W = \indicator (U\leqslant p(Z,X)),
+        \end{align}
+        where $p(Z,X) = \mathbb{P}(W=1 \mid Z, X)$. Moreover, $U \mid X \sim \mathrm{Unif}(0,1)$.
+        \item (Common Instrument Support) The conditional support of $Z$ given $X$ does not depend on $X$: $\mathrm{Supp}(Z \mid X=x) = \mathcal{Z}$ for all $x \in \mathcal{X}$.
+    \end{enumerate}
+\end{assumption}
+
+\noindent\textit{Remark.} $Y=WY(1)+(1-W)Y(0)$ almost surely under the structural population law. $W=\indicator(U\leqslant p(Z,X))$ almost surely under the structural population law. $\mathcal L(U\mid X=x)=\mathrm{Unif}(0,1)$ for $\mathbb P_X$-almost every $x$.
+
+\noindent\textit{Remark (notation).} $p(z,x)=\mathbb P(W=1\mid Z=z,X=x)$ denotes the baseline population conditional treatment propensity, with values in $[0,1]$. In Theorem~\ref{thm:discrete_lower_bound}: Since $X$ is almost surely constant, $p$ is written as $p(z)$. In Theorem~\ref{thm:continuous_lower_bound}: Since $X$ is almost surely constant, $p$ is written as $p(z)$, using its continuous version on each connected component of $\mathcal Z$. In Theorem~\ref{thm:covariate_continuous_lower_bound}, Proposition~\ref{prop:continuous_reduction}, Theorem~\ref{thm:continuous_rate}, Corollary~\ref{cor:continuous_primitive_rate}: For almost every $x$, $z\mapsto p(z,x)$ is the version continuous on each connected component of $\mathcal Z$, so its range and extrema are taken over that version throughout the conditional support. $\indep$ denotes independence, with $A\indep B\mid C$ denoting conditional independence given $C$, namely factorization of the conditional joint law into the two conditional marginal laws almost surely. $\mathcal Y$ is the fixed, known, compact outcome domain contained in $\mathbb R$, equipped with its Borel $\sigma$-field, with known feasible endpoints $y_{\min}=\min\mathcal Y$ and $y_{\max}=\max\mathcal Y$. $Y$ denotes the observed outcome taking values in the known compact Borel domain $\mathcal Y\subset\mathbb R$, with $y_{\min}\leqslant Y\leqslant y_{\max}$. In Proposition~\ref{prop:J_specialization}, Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}: In part~\textup{(ii)}, $Y\in\{0,1\}$. $\mathcal Z$ is the compact standard Borel instrument domain equipped with its Borel $\sigma$-field and is the common conditional support $\mathrm{Supp}(Z\mid X=x)=\mathcal Z$ for all $x\in\mathcal X$. In Theorem~\ref{thm:discrete_lower_bound}, Proposition~\ref{prop:discrete_reduction}, Proposition~\ref{prop:J_specialization}, Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}: $\mathcal Z$ is finite. In Theorem~\ref{thm:continuous_lower_bound}, Theorem~\ref{thm:covariate_continuous_lower_bound}: $\mathcal Z$ has finitely many connected components. In Proposition~\ref{prop:continuous_reduction}, Theorem~\ref{thm:continuous_rate}, Corollary~\ref{cor:continuous_primitive_rate}: $\mathcal Z$ is connected. $\mathcal X\subset\mathbb R^{d_X}$ is the compact covariate domain, equipped with its Borel $\sigma$-field and regarded as a standard Borel space. $X$ denotes observed covariate information taking values in the compact Borel domain $\mathcal X\subset\mathbb R^{d_X}$; $x$ denotes a conditioning value, and expectations indexed by $X$ average over its marginal law. In Theorem~\ref{thm:discrete_lower_bound}, Theorem~\ref{thm:continuous_lower_bound}: $X$ is almost surely constant, so conditional covariate arguments are suppressed. $U$ denotes the latent resistance in the threshold-crossing model, invariant under the policy change, with interval-uniform uses denoting its law restricted to the indicated resistance interval. In Theorem~\ref{thm:discrete_lower_bound}: In defining $Q_{\omega,i}$, $U\sim\mathrm{Unif}(p_i,p_{i+1})$ denotes the resistance draw conditional on $U\in(p_i,p_{i+1}]$, for $i=0,\dots,K-1$ with $p_i<p_{i+1}$. In Theorem~\ref{thm:continuous_lower_bound}: In defining $Q_{\omega,k}$, $U\sim\mathrm{Unif}(G_k)$ denotes the resistance draw restricted to the nonempty gap $G_k$, for $k=0,\dots,K-1$; no gap-specific law is defined for an empty gap. In Theorem~\ref{thm:covariate_continuous_lower_bound}: For fixed $x$ and a nonempty $G_k(x)$, the draw $U\sim\mathrm{Unif}(G_k(x))$ used to define $Q_{\omega,k\mid x}$ is the resistance law conditional on $X=x$ and $U\in G_k(x)$, for $k=0,\dots,K_x-1$; in the randomized rank construction this gap draw is independent of $S\sim\mathrm{Unif}(0,1)$.
+
+
+Because $Y(w)\in\mathcal Y$ and $\mathcal Y$ is compact, $y_{\min}\leqslant Y(w)\leqslant y_{\max}$ almost surely; boundedness therefore follows from the maintained setup. It is without loss of generality to impose $U\mid X\sim\text{Unif}(0,1)$ when the original latent resistance has a continuous conditional distribution, because we can normalize that distribution.\footnote{Let $V$ denote the original latent resistance, let $c(Z,X)$ be its cutoff, and suppose $F_{V\mid X}(\cdot\mid x)$ is continuous. Define $\tilde U=F_{V\mid X}(V\mid X)$ and the transformed cutoff $\tilde p(z,x)=F_{V\mid X}(c(z,x)\mid x)$. The conditional probability integral transform gives $\tilde U\mid X\sim\mathrm{Unif}(0,1)$, and $\indicator\{V\leqslant c(Z,X)\}=\indicator\{\tilde U\leqslant\tilde p(Z,X)\}$ almost surely.} The common instrument support condition lets us use the same instrument domain at each covariate value. The observed law identifies conditional probabilities almost surely; the continuity condition introduced in \cref{asp:continuity_p} selects their continuous propensity-score version throughout the conditional support.
+
+\noindent\textit{Remark (notation).} In transport notation, $c$ is the specified cost function on the two transported state spaces; a conditional cost $c(y,u,x)$ is read at fixed $x$ as the function $(y,u)\mapsto y\omega(x,u)$. In Theorem~\ref{thm:1d_ot}: $\mathcal A=\mathcal B=\mathbb R$ and $c(a,b)=a\cdot b$.
+
+
+The fundamental building block for evaluating causal parameters in this framework is the MTE, originally introduced by \citet{heckman1999local,heckman2005structural}. The MTE is defined as the average treatment effect for individuals with covariates $X=x$ and latent variable $U=u$:
+\[ \text{MTE}(x,u) = \mathbb{E}[Y(1) - Y(0) \mid X=x, U=u]. \]
+
+In policy analysis, we are often interested in the effect of an intervention that changes treatment take-up from a baseline status to a new regime. Let the baseline policy be characterized by the current propensity score $p(Z,X)$ and the corresponding treatment status $W$. Consider an alternative policy that induces a counterfactual propensity score $q(Z,X)$ and a new treatment status $W^q = \indicator(U \leqslant q(Z,X))$, where we assume the latent variable $U$ is invariant to the policy change, as is standard in the MTE framework.
+
+\noindent\textit{Remark (notation).} $q:\mathcal Z\times\mathcal X\to[0,1]$ denotes the alternative-policy propensity function determining $W^q=\indicator(U\leqslant q(Z,X))$ with the same latent resistance $U$ as under the baseline policy. In Proposition~\ref{prop:discrete_reduction}, Proposition~\ref{prop:J_specialization}, Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}, Proposition~\ref{prop:continuous_reduction}, Theorem~\ref{thm:continuous_rate}, Corollary~\ref{cor:continuous_primitive_rate}: $q(z,x)=\phi(z,x,p(z,x))$, where the known map $\phi:\mathcal Z\times\mathcal X\times[0,1]\to[0,1]$ is jointly measurable. $W^q=\indicator(U\leqslant q(Z,X))$ uses the same latent resistance $U$ as baseline treatment $W$; $U$ is invariant to the policy change.
+
+
+The PRTE evaluates the average per-person impact of shifting from the baseline policy to the alternative policy. Define the outcome realized under the alternative policy by $Y^q = W^qY(1) + (1-W^q)Y(0)$. The PRTE is formally defined as
+\[ \text{PRTE} = \frac{\mathbb{E}[Y^q - Y]}{\mathbb{E}[W^q - W]}. \]
+
+Many common treatment effect parameters can be expressed as a weighted average of the MTE\@. Specifically, the PRTE can be rewritten as:
+\[ \text{PRTE} = \mathbb{E}_{X,U}[\text{MTE}(X, U) \omega_{\text{PRTE}}(X,U)], \]
+where the policy-specific weight function is given by:
+\[ \omega_{\text{PRTE}}(x,u) = \frac{\mathbb{P}(q(Z,X) \geqslant u \mid X=x) - \mathbb{P}(p(Z,X) \geqslant u \mid X=x)}{\mathbb{E}[q(Z,X) - p(Z,X)]}, \]
+provided $\mathbb{E}[q(Z,X) - p(Z,X)] \neq 0$.
+Following \citet{heckman2005structural,magne2018using}, we consider the following more general target parameter.
+\begin{align}\label{eq:target_mte}
+    \theta_\omega = \mathbb{E}_X \int_0^1 \text{MTE}(X,u) \omega(X,u) \, \mathrm{d}u,
+\end{align}
+where $\omega$ is the target-specific weight. We impose the following standing condition on this weight.
+\begin{assumption}[Target-Weight Regularity]\label{asp:target_weight}
+The function $\omega:\mathcal X\times[0,1]\to\mathbb R$ is jointly measurable and identifiable from the observed law, and
+\[
+    \mathbb E_X\!\left[\int_0^1 |\omega(X,u)|\,\mathrm du\right]<\infty.
+\]
+\end{assumption}
+
+\noindent\textit{Remark.} Any two structural laws satisfying Structural Assumptions and inducing the same $\mathbb P_{obs}$ give the same $\omega(x,u)$ for $\mathbb P_{obs}(\mathrm dx)\,\mathrm du$-almost every $(x,u)$.
+
+Together with the compact outcome domain, \cref{asp:target_weight} ensures that $\theta_\omega$ is finite.
+We can obtain different PRTEs by taking
+\begin{align}\label{eq:omega_form}
+    \omega(x,u) \propto \mathbb{E}[\indicator(u \leqslant q_1(Z,X)) - \indicator(u \leqslant q_0(Z,X)) \mid X=x],
+\end{align}
+for given propensity functions $q_0$ and $q_1$, where $q_0 = p$ and $q_1 = q$ correspond to the baseline and alternative propensity score functions, respectively, in the PRTE case. The coefficient hidden inside the proportionality symbol is identifiable. \cref{tab:causal_quantities} shows a variety of common causal parameters under different choices of $\omega$.
+\begin{table}[htbp]
+    \centering
+    \caption{Common Causal Parameters as Weighted Averages of the MTE}
+    \label{tab:causal_quantities}
+    \renewcommand{\arraystretch}{1.8} % Increases row spacing for large fractions
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Target Parameter} & \textbf{Notation} & \textbf{Weight Function} $\omega(x,u)$ \\
+        \midrule
+        Average Treatment Effect & ATE & $1$ \\
+        Average Treatment Effect on the Treated & ATT & $ \frac{\mathbb{E}[\indicator (u\in(0,p(Z,X)))\mid X=x]}{\mathbb{E}[p(Z,X)]}$ \\
+        Average Treatment Effect on the Untreated & ATU & $ \frac{\mathbb{E}[\indicator (u\in(p(Z,X),1))\mid X=x]}{\mathbb{E}[1 - p(Z,X)]}$\\
+        Local Average Treatment Effect\textsuperscript{a} & LATE$(z_1, z_0)$ & $ \frac{\indicator(u \in [p(z_0, x), p(z_1, x)])}{\mathbb{E}[p(z_1, X) - p(z_0, X)]}$ \\
+        Policy-Relevant Treatment Effect & PRTE & $ \frac{\mathbb{P}(q(Z,X) \geqslant u \mid X=x) - \mathbb{P}(p(Z,X) \geqslant u \mid X=x)}{\mathbb{E}[q(Z,X) - p(Z,X)]}$ \\
+        \bottomrule
+        \multicolumn{3}{l}{\footnotesize \textsuperscript{a} Evaluated for a shift from instrument state $z_0$ to $z_1$, assuming $p(z_1, x) \geqslant p(z_0, x)$.}
+    \end{tabular}
+\end{table}
+
+\noindent\textit{Remark (notation).} $\omega:\mathcal X\times[0,1]\to\mathbb R$ is the population target weight, jointly measurable and identifiable from the observed law, with $\mathbb E_X[\int_0^1|\omega(X,u)|\,\mathrm du]<\infty$. In Theorem~\ref{thm:discrete_lower_bound}, Theorem~\ref{thm:continuous_lower_bound}: With $X$ almost surely constant, $\omega$ is written as a function $\omega(u)$ of latent resistance alone. In Proposition~\ref{prop:discrete_reduction}, Proposition~\ref{prop:J_specialization}, Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}, Proposition~\ref{prop:continuous_reduction}, Theorem~\ref{thm:continuous_rate}, Corollary~\ref{cor:continuous_primitive_rate}: $\omega(x,u)=\mathbb E_{\mathrm{obs}}[\indicator(u\leqslant q(Z,X))-\indicator(u\leqslant p(Z,X))\mid X=x]$, where $q(z,x)=\phi(z,x,p(z,x))$ and $\phi$ is known; the target is the unscaled numerator $\mathbb E[Y^q-Y]$. $\theta_\omega=\mathbb E_X\int_0^1\text{MTE}(X,u)\omega(X,u)\,\mathrm du$ denotes the target under the latent law being considered, equivalently $\mathbb E[Y(1)\omega(X,U)]-\mathbb E[Y(0)\omega(X,U)]$. In Proposition~\ref{prop:sharpness}: When written with candidate-law arguments, $\theta_\omega(\pi_0,\pi_1)=\mathbb E_{\pi_1}[Y(1)\omega(X,U)]-\mathbb E_{\pi_0}[Y(0)\omega(X,U)]$, with $(\pi_0,\pi_1)\in\Gamma(\mathbb P_{obs})$; its value varies with the candidate marginal laws.
+
+
+While our bounds recover the classical bounds for the first four quantities in \cref{tab:causal_quantities}, we focus in particular on PRTEs. As a leading example, consider a uniform policy shift of the form $q(Z,X) = \min(p(Z,X) + \alpha, 1)$ for some $\alpha > 0$. This corresponds to a policy that uniformly raises the probability of treatment uptake by $\alpha$. In our empirical application (\cref{sec:simulation}), the instrument is the offered price of an insecticide-treated bed net \citep{dupas2014subsidies}, and $q = p + \alpha$ models a uniform price subsidy that lowers the cost of purchase and thereby increases take-up probability by $\alpha$.
+
+\citet{heckman2001instrumental} shows that if the support of $p(Z,x)$ spans the entire interval $(0,1)$ for all $x$, then the MTE is identifiable. However, because the common support of $p(Z,X)$ is often a strict subset of $(0,1)$, the MTE is generally not identifiable. For instance, when both $X$ and $Z$ are discrete, the supports of $p(Z,x)$ are discrete and this full-support condition is violated.
+
+\subsection{A Primer on Optimal Transport}\label{subsec:ot_primer}
+
+To build the framework for our partial identification results, we briefly introduce the relevant concepts from OT theory. OT provides a mathematical framework for coupling two probability distributions at minimum cost, and has emerged as a powerful toolkit for bounding joint distributions when only their marginals are known \citep{galichon2016optimal}.
+
+Let $\mu$ and $\nu$ be two probability measures on state spaces $\mathcal{A}$ and $\mathcal{B}$, respectively. In the context of partial identification, we often observe the marginal distributions of two variables but not their joint distribution. We define $\Pi(\mu, \nu)$ as the set of all couplings between $\mu$ and $\nu$. Formally, a coupling $\pi \in \Pi(\mu, \nu)$ is a joint probability measure on the product space $\mathcal{A} \times \mathcal{B}$ such that its marginals are exactly $\mu$ and $\nu$.
+
+\noindent\textit{Remark (notation).} $\mu$ denotes a probability measure on the state space appropriate to the coupling or quantile expression in which it occurs. In Theorem~\ref{thm:1d_ot}: $\mu\in\mathcal P(\mathbb R)$, and either $\mu$ has bounded support and $\nu$ has a finite first moment, or vice versa. $\nu$ denotes a probability measure in transport notation, a locally bound candidate real-valued function of $X$ inside the conditional quantile-regression minimization, or an unperturbed scalar quantile boundary in a local boundary-perturbation calculation. In Theorem~\ref{thm:1d_ot}: $\nu\in\mathcal P(\mathbb R)$, and either $\mu$ has bounded support and $\nu$ has a finite first moment, or vice versa. In Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}: In the continuous-outcome quantile-regression minimization, $\nu$ is a candidate function $\mathcal X\to\mathbb R$; the resulting population threshold is $\nu_{j,k}(x)=Q_{Y,k\mid x}(\kappa_{j,k}(x))$ for $j=1,\ldots,l_k$, while $\nu_{0,k}(x)=y_{\min}$ is fixed. In Lemma~\ref{lem:orthogonality_discrete}: In the continuous-outcome proof's indicator-boundary calculation, unindexed $\nu$ denotes the scalar value of the threshold being perturbed at a given covariate value: $a_t=\nu+t\,\delta\nu$, and $\int_{\nu}^{a_t}(a_t-y)\,\mathrm{d}F(y)$ uses the oriented-integral convention when $a_t<\nu$. $\mathcal A$ is reused contextually for the first marginal's state space in the OT primer and for the explicitly specified countable measure-determining class in the LIV argument. In Theorem~\ref{thm:1d_ot}: $\mathcal A=\mathbb R$ is the state space carrying the first marginal $\mu$. In Theorem~\ref{thm:covariate_continuous_lower_bound}: In the LIV proof, $\mathcal A=\{\mathcal Y\cap(-\infty,r]:r\in\mathbb Q\}\cup\{\mathcal Y\}$ is the countable measure-determining class of outcome events used to obtain a common exceptional null set. The meaning of $\pi$ is determined by its arguments: transport notation denotes a joint probability measure, whereas $\pi(z,x)$ denotes the conditional instrument assignment probability $\mathbb P(Z=z\mid X=x)$. In Theorem~\ref{thm:1d_ot}: $\pi$ ranges over $\Pi(\mu,\nu)\subseteq\mathcal P(\mathbb R^2)$. In Lemma~\ref{lem:orthogonality_discrete}, Theorem~\ref{thm:dml_normality}: In instrument-specific probability expressions, $\pi(z,x)=\mathbb P_{\mathrm{obs}}(Z=z\mid X=x)$, rather than a transport coupling. The notation $\mathcal B$ denotes an OT state space when standing alone and the Borel $\sigma$-field operator when applied to an outcome domain. In Theorem~\ref{thm:1d_ot}: The second marginal state space is $\mathcal B=\mathbb R$. In Theorem~\ref{thm:covariate_continuous_lower_bound}: In the kernel definition, $A\in\mathcal B(\mathcal Y)$ means that $A$ is a Borel subset of $\mathcal Y$.
+
+
+Given a cost function $c: \mathcal{A} \times \mathcal{B} \to \mathbb{R} \cup \{+\infty\}$ that represents the cost of associating state $a$ with state $b$, the standard Kantorovich optimal transport problem seeks the coupling that minimizes the expected cost:
+\begin{align}
+    \inf_{\pi \in \Pi(\mu, \nu)} \int_{\mathcal{A} \times \mathcal{B}} c(a, b) \, \mathrm{d}\pi(a, b). \label{eq:kantorovich}
+\end{align}
+
+Generally, solving (\ref{eq:kantorovich}) in multidimensional spaces requires computationally intensive linear programming. However, a celebrated result in the OT literature demonstrates that when the spaces are one-dimensional and the cost function satisfies specific structural conditions---such as supermodularity---the optimal coupling admits a sharp, closed-form solution.
+
+We formalize this one-dimensional closed-form solution in the following theorem, which we use to derive the analytic PRTE bounds.
+
+\begin{theorem}[1D Optimal Transport with Product Cost; see, e.g., \citep{villani2021topics, galichon2016optimal}] \label{thm:1d_ot}
+    Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}$ with quantile functions $Q_\mu$ and $Q_\nu$. Suppose either that $\mu$ has bounded support and $\nu$ has a finite first moment, or vice versa, and let the cost be the simple product $c(a,b) = a \cdot b$. Then, the minimum and maximum of the expected cost over all valid couplings are completely characterized by the countermonotonic and comonotonic couplings, respectively:
+    \begin{align*}
+        \min_{\pi \in \Pi(\mu, \nu)} \int_{\mathbb{R}^2} a \cdot b \, \mathrm{d}\pi(a, b) &= \int_0^1 Q_\mu(t) Q_\nu(1-t) \, \mathrm{d}t, \\
+        \max_{\pi \in \Pi(\mu, \nu)} \int_{\mathbb{R}^2} a \cdot b \, \mathrm{d}\pi(a, b) &= \int_0^1 Q_\mu(t) Q_\nu(t) \, \mathrm{d}t.
+    \end{align*}
+    The minimum is attained by the countermonotonic coupling $(Q_\mu(\xi), Q_\nu(1-\xi))$, and the maximum by the comonotonic coupling $(Q_\mu(\xi), Q_\nu(\xi))$, where $\xi \sim \mathrm{Unif}(0,1)$.
+\end{theorem}
+
+\noindent\textit{Remark.} For $0<t<1$, $(Q_\mu(t),Q_\nu(t))=(\inf\{a\in\mathbb R:\mu(( -\infty,a])\geqslant t\},\inf\{b\in\mathbb R:\nu(( -\infty,b])\geqslant t\})$. For $\rho\in\{\mu,\nu\}$ and $t\in(0,1)$, $Q_\rho(t)=\inf\{a\in\mathbb R:\rho((\! -\infty,a])\geqslant t\}$.
+
+\noindent\textit{Remark (notation).} In transport notation, $\xi\sim\mathrm{Unif}(0,1)$ is the auxiliary variable shared by both coordinates of $(Q_\mu(\xi),Q_\nu(1-\xi))$ or $(Q_\mu(\xi),Q_\nu(\xi))$.
+
+
+\cref{thm:1d_ot} provides a closed-form characterization of the optimal value of 1D OT problems. We will leverage this characterization to derive tight bounds for PRTEs later.
+
+\subsection{Notation}\label{subsec:notation}
+
+We use $\mathbb{P}$ and $\mathbb{E}$ for probability and expectation, and $\indep$ for (conditional) independence. $\indicator(\cdot)$ denotes the indicator function. We write $\mathrm{d}$ for the differential or Lebesgue measure. For a probability measure $\mu$ on $\mathbb{R}$, $Q_\mu(t)$ denotes its quantile function. $\Pi(\mu, \nu)$ denotes the set of all couplings of two probability measures $\mu$ and $\nu$, and $W_1(\mu,\nu)=\int_0^1 |Q_\mu(t)-Q_\nu(t)|\,\mathrm{d}t$ their $1$-Wasserstein distance. Calligraphic letters $\mathcal{X}, \mathcal{Y}, \mathcal{Z}, \mathcal{W}$ denote domains of the corresponding variables. We write $O_P(\cdot)$ and $o_P(\cdot)$ for stochastic order notation: $X_n = O_P(a_n)$ means $X_n/a_n$ is bounded in probability, and $X_n = o_P(a_n)$ means $X_n/a_n \xrightarrow{P} 0$. A table collecting the variables and symbols used throughout the paper is given in \cref{sec:notation} of \oalocation.

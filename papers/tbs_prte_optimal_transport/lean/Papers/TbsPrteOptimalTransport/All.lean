@@ -1,0 +1,14 @@
+module
+public import Papers.TbsPrteOptimalTransport.Basic
+public import Papers.TbsPrteOptimalTransport.Helpers
+public import Papers.TbsPrteOptimalTransport.T1dOt
+public import Papers.TbsPrteOptimalTransport.TContinuousLowerBound
+public import Papers.TbsPrteOptimalTransport.TContinuousPrimitiveRate
+public import Papers.TbsPrteOptimalTransport.TContinuousRate
+public import Papers.TbsPrteOptimalTransport.TContinuousReduction
+public import Papers.TbsPrteOptimalTransport.TCovariateLowerBound
+public import Papers.TbsPrteOptimalTransport.TDiscreteLowerBound
+public import Papers.TbsPrteOptimalTransport.TDiscreteReduction
+public import Papers.TbsPrteOptimalTransport.TDmlNormality
+public import Papers.TbsPrteOptimalTransport.TJSpecialization
+public import Papers.TbsPrteOptimalTransport.TSharpness
