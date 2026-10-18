@@ -3,7 +3,7 @@ import { cpSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from "n
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { gzipSync } from "node:zlib";
+import { gunzipSync, gzipSync } from "node:zlib";
 import { sealCode, sha256 } from "../checks/seal.mjs";
 
 export const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -42,10 +42,19 @@ export function filesOf(dir, rel = "", out = []) {
   return out.sort(([a], [b]) => (a < b ? -1 : 1));
 }
 
+/** A pax header's record `key=value`, its length included. */
+export function paxRecord(key, value) {
+  const body = ` ${key}=${value}\n`;
+  let n = Buffer.byteLength(body) + 1;
+  while (String(n).length + Buffer.byteLength(body) !== n) n = String(n).length + Buffer.byteLength(body);
+  return Buffer.from(`${n}${body}`);
+}
+
 /**
  * A gzip'd ustar archive of `entries`, written as the tool's share writes one: each entry
  * `[path, bytes]`, or `{ path, data, type, linkname }` for an entry of another type; a path over
- * 100 bytes is split at a `/` into the ustar prefix and name.
+ * 100 bytes is split at a `/` into the ustar prefix and name, and one whose last part is over 100
+ * bytes goes before its file as a pax header's `path` record.
  */
 export function tarGz(entries) {
   const blocks = [];
@@ -53,7 +62,10 @@ export function tarGz(entries) {
     const { path: p, data = Buffer.alloc(0), type = "0", linkname = "" } = Array.isArray(e) ? { path: e[0], data: e[1] } : e;
     const h = Buffer.alloc(512);
     let name = p, prefix = "";
-    if (Buffer.byteLength(p) > 100) {
+    if (type !== "x" && Buffer.byteLength(p.slice(p.lastIndexOf("/") + 1)) > 100) {
+      blocks.push(gunzipSync(tarGz([{ path: "PaxHeader", type: "x", data: paxRecord("path", p) }])).subarray(0, -1024));
+      name = "long-name";
+    } else if (Buffer.byteLength(p) > 100) {
       const cut = p.lastIndexOf("/", 155);
       prefix = p.slice(0, cut); name = p.slice(cut + 1);
     }

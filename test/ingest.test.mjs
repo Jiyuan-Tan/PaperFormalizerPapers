@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
 import { ingest, runCommand } from "../checks/ingest.mjs";
-import { copyFixture, filesOf, FIXTURE, git, manifestOf, reseal, SLUG, tarGz, tmp, writeJson } from "./helpers.mjs";
+import { copyFixture, filesOf, FIXTURE, git, manifestOf, paxRecord, reseal, SLUG, tarGz, tmp, writeJson } from "./helpers.mjs";
 
 const ID = "abcdefghijklmnopqrstuvwxyz";
 const SECRET = "s3cret";
@@ -158,7 +158,8 @@ test("refused: an entry that is not a regular file, or a path out of the folder"
   for (const [e, re] of [
     [{ path: "lean/link", type: "2", linkname: "/etc/passwd" }, /"lean\/link": a symbolic link/u],
     [{ path: "lean/dir", type: "5" }, /"lean\/dir": a directory/u],
-    [{ path: "PaxHeader", type: "x", data: Buffer.from("30 path=../../escape\n") }, /a pax header/u],
+    [{ path: "PaxHeader", type: "x", data: Buffer.from("30 path=../../escape\n") }, /pax header at byte \d+ is not one path record/u],
+    [{ path: "PaxHeader", type: "x", data: paxRecord("path", "../../escape") }, /"\.\.\/\.\.\/escape": its pax header is the archive's last entry/u],
     [["../escape.md", Buffer.from("x")], /"\.\.\/escape\.md": an empty, \. or \.\. segment/u],
   ]) await refused({ files, entries: [...files, e] }, re);
   // a manifest naming a path out of the folder
