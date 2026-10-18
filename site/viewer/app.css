@@ -542,6 +542,10 @@ mjx-container[jax="SVG"][display="true"] { display: block; text-align: center; }
 .dbody { padding: 1rem 1.2rem 2rem; overflow-y: auto; flex: 1; font-size: var(--fs-sm); }
 .dbody h4 { font-family: var(--mono); font-size: var(--fs-2xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 1.2rem 0 0.45rem; }
 .dbody h4:first-child { margin-top: 0; }
+.report { font-size: 0.95rem; line-height: 1.55; }
+.report .rh { font-family: inherit; text-transform: none; letter-spacing: 0; color: var(--ink, inherit); margin: 1.3rem 0 0.5rem; }
+.report h3.rh { font-size: 1.15rem; margin-top: 0; } .report h4.rh { font-size: 1.02rem; color: var(--accent); } .report h5.rh, .report h6.rh { font-size: 0.95rem; }
+.report ul { padding-left: 1.2rem; margin: 0.4rem 0 0.8rem; } .report li { margin: 0.3rem 0; } .report p { margin: 0.45rem 0; }
 dl.kv { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 0.3rem 0.8rem; margin: 0; }
 .kv dt { color: var(--ink-faint); font-family: var(--mono); font-size: var(--fs-2xs); padding-top: 0.15rem; }
 .kv dd { margin: 0; overflow-wrap: anywhere; }

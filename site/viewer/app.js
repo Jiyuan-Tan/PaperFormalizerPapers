@@ -137,6 +137,7 @@ function copy(text) {
   (navigator.clipboard?.writeText(text) ?? Promise.reject()).then(() => toast("Copied"), () => toast("Copy is blocked here — select the text instead"));
 }
 document.addEventListener("click", (e) => { const c = e.target.closest("[data-copy]"); if (c) { e.preventDefault(); copy(c.dataset.copy); } });
+document.addEventListener("click", (e) => { if (SNAP && e.target.closest("[data-report]")) openReport(); });
 /** A token count in a few characters: 940, 12k, 4.0M, 1.2B. */
 const tokens = (n) => n >= 1e9 ? `${(n / 1e9).toFixed(1)}B` : n >= 1e6 ? `${(n / 1e6).toFixed(n >= 1e8 ? 0 : 1)}M` : n >= 1e3 ? `${Math.round(n / 1e3)}k` : String(n);
 const tokenLine = (t) => t ? `${tokens(t.input)} in (${tokens(t.cached)} cached) · ${tokens(t.output)} out · ${t.calls} calls${t.uncounted ? `, ${t.uncounted} not counted` : ""}` : "";
@@ -935,8 +936,46 @@ function drawSnapStatus() {
   const login = /^[A-Za-z0-9-]{1,39}$/.test(sh?.shared_by ?? "") ? sh.shared_by : null;
   const on = /^\d{4}-\d{2}-\d{2}/.test(sh?.shared_at ?? "") ? sh.shared_at.slice(0, 10) : null;
   const by = login ? `<p>Shared by <a href="https://github.com/${esc(login)}" target="_blank" rel="noopener">@${esc(login)}</a>${on ? ` on ${esc(on)}` : ""}.</p>` : "";
-  const files = [["REPORT.md", "Report"], ["MATCH.md", "Each result beside its Lean"], ...(P.paper?.pdf ? [[P.paper.pdf, "Corrected paper (PDF)"]] : []), ...(SNAP.leanDir ? [["lean/", "Lean code"]] : [])];
-  $("#status").innerHTML = `<div class="status"><div class="line"><span class="pill b-done">${esc(String(s.verdict ?? "report").replace(/_/g, " "))}</span><h2>Checked by TheoremChecker</h2></div>${b ? `<p>${esc(b)}</p>` : ""}${by}<div class="actions">${files.map(([f, label]) => `<a class="btn" href="${esc(f)}" target="_blank" rel="noopener">${esc(label)}</a>`).join("")}</div></div>`;
+  const files = [...(P.paper?.pdf ? [[P.paper.pdf, "Corrected paper (PDF)"]] : []), ...(SNAP.leanDir ? [["lean/", "Lean code"]] : [])];
+  $("#status").innerHTML = `<div class="status"><div class="line"><span class="pill b-done">${esc(String(s.verdict ?? "report").replace(/_/g, " "))}</span><h2>Checked by TheoremChecker</h2></div>${b ? `<p>${esc(b)}</p>` : ""}${by}<div class="actions"><button class="btn" type="button" data-report>Full report</button>${files.map(([f, label]) => `<a class="btn" href="${esc(f)}" target="_blank" rel="noopener">${esc(label)}</a>`).join("")}</div></div>`;
+}
+/* The bundle's REPORT.md, typeset in the drawer (a shared paper's page): its headings, paragraphs and
+   lists, **bold** and `code`, and its formulas by KaTeX under the paper's macros. A plain reader of
+   the few forms the report writes, not Markdown at large; what it inserts passes DOMPurify. */
+function reportHTML(md) {
+  const m = P.paper?.macros;
+  const inline = (t) => t.replace(/\\label\{[^{}]*\}\s*/g, "").split(/`([^`]+)`/).map((part, k) => (k % 2 ? `<code>${esc(part)}</code>` : typeset(part, m, (x) => esc(x).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")))).join("");
+  const out = [];
+  let para = [], list = null;
+  const flush = () => {
+    if (para.length) out.push(`<p>${inline(para.join(" "))}</p>`);
+    if (list) out.push(`<ul>${list.map((i) => `<li>${inline(i)}</li>`).join("")}</ul>`);
+    para = []; list = null;
+  };
+  for (const line of String(md).split(/\r?\n/)) {
+    const h = /^(#{1,4})\s+(.*)$/.exec(line), li = /^\s{0,3}[-*]\s+(.*)$/.exec(line);
+    if (!line.trim()) flush();
+    else if (h) { flush(); out.push(`<h${Math.min(6, h[1].length + 2)} class="rh">${inline(h[2])}</h${Math.min(6, h[1].length + 2)}>`); }
+    else if (li) { if (para.length) { const keep = list; list = null; flush(); list = keep; } (list ??= []).push(li[1]); }
+    else if (list && /^\s+\S/.test(line)) list[list.length - 1] += ` ${line.trim()}`;
+    else { if (list) flush(); para.push(line.trim()); }
+  }
+  flush();
+  return out.join("");
+}
+async function openReport() {
+  closeDrawer();
+  $("#d-kind").textContent = "report"; $("#d-title").textContent = "Full report";
+  $("#d-sub").innerHTML = `<a href="REPORT.md" target="_blank" rel="noopener">REPORT.md</a>`;
+  $("#d-body").innerHTML = `<p class="none">Loading…</p>`;
+  $("#drawer").classList.add("on"); $("#drawer").setAttribute("aria-hidden", "false");
+  document.body.classList.add("drawer-on");
+  try {
+    const r = await fetch("REPORT.md", { credentials: "same-origin" });
+    if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+    $("#d-body").innerHTML = `<div class="report">${reportHTML(await r.text())}</div>`;
+  } catch (err) { $("#d-body").innerHTML = `<p class="none">The report could not be read: ${esc(err.message)}</p>`; }
+  $("#d-body").scrollTop = 0;
 }
 function drawStatus() {
   if (SNAP) { drawSnapStatus(); return; }
@@ -2460,7 +2499,7 @@ document.addEventListener("click", async (e) => {
 if (SNAP) {
   // a shared paper: drawn once from its snapshot; what the build wrote in #app stays if that fails
   SNAP.views = snapLoad();
-  SNAP.views.then((v) => { SNAP.slug = v.page.summary.slug; return route(); }, (err) => app.insertAdjacentHTML("afterbegin", `<p class="empty-note">The interactive page could not be drawn: ${esc(err.message)}</p>`));
+  SNAP.views.then((v) => { SNAP.slug = v.page.summary.slug; return route(); }).then(() => { if (location.hash === "#report") openReport(); }, (err) => app.insertAdjacentHTML("afterbegin", `<p class="empty-note">The interactive page could not be drawn: ${esc(err.message)}</p>`));
 } else {
 connect();
 refreshInbox().catch(() => {});

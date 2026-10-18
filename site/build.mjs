@@ -47,7 +47,7 @@
 //                         whether it is proved in Lean (proved). The printed and corrected statements
 //                         are TeX; they are on the paper's page, not here.
 //   Corrected PDF         page.json paper.pdf, when that file is in the folder
-//   Lean code, Report     lean/ and REPORT.md, when they are in the folder
+//   Lean code, Full report  lean/, and the paper's page opening REPORT.md (#report), when in the folder
 //   seal                  f4_seal.json code
 import { copyFileSync, cpSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -195,7 +195,7 @@ function entry(p, featured) {
       <a class="main" href="${base}">Read with findings</a>
       ${p.pdf ? `<a href="${base}${p.pdf}">Corrected PDF</a>` : ""}
       ${p.lean ? `<a href="${base}lean/">Lean code</a>` : ""}
-      ${p.report ? `<a href="${base}REPORT.md">Report</a>` : ""}
+      ${p.report ? `<a href="${base}#report">Full report</a>` : ""}
       <span class="grow"></span>
       ${sealSpan(p)}
     </div>
@@ -416,7 +416,6 @@ export function indexHtml(papers) {
 function paperSummary(p) {
   const links = [
     p.report ? '<li><a href="REPORT.md">REPORT.md</a> — the report: what was wrong, what was done, what was proved</li>' : "",
-    p.match ? '<li><a href="MATCH.md">MATCH.md</a> — each result beside its Lean declaration</li>' : "",
     p.pdf ? `<li><a href="${p.pdf}">Corrected PDF</a> — the paper as it reads after the corrections</li>` : "",
     p.lean ? '<li><a href="lean/">lean/</a> — the Lean code</li>' : "",
   ].filter(Boolean);

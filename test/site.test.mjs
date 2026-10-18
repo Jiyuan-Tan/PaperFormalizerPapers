@@ -30,7 +30,7 @@ test("the index lists the fixture paper with its badges", () => {
     "<strong>What the check found.</strong> 28 result(s) of the paper were examined",
     'href="papers/cns_simple_dml/corrected_paper/main.pdf">Corrected PDF',
     'href="papers/cns_simple_dml/lean/">Lean code',
-    'href="papers/cns_simple_dml/REPORT.md">Report',
+    'href="papers/cns_simple_dml/#report">Full report',
     "seal e84ecbe79ae9",
     "Findings (22)",
     "<li>Theorem 5.1 — statement corrected, proved in Lean</li>",
@@ -46,8 +46,9 @@ test("the index lists the fixture paper with its badges", () => {
     '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
     '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
     "<title>A Simple and General Debiased Machine Learning Theorem with Finite Sample Guarantees — TheoremChecker</title>",
-    'href="REPORT.md"', 'href="MATCH.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4",
+    'href="REPORT.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4",
   ]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
+  assert.ok(!paper.includes('href="MATCH.md"'), "the result-by-Lean file is not offered");
   assert.ok(!paper.includes("{{"), "every field of the template is filled");
   assert.ok(existsSync(path.join(outDir, "papers", SLUG, "f4_seal.json")));
   assert.ok(readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8").includes('href="Papers/CnsSimpleDml/TVar.lean"'));
