@@ -192,6 +192,16 @@ The workflow uses `pull_request_target`, so it always runs the scripts of `main`
 pull request's files. Keep it that way: never add a step that installs, builds or runs anything from
 the pull request.
 
+## License and the papers' rights
+
+The code of this repository (`checks/`, `site/`, `worker/`, `test/`, the workflows) is under the MIT
+License (`LICENSE`). `site/viewer/` also holds unmodified releases of KaTeX (MIT), pdf.js
+(Apache-2.0) and DOMPurify (Apache-2.0 or MPL-2.0).
+
+The shared papers are not under that license: a paper's text, figures and proofs belong to its
+authors, and whoever shares a paper states, by sharing it, that they may publish it. To have a paper
+taken down, open an issue naming it; the owner removes it as below.
+
 ## Remove a paper
 
 Only the owner removes a paper (a pull request that deletes a folder fails the check):

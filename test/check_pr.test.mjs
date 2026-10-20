@@ -46,7 +46,7 @@ test("the base branch moved on: only the pull request's own changes count", () =
 
 test("two paper folders in one pull request", () => {
   const r = repo((dir) => { add(dir); add(dir, "second_paper"); });
-  has(checkPr({ ...r, author: "fixture-user" }), /touches 2 paper folders \("cns_simple_dml", "second_paper"\)/u);
+  has(checkPr({ ...r, author: "fixture-user" }), /touches 2 paper folders \("second_paper", "tbs_neural_causal_pi"\)/u);
 });
 
 test("a file outside papers/<slug>/", () => {
@@ -68,7 +68,7 @@ test("a file outside papers/<slug>/", () => {
 test("shared_by is not the pull request's author", () => {
   const r = repo((dir) => add(dir));
   const problems = checkPr({ ...r, author: "someone-else" });
-  assert.deepEqual(problems, ['papers/cns_simple_dml/share.json: shared_by is "fixture-user", and the pull request is from "someone-else"']);
+  assert.deepEqual(problems, ['papers/tbs_neural_causal_pi/share.json: shared_by is "fixture-user", and the pull request is from "someone-else"']);
   has(checkPr({ ...r, author: "" }), /PR_AUTHOR is not set/u);
 });
 
@@ -101,7 +101,7 @@ test("a paper shared with an account id is changed by that account only, whateve
 
 test("the folder must pass the paper check, and cannot be removed", () => {
   const bad = repo((dir) => { add(dir); writeFileSync(path.join(dir, "papers", SLUG, "lean", "Check.lean"), "-- tampered\n"); });
-  has(checkPr({ ...bad, author: "fixture-user" }), /^papers\/cns_simple_dml: lean\/Check\.lean: changed after the seal was written/u);
+  has(checkPr({ ...bad, author: "fixture-user" }), /^papers\/tbs_neural_causal_pi: lean\/Check\.lean: changed after the seal was written/u);
   const gone = repo((dir) => rmSync(path.join(dir, "papers", SLUG), { recursive: true }), (dir) => add(dir));
   has(checkPr({ ...gone, author: "fixture-user" }), /removed by the pull request/u);
 });
@@ -122,9 +122,9 @@ test("the tree holds plain files only: a submodule, a symbolic link or an execut
     return { ...r, head: git(r.cwd, "rev-parse", "HEAD") };
   };
   const sub = entry("160000", "lean/sub");
-  has(checkPr({ ...sub, author: "fixture-user" }), /^"papers\/cns_simple_dml\/lean\/sub": a submodule — a paper folder holds plain files of git mode 100644 only$/u);
-  has(checkPr({ ...entry("120000", "README.md"), author: "fixture-user" }), /^"papers\/cns_simple_dml\/README\.md": a symbolic link/u);
-  has(checkPr({ ...entry("100755", "MATCH.md"), author: "fixture-user" }), /^"papers\/cns_simple_dml\/MATCH\.md": an executable file/u);
+  has(checkPr({ ...sub, author: "fixture-user" }), /^"papers\/tbs_neural_causal_pi\/lean\/sub": a submodule — a paper folder holds plain files of git mode 100644 only$/u);
+  has(checkPr({ ...entry("120000", "README.md"), author: "fixture-user" }), /^"papers\/tbs_neural_causal_pi\/README\.md": a symbolic link/u);
+  has(checkPr({ ...entry("100755", "MATCH.md"), author: "fixture-user" }), /^"papers\/tbs_neural_causal_pi\/MATCH\.md": an executable file/u);
 });
 
 test("who merges without the owner: the logins of TRUSTED_SHARERS, or everyone with *; nobody when it is unset", () => {

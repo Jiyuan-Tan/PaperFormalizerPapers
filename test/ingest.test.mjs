@@ -64,12 +64,12 @@ test("a trusted sharer's paper goes on main, with share.json, and the site is re
   const w = worker();
   const r = runner();
   const res = await go(reg, w, r, { trusted: "bob, Alice" });
-  assert.deepEqual(res, { kind: "published", url: "https://site.test/papers-site/papers/cns_simple_dml/" });
+  assert.deepEqual(res, { kind: "published", url: "https://site.test/papers-site/papers/tbs_neural_causal_pi/" });
   assert.deepEqual(w.results, [res]);
   const share = JSON.parse(git(reg.origin, "show", `main:papers/${SLUG}/share.json`));
   assert.deepEqual(share, { shared_by: "alice", shared_by_id: 101, shared_at: "2026-10-12T08:00:00.000Z", arxiv: null });
   assert.equal(git(reg.origin, "show", `main:papers/${SLUG}/lean/Check.lean`), readFileSync(path.join(FIXTURE, "lean", "Check.lean"), "utf8").trim());
-  assert.match(git(reg.origin, "log", "-1", "--format=%an <%ae>%n%B", "main"), /^github-actions\[bot\] <41898282\+github-actions\[bot\]@users\.noreply\.github\.com>\nShare cns_simple_dml by @alice\n\nShared-by: alice 101/u);
+  assert.match(git(reg.origin, "log", "-1", "--format=%an <%ae>%n%B", "main"), /^github-actions\[bot\] <41898282\+github-actions\[bot\]@users\.noreply\.github\.com>\nShare tbs_neural_causal_pi by @alice\n\nShared-by: alice 101/u);
   assert.equal(git(reg.origin, "ls-tree", "-r", "main", "--", `papers/${SLUG}`).split("\n").filter((l) => !l.startsWith("100644 blob")).length, 0);
   assert.deepEqual(r.gh, [["workflow", "run", "pages.yml", "--ref", "main"]]);
   assert.equal(clean(reg.root), "");
@@ -95,7 +95,7 @@ test("anyone else's paper waits for the owner: a branch and a pull request, main
   assert.equal(r.gh.length, 1);
   const [pr] = r.gh;
   assert.deepEqual(pr.slice(0, 7), ["pr", "create", "--base", "main", "--head", branch, "--title"]);
-  assert.equal(pr[7], "Share cns_simple_dml by @alice");
+  assert.equal(pr[7], "Share tbs_neural_causal_pi by @alice");
   assert.match(pr[9], /not in TRUSTED_SHARERS/u);
   assert.equal(git(reg.root, "rev-parse", "--abbrev-ref", "HEAD"), "main");
   assert.equal(clean(reg.root), "");
@@ -172,9 +172,9 @@ test("refused: a slug someone else shared, by account id (a login can be taken o
     mkdirSync(path.join(root, "papers", SLUG), { recursive: true });
     writeJson(path.join(root, "papers", SLUG, "share.json"), { shared_by: login, shared_by_id: id, shared_at: "2026-10-01", arxiv: null });
   };
-  await refused({}, /the slug cns_simple_dml is taken by @mallory/u, seed(999, "mallory"));
+  await refused({}, /the slug tbs_neural_causal_pi is taken by @mallory/u, seed(999, "mallory"));
   // the same login, another account: still taken
-  await refused({}, /the slug cns_simple_dml is taken by @alice/u, seed(999, "alice"));
+  await refused({}, /the slug tbs_neural_causal_pi is taken by @alice/u, seed(999, "alice"));
   // the same account under a new login takes its own paper back
   const reg = registry(seed(101, "alice-old"));
   assert.equal((await go(reg, worker(), runner(), { trusted: "*" })).kind, "published");

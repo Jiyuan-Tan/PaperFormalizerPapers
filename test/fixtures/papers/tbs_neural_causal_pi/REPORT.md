@@ -1,0 +1,224 @@
+# Correctness report — tbs_neural_causal_pi
+
+**Verdict: ERRORS FOUND — REPAIRED BY MINIMAL PATCHES**
+
+**Paper: MINOR ISSUES — no main result is shown false or weakened**
+
+Minor:
+
+- Proposition C.1: weakened: The requirement that each entire non-Gumbel latent law satisfy Assumption~\ref{assumption:lower_bound}; only its normalized connected-component laws are required to satisfy it.; error repaired; condition added (bookkeeping or a pinned reading); ambiguous; a reading was pinned
+- Proposition B.1: weakened: Preservation of the original global Lipschitz regularity for unnormalized categorical functions on unrestricted domains, including cases where their total mass approaches zero.; error repaired; condition added (bookkeeping or a pinned reading)
+- Theorem 3.3: weakened: Uniformity of the comparison constant over unbounded continuous output dimensions and categorical cardinalities at fixed $L,K$ and abstract causal graph. (the referee found the key results and the contribution kept); error repaired; condition added (bookkeeping or a pinned reading)
+- Proposition 4.1: weakened: The requirement that each entire non-Gumbel latent law satisfy Assumption~\ref{assumption:lower_bound}; only its normalized connected-component laws are required to satisfy it. (the referee found the key results and the contribution kept); corrected; condition added (bookkeeping or a pinned reading); ambiguous; the owner settled a reading
+- Lemma B.3: weakened: The assertion of compatible face-adjacent orderings for arbitrary non-dyadic coordinate-box refinements satisfying property (*).; error repaired; condition added (bookkeeping or a pinned reading)
+- Corollary 3.8: weakened: A single neural model with the displayed error bound uniformly over unbounded continuous treatment values, and the displayed-rate statement when $d_{\max}^{\text{in}}=0$ or $d_{\max}^U=0$. (the referee found the key results and the contribution kept); error repaired; condition added (bookkeeping or a pinned reading)
+- Theorem 4.2: weakened: The guarantee for the printed optimizer is replaced by a guarantee for candidates whose continuous structural functions have uniform output $1$-norm at most $K$ and whose normalized categorical propensities have Lipschitz constant at most $\hat L_f$. True models whose continuous structural functions violate that output $1$-norm bound on the input domain are excluded, even when every output coordinate is bounded by $K$. The sampling orders based only on $d_{\max}^U$ and the rate for the original $\alpha_n$ are given up. The displayed-order version excludes $d_{\max}^{\text{in}}=0$ and $d_{\max}^U=0$. (the referee found the key results and the contribution kept); error repaired; condition added (bookkeeping or a pinned reading); ambiguous; the owner settled a reading
+- Corollary 4.4: weakened: The corrected statement excludes uniform intervention laws that are not absolutely continuous with respect to $P$ or whose density is not square-integrable, true models or continuous candidates whose structural functions violate $\sup_x\|f_i(x)\|_1\leqslant K$ on their full input domains even when every coordinate is bounded by $K$, categorical candidates whose normalized propensity functions exceed $\hat L_f$, and candidate-specific independently resampled simulation experiments; it replaces the printed sampling orders determined only by $d_{\max}^U$ with orders accounting for the joint latent dimension and does not retain the sample-size guarantee for the original estimator and radius. The displayed-order version also excludes $d_{\max}^{\text{in}}=0$ and $d_{\max}^U=0$, and the uniform intervention law requires $t_1<t_2$. (the referee found the key results and the contribution kept); error repaired; condition added (bookkeeping or a pinned reading); ambiguous; the owner settled a reading
+- Theorem 3.6: error repaired; condition added (bookkeeping or a pinned reading)
+- Corollary 3.6.1: condition added (bookkeeping or a pinned reading)
+- Proposition 4.3: error repaired; condition added (bookkeeping or a pinned reading)
+- Proposition B.2: error repaired; condition added (bookkeeping or a pinned reading)
+- Proposition C.2: condition added (bookkeeping or a pinned reading); ambiguous; a reading was pinned
+- Lemma C.3: condition added (bookkeeping or a pinned reading); ambiguous; the owner settled a reading
+- Lemma E.1: error repaired; condition added (bookkeeping or a pinned reading)
+- Lemma E.2: condition added (bookkeeping or a pinned reading); ambiguous; a reading was pinned
+- Lemma E.3: corrected; condition added (bookkeeping or a pinned reading)
+- Lemma E.4: condition added (bookkeeping or a pinned reading); ambiguous; a reading was pinned
+- Lemma E.5: error repaired; condition added (bookkeeping or a pinned reading)
+- Lemma E.6: error repaired; condition added (bookkeeping or a pinned reading)
+- `ass:assump-categorical-rv-generation`: ambiguous; a reading was pinned; ambiguous; the owner settled a reading
+- `ass:assump-lip-and-bounded-categorical`: ambiguous; a reading was pinned
+- `ass:assump-lip-and-bounded-bound`: ambiguous; a reading was pinned
+- `ass:thm-consistency-structural-lipschitz`: ambiguous; a reading was pinned
+- `ass:prop-lip-ate-bounded`: ambiguous; a reading was pinned
+- `ass:prop-lip-ate-overlap`: ambiguous; a reading was pinned
+- `ass:prop-convg-opt-approximate-lipschitz`: ambiguous; a reading was pinned
+- `ass:prop-convg-opt-approximation`: ambiguous; a reading was pinned
+- `ass:lemma-lip-condition-regression`: ambiguous; a reading was pinned
+- `ass:lemma-sup-wasserstein-bounded`: ambiguous; a reading was pinned
+- `ass:relu-approximation-domain`: ambiguous; a reading was pinned
+- `ass:bk-owner-1`: ambiguous; a reading was pinned
+- `ass:bk-owner-2`: ambiguous; a reading was pinned
+- `def:eq-structure-eq`: ambiguous; a reading was pinned
+- `def:definition-2`: ambiguous; a reading was pinned
+- `def:eq-structure-equation`: ambiguous; a reading was pinned; ambiguous; the owner settled a reading
+- `def:intervention`: ambiguous; a reading was pinned
+- `def:homeomorphisms`: ambiguous; a reading was pinned
+- `def:relu-networks`: ambiguous; a reading was pinned; ambiguous; the owner settled a reading
+- `def:eq-structure-equation-hat`: ambiguous; a reading was pinned
+- `def:gumbel-softmax-layer`: ambiguous; a reading was pinned
+- `def:neural-causal-class`: ambiguous; a reading was pinned
+- `def:eq-opt-empiri`: ambiguous; a reading was pinned; ambiguous; the owner settled a reading
+- `def:truncated-neural-class`: ambiguous; a reading was pinned
+- `def:eq-consistent-limiting`: ambiguous; a reading was pinned; ambiguous; the owner settled a reading
+- `def:cor-rate-objective`: ambiguous; a reading was pinned
+- `def:lemma-gumbel-err-softmax`: ambiguous; a reading was pinned
+- `def:corollary-deep-nn-dimensions`: ambiguous; a reading was pinned
+- `def:thm-consistency-model-parameterization`: ambiguous; a reading was pinned
+- `V_i`: notation ambiguous; a reading was pinned
+- `n_i`: notation ambiguous; a reading was pinned
+- `\boldsymbol{V}`: notation ambiguous; a reading was pinned
+- `U_j`: notation ambiguous; a reading was pinned
+- `\boldsymbol{U}`: notation ambiguous; a reading was pinned
+- `n_U`: notation ambiguous; a reading was pinned
+- `\boldsymbol{U}_{V_i}`: notation ambiguous; a reading was pinned
+- `\text{Pa}`: notation ambiguous; a reading was pinned
+- `f_i`: notation ambiguous; a reading was pinned
+- `F`: notation ambiguous; a reading was pinned
+- `P`: notation ambiguous; a reading was pinned
+- `\mathcal{M}`: notation ambiguous; a reading was pinned
+- `\mathcal{G}`: notation ambiguous; a reading was pinned
+- `\hat{\mathcal{F}}`: notation ambiguous; a reading was pinned
+- `\hat{\mathcal{M}}`: notation ambiguous; a reading was pinned
+- `\hat{\boldsymbol{U}}`: notation ambiguous; a reading was pinned
+- `\epsilon`: notation ambiguous; a reading was pinned
+- `\mathcal{M}_\epsilon`: notation ambiguous; a reading was pinned
+- `\mathcal{C}`: notation ambiguous; a reading was pinned
+- `\theta`: notation ambiguous; a reading was pinned
+- `\hat{\boldsymbol{V}}`: notation ambiguous; a reading was pinned
+- `\hat{V}_i`: notation ambiguous; a reading was pinned
+- `C`: notation ambiguous; a reading was pinned
+- `U_C`: notation ambiguous; a reading was pinned
+- `G_{V_i}`: notation ambiguous; a reading was pinned
+- `g_k^{V_i}`: notation ambiguous; a reading was pinned
+- `G_k`: notation ambiguous; a reading was pinned
+- `\hat{f}_i`: notation ambiguous; a reading was pinned
+- `f`: notation ambiguous; a reading was pinned
+- `\hat{f}`: notation ambiguous; a reading was pinned
+- `\boldsymbol{t}`: notation ambiguous; a reading was pinned
+- `\boldsymbol{t}_0`: notation ambiguous; a reading was pinned
+- `T`: notation ambiguous; a reading was pinned
+- `Y`: notation ambiguous; a reading was pinned
+- `\mu`: notation ambiguous; a reading was pinned
+- `\hat{T}`: notation ambiguous; a reading was pinned
+- `\hat{Y}`: notation ambiguous; a reading was pinned
+- `\text{ATE}_{\mathcal{M}}`: notation ambiguous; a reading was pinned
+- `P^{\mathcal{M}}`: notation ambiguous; a reading was pinned
+- `\mathbb{P}`: notation ambiguous; a reading was pinned
+- `\nu`: notation ambiguous; a reading was pinned
+- `\hat{\mu}`: notation ambiguous; a reading was pinned
+- `C_i`: notation ambiguous; a reading was pinned
+- `\mu_i`: notation ambiguous; a reading was pinned
+- `\hat{\mu}_i`: notation ambiguous; a reading was pinned
+- `X^\tau`: notation ambiguous; a reading was pinned
+- `\tau`: notation ambiguous; a reading was pinned
+- `X^0`: notation ambiguous; a reading was pinned
+- `\mu^0`: notation ambiguous; a reading was pinned
+- `n`: notation ambiguous; a reading was pinned
+- `\mu_n`: notation ambiguous; a reading was pinned
+- `W`: notation ambiguous; a reading was pinned
+- `\lambda`: notation ambiguous; a reading was pinned
+- `S_\lambda`: notation ambiguous; a reading was pinned
+- `W_{1,\lambda}`: notation ambiguous; a reading was pinned
+- `L`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_L`: notation ambiguous; a reading was pinned
+- `\mathcal{H}`: notation ambiguous; a reading was pinned
+- `\mathcal{F}`: notation ambiguous; a reading was pinned
+- `K`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_L^K`: notation ambiguous; a reading was pinned
+- `\mathcal{M}(\mathcal{G},\mathcal{F},\boldsymbol{U})`: notation ambiguous; a reading was pinned
+- `\mathcal{NN}`: notation ambiguous; a reading was pinned
+- `\mathcal{NN}(W_1,L_1,W_2,L_2,\tau)`: notation ambiguous; a reading was pinned
+- `\mathcal{NN}^{L_f,K}`: notation ambiguous; a reading was pinned
+- `W_1`: notation ambiguous; a reading was pinned
+- `W_2`: notation ambiguous; a reading was pinned
+- `L_1`: notation ambiguous; a reading was pinned
+- `L_2`: notation ambiguous; a reading was pinned
+- `\mathcal{NN}^{\infty,K}`: notation ambiguous; a reading was pinned
+- `\hat{g}`: notation ambiguous; a reading was pinned
+- `\text{NCM}_{\mathcal{G}}`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_0`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_1`: notation ambiguous; a reading was pinned
+- `\hat{g}_1`: notation ambiguous; a reading was pinned
+- `\hat{g}_2`: notation ambiguous; a reading was pinned
+- `\hat{g}_3^\tau`: notation ambiguous; a reading was pinned
+- `g_2^i`: notation ambiguous; a reading was pinned
+- `\hat{g}_2^{i,j}`: notation ambiguous; a reading was pinned
+- `\gamma_i`: notation ambiguous; a reading was pinned
+- `\hat{g}_1^{i,j}`: notation ambiguous; a reading was pinned
+- `Z_{C_j}`: notation ambiguous; a reading was pinned
+- `\hat{U}_{C_j}`: notation ambiguous; a reading was pinned
+- `N_C`: notation ambiguous; a reading was pinned
+- `d_i^C`: notation ambiguous; a reading was pinned
+- `C_f`: notation ambiguous; a reading was pinned
+- `\gamma`: notation ambiguous; a reading was pinned
+- `\mathcal{C}_n`: notation ambiguous; a reading was pinned
+- `O_n`: notation ambiguous; a reading was pinned
+- `\mathcal{I}_n`: notation ambiguous; a reading was pinned
+- `f_k`: notation ambiguous; a reading was pinned
+- `F_n`: notation ambiguous; a reading was pinned
+- `\mu_T`: notation ambiguous; a reading was pinned
+- `F_*`: notation ambiguous; a reading was pinned
+- `\underline{F}^L`: notation ambiguous; a reading was pinned
+- `P_n^{\mathcal{M}^*}`: notation ambiguous; a reading was pinned
+- `m_n`: notation ambiguous; a reading was pinned
+- `P_{m_n}^{\hat{\mathcal{M}}}`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_{0,n}`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_{1,n}`: notation ambiguous; a reading was pinned
+- `\epsilon_n`: notation ambiguous; a reading was pinned
+- `s_n`: notation ambiguous; a reading was pinned
+- `\alpha_n`: notation ambiguous; a reading was pinned
+- `\tau_n`: notation ambiguous; a reading was pinned
+- `\lambda_n`: notation ambiguous; a reading was pinned
+- `d`: notation ambiguous; a reading was pinned
+- `d_1`: notation ambiguous; a reading was pinned
+- `d_2`: notation ambiguous; a reading was pinned
+- `D`: notation ambiguous; a reading was pinned
+- `d_{\max}^{\text{in}}`: notation ambiguous; a reading was pinned
+- `d_{\max}^{\text{out}}`: notation ambiguous; a reading was pinned
+- `d_{\max}^U`: notation ambiguous; a reading was pinned
+- `d_{\mathcal{F}}`: notation ambiguous; a reading was pinned
+- `C_{\mathcal{G}}(L,K)`: notation ambiguous; a reading was pinned
+- `C_W`: notation ambiguous; a reading was pinned
+- `W_{0,n}`: notation ambiguous; a reading was pinned
+- `L_{i,n}`: notation ambiguous; a reading was pinned
+- `p_i`: notation ambiguous; a reading was pinned
+- `p_\nu`: notation ambiguous; a reading was pinned
+- `\delta`: notation ambiguous; a reading was pinned
+- `c`: notation ambiguous; a reading was pinned
+- `t_1`: notation ambiguous; a reading was pinned
+- `t_2`: notation ambiguous; a reading was pinned
+- `\Delta_n`: notation ambiguous; a reading was pinned
+- `M`: notation ambiguous; a reading was pinned
+- `\Theta_n`: notation ambiguous; a reading was pinned
+- `\Theta_\infty`: notation ambiguous; a reading was pinned
+- `\tilde{\Theta}_\infty`: notation ambiguous; a reading was pinned
+- `\delta_n`: notation ambiguous; a reading was pinned
+- `g_n`: notation ambiguous; a reading was pinned
+- `g`: notation ambiguous; a reading was pinned
+- `L_g`: notation ambiguous; a reading was pinned
+- `B`: notation ambiguous; a reading was pinned
+- `\mathcal{N}_1`: notation ambiguous; a reading was pinned
+- `\mathcal{H}_\delta`: notation ambiguous; a reading was pinned
+- `h`: notation ambiguous; a reading was pinned
+- `m`: notation ambiguous; a reading was pinned
+- `\|\cdot\|_\infty`: notation ambiguous; a reading was pinned
+- `R`: notation ambiguous; a reading was pinned
+- `S`: notation ambiguous; a reading was pinned
+- `\mathcal{N}`: notation ambiguous; a reading was pinned
+- `\theta_{\mathcal{M}}`: notation ambiguous; a reading was pinned
+- `\mathcal{M}^{\theta}`: notation ambiguous; a reading was pinned
+- `\theta^*`: notation ambiguous; a reading was pinned
+- `\theta'`: notation ambiguous; a reading was pinned
+- `P^\theta`: notation ambiguous; a reading was pinned
+- `\mathcal{F}_{V_i}`: notation ambiguous; a reading was pinned
+- `d_{i,\text{in}}^{V}`: notation ambiguous; a reading was pinned
+- `d_{i,\text{out}}^{V}`: notation ambiguous; a reading was pinned
+- `d_j^U`: notation ambiguous; a reading was pinned
+- `\mathcal{P}`: notation ambiguous; a reading was pinned
+- `\mathcal{P}_n`: notation ambiguous; a reading was pinned
+- `\hat{\mathcal{F}}_{V_i,n}`: notation ambiguous; a reading was pinned
+- `\hat{g}_1^i`: notation ambiguous; a reading was pinned
+- `U_i`: notation ambiguous; a reading was pinned
+- `s`: notation ambiguous; a reading was pinned
+- `def:lemma-sup-wasserstein-empirical-covering`: ambiguous; the owner settled a reading
+- `def:true-objective`: ambiguous; the owner settled a reading
+- `lem:consistency-fournier-theorem-2`: ambiguous; the owner settled a reading
+- `lem:sup-wasserstein-anthony-theorem-17-1`: error repaired
+- `def:definition-3`: error repaired
+- `def:thm-consistency-architecture-radius`: error repaired
+
+19 result(s) of the paper were examined, and 1 corollary a correction split off them. 13 were found wrong as printed: 13 corrected (7 by a weaker statement), 0 not repaired. In Lean: 20 proved, 0 taken from the literature as cited, 0 not certified, 0 not formalized.
+
+
+> FIXTURE (TheoremCheckerPapers test data): trimmed from a real bundle; not a complete bundle.

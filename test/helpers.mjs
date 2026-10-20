@@ -7,7 +7,7 @@ import { gunzipSync, gzipSync } from "node:zlib";
 import { sealCode, sha256 } from "../checks/seal.mjs";
 
 export const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-export const SLUG = "cns_simple_dml";
+export const SLUG = "tbs_neural_causal_pi";
 export const FIXTURE = path.join(ROOT, "test", "fixtures", "papers", SLUG);
 
 export const tmp = () => mkdtempSync(path.join(os.tmpdir(), "tcpapers-"));

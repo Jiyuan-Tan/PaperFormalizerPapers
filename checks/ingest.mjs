@@ -149,7 +149,7 @@ export async function ingest({ id, root, workerUrl = DEFAULT_WORKER_URL, siteUrl
     if (result.problems) result = { ...result, problems: cappedProblems(result.problems) };
     const r = await fetchImpl(`${base}/result`, { method: "POST", headers: { ...auth, "Content-Type": "application/json" }, body: JSON.stringify(result) });
     if (!r.ok) throw new Error(`posting the result: HTTP ${r.status}`);
-    log(`${id}: ${result.kind}${result.url ? ` ${result.url}` : ""}${result.pr_url ? ` ${result.pr_url}` : ""}${result.problems ? `\n  ${result.problems.join("\n  ")}` : ""}`);
+    log(`${id}: ${result.kind}${result.url ? ` ${result.url}` : ""}${result.pr_url ? ` ${result.pr_url}` : ""}${result.problems ? `\n  ${result.problems.map((x) => x.replace(/\s*[\r\n]+\s*/gu, " ")).join("\n  ")}` : ""}`);
     return result;
   };
 

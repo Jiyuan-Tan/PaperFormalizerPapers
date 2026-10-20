@@ -1,0 +1,41 @@
+===== reviewer convergence/dual :: medium :: batch[ass:assump-lip-and-bounded-bound,ass:assump-support-components,ass:assump-support-homeomorphisms,ass:assumption-lower-bound-domination,ass:assumption-lower-bound-boundary] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:assump-lip-and-bounded-bound",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent to pin-168: one deterministic positive K bounds every observed coordinate and every non-Gumbel latent coordinate almost surely; categorical labels retain their one-based values."
+    },
+    {
+      "obj_id": "ass:assump-support-components",
+      "verdict": "faithful-refinement",
+      "note": "The finite indexed family consists of distinct actual connected components and covers the support, exactly expressing its finite component decomposition."
+    },
+    {
+      "obj_id": "ass:assump-support-homeomorphisms",
+      "verdict": "faithful-refinement",
+      "note": "For each component and its nonnegative integer dimension, the predicate requires a homeomorphism from the unit cube with forward Lipschitz constant at most L in the prescribed one-norm; dimension zero is included."
+    },
+    {
+      "obj_id": "ass:assumption-lower-bound-domination",
+      "verdict": "faithful-refinement",
+      "note": "On the standing probability-measure domain, P K = 1 expresses support on K; compactness, a positive constant, the Lipschitz homeomorphism, and domination for every measurable cube subset match the paper in both directions."
+    },
+    {
+      "obj_id": "ass:assumption-lower-bound-boundary",
+      "verdict": "faithful-refinement",
+      "note": "The existential packaging retains a common domination chart and requires its inverse push-forward to assign zero mass to the cube boundary when d > 0; extending the inverse outside K is immaterial because P K = 1."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:assump-lip-and-bounded-bound","verdict":"faithful-refinement","note":"Unfolded VariablesBoundedAt says 0<K, and for M.latentLaw-a.e. u: every coordinate of the observational value intervenedEval M (no intervention) u has |.|≤K, and so does every coordinate of every non-Gumbel block blockProjection j u (j : Fin b ranges over the non-Gumbel blocks; the Gumbel vectors sit in the separate .inr summand of Exogenous). Categorical nodes are stored as one-based labels (admissibleStructuralInputs, Joint). Coordinatewise |.|≤K for all coordinates is the same as max_i,j{||V_i||_inf,||U_j||_inf}≤K. With ∃K that is exactly pin-168 (a deterministic K>0, a.s. under P(U)) and pin-154/pin-84 (U_j non-Gumbel). Both directions hold."},{"obj_id":"ass:assump-support-components","verdict":"faithful-refinement","note":"measureSupport is the standard support {x | every open neighbourhood has positive mass}. The WithLp-1 topology is the Euclidean one. Lean asks for supp P = ⋃ C_i, C injective, and each C_i = connectedComponentIn supp x for some x in supp. Lean ⟹ paper: immediate. Paper ⟹ Lean: components are pairwise equal or disjoint, so a cover by components enumerates every component exactly once. So C : Fin N → Set is a bijective enumeration of the finitely many components with union supp P. Equivalent."},{"obj_id":"ass:assump-support-homeomorphisms","verdict":"faithful-refinement","note":"Lean: ∀ i, ∃ f : Homeomorph (unitCube (dC i)) (C i) with LipschitzWith L f. Under pin-33, homeoClass is H (a continuous bijection with continuous inverse). LipschitzWith on the subtype ℓ1 metric is F_L([0,1]^{d_i},C_i) in the paper's 1-norm. 'For some d_i^C≥0' becomes the parameter dC : Fin N → ℕ. Consumers (TDeepNn/TRate/TConsistency/TWideNn) bind dC universally under the hypothesis, which is equivalent to the existential in assumption position. For d=0 the cube is a single point, so C_i is a singleton, which matches pin-fix-9bbf998f."},{"obj_id":"ass:assumption-lower-bound-domination","verdict":"faithful-refinement","note":"lowerBoundDominationAt contains: IsCompact K; P K = 1; 0<C_f; f in homeoClass(cube,K) with LipschitzWith L f; and C_f·λ_d(B) ≤ P(f(B)) for every Borel B ⊆ [0,1]^d. Here λ_d is the product Lebesgue measure transported to WithLp, matching pin-fix-c778b424. 'Supported on compact K' is rendered as P(K)=1. For the probability laws that consumers supply (blockLaw, cond on a component), this is equivalent to supp P ⊆ K, since K is closed. The domination clause in fact forces supp P = K, so both readings agree. Borel B versus Lebesgue-measurable B: equivalent, because a Lebesgue-measurable B differs from a Borel subset by a null set and P is monotone. The existential over f and C_f matches the NL."},{"obj_id":"ass:assumption-lower-bound-boundary","verdict":"faithful-refinement","note":"The NL's f is the chart of the domination assumption, so Lean correctly bundles one witness pair (f, C_f) satisfying lowerBoundDominationAt and (0<d → (P.map chartInverse f)(frontier [0,1]^d) = 0). The map is not vacuous: chartInverse is f.symm on K and 0 outside, and it is Borel-measurable because K is compact (hence closed and measurable) and f.symm is continuous. Since P(K)=1, P.map chartInverse f equals (f^{-1})_#P. frontier(unitCube d) in L1Vec d is ∂[0,1]^d. Equivalent to the NL."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:combin-err,lem:product-err,lem:gumbel-err] =====
+--- codex stdout ---
+{
+[…fixture: truncated]

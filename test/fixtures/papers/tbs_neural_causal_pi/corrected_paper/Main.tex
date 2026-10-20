@@ -1,0 +1,97 @@
+% FIXTURE (TheoremCheckerPapers test data): trimmed from a real bundle; not a complete bundle.
+%%%%%%%% ICML 2022 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{natbib}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{times}
+\usepackage{booktabs} % for professional tables
+\usepackage{fullpage}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning,patterns,calc}
+\renewcommand{\baselinestretch}{1.35}
+
+
+\usepackage[breaklinks,colorlinks,
+            linkcolor=red,
+            anchorcolor=blue,
+            citecolor=blue
+            ]{hyperref}
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+%\usepackage{icml2022}
+
+% If accepted, instead use the following line for the camera-ready submission:
+% \usepackage[accepted]{icml2022}
+
+% For theorems and such
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+% if you use cleveref..
+\usepackage[capitalize,noabbrev]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{prob}{Problem}
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+%\usepackage[disable,textsize=tiny]{todonotes}
+\usepackage[textsize=tiny]{todonotes}
+
+
+\usepackage{relsize}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{smile}
+\usepackage{bbm}
+\usepackage{xcolor}
+\usepackage{bbm}
+\def \d {\text{d}}
+\def \mcs{\mathcal{S}}
+\def \mcm{\mathcal{M}}
+\def \mbp{\mathbb{P}}
+\def \mcd{\mathcal{D}}
+
+\newcommand{\tank}[1]{[\textcolor{green}{Tan: #1}]}
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+%\icmltitlerunning{Pessimistic Minimax Value Iteration: Provably Efficient Equilibrium Learning from Offline Datasets}
+\title{\LARGE Consistency of Neural Causal Partial Identification}
+\author{
+Jiyuan Tan \footnote{Management Science and Engineering, Stanford University. Email: \texttt{jiyuantan@stanford.edu}} \quad Jose Blanchet \footnote{Management Science and Engineering, Stanford University. Email: \texttt{jose.blanchet@stanford.edu}} \quad Vasilis Syrgkanis \footnote{Management Science and Engineering, Stanford University. Email: \texttt{vsyrgk@stanford.edu}. Supported by NSF Award IIS-2337916 and a 2022 Amazon Research Award}
+}
+\date{\today}
+\begin{document}
+\maketitle
+\begin{abstract}
+Recent progress in Neural Causal Models (NCMs) showcased how identification and partial identification of causal effects can be automatically carried out via training of neural generative models that respect the constraints encoded in a given causal graph \cite{xia2022neural,balazadehPartialIdentificationTreatment2022}. However, formal consistency of these methods has only been proven for the case of discrete variables or only for linear causal models. In this work, we prove the consistency of partial identification via NCMs in a general setting with both continuous and categorical variables. Further, our results highlight the impact of the design of the underlying neural network architecture in terms of depth and connectivity as well as the importance of applying Lipschitz regularization in the training phase. In particular, we provide a counterexample showing that without Lipschitz regularization this method may not be asymptotically consistent. Our results are enabled by new results on the approximability of Structural Causal Models (SCMs) via neural generative models, together with an analysis of the sample complexity of the resulting architectures and how that translates into an error in the constrained optimization problem that defines the partial identification bounds.
+
+% The objective of the Neural Causal Model (NCM) for partial identification is to obtain informative bounds for causal quantities based on observational data using generative models. In this paper, we show the asymptotic consistency of the neural causal partial identification for a large class of underlying SCMs in general data settings (including continuous and categorical data) as the sample size increases. Our results extend prior theoretical results (e.g. \cite{xia2022neural,balazadehPartialIdentificationTreatment2022}) that considered discrete data or linear structural causal models. Further, our results elucidate the impact of the neural network architecture in terms of depth and connectivity as well as the importance of applying Lipschitz regularization in the training phase. In particular, we provide a counterexample showing that without Lipschitz regularization the NCM may not be asymptotically consistent. 
+\end{abstract}
+\end{document}

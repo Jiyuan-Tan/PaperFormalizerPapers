@@ -16,25 +16,28 @@ test("the index lists the fixture paper with its badges", () => {
   assert.equal(papers.length, 1);
   assert.deepEqual(
     { total: papers[0].total, proved: papers[0].proved, corrections: papers[0].corrections, refuted: papers[0].refuted, clarifications: papers[0].clarifications, cited: papers[0].cited },
-    { total: 41, proved: 40, corrections: 22, refuted: 0, clarifications: 135, cited: 1 },
+    { total: 29, proved: 20, corrections: 15, refuted: 2, clarifications: 237, cited: 7 },
   );
   for (const s of [
     "TheoremChecker · Verified papers",
-    '<h2><a href="papers/cns_simple_dml/">A Simple and General Debiased Machine Learning Theorem with Finite Sample Guarantees</a></h2>',
-    "Victor Chernozhukov, Whitney K. Newey, Rahul Singh",
-    "shared 2026-10-09 by @fixture-user",
-    "40 of 41 results proved in Lean 4",
-    "22 corrections",
-    "135 clarifications",
-    "1 cited result taken as stated",
-    "<strong>What the check found.</strong> 28 result(s) of the paper were examined",
-    'href="papers/cns_simple_dml/corrected_paper/main.pdf">Corrected PDF',
-    'href="papers/cns_simple_dml/lean/">Lean code',
-    'href="papers/cns_simple_dml/#report">Full report',
-    "seal e84ecbe79ae9",
-    "Findings (22)",
-    "<li>Theorem 5.1 — statement corrected, proved in Lean</li>",
-    "<li>Corollary B.4 — statement unchanged, proof corrected, proved in Lean</li>",
+    '<h2><a href="papers/tbs_neural_causal_pi/">Consistency of Neural Causal Partial Identification</a></h2>',
+    "Jiyuan Tan, Jose Blanchet, Vasilis Syrgkanis",
+    "shared 2026-10-19 by @fixture-user",
+    "2 results refuted, no repair keeps them",
+    "20 of 29 results proved in Lean 4",
+    "15 corrections",
+    "237 clarifications",
+    "7 cited results taken as stated",
+    // the count sentence, not the paper's grade above it
+    "<strong>What the check found.</strong> 19 result(s) of the paper were examined",
+    'href="papers/tbs_neural_causal_pi/corrected_paper/Main.pdf">Corrected PDF',
+    'href="papers/tbs_neural_causal_pi/lean/">Lean code',
+    'href="papers/tbs_neural_causal_pi/#report">Full report',
+    "seal 4869aa364e91",
+    "Findings (17)",
+    "<li>Theorem 3.3 — statement corrected, proved in Lean</li>",
+    "<li>Proposition B.2 — statement unchanged, proof corrected, proved in Lean</li>",
+    "<li>lemma lem:sinkhorn-luise-proposition-1 — refuted, no repair, not proved in Lean</li>",
     'data-flags="repaired cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   assert.ok(!index.includes("No error found</span>"));
@@ -45,13 +48,13 @@ test("the index lists the fixture paper with its badges", () => {
   for (const s of [
     '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
     '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
-    "<title>A Simple and General Debiased Machine Learning Theorem with Finite Sample Guarantees — TheoremChecker</title>",
-    'href="REPORT.md"', 'href="corrected_paper/main.pdf"', 'href="lean/"', "40 of 41 results proved in Lean 4",
+    "<title>Consistency of Neural Causal Partial Identification — TheoremChecker</title>",
+    'href="REPORT.md"', 'href="corrected_paper/Main.pdf"', 'href="lean/"', "20 of 29 results proved in Lean 4",
   ]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
   assert.ok(!paper.includes('href="MATCH.md"'), "the result-by-Lean file is not offered");
   assert.ok(!paper.includes("{{"), "every field of the template is filled");
   assert.ok(existsSync(path.join(outDir, "papers", SLUG, "f4_seal.json")));
-  assert.ok(readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8").includes('href="Papers/CnsSimpleDml/TVar.lean"'));
+  assert.ok(readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8").includes('href="Papers/TbsNeuralCausalPi/TDeepNn.lean"'));
   // the viewer is copied beside the papers (its template apart); GitHub Pages: no header file, no Jekyll
   for (const f of ["app.js", "app.css", "purify.min.js", "katex/katex.min.js", "katex/katex.min.css", "pdfjs/pdf.min.mjs", "pdfjs/pdf.worker.min.mjs", "VERSION"]) assert.ok(existsSync(path.join(outDir, "viewer", f)), `dist/viewer lacks ${f}`);
   assert.ok(!existsSync(path.join(outDir, "viewer", "page.html")) && !existsSync(path.join(outDir, "_headers")) && existsSync(path.join(outDir, ".nojekyll")));
@@ -126,10 +129,10 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
   const { index, papers } = site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
   for (const s of [
-    "1 result refuted, no repair keeps it",
-    "39 of 41 results proved in Lean 4",
-    "21 corrections",
-    '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-09 by @fixture-user</',
+    "3 results refuted, no repair keeps them",
+    "19 of 29 results proved in Lean 4",
+    "14 corrections",
+    '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-19 by @fixture-user</',
     "refuted, no repair, not proved in Lean</li>",
     '<span class="badge grey">No error found</span>',
     'data-flags="clean cited"',
@@ -137,7 +140,7 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
     '1,200,500,000 tokens in 412 model calls, as the run\'s own ledger counted them">1.2B tokens</span>',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   // newest first: the featured entry is the fixture, then the clean paper
-  assert.ok(index.indexOf("A Simple and General") < index.indexOf("A clean paper"));
+  assert.ok(index.indexOf("Consistency of Neural Causal") < index.indexOf("A clean paper"));
   assert.equal(index.match(/class="paper featured"/gu).length, 1);
   assert.equal(index.match(/ tokens<\/span>/gu).length, 1);
 });

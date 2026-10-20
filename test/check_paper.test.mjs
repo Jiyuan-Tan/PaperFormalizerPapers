@@ -11,13 +11,13 @@ const has = (problems, re) => assert.ok(problems.some((p) => re.test(p)), `expec
 
 test("the fixture passes", () => {
   assert.deepEqual(checkPaper(FIXTURE), []);
-  assert.match(execFileSync("node", [path.join(ROOT, "checks", "check_paper.mjs"), FIXTURE], { encoding: "utf8" }), /cns_simple_dml: ok/u);
+  assert.match(execFileSync("node", [path.join(ROOT, "checks", "check_paper.mjs"), FIXTURE], { encoding: "utf8" }), /tbs_neural_causal_pi: ok/u);
 });
 
 test("the seal's code is the tool's (a known seal)", () => {
   const seal = readJson(path.join(FIXTURE, "f4_seal.json"));
   assert.equal(sealCode(seal), seal.code);
-  assert.equal(seal.code, "e84ecbe79ae9198cbba86caecbbfcb33177a996201b08bda6b854da613b5ca59");
+  assert.equal(seal.code, "4869aa364e91445e12ef207199b2d930a9c028d51d5882ef743780e08b5d6f65");
 });
 
 test("a sealed file changed after the seal was written", () => {
@@ -27,7 +27,7 @@ test("a sealed file changed after the seal was written", () => {
   has(problems, /lean\/Check\.lean: changed after the seal was written/u);
   const cli = spawnSync("node", [path.join(ROOT, "checks", "check_paper.mjs"), dir], { encoding: "utf8" });
   assert.equal(cli.status, 1);
-  assert.match(cli.stderr, /^cns_simple_dml: lean\/Check\.lean: changed after the seal was written$/mu);
+  assert.match(cli.stderr, /^tbs_neural_causal_pi: lean\/Check\.lean: changed after the seal was written$/mu);
 });
 
 test("the seal file edited: its code no longer matches", () => {
@@ -59,7 +59,7 @@ test("a missing file: required, and named by the seal", () => {
 test("the folder's name is not the bundle's slug", () => {
   const dir = copyFixture("another_paper");
   const problems = checkPaper(dir);
-  has(problems, /page\/page\.json: its slug "cns_simple_dml" is not the folder's \(another_paper\)/u);
+  has(problems, /page\/page\.json: its slug "tbs_neural_causal_pi" is not the folder's \(another_paper\)/u);
   has(problems, /f4_seal\.json: its slug/u);
 });
 
@@ -132,17 +132,17 @@ test("a paper without its corrected source", () => {
   rmSync(path.join(dir, "corrected_paper"), { recursive: true });
   const problems = checkPaper(dir);
   has(problems, /^corrected_paper: missing$/u);
-  has(problems, /corrected_paper\/main\.tex: missing from the bundle/u);
+  has(problems, /corrected_paper\/Main\.tex: missing from the bundle/u);
 });
 
 test("what a browser would run is refused, an SVG figure too; a file over the host's limit is", () => {
   const dir = copyFixture();
   for (const f of ["a.xml", "b.XHT", "c.htm", "d.mjs"]) writeFileSync(path.join(dir, "corrected_paper", f), "x");
   writeFileSync(path.join(dir, "corrected_paper", "fig.svg"), "<svg xmlns=\"http://www.w3.org/2000/svg\"/>");
-  truncateSync(path.join(dir, "corrected_paper", "main.pdf"), MAX_FILE_BYTES + 1);
+  truncateSync(path.join(dir, "corrected_paper", "Main.pdf"), MAX_FILE_BYTES + 1);
   const problems = checkPaper(dir);
   for (const [f, ext] of [["a.xml", "xml"], ["b.XHT", "xht"], ["c.htm", "htm"], ["d.mjs", "mjs"]]) has(problems, new RegExp(`"corrected_paper/${f}": a \\.${ext} file is not part of a bundle`, "u"));
   has(problems, /"corrected_paper\/fig\.svg": a \.svg file is not part of a bundle/u);
-  has(problems, /"corrected_paper\/main\.pdf": 25165825 bytes, over the limit of 25165824 for one file/u);
+  has(problems, /"corrected_paper\/Main\.pdf": 25165825 bytes, over the limit of 25165824 for one file/u);
   assert.equal(MAX_FILES, 3000);
 });

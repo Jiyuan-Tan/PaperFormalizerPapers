@@ -39,8 +39,8 @@
 //   filter "Rests on cited results"   cited > 0, or page.json buckets.conditional > 0
 //   tokens                page.json tokens (the run's own ledger: total tokens and model calls of
 //                         the pipeline's stages; absent in a bundle written before it was recorded)
-//   What the check found  REPORT.md: its first paragraph after the verdict line (the report's own
-//                         count sentence). The bundle holds no short prose headline of the main
+//   What the check found  REPORT.md: its count sentence ("N result(s) of the paper were examined…"),
+//                         after the verdict line and the paper's grade. The bundle holds no short prose headline of the main
 //                         correction, so none is shown.
 //   Findings fold         one line per result with state === "error": its name (bundle.json
 //                         names[id], else kind + label), where the repair changes it (repair), and
@@ -113,13 +113,15 @@ export function paperData(dir, slug) {
   const sharedAt = /^\d{4}-\d{2}-\d{2}/u.test(text(share.shared_at)) && !Number.isNaN(Date.parse(share.shared_at)) ? share.shared_at : null;
   const pdf = href(obj(page.paper).pdf);
 
-  // REPORT.md: the paragraph after the verdict line
+  // REPORT.md: the count sentence after the verdict line
   let summary = "";
   const reportFile = path.join(dir, "REPORT.md");
   if (isFile(reportFile)) {
     const head = readFileSync(reportFile, "utf8").split(/^## /mu)[0].split(/\n\s*\n/u).map((p) => p.trim());
     const at = head.findIndex((p) => p.startsWith("**Verdict"));
-    summary = plain(head.slice(at + 1).find((p) => p && !p.startsWith(">") && !p.startsWith("#")) ?? "", 700);
+    // the count sentence; a report with the paper's grade (`**Paper: …**` and its list) puts it after that
+    const after = head.slice(at + 1).filter((p) => p && !p.startsWith(">") && !p.startsWith("#"));
+    summary = plain(after.find((p) => /^\d+ result\(s\) of the paper were examined/u.test(p)) ?? after.find((p) => !p.startsWith("**")) ?? "", 700);
   }
 
   return {
