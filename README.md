@@ -1,6 +1,6 @@
-# TheoremChecker — Shared Papers
+# PaperFormalizer — Shared Papers
 
-The public registry of papers checked by [TheoremChecker](https://github.com/Jiyuan-Tan/TheoremChecker),
+The public registry of papers checked by [PaperFormalizer](https://github.com/Jiyuan-Tan/PaperFormalizer),
 a tool that referees a paper's statements, repairs the errors it finds and proves the corrected
 results in Lean 4. Each paper here is one folder, `papers/<slug>/`, holding the bundle a finished run
 wrote. The site is built from those folders.
@@ -9,7 +9,7 @@ Nobody clones this repository to share a paper: the tool does it through GitHub.
 
 ## How a paper gets in
 
-1. On a finished run, the user presses **Share** on the paper's page (or runs `theoremchecker share`).
+1. On a finished run, the user presses **Share** on the paper's page (or runs `paperformalizer share`).
 2. The tool uploads the bundle to the Worker (`worker/`) and opens its page, where the user signs in
    with GitHub — identity only: the sign-in asks for no permission — and confirms.
 3. The Worker sends the repository a `share` event; `.github/workflows/ingest.yml` runs
@@ -24,7 +24,7 @@ A pull request a person opens by hand is checked by `.github/workflows/check.yml
 
 The seal is a checksum, not a signature: everything in it is computed on the sharer's machine, so
 any GitHub account can fabricate a bundle that is consistent with its own seal and passes the
-check — with content TheoremChecker never produced. The check keeps a folder well-formed and
+check — with content PaperFormalizer never produced. The check keeps a folder well-formed and
 harmless to serve; it does not vouch for what the folder says.
 
 So a share is published without the owner only when its sharer is named in the repository
@@ -104,7 +104,7 @@ an executable file.
 The seal check in `checks/seal.mjs` mirrors the tool's `tools/src/verify/f4_seal.ts`. The tool's own
 command is the reference:
 
-    theoremchecker seal papers/<slug>
+    paperformalizer seal papers/<slug>
 
 ## What the check does NOT prove
 
@@ -140,11 +140,11 @@ drawn, and for a browser that runs no script.
 
 The paper's page is drawn in the browser from `page/page.json` by the local UI's own `app.js`, in its
 snapshot mode, with its stylesheet, KaTeX, pdf.js (PDF figures) and DOMPurify. These files are
-copied from TheoremChecker, never edited here:
+copied from PaperFormalizer, never edited here:
 
-    node <TheoremChecker>/tools/scripts/sync_viewer.mjs <this repository>
+    node <PaperFormalizer>/tools/scripts/sync_viewer.mjs <this repository>
 
-`site/viewer/VERSION` names the TheoremChecker commit they come from; run the command again after a
+`site/viewer/VERSION` names the PaperFormalizer commit they come from; run the command again after a
 change to the UI's paper page. The build refuses to run without the viewer.
 
 ### GitHub Pages
@@ -215,7 +215,7 @@ manual step if a paper must disappear entirely.
 
 ## Sharing through the Worker
 
-A sharer needs only a GitHub account: their TheoremChecker uploads the bundle to the share worker
+A sharer needs only a GitHub account: their PaperFormalizer uploads the bundle to the share worker
 (`worker/`, a Cloudflare Worker), they sign in with GitHub in the browser (identity only, "public data
 only" on the consent screen), confirm on the worker's page, and the worker dispatches this
 repository's ingest workflow, which checks the bundle and adds the paper. `worker/README.md` says

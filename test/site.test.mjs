@@ -19,7 +19,7 @@ test("the index lists the fixture paper with its badges", () => {
     { total: 29, proved: 20, corrections: 15, refuted: 2, clarifications: 237, cited: 7 },
   );
   for (const s of [
-    "TheoremChecker · Verified papers",
+    "PaperFormalizer · Verified papers",
     '<h2><a href="papers/tbs_neural_causal_pi/">Consistency of Neural Causal Partial Identification</a></h2>',
     "Jiyuan Tan, Jose Blanchet, Vasilis Syrgkanis",
     "shared 2026-10-19 by @fixture-user",
@@ -48,7 +48,7 @@ test("the index lists the fixture paper with its badges", () => {
   for (const s of [
     '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
     '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
-    "<title>Consistency of Neural Causal Partial Identification — TheoremChecker</title>",
+    "<title>Consistency of Neural Causal Partial Identification — PaperFormalizer</title>",
     'href="REPORT.md"', 'href="corrected_paper/Main.pdf"', 'href="lean/"', "20 of 29 results proved in Lean 4",
   ]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
   assert.ok(!paper.includes('href="MATCH.md"'), "the result-by-Lean file is not offered");

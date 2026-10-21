@@ -6,7 +6,7 @@ The one server-side piece of sharing: `worker.js`, a Cloudflare Worker at
 
 ## What it does
 
-1. **Receives a bundle.** The sharer's TheoremChecker sends a manifest (`POST /api/uploads`: slug,
+1. **Receives a bundle.** The sharer's PaperFormalizer sends a manifest (`POST /api/uploads`: slug,
    title, authors, arXiv id, every file's path, size and sha256, the archive's size and sha256) and
    gets back an upload id, a poll token, a four-letter check code and a claim link. It then sends the
    archive (`PUT /api/uploads/<id>`, with the poll token). R2 stores it and checks its sha256.
@@ -36,15 +36,15 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 1. **R2.** Enable R2 in the Cloudflare dashboard once (R2 → enable; the free tier needs a card on
    file). Then:
 
-       npx wrangler r2 bucket create theoremchecker-share
-       npx wrangler r2 bucket lifecycle add theoremchecker-share bundles-2d bundles/ --expire-days 2 --force
-       npx wrangler r2 bucket lifecycle add theoremchecker-share meta-30d meta/ --expire-days 30 --force
+       npx wrangler r2 bucket create paperformalizer-share
+       npx wrangler r2 bucket lifecycle add paperformalizer-share bundles-2d bundles/ --expire-days 2 --force
+       npx wrangler r2 bucket lifecycle add paperformalizer-share meta-30d meta/ --expire-days 30 --force
 
    The worker deletes each archive itself once ingested; the rules sweep what is left behind.
 
 2. **The OAuth App.** GitHub → Settings → Developer settings → **OAuth Apps** (not GitHub Apps) →
    New OAuth App:
-   - Homepage URL: `https://jiyuan-tan.github.io/TheoremCheckerPapers/`
+   - Homepage URL: `https://jiyuan-tan.github.io/PaperFormalizerPapers/`
    - Authorization callback URL: `https://theoremchecker-share.comments-worker.workers.dev/auth/callback`
    - Device flow: off.
 
@@ -53,7 +53,7 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 
 3. **The dispatch token.** GitHub → Settings → Developer settings → Fine-grained tokens → Generate:
    resource owner `Jiyuan-Tan`, repository access "Only select repositories" →
-   `TheoremCheckerPapers`, permissions **Contents: Read and write** (Metadata: read is added by
+   `PaperFormalizerPapers`, permissions **Contents: Read and write** (Metadata: read is added by
    itself), nothing else. Note its expiry date: sharing stops when it expires, until a new one is
    set.
 
@@ -67,7 +67,7 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 
    The INGEST_SECRET value is also the registry's Actions secret of that name:
 
-       printf %s "$S" | gh secret set INGEST_SECRET -R Jiyuan-Tan/TheoremCheckerPapers; unset S
+       printf %s "$S" | gh secret set INGEST_SECRET -R Jiyuan-Tan/PaperFormalizerPapers; unset S
 
 5. **Deploy:** `npx wrangler deploy`. Check it: `curl https://theoremchecker-share.comments-worker.workers.dev/`
    answers a one-line page.

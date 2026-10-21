@@ -1,7 +1,7 @@
 // The seal check of a paper folder: recompute what `f4_seal.json` names and compare.
 //
-// This MIRRORS the tool's checker, TheoremChecker `tools/src/verify/f4_seal.ts` (`F4SealSchema`,
-// `codeOf`, `checkF4Seal`, `runSealCli`), which is the reference: `theoremchecker seal <dir>` must
+// This MIRRORS the tool's checker, PaperFormalizer `tools/src/verify/f4_seal.ts` (`F4SealSchema`,
+// `codeOf`, `checkF4Seal`, `runSealCli`), which is the reference: `paperformalizer seal <dir>` must
 // agree with it on every bundle. Keep the two in step when the seal's version changes.
 //
 // What it establishes: the seal file is whole (its code is the hash of its own contents), it records

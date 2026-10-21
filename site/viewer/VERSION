@@ -1,6 +1,6 @@
-TheoremChecker 5ae29ee460116c32408f06d96fbea20ac1ddd8fb
+PaperFormalizer 1226452e95f13298e36c749ed185d4d1ae036546
 katex 0.16.11
 pdfjs-dist 4.10.38
 dompurify 3.2.6
 
-Copied by tools/scripts/sync_viewer.mjs of TheoremChecker: do not edit these files here.
+Copied by tools/scripts/sync_viewer.mjs of PaperFormalizer: do not edit these files here.

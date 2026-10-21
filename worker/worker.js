@@ -1,7 +1,7 @@
 /**
- * TheoremChecker share worker — the one server-side piece of sharing a paper.
+ * PaperFormalizer share worker — the one server-side piece of sharing a paper.
  *
- * A sharer's TheoremChecker uploads a finished run's bundle here; the sharer then
+ * A sharer's PaperFormalizer uploads a finished run's bundle here; the sharer then
  * signs in with GitHub in their browser, sees what is about to be published under
  * their name, and confirms. The worker dispatches the registry's ingest workflow,
  * which reads the bundle back from here, checks it and adds it to the registry
@@ -49,7 +49,7 @@ const STATE_TTL_MS = 10 * 60 * 1000;
 const CHECK_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no O, I, 1, 0
 const STATUSES = ["awaiting_upload", "awaiting_sign_in", "submitted", "published", "review", "refused", "expired"];
 const RESULT_KINDS = ["published", "review", "refused"];
-const UA = "theoremchecker-share-worker";
+const UA = "paperformalizer-share-worker";
 const MANIFEST_BYTES = 2 * MiB;
 
 export default {
@@ -94,7 +94,7 @@ async function route(request, env) {
     return callback(request, env, url);
   }
   if (p === "/auth/logout" && m === "GET") return logout(url);
-  if (p === "/" && m === "GET") return html("TheoremChecker share", `<p>This address receives papers shared from TheoremChecker. The shared papers are at <a href="${esc(env.SITE_URL)}">${esc(env.SITE_URL)}</a>.</p>`);
+  if (p === "/" && m === "GET") return html("PaperFormalizer share", `<p>This address receives papers shared from PaperFormalizer. The shared papers are at <a href="${esc(env.SITE_URL)}">${esc(env.SITE_URL)}</a>.</p>`);
   return json({ error: "not found" }, 404);
 }
 
@@ -289,7 +289,7 @@ async function poll(request, env, id) {
 
 async function claimPage(request, env, id) {
   const meta = await readMeta(env, id);
-  if (!meta) return html("Unknown share", "<p>No share has this address. It may have expired; start the share again from your TheoremChecker page.</p>", 404);
+  if (!meta) return html("Unknown share", "<p>No share has this address. It may have expired; start the share again from your PaperFormalizer page.</p>", 404);
   const session = await readSession(request, env);
   if (!session) return startSignIn(env, request, id);
   return claimView(env, request, meta, session);
@@ -313,7 +313,7 @@ async function claimView(env, request, meta, session, note = "") {
   const csrf = await csrfToken(env, session, meta.id);
   const body = `${note ? `<p class="warn">${esc(note)}</p>` : ""}${who}${facts}
 <div class="warn"><p><b>Sharing publishes this paper.</b> The corrected paper's TeX source and PDF, its Lean code, the report and the page are made public at <a href="${esc(paperUrl)}">${esc(paperUrl)}</a>, under your GitHub name <b>@${esc(session.login)}</b>.</p>
-<p>Continue only if you started this share yourself, on your own TheoremChecker page, and the check code there reads <b class="code">${esc(meta.check_code)}</b>.</p></div>
+<p>Continue only if you started this share yourself, on your own PaperFormalizer page, and the check code there reads <b class="code">${esc(meta.check_code)}</b>.</p></div>
 <form method="post" action="/claim/${esc(meta.id)}"><input type="hidden" name="csrf" value="${esc(csrf)}"><button type="submit">Share publicly as @${esc(session.login)}</button></form>`;
   return html("Share this paper?", body);
 }
@@ -321,12 +321,12 @@ async function claimView(env, request, meta, session, note = "") {
 function statusText(meta, paperUrl) {
   const r = meta.result || {};
   switch (meta.status) {
-    case "awaiting_upload": return "<p>The upload has not finished yet. Wait for your TheoremChecker page to finish sending, then reload this page.</p>";
-    case "submitted": return "<p><b>Submitted.</b> The registry is checking the bundle now. You can close this tab; your TheoremChecker page shows the result.</p>";
+    case "awaiting_upload": return "<p>The upload has not finished yet. Wait for your PaperFormalizer page to finish sending, then reload this page.</p>";
+    case "submitted": return "<p><b>Submitted.</b> The registry is checking the bundle now. You can close this tab; your PaperFormalizer page shows the result.</p>";
     case "published": return `<p><b>Published</b> at <a href="${esc(r.url || paperUrl)}">${esc(r.url || paperUrl)}</a>.</p>`;
     case "review": return `<p><b>Checked, waiting for the owner's review.</b>${r.pr_url ? ` The pull request: <a href="${esc(r.pr_url)}">${esc(r.pr_url)}</a>.` : ""}</p>`;
     case "refused": return `<p><b>Refused</b> by the registry's checks:</p><ul>${(r.problems || []).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
-    case "expired": return "<p>This share has expired (an upload waits an hour for sign-in). Start the share again from your TheoremChecker page.</p>";
+    case "expired": return "<p>This share has expired (an upload waits an hour for sign-in). Start the share again from your PaperFormalizer page.</p>";
     default: return `<p>Status: ${esc(meta.status)}.</p>`;
   }
 }
@@ -350,7 +350,7 @@ async function callback(request, env, url) {
   const state = await verify(env, url.searchParams.get("state") || "");
   const nonce = cookie(request, "tc_oauth");
   if (!state || state.k !== "state" || !(state.exp > Date.now()) || !ID_RE.test(String(state.id))) {
-    return html("Sign-in failed", "<p>The sign-in link is invalid or has expired. Go back to your TheoremChecker page and open the share link again.</p>", 400);
+    return html("Sign-in failed", "<p>The sign-in link is invalid or has expired. Go back to your PaperFormalizer page and open the share link again.</p>", 400);
   }
   if (!nonce || !timingSafeEqualStr(nonce, String(state.nonce))) {
     return html("Sign-in failed", "<p>This sign-in was not started in this browser. Open the share link again.</p>", 400);
@@ -622,7 +622,7 @@ function json(obj, status = 200, extra = {}) {
 const PAGE_CSS = "body{font-family:system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1rem;color:#1a1a1a;background:#fdfcfa;line-height:1.5}table{border-collapse:collapse;margin:1rem 0}th{text-align:left;padding:.2rem 1rem .2rem 0;color:#555;font-weight:500}td{padding:.2rem 0}.warn{background:#fff5e6;border:1px solid #f0c27b;border-radius:6px;padding:.5rem 1rem}.code{font-family:ui-monospace,monospace;letter-spacing:.15em}button{font-size:1rem;padding:.6rem 1.2rem;border-radius:6px;border:1px solid #1f6f43;background:#1f7a4a;color:#fff;cursor:pointer}.who{color:#555}@media (prefers-color-scheme:dark){body{background:#1b1b1b;color:#eee}th,.who{color:#aaa}.warn{background:#3a2c14;border-color:#7a5a20}a{color:#8ab4f8}}";
 
 function html(title, body, status = 200) {
-  const page = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><style>${PAGE_CSS}</style></head><body><h1>${esc(title)}</h1>${body}<p class="who"><small>TheoremChecker shared papers</small></p></body></html>`;
+  const page = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><style>${PAGE_CSS}</style></head><body><h1>${esc(title)}</h1>${body}<p class="who"><small>PaperFormalizer shared papers</small></p></body></html>`;
   return new Response(page, {
     status,
     headers: {

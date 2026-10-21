@@ -2,7 +2,7 @@
 // Builds the static site, dist/, from papers/*/ :   node site/build.mjs [--papers <dir>] [--out <dir>]
 //
 //   dist/index.html                the main page: every paper, newest first (its script: dist/site.js)
-//   dist/viewer/                   the paper viewer: site/viewer/ as TheoremChecker's
+//   dist/viewer/                   the paper viewer: site/viewer/ as PaperFormalizer's
 //                                  tools/scripts/sync_viewer.mjs copied it (never edited here)
 //   dist/papers/<slug>/            the paper's folder as shared, plus
 //   dist/papers/<slug>/index.html  the paper's page: the viewer draws it from page/page.json, as the
@@ -55,7 +55,7 @@ import { fileURLToPath } from "node:url";
 import { SLUG } from "../checks/check_paper.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const TOOL_URL = "https://github.com/Jiyuan-Tan/TheoremChecker";
+const TOOL_URL = "https://github.com/Jiyuan-Tan/PaperFormalizer";
 const VIEWER = path.join(ROOT, "site", "viewer");
 /** The policy of every page: scripts and data of the site only, no form, no <base>, no plugin. */
 export const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'";
@@ -346,12 +346,12 @@ const head = (title, extra = "") => `<!doctype html>
 export function indexHtml(papers) {
   const sorted = [...papers].sort((a, b) => (a.sharedAt ?? "") < (b.sharedAt ?? "") ? 1 : (a.sharedAt ?? "") > (b.sharedAt ?? "") ? -1 : a.slug < b.slug ? -1 : 1);
   const pill = (set, value, label, on) => `<button type="button" class="pill" data-set="${set}" data-value="${value}" aria-pressed="${on}">${label}</button>`;
-  return `${head("TheoremChecker — checked papers", '\n<script src="site.js"></script>')}
+  return `${head("PaperFormalizer — checked papers", '\n<script src="site.js"></script>')}
 <body>
 <div class="wrap">
 
   <header>
-    <div class="kicker">TheoremChecker · Verified papers</div>
+    <div class="kicker">PaperFormalizer · Verified papers</div>
     <nav>
       <span class="here">Checked papers</span>
       <a href="#how">How a paper is checked</a>
@@ -359,8 +359,8 @@ export function indexHtml(papers) {
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
     <h1>Checked papers</h1>
-    <p class="lede">TheoremChecker checks the theorems of a paper. It reads each theorem, lemma and assumption against the paper's own proof, fixes the errors it finds while keeping each result as close to the original as it can, and then proves the corrected statements in Lean 4.</p>
-    <p class="lede">The papers below were checked and shared by people who ran TheoremChecker on them. On a paper's page, the findings sit next to the text they refer to, and each result links to its Lean statement.</p>
+    <p class="lede">PaperFormalizer checks the theorems of a paper. It reads each theorem, lemma and assumption against the paper's own proof, fixes the errors it finds while keeping each result as close to the original as it can, and then proves the corrected statements in Lean 4.</p>
+    <p class="lede">The papers below were checked and shared by people who ran PaperFormalizer on them. On a paper's page, the findings sit next to the text they refer to, and each result links to its Lean statement.</p>
   </header>
 
   <section id="share" class="share">
@@ -399,7 +399,7 @@ export function indexHtml(papers) {
 
   <section id="how" class="how">
     <h2>How a paper is checked, and shared</h2>
-    <p>TheoremChecker reads a paper's LaTeX source. Every result is refereed against the paper's own proof; an error is repaired by the smallest change that keeps the claim; the corrected statements are stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
+    <p>PaperFormalizer reads a paper's LaTeX source. Every result is refereed against the paper's own proof; an error is repaired by the smallest change that keeps the claim; the corrected statements are stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
     <p>Pressing <em>Share</em> on a finished run sends its bundle and opens a GitHub sign-in that asks for your public name and nothing else. You confirm the share on the page that follows; an automatic check then confirms the bundle is complete and unchanged since the run wrote it, and the paper appears here, after the registry owner's review unless you are a trusted sharer.</p>
   </section>
 
@@ -440,7 +440,7 @@ function paperSummary(p) {
 
 /** The paper's page, dist/papers/<slug>/index.html: the viewer's page (`viewer/page.html`) for it. */
 export function paperHtml(p, template) {
-  const fields = { CSP: CSP_VIEWER, TITLE: esc(`${p.title} — TheoremChecker`), VIEWER: "../../viewer/", HOME: "../../", FALLBACK: paperSummary(p) };
+  const fields = { CSP: CSP_VIEWER, TITLE: esc(`${p.title} — PaperFormalizer`), VIEWER: "../../viewer/", HOME: "../../", FALLBACK: paperSummary(p) };
   // one pass: a field's value is never read for another field
   return template.replace(/\{\{(CSP|TITLE|VIEWER|HOME|FALLBACK)\}\}/gu, (_, k) => fields[k]);
 }
@@ -467,7 +467,7 @@ function leanIndexHtml(p, files) {
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">TheoremChecker · Verified papers</div>
+    <div class="kicker">PaperFormalizer · Verified papers</div>
     <nav><a href="../../../">Checked papers</a><a href="../">${esc(p.title)}</a></nav>
     <h1>Lean code</h1>
     <p class="lede">A standalone Lake project: the paper's Lean, the toolkit modules it imports, and <span class="mono">Check.lean</span>.</p>
@@ -484,7 +484,7 @@ function leanIndexHtml(p, files) {
 /** Builds the site of the papers under `papersDir` into `outDir`; returns the papers it shows. */
 export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.join(ROOT, "dist"), viewerDir = VIEWER, log = console.log } = {}) {
   const pageFile = path.join(viewerDir, "page.html");
-  if (!isFile(pageFile)) throw new Error(`${pageFile} is missing: copy the viewer with TheoremChecker's \`node tools/scripts/sync_viewer.mjs <this repository>\``);
+  if (!isFile(pageFile)) throw new Error(`${pageFile} is missing: copy the viewer with PaperFormalizer's \`node tools/scripts/sync_viewer.mjs <this repository>\``);
   const template = readFileSync(pageFile, "utf8");
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(path.join(outDir, "papers"), { recursive: true });

@@ -1,7 +1,7 @@
 {
-  "name": "theoremchecker-papers",
+  "name": "paperformalizer-papers",
   "private": true,
-  "description": "TheoremChecker — Shared Papers: the registry of papers checked by TheoremChecker, and the site built from it.",
+  "description": "PaperFormalizer — Shared Papers: the registry of papers checked by PaperFormalizer, and the site built from it.",
   "type": "module",
   "engines": { "node": ">=20" },
   "scripts": {

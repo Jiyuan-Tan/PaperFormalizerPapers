@@ -1,9 +1,9 @@
-# TheoremChecker share worker — deploy with (from this directory):
+# PaperFormalizer share worker — deploy with (from this directory):
 #   npx wrangler deploy
 # Before the first deploy, see README.md here: the R2 bucket, its lifecycle rules, the OAuth App and
 # the four secrets (set once each with `npx wrangler secret put <NAME>`):
 #   GITHUB_CLIENT_SECRET   the OAuth App's client secret
-#   GITHUB_DISPATCH_TOKEN  fine-grained PAT: repository Jiyuan-Tan/TheoremCheckerPapers only, Contents read & write
+#   GITHUB_DISPATCH_TOKEN  fine-grained PAT: repository Jiyuan-Tan/PaperFormalizerPapers only, Contents read & write
 #   SESSION_SECRET         random, e.g. `openssl rand -base64 48`
 #   INGEST_SECRET          random; the same value is the registry's Actions secret INGEST_SECRET
 name = "theoremchecker-share"
@@ -16,12 +16,12 @@ workers_dev = true
 # "Act on your behalf" whatever its permissions. Authorized with no `scope`, the OAuth App's says
 # "public data only". Its callback URL: https://theoremchecker-share.comments-worker.workers.dev/auth/callback
 GITHUB_CLIENT_ID = "Ov23li1PzsFTwbTuALRi"
-REGISTRY = "Jiyuan-Tan/TheoremCheckerPapers"
-SITE_URL = "https://jiyuan-tan.github.io/TheoremCheckerPapers/"
+REGISTRY = "Jiyuan-Tan/PaperFormalizerPapers"
+SITE_URL = "https://jiyuan-tan.github.io/PaperFormalizerPapers/"
 WORKER_URL = "https://theoremchecker-share.comments-worker.workers.dev/"
 
 # One bucket: meta/<id>.json (an upload's manifest, status and sharer) and bundles/<id>.tar.gz.
-# Create it with `npx wrangler r2 bucket create theoremchecker-share`.
+# Create it with `npx wrangler r2 bucket create paperformalizer-share`.
 [[r2_buckets]]
 binding = "SHARES"
 bucket_name = "theoremchecker-share"
