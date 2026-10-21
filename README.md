@@ -1,8 +1,8 @@
 # PaperFormalizer — Shared Papers
 
-The public registry of papers checked by [PaperFormalizer](https://github.com/Jiyuan-Tan/PaperFormalizer),
-a tool that referees a paper's statements, repairs the errors it finds and proves the corrected
-results in Lean 4. Each paper here is one folder, `papers/<slug>/`, holding the bundle a finished run
+The public registry of papers formalized with [PaperFormalizer](https://github.com/Jiyuan-Tan/PaperFormalizer),
+a tool that helps authors turn a paper into a Lean-verified version: it audits the paper's statements,
+proposes repairs for the author to decide, and proves the results in Lean 4. Each paper here is one folder, `papers/<slug>/`, holding the bundle a finished run
 wrote. The site is built from those folders.
 
 Nobody clones this repository to share a paper: the tool does it through GitHub.

@@ -19,28 +19,28 @@ test("the index lists the fixture paper with its badges", () => {
     { total: 29, proved: 20, corrections: 15, refuted: 2, clarifications: 237, cited: 7 },
   );
   for (const s of [
-    "PaperFormalizer · Verified papers",
+    "PaperFormalizer · Formalized papers",
     '<h2><a href="papers/tbs_neural_causal_pi/">Consistency of Neural Causal Partial Identification</a></h2>',
     "Jiyuan Tan, Jose Blanchet, Vasilis Syrgkanis",
     "shared 2026-10-19 by @fixture-user",
-    "2 results refuted, no repair keeps them",
+    "2 results without a repair that holds",
     "20 of 29 results proved in Lean 4",
-    "15 corrections",
+    "15 repairs",
     "237 clarifications",
     "7 cited results taken as stated",
     // the count sentence, not the paper's grade above it
-    "<strong>What the check found.</strong> 19 result(s) of the paper were examined",
-    'href="papers/tbs_neural_causal_pi/corrected_paper/Main.pdf">Corrected PDF',
+    "<strong>Summary.</strong> 19 result(s) of the paper were examined",
+    'href="papers/tbs_neural_causal_pi/corrected_paper/Main.pdf">Revised PDF',
     'href="papers/tbs_neural_causal_pi/lean/">Lean code',
     'href="papers/tbs_neural_causal_pi/#report">Full report',
     "seal 4869aa364e91",
-    "Findings (17)",
-    "<li>Theorem 3.3 — statement corrected, proved in Lean</li>",
-    "<li>Proposition B.2 — statement unchanged, proof corrected, proved in Lean</li>",
-    "<li>lemma lem:sinkhorn-luise-proposition-1 — refuted, no repair, not proved in Lean</li>",
+    "Revisions (17)",
+    "<li>Theorem 3.3 — statement revised, proved in Lean</li>",
+    "<li>Proposition B.2 — proof revised, statement unchanged, proved in Lean</li>",
+    "<li>lemma lem:sinkhorn-luise-proposition-1 — no repair that holds, not proved in Lean</li>",
     'data-flags="repaired cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
-  assert.ok(!index.includes("No error found</span>"));
+  assert.ok(!index.includes("No changes needed</span>"));
   assert.ok(!index.includes(">Subject<"), "no paper records a subject: no Subject button");
   // the paper's folder is copied, with its page (the viewer's, drawn from page/page.json, over a
   // plain summary) and the list of the Lean files
@@ -107,7 +107,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   assert.ok(index.includes("<li>Theorem &lt;script&gt;"));
   assert.ok(index.includes("stat.ML &lt;script&gt;") && index.includes(">Subject<"));
   assert.ok(!index.includes("arXiv:") && !index.includes("by @") && !index.includes('class="seal"'), "malformed id, login and code are left out");
-  assert.ok(!index.includes("Corrected PDF"));
+  assert.ok(!index.includes("Revised PDF"));
   assert.equal(esc(`<a b="c" d='e'>&`), "&lt;a b=&quot;c&quot; d=&#39;e&#39;&gt;&amp;");
   assert.equal(plain("A \\emph{simple} bound \\label{x}for $n$~points"), "A simple bound for n points");
 });
@@ -129,12 +129,12 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
   const { index, papers } = site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
   for (const s of [
-    "3 results refuted, no repair keeps them",
+    "3 results without a repair that holds",
     "19 of 29 results proved in Lean 4",
-    "14 corrections",
+    "14 repairs",
     '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-19 by @fixture-user</',
-    "refuted, no repair, not proved in Lean</li>",
-    '<span class="badge grey">No error found</span>',
+    "no repair that holds, not proved in Lean</li>",
+    '<span class="badge grey">No changes needed</span>',
     'data-flags="clean cited"',
     // the run's token total, when the bundle records it (the fixture paper's does not: no badge)
     '1,200,500,000 tokens in 412 model calls, as the run\'s own ledger counted them">1.2B tokens</span>',

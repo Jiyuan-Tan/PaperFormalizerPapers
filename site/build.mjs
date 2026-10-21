@@ -30,7 +30,7 @@
 //   k of n proved         page.json results: n = results.length (the paper's results and those a
 //                         correction split off them), k = those with proved === true
 //   corrections           results with state === "error" and repair "statement" or "proof"
-//   refuted, no repair    results with state === "error" and any other repair ("none")
+//   without a repair      results with state === "error" and any other repair ("none")
 //   "No error found"      no result has state === "error"
 //   clarifications        page.json paper.comments whose kind starts with "reading" (readings of a
 //                         statement, of a symbol, and the owner's)
@@ -144,7 +144,7 @@ export function paperData(dir, slug) {
     summary,
     findings: errors.map((r) => ({
       name: plain(names[r.id], 80) || plain(`${text(r.kind)} ${text(r.label) || text(r.id)}`, 80),
-      outcome: r.repair === "statement" ? "statement corrected" : r.repair === "proof" ? "statement unchanged, proof corrected" : "refuted, no repair",
+      outcome: r.repair === "statement" ? "statement revised" : r.repair === "proof" ? "proof revised, statement unchanged" : "no repair that holds",
       lean: r.proved === true ? "proved in Lean" : "not proved in Lean",
     })),
     pdf: pdf && isFile(path.join(dir, ...obj(page.paper).pdf.split("/"))) ? pdf : null,
@@ -159,10 +159,10 @@ const CHECK = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" strok
 
 function badges(p) {
   const out = [];
-  if (p.refuted > 0) out.push(`<span class="badge red">${count(p.refuted, "result")} refuted, no repair keeps ${p.refuted === 1 ? "it" : "them"}</span>`);
+  if (p.refuted > 0) out.push(`<span class="badge red">${count(p.refuted, "result")} without a repair that holds</span>`);
   if (p.total > 0) out.push(`<span class="badge green">${CHECK}${p.proved} of ${count(p.total, "result")} proved in Lean 4</span>`);
-  if (p.corrections > 0) out.push(`<span class="badge amber">${count(p.corrections, "correction")}</span>`);
-  if (p.errors === 0) out.push('<span class="badge grey">No error found</span>');
+  if (p.corrections > 0) out.push(`<span class="badge amber">${count(p.corrections, "repair")}</span>`);
+  if (p.errors === 0) out.push('<span class="badge grey">No changes needed</span>');
   if (p.clarifications > 0) out.push(`<span class="badge blue">${count(p.clarifications, "clarification")}</span>`);
   if (p.cited > 0) out.push(`<span class="badge grey">${count(p.cited, "cited result")} taken as stated</span>`);
   if (p.tokens) out.push(`<span class="badge grey" title="${p.tokens.total.toLocaleString("en-US")} tokens${p.tokens.calls ? ` in ${p.tokens.calls.toLocaleString("en-US")} model calls` : ""}, as the run's own ledger counted them">${compact(p.tokens.total)} tokens</span>`);
@@ -192,17 +192,17 @@ function entry(p, featured) {
     ${p.authors ? `<div class="authors">${esc(p.authors)}</div>` : ""}
     <div class="meta">${meta(p)}</div>
     ${badges(p)}
-    ${p.summary ? `<p class="found"><strong>What the check found.</strong> ${esc(p.summary)}</p>` : ""}
+    ${p.summary ? `<p class="found"><strong>Summary.</strong> ${esc(p.summary)}</p>` : ""}
     <div class="actions">
-      <a class="main" href="${base}">Read with findings</a>
-      ${p.pdf ? `<a href="${base}${p.pdf}">Corrected PDF</a>` : ""}
+      <a class="main" href="${base}">Read the paper</a>
+      ${p.pdf ? `<a href="${base}${p.pdf}">Revised PDF</a>` : ""}
       ${p.lean ? `<a href="${base}lean/">Lean code</a>` : ""}
       ${p.report ? `<a href="${base}#report">Full report</a>` : ""}
       <span class="grow"></span>
       ${sealSpan(p)}
     </div>
     ${p.findings.length > 0 ? `<details>
-      <summary>Findings (${p.findings.length})</summary>
+      <summary>Revisions (${p.findings.length})</summary>
       <ul>
         ${p.findings.map((f) => `<li>${esc(f.name)} — ${f.outcome}, ${f.lean}</li>`).join("\n        ")}
       </ul>
@@ -346,27 +346,27 @@ const head = (title, extra = "") => `<!doctype html>
 export function indexHtml(papers) {
   const sorted = [...papers].sort((a, b) => (a.sharedAt ?? "") < (b.sharedAt ?? "") ? 1 : (a.sharedAt ?? "") > (b.sharedAt ?? "") ? -1 : a.slug < b.slug ? -1 : 1);
   const pill = (set, value, label, on) => `<button type="button" class="pill" data-set="${set}" data-value="${value}" aria-pressed="${on}">${label}</button>`;
-  return `${head("PaperFormalizer — checked papers", '\n<script src="site.js"></script>')}
+  return `${head("PaperFormalizer — formalized papers", '\n<script src="site.js"></script>')}
 <body>
 <div class="wrap">
 
   <header>
-    <div class="kicker">PaperFormalizer · Verified papers</div>
+    <div class="kicker">PaperFormalizer · Formalized papers</div>
     <nav>
-      <span class="here">Checked papers</span>
-      <a href="#how">How a paper is checked</a>
+      <span class="here">Formalized papers</span>
+      <a href="#how">How a paper is formalized</a>
       <a href="#share">Share a paper</a>
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
-    <h1>Checked papers</h1>
-    <p class="lede">PaperFormalizer checks the theorems of a paper. It reads each theorem, lemma and assumption against the paper's own proof, fixes the errors it finds while keeping each result as close to the original as it can, and then proves the corrected statements in Lean 4.</p>
-    <p class="lede">The papers below were checked and shared by people who ran PaperFormalizer on them. On a paper's page, the findings sit next to the text they refer to, and each result links to its Lean statement.</p>
+    <h1>Formalized papers</h1>
+    <p class="lede">PaperFormalizer helps authors turn a paper into a Lean-verified version. It reads each theorem, lemma and assumption alongside the paper's own proof, proposes a repair wherever a statement needs one, with the author deciding each, and proves the statements in Lean 4.</p>
+    <p class="lede">The papers below were formalized with PaperFormalizer and shared by the people who ran it. On a paper's page, the notes sit next to the text they refer to, and each result links to its Lean statement.</p>
   </header>
 
   <section id="share" class="share">
     <div>
-      <div class="t">Share a paper you checked</div>
-      <div class="d">Share your checked work to help other people: readers see what the check found, and others can build on its Lean proofs. On a finished run, press <em>Share</em> on the paper's page and sign in with GitHub; the paper is checked automatically and appears here under your GitHub name. A share carries the whole bundle, including the corrected paper's TeX source and PDF.</div>
+      <div class="t">Share a paper you formalized</div>
+      <div class="d">Share your formalized paper so that others can read it and build on its Lean proofs. On a finished run, press <em>Share</em> on the paper's page and sign in with GitHub; the paper is checked automatically and appears here under your GitHub name. A share carries the whole bundle, including the revised paper's TeX source and PDF.</div>
     </div>
     <a class="btn" href="#how">How sharing works</a>
   </section>
@@ -378,19 +378,19 @@ export function indexHtml(papers) {
       <div role="group" aria-label="Sort papers" class="row sort">
         <span class="lab">Sort:</span>
         ${pill("sort", "date", "Newest", true)}
-        ${pill("sort", "corrections", "Most corrections", false)}
+        ${pill("sort", "corrections", "Most repairs", false)}
         ${papers.some((p) => p.subject) ? pill("sort", "subject", "Subject", false) : ""}
       </div>
     </div>
     <div role="group" aria-label="Filter by outcome" class="row filter">
       <span class="lab">Show:</span>
       ${pill("filter", "", "All", true)}
-      ${pill("filter", "repaired", "Errors repaired", false)}
-      ${pill("filter", "clean", "No error found", false)}
+      ${pill("filter", "repaired", "Revised", false)}
+      ${pill("filter", "clean", "No changes needed", false)}
       ${pill("filter", "cited", "Rests on cited results", false)}
     </div>
   </div>
-  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose corrected statement Lean certifies. <em>Corrections</em> are errors the referee found and repaired; <em>clarifications</em> are readings of ambiguous wording, not errors. A check covers the paper's results, not the prose around them.</p>
+  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose statement, as revised, Lean certifies. <em>Repairs</em> are statements revised where the original did not hold as written; <em>clarifications</em> are readings of ambiguous wording. Formalization covers the paper's results, not the prose around them.</p>
 
   <div id="papers">${sorted.map((p, i) => entry(p, i === 0)).join("\n")}
   </div>
@@ -398,13 +398,13 @@ export function indexHtml(papers) {
   <nav id="pager" class="pager" aria-label="Pages" hidden></nav>
 
   <section id="how" class="how">
-    <h2>How a paper is checked, and shared</h2>
-    <p>PaperFormalizer reads a paper's LaTeX source. Every result is refereed against the paper's own proof; an error is repaired by the smallest change that keeps the claim; the corrected statements are stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
+    <h2>How a paper is formalized, and shared</h2>
+    <p>PaperFormalizer reads a paper's LaTeX source. Every result is audited against the paper's own proof; where a statement does not hold as written, a repair is proposed, the smallest change that keeps the claim, and the author decides; the statements are then stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
     <p>Pressing <em>Share</em> on a finished run sends its bundle and opens a GitHub sign-in that asks for your public name and nothing else. You confirm the share on the page that follows; an automatic check then confirms the bundle is complete and unchanged since the run wrote it, and the paper appears here, after the registry owner's review unless you are a trusted sharer.</p>
   </section>
 
   <footer>
-    Every page is built from a bundle whose seal was checked when it was shared: the reviewers' verdicts, the Lean code and the corrected paper are the files the check wrote. The seal shows a bundle is complete and unchanged; it does not show who ran the check. "Proved in Lean" means the statement shown on the paper's page compiles with no <span class="mono">sorry</span> and its axioms are listed there.
+    Every page is built from a bundle whose seal was checked when it was shared: the reviewers' verdicts, the Lean code and the revised paper are the files the run wrote. The seal shows a bundle is complete and unchanged; it does not show who ran it. "Proved in Lean" means the statement shown on the paper's page compiles with no <span class="mono">sorry</span> and its axioms are listed there.
   </footer>
 
 </div>
@@ -417,19 +417,19 @@ export function indexHtml(papers) {
  *  all it shows where the browser runs no script). */
 function paperSummary(p) {
   const links = [
-    p.report ? '<li><a href="REPORT.md">REPORT.md</a> — the report: what was wrong, what was done, what was proved</li>' : "",
-    p.pdf ? `<li><a href="${p.pdf}">Corrected PDF</a> — the paper as it reads after the corrections</li>` : "",
+    p.report ? '<li><a href="REPORT.md">REPORT.md</a> — the report: what was revised and what was proved</li>' : "",
+    p.pdf ? `<li><a href="${p.pdf}">Revised PDF</a> — the paper with its revisions</li>` : "",
     p.lean ? '<li><a href="lean/">lean/</a> — the Lean code</li>' : "",
   ].filter(Boolean);
   // (styled here: the viewer's stylesheet knows none of it, and the viewer replaces it)
   return `<style>.snap-summary{max-width:46rem;margin:2rem auto;padding:0 1rem}.snap-summary .badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.snap-summary .badge{padding:2px 8px;border-radius:3px;background:#f1eee7;font-size:.8rem}.snap-summary .seal{font-family:monospace;font-size:.75rem;overflow-wrap:anywhere}</style>
 <div class="page snap-summary">
-  <p><a href="../../">Checked papers</a></p>
+  <p><a href="../../">Formalized papers</a></p>
   <h1>${esc(p.title)}</h1>
   ${p.authors ? `<div class="authors">${esc(p.authors)}</div>` : ""}
   <div class="meta">${meta(p)}</div>
   ${badges(p)}
-  ${p.summary ? `<p class="found"><strong>What the check found.</strong> ${esc(p.summary)}</p>` : ""}
+  ${p.summary ? `<p class="found"><strong>Summary.</strong> ${esc(p.summary)}</p>` : ""}
   <ul class="links">
     ${links.join("\n    ")}
   </ul>
@@ -467,8 +467,8 @@ function leanIndexHtml(p, files) {
 <body>
 <div class="wrap">
   <header>
-    <div class="kicker">PaperFormalizer · Verified papers</div>
-    <nav><a href="../../../">Checked papers</a><a href="../">${esc(p.title)}</a></nav>
+    <div class="kicker">PaperFormalizer · Formalized papers</div>
+    <nav><a href="../../../">Formalized papers</a><a href="../">${esc(p.title)}</a></nav>
     <h1>Lean code</h1>
     <p class="lede">A standalone Lake project: the paper's Lean, the toolkit modules it imports, and <span class="mono">Check.lean</span>.</p>
   </header>
