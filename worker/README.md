@@ -1,7 +1,8 @@
 # Share worker
 
 The one server-side piece of sharing: `worker.js`, a Cloudflare Worker at
-`https://theoremchecker-share.comments-worker.workers.dev/`. It needs no npm package; the tests are
+`https://share.paperformalizer.org/` (a Workers custom domain on the paperformalizer.org zone; the
+Worker itself is named `theoremchecker-share`, the name it was first deployed under). It needs no npm package; the tests are
 `test/worker.test.mjs` (`npm test` from the repository root).
 
 ## What it does
@@ -36,16 +37,16 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 1. **R2.** Enable R2 in the Cloudflare dashboard once (R2 → enable; the free tier needs a card on
    file). Then:
 
-       npx wrangler r2 bucket create paperformalizer-share
-       npx wrangler r2 bucket lifecycle add paperformalizer-share bundles-2d bundles/ --expire-days 2 --force
-       npx wrangler r2 bucket lifecycle add paperformalizer-share meta-30d meta/ --expire-days 30 --force
+       npx wrangler r2 bucket create theoremchecker-share
+       npx wrangler r2 bucket lifecycle add theoremchecker-share bundles-2d bundles/ --expire-days 2 --force
+       npx wrangler r2 bucket lifecycle add theoremchecker-share meta-30d meta/ --expire-days 30 --force
 
    The worker deletes each archive itself once ingested; the rules sweep what is left behind.
 
 2. **The OAuth App.** GitHub → Settings → Developer settings → **OAuth Apps** (not GitHub Apps) →
    New OAuth App:
    - Homepage URL: `https://paperformalizer.org/`
-   - Authorization callback URL: `https://theoremchecker-share.comments-worker.workers.dev/auth/callback`
+   - Authorization callback URL: `https://share.paperformalizer.org/auth/callback`
    - Device flow: off.
 
    Put its client id (`Ov23…`) in `wrangler.toml` as `GITHUB_CLIENT_ID`, and generate a client
@@ -69,7 +70,8 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 
        printf %s "$S" | gh secret set INGEST_SECRET -R Jiyuan-Tan/PaperFormalizerPapers; unset S
 
-5. **Deploy:** `npx wrangler deploy`. Check it: `curl https://theoremchecker-share.comments-worker.workers.dev/`
+5. **Deploy:** `npx wrangler deploy` (it also creates the `share.paperformalizer.org` DNS record and
+   certificate). Check it: `curl https://share.paperformalizer.org/`
    answers a one-line page.
 
 Rotating `SESSION_SECRET` signs everyone out (pending uploads stay claimable). Rotating

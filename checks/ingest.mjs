@@ -25,7 +25,7 @@ import { checkPaper, GITHUB_LOGIN, MAX_FILE_BYTES, MAX_FILES, MAX_TOTAL_BYTES, S
 import { pathProblem, readTarGz } from "./tar.mjs";
 import { trustedSharer } from "./trusted_sharer.mjs";
 
-export const DEFAULT_WORKER_URL = "https://theoremchecker-share.comments-worker.workers.dev";
+export const DEFAULT_WORKER_URL = "https://share.paperformalizer.org";
 export const DEFAULT_SITE_URL = "https://paperformalizer.org/";
 export const UPLOAD_ID = /^[a-z2-7]{26}$/u;
 export const MAX_ARCHIVE_BYTES = 64 * 1024 * 1024;

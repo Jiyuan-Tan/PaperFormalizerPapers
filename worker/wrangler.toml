@@ -9,19 +9,23 @@
 name = "theoremchecker-share"
 main = "worker.js"
 compatibility_date = "2026-08-01"
-workers_dev = true
+# Served at its own domain, share.paperformalizer.org (a Workers custom domain: `wrangler deploy`
+# creates its DNS record and certificate in the paperformalizer.org zone). The *.workers.dev address
+# is off, so there is one address.
+workers_dev = false
+routes = [{ pattern = "share.paperformalizer.org", custom_domain = true }]
 
 [vars]
 # A CLASSIC OAuth App (client id Ov23…), never a GitHub App (Iv23…): a GitHub App's consent screen says
 # "Act on your behalf" whatever its permissions. Authorized with no `scope`, the OAuth App's says
-# "public data only". Its callback URL: https://theoremchecker-share.comments-worker.workers.dev/auth/callback
+# "public data only". Its callback URL: https://share.paperformalizer.org/auth/callback
 GITHUB_CLIENT_ID = "Ov23li1PzsFTwbTuALRi"
 REGISTRY = "Jiyuan-Tan/PaperFormalizerPapers"
 SITE_URL = "https://paperformalizer.org/"
-WORKER_URL = "https://theoremchecker-share.comments-worker.workers.dev/"
+WORKER_URL = "https://share.paperformalizer.org/"
 
 # One bucket: meta/<id>.json (an upload's manifest, status and sharer) and bundles/<id>.tar.gz.
-# Create it with `npx wrangler r2 bucket create paperformalizer-share`.
+# Create it with `npx wrangler r2 bucket create theoremchecker-share` (the name it was made under).
 [[r2_buckets]]
 binding = "SHARES"
 bucket_name = "theoremchecker-share"
