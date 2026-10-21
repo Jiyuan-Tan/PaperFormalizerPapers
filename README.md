@@ -194,8 +194,12 @@ the pull request.
 
 ## License and the papers' rights
 
-The code of this repository (`checks/`, `site/`, `worker/`, `test/`, the workflows) is under the MIT
-License (`LICENSE`). `site/viewer/` also holds unmodified releases of KaTeX (MIT), pdf.js
+The code of this repository (`checks/`, `site/`, `worker/`, `test/`, the workflows) is under the
+PaperFormalizer License (`LICENSE`): the MIT License with a responsible-use condition — it must not
+be used for targeted harassment, threats or discriminatory abuse, or to spread allegations known to
+be false, while good-faith scientific criticism, peer review and the reporting of mathematical
+errors, naming the papers and authors concerned, are expressly permitted. The copyright holders are
+listed in `AUTHORS`. `site/viewer/` also holds unmodified releases of KaTeX (MIT), pdf.js
 (Apache-2.0) and DOMPurify (Apache-2.0 or MPL-2.0).
 
 The shared papers are not under that license: a paper's text, figures and proofs belong to its
