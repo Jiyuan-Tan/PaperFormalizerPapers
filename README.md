@@ -198,12 +198,12 @@ The code of this repository (`checks/`, `site/`, `worker/`, `test/`, the workflo
 PaperFormalizer License (`LICENSE`), based on the MIT License with a responsible-use condition: it
 or its output must not be used, or knowingly made available to others, for targeted harassment or
 threats, for abuse of people because of a protected characteristic, or to spread factual
-allegations known to be false or made with reckless disregard for the truth. Good-faith scientific
-criticism, peer review, the identification and reporting of mathematical errors, replication and
-reproducibility research — naming the papers and authors concerned — are expressly permitted, and
-an unfavorable finding or an honest mistake is not a violation. Because of that condition it is not
-an OSI-approved open-source license. This summary is not the license; `LICENSE` governs. The
-copyright holders are listed in `AUTHORS`. Versions published before this license was adopted on
+allegations known to be false or made with reckless disregard for the truth. Peer review,
+verification, replication and reproducibility research, and the identification and reporting of
+mathematical errors — each in good faith, naming the papers and authors concerned — are expressly
+permitted, and an unfavorable finding or an honest mistake is not a violation. Because of that
+condition it is not an OSI-approved open-source license. This summary is not the license; `LICENSE`
+governs. The copyright holders are listed in `AUTHORS`. Versions published before this license was adopted on
 21 October 2026 were released under the MIT License and remain available under it.
 
 Third-party code keeps its own license, shipped with it: KaTeX (MIT), pdf.js (Apache-2.0) and
