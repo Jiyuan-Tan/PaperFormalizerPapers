@@ -26,7 +26,7 @@ import { pathProblem, readTarGz } from "./tar.mjs";
 import { trustedSharer } from "./trusted_sharer.mjs";
 
 export const DEFAULT_WORKER_URL = "https://theoremchecker-share.comments-worker.workers.dev";
-export const DEFAULT_SITE_URL = "https://jiyuan-tan.github.io/PaperFormalizerPapers/";
+export const DEFAULT_SITE_URL = "https://paperformalizer.org/";
 export const UPLOAD_ID = /^[a-z2-7]{26}$/u;
 export const MAX_ARCHIVE_BYTES = 64 * 1024 * 1024;
 const SHA256 = /^[0-9a-f]{64}$/u;

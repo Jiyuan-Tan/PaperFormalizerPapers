@@ -44,7 +44,7 @@ All commands run from this directory, with `wrangler` logged in to the owner's C
 
 2. **The OAuth App.** GitHub → Settings → Developer settings → **OAuth Apps** (not GitHub Apps) →
    New OAuth App:
-   - Homepage URL: `https://jiyuan-tan.github.io/PaperFormalizerPapers/`
+   - Homepage URL: `https://paperformalizer.org/`
    - Authorization callback URL: `https://theoremchecker-share.comments-worker.workers.dev/auth/callback`
    - Device flow: off.
 

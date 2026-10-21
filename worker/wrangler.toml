@@ -17,7 +17,7 @@ workers_dev = true
 # "public data only". Its callback URL: https://theoremchecker-share.comments-worker.workers.dev/auth/callback
 GITHUB_CLIENT_ID = "Ov23li1PzsFTwbTuALRi"
 REGISTRY = "Jiyuan-Tan/PaperFormalizerPapers"
-SITE_URL = "https://jiyuan-tan.github.io/PaperFormalizerPapers/"
+SITE_URL = "https://paperformalizer.org/"
 WORKER_URL = "https://theoremchecker-share.comments-worker.workers.dev/"
 
 # One bucket: meta/<id>.json (an upload's manifest, status and sharer) and bundles/<id>.tar.gz.

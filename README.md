@@ -150,9 +150,10 @@ change to the UI's paper page. The build refuses to run without the viewer.
 
 ### GitHub Pages
 
-`.github/workflows/pages.yml` builds the site and publishes `dist/` at
-`https://<owner>.github.io/<repository>/`. Every link of the site is relative, so it works under
-that path and under a domain of its own alike.
+`.github/workflows/pages.yml` builds the site and publishes `dist/`. The site's address is
+`https://paperformalizer.org/`, a custom domain of the repository's Pages (the old
+`https://jiyuan-tan.github.io/PaperFormalizerPapers/` redirects to it). Every link of the site is
+relative, so it works under either address.
 
 GitHub Pages sets no header of the site's choosing, so each page carries its
 Content-Security-Policy in a `<meta>` (`CSP` in `site/build.mjs`): scripts, styles, images and
@@ -177,6 +178,11 @@ For shares (`ingest.yml`) and the site (`pages.yml`):
 3. **Settings → Actions → General → Workflow permissions**: allow GitHub Actions to create and
    approve pull requests (the pull request of a sharer who is not trusted).
 4. **Settings → Pages → Source**: GitHub Actions. On a free plan Pages serves a public repository only.
+   **Custom domain**: `paperformalizer.org`, then **Enforce HTTPS** once GitHub has issued the
+   certificate. Its DNS (Cloudflare, "DNS only"): four `A` records for `paperformalizer.org` to
+   `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, the matching `AAAA`
+   records (`2606:50c0:8000::153` … `8003::153`), and `www` as a `CNAME` to `jiyuan-tan.github.io`.
+   Verify the domain under your account's Settings → Pages, so no other repository can claim it.
 5. The ingest pushes a trusted sharer's paper to `main` with the workflow's own token: a rule on
    `main` that requires a status check or a pull request must let GitHub Actions bypass it
    (a ruleset with "GitHub Actions" as a bypass actor), or those shares fail to push.

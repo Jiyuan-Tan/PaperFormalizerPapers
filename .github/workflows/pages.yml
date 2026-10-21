@@ -1,8 +1,8 @@
 # Builds the site from papers/ (site/build.mjs) and publishes it on GitHub Pages, at every push to
 # main and when ingest.yml asks (it commits with the run's token, whose pushes start no workflow).
 #
-# OWNER SETUP: Settings → Pages → Source: "GitHub Actions". (On a free plan, Pages serves a public
-# repository only.)
+# OWNER SETUP: Settings → Pages → Source: "GitHub Actions", custom domain paperformalizer.org (README
+# "Owner setup"). (On a free plan, Pages serves a public repository only.)
 name: pages
 
 on:
