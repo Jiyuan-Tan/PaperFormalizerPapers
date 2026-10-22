@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Causalean",
+    "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+    "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+    "uncommitted": 0,
+    "local_rev": "3292728656ffad7979c566cad8bd6455cc4ceefe",
+    "files": {
+      "Causalean/Experimentation/Sequential/Ville.lean": "d8382af02b8903ffcb7dbf78094daf0c502080b5",
+      "Causalean/Mathlib/Probability/FinitePartitionConditional.lean": "6a5d915fa423e11a5ed0e903acac17f26eb6ea02",
+      "Causalean/Mathlib/Probability/GaussianMoments.lean": "72c188c4def0887312999644452347d3f56815f1",
+      "Causalean/Mathlib/Probability/IidMeanVariance.lean": "2b0dca4e3a695466f95360f6047115b017b39dd3",
+      "Causalean/Mathlib/Probability/LimitTheorems/Approximation/CharFunBound.lean": "833b8c8169e83d4f29df76ef27a9d52ad0025d16",
+      "Causalean/Mathlib/Probability/StdNormalCDF.lean": "4515ea454b4a222dc692393335c99b0e0d4f2930",
+      "Causalean/Mathlib/Probability/StdNormalMoments.lean": "d3483f5066f9e30738c19a6435cab080f4142bd0",
+      "Causalean/Stat/Concentration/Covering/Separable.lean": "53f4ff516a2005ab36ca7603ae698cf3b7e2dc2d",
+      "Causalean/Stat/Concentration/TailBounds/BinomialCount.lean": "bedb12bff7354c01614751465e28c3e9c5421251",
+      "Causalean/Stat/Concentration/VC/Separability.lean": "f57fec129676b8bf0b13baf5b110c917167686a6",
+      "Causalean/Stat/Coupling/Monotone/ProductLoss/PIT.lean": "9b8e7d4c21f02091e71b6f278b8d3b26037a7657",
+      "Causalean/Stat/EmpiricalProcess/Countable/Basic.lean": "1a2ef02f00bd370e2ea188ee628a222ca0cd6598",
+      "Causalean/Stat/EmpiricalProcess/Countable/Doob.lean": "34ebfb78aaaf088ed72b86bf4fef62796a0755a0",
+      "Causalean/Stat/EmpiricalProcess/Countable/FiniteAverage.lean": "5b078891c2b033adb40bcc365da4c9b40b9648aa",
+      "Causalean/Stat/EmpiricalProcess/Countable/FiniteSigns.lean": "44f99eb3ed065c1c86123847f5728c55f6c0c675",
+      "Causalean/Stat/EmpiricalProcess/Countable/Holder.lean": "d916a5e784c529c33c8284bd16c8a8d2b882182d",
+      "Causalean/Stat/EmpiricalProcess/Countable/OneSidedSkeleton.lean": "08baac31188e344f444e1577268214e2f04f1bc0",
+      "Causalean/Stat/EmpiricalProcess/Countable/PopulationRange.lean": "2b95519b2646c6eaad6f57a87bc9d61f9ef1148c",
+      "Causalean/Stat/EmpiricalProcess/Countable/PrefixProbability.lean": "6746ac809ef3c98e8bc4716823c45c922be1f112",
+      "Causalean/Stat/EmpiricalProcess/Countable/ProductSwap.lean": "0be6d7e5963ae9ec9702e7983b7ec2c28a6fb795",
+      "Causalean/Stat/EmpiricalProcess/Countable/ScalarSigns.lean": "98603822769cb15a070ef3b6d2e3b2cd97beea8a",
+      "Causalean/Stat/EmpiricalProcess/Countable/TailMoment.lean": "077844dec69ba4c2669631771c2f7fa8c7493d27",
+      "Causalean/Stat/EmpiricalProcess/Countable/Threshold.lean": "891c0bb75f897cc631234636d110601095a1f27b",
+      "Causalean/Stat/OrderStatistic/Basic.lean": "bdb573ae397c813c017b810eebdb16a207ffd366",
+      "Causalean/Stat/OrderStatistic/CDFTransport.lean": "64ecb672b82577314f72938afa11efd1fe2e90bc",
+      "Causalean/Stat/Quantile/CdfConvergence.lean": "1e34e6a0bd0758bd5f3c297204d9a7545d9477c3",
+      "Causalean/Stat/Quantile/Quantile.lean": "064b4c814336de1284f2bcf5bcc51f8c51af1ecd",
+      "Causalean/Stat/Sample.lean": "04083e8b79ea8d0669f52e44dbc37bba46b88d9d",
+      "Causalean/Tactic/IntegralLinearity.lean": "f4eac70bc1f97bcc31431e164cd7f4ad61219ec3",
+      "third_party/lean-rademacher/FoML/SeparableSpaceSup.lean": "a5b5ffff2b4d7ea0829e8ad390a1957445db4462"
+    },
+    "status": "same"
+  }
+]
