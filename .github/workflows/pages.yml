@@ -28,9 +28,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # the build cleans each paper's page in a headless Chromium (site/sanitize.mjs)
+      # the build cleans each paper's page in a headless Chromium (site/sanitize.mjs): the runner's own
+      # Chrome when it has one (no download, no system packages); else Playwright's, with its packages
       - name: Install the build's dependencies
-        run: npm ci --no-audit --no-fund && npx playwright-core install --with-deps chromium
+        run: |
+          npm ci --no-audit --no-fund
+          if command -v google-chrome >/dev/null; then echo "CHROMIUM_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          else npx playwright-core install --with-deps chromium; fi
       - name: Build the site
         run: node site/build.mjs
       - uses: actions/upload-pages-artifact@v3
