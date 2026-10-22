@@ -427,8 +427,10 @@ function paperSummary(p) {
     p.pdf ? `<li><a href="${p.pdf}">Revised PDF</a> — the paper with its revisions</li>` : "",
     p.lean ? '<li><a href="lean/">lean/</a> — the Lean code</li>' : "",
   ].filter(Boolean);
-  // (styled here: the viewer's stylesheet knows none of it, and the viewer replaces it)
-  return `<style>.snap-summary{max-width:46rem;margin:2rem auto;padding:0 1rem}.snap-summary .badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.snap-summary .badge{padding:2px 8px;border-radius:3px;background:#f1eee7;font-size:.8rem}.snap-summary .seal{font-family:monospace;font-size:.75rem;overflow-wrap:anywhere}</style>
+  // (styled here: the viewer's stylesheet knows none of it, and the viewer replaces it). A browser that
+  // runs the viewer shows a loading line instead, and the summary again only if the viewer fails.
+  return `<style>.snap-summary{display:none}.snap-loading{max-width:46rem;margin:3rem auto;padding:0 1rem;color:#6b655d;font-style:italic}@media (scripting: none){.snap-summary{display:block}.snap-loading{display:none}}.snap-failed .snap-summary{display:block}.snap-failed .snap-loading{display:none}.snap-summary{max-width:46rem;margin:2rem auto;padding:0 1rem}.snap-summary .badges{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.snap-summary .badge{padding:2px 8px;border-radius:3px;background:#f1eee7;font-size:.8rem}.snap-summary .seal{font-family:monospace;font-size:.75rem;overflow-wrap:anywhere}</style>
+<p class="snap-loading">Loading the paper…</p>
 <div class="page snap-summary">
   <p><a href="../../">Formalized papers</a></p>
   <h1>${esc(p.title)}</h1>

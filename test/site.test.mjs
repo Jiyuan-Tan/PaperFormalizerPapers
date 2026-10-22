@@ -45,6 +45,9 @@ test("the index lists the fixture paper with its badges", () => {
   // the paper's folder is copied, with its page (the viewer's, drawn from page/page.json, over a
   // plain summary) and the list of the Lean files
   const paper = readFileSync(path.join(outDir, "papers", SLUG, "index.html"), "utf8");
+  // a browser running the viewer shows a loading line; the summary only without script, or if the viewer fails
+  assert.ok(paper.includes('<p class="snap-loading">Loading the paper…</p>') && paper.includes(".snap-summary{display:none}"));
+  assert.ok(paper.includes("@media (scripting: none){.snap-summary{display:block}") && paper.includes(".snap-failed .snap-summary{display:block}"));
   for (const s of [
     '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
     '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
