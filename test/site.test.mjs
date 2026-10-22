@@ -16,18 +16,17 @@ test("the index lists the fixture paper with its badges", async () => {
   assert.equal(papers.length, 1);
   assert.deepEqual(
     { total: papers[0].total, proved: papers[0].proved, corrections: papers[0].corrections, refuted: papers[0].refuted, clarifications: papers[0].clarifications, cited: papers[0].cited },
-    { total: 29, proved: 20, corrections: 15, refuted: 2, clarifications: 237, cited: 7 },
+    { total: 20, proved: 20, corrections: 15, refuted: 0, clarifications: 237, cited: 10 },
   );
   for (const s of [
     "PaperFormalizer · Formalized papers",
     '<h2><a href="papers/tbs_neural_causal_pi/">Consistency of Neural Causal Partial Identification</a></h2>',
     "Jiyuan Tan, Jose Blanchet, Vasilis Syrgkanis",
     "shared 2026-10-19 by @fixture-user",
-    "2 unresolved",
-    "20/29 proved in Lean",
+    "20/20 proved in Lean",
     "15 revisions",
     "237 clarifications",
-    "Depends on 7 cited results",
+    "Depends on 10 cited results",
     // the count sentence, not the paper's grade above it
     "<strong>Summary.</strong> 19 result(s) of the paper were examined",
     'href="papers/tbs_neural_causal_pi/corrected_paper/Main.pdf">Revised PDF',
@@ -37,10 +36,12 @@ test("the index lists the fixture paper with its badges", async () => {
     "Revisions (17)",
     "<li>Theorem 3.3 — statement revised, proved in Lean</li>",
     "<li>Proposition B.2 — proof revised, statement unchanged, proved in Lean</li>",
-    "<li>lemma lem:sinkhorn-luise-proposition-1 — no revision that holds, not proved in Lean</li>",
+    "<li>lemma lem:sinkhorn-luise-proposition-1 — cited result, taken as stated, not proved in Lean</li>",
     'data-flags="repaired cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
   assert.ok(!index.includes("Unrevised</span>"));
+  // a cited result taken as stated is no unresolved result of the paper's
+  assert.ok(!index.includes("unresolved</span>"));
   assert.ok(!index.includes(">Subject<"), "no paper records a subject: no Subject button");
   // the paper's folder is copied, with its page (the viewer's, drawn from page/page.json, over a
   // plain summary) and the list of the Lean files
@@ -52,7 +53,7 @@ test("the index lists the fixture paper with its badges", async () => {
     '<script src="../../viewer/app.js" data-snapshot="page/page.json"></script>', '<script src="../../viewer/purify.min.js"></script>',
     '<link rel="stylesheet" href="../../viewer/app.css">', '<a class="brand" href="../../">',
     "<title>Consistency of Neural Causal Partial Identification — PaperFormalizer</title>",
-    'href="REPORT.md"', 'href="corrected_paper/Main.pdf"', 'href="lean/"', "20/29 proved in Lean",
+    'href="REPORT.md"', 'href="corrected_paper/Main.pdf"', 'href="lean/"', "20/20 proved in Lean",
   ]) assert.ok(paper.includes(s), `the paper page lacks: ${s}`);
   assert.ok(!paper.includes('href="MATCH.md"'), "the result-by-Lean file is not offered");
   assert.ok(!paper.includes("{{"), "every field of the template is filled");
@@ -132,8 +133,8 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", async 
   const { index, papers } = await site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
   for (const s of [
-    "3 unresolved",
-    "19/29 proved in Lean",
+    "1 unresolved",
+    "19/20 proved in Lean",
     "14 revisions",
     '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-19 by @fixture-user</',
     "no revision that holds, not proved in Lean</li>",

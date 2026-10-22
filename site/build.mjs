@@ -27,15 +27,16 @@
 //                         is normally absent and then left out, with the "Subject" sort button).
 //                         TODO: record the arXiv primary subject at share time (not fetched here).
 //   shared date, @login   share.json      shared_at, shared_by
-//   k of n proved         page.json results: n = results.length (the paper's results and those a
-//                         correction split off them), k = those with proved === true
-//   corrections           results with state === "error" and repair "statement" or "proof"
-//   without a repair      results with state === "error" and any other repair ("none")
+//   k/n proved in Lean    page.json results, but a cited one (`cites`) not proved here — taken as
+//                         stated; n of them, k with proved === true
+//   revisions             results with state === "error" and repair "statement" or "proof"
+//   unresolved            results with state === "error" and any other repair ("none"), but a cited
+//                         one taken as stated
 //   "No error found"      no result has state === "error"
 //   clarifications        page.json paper.comments whose kind starts with "reading" (readings of a
 //                         statement, of a symbol, and the owner's)
-//   cited results         f4_seal.json cited: the distinct node_id (results taken from the
-//                         literature as cited, not proved here)
+//   cited results         the distinct results taken from the literature as stated, not proved
+//                         here: f4_seal.json cited node_id, and page.json results with `cites` not proved
 //   filter "Depends on cited results"   cited > 0, or page.json buckets.conditional > 0
 //   tokens                page.json tokens (the run's own ledger: total tokens and model calls of
 //                         the pipeline's stages; absent in a bundle written before it was recorded)
@@ -106,11 +107,15 @@ export function paperData(dir, slug) {
   const share = obj(readJson(path.join(dir, "share.json")));
   const seal = obj(readJson(path.join(dir, "f4_seal.json")));
   const names = obj(obj(readJson(path.join(dir, "bundle.json"))).names);
-  const results = page.results.filter((r) => r && typeof r === "object");
-  const errors = results.filter((r) => r.state === "error");
+  // a result the paper cites from other work (`cites`) and does not prove is taken as stated: it is no
+  // result of the paper's to prove, nor one left unresolved; a cited result proved here counts as proved
+  const all = page.results.filter((r) => r && typeof r === "object");
+  const asStated = (r) => Boolean(text(r.cites)) && r.proved !== true;
+  const results = all.filter((r) => !asStated(r));
+  const errors = all.filter((r) => r.state === "error");
   const corrected = errors.filter((r) => r.repair === "statement" || r.repair === "proof");
   const comments = Array.isArray(obj(page.paper).comments) ? page.paper.comments : [];
-  const cited = new Set((Array.isArray(seal.cited) ? seal.cited : []).map((c) => text(obj(c).node_id)).filter(Boolean)).size;
+  const cited = new Set([...(Array.isArray(seal.cited) ? seal.cited : []).map((c) => text(obj(c).node_id)), ...all.filter(asStated).map((r) => text(r.id))].filter(Boolean)).size;
   const sharedAt = /^\d{4}-\d{2}-\d{2}/u.test(text(share.shared_at)) && !Number.isNaN(Date.parse(share.shared_at)) ? share.shared_at : null;
   const pdf = href(obj(page.paper).pdf);
 
@@ -137,7 +142,7 @@ export function paperData(dir, slug) {
     proved: results.filter((r) => r.proved === true).length,
     errors: errors.length,
     corrections: corrected.length,
-    refuted: errors.length - corrected.length,
+    refuted: errors.filter((r) => !corrected.includes(r) && !asStated(r)).length,
     clarifications: comments.filter((c) => text(obj(c).kind).startsWith("reading")).length,
     cited,
     restsOnCited: cited > 0 || obj(page.buckets).conditional > 0,
@@ -145,7 +150,7 @@ export function paperData(dir, slug) {
     summary,
     findings: errors.map((r) => ({
       name: plain(names[r.id], 80) || plain(`${text(r.kind)} ${text(r.label) || text(r.id)}`, 80),
-      outcome: r.repair === "statement" ? "statement revised" : r.repair === "proof" ? "proof revised, statement unchanged" : "no revision that holds",
+      outcome: r.repair === "statement" ? "statement revised" : r.repair === "proof" ? "proof revised, statement unchanged" : asStated(r) ? "cited result, taken as stated" : "no revision that holds",
       lean: r.proved === true ? "proved in Lean" : "not proved in Lean",
     })),
     pdf: pdf && isFile(path.join(dir, ...obj(page.paper).pdf.split("/"))) ? pdf : null,
@@ -397,7 +402,7 @@ export function indexHtml(papers) {
       ${pill("filter", "cited", "Depends on cited results", false)}
     </div>
   </div>
-  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose statement, as revised, Lean certifies; <em>unresolved</em> results are those for which no revision that holds was found. <em>Revisions</em> are statements revised where the original did not hold as written; <em>clarifications</em> are readings of ambiguous wording. Formalization covers the paper's results, not the prose around them.</p>
+  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose statement, as revised, Lean certifies; <em>unresolved</em> results are those for which no revision that holds was found. Results the paper cites from other work are taken as stated, not proved here. <em>Revisions</em> are statements revised where the original did not hold as written; <em>clarifications</em> are readings of ambiguous wording. Formalization covers the paper's results, not the prose around them.</p>
 
   <div id="papers">${sorted.map((p, i) => entry(p, i === 0)).join("\n")}
   </div>
