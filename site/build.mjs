@@ -36,7 +36,7 @@
 //                         statement, of a symbol, and the owner's)
 //   cited results         f4_seal.json cited: the distinct node_id (results taken from the
 //                         literature as cited, not proved here)
-//   filter "Rests on cited results"   cited > 0, or page.json buckets.conditional > 0
+//   filter "Depends on cited results"   cited > 0, or page.json buckets.conditional > 0
 //   tokens                page.json tokens (the run's own ledger: total tokens and model calls of
 //                         the pipeline's stages; absent in a bundle written before it was recorded)
 //   What the check found  REPORT.md: its count sentence ("N result(s) of the paper were examined…"),
@@ -63,7 +63,7 @@ export const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'uns
 const CSP_FONTS = CSP.replace("style-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com").replace("font-src 'self' data:", "font-src 'self' data: https://fonts.gstatic.com");
 /** The paper's page: the local UI's stylesheet takes its code font (JuliaMono) from jsDelivr. */
 const CSP_VIEWER = CSP.replace("font-src 'self' data:", "font-src 'self' data: https://cdn.jsdelivr.net");
-const FONTS = "https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap";
+const FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap";
 const PAGE_SIZE = 20;
 /** The extensions of the bundle files copied into the site (lower case; a file with none is served
  *  as octet-stream, a download): types a browser shows as data or offers to save, never runs. */
@@ -144,7 +144,7 @@ export function paperData(dir, slug) {
     summary,
     findings: errors.map((r) => ({
       name: plain(names[r.id], 80) || plain(`${text(r.kind)} ${text(r.label) || text(r.id)}`, 80),
-      outcome: r.repair === "statement" ? "statement revised" : r.repair === "proof" ? "proof revised, statement unchanged" : "no repair that holds",
+      outcome: r.repair === "statement" ? "statement revised" : r.repair === "proof" ? "proof revised, statement unchanged" : "no revision that holds",
       lean: r.proved === true ? "proved in Lean" : "not proved in Lean",
     })),
     pdf: pdf && isFile(path.join(dir, ...obj(page.paper).pdf.split("/"))) ? pdf : null,
@@ -159,12 +159,12 @@ const CHECK = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" strok
 
 function badges(p) {
   const out = [];
-  if (p.refuted > 0) out.push(`<span class="badge red">${count(p.refuted, "result")} without a repair that holds</span>`);
-  if (p.total > 0) out.push(`<span class="badge green">${CHECK}${p.proved} of ${count(p.total, "result")} proved in Lean 4</span>`);
-  if (p.corrections > 0) out.push(`<span class="badge amber">${count(p.corrections, "repair")}</span>`);
-  if (p.errors === 0) out.push('<span class="badge grey">No changes needed</span>');
+  if (p.refuted > 0) out.push(`<span class="badge red">${p.refuted} unresolved</span>`);
+  if (p.total > 0) out.push(`<span class="badge green">${CHECK}${p.proved}/${p.total} proved in Lean</span>`);
+  if (p.corrections > 0) out.push(`<span class="badge amber">${count(p.corrections, "revision")}</span>`);
+  if (p.errors === 0) out.push('<span class="badge grey">Unrevised</span>');
   if (p.clarifications > 0) out.push(`<span class="badge blue">${count(p.clarifications, "clarification")}</span>`);
-  if (p.cited > 0) out.push(`<span class="badge grey">${count(p.cited, "cited result")} taken as stated</span>`);
+  if (p.cited > 0) out.push(`<span class="badge grey">Depends on ${count(p.cited, "cited result")}</span>`);
   if (p.tokens) out.push(`<span class="badge grey" title="${p.tokens.total.toLocaleString("en-US")} tokens${p.tokens.calls ? ` in ${p.tokens.calls.toLocaleString("en-US")} model calls` : ""}, as the run's own ledger counted them">${compact(p.tokens.total)} tokens</span>`);
   return `<div class="badges">${out.join("")}</div>`;
 }
@@ -211,6 +211,11 @@ function entry(p, featured) {
 }
 
 const CSS = `
+/* Source Serif 4 ships with the viewer (viewer/fonts, SIL OFL 1.1): one copy for the index and the paper pages */
+@font-face{font-family:'Source Serif 4';src:url(viewer/fonts/source-serif-4-latin-standard-normal.woff2) format('woff2');font-weight:200 900;font-style:normal;font-display:swap;unicode-range:}
+@font-face{font-family:'Source Serif 4';src:url(viewer/fonts/source-serif-4-latin-standard-italic.woff2) format('woff2');font-weight:200 900;font-style:italic;font-display:swap;unicode-range:}
+@font-face{font-family:'Source Serif 4';src:url(viewer/fonts/source-serif-4-latin-ext-standard-normal.woff2) format('woff2');font-weight:200 900;font-style:normal;font-display:swap;unicode-range:}
+@font-face{font-family:'Source Serif 4';src:url(viewer/fonts/source-serif-4-latin-ext-standard-italic.woff2) format('woff2');font-weight:200 900;font-style:italic;font-display:swap;unicode-range:}
 [hidden]{display:none!important}
 body{margin:0;background:#fdfcfa;font-family:'Source Serif 4',Georgia,serif;color:#1a1a1a;padding:0 16px 64px}
 a{color:#820000}a:hover{color:#b1040e}
@@ -261,6 +266,7 @@ h1{margin:26px 0 14px;font-size:2.4rem;line-height:1.15;font-weight:700;letter-s
 .found{margin:12px 0 0;font-size:1rem;line-height:1.6}
 .actions{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;margin-top:12px;font-size:.95rem}
 .actions .main{font-weight:600}
+.actions a,.meta a{text-decoration:none;border-bottom:1px dotted #c58a8a}.actions a:hover,.meta a:hover{border-bottom-style:solid}
 .grow{flex:1 1 auto}
 .seal{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:#6b655d}
 details{margin-top:12px;font-size:.95rem;color:#5c5853}
@@ -359,7 +365,7 @@ export function indexHtml(papers) {
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
     <h1>Formalized papers</h1>
-    <p class="lede">PaperFormalizer helps authors turn a paper into a Lean-verified version. It reads each theorem, lemma and assumption alongside the paper's own proof, proposes a repair wherever a statement needs one, with the author deciding each, and proves the statements in Lean 4.</p>
+    <p class="lede">PaperFormalizer helps authors turn a paper into a Lean-verified version. It reads each theorem, lemma and assumption alongside the paper's own proof, proposes a revision wherever a statement needs one, with the author deciding each, and proves the statements in Lean 4.</p>
     <p class="lede">The papers below were formalized with PaperFormalizer and shared by the people who ran it. On a paper's page, the notes sit next to the text they refer to, and each result links to its Lean statement.</p>
   </header>
 
@@ -378,7 +384,7 @@ export function indexHtml(papers) {
       <div role="group" aria-label="Sort papers" class="row sort">
         <span class="lab">Sort:</span>
         ${pill("sort", "date", "Newest", true)}
-        ${pill("sort", "corrections", "Most repairs", false)}
+        ${pill("sort", "corrections", "Most revisions", false)}
         ${papers.some((p) => p.subject) ? pill("sort", "subject", "Subject", false) : ""}
       </div>
     </div>
@@ -386,11 +392,11 @@ export function indexHtml(papers) {
       <span class="lab">Show:</span>
       ${pill("filter", "", "All", true)}
       ${pill("filter", "repaired", "Revised", false)}
-      ${pill("filter", "clean", "No changes needed", false)}
-      ${pill("filter", "cited", "Rests on cited results", false)}
+      ${pill("filter", "clean", "Unrevised", false)}
+      ${pill("filter", "cited", "Depends on cited results", false)}
     </div>
   </div>
-  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose statement, as revised, Lean certifies. <em>Repairs</em> are statements revised where the original did not hold as written; <em>clarifications</em> are readings of ambiguous wording. Formalization covers the paper's results, not the prose around them.</p>
+  <p class="legend"><strong>Reading the badges.</strong> <em>Proved in Lean</em> counts the paper's results whose statement, as revised, Lean certifies; <em>unresolved</em> results are those for which no revision that holds was found. <em>Revisions</em> are statements revised where the original did not hold as written; <em>clarifications</em> are readings of ambiguous wording. Formalization covers the paper's results, not the prose around them.</p>
 
   <div id="papers">${sorted.map((p, i) => entry(p, i === 0)).join("\n")}
   </div>
@@ -399,7 +405,7 @@ export function indexHtml(papers) {
 
   <section id="how" class="how">
     <h2>How a paper is formalized, and shared</h2>
-    <p>PaperFormalizer reads a paper's LaTeX source. Every result is audited against the paper's own proof; where a statement does not hold as written, a repair is proposed, the smallest change that keeps the claim, and the author decides; the statements are then stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
+    <p>PaperFormalizer reads a paper's LaTeX source. Every result is audited against the paper's own proof; where a statement does not hold as written, a revision is proposed, the smallest change that keeps the claim, and the author decides; the statements are then stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
     <p>Pressing <em>Share</em> on a finished run sends its bundle and opens a GitHub sign-in that asks for your public name and nothing else. You confirm the share on the page that follows; an automatic check then confirms the bundle is complete and unchanged since the run wrote it, and the paper appears here, after the registry owner's review unless you are a trusted sharer.</p>
   </section>
 
