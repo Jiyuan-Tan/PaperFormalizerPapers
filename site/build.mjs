@@ -225,7 +225,7 @@ header{padding:56px 0 28px;border-bottom:1px solid #e0dad0}
 header nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px;font-size:.95rem}
 header nav a{text-decoration:none;border-bottom:1px dotted #c58a8a;color:#8c1515}
 header nav .here{font-weight:600}
-h1{margin:26px 0 14px;font-size:2.4rem;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+h1{margin:26px 0 14px;font-size:2.4rem;line-height:1.15;font-weight:600;letter-spacing:-.01em}
 .lede{margin:0 0 12px;font-size:1.08rem;line-height:1.6;color:#5c5853;max-width:720px}
 .lede:last-child{margin-bottom:0}
 .share{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;margin:28px 0 8px;padding:18px 22px;background:#f7f5f0;border:1px solid #e0dad0;border-radius:8px}
@@ -247,12 +247,12 @@ h1{margin:26px 0 14px;font-size:2.4rem;line-height:1.15;font-weight:700;letter-s
 .legend{margin:10px 0 0;font-size:.85rem;line-height:1.55;color:#6b655d}
 .legend strong{color:#1a1a1a}
 .paper{padding:26px 0 22px;border-bottom:1px solid #e8e2d8}
-.paper h2{margin:0 0 6px;font-size:1.35rem;line-height:1.3;font-weight:700}
+.paper h2{margin:0 0 6px;font-size:1.35rem;line-height:1.3;font-weight:600}
 .paper h2 a{color:inherit;text-decoration:none}
 .paper .recent{display:none}
 .paper.featured{margin-top:26px;padding:22px 24px 20px;background:#f7f5f0;border:1px solid #e0dad0;border-top:3px solid #b1040e;border-radius:8px}
 .paper.featured .recent{display:block;font-size:.72rem}
-.paper.featured h2{margin:8px 0;font-size:1.55rem;line-height:1.25}
+.paper.featured h2{margin:8px 0;font-size:1.55rem;line-height:1.25;font-weight:600}
 .authors{font-size:.95rem;color:#5c5853}
 .meta{margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:#6b655d;overflow-wrap:anywhere}
 .meta a{color:inherit}
@@ -278,7 +278,7 @@ details ul{margin:8px 0 0;padding-left:20px;line-height:1.6}
 .pager button[disabled]{color:#9a938c;cursor:default;text-decoration:none}
 .pager button[aria-current]{color:#1a1a1a;font-weight:700;text-decoration:none}
 .how{margin-top:44px}
-.how h2{font-size:1.2rem;margin:0 0 8px}
+.how h2{font-size:1.2rem;margin:0 0 8px;font-weight:600}
 .how p{margin:0 0 10px;font-size:.98rem;line-height:1.6;color:#5c5853;max-width:720px}
 footer{margin-top:44px;padding-top:18px;border-top:1px solid #e0dad0;font-size:.85rem;line-height:1.6;color:#6b655d}
 code,.mono{font-family:'IBM Plex Mono',monospace}
