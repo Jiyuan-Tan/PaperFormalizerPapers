@@ -3,7 +3,8 @@
 // Chromium, with the viewer's own DOMPurify (site/viewer/purify.min.js) and the viewer's strict rules
 // (`SNAP.strict` in PaperFormalizer's tools/src/ui/static/app.js, repeated below): the same cleaning,
 // in the same kind of browser, as a reader's. The result carries `sanitized: "site"`, and the viewer
-// then inserts its paper body without cleaning it again.
+// then inserts its paper body without cleaning it again; the formulas' markup is set apart in
+// `paper.math`, drawn by the viewer as each part of the paper nears the window.
 //
 // Everything in page.json is UNTRUSTED: every paper is cleaned, and a page that cannot be cleaned fails
 // the build rather than reach the site uncleaned.
@@ -32,6 +33,22 @@ function strictCleaner() {
     const clean = (html) => purify.sanitize(String(html ?? ""), { ADD_ATTR: ["target"], FORBID_TAGS: ["form", "style"] });
     if (p.paper && typeof p.paper === "object") {
       p.paper.html = clean(p.paper.html);
+      // each formula's markup (KaTeX's, most of a paper's HTML) set apart in `paper.math`, a placeholder
+      // `<span class="kx" data-k="i">` in its place: the viewer inserts a light body and draws the
+      // formulas of each part as it nears the window
+      const t = document.createElement("template");
+      t.innerHTML = p.paper.html;
+      const math = [];
+      for (const k of t.content.querySelectorAll(".katex")) {
+        if (k.parentElement?.closest(".katex")) continue;
+        math.push(k.outerHTML);
+        const ph = document.createElement("span");
+        ph.className = "kx";
+        ph.dataset.k = String(math.length - 1);
+        k.replaceWith(ph);
+      }
+      p.paper.html = t.innerHTML;
+      p.paper.math = math;
       for (const c of Array.isArray(p.paper.comments) ? p.paper.comments : []) if (c && typeof c === "object") { c.html = clean(c.html); if (c.label != null) c.label = clean(c.label); }
       for (const t of Array.isArray(p.paper.toc) ? p.paper.toc : []) if (t && typeof t === "object") t.html = clean(t.html);
     }

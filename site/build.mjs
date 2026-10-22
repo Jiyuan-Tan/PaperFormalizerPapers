@@ -168,7 +168,7 @@ function badges(p) {
   if (p.refuted > 0) out.push(`<span class="badge red">${p.refuted} unresolved</span>`);
   if (p.total > 0) out.push(`<span class="badge green">${CHECK}${p.proved}/${p.total} proved in Lean</span>`);
   if (p.corrections > 0) out.push(`<span class="badge amber">${count(p.corrections, "revision")}</span>`);
-  if (p.errors === 0) out.push('<span class="badge grey">Unrevised</span>');
+  if (p.errors === 0) out.push('<span class="badge grey">No revisions required</span>');
   if (p.clarifications > 0) out.push(`<span class="badge blue">${count(p.clarifications, "clarification")}</span>`);
   if (p.cited > 0) out.push(`<span class="badge grey">Depends on ${count(p.cited, "cited result")}</span>`);
   if (p.tokens) out.push(`<span class="badge grey" title="${p.tokens.total.toLocaleString("en-US")} tokens${p.tokens.calls ? ` in ${p.tokens.calls.toLocaleString("en-US")} model calls` : ""}, as the run's own ledger counted them">${compact(p.tokens.total)} tokens</span>`);
@@ -398,7 +398,7 @@ export function indexHtml(papers) {
       <span class="lab">Show:</span>
       ${pill("filter", "", "All", true)}
       ${pill("filter", "repaired", "Revised", false)}
-      ${pill("filter", "clean", "Unrevised", false)}
+      ${pill("filter", "clean", "No revisions required", false)}
       ${pill("filter", "cited", "Depends on cited results", false)}
     </div>
   </div>

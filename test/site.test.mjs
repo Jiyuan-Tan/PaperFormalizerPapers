@@ -39,7 +39,7 @@ test("the index lists the fixture paper with its badges", async () => {
     "<li>lemma lem:sinkhorn-luise-proposition-1 — cited result, taken as stated, not proved in Lean</li>",
     'data-flags="repaired cited"',
   ]) assert.ok(index.includes(s), `the index lacks: ${s}`);
-  assert.ok(!index.includes("Unrevised</span>"));
+  assert.ok(!index.includes("No revisions required</span>"));
   // a cited result taken as stated is no unresolved result of the paper's
   assert.ok(!index.includes("unresolved</span>"));
   assert.ok(!index.includes(">Subject<"), "no paper records a subject: no Subject button");
@@ -138,7 +138,7 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", async 
     "14 revisions",
     '<a href="https://arxiv.org/abs/2105.15197">arXiv:2105.15197</a> · shared 2026-10-19 by @fixture-user</',
     "no revision that holds, not proved in Lean</li>",
-    '<span class="badge grey">Unrevised</span>',
+    '<span class="badge grey">No revisions required</span>',
     'data-flags="clean cited"',
     // the run's token total, when the bundle records it (the fixture paper's does not: no badge)
     '1,200,500,000 tokens in 412 model calls, as the run\'s own ledger counted them">1.2B tokens</span>',
@@ -204,4 +204,17 @@ test("the site's page.json is cleaned at build time with the viewer's strict rul
   assert.deepEqual(out.texHtml, { x: "<i>t</i>" });
   // the bundle's own file is left as shared (the seal names it); only the site's copy is cleaned
   assert.equal(readJson(file).paper.html, page.paper.html);
+});
+
+test("each formula's markup is set apart in paper.math, a placeholder in its place", async () => {
+  const dir = copyFixture();
+  const file = path.join(dir, "page", "page.json");
+  const page = readJson(file);
+  page.paper.html = '<p>Let <span class="katex"><span class="katex-html">x<span class="katex">y</span></span></span> and <span class="katex">z</span>.</p>';
+  writeJson(file, page);
+  const { outDir } = await site(path.dirname(dir));
+  const out = readJson(path.join(outDir, "papers", SLUG, "page", "page.json"));
+  // outermost formulas only, in order; the body keeps the text
+  assert.deepEqual(out.paper.math, ['<span class="katex"><span class="katex-html">x<span class="katex">y</span></span></span>', '<span class="katex">z</span>']);
+  assert.equal(out.paper.html, '<p>Let <span class="kx" data-k="0"></span> and <span class="kx" data-k="1"></span>.</p>');
 });
