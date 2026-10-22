@@ -36,20 +36,24 @@ function strictCleaner() {
       // each formula's markup (KaTeX's, most of a paper's HTML) set apart in `paper.math`, a placeholder
       // `<span class="kx" data-k="i">` in its place: the viewer inserts a light body and draws the
       // formulas of each part as it nears the window
-      const t = document.createElement("template");
-      t.innerHTML = p.paper.html;
       const math = [];
-      for (const k of t.content.querySelectorAll(".katex")) {
-        if (k.parentElement?.closest(".katex")) continue;
-        math.push(k.outerHTML);
-        const ph = document.createElement("span");
-        ph.className = "kx";
-        ph.dataset.k = String(math.length - 1);
-        k.replaceWith(ph);
-      }
-      p.paper.html = t.innerHTML;
+      const apart = (html) => {
+        const t = document.createElement("template");
+        t.innerHTML = html;
+        for (const k of t.content.querySelectorAll(".katex")) {
+          if (k.parentElement?.closest(".katex")) continue;
+          math.push(k.outerHTML);
+          const ph = document.createElement("span");
+          ph.className = "kx";
+          ph.dataset.k = String(math.length - 1);
+          k.replaceWith(ph);
+        }
+        return t.innerHTML;
+      };
+      p.paper.html = apart(p.paper.html);
+      // the comments' bodies too (a margin card shows its first lines; its formulas are drawn as it nears the window)
+      for (const c of Array.isArray(p.paper.comments) ? p.paper.comments : []) if (c && typeof c === "object") { c.html = apart(clean(c.html)); if (c.label != null) c.label = clean(c.label); }
       p.paper.math = math;
-      for (const c of Array.isArray(p.paper.comments) ? p.paper.comments : []) if (c && typeof c === "object") { c.html = clean(c.html); if (c.label != null) c.label = clean(c.label); }
       for (const t of Array.isArray(p.paper.toc) ? p.paper.toc : []) if (t && typeof t === "object") t.html = clean(t.html);
     }
     p.texHtml = Object.fromEntries(Object.entries(p.texHtml && typeof p.texHtml === "object" ? p.texHtml : {}).map(([k, v]) => [k, clean(v)]));

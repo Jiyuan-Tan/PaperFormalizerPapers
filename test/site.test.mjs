@@ -211,10 +211,14 @@ test("each formula's markup is set apart in paper.math, a placeholder in its pla
   const file = path.join(dir, "page", "page.json");
   const page = readJson(file);
   page.paper.html = '<p>Let <span class="katex"><span class="katex-html">x<span class="katex">y</span></span></span> and <span class="katex">z</span>.</p>';
+  page.paper.comments[0].html = 'Note on <span class="katex">w</span>';
   writeJson(file, page);
   const { outDir } = await site(path.dirname(dir));
   const out = readJson(path.join(outDir, "papers", SLUG, "page", "page.json"));
   // outermost formulas only, in order; the body keeps the text
-  assert.deepEqual(out.paper.math, ['<span class="katex"><span class="katex-html">x<span class="katex">y</span></span></span>', '<span class="katex">z</span>']);
+  assert.deepEqual(out.paper.math.slice(0, 2), ['<span class="katex"><span class="katex-html">x<span class="katex">y</span></span></span>', '<span class="katex">z</span>']);
   assert.equal(out.paper.html, '<p>Let <span class="kx" data-k="0"></span> and <span class="kx" data-k="1"></span>.</p>');
+  // a comment's formulas join the same table, after the paper's
+  assert.equal(out.paper.comments[0].html, 'Note on <span class="kx" data-k="2"></span>');
+  assert.equal(out.paper.math[2], '<span class="katex">w</span>');
 });
