@@ -19,12 +19,16 @@
   "lean": {
     "files": 432,
     "toolkit_modules": [
+      "Toolkit.Foundations.Algebra.Order.SortingRearrangement",
       "Toolkit.Foundations.Analysis.Calculus.AbsolutelyContinuous",
       "Toolkit.Foundations.Probability.Conditioning.FiniteValuedConditionalExpectation",
+      "Toolkit.Foundations.Probability.Moments.HingeExpansion",
+      "Toolkit.Tricks.Probability.Distributions.DistributionalTransform",
       "Toolkit.Tricks.Probability.Moments.ClippedCouplings",
       "Toolkit.Tricks.Probability.Moments.ProductCouplingBounds",
       "Toolkit.Tricks.Probability.Moments.QuantileVersions",
-      "Toolkit.Tricks.Probability.Moments.SymmetricClipping"
+      "Toolkit.Tricks.Probability.Moments.SymmetricClipping",
+      "Toolkit.Tricks.Statistics.Asymptotics.ConditionalMarkov"
     ],
     "requires": [
       {
@@ -99,17 +103,17 @@
           "Causalean/Tactic/IntegralLinearity.lean": "f4eac70bc1f97bcc31431e164cd7f4ad61219ec3"
         },
         "status": "unverified",
-        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
       }
     ],
     "warnings": [],
     "notes": [
-      "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      "built against a local copy of Causalean (its commit 5ca94e0ac387): 36 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report tbs_prte_optimal_transport --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
     ]
   },
   "page": "page/page.json",
   "f4_seal": {
-    "code": "609539a4bcc0b670b98f3bb7d2a3aabce0327957ddff7cf38f776d04f42e96f4",
+    "code": "be587b10e9e9364adac8795a48fa3047ef62bfcf1e9e972e93dac94675851953",
     "problems": [],
     "reviews": "f4_reviews.log"
   },

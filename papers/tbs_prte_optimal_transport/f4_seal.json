@@ -3025,6 +3025,10 @@
       "sha256": "0b2ea67d1c3556450136007820adcaac6add50fe417613df592c48841ad9c83b"
     },
     {
+      "path": "corrected_paper/_tikz/ed262451132fabbb.pdf",
+      "sha256": "ec13e594a3b8e2ff5d2d5ef3e14e21477629eb5c03311f55542d16e0327add9c"
+    },
+    {
       "path": "corrected_paper/archive/README.md",
       "sha256": "b2021816430f3b5673fa441d1582b445cb341fd9a4360f25bb82f91a478269fe"
     },
@@ -3526,7 +3530,7 @@
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/DMLConditionalFluctuation.lean",
-      "sha256": "fa9b475695b09472f5f361aa5c1448147af1da3a441cec9d2574968c34634ca7"
+      "sha256": "76a9bea08280b0903ef95cb38629fe5c0e4a5185288dfbfd4eb526083f13463f"
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/DMLContinuousBandBiasDecomposition.lean",
@@ -4166,7 +4170,7 @@
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/DebiasedQuantileBoundary.lean",
-      "sha256": "03743980c6d75f9e8c5a623d864b894051afecb003de26f32462459efb4b42ed"
+      "sha256": "a4350b0db9d8ff4b765fa68fac33281b78a050afed79817a5b29069f231af50c"
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/DenominatorOrthogonality.lean",
@@ -4606,7 +4610,7 @@
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/QuantileSorting.lean",
-      "sha256": "e9dcadd100da87ca1cf64315a7c43a4377424aeabc6259713fac10f9ae8c88a0"
+      "sha256": "b4750639bef8641b8d532c8664a390fc1786e1ec12ed29ef3f885a23bd3d78b3"
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/QuantileTotalAssembly.lean",
@@ -4614,7 +4618,7 @@
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/RandomizedRank.lean",
-      "sha256": "dafdcfa6f5724641ea85912955bbca271067e6fd65f66484b55030a6fcb7bd9d"
+      "sha256": "aedf0c53f51f1865ad6b17ec666bcf12174dd5e41bddf2a7fcc2df4f47ef2da0"
     },
     {
       "path": "lean/Papers/TbsPrteOptimalTransport/Helpers/RangeRegularity.lean",
@@ -4870,11 +4874,15 @@
     },
     {
       "path": "lean/README.md",
-      "sha256": "f388ff4c82183a6d85a39ad3415bac173f53803a950aa6abd7149b933dd50b68"
+      "sha256": "3585f6b70844a968b63379d2bef4bc0f458269efd111496b4c146d73c304de1d"
     },
     {
       "path": "lean/Toolkit.lean",
-      "sha256": "2fe91220c9549317fed43c07c174672c731dbb8ad444465ee8fd30fe5075e73a"
+      "sha256": "b5b720876a2510e9cc30ceb0c8aac7ab2998e74a4c152b2a85282e2d36f0a87c"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Algebra/Order/SortingRearrangement.lean",
+      "sha256": "7f75c77725bc78f3b330eaf2edf9eb03aaf7d66b6f0d8635c2e6303eee634a61"
     },
     {
       "path": "lean/Toolkit/Foundations/Analysis/Calculus/AbsolutelyContinuous.lean",
@@ -4883,6 +4891,14 @@
     {
       "path": "lean/Toolkit/Foundations/Probability/Conditioning/FiniteValuedConditionalExpectation.lean",
       "sha256": "71d4e70e43306d080c788c7763e72dd36c21773ad995cbe2d7090256c19bcc9b"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Probability/Moments/HingeExpansion.lean",
+      "sha256": "7e054247fd03d7810e23f8179f818bb160cb3083c0fccc07493c6bcbd38bb394"
+    },
+    {
+      "path": "lean/Toolkit/Tricks/Probability/Distributions/DistributionalTransform.lean",
+      "sha256": "cb04ad04abb483898540df896aac3ad7e8986e405fdc7c3e56e36d61203dbde6"
     },
     {
       "path": "lean/Toolkit/Tricks/Probability/Moments/ClippedCouplings.lean",
@@ -4901,12 +4917,16 @@
       "sha256": "25a00d4c2b280a3679c8d902e2c4665301053398cb2d95dfba07150e934cee03"
     },
     {
+      "path": "lean/Toolkit/Tricks/Statistics/Asymptotics/ConditionalMarkov.lean",
+      "sha256": "ae178c523cd6c0b4937bd51d705d06cb6bff3a3b01ef02e5e2a3e9ea9492caa5"
+    },
+    {
       "path": "lean/built-against.json",
       "sha256": "f0e7908b90ff123274e778e2ad709e58d3ffbc87e339fbadcf3e2521ca19a9da"
     },
     {
       "path": "lean/lakefile.toml",
-      "sha256": "74bac2522f6c2bfa999851d255a7f277ed3d27b6542a67bb60e60a50e12f8e72"
+      "sha256": "84c2241af8baab8b829c140306136061450d5c1a76b130b4357cf193b031ce16"
     },
     {
       "path": "lean/lean-toolchain",
@@ -9514,7 +9534,7 @@
     },
     {
       "path": "lean/vendor/StatLean/port/build_cache.sh",
-      "sha256": "32cbab2632c810a30ff4f6d8ad66151ada8f8d59b84ceec11843b0362f0cfe83"
+      "sha256": "fccb0b2b630c9c45a5687580b51207e49ee0ad49330c11fa7a232ccb2161eedd"
     },
     {
       "path": "lean/vendor/StatLean/port/convert_modules.py",
@@ -9526,8 +9546,8 @@
     },
     {
       "path": "page/page.json",
-      "sha256": "58c78210aa6c78e9612877198821967f6deceb2948b3e4c51f71e592f0272bf1"
+      "sha256": "94beae340993e562cbc26f3e7a17bf309b9a275ded3c009c3d7862fea28a0dba"
     }
   ],
-  "code": "609539a4bcc0b670b98f3bb7d2a3aabce0327957ddff7cf38f776d04f42e96f4"
+  "code": "be587b10e9e9364adac8795a48fa3047ef62bfcf1e9e972e93dac94675851953"
 }

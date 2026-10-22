@@ -1,5 +1,6 @@
 module
 public import Papers.TbsPrteOptimalTransport.Helpers.QuantileScoreRemainder
+public import Toolkit.Foundations.Probability.Moments.HingeExpansion
 /-! The combined truncated-moment and CDF boundary change is a quadratic remainder. -/
 public section
 set_option linter.style.openClassical false
@@ -116,21 +117,14 @@ lemma debiased_quantile_boundary_global_quadratic
     |∫ y, (b - y) * indicator (y ≤ b) - (a - y) * indicator (y ≤ a) -
       (b - a) * indicator (y ≤ a) ∂ν| ≤
         (C + (ν univ).toReal / r) * (b - a) ^ 2 := by
-  by_cases he : |b - a| ≤ r
-  · have hb := debiased_quantile_boundary_local_quadratic ν a b r C he hdensity
-    rw [sq_abs] at hb
-    exact hb.trans (mul_le_mul_of_nonneg_right
-      (le_add_of_nonneg_right (by positivity)) (sq_nonneg _))
-  · have he' : r ≤ |b - a| := le_of_not_ge he
-    have hlarge : |b - a| * (ν univ).toReal ≤
-        ((ν univ).toReal / r) * (b - a) ^ 2 := by
-      have hsq : r * |b - a| ≤ (b - a) ^ 2 := by
-        nlinarith [sq_abs (b - a)]
-      have hm := mul_le_mul_of_nonneg_left hsq (ENNReal.toReal_nonneg (a := ν univ))
-      rw [div_mul_eq_mul_div]
-      apply (le_div_iff₀ hr).mpr
-      nlinarith
-    exact (debiased_quantile_boundary_linear_bound ν a b).trans
-      (hlarge.trans (by nlinarith [sq_nonneg (b - a)]))
+  have hramp (c y : ℝ) : (c - y) * indicator (y ≤ c) = max (c - y) 0 := by
+    by_cases h : y ≤ c
+    · simp only [indicator, if_pos h, mul_one, max_eq_left (sub_nonneg.mpr h)]
+    · simp only [indicator, if_neg h, mul_zero,
+        max_eq_right (sub_nonpos.mpr (le_of_not_ge h))]
+  simp_rw [hramp]
+  simpa only [Set.indicator, mem_Iic, indicator] using
+    Toolkit.Foundations.Probability.Moments.abs_integral_posPart_sub_sub_mul_indicator_le
+      ν a b r C hr hC hdensity
 
 end Papers.TbsPrteOptimalTransport

@@ -2,6 +2,7 @@ module
 public import Papers.TbsPrteOptimalTransport.Helpers.ContinuousLearners
 public import Mathlib.Data.List.Sort
 public import Mathlib.Algebra.BigOperators.Fin
+public import Toolkit.Foundations.Algebra.Order.SortingRearrangement
 /-! Sorting contracts the grid error toward a nondecreasing population quantile vector. -/
 public section
 namespace Papers.TbsPrteOptimalTransport
@@ -84,8 +85,7 @@ lemma merge_sort_quantile_error_le (l q : List ℝ)
     (hq : q.Pairwise (· ≤ ·)) (hlen : q.length = l.length) :
     (List.zipWith (fun x y : ℝ => |x - y|) (l.mergeSort (· ≤ ·)) q).sum ≤
       (List.zipWith (fun x y : ℝ => |x - y|) l q).sum := by
-  rw [List.mergeSort_eq_insertionSort]
-  exact insertion_sort_quantile_error_le l q hq hlen
+  exact Toolkit.Foundations.Algebra.Order.sum_zipWith_abs_sub_mergeSort_le l q hq hlen
 
 -- @node: list_grid_error_sum
 /-- [The sum of absolute deviations obtained by pairing a list with reference values at indices starting from zero equals the sum over all valid list indices, with any fallback value for out-of-range access](goal). -/

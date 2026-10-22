@@ -3,6 +3,7 @@ public import Papers.TbsPrteOptimalTransport.Helpers.DMLOracleTransfer
 public import Papers.TbsPrteOptimalTransport.Helpers.DMLRemainderRates
 public import Causalean.Stat.Limit.ContinuousMapping
 public import Mathlib.Probability.CondVar
+public import Toolkit.Tricks.Statistics.Asymptotics.ConditionalMarkov
 /-! Conditional Chebyshev and the bias/fluctuation assembly in the DML proof.
 The conditional second moment is localized on a training-measurable good event;
 its convergence in probability suffices without convergence of its expectation. -/
@@ -155,17 +156,8 @@ lemma conditional_nonneg_tendsto_probability_zero {A : Type*} [mA : MeasurableSp
       (fun _ _ => 0)) :
     Causalean.Stat.Modes.TendstoInProbability (fun _ => μ) E atTop
       (fun _ _ => 0) := by
-  have hsq (n : ℕ) : (fun a => Real.sqrt (E n a) ^ 2) =ᵐ[μ] E n :=
-    (hpos n).mono (fun a ha => Real.sq_sqrt ha)
-  have hs := conditional_sq_tendsto_probability_zero μ m hm
-    (fun n a => Real.sqrt (E n a)) V hV
-    (fun n => (hE n).congr (hsq n).symm)
-    (fun n => (condExp_congr_ae (m := m n) (hsq n)).trans_le (hbound n)) hrate
-  have hc : Continuous (fun x : ℝ => x ^ 2) := by fun_prop
-  have ht := Causalean.Stat.Modes.TendstoInProbability.comp_continuousAt
-    hc.continuousAt hs
-  simp only [zero_pow (by norm_num : 2 ≠ 0)] at ht
-  exact TendstoInMeasure.congr (fun n => hsq n) (Eventually.of_forall (fun _ => rfl)) ht
+  exact Toolkit.Tricks.Statistics.Asymptotics.tendstoInProbability_zero_of_condExp_le_of_tendstoInProbability_zero
+    μ m hm E V (fun n => (hV n).mono (hm n) le_rfl) hE hpos hbound hrate
 
 -- Conditional independence of centered evaluation errors supplies the zero
 -- cross-moments. The finite expansion below uses those identities directly,

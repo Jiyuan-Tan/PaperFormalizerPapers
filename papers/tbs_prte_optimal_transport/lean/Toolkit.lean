@@ -1,8 +1,12 @@
 module
 
+public import Toolkit.Foundations.Algebra.Order.SortingRearrangement
 public import Toolkit.Foundations.Analysis.Calculus.AbsolutelyContinuous
 public import Toolkit.Foundations.Probability.Conditioning.FiniteValuedConditionalExpectation
+public import Toolkit.Foundations.Probability.Moments.HingeExpansion
+public import Toolkit.Tricks.Probability.Distributions.DistributionalTransform
 public import Toolkit.Tricks.Probability.Moments.ClippedCouplings
 public import Toolkit.Tricks.Probability.Moments.ProductCouplingBounds
 public import Toolkit.Tricks.Probability.Moments.QuantileVersions
 public import Toolkit.Tricks.Probability.Moments.SymmetricClipping
+public import Toolkit.Tricks.Statistics.Asymptotics.ConditionalMarkov

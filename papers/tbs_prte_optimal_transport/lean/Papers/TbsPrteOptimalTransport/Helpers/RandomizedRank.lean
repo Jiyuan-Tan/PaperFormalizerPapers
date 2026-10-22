@@ -1,6 +1,7 @@
 module
 public import Papers.TbsPrteOptimalTransport.Helpers.RangeRegularity
 public import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
+public import Toolkit.Tricks.Probability.Distributions.DistributionalTransform
 /-!
 # Randomized ranks on conditional gaps
 
@@ -318,28 +319,8 @@ lemma transform_of_aemeasurable {A : Type*} [MeasurableSpace A]
       Causalean.Stat.unifOI ∧
     (∀ᵐ a ∂μ.prod Causalean.Stat.unifOI,
       f a.1 = Causalean.Stat.quantile (μ.map f) (rank (μ.map f) (f a.1, a.2))) := by
-  haveI : IsProbabilityMeasure (μ.map f) := Measure.isProbabilityMeasure_map hf
-  let g : A × ℝ → ℝ × ℝ := fun a => (f a.1, a.2)
-  have he : g =ᵐ[μ.prod Causalean.Stat.unifOI] Prod.map (hf.mk f) id := by
-    have hfst := (measurePreserving_fst (μ := μ) (ν := Causalean.Stat.unifOI)).quasiMeasurePreserving.ae
-      hf.ae_eq_mk
-    filter_upwards [hfst] with a ha
-    exact congrArg (fun y => (y, a.2)) ha
-  have hg : AEMeasurable g (μ.prod Causalean.Stat.unifOI) := by
-    exact (hf.measurable_mk.prodMap measurable_id).aemeasurable.congr he.symm
-  have hmap : (μ.prod Causalean.Stat.unifOI).map g = (μ.map f).prod Causalean.Stat.unifOI := by
-    rw [Measure.map_congr he, ← Measure.map_prod_map μ Causalean.Stat.unifOI
-      hf.measurable_mk measurable_id, Measure.map_id, ← Measure.map_congr hf.ae_eq_mk]
-  constructor
-  · change (μ.prod Causalean.Stat.unifOI).map (rank (μ.map f) ∘ g) = _
-    rw [← AEMeasurable.map_map_of_aemeasurable
-      ((measurable_rank (μ.map f)).aemeasurable) hg, hmap]
-    exact uniform (μ.map f)
-  · have hr : ∀ᵐ b ∂(μ.prod Causalean.Stat.unifOI).map g,
-        b.1 = Causalean.Stat.quantile (μ.map f) (rank (μ.map f) b) := by
-      rw [hmap]
-      exact (recover (μ.map f)).mono fun b hb => hb.symm
-    exact ae_of_ae_map hg hr
+  exact Toolkit.Tricks.Probability.Distributions.map_distributionalTransform_eq_unifOI_and_ae_eq_quantile
+    μ f hf
 
 end Papers.TbsPrteOptimalTransport.DistributionalTransform
 

@@ -734,7 +734,7 @@ The records behind the report above, by the run's own identifiers.
 
 ## Corrected version
 
-12 of 12 result(s) differ from the version you provided — 0 repaired, 0 with the proof written out in full (no error), 12 only with a side condition or reading made explicit; the others are as printed. The Lean formalization is of the corrected version.
+12 of 12 result(s) differ from the version you provided — 0 repaired, 0 with the proof completed (no error), 12 only with a side condition or reading made explicit; the others are as printed. The Lean formalization is of the corrected version.
 
 ### `thm:1d-ot` (`sections/preliminaries.tex:88-95`)
 
