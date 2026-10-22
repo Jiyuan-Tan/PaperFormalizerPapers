@@ -2555,7 +2555,11 @@
     },
     {
       "path": "corrected_paper/TODO.md",
-      "sha256": "524e911c23b4ceff214dfc635dbc786e1ebd7c4850d528758daa6c74d0e77bdd"
+      "sha256": "5cc985fad4e2b5d236c557ae1e08c4d131a80a215c917817c3521c88448fccf4"
+    },
+    {
+      "path": "corrected_paper/_tikz/ba17529d4fbf944b.pdf",
+      "sha256": "5cd22b141d3ea65581b2cf1a7c26f53459cfaafc0c30fb97a48abc62ea9de8dc"
     },
     {
       "path": "corrected_paper/algorithm.sty",
@@ -2587,7 +2591,7 @@
     },
     {
       "path": "corrected_paper/proof.tex",
-      "sha256": "cfa6a8218a27e9a6663227019a9e60369ad79a36b6b7a8b784a10014a8a2507b"
+      "sha256": "21f194abca498f1c14883f356847858e3435bcba7aa2370a8c1da0f9ef2644d4"
     },
     {
       "path": "corrected_paper/ref.bib",
@@ -2751,7 +2755,7 @@
     },
     {
       "path": "lean/Papers/TbsNeuralCausalPi/Helpers/CanonicalNormalization.lean",
-      "sha256": "856366dcb8a45717ee70b173f849e92eca7a92ab0e659cccc39939c6f8d79415"
+      "sha256": "658d51d4528664b2b85bf391bff180067ef9d41ae6c34f05d0b0e20b40eb921a"
     },
     {
       "path": "lean/Papers/TbsNeuralCausalPi/Helpers/CanonicalRegrouping.lean",
@@ -3707,15 +3711,19 @@
     },
     {
       "path": "lean/README.md",
-      "sha256": "9e39cc6776d101049674da2a8411a35d47cde69edb272e8a8a48c4c4a3daf73d"
+      "sha256": "fd397f720fcb985cdffa7e013723b9c94c87758cc461a1f2f8dff69417514a0c"
     },
     {
       "path": "lean/Toolkit.lean",
-      "sha256": "d28a72c1021e5ed84a8b54cfe083fdf661b30b469f0a2c5101f0293907166e17"
+      "sha256": "fb4e481b9f4334db4e8de02d51095c6139edccde1d2765b17f45e2ca4f1c41e5"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Analysis/Normed/SimplexNormalization.lean",
+      "sha256": "69bf6fa03ee510e47e681a7367dea72be86c55c42860307e5b028cd23e19bd8f"
     },
     {
       "path": "lean/Toolkit/Foundations/LinearAlgebra/AffineGeneralPosition.lean",
-      "sha256": "2b7ace196aece0258905f77530e157d3a64608a380cbe8188d4831babea54bd5"
+      "sha256": "2d2ebdebf05f1d9b5f766814cff6cde0e7afce55c629a4881fe09b6d6a0add35"
     },
     {
       "path": "lean/Toolkit/Foundations/MeasureTheory/KantorovichRubinstein.lean",
@@ -3779,7 +3787,7 @@
     },
     {
       "path": "lean/lakefile.toml",
-      "sha256": "a15b84f1ac022efd2a49db9f2187d20232bb1abd756192652143e092147df638"
+      "sha256": "06405b21e5be36ceea33aba752a12cf9e1e6423d4d2c2be7ea64d76495bd1912"
     },
     {
       "path": "lean/lean-toolchain",
@@ -8387,7 +8395,7 @@
     },
     {
       "path": "lean/vendor/StatLean/port/build_cache.sh",
-      "sha256": "32cbab2632c810a30ff4f6d8ad66151ada8f8d59b84ceec11843b0362f0cfe83"
+      "sha256": "fccb0b2b630c9c45a5687580b51207e49ee0ad49330c11fa7a232ccb2161eedd"
     },
     {
       "path": "lean/vendor/StatLean/port/convert_modules.py",
@@ -8399,8 +8407,8 @@
     },
     {
       "path": "page/page.json",
-      "sha256": "0be360ba31f958cd070b2da2ddd8364a6792eea1633251f144a5e829d071951f"
+      "sha256": "33799141bbdd53fcbf7dac3c35281d9d3828f304a020e7e9c33fa1f67674b67d"
     }
   ],
-  "code": "15f9d18e76cb1f9ea0772653aea46ff9009f672a7b737f47ed977dc4a4d374c8"
+  "code": "91b1e2b991630b5f9c171af02b1535ad4e9fd5136316437012fbde2144672a87"
 }

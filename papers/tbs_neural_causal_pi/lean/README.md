@@ -20,7 +20,7 @@ lake env lean Check.lean   # the axioms of each result
 - `mathlib` (the Lean mathematical library): `https://github.com/leanprover-community/mathlib4` at `db584cd6d46c92f209a44c0f1c829460d327499d`
 - `StatLean` (Mathematical statistics: estimation, hypothesis testing, asymptotic statistics, nonparametrics, time series (adapted Stat-Lean).): no public repository carries the adapted copy this was built with, so it is included in `vendor/StatLean/` with its licence (`vendor/StatLean/UPSTREAM.md`: where it comes from)
 
-Note: built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`.
+Note: built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`.
 
 ## The paper's results
 
@@ -53,9 +53,15 @@ Note: built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file
 
 ## What is in this directory
 
-From the author's own library, copied here (15 module(s)): `Toolkit.Foundations.LinearAlgebra.AffineGeneralPosition`, `Toolkit.Foundations.MeasureTheory.KantorovichRubinstein`, `Toolkit.Foundations.MeasureTheory.Quantization`, `Toolkit.Foundations.MeasureTheory.Wasserstein`, `Toolkit.Foundations.Optimization.Convex.FiniteTransport`, `Toolkit.Foundations.Probability.Conditioning.ConditioningOnEvent`, `Toolkit.Foundations.Probability.Independence.ProductConditioning`, `Toolkit.Foundations.Topology.BarycentricSubdivision`, `Toolkit.Foundations.Topology.ChainVertexWeights`, `Toolkit.Foundations.Topology.EquivariantGeneralPosition`, `Toolkit.Foundations.Topology.EquivariantTransversality`, `Toolkit.Foundations.Topology.PiecewiseAffine`, `Toolkit.Foundations.Topology.PiecewiseAffineApproximation`, `Toolkit.Foundations.Topology.SimplicialAction`, `Toolkit.Foundations.Topology.SubdivisionMesh`.
+From the author's own library, copied here (16 module(s)): `Toolkit.Foundations.Analysis.Normed.SimplexNormalization`, `Toolkit.Foundations.LinearAlgebra.AffineGeneralPosition`, `Toolkit.Foundations.MeasureTheory.KantorovichRubinstein`, `Toolkit.Foundations.MeasureTheory.Quantization`, `Toolkit.Foundations.MeasureTheory.Wasserstein`, `Toolkit.Foundations.Optimization.Convex.FiniteTransport`, `Toolkit.Foundations.Probability.Conditioning.ConditioningOnEvent`, `Toolkit.Foundations.Probability.Independence.ProductConditioning`, `Toolkit.Foundations.Topology.BarycentricSubdivision`, `Toolkit.Foundations.Topology.ChainVertexWeights`, `Toolkit.Foundations.Topology.EquivariantGeneralPosition`, `Toolkit.Foundations.Topology.EquivariantTransversality`, `Toolkit.Foundations.Topology.PiecewiseAffine`, `Toolkit.Foundations.Topology.PiecewiseAffineApproximation`, `Toolkit.Foundations.Topology.SimplicialAction`, `Toolkit.Foundations.Topology.SubdivisionMesh`.
 
-Imported from the required libraries: `Causalean` (16 module(s)), `Mathlib` (446 module(s)), `StatLean` (2 module(s)).
+Imported from the required libraries: `Causalean` (16 module(s)), `Mathlib` (458 module(s)), `StatLean` (2 module(s)).
+
+## Moved into the author's library
+
+Results first proved for this paper and since moved into the library, where the paper now uses them:
+
+- `Toolkit.Foundations.Analysis.Normed.sum_abs_div_sum_sub_div_sum_le`
 
 ## Self-containment
 

@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Ring.CompTypeclasses
 public import Mathlib.Algebra.Ring.Defs
 public import Mathlib.Algebra.Ring.Hom.Defs
 public import Mathlib.Algebra.Torsor.Defs
+public import Mathlib.Analysis.Convex.SimplicialComplex.Basic
+public import Mathlib.Analysis.Convex.StdSimplex
 public import Mathlib.Analysis.Normed.Field.Basic
 public import Mathlib.Analysis.Normed.Group.AddTorsor
 public import Mathlib.Analysis.Normed.Group.Defs
@@ -32,6 +34,8 @@ public import Mathlib.Data.Fintype.Defs
 public import Mathlib.Data.Fintype.EquivFin
 public import Mathlib.Data.FunLike.Basic
 public import Mathlib.Data.FunLike.Equiv
+public import Mathlib.Data.Nat.Factors
+public import Mathlib.Data.Nat.Prime.Basic
 public import Mathlib.Data.Real.Basic
 public import Mathlib.Data.Set.Basic
 public import Mathlib.Data.Set.Countable
@@ -39,11 +43,17 @@ public import Mathlib.Data.Set.Defs
 public import Mathlib.Data.Set.Image
 public import Mathlib.Data.Set.Insert
 public import Mathlib.Data.SetLike.Basic
+public import Mathlib.Data.Sign.Basic
+public import Mathlib.GroupTheory.GroupAction.Basic
 public import Mathlib.LinearAlgebra.AffineSpace.AffineMap
 public import Mathlib.LinearAlgebra.AffineSpace.AffineSubspace.Basic
 public import Mathlib.LinearAlgebra.AffineSpace.AffineSubspace.Defs
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
 public import Mathlib.LinearAlgebra.DFinsupp
+public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.Orientation
 public import Mathlib.Logic.Function.Basic
 public import Mathlib.Logic.IsEmpty.Defs
 public import Mathlib.Logic.Nonempty
@@ -64,7 +74,14 @@ public import Mathlib.Order.Lattice
 public import Mathlib.Order.Notation
 public import Mathlib.Order.SetNotation
 public import Mathlib.Tactic.Push
+public import Mathlib.Topology.Compactness.Compact
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Constructions
+public import Mathlib.Topology.Constructions.SumProd
+public import Mathlib.Topology.ContinuousOn
 public import Mathlib.Topology.Defs.Basic
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Topology.Maps.Basic
 public import Mathlib.Topology.MetricSpace.ProperSpace
 public import Mathlib.Topology.MetricSpace.Pseudo.Defs
 public import Mathlib.Topology.Sets.Compacts
@@ -263,5 +280,85 @@ theorem exists_generalPosition_coordinates {ι κ : Type*} [Finite κ]
         · have hs : (s j).erase i = s j := Finset.erase_eq_of_notMem hij
           rw [← hs, herase]
           exact hgood j
+
+end Toolkit.Foundations.LinearAlgebra
+
+namespace Toolkit.Foundations.LinearAlgebra
+
+section
+
+open Set
+variable {E V : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup V] [Module ℝ V]
+
+/-- If [a finite set of points is affinely independent](hyp:hs), [any assignment
+of values in a real vector space to those points extends to an affine map on
+the entire ambient space](goal). -/
+-- @node: exists_affine_extension_module
+lemma exists_affineMap_eq_of_affineIndependent {s : Finset E}
+    (hs : AffineIndependent ℝ ((↑) : s → E)) (v : s → V) :
+    ∃ a : E →ᵃ[ℝ] V, ∀ p : s, a p = v p := by
+  classical
+  by_cases hempty : IsEmpty s
+  · exact ⟨AffineMap.const ℝ E 0, fun p => (hempty.false p).elim⟩
+  · have : Nonempty s := not_isEmpty_iff.mp hempty
+    let p₀ : s := Classical.choice inferInstance
+    let w : {p : s // p ≠ p₀} → E := fun p => (p.val : E) - p₀
+    have hw : LinearIndependent ℝ w :=
+      (affineIndependent_iff_linearIndependent_vsub ℝ _ p₀).mp hs
+    let b := Module.Basis.extend hw.linearIndepOn_id
+    let L : E →ₗ[ℝ] V := b.constr ℝ
+      (fun i => Function.extend w (fun p => v p.val - v p₀) (fun _ => 0) i.val)
+    have hL (p : {p : s // p ≠ p₀}) : L (w p) = v p.val - v p₀ := by
+      let i : hw.linearIndepOn_id.extend (Set.subset_univ _) :=
+        ⟨w p, hw.linearIndepOn_id.subset_extend _ ⟨p, rfl⟩⟩
+      have hi : b i = w p := Module.Basis.extend_apply_self _ i
+      rw [← hi, Module.Basis.constr_basis]
+      exact hw.injective.extend_apply _ _ p
+    refine ⟨AffineMap.mk' (fun x => L (x - p₀) + v p₀) L (p₀ : E)
+      (fun x => by simp), ?_⟩
+    intro p
+    change L ((p : E) - p₀) + v p₀ = v p
+    by_cases hp : p = p₀
+    · subst p
+      simp
+    · rw [show (p : E) - p₀ = w ⟨p, hp⟩ from rfl, hL]
+      exact sub_add_cancel _ _
+
+end
+
+end Toolkit.Foundations.LinearAlgebra
+
+namespace Toolkit.Foundations.LinearAlgebra
+
+section
+
+open Set
+variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F] [FiniteDimensional ℝ F]
+
+/-- If [a family of affine subspaces is countable](hyp:hcount), [every member is
+proper](hyp:hS), and [the radius is positive](hyp:heps), then [there is a point
+within that radius of the prescribed center that belongs to none of the affine
+subspaces](goal). -/
+-- @node: exists_near_avoiding_countable_affineSubspaces
+lemma exists_near_avoiding_countable_affineSubspaces
+    (S : Set (AffineSubspace ℝ F)) (hcount : S.Countable)
+    (hS : ∀ A ∈ S, A ≠ ⊤) (c : F) {eps : ℝ} (heps : 0 < eps) :
+    ∃ y : F, dist y c < eps ∧ ∀ A ∈ S, y ∉ A := by
+  classical
+  let : MeasurableSpace F := borel F
+  let : BorelSpace F := ⟨rfl⟩
+  let μ : MeasureTheory.Measure F := MeasureTheory.Measure.addHaar
+  have hnull : μ (⋃ A ∈ S, (A : Set F)) = 0 :=
+    (MeasureTheory.measure_biUnion_null_iff hcount).2 fun A hA =>
+      MeasureTheory.Measure.addHaar_affineSubspace μ A (hS A hA)
+  by_contra! h
+  have hsub : Metric.ball c eps ⊆ ⋃ A ∈ S, (A : Set F) := by
+    intro y hy
+    obtain ⟨A, hA, hyA⟩ := h y hy
+    exact mem_iUnion.2 ⟨A, mem_iUnion.2 ⟨hA, hyA⟩⟩
+  exact (Metric.measure_ball_pos μ c heps).ne'
+    (MeasureTheory.measure_mono_null hsub hnull)
+
+end
 
 end Toolkit.Foundations.LinearAlgebra

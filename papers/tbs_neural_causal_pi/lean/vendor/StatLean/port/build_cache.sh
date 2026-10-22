@@ -12,7 +12,7 @@
 # the tracked Lean sources and the pins (StatLean/, StatLean.lean, lakefile.toml, lean-toolchain,
 # lake-manifest.json), so an archive is only ever offered to the sources it was built from.
 set -euo pipefail
-REPO="${STATLEAN_CACHE_REPO:-Jiyuan-Tan/TheoremChecker}"
+REPO="${STATLEAN_CACHE_REPO:-Jiyuan-Tan/PaperFormalizer}"
 TAG="${STATLEAN_CACHE_TAG:-build-cache}"
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$HERE"
@@ -30,7 +30,7 @@ asset="statlean-build-$key.tar.zst"
 case "${1:-}" in
   fetch)
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
-    # A public repository serves the asset to curl; a private one needs gh (signed in).
+    # The release asset is public: curl fetches it (gh is a fallback, e.g. for a private fork).
     if command -v curl >/dev/null && curl -fsSL --retry 3 -o "$tmp/$asset" "https://github.com/$REPO/releases/download/$TAG/$asset" 2>/dev/null; then :
     elif command -v gh >/dev/null && gh release download "$TAG" --repo "$REPO" --pattern "$asset" --dir "$tmp" 2>/dev/null; then :
     else

@@ -907,7 +907,7 @@ The Lean development builds; it contains no `sorry`, `admit` or added axiom.
 
 ## The corrected paper
 
-`bundle/corrected_paper/` holds the paper as it reads after the corrections, as plain source in the author's own class and layout, compiled to `bundle/corrected_paper/Main.pdf` (130 pages). `bundle/MATCH.md` sets each result beside its Lean declaration; `bundle/lean/` holds the Lean code.
+`bundle/corrected_paper/` holds the paper as it reads after the corrections, as plain source in the author's own class and layout, compiled to `bundle/corrected_paper/Main.pdf` (129 pages). `bundle/MATCH.md` sets each result beside its Lean declaration; `bundle/lean/` holds the Lean code.
 
 **18 item(s) remain before the paper is ready to submit** (0 blocking), each with its place in the source: `bundle/corrected_paper/TODO.md`. What is checked is the paper's results; the prose around them is the authors', as printed.
 
@@ -1359,7 +1359,7 @@ Key contribution, as judged by the confirming referee: The key-result list is co
 
 ## Corrected version
 
-20 of 20 result(s) differ from the version you provided — 15 repaired, 0 with the proof written out in full (no error), 5 only with a side condition or reading made explicit; the others are as printed. The Lean formalization is of the corrected version.
+20 of 20 result(s) differ from the version you provided — 15 repaired, 0 with the proof completed (no error), 5 only with a side condition or reading made explicit; the others are as printed. The Lean formalization is of the corrected version.
 
 ### `thm:approximation` (`Main.tex:240-246`)
 

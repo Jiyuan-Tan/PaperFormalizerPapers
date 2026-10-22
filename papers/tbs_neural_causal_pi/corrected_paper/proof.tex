@@ -1645,10 +1645,6 @@ Replacing a categorical propensity vector $\hat f_i(x)$ by $\hat f_i(x)/\|\hat f
 \end{align*}
 For the second inequality, every term of the first sum has the continuous structural error bound proved here, every term of the second sum has the normalized categorical error bound proved here, and the latent term has the bound obtained using \cref{lemma:product_err}; the two sums contain only finitely many nodes. The comparison constant $C$ depends only on the fixed model, its dimensions and cardinalities, and $R$. The cubes, extensions, and networks were chosen independently of the intervention within the prescribed region. This proves the estimate uniformly throughout that region. 
 \end{proof}
-By \cite[Theorem 2]{Yarotsky2018OptimalAO}, part b), applied with $p=2/d_{i}^{\text{in}}$ to each output coordinate of $f_i$, which is Lipschitz continuous on the input cube by \cref{assump:Lip_and_bounded}: there are narrow fully-connected ReLU networks of constant width $2d_{i}^{\text{in}}+10$ and depth $L_0$ whose sup-norm error is at most $a\,\omega(cW^{-2/d_{i}^{\text{in}}})$, where $W$, the number of weights, grows linearly in $L_0$ at fixed width; stacking the $d_{i}^{\text{out}}$ coordinates gives, if $V_i$ is continuous, $ \| \hat{f}_{i} -f_{i} \| _{\infty } \leqslant O(L_0^{-2/d_{i}^{\text{in}}}) \leqslant O(L_0^{-2/d_{\max}^{\text{in}}}) $. 
-
-Theorem 2 b) of \cite{Yarotsky2018OptimalAO} applied to each output coordinate, whose modulus of continuity satisfies $\omega(r)\leqslant L_f r$; at fixed width the number of weights $W$ is proportional to the depth $L_0$, so $a\,\omega(cW^{-2/d_{i}^{\text{in}}})=O(L_0^{-2/d_{i}^{\text{in}}})$.
-
 \section{Proof of Consistency}
 \subsection{Inconsistent Counterexample (\cref{prop:counterexample})}\label{subsec:counter}
 
@@ -2812,24 +2808,6 @@ Therefore
 
 The dual formula yields the stated Wasserstein bound. If $\epsilon\geqslant2dK$, both push-forward measures are supported in a set of $1$-norm diameter $2dK$, so their Wasserstein distance is at most $2dK\leqslant\delta+\epsilon$ deterministically. This completes the proof for all positive $\delta,\epsilon$.
 \end{proof}
-By Theorem 18.4 in \cite{anthony1999neural}, if $\mathcal G$ is a nonempty class of functions from a set $X$ into $[0,1]$ with finite pseudo-dimension $v$, then for every $0<\epsilon\leqslant1$ and every positive integer $m$,
-\begin{align*}
-\mathcal{N}_{1}^{\mathrm{avg}}(\epsilon,\mathcal G,m)\leqslant\mathcal{M}_{1}^{\mathrm{avg}}(\epsilon,\mathcal G,m)<e(v+1)\left(\frac{2e}{\epsilon}\right)^{v},
-\end{align*}
-where $\mathcal{N}_{1}^{\mathrm{avg}}(\epsilon,\mathcal G,m)$ and $\mathcal{M}_{1}^{\mathrm{avg}}(\epsilon,\mathcal G,m)$ are the largest, over $x_1,\ldots,x_m\in X$, covering and packing numbers of $\{(g(x_1),\ldots,g(x_m)):g\in\mathcal G\}$ in the averaged metric $d_1(u,w)=\frac1m\sum_{i=1}^m|u_i-w_i|$. 
-
-This is Theorem 18.4 in \cite{anthony1999neural}.
-
-The cited assertion used in Lemma~\ref{lemma:sup_wasserstein} is the following restricted form of Theorem 17.1 in \cite{anthony1999neural}, with its standing measurability condition. Let $X$ and $T$ be standard Borel spaces, let $g:T\times X\rightarrow[0,1]$ be jointly Borel, and put $\mathcal G=\{g(t,\cdot):t\in T\}\ne\varnothing$. For every Borel probability distribution $P$ on $X\times[0,1]$, every $0<\epsilon<1$ and every positive integer $m$,
-
-\[
-\begin{aligned}
-&P^m\left\{\text{some }t\in T\text{ has }\left|\mathbb E_{(x,y)\sim P}(g(t,x)-y)^2-\frac1m\sum_{i=1}^m(g(t,x_i)-y_i)^2\right|\geqslant\epsilon\right\}\\
-&\quad\leqslant4\mathcal N_1^{\mathrm{avg}}(\epsilon/16,\mathcal G,2m)\exp(-\epsilon^2m/32).
-\end{aligned}
-\]
-
-Here the sample consists of independent draws from $P$, the probability is taken in its completion, and $\mathcal N_1^{\mathrm{avg}}(r,\mathcal G,N)$ is the supremum over $x_1,\ldots,x_N\in X$ of the covering number of the evaluation vectors in the metric $N^{-1}\sum_i|u_i-v_i|$. This structural domain supplies the standing measurability condition: the loss is bounded and jointly Borel, and its integral against $P$ is Borel in $t$. The latter assertion holds for indicators of measurable rectangles, is preserved by bounded monotone limits and linear combinations, and hence holds for bounded Borel functions by the monotone class theorem. Each bad event is a projection of a Borel subset of $T\times(X\times[0,1])^m$, so it is analytic and universally measurable. Replacing the sample by two independent samples or applying any of the finitely many coordinate swaps gives Borel functions on finite products and therefore the same measurability conclusion. Thus the sample and ghost-sample events used by Theorem 17.1 are measurable in the completed sample laws, and that theorem gives the displayed inequality.
 
 \noindent\textit{Remark (notation).} $\mathcal{N}_1(\epsilon,\mathcal{F},n)=\sup_{x_1,\ldots,x_n}\mathcal{N}(\epsilon,\{(f(x_1),\ldots,f(x_n)):f\in\mathcal{F}\},\|\cdot\|_1)$, where the points range over the domain of $\mathcal{F}$ and the norm is the printed $\ell_1$ norm without a factor $1/n$. In a result cited in the proof of Lemma~\ref{lemma:sup_wasserstein}: $\mathcal N_1^{\mathrm{avg}}(\epsilon,\mathcal G,m)$ is the supremum over $x_1,\ldots,x_m\in X$ of the covering numbers of $\{(g(x_1),\ldots,g(x_m)):g\in\mathcal G\}$ in $d_1(u,w)=m^{-1}\sum_{i=1}^m|u_i-w_i|$, for $\epsilon>0$ and positive integers $m$. This averaged covering number is distinct from the covering number defined with the unnormalized $\ell_1$ norm. In a result cited in the proof of Lemma~\ref{lemma:sup_wasserstein}: $\mathcal N_1^{\mathrm{avg}}(r,\mathcal G,N)$ is the supremum over $x_1,\ldots,x_N\in X$ of the covering number of $\{(g(x_1),\ldots,g(x_N)):g\in\mathcal G\}$ in $d_1(u,w)=N^{-1}\sum_{i=1}^N|u_i-w_i|$. The probability bound uses $r=\epsilon/16$ and $N=2m$. This averaged covering number is distinct from the covering number defined with the unnormalized $\ell_1$ norm. $\mathcal H_\delta\subseteq\mathcal H$ is a finite $\delta/2$-net in the uniform norm of $\mathcal H=\{h:[-K,K]^d\rightarrow\mathbb R:h(0)=0,\ |h(x)-h(y)|\leqslant\|x-y\|\}$, for $\delta>0$.
 

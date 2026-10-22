@@ -2,6 +2,7 @@ module
 public import Papers.TbsNeuralCausalPi.Setup.Assumptions.Model
 public import Mathlib.Analysis.Calculus.ContDiff.WithLp
 public import Mathlib.Analysis.Calculus.ContDiff.Operations
+public import Toolkit.Foundations.Analysis.Normed.SimplexNormalization
 /-! # Regularity of normalized categorical weights
 
 The denominator need only be positive on the structural input domain.
@@ -27,37 +28,9 @@ lemma canonical_normalized_dist_le {k : ℕ} (p q : L1Vec k)
     dist (WithLp.toLp 1 (fun j => p.ofLp j / ∑ l, p.ofLp l))
       (WithLp.toLp 1 (fun j => q.ofLp j / ∑ l, q.ofLp l)) ≤
         2 / (∑ j, p.ofLp j) * dist p q := by
-  let s := ∑ j, p.ofLp j
-  let t := ∑ j, q.ofLp j
-  have hmass : |s-t| ≤ dist p q := by
-    rw [PiLp.dist_eq_of_L1]
-    simpa only [s, t, ← Finset.sum_sub_distrib, Real.dist_eq] using
-      (Finset.abs_sum_le_sum_abs (fun j : Fin k => p.ofLp j-q.ofLp j) Finset.univ)
-  have hcoord (j : Fin k) :
-      |p.ofLp j / s - q.ofLp j / t| ≤
-        |p.ofLp j-q.ofLp j| / s + (q.ofLp j / t) * (|s-t| / s) := by
-    have heq : p.ofLp j / s - q.ofLp j / t =
-        (p.ofLp j-q.ofLp j) / s + (q.ofLp j / t) * ((t-s) / s) := by
-      field_simp [show s ≠ 0 from hs.ne', show t ≠ 0 from ht.ne']
-      ring
-    rw [heq]
-    calc
-      _ ≤ |(p.ofLp j-q.ofLp j) / s| + |(q.ofLp j / t) * ((t-s) / s)| := abs_add_le _ _
-      _ = _ := by
-        rw [abs_div, abs_of_pos hs, abs_mul,
-          abs_of_nonneg (div_nonneg (hq j) ht.le), abs_div, abs_of_pos hs, abs_sub_comm t s]
-  rw [PiLp.dist_eq_of_L1]
-  simp only [Real.dist_eq]
-  calc
-    _ ≤ ∑ j, (|p.ofLp j-q.ofLp j| / s + (q.ofLp j / t) * (|s-t| / s)) :=
-      Finset.sum_le_sum (fun j _ => hcoord j)
-    _ = dist p q / s + |s-t| / s := by
-      rw [Finset.sum_add_distrib, ← Finset.sum_div, ← Finset.sum_mul,
-        ← Finset.sum_div, show (∑ j, q.ofLp j) = t from rfl, div_self ht.ne', one_mul]
-      rw [PiLp.dist_eq_of_L1]
-      rfl
-    _ ≤ dist p q / s + dist p q / s := by gcongr
-    _ = _ := by dsimp only [s]; ring
+  simpa only [PiLp.dist_eq_of_L1, Real.dist_eq] using
+    (Toolkit.Foundations.Analysis.Normed.sum_abs_div_sum_sub_div_sum_le
+      Finset.univ p.ofLp q.ofLp (fun j _ => hq j) hs ht)
 
 /-- If [a vector-valued function is continuously differentiable to order r on a set](hyp:hp) and [its coordinate sum is positive throughout that set](hyp:hs), then [dividing its coordinates by their sum preserves continuous differentiability to order r on the set](goal). -/
 -- @node: canonical_normalized_contDiffOn

@@ -1,5 +1,6 @@
 module
 
+public import Toolkit.Foundations.Analysis.Normed.SimplexNormalization
 public import Toolkit.Foundations.LinearAlgebra.AffineGeneralPosition
 public import Toolkit.Foundations.MeasureTheory.KantorovichRubinstein
 public import Toolkit.Foundations.MeasureTheory.Quantization

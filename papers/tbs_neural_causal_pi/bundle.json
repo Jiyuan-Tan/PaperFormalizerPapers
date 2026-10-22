@@ -5,7 +5,7 @@
     "dir": "corrected_paper",
     "main": "Main.tex",
     "pdf": "Main.pdf",
-    "pages": 130,
+    "pages": 129,
     "compile": {
       "status": "passed",
       "tool": "pdflatex",
@@ -19,6 +19,7 @@
   "lean": {
     "files": 275,
     "toolkit_modules": [
+      "Toolkit.Foundations.Analysis.Normed.SimplexNormalization",
       "Toolkit.Foundations.LinearAlgebra.AffineGeneralPosition",
       "Toolkit.Foundations.MeasureTheory.KantorovichRubinstein",
       "Toolkit.Foundations.MeasureTheory.Quantization",
@@ -138,17 +139,17 @@
           "third_party/lean-rademacher/FoML/Symmetrization.lean": "d68c7374d0b33cdf6fbfb50b09fe5188e53dbffd"
         },
         "status": "unverified",
-        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
       }
     ],
     "warnings": [],
     "notes": [
-      "built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `theoremchecker report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      "built against a local copy of Causalean (its commit 5ca94e0ac387): 66 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report tbs_neural_causal_pi --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
     ]
   },
   "page": "page/page.json",
   "f4_seal": {
-    "code": "15f9d18e76cb1f9ea0772653aea46ff9009f672a7b737f47ed977dc4a4d374c8",
+    "code": "91b1e2b991630b5f9c171af02b1535ad4e9fd5136316437012fbde2144672a87",
     "problems": [],
     "reviews": "f4_reviews.log"
   },
@@ -238,49 +239,49 @@
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1877,
+      "line": 1873,
       "text": "Theorem 4.2: the equation labelled `eq:uniform_app_err` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1877,
+      "line": 1873,
       "text": "Theorem 4.2: the equation labelled `eq:decomp_u` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1877,
+      "line": 1873,
       "text": "Theorem 4.2: the equation labelled `eq:uniform_app_err2` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1877,
+      "line": 1873,
       "text": "Theorem 4.2: the equation labelled `eq:uniform_app_err3` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1877,
+      "line": 1873,
       "text": "Theorem 4.2: the replaced text had 4 numbered display(s), the correction has 0: equation numbers after this point shift"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1983,
+      "line": 1979,
       "text": "Theorem 4.2: the equation labelled `eq:appro_lip` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1983,
+      "line": 1979,
       "text": "Theorem 4.2: the equation labelled `eq:appro_dis` was in the replaced text and is not in the correction"
     },
     {
       "group": "numbering",
       "file": "proof.tex",
-      "line": 1983,
+      "line": 1979,
       "text": "Theorem 4.2: the replaced text had 2 numbered display(s), the correction has 0: equation numbers after this point shift"
     }
   ]
