@@ -3,10 +3,15 @@
   "private": true,
   "description": "PaperFormalizer — Shared Papers: the registry of papers formalized with PaperFormalizer, and the site built from it.",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "check": "node checks/check_paper.mjs",
     "build": "node site/build.mjs",
     "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "1.56.0"
   }
 }

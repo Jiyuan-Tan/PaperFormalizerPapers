@@ -14,8 +14,8 @@
 //
 // A bundle is UNTRUSTED input. Every string taken from one is escaped; the pages written here show
 // plain text only (the rendered HTML fields of page.json — paper.html, comments[].html, texHtml —
-// are never written into a page here: the viewer inserts them in the browser, through DOMPurify,
-// under the CSP); a link into a bundle is built from checked path segments; only a file of a type no
+// are never written into a page here: they are cleaned with the viewer's strict DOMPurify rules
+// into dist's page.json (`sanitize.mjs`), and the viewer inserts them under the CSP); a link into a bundle is built from checked path segments; only a file of a type no
 // browser runs is copied into the site (`SERVED_EXT`, an allowlist: GitHub Pages types a file by its
 // extension and renders HTML and every XML type, with no CSP of ours on it). Git keeps the rest.
 //
@@ -49,6 +49,7 @@
 //   Corrected PDF         page.json paper.pdf, when that file is in the folder
 //   Lean code, Full report  lean/, and the paper's page opening REPORT.md (#report), when in the folder
 //   seal                  f4_seal.json code
+import { pageCleaner } from "./sanitize.mjs";
 import { copyFileSync, cpSync, existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -490,7 +491,7 @@ function leanIndexHtml(p, files) {
 }
 
 /** Builds the site of the papers under `papersDir` into `outDir`; returns the papers it shows. */
-export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.join(ROOT, "dist"), viewerDir = VIEWER, log = console.log } = {}) {
+export async function build({ papersDir = path.join(ROOT, "papers"), outDir = path.join(ROOT, "dist"), viewerDir = VIEWER, log = console.log } = {}) {
   const pageFile = path.join(viewerDir, "page.html");
   if (!isFile(pageFile)) throw new Error(`${pageFile} is missing: copy the viewer with PaperFormalizer's \`node tools/scripts/sync_viewer.mjs <this repository>\``);
   const template = readFileSync(pageFile, "utf8");
@@ -498,20 +499,28 @@ export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.joi
   mkdirSync(path.join(outDir, "papers"), { recursive: true });
   cpSync(viewerDir, path.join(outDir, "viewer"), { recursive: true, filter: (f) => path.basename(f) !== "page.html" });
   const papers = [];
-  const slugs = existsSync(papersDir) ? readdirSync(papersDir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort() : [];
-  for (const slug of slugs) {
-    const dir = path.join(papersDir, slug);
-    const p = SLUG.test(slug) ? paperData(dir, slug) : null;
-    if (!p) {
-      log(`skipped ${JSON.stringify(slug)}: no readable page/page.json`);
-      continue;
+  const cleaner = await pageCleaner(viewerDir);
+  try {
+    const slugs = existsSync(papersDir) ? readdirSync(papersDir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort() : [];
+    for (const slug of slugs) {
+      const dir = path.join(papersDir, slug);
+      const p = SLUG.test(slug) ? paperData(dir, slug) : null;
+      if (!p) {
+        log(`skipped ${JSON.stringify(slug)}: no readable page/page.json`);
+        continue;
+      }
+      const out = path.join(outDir, "papers", slug);
+      const files = copyTree(dir, out);
+      // the page's HTML cleaned here, once, rather than in every reader's browser (`sanitize.mjs`)
+      const pageJson = path.join(out, "page", "page.json");
+      writeFileSync(pageJson, JSON.stringify(await cleaner.clean(JSON.parse(readFileSync(pageJson, "utf8")))));
+      writeFileSync(path.join(out, "index.html"), paperHtml(p, template));
+      const lean = files.filter((f) => f.startsWith("lean/") && href(f)).map((f) => f.slice("lean/".length));
+      if (p.lean) writeFileSync(path.join(out, "lean", "index.html"), leanIndexHtml(p, lean));
+      papers.push(p);
     }
-    const out = path.join(outDir, "papers", slug);
-    const files = copyTree(dir, out);
-    writeFileSync(path.join(out, "index.html"), paperHtml(p, template));
-    const lean = files.filter((f) => f.startsWith("lean/") && href(f)).map((f) => f.slice("lean/".length));
-    if (p.lean) writeFileSync(path.join(out, "lean", "index.html"), leanIndexHtml(p, lean));
-    papers.push(p);
+  } finally {
+    await cleaner.close();
   }
   writeFileSync(path.join(outDir, "index.html"), indexHtml(papers));
   writeFileSync(path.join(outDir, "site.js"), SCRIPT);
@@ -523,5 +532,5 @@ export function build({ papersDir = path.join(ROOT, "papers"), outDir = path.joi
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const arg = (name) => { const i = process.argv.indexOf(name); return i > 0 && process.argv[i + 1] ? path.resolve(process.argv[i + 1]) : undefined; };
-  build({ papersDir: arg("--papers"), outDir: arg("--out") });
+  await build({ papersDir: arg("--papers"), outDir: arg("--out") });
 }

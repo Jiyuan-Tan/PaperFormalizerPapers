@@ -122,7 +122,10 @@ Two smaller limits:
 
 ## Run the checks and build the site
 
-Node 20 or later; there is nothing to install.
+Node 20 or later. The checks need nothing installed; the site build cleans each paper's page in a
+headless Chromium, so install it once:
+
+    npm ci && npx playwright-core install chromium
 
     npm test                                   # the tests
     node checks/check_paper.mjs papers/<slug>  # one folder (no argument: every folder)
@@ -159,8 +162,10 @@ GitHub Pages sets no header of the site's choosing, so each page carries its
 Content-Security-Policy in a `<meta>` (`CSP` in `site/build.mjs`): scripts, styles, images and
 frames of the site only, no form, no `<base>`, no plugin; the paper's page also takes its code font
 from jsDelivr, and the pages the build writes their text fonts from Google Fonts. A bundle's
-rendered HTML (the paper, its notes, the TeX of the findings) reaches only the paper's page, where
-the viewer passes every string through DOMPurify before inserting it. No file of a bundle that a
+rendered HTML (the paper, its notes, the TeX of the findings) reaches only the paper's page: the
+build cleans it into the site's copy of `page.json` with DOMPurify under the viewer's strict rules,
+in a headless Chromium (`site/sanitize.mjs`), and the viewer passes every other string it inserts
+through DOMPurify too. No file of a bundle that a
 browser would run is copied into the site: only the inert types of `SERVED_EXT` in
 `site/build.mjs` are (PDF, images, TeX, Lean, Markdown, text, JSON, …) — an allowlist, since Pages
 types a file by its extension, renders HTML and every XML type, and cannot sandbox a file served at

@@ -5,14 +5,14 @@ import { test } from "node:test";
 import { build, CSP, esc, plain } from "../site/build.mjs";
 import { copyFixture, FIXTURE, readJson, SLUG, tmp, writeJson } from "./helpers.mjs";
 
-const site = (papersDir) => {
+const site = async (papersDir) => {
   const outDir = path.join(tmp(), "dist");
-  const papers = build({ papersDir, outDir, log: () => {} });
+  const papers = await build({ papersDir, outDir, log: () => {} });
   return { outDir, papers, index: readFileSync(path.join(outDir, "index.html"), "utf8") };
 };
 
-test("the index lists the fixture paper with its badges", () => {
-  const { outDir, papers, index } = site(path.dirname(FIXTURE));
+test("the index lists the fixture paper with its badges", async () => {
+  const { outDir, papers, index } = await site(path.dirname(FIXTURE));
   assert.equal(papers.length, 1);
   assert.deepEqual(
     { total: papers[0].total, proved: papers[0].proved, corrections: papers[0].corrections, refuted: papers[0].refuted, clarifications: papers[0].clarifications, cited: papers[0].cited },
@@ -72,7 +72,7 @@ test("the index lists the fixture paper with its badges", () => {
   assert.ok(index.includes("A share carries the whole bundle") && !index.includes("You choose"));
 });
 
-test("a bundle's strings are escaped, and its rendered HTML is never used", () => {
+test("a bundle's strings are escaped, and its rendered HTML is never used", async () => {
   const dir = copyFixture();
   const X = '<script>alert(1)</script>"><img src=x onerror=alert(2)>';
   const file = path.join(dir, "page", "page.json");
@@ -96,7 +96,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   for (const f of ["index.html", "x.js", "fig.svg"]) writeFileSync(path.join(dir, "corrected_paper", f), "<script>alert(5)</script>");
   page.title = `{{CSP}} {{FALLBACK}} ${page.title}`;
   writeJson(file, page);
-  const { outDir, index } = site(path.dirname(dir));
+  const { outDir, index } = await site(path.dirname(dir));
   const pages = [index, readFileSync(path.join(outDir, "papers", SLUG, "index.html"), "utf8"), readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8")];
   for (const html of pages) {
     assert.ok(!/<script>alert/u.test(html), "a script of the bundle reached a page");
@@ -115,7 +115,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", () =
   assert.equal(plain("A \\emph{simple} bound \\label{x}for $n$~points"), "A simple bound for n points");
 });
 
-test("the other outcomes: no error found, a refuted result, an arXiv id", () => {
+test("the other outcomes: no error found, a refuted result, an arXiv id", async () => {
   const dir = copyFixture();
   const file = path.join(dir, "page", "page.json");
   const page = readJson(file);
@@ -129,7 +129,7 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
   for (const r of cleanPage.results) Object.assign(r, { state: "ok", repair: null, paperError: null });
   writeJson(path.join(clean, "page", "page.json"), { ...cleanPage, slug: "clean_paper", title: "A clean paper", tokens: { calls: 412, uncounted: 0, input: 1_180_000_000, cached: 900_000_000, output: 20_500_000, total: 1_200_500_000 } });
   writeJson(path.join(clean, "share.json"), { shared_by: "fixture-user", shared_at: "2026-10-01", arxiv: null });
-  const { index, papers } = site(path.dirname(dir));
+  const { index, papers } = await site(path.dirname(dir));
   assert.deepEqual(papers.map((p) => p.slug), ["clean_paper", SLUG]);
   for (const s of [
     "3 unresolved",
@@ -148,23 +148,23 @@ test("the other outcomes: no error found, a refuted result, an arXiv id", () => 
   assert.equal(index.match(/ tokens<\/span>/gu).length, 1);
 });
 
-test("an empty registry, and a folder that is no bundle", () => {
+test("an empty registry, and a folder that is no bundle", async () => {
   const papersDir = path.join(tmp(), "papers");
-  assert.ok(site(papersDir).index.includes("No paper has been shared yet."));
+  assert.ok((await site(papersDir)).index.includes("No paper has been shared yet."));
   const dir = copyFixture();
   writeFileSync(path.join(dir, "page", "page.json"), "{ not json");
-  const { papers, outDir } = site(path.dirname(dir));
+  const { papers, outDir } = await site(path.dirname(dir));
   assert.equal(papers.length, 0);
   assert.ok(!existsSync(path.join(outDir, "papers", SLUG)));
 });
 
-test("only a file of a type no browser runs is copied into the site; the page builds without the rest", () => {
+test("only a file of a type no browser runs is copied into the site; the page builds without the rest", async () => {
   const dir = copyFixture();
   const refused = ["x.shtml", "y.xsl", "z.xsd", "w.rng", "m.mml", "e.ecma", "F.SVG", "P.Html", "q.out"];
   const kept = ["a.tex", "b.bib", "c.bbl", "d.sty", "e.cls", "f.bst", "fig.PNG", "g.jpg", "h.pdf", "notes.md", "i.txt", "j.json", "LICENSE"];
   for (const f of [...refused, ...kept]) writeFileSync(path.join(dir, "corrected_paper", f), "<script>alert(1)</script>");
   writeFileSync(path.join(dir, "lean", "lean-toolchain"), "leanprover/lean4:v4.33.0\n");
-  const { outDir, papers } = site(path.dirname(dir));
+  const { outDir, papers } = await site(path.dirname(dir));
   assert.equal(papers.length, 1);
   const at = (f) => path.join(outDir, "papers", SLUG, "corrected_paper", f);
   for (const f of refused) assert.ok(!existsSync(at(f)), `${f} was copied`);
@@ -173,12 +173,34 @@ test("only a file of a type no browser runs is copied into the site; the page bu
   assert.ok(existsSync(path.join(outDir, "papers", SLUG, "index.html")));
 });
 
-test("a slug of up to 80 characters, as the check allows, is on the site", () => {
+test("a slug of up to 80 characters, as the check allows, is on the site", async () => {
   const long = `p${"a".repeat(79)}`;
   const dir = copyFixture(long);
   const page = readJson(path.join(dir, "page", "page.json"));
   writeJson(path.join(dir, "page", "page.json"), { ...page, slug: long });
-  const { papers, outDir } = site(path.dirname(dir));
+  const { papers, outDir } = await site(path.dirname(dir));
   assert.equal(papers.length, 1);
   assert.ok(existsSync(path.join(outDir, "papers", long, "index.html")));
+});
+
+test("the site's page.json is cleaned at build time with the viewer's strict rules, whatever the bundle claims", async () => {
+  const dir = copyFixture();
+  const file = path.join(dir, "page", "page.json");
+  const page = readJson(file);
+  page.sanitized = "site"; // a bundle's own claim changes nothing: every page is cleaned
+  page.paper.html = '<p id="lbl-a" name="n" data-copy="c">A</p><img src=x onerror="alert(1)"><script>alert(2)</script><form><input></form>'
+    + '<span id="d-body" style="position:fixed;z-index:9;inset:0;color:red">B</span><span style="position:relative;top:-1em">C</span>';
+  page.paper.comments[0].html = '<b onclick="alert(3)">n</b>';
+  page.paper.toc = [{ html: '<a href="javascript:alert(4)">1</a>' }];
+  page.texHtml = { x: '<i>t</i><script>alert(5)</script>' };
+  writeJson(file, page);
+  const { outDir } = await site(path.dirname(dir));
+  const out = readJson(path.join(outDir, "papers", SLUG, "page", "page.json"));
+  assert.equal(out.sanitized, "site");
+  assert.equal(out.paper.html, '<p id="lbl-a">A</p><img src="x"><input><span style="color: red;">B</span><span style="position:relative;top:-1em">C</span>');
+  assert.equal(out.paper.comments[0].html, "<b>n</b>");
+  assert.equal(out.paper.toc[0].html, "<a>1</a>");
+  assert.deepEqual(out.texHtml, { x: "<i>t</i>" });
+  // the bundle's own file is left as shared (the seal names it); only the site's copy is cleaned
+  assert.equal(readJson(file).paper.html, page.paper.html);
 });
