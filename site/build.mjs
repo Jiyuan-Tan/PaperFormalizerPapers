@@ -58,6 +58,9 @@ import { SLUG } from "../checks/check_paper.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TOOL_URL = "https://github.com/Jiyuan-Tan/PaperFormalizer";
+/** The site's address (its Pages custom domain): the canonical links, the sitemap and the robots file name it. */
+export const SITE = "https://paperformalizer.org/";
+const SITE_DESCRIPTION = "PaperFormalizer helps authors turn a mathematical paper into a Lean-verified version: it checks each theorem, lemma and assumption against the paper's own proof, proposes revisions the author decides on, and proves the statements in Lean 4. Browse papers formalized with it.";
 const VIEWER = path.join(ROOT, "site", "viewer");
 /** The policy of every page: scripts and data of the site only, no form, no <base>, no plugin. */
 export const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'";
@@ -343,6 +346,41 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 `;
 
+/** What a search engine or a link preview reads of a page: its description, canonical address, Open
+ *  Graph card and structured data (JSON-LD, `<` escaped so no text of a bundle closes the script). */
+export function seoHead({ title, description, url, type = "website", data = null }) {
+  const d = plain(description, 300);
+  return [
+    `<meta name="description" content="${esc(d)}">`,
+    `<link rel="canonical" href="${esc(url)}">`,
+    `<meta property="og:site_name" content="PaperFormalizer">`,
+    `<meta property="og:type" content="${esc(type)}">`,
+    `<meta property="og:title" content="${esc(title)}">`,
+    `<meta property="og:description" content="${esc(d)}">`,
+    `<meta property="og:url" content="${esc(url)}">`,
+    `<meta name="twitter:card" content="summary">`,
+    ...(data ? [`<script type="application/ld+json">${JSON.stringify(data).replace(/</gu, "\\u003c")}</script>`] : []),
+  ].join("\n");
+}
+
+/** The search-engine head of a paper's page. */
+function paperSeo(p) {
+  const url = `${SITE}papers/${p.slug}/`;
+  const authors = p.authors ? p.authors.split(/\s*(?:,|\band\b)\s*/u).filter(Boolean).map((name) => ({ "@type": "Person", name })) : [];
+  const description = `${p.title}${p.authors ? `, by ${p.authors}` : ""}: the paper formalized in Lean 4 with PaperFormalizer, with its revisions and their proofs. ${p.summary ?? ""}`;
+  return seoHead({
+    title: `${p.title} — PaperFormalizer`, description, url, type: "article",
+    data: { "@context": "https://schema.org", "@type": "ScholarlyArticle", headline: p.title, name: p.title, url, ...(authors.length ? { author: authors } : {}), ...(p.sharedAt ? { datePublished: p.sharedAt.slice(0, 10) } : {}), ...(p.arxiv ? { sameAs: `https://arxiv.org/abs/${p.arxiv}` } : {}), isPartOf: { "@type": "WebSite", name: "PaperFormalizer", url: SITE } },
+  });
+}
+
+/** sitemap.xml: the index and every paper's page. */
+export function sitemapXml(papers) {
+  const url = (loc, lastmod) => `  <url><loc>${esc(loc)}</loc>${lastmod ? `<lastmod>${esc(lastmod.slice(0, 10))}</lastmod>` : ""}</url>`;
+  const newest = papers.map((p) => p.sharedAt).filter(Boolean).sort().at(-1);
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[url(SITE, newest), ...papers.map((p) => url(`${SITE}papers/${p.slug}/`, p.sharedAt))].join("\n")}\n</urlset>\n`;
+}
+
 const head = (title, extra = "") => `<!doctype html>
 <html lang="en">
 <head>
@@ -358,7 +396,14 @@ const head = (title, extra = "") => `<!doctype html>
 export function indexHtml(papers) {
   const sorted = [...papers].sort((a, b) => (a.sharedAt ?? "") < (b.sharedAt ?? "") ? 1 : (a.sharedAt ?? "") > (b.sharedAt ?? "") ? -1 : a.slug < b.slug ? -1 : 1);
   const pill = (set, value, label, on) => `<button type="button" class="pill" data-set="${set}" data-value="${value}" aria-pressed="${on}">${label}</button>`;
-  return `${head("PaperFormalizer — formalized papers", '\n<script src="site.js"></script>')}
+  const seo = seoHead({
+    title: "PaperFormalizer — formalized papers", description: SITE_DESCRIPTION, url: SITE,
+    data: { "@context": "https://schema.org", "@graph": [
+      { "@type": "WebSite", name: "PaperFormalizer", url: SITE, description: SITE_DESCRIPTION },
+      { "@type": "SoftwareSourceCode", name: "PaperFormalizer", codeRepository: TOOL_URL, programmingLanguage: ["TypeScript", "Lean"], description: SITE_DESCRIPTION, url: SITE },
+    ] },
+  });
+  return `${head("PaperFormalizer — formalized papers", `\n${seo}\n<script src="site.js"></script>`)}
 <body>
 <div class="wrap">
 
@@ -456,7 +501,7 @@ function paperSummary(p) {
 export function paperHtml(p, template) {
   const fields = { CSP: CSP_VIEWER, TITLE: esc(`${p.title} — PaperFormalizer`), VIEWER: "../../viewer/", HOME: "../../", FALLBACK: paperSummary(p) };
   // one pass: a field's value is never read for another field
-  return template.replace(/\{\{(CSP|TITLE|VIEWER|HOME|FALLBACK)\}\}/gu, (_, k) => fields[k]);
+  return template.replace(/\{\{(CSP|TITLE|VIEWER|HOME|FALLBACK)\}\}/gu, (_, k) => fields[k]).replace("</head>", () => `${paperSeo(p)}\n</head>`);
 }
 
 /** The regular files and folders of `from`, copied to `to`; anything else, and a file not `served`,
@@ -529,6 +574,8 @@ export async function build({ papersDir = path.join(ROOT, "papers"), outDir = pa
   }
   writeFileSync(path.join(outDir, "index.html"), indexHtml(papers));
   writeFileSync(path.join(outDir, "site.js"), SCRIPT);
+  writeFileSync(path.join(outDir, "sitemap.xml"), sitemapXml(papers));
+  writeFileSync(path.join(outDir, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}sitemap.xml\n`);
   // served as built: no Jekyll pass over the folders (it would drop those whose name starts with _)
   writeFileSync(path.join(outDir, ".nojekyll"), "");
   log(`built ${papers.length} paper(s) into ${outDir}`);

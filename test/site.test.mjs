@@ -66,7 +66,8 @@ test("the index lists the fixture paper with its badges", async () => {
   const leanIndex = readFileSync(path.join(outDir, "papers", SLUG, "lean", "index.html"), "utf8");
   for (const html of [index, paper, leanIndex]) {
     assert.match(html, /<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; [^"]*base-uri 'none'; form-action 'none'">/u);
-    assert.ok(!/<script(?![^>]*\ssrc=)[^>]*>/u.test(html), "an inline script");
+    // (structured data, type application/ld+json, is data a browser never runs)
+    assert.ok(!/<script(?![^>]*\ssrc=)(?![^>]*type="application\/ld\+json")[^>]*>/u.test(html), "an inline script");
   }
   assert.ok(paper.includes(`content="${CSP.replace("font-src 'self' data:", "font-src 'self' data: https://cdn.jsdelivr.net")}"`), "the paper's page: the strict policy, the code font's host apart");
   assert.ok(index.includes('<script src="site.js"></script>') && readFileSync(path.join(outDir, "site.js"), "utf8").includes("document.documentElement.className = 'js'"));
@@ -221,4 +222,34 @@ test("each formula's markup is set apart in paper.math, a placeholder in its pla
   // a comment's formulas join the same table, after the paper's
   assert.equal(out.paper.comments[0].html, 'Note on <span class="kx" data-k="2"></span>');
   assert.equal(out.paper.math[2], '<span class="katex">w</span>');
+});
+
+test("search engines: each page's description, canonical link and structured data; a sitemap and robots file", async () => {
+  const dir = copyFixture();
+  const file = path.join(dir, "page", "page.json");
+  const page = readJson(file);
+  page.title = 'A </script><script>alert(1)</script> "title"';
+  writeJson(file, page);
+  const { outDir, index } = await site(path.dirname(dir));
+  assert.match(index, /<meta name="description" content="PaperFormalizer helps authors turn a mathematical paper into a Lean-verified version/u);
+  assert.ok(index.includes('<link rel="canonical" href="https://paperformalizer.org/">'));
+  assert.ok(index.includes('"codeRepository":"https://github.com/Jiyuan-Tan/PaperFormalizer"'));
+  const slug = path.basename(dir);
+  const html = readFileSync(path.join(outDir, "papers", slug, "index.html"), "utf8");
+  const headPart = html.slice(0, html.indexOf("</head>"));
+  assert.ok(headPart.includes(`<link rel="canonical" href="https://paperformalizer.org/papers/${slug}/">`));
+  assert.ok(headPart.includes('<meta property="og:type" content="article">'));
+  assert.match(headPart, /<meta name="description" content="A &lt;\/script&gt;/u);
+  // the structured data is JSON a bundle's text cannot close: one script element, its `<` escaped
+  const ld = /<script type="application\/ld\+json">([^]*?)<\/script>/u.exec(headPart);
+  assert.ok(ld && !ld[1].includes("<"));
+  const data = JSON.parse(ld[1]);
+  assert.equal(data["@type"], "ScholarlyArticle");
+  assert.equal(data.headline, page.title.replace(/\s+/gu, " "));
+  assert.deepEqual(data.author.map((a) => a.name), ["Jiyuan Tan", "Jose Blanchet", "Vasilis Syrgkanis"]);
+  assert.equal((headPart.match(/<script/gu) ?? []).length, (headPart.match(/<\/script>/gu) ?? []).length);
+  const sitemap = readFileSync(path.join(outDir, "sitemap.xml"), "utf8");
+  assert.ok(sitemap.includes("<loc>https://paperformalizer.org/</loc>"));
+  assert.ok(sitemap.includes(`<loc>https://paperformalizer.org/papers/${slug}/</loc><lastmod>`));
+  assert.equal(readFileSync(path.join(outDir, "robots.txt"), "utf8"), "User-agent: *\nAllow: /\n\nSitemap: https://paperformalizer.org/sitemap.xml\n");
 });
