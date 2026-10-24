@@ -1,0 +1,110 @@
+module
+public import Papers.OaiPairedStatesHamiltonian.Basic
+public import Papers.OaiPairedStatesHamiltonian.Helpers
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Cancel
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CancelCycleLift
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CancelDelta
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CancelSwitch
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Circulation
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CitedGates
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ClockwiseMatching
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ComponentEulerBound
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ComponentEulerExact
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ComponentMaps
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleCap
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleDisk
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleDiskEuler
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleExterior
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleGluing
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleIncidence
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleReversal
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleSeparation
+public import Papers.OaiPairedStatesHamiltonian.Helpers.CycleSideCount
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DartRestriction
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Density
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DensityBoundary
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DensityComponentEuler
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DensityComponents
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DensityFlowCounts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DensityRegions
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Disk
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DiskCounts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DiskMatching
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DualConnectivity
+public import Papers.OaiPairedStatesHamiltonian.Helpers.DualMap
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Duality
+public import Papers.OaiPairedStatesHamiltonian.Helpers.EdgeCuts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.EdgeDeletion
+public import Papers.OaiPairedStatesHamiltonian.Helpers.EulerBound
+public import Papers.OaiPairedStatesHamiltonian.Helpers.FaceSideLabels
+public import Papers.OaiPairedStatesHamiltonian.Helpers.FirstReturn
+public import Papers.OaiPairedStatesHamiltonian.Helpers.FirstReturnCompose
+public import Papers.OaiPairedStatesHamiltonian.Helpers.FirstReturnCounts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ForestAsymptotics
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ForestExtension
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ForestGraph
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ForestState
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Forests
+public import Papers.OaiPairedStatesHamiltonian.Helpers.GlobalGradients
+public import Papers.OaiPairedStatesHamiltonian.Helpers.GradientRestriction
+public import Papers.OaiPairedStatesHamiltonian.Helpers.GraphClasses
+public import Papers.OaiPairedStatesHamiltonian.Helpers.HamiltonianAssembly
+public import Papers.OaiPairedStatesHamiltonian.Helpers.InducedCore
+public import Papers.OaiPairedStatesHamiltonian.Helpers.InducedMaps
+public import Papers.OaiPairedStatesHamiltonian.Helpers.InducedPlacement
+public import Papers.OaiPairedStatesHamiltonian.Helpers.IsolatedVertexRemoval
+public import Papers.OaiPairedStatesHamiltonian.Helpers.MapOperations
+public import Papers.OaiPairedStatesHamiltonian.Helpers.OppositeEdges
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PForest
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PairCycleLift
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PairGroupProducts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PairOrientations
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PairPhases
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Pairs
+public import Papers.OaiPairedStatesHamiltonian.Helpers.PartitionAssembly
+public import Papers.OaiPairedStatesHamiltonian.Helpers.RadialRotation
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ReverseCycleSides
+public import Papers.OaiPairedStatesHamiltonian.Helpers.RootComponents
+public import Papers.OaiPairedStatesHamiltonian.Helpers.RotationEquiv
+public import Papers.OaiPairedStatesHamiltonian.Helpers.RotationEulerBound
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Selection
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SelectionAcyclic
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SelectionCounting
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SelectionCycles
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SelectionWhite
+public import Papers.OaiPairedStatesHamiltonian.Helpers.ShortFaces
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SphereMaps
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeCore
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeEdges
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeGenus
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeLocalSides
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeMaps
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokePlacement
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeProjection
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeRegions
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SpokeSectors
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Spokes
+public import Papers.OaiPairedStatesHamiltonian.Helpers.States
+public import Papers.OaiPairedStatesHamiltonian.Helpers.StatesCore
+public import Papers.OaiPairedStatesHamiltonian.Helpers.SwapOrbitCounts
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TreeBranches
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TreeCardinality
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TreeGluing
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TriangleCapIncidence
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TriangleCaps
+public import Papers.OaiPairedStatesHamiltonian.Helpers.TrianglePartitionMatching
+public import Papers.OaiPairedStatesHamiltonian.Helpers.Triangulation
+public import Papers.OaiPairedStatesHamiltonian.Main
+public import Papers.OaiPairedStatesHamiltonian.TEdgeAvoidance
+public import Papers.OaiPairedStatesHamiltonian.TMain
+public import Papers.OaiPairedStatesHamiltonian.TPartition
+public import Papers.OaiPairedStatesHamiltonian.TPfaffianPaths
+
+/-! # Run barrel (auto-generated)
+
+Aggregates every module of this paper run so the whole run is ONE buildable target
+(`lake build <this module>`). Paper modules are not reachable from the library barrels, so
+the default lake target skips them and reports green on stale oleans. Rewritten from the
+run's module set on every F-stage entry — do not hand-edit. -/
+
+public section

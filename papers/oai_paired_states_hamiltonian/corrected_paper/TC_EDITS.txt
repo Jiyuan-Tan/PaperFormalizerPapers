@@ -1,0 +1,1 @@
+2026-10-24: paper.tex:361,496,830: replaced three page-space reservations with comments; paper.tex:831,836: replaced bibliography group commands with equivalent braces. Layout only; all statement/proof text and line numbers preserved.

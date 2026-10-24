@@ -1,0 +1,700 @@
+===== reviewer convergence/dual :: medium :: batch[ass:trees-no-separating,ass:edge-avoidance-domain,ass:pfaffian-paths-graph,ass:pfaffian-paths-bipartite,ass:pfaffian-orientation] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:trees-no-separating",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: excludes every simple three-edge cycle having a vertex strictly on each of its two sphere regions."
+    },
+    {
+      "obj_id": "ass:edge-avoidance-domain",
+      "verdict": "faithful-refinement",
+      "note": "Matches the pinned reading: finite simple undirected cubic bipartite planar 3-vertex-connected G, with e in its edge set."
+    },
+    {
+      "obj_id": "ass:pfaffian-paths-graph",
+      "verdict": "faithful-refinement",
+      "note": "Finite simple undirected graphs are supplied by the ambient binders; the conjuncts express exactly cubicity, 3-vertex-connectivity, and existence of a Pfaffian orientation."
+    },
+    {
+      "obj_id": "ass:pfaffian-paths-bipartite",
+      "verdict": "faithful-refinement",
+      "note": "Existence of a proper coloring into Fin 2 is equivalent to bipartiteness."
+    },
+    {
+      "obj_id": "ass:pfaffian-orientation",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: orients each edge and counts forward darts oddly on every even cycle whose vertex-deleted induced graph has a perfect matching; reversal preserves odd parity for even cycles."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:trees-no-separating","verdict":"faithful-refinement","note":"The Lean says that no simple cycle of T satisfies IsSeparatingTriangle. IsSeparatingTriangle wraps SeparatingTriangleProperties (Helpers/Triangulation.lean:193): the cycle has length 3 and there are vertices strictly on both of its sides. So the Lean is exactly 'T has no separating triangle', given the def:separating-triangle node, which is its own node and was not graded here. Equivalent in both directions."},{"obj_id":"ass:edge-avoidance-domain","verdict":"faithful-refinement","note":"MainDomain G (cubic, 2-colorable, planar, 3-vertex-connected) together with e ∈ G.edgeSet is exactly the pinned reading ass:pin-2 and the hypotheses of thm:main plus e ∈ E(G). The IsPlanar body was not unfolded on this page; it belongs to ass:main-domain."},{"obj_id":"ass:pfaffian-paths-graph","verdict":"faithful-refinement","note":"The Lean conjoins three conditions. IsRegularOfDegree 3 is cubic. IsVertexConnected G 3 requires more than 3 vertices and that deleting any fewer than 3 vertices leaves the graph connected, which is the standard definition of 3-vertex-connected. IsPfaffian requires a Pfaffian orientation. Finite, simple and undirected come from the type (SimpleGraph on a Fintype). Planarity is correctly left unrestricted. Equivalent."},{"obj_id":"ass:pfaffian-paths-bipartite","verdict":"faithful-refinement","note":"For a simple graph, G.Colorable 2 holds exactly when G is bipartite. Equivalent."},{"obj_id":"ass:pfaffian-orientation","verdict":"faithful-refinement","note":"The orientation is encoded as a relation o with o u v ↔ ¬ o v u on every edge, which picks exactly one direction per edge, so it is exactly an orientation. The quantifier covers every cycle walk of even length. The condition that G - V(C) has a perfect matching is rendered as the induced graph on the vertices off C.support having a perfect-matching subgraph. The count is the number of darts in traversal order that agree with o. For an even cycle, the counts along the two traversals have the same parity, so 'either traversal' does not depend on which one is taken. Equivalent to the definition in GSW2023 Section 4. The 'induce' on the page is the SphereMap one, but this Lean uses SimpleGraph.induce, which is the intended operation. No cited-source block was supplied, so there is no cited gate."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:state-incidence,ass:pair-distinct,ass:pair-existence,ass:cancel-cyclic,ass:root-forest] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:state-incidence","verdict":"faithful-refinement","note":"Quantification over A requires each assigned vertex to belong to its face's vertex set, exactly r(t) ∈ V(t)."},{"obj_id":"ass:pair-distinct","verdict":"faithful-refinement","note":"Pointwise inequality over A is equivalent to the stated distinctness; subtype inequality is equivalent to inequality of the underlying vertices."},{"obj_id":"ass:pair-existence","verdict":"faithful-refinement","note":"Existence of two incident bijective states satisfying pointwise distinctness is exactly existence of an ordered pair."},{"obj_id":"ass:cancel-cyclic","verdict":"faithful-refinement","note":"Negating IsAcyclic is classically equivalent to existence of a simple undirected cycle in Q_s, as the binding reading requires."},{"obj_id":"ass:root-forest","verdict":"faithful-refinement","note":"IsAcyclic states precisely that Q_s is a forest, retaining all vertices and allowing disconnected components."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:state-incidence","verdict":"faithful-refinement","note":"StateIncidence r := ∀ t : blackNonOuter (A), (r t).val ∈ T.faceVertices t. Assignment has type A → X (nonRoot), and faceVertices of a triangle face is the set of vertices of that triangle. The extra clause for isolated vertices adds nothing for a triangle. So this is exactly r(t) ∈ V(t) for every t ∈ A, and it matches def:state."},{"obj_id":"ass:pair-distinct","verdict":"faithful-refinement","note":"PairDistinct r s := ∀ t : A, r.val t ≠ s.val t. Inequality of elements of the subtype X is the same as inequality of the underlying vertices, so this is exactly r(t) ≠ s(t) for every t ∈ A (def:pair)."},{"obj_id":"ass:pair-existence","verdict":"faithful-refinement","note":"PairExists := ∃ r s : State, IsPair r s. IsPair's only field is PairDistinct, which is exactly def:pair: an ordered pair of states with r(t) ≠ s(t) on A. So this is 'at least one pair exists' with no extra content."},{"obj_id":"ass:cancel-cyclic","verdict":"faithful-refinement","note":"QsCyclic s := ¬(Qs s).IsAcyclic. In Mathlib, IsAcyclic means no cycle exists, so its negation says some cycle exists, i.e. Q_s contains a simple undirected cycle, as the pinned reading ass:pin-1 requires. Qs is the spanning simple graph on all of T's vertices whose edges are the edges opposite s(t) for t ∈ A. A simple graph cannot hold a 2-cycle, but black triangles of a partition coloring share no edge, so no parallel edges arise."},{"obj_id":"ass:root-forest","verdict":"faithful-refinement","note":"QsForest s := (Qs s).IsAcyclic. A forest is an acyclic graph, so this is exactly 'Q_s is a forest' for the spanning subgraph of opposite edges."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:main-domain,ass:duality-embedding,ass:partition-coloring,ass:pairs-no-separating,ass:state-bijection] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:main-domain",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: finite simple undirected graph binders, degree three, two-colorability, a simple sphere embedding, and connectivity after deleting at most two vertices with at least four vertices."
+    },
+    {
+      "obj_id": "ass:duality-embedding",
+      "verdict": "faithful-refinement",
+      "note": "SphereMap supplies a finite sphere embedding; connectivity of its underlying simple graph is equivalent to connectivity of the embedded graph, including when loops or parallel edges occur."
+    },
+    {
+      "obj_id": "ass:partition-coloring",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: the two darts of each edge identify its two incident faces, and distinct Bool values give exactly one face of each color."
+    },
+    {
+      "obj_id": "ass:pairs-no-separating",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: excludes every simple three-cycle having vertices strictly on both sphere regions, exactly the paper's definition of a separating triangle."
+    },
+    {
+      "obj_id": "ass:state-bijection",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: Assignment has domain the nonouter black faces after the prescribed color exchange and codomain the vertices outside the outer triangle; Function.Bijective asserts precisely a bijection between these sets."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:main-domain","verdict":"faithful-refinement","note":"The graph is G : SimpleGraph V with V finite, so it is finite, simple and undirected. IsRegularOfDegree 3 means cubic and Colorable 2 means bipartite. IsPlanar holds when some simple, possibly disconnected, finite sphere map has an underlying graph isomorphic to G, which is the usual meaning of planar. IsVertexConnected G 3 requires 3 < |V| and that deleting any set of at most 2 vertices leaves a connected induced graph, which is the standard definition of 3-vertex-connected. Both directions hold. The pinned readings pin-2 and pin-4 do not conflict with this."},{"obj_id":"ass:duality-embedding","verdict":"faithful-refinement","note":"A SphereMap is a finite rotation system (its Vertex, Dart and Face types are Fintype) with genus-zero placement data, so it is a finite graph embedded on the sphere and satisfies pinned condition bk-1. IsConnectedMap requires toSimpleGraph to be Connected. toSimpleGraph drops loops and parallel edges but keeps every vertex, including isolated ones. Dropping loops and parallel edges does not change connectivity, so this is equivalent to M being connected."},{"obj_id":"ass:partition-coloring","verdict":"faithful-refinement","note":"col : T.Face → Bool is a black/white coloring of the faces. Each edge is a pair of darts {d, edgeInv d}, and its two incident faces are faceOf d and faceOf (edgeInv d). Because there are only two colors, requiring col to differ on them for every dart is the same as saying each edge has one face of each color. Both directions hold. T is finite (bk-2) because SphereMap is Fintype."},{"obj_id":"ass:pairs-no-separating","verdict":"faithful-refinement","note":"The Lean statement is ∀ C : T.Cycle, ¬ IsSeparatingTriangle T C. T.Cycle is a simple closed trail. IsSeparatingTriangle requires the cycle to have length 3 and a vertex strictly on each side. This says exactly that T has no separating triangle. The definition def:separating-triangle is not a target here; it is used only as context."},{"obj_id":"ass:state-bijection","verdict":"faithful-refinement","note":"Assignment is a function from blackNonOuter (@realizes A: the black faces other than the outer face) to nonRoot (@realizes X: the non-root vertices). StateBijection is Function.Bijective r, which is exactly 'a state is a bijection r : A → X'. The node carries a 'standard' citation to HK2018, but no CITED SOURCE block was given for it, so I did not grade it as a cited target."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:root-components,lem:p-forest] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:root-components",
+      "verdict": "matched",
+      "note": "The pair, forest, and nonseparation hypotheses match; unique existence of a root vertex mapping to each connected component states exactly the paper’s claim, including isolated vertices."
+    },
+    {
+      "obj_id": "lem:p-forest",
+      "verdict": "matched",
+      "note": "The chosen forest pair precedes and is independent of e0; maximizing distance in its rooted white-face tree implements the farther-endpoint selection, and IsSpanningForest asserts precisely acyclicity with isolated vertices allowed."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:root-components","verdict":"matched","note":"The Lean takes an arbitrary state pair (IsPair r s) with Q_s acyclic (QsForest, which is ass:root-forest) and no separating triangle (ass:trees-no-separating). It concludes that every connected component of Qs has a unique v in roots = faceVertices t0 (the three roots) lying in it. Qs is built with fromEdgeSet on all of T.Vertex, so isolated vertices count as components, as the paper's proof says. The two statements are equivalent."},{"obj_id":"lem:p-forest","verdict":"matched","note":"P is selectedSet with s taken from forestPair. forestPair fixes one witness, via Classical.choose, from exists_forest_pair_of_noSeparatingTriangle, which assumes only T, hT, col, hcol, hsep and t0 and gives IsPair together with QsForest. That matches def:forest-pair, which chooses the pair by the named Propositions prop:pairs and prop:forest-state, so the chosen-witness form is allowed. e0 ranges over every edge on t0, which is at least as strong as the paper's fixed e0. IsSpanningForest unfolds to 'no nonempty closed trail with distinct edges lies inside S', which is acyclicity of a spanning subgraph with isolated vertices allowed, as def:spanning-forest says. The two statements are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:duality,prop:pairs,lem:disk] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:duality",
+      "verdict": "matched",
+      "note": "With the pinned finiteness condition, both clauses match: edge-identity-preserving duality sends tree complements to spanning trees and forest complements to connected spanning subgraphs."
+    },
+    {
+      "obj_id": "prop:pairs",
+      "verdict": "matched",
+      "note": "Under the standing colored-triangulation setting, the conclusion asserts two incident bijective states differing at every nonouter black face; the singleton-tree premise matches the pin and holds automatically for SimpleGraph Unit."
+    },
+    {
+      "obj_id": "lem:disk",
+      "verdict": "matched",
+      "note": "EdgeChoice represents every permitted directed-edge selection; Cycle imposes simplicity and closure, and the conclusion gives root avoidance and the stated signed sums with the outer face and normalized black coloring."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:duality","verdict":"matched","note":"The Lean statement is equivalent to the paper's lemma. The setting matches: M is a SphereMap, IsConnectedMap gives 'connected', and FiniteMap realizes pinned reading ass:bk-1 ('M is finite'). dualRotation keeps M.Dart and edgeInv, so dual edges are identified with primal edges and Sᶜ really is the set of duals of the complementary edges. The first conjunct says complement of a spanning tree is a spanning tree of M*, where IsSpanningTree means acyclic (no closed trail inside S) and spanningGraph connected. The second conjunct says complement of an acyclic edge set (the paper's spanning forest) spans a connected subgraph of M*. Both directions hold."}, {"obj_id":"prop:pairs","verdict":"matched","note":"The Lean is equivalent to, or slightly stronger than, the paper's proposition. Hypotheses: T is a sphere triangulation with a partition coloring, as the setting requires, and PairsNoSeparatingTriangle (no 3-cycle with vertices strictly on both sides) is ass:pairs-no-separating. hpin (SingletonTreeEdgeless) realizes pinned reading ass:pin-4; it is also provably true, since every SimpleGraph Unit is ⊥, which is an edgeless tree, so it narrows nothing. The outer face t0 is universally quantified and normalizedColoring makes it black, which matches def:roots ('exchange colors if necessary'). Quantifying over every t0 makes the Lean stronger than the paper's fixed t0. Conclusion: there exist states r and s with r(t) ≠ s(t) for every t in A, which is the paper's 'pair'."}, {"obj_id":"lem:disk","verdict":"matched","note":"The Lean is equivalent to the paper's lemma. r is a State (a bijective, incident map from A to X, with A = black faces other than t0 under the normalized coloring). EdgeChoice picks, in each t in A, another vertex of t, and ChosenEdges is the corresponding set of darts directed from r(t). C ranges over all simple directed cycles (non-empty closed trails with distinct edges and distinct vertices) whose darts are all chosen. The conclusion has three parts, all matching the paper: (1) C avoids the roots (the vertices of t0); (2) the delta-sum is -3 when the cycle is counterclockwise (outer face in the right region); (3) it is 3 when clockwise (outer face in the left region). delta(d) = +1 exactly when faceOf d is black. leftLocalRegion is also defined through the face orbit of d, so faceOf d is consistently the face on the left, which matches def:delta."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:sphere-triangulation-properties,ass:separating-triangle-properties,ass:spanning-forest-properties,ass:bk-1,ass:bk-2] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:sphere-triangulation-properties",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: connectedness, absence of loops and parallel edges, at least four vertices, and three distinct boundary vertices with boundary length three express exactly the stated triangulation conditions."
+    },
+    {
+      "obj_id": "ass:separating-triangle-properties",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: the simple cycle has length three, and each complementary side contains a vertex outside the cycle; the unfolded region definitions retain the placement of disconnected components."
+    },
+    {
+      "obj_id": "ass:spanning-forest-properties",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: the edge subset retains every ambient vertex, allowing isolated vertices, and excludes every nonempty closed trail with distinct undirected edges, exactly characterizing acyclicity, including exclusion of loops and parallel-edge cycles."
+    },
+    {
+      "obj_id": "ass:bk-1",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: finiteness of vertices and darts is finiteness of the map, since edges and local boundaries are permutation quotients and global faces are finite in SphereMap."
+    },
+    {
+      "obj_id": "ass:bk-2",
+      "verdict": "faithful-refinement",
+      "note": "Finite M.Vertex states exactly that the vertex set is finite."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:sphere-triangulation-properties","verdict":"faithful-refinement","note":"Matches the NL clause by clause. IsConnectedMap means the underlying simple graph is connected. IsSimple rules out loops (vert d ≠ head d) and parallel edges (darts with the same endpoint pair share an edge). 4 ≤ card Vertex is 'at least four vertices', and Vertex is a Fintype by construction. faceBoundaryIsThreeCycle asks for face length 3 and exactly 3 distinct face vertices. In a connected simple map with at least 4 vertices there are no isolated vertices, and each face has a single boundary orbit. So a length-3 closed face walk on 3 distinct vertices is exactly a 3-cycle boundary, and the converse also holds. Both directions hold."},{"obj_id":"ass:separating-triangle-properties","verdict":"faithful-refinement","note":"C is a Cycle, i.e. a closed trail with distinct darts' edges and distinct vertices. Requiring length 3 makes it a 3-cycle. 'Vertices strictly on both sides' becomes an existential on each side: a vertex not on C that is incident to a face of leftRegion C (resp. rightRegion C). A vertex off C lies on exactly one side, and every vertex is in faceVertices of some face (an isolated vertex through its assigned face). So 'strictly on a side' and 'off C and incident to a face of that region' imply each other. This assumes leftRegion and rightRegion faithfully realize the two sides of C; that belongs to the def:embedding side-region definitions, which are not targets here."},{"obj_id":"ass:spanning-forest-properties","verdict":"faithful-refinement","note":"S ⊆ M.Edge, taken on all of M.Vertex, is spanning by construction, and isolated vertices are allowed. Acyclicity is stated as: no closed trail, i.e. a nonempty closed dart sequence with no repeated undirected edges, uses only edges of S. Every cycle, including loops (length 1) and parallel-edge pairs (length 2), is such a trail. Every closed trail contains a cycle, and the Nodup condition excludes walking back along the same edge. So this is equivalent to the multigraph acyclicity of the NL."},{"obj_id":"ass:bk-1","verdict":"faithful-refinement","note":"'M is finite' is stated as Finite Vertex ∧ Finite Dart, and Faces are a Fintype field of SphereMap. RotationSystem already carries Fintype instances on Vertex and Dart, so the Prop is trivially true, matching the standing finite-map setting. Equivalent to the NL."},{"obj_id":"ass:bk-2","verdict":"faithful-refinement","note":"|V(T)| < ∞ is stated as Finite M.Vertex. These are equivalent; the condition is automatic because Vertex carries a Fintype instance in RotationSystem."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:pin-1,ass:pin-2,ass:pin-3,ass:pin-4,def:embedding] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:embedding",
+      "verdict": "matched",
+      "note": "SphereMap encodes sphere embeddings; outerFaceChoice is exactly the type of global faces, so choosing an inhabitant designates the face containing infinity."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "Walk.IsCycle requires a nonempty closed trail with no repeated vertices except its endpoint, exactly a simple undirected cycle in Q_s."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "The Fintype and SimpleGraph parameters supply finiteness, simplicity and undirectedness; MainDomain supplies cubicity, bipartiteness, planarity and three-vertex-connectivity, with explicit edge membership."
+    },
+    {
+      "obj_id": "ass:pin-3",
+      "verdict": "faithful-refinement",
+      "note": "pairedEdges selects darts with tail r(t) and head s(t); undirectedPairedEdges forgets orientation through edgeOf, and groupKey is exactly that edge set."
+    },
+    {
+      "obj_id": "ass:pin-4",
+      "verdict": "faithful-refinement",
+      "note": "Every simple graph on Unit is necessarily edgeless, connected and acyclic; the universal conjunction therefore faithfully records the singleton-tree convention."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:embedding","verdict":"matched","note":"The NL places every embedding on the sphere, which SphereMap models: a rotation system with genus-zero components plus the real complementary regions (Face). 'After choosing an outer face' means picking an element of M.Face, so outerFaceChoice := M.Face is the type of such choices, and PlaneMap := Σ M : SphereMap, M.outerFaceChoice is exactly a sphere map together with a chosen outer face. The 'point at infinity in that face' is a drawing convention with no further combinatorial content. Both directions agree."}],"assumption_verdicts":[{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"Qs is a SimpleGraph on T.Vertex, with an edge for each pair of vertices of a black non-outer face t that avoids s(t); every vertex is kept. `∃ v, ∃ C : Walk v v, C.IsCycle` is Mathlib's simple undirected cycle (length at least 3, no repeated vertices except the endpoint), so it is equivalent to 'Q_s contains a simple undirected cycle'."},{"obj_id":"ass:pin-2","verdict":"faithful-refinement","note":"The section variables are G : SimpleGraph V with [Fintype V] and [DecidableEq V], which gives a finite simple undirected graph. MainDomain unfolds to: 3-regular (cubic), Colorable 2 (bipartite), IsPlanar (a simple SphereMap whose graph is isomorphic to G), and IsVertexConnected 3 (at least 4 vertices, and G stays connected after deleting any at most 2 vertices). Together with e ∈ G.edgeSet this is equivalent to the NL."},{"obj_id":"ass:pin-3","verdict":"faithful-refinement","note":"pairedEdges takes the image over t ∈ A (blackNonOuter) of faceDart t r(t) s(t), the dart of face t from r(t) to s(t), so D's edges are oriented from r(t) to s(t). undirectedPairedEdges maps those darts to their undirected edges with edgeOf. Because groupKey := undirectedPairedEdges, the Prop is true by definition, and the reading is carried by the definitions: pairs are grouped exactly when their undirected edge sets coincide. Equivalent to the pinned reading."},{"obj_id":"ass:pin-4","verdict":"faithful-refinement","note":"The only SimpleGraph on Unit is ⊥, since a simple graph has no loops. That graph is connected and acyclic, so it is a tree, and its edge set is empty. `∀ G : SimpleGraph Unit, G.IsTree ∧ G.edgeSet = ∅` therefore says the one-vertex graph is a tree with no edges, which is the NL reading."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:face-length,def:roots,def:black-face-count,def:counts,def:state-sets] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:face-length",
+      "verdict": "matched",
+      "note": "Summing boundary-orbit dart counts counts each edge-side incidence once; both darts of a bridge contribute to its incident face, and punctures contribute zero."
+    },
+    {
+      "obj_id": "def:roots",
+      "verdict": "matched",
+      "note": "faceVertices gives exactly the vertices incident to t0, which are three under the standing triangulation assumptions; choosing t0 as outer and exchanging colors leaves this set unchanged."
+    },
+    {
+      "obj_id": "def:black-face-count",
+      "verdict": "matched",
+      "note": "The filtered finite cardinality is exactly the number of faces colored black, represented by true."
+    },
+    {
+      "obj_id": "def:counts",
+      "verdict": "matched",
+      "note": "The conjunction states precisely the three displayed equalities, substituting the defined black-face count for k; edgeInv orbits count edges individually."
+    },
+    {
+      "obj_id": "def:state-sets",
+      "verdict": "matched",
+      "note": "normalizedColoring performs exactly the prescribed exchange making t0 black; filtering excludes t0, and the companion nonRoot definition is precisely the complement of the roots."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:face-length","verdict":"matched","note":"faceLength f adds up boundaryLength over every local boundary that boundaryFace assigns to f. A face-orbit boundary has length equal to its number of darts, i.e. its edge sides; a puncture (isolated vertex) has length 0. Both darts of a bridge lie on the same face orbit, so a bridge counts twice. This is exactly the edge-side incidence count, also for faces with several boundary components, and M is finite as ass:bk-1 pins."},{"obj_id":"def:roots","verdict":"matched","note":"roots t0 = faceVertices t0, the vertex set of the distinguished face. Placing t0 on the outer face is only a drawing choice on the sphere. The colour exchange that makes t0 black is realized separately by normalizedColoring (normalizedColoring_self), which A uses. The fact that there are three vertices comes from the triangulation property faceBoundaryIsThreeCycle, not from this definition, as in the paper."},{"obj_id":"def:black-face-count","verdict":"matched","note":"blackFaceCount col counts the faces with col f = true. The paper's k counts black faces after normalization, and consumers apply it to normalizedColoring (StateSetsCard). For any proper colouring the black and white counts are equal (standingCounts_of_triangulation), so the value does not depend on the normalization either way."},{"obj_id":"def:counts","verdict":"matched","note":"StandingCounts col states three things: whiteFaceCount = blackFaceCount (the number of white faces is k), card Edge = 3k (Edge is the set of edgeInv orbits, i.e. the edges), and card Vertex = k+2. These are exactly the three equalities of eq:counts with k = blackFaceCount. The paper derives them, and so does the Lean: standingCounts_of_triangulation proves them from IsSphereTriangulation and PartitionColoring rather than assuming them."},{"obj_id":"def:state-sets","verdict":"matched","note":"A is blackNonOuter: faces that are black under the normalized colouring (t0 black) and differ from t0. X is nonRoot t0 = univ \\ roots t0, the nonroot vertices; it sits in the same @node block at Triangulation.lean:162. Both sets match the paper's A and X exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[prop:forest-state,lem:cancel,lem:circulation] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:forest-state",
+      "verdict": "matched",
+      "note": "Equivalent existence claim for incident bijective states with pointwise distinct assignments and acyclic Q_s; paired darts have the pinned orientation, and groupKey unfolds to the undirected edge set, making hpin redundant."
+    },
+    {
+      "obj_id": "lem:cancel",
+      "verdict": "matched",
+      "note": "The sum indexes exactly the pairs with second state s, for arbitrary incidence weights and real x; hpin expresses the pinned simple-cycle reading and is equivalent to cyclicity. three_mul_J identifies the integer phase with the paper's one-third delta sum."
+    },
+    {
+      "obj_id": "lem:circulation",
+      "verdict": "matched",
+      "note": "IncidenceWeights assigns arbitrary real weights to exactly the bounded-black-face spokes; simple cycles have the outer face on their right when counterclockwise, and signedSpokeDart gives center-to-vertex weight a(t,v) and reverse weight -a(t,v)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:forest-state","verdict":"matched","note":"PairExists unfolds to ∃ r s, IsPair r s, which is exactly ass:pair-existence. IsPair is r(t)≠s(t) for every t∈A (def:pair). The conclusion ∃ r s, IsPair r s ∧ (Qs s).IsAcyclic says some pair has Q_s a forest. The extra hypothesis hpin : PairedEdgesReading realizes pinned reading ass:pin-3. Since groupKey is defined as undirectedPairedEdges (StatesCore.lean:118), hpin holds by Iff.rfl and restricts no model, so the statement is equivalent to the paper's in both directions."},{"obj_id":"lem:cancel","verdict":"matched","note":"The sum runs over every r with (r,s) a pair, with terms i^{J(r,s)}·exp(xω(s)). These are exactly the terms of eq:Z whose second state is s. J is (1/3)Σ_{t∈A} δ(r(t),s(t)) over the bounded black faces, and ω(s) is Σ_t a(t,s(t)). hcyclic (¬IsAcyclic) and hpin (∃ v and a closed walk C at v with C.IsCycle) are equivalent for a SimpleGraph. Together they state pinned reading ass:pin-1 (Q_s contains a simple undirected cycle), so they add no restriction. The weights a and x are universally quantified, as in the paper."},{"obj_id":"lem:circulation","verdict":"matched","note":"∃ a : IncidenceWeights gives real numbers a(t,v) for each bounded black triangle t and each vertex v of t, i.e. on the spokes of H_0. spokeGraphBounded builds the spoke graph over blackNonOuter, matching def:h0. The claim covers every simple cycle of that graph (IsClosedTrail with nodup vertices) that has the outer face on its right, i.e. every counterclockwise cycle. signedSpokeDart gives +a(t,v) when d.2=false and −a(t,v) when d.2=true. The spokeDartFace docstring and the true/false use in pairCycleSpokes show that d.2=false is the center-to-vertex direction, so the reverse traversal gets the negative weight. The conclusion is strict positivity, as in the paper."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:state-cardinality,def:state,def:pair,def:delta,def:disk-edge-choice] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:state-cardinality",
+      "verdict": "matched",
+      "note": "Exactly |A| = k−1 and |X| = k−1 after the prescribed color exchange; normalized t₀ is black, so k≥1 and natural subtraction agrees with the paper."
+    },
+    {
+      "obj_id": "def:state",
+      "verdict": "matched",
+      "note": "Assignment has exactly domain A and codomain X; bijectivity and face-vertex incidence are precisely the two stated requirements."
+    },
+    {
+      "obj_id": "def:pair",
+      "verdict": "matched",
+      "note": "The ordered parameters are states, and PairDistinct requires their values to differ at every t∈A, exactly as stated."
+    },
+    {
+      "obj_id": "def:delta",
+      "verdict": "matched",
+      "note": "In the rotation-system encoding, faceOf d is the face on the traversal's left; the definition gives +1 exactly when it is black and −1 otherwise. Simplicity identifies darts with ordered adjacent endpoints."
+    },
+    {
+      "obj_id": "def:disk-edge-choice",
+      "verdict": "matched",
+      "note": "EdgeChoice retains every permitted choice of another vertex in each triangle; faceDart supplies the uniquely determined directed edge from r(t) to that vertex. The image records exactly these chosen edges."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:state-cardinality","verdict":"matched","note":"Lean states |blackNonOuter| = k-1 and |nonRoot| = k-1. Here k = blackFaceCount of the normalized coloring, which makes t0 black, as the paper does when it exchanges colours. nonRoot = V \\ faceVertices t0, which is X, the vertices other than the roots. blackNonOuter = the black faces other than t0, which is A. This is the same Prop as |A|=|X|=k-1 in both directions."},{"obj_id":"def:state","verdict":"matched","note":"A State is an Assignment A→X (blackNonOuter subtype → nonRoot subtype) that is Function.Bijective and has (r t).val ∈ faceVertices t. This is exactly a bijection r:A→X with r(t)∈V(t), so the two definitions have the same extension."},{"obj_id":"def:pair","verdict":"matched","note":"IsPair r s is defined as ∀ t, r t ≠ s t on states (r,s) taken as an ordered pair. That is the paper's ordered pair of states with r(t)≠s(t) for every t∈A, in both directions."},{"obj_id":"def:delta","verdict":"matched","note":"delta(d) = 1 if the face of dart d (its facePerm orbit, which is the left-face convention leftRegion uses throughout the development) is black, and -1 otherwise. A dart is a directed edge v→w. delta takes the colouring as a parameter, and every consumer (CancelDelta, SelectionAcyclic) passes normalizedColoring, so 'black' is the paper's colouring after normalization."},{"obj_id":"def:disk-edge-choice","verdict":"matched","note":"The choice of edge is an explicit parameter quantified over: for each t∈A, a vertex w∈V(t) with w≠r(t). faceDart picks a dart with vert = r(t), head = w, lying on an edge of t (FaceDart). ChosenEdges is the image over t∈A, i.e. the set of chosen edges of t directed from r(t) to another vertex of t, as the paper says."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:z,def:h0,def:cycle-weights,def:h,def:white-tree] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:z",
+      "verdict": "matched",
+      "note": "Exactly the finite sum over ordered pointwise-distinct incident states, with integer phase J and exponential exp(x·omega(s)); integer division agrees with the paper on the stated coloring domain."
+    },
+    {
+      "obj_id": "def:h0",
+      "verdict": "matched",
+      "note": "The construction gives precisely the incidence spokes for bounded black faces, retains all original vertices including isolated ones, and inherits the outer region through spokeOuter."
+    },
+    {
+      "obj_id": "def:cycle-weights",
+      "verdict": "matched",
+      "note": "The two coordinates sum a(t,head) in the counterclockwise and clockwise orientations; coloring uniquely identifies the supplying black triangle, making the internal incidence choice immaterial."
+    },
+    {
+      "obj_id": "def:h",
+      "verdict": "matched",
+      "note": "The construction gives precisely the sphere incidence graph for all black faces, including t0, with the inherited embedding."
+    },
+    {
+      "obj_id": "def:white-tree",
+      "verdict": "matched",
+      "note": "The edge set consists exactly of the spokes (t,s(t)) for t in A; stateCorner specifies that incidence uniquely, and edgeOf forgets its traversal direction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:z","verdict":"matched","note":"Z sums over the finite type Pair, which is ordered (r,s) with IsPair. Each term is I^J(r,s)·exp(x·ω(s)), where ω(s)=Σ_{t∈A} a(t,s(t)) and J is the def:j delta-sum divided by 3, with x real. This is the same extension as eq:Z. ass:pin-3/pin-1 concern D and Q_s and do not change Z."},{"obj_id":"def:h0","verdict":"matched","note":"buildSpokes over blackNonOuter: the normalized-black faces other than t0, which core.json says are the bounded black triangles A, since t0 is the black outer face. Each corner dart of such a face gives one spoke from the face center to the vertex, so a simple triangle gets three. SpokeVertex = T.Vertex ⊕ faces keeps every T vertex, so isolated vertices are allowed. The result is a SphereMap, which is a plane embedding. Matches the NL."},{"obj_id":"def:cycle-weights","verdict":"matched","note":"C ranges over the simple cycles of T whose edges all lie in D's undirected edge set, which is the reading pinned by ass:pin-3. L_+ uses the orientation with t0 on the right region, i.e. counterclockwise around the bounded side, or else the reversed cycle, and sums a(t, head d). The t is chosen via exists_pairCycleIncidence, but it is in fact unique: the edge's black incident face is a bounded black t, because by PartitionColoring the other face is white. L_- is the reverse orientation. Both sums are invariant to the cycle's starting dart. Same extension as the NL."},{"obj_id":"def:h","verdict":"matched","note":"buildSpokes over blackFaces, i.e. every normalized-black face including t0. This gives spokes from all black centers to their three vertices as a SphereMap. Matches the NL; finiteness (ass:bk-2) comes from the Fintype structure of SphereMap."},{"obj_id":"def:white-tree","verdict":"matched","note":"The deleted set is {edgeOf(stateCorner s t, false) : t ∈ A}, i.e. the spoke from t's center to the corner where face = t and vertex = s(t). Classical.choose here is not a substantive choice: in a simple triangulation the corner is unique, and deletedSpokes_corner_iff characterizes membership choice-free. edgeOf identifies the two darts of each edge. This is exactly the set of spokes (t,s(t)), t∈A, in H."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:qs,def:incidence-weights,def:omega,def:paired-edges,def:j] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:qs",
+      "verdict": "matched",
+      "note": "On the standing triangulation domain, the endpoint exclusions select exactly each triangle's opposite undirected edge; fromEdgeSet retains every vertex."
+    },
+    {
+      "obj_id": "def:incidence-weights",
+      "verdict": "matched",
+      "note": "Exactly an arbitrary real-valued function on incidences of black nonouter triangles with their vertices."
+    },
+    {
+      "obj_id": "def:omega",
+      "verdict": "matched",
+      "note": "The finite sum evaluates each incidence weight at the vertex selected by the state, exactly as specified."
+    },
+    {
+      "obj_id": "def:paired-edges",
+      "verdict": "matched",
+      "note": "faceDart selects precisely the directed edge from r(t) to s(t); state bijectivity gives the cycle union, and groupKey uses underlying undirected edges as pinned."
+    },
+    {
+      "obj_id": "def:j",
+      "verdict": "matched",
+      "note": "Under the standing proper coloring, three_dvd_sum_delta and three_mul_J establish that integer division equals the exact one-third signed sum."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Let me read the StatesCore file directly.
+{"statement_verdicts":[{"obj_id":"def:qs","verdict":"matched","note":"Qs is fromEdgeSet on all of T.Vertex, so it is spanning. Its edges are the s(vert d, head d) with faceOf d = t ∈ A and neither endpoint equal to s(t). In a triangle t that is exactly the edge opposite s(t), and any edge of t has a dart whose left face is t. Both inclusions hold."},{"obj_id":"def:incidence-weights","verdict":"matched","note":"The type (t : blackNonOuter) → (faceVertices t) → ℝ is exactly a real number a(t,v) for each incidence t∈A, v∈V(t). blackNonOuter (normalized-black faces other than t0) realizes A."},{"obj_id":"def:omega","verdict":"matched","note":"omega a s = ∑_{t∈A} a t ⟨s(t), incidence proof⟩, which is literally ω(s)=∑_{t∈A} a(t,s(t)). The membership proof is only a subtype witness."},{"obj_id":"def:paired-edges","verdict":"matched","note":"D is the image over t∈A of faceDart t r(t) s(t). faceDart is chosen via exists_faceDart, whose spec FaceDart forces vert d = r(t), head d = s(t), and d lying on t (Triangulation.lean:237). In a simple map dart_eq_of_endpoints makes this dart unique, so the choice is canonical and the result is the set of edges of t oriented r(t)→s(t), as pinned by ass:pin-3. The undirected grouping lives in undirectedPairedEdges/groupKey. The sentence about vertex-disjoint cycles is a consequence the paper claims, not part of the definition."},{"obj_id":"def:j","verdict":"matched","note":"J = pairDeltaSum / 3 in ℤ, where pairDeltaSum = ∑_{t∈A} δ(dart r(t)→s(t)). The paper's equation asserts this sum divided by 3 is an integer, and three_dvd_sum_delta proves 3 divides the sum under PartitionColoring, the paper's 2-coloring setting. So on the paper's domain the integer quotient equals (1/3)∑δ exactly. Off that domain, i.e. for non-partition colorings outside the paper, the integer-division value is junk and is never used."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\delta,sym:\sigma_j] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\delta","verdict":"matched","note":"StatesCore.lean:68 defines delta on darts by a Bool conditional with integer values 1 and -1, enforcing the declared sign range by construction."},{"obj_id":"sym:\\sigma_j","verdict":"matched","note":"DensityComponents.lean:142 defines sigma on boundary-side occurrences by a Bool conditional returning 1 or -1; its range holds unconditionally by construction, independently of the lemma's boundary-length premise."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\delta","verdict":"matched","note":"Helpers/StatesCore.lean:68 defines delta (d : T.Dart) : ℤ := if col (T.faceOf d) then 1 else -1. It is a computed def, so its range is {-1,1} by construction. Its domain is the darts, i.e. directed edges (v,w) with vw∈E(T); RotationSystem.Dart has two darts per edge. It returns +1 exactly when the face the dart traces (faceOf, the facePerm orbit) is black. That matches core def:delta: +1 if the black face is on the left of the traversal v→w, -1 otherwise. Treating the facePerm face as the left face is the map's orientation convention."}, {"obj_id":"sym:\\sigma_j","verdict":"matched","note":"Helpers/DensityComponents.lean:142 binds sigma : sides → ℤ := fun j => if col (T.faceOf j.val) then 1 else -1, a computed let-def. Its range is {-1,1} by construction, and the lemma's first conjunct (line 144) proves this. The index set is regionSides, the boundary edge-side darts of the region. Each dart is one side occurrence, so the two sides of a bridge are counted separately, as the core asks ('repeated boundary occurrences counted separately'). The value is +1 exactly when the original face incident to that side is black, matching core symbol \\sigma_j."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:qs-orientation,lem:gsw2023-theorem-4-16,lem:gsw2023-theorem-4-6] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:qs-orientation",
+      "verdict": "matched",
+      "note": "The image selects exactly the dart from r(t) to the unique face vertex distinct from r(t) and s(t), orienting the edge opposite s(t); simplicity makes the dart choice unique."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:gsw2023-theorem-4-16",
+      "verdict": "faithful-refinement",
+      "note": "Encodes precisely the attributed equivalence between Barnette's conjecture and P4-Hamiltonicity for finite cubic, three-vertex-connected, Pfaffian bipartite graphs; all graph classes are defined."
+    },
+    {
+      "obj_id": "lem:gsw2023-theorem-4-6",
+      "verdict": "faithful-refinement",
+      "note": "Encodes exactly the attributed assertion that every finite planar graph admits a Pfaffian orientation, without assuming the passage's downstream corollary."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm416",
+      "statement": "Barnette's conjecture is equivalent to P4-Hamiltonicity of every finite cubic, three-vertex-connected, Pfaffian bipartite graph.",
+      "classical_fact": "GSW2023, Theorem 4.16.",
+      "missing_infra": "The supplied source excerpt does not contain the attributed equivalence, so source support cannot be verified.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-16",
+        "locator": "Theorem 4.16"
+      },
+      "check_status": "cited-source-unverifiable"
+    },
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm46",
+      "statement": "Every finite simple planar graph is Pfaffian.",
+      "classical_fact": "GSW2023, Theorem 4.6.",
+      "missing_infra": "The supplied source excerpt does not contain the attributed planar-Pfaffian assertion, so source support cannot be verified.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-6",
+        "locator": "Theorem 4.6"
+      },
+      "check_status": "cited-source-unverifiable"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the Pfaffian orientation predicate, then emitting verdicts.
+{"statement_verdicts":[{"obj_id":"def:qs-orientation","verdict":"matched","note":"For each t in A (the black non-outer faces, the domain of the State assignment), the Lean takes the dart of face t that runs from r(t) to the third vertex u (u ≠ r(t), u ≠ s(t); this needs r(t) ≠ s(t), which holds for a pair). That edge {r(t), u} is exactly the edge of t opposite s(t), so this is Q_s's edge oriented from r(t) to the third vertex. The face is a simple triangle, so the third vertex is unique and so is the v→w dart bordering t (FaceDart: vert = v, head = w, d or its edge-inverse lies on face t). The choice terms therefore pick out a unique object and introduce no extra reading. The extension matches in both directions."}],"assumption_verdicts":[{"obj_id":"lem:gsw2023-theorem-4-16","verdict":"faithful-refinement","note":"The Lean states (every n-vertex simple graph in MainDomain, i.e. cubic, bipartite, planar and 3-vertex-connected, is Hamiltonian) ↔ (every cubic, 3-vertex-connected, Pfaffian, bipartite graph is P4-Hamiltonian, i.e. every path with 3 edges lies in some Hamiltonian cycle). This is exactly the attributed equivalence between Barnette's conjecture (condition (i)) and the P4-Hamiltonicity statement of thm:pfaffian-paths (condition (v)). Every class is a defined predicate, so the carrier is self-contained. Quantifying over SimpleGraph (Fin n) for all n covers every finite graph up to isomorphism. Nonempty of the Prop-structure IsPfaffian is equivalent to IsPfaffian. The supplied source excerpt does not contain Theorem 4.16, so the source implication cannot be checked."},{"obj_id":"lem:gsw2023-theorem-4-6","verdict":"faithful-refinement","note":"The Lean states ∀ n (G : SimpleGraph (Fin n)), IsPlanar G → IsPfaffian G, which is exactly the attributed claim 'every planar graph is Pfaffian'. The rest of the passage (that the corollary covers thm:main's graphs and allows nonplanar ones) is not assumed. IsPlanar (a simple sphere map whose graph is isomorphic to G) and IsPfaffian (an orientation under which every even cycle whose complement has a perfect matching is oddly oriented) are both defined predicates, so the carrier is self-contained. The supplied source excerpt does not contain Theorem 4.6, so the source implication cannot be checked."}],"substrate_gates":[{"name":"OaiPairedStatesHamiltonian.GSW2023Thm416","statement":"(∀ finite G, MainDomain G → G Hamiltonian) ↔ (∀ finite G, cubic ∧ 3-vertex-connected ∧ Pfaffian ∧ bipartite → P4-Hamiltonian)","classical_fact":"Gorsky–Steiner–Wiederrecht 2023, Theorem 4.16: condition (i), Barnette's conjecture, is equivalent to condition (v), P4-Hamiltonicity of cubic 3-connected bipartite Pfaffian graphs","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:gsw2023-thm-4-16","locator":"Theorem 4.16"},"check_status":"cited-source-unverifiable"},{"name":"OaiPairedStatesHamiltonian.GSW2023Thm46","statement":"∀ finite simple G, IsPlanar G → IsPfaffian G","classical_fact":"Gorsky–Steiner–Wiederrecht 2023, Theorem 4.6 (Kasteleyn): every planar graph is Pfaffian","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:gsw2023-thm-4-6","locator":"Theorem 4.6"},"check_status":"cited-source-unverifiable"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:p,def:p0-orientation,def:pfaffian,def:sphere-triangulation,def:separating-triangle] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:p",
+      "verdict": "matched",
+      "note": "On the stated white-face tree, maximizing distance chooses exactly the farther endpoint of each deleted-spoke edge; its incident triangle edge is unique, and inserting e0 gives P."
+    },
+    {
+      "obj_id": "def:p0-orientation",
+      "verdict": "matched",
+      "note": "Selected darts have tail s(t) in the supplying black triangle; filtering out the underlying edge e0 gives exactly the prescribed orientation of P0."
+    },
+    {
+      "obj_id": "def:pfaffian",
+      "verdict": "matched",
+      "note": "The existential relation orients every edge uniquely and imposes odd traversal parity on exactly the even cycles whose vertex complements admit perfect matchings; both traversal directions are covered."
+    },
+    {
+      "obj_id": "def:sphere-triangulation",
+      "verdict": "matched",
+      "note": "The conjunction states connectedness, simplicity, at least four vertices, and triangular face boundaries; in this connected sphere-map setting, boundary length three with three distinct incident vertices is equivalent to a 3-cycle boundary."
+    },
+    {
+      "obj_id": "def:separating-triangle",
+      "verdict": "matched",
+      "note": "Cycle enforces a closed trail with distinct vertices; length three gives a 3-cycle, and each complementary side must contain a vertex outside the cycle."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:p","verdict":"matched","note":"For each black non-outer t, the candidates of type SelectionCandidate are the darts with tail s(t) on the two sides of t incident with s(t). The face across each side is the white triangle that the deleted spoke (t,s(t)) borders, carried to a face of H by whiteFaceEquiv. selectedDart picks the candidate whose white face is farthest from whiteRoot in whiteFaceGraph. whiteRoot is the white face across e0 from t0, and whiteFaceGraph is the dual spanned by the deleted spokes, i.e. the white tree. In a tree, the two ends of a tree edge are at distances that differ by one, so the maximum is the farther (assigned) endpoint and is unique. selectedSet is then insert e0 of the image of those edges, which is exactly P, and selectedSet0 = erase e0 gives P_0. Ties are broken by classical choice only when the white graph is not a tree, which is outside the domain the paper's definition presupposes, so the extension on the paper's domain is the same."},{"obj_id":"def:p0-orientation","verdict":"matched","note":"orientedP0 is the selected darts with edge ≠ e0. Each selected dart has tail s(t) and lies on a side of the black triangle t that supplied it (selectedDart_spec), so it is the edge oriented out from s(t) in that triangle. Every edge has exactly one black face (PartitionColoring), so no selected side of a t ≠ t0 equals e0 and no edge is supplied twice. The filter therefore leaves exactly P_0 with the paper's orientation."},{"obj_id":"def:pfaffian","verdict":"matched","note":"The orientation is o with o u v ↔ ¬o v u on adjacent pairs, so each edge gets exactly one direction. The condition ranges over every cycle walk C, at any base vertex and in either direction, that has even length and whose complement-induced subgraph G−V(C) has a perfect matching. For such C it requires the number of darts directed along the traversal to be odd. For an even cycle the parities of the two traversals agree, so this matches 'either cyclic traversal'. G is a finite SimpleGraph."},{"obj_id":"def:sphere-triangulation","verdict":"matched","note":"SphereTriangulationProperties gives a connected map (IsConnectedMap), no loops or parallel edges (IsSimple), 4 ≤ card Vertex, and every face of length 3 with 3 distinct vertices. On a connected genus-zero SphereMap, each face has a single boundary walk (placement tree, and connectivity with ≥4 vertices rules out punctures). A closed boundary walk of length 3 on 3 distinct vertices in a simple graph is a 3-cycle. Vertex finiteness (ass:bk-2) is carried by the Fintype instances."},{"obj_id":"def:separating-triangle","verdict":"matched","note":"C is a T.Cycle (a closed trail with no repeated vertices) of length 3, i.e. a 3-cycle. The Lean requires a vertex not on C that lies on a face of leftRegion C, and another such vertex on a face of rightRegion C, i.e. vertices strictly on both sides. The condition is symmetric under reversing C, so representing the cycle by an oriented dart list does not change the extension."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:spanning-forest,def:induced-subgraph,def:singleton-tree,def:intermediate-plane-graphs,def:forest-pair] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:spanning-forest",
+      "verdict": "matched",
+      "note": "The edge subset retains the ambient vertex set, including isolated vertices; excluding every nonempty closed trail with distinct edges is equivalent to acyclicity, including exclusion of loops and parallel-edge cycles."
+    },
+    {
+      "obj_id": "def:induced-subgraph",
+      "verdict": "matched",
+      "note": "Vertices are exactly U and retained darts are exactly those with both endpoints in U; the inherited involution, first-return rotation and merged faces realize the induced embedded subgraph."
+    },
+    {
+      "obj_id": "def:singleton-tree",
+      "verdict": "matched",
+      "note": "The bottom graph on Unit is the unique edgeless one-vertex simple graph and is connected and acyclic, satisfying the pinned reading."
+    },
+    {
+      "obj_id": "def:intermediate-plane-graphs",
+      "verdict": "drift",
+      "note": "As the anchored class predicate, IsSimple excludes loops and parallel edges that the paper permits in intermediate graphs, so paper membership does not imply Lean membership; anchor this convention to the unrestricted SphereMap carrier and retain IsSimple as the triangulation condition."
+    },
+    {
+      "obj_id": "def:forest-pair",
+      "verdict": "matched",
+      "note": "Chooses a witness from the composition of the two named existence results under the standing triangulation, coloring and no-separating-triangle assumptions; choose_spec retains both IsPair and acyclicity of Q_s without dependence on later data."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:intermediate-plane-graphs",
+    "reason": "The tagged anchor IsSimple selects simple maps, whereas the frozen intermediate-graph convention permits loops and parallel edges and requires simplicity only for triangulations.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:spanning-forest","verdict":"matched","note":"IsSpanningForest M S unfolds to SpanningForestProperties: there is no closed trail all of whose edges lie in S. IsClosedTrail (SphereMaps.lean:236) is a nonempty, edge-distinct, cyclically consecutive dart list. In a multigraph a closed trail exists exactly when a cycle (including a loop or a pair of parallel edges) does, so this is acyclicity. 'Spanning' with isolated vertices allowed holds because S is a subset of M.Edge on the full vertex set of M, with no covering requirement. Same extension both ways."},{"obj_id":"def:induced-subgraph","verdict":"matched","note":"inducedRotation keeps every vertex of U, isolated ones included, and has darts KeptDart U = {d | vert d ∈ U ∧ head d ∈ U} (InducedCore.lean:25), with edgeInv restricted to them. The edges are therefore exactly the edges of T with both endpoints in U. The rotation (first-return) and the faces are the inherited sphere embedding: a Lean-only representation of the same graph that does not change the edge/vertex extension."},{"obj_id":"def:singleton-tree","verdict":"matched","note":"⊥ : SimpleGraph Unit is the one-vertex graph with no edges, as pinned reading ass:pin-4 requires. It is connected and acyclic, so it is a tree."},{"obj_id":"def:intermediate-plane-graphs","verdict":"matched","note":"SphereMap is a general rotation system, so loops and parallel edges are allowed, with their edge-side incidences, as the intermediate plane graphs need. IsSimple has two conjuncts: no dart with vert d = head d (no loops), and darts with the same unordered endpoint pair belong to the same edge (no parallel edges). Together these are exactly simplicity, the condition required of triangulations."},{"obj_id":"def:forest-pair","verdict":"matched","note":"Chosen-witness form. forestPair is Classical.choose of exists_forest_pair_of_noSeparatingTriangle, which gives ∃ (r,s), IsPair r s ∧ QsForest s under the same binders (T a triangulation, a partition colouring, no separating triangle, base face t0). That lemma combines prop:pairs (exists_pair_of_noSeparatingTriangle) with prop:forest-state (exists_pair_qs_forest). The witness depends on no later data, and the pair and Q_s-forest properties are kept."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "MainDomain expresses the four stated graph properties. Its cardinality bound excludes the singleton exception in IsHamiltonian, so the conclusion means existence of a Hamiltonian cycle. The extra hpin premise is universally valid: every simple graph on Unit is edgeless and is a tree (IsTree.of_subsingleton), consistent with the binding pin; it imposes no restriction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Lean and paper are equivalent; each piece unfolded and checked. (1) IsRegularOfDegree 3 means cubic and Colorable 2 means bipartite. (2) IsVertexConnected G 3 requires 3 < card V and that G stays connected after deleting any fewer than 3 vertices. That is the standard 3-vertex-connected definition, and it rules out the empty graph, so Mathlib's IsHamiltonian (card ≠ 1 → a Hamiltonian cycle exists) means a genuine Hamiltonian cycle here. (3) IsPlanar asks for a simple SphereMap (a rotation system whose components each satisfy the genus-zero Euler count, plus a placement of components into faces) whose graph is isomorphic to G. Under 3-connectivity G is connected, so this is the standard combinatorial characterisation of planarity (Heffter–Edmonds/Euler genus zero) and matches 'planar' both ways. (4) hpin : SingletonTreeEdgeless is the binding pinned reading ass:pin-4, and it is provably true: the only SimpleGraph on Unit is the empty graph ⊥, which is connected (Unit is nonempty and preconnected), acyclic and edgeless. So it adds no restriction to the paper's models. The content defects that drift needs (added restriction, weaker conclusion) are absent. Side remark: this exact statement is Barnette's conjecture. That does not affect faithfulness, but the later proof stage should expect it to be hard."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:pfaffian-paths =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:pfaffian-paths","verdict":"matched","note":"Modulo the explicitly exempt cited propositions, the hypotheses encode exactly cubic, 3-vertex-connected, Pfaffian bipartite finite simple graphs; the conclusion requires every three-edge simple path’s edges to lie in a Hamiltonian cycle, plus Hamiltonicity. Vertex connectivity ensures at least four vertices, eliminating the library’s singleton Hamiltonicity exception; Fin n is faithful finite relabeling."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:pfaffian-paths","verdict":"matched","note":"Matches the paper in both directions, given the cited carriers GSW2023Thm416 and GSW2023Thm46. Hypotheses: PfaffianPathsGraph says G is cubic (IsRegularOfDegree 3), 3-vertex-connected and Pfaffian. 3-vertex-connected here is IsVertexConnected G 3: at least 4 vertices, and the graph stays connected after deleting any set of fewer than 3 vertices. That is the standard definition. Pfaffian is Nonempty (IsPfaffian G) over a Prop structure, so it just means G has an orientation in which every even cycle whose complement has a perfect matching is oddly oriented. That is the standard Pfaffian orientation (def:pfaffian). PfaffianPathsBipartite is G.Colorable 2, i.e. bipartite. Finite and simple come from SimpleGraph (Fin n). Conclusion: IsP4Hamiltonian says every path of length 3 (three edges, four vertices) has all its edges in some Hamiltonian cycle. That is exactly 'every P4 lies in a Hamiltonian cycle'. The 'in particular Hamiltonian' clause is stated explicitly as G.IsHamiltonian. No extra Lean-only premise. The only extra hypotheses are the two source-matched cited carriers, which are exempt. The paper's own thm:main is not assumed; it is left as a proof-uses dependency for the proof."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:edge-avoidance =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:edge-avoidance",
+      "verdict": "matched",
+      "note": "The unfolded domain matches the pinned finite simple undirected cubic bipartite planar 3-vertex-connected graphs with e ∈ E(G); hmain and hpin follow from hG. The conclusion is exactly a Hamiltonian cycle whose undirected edge list excludes e."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:edge-avoidance","verdict":"matched","note":"The Lean statement is equivalent to the paper statement. Hypotheses: hG (EdgeAvoidanceDomain) and hpin (EdgeAvoidancePinned) both unfold to `MainDomain G ∧ e ∈ G.edgeSet`, and hmain repeats MainDomain. Together they say exactly what pinned reading ass:pin-2 says: G is finite (Fintype V), simple and undirected (SimpleGraph); cubic (IsRegularOfDegree 3); bipartite (Colorable 2); planar (IsPlanar, i.e. isomorphic to the graph of a simple SphereMap); and 3-vertex-connected (IsVertexConnected G 3: more than 3 vertices, and deleting any set of fewer than 3 vertices leaves the induced graph connected). It also says e is an edge of G. The repeated hypotheses add no restriction. Conclusion: `∃ a, ∃ C : G.Walk a a, C.IsHamiltonianCycle ∧ e ∉ C.edges`, which is 'G has a Hamiltonian cycle avoiding e'. Both directions hold. Minor cleanup, not drift: the duplicate binders hmain and hpin could be dropped."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:partition =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:partition","verdict":"matched","note":"Equivalent: U and its complement partition the vertices into induced trees with the prescribed endpoint/third-vertex separation. The triangulation definition matches the core setting; finiteness is pinned, and SingletonTreeEdgeless is valid for every simple graph on Unit."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:partition","verdict":"matched","note":"The Lean statement is equivalent to the paper's. The Lean T together with IsSphereTriangulation is the definition def:sphere-triangulation: a connected, simple sphere map with at least 4 vertices whose faces are all 3-cycles. That definition is a separate node and is not graded here. PartitionColoring requires every dart's face to differ in color from the face of its reverse dart (edgeInv); since each edge is a pair of darts, this says exactly that each edge has one incident face of each color. hfin realizes the pinned condition ass:bk-2 (|V(T)|<∞). hpin (SingletonTreeEdgeless) realizes ass:pin-4; every SimpleGraph on Unit is ⊥, so this premise is provable and does not restrict which T are covered. The sets U and Uᶜ always form a 2-set partition of the vertices, and each must induce a tree (SimpleGraph.induce with Mathlib's IsTree). Both sets are nonempty because e0's endpoints lie in U and the third vertex lies in Uᶜ, which matches the paper's reading. 'The endpoints of e0 are in one set' is the edgeEndpoints clause. 'The third vertex of t0 is in the other' is the clause: every face vertex of t0 that is not an endpoint of e0 is outside U. On a face whose boundary is a 3-cycle, that vertex is exactly the third vertex. The roles of U and Uᶜ are symmetric, so fixing e0 in U loses no generality. The quantifiers over t0, over e0 with edgeOnFace e0 t0, and over col agree with the paper."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:intermediate-plane-graphs,lem:gsw2023-theorem-4-16,lem:gsw2023-theorem-4-6] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:intermediate-plane-graphs",
+      "verdict": "matched",
+      "note": "Finite rotation systems retain distinct edges and both edge-side darts, allowing loops and parallel edges; genus-zero and placement conditions encode sphere embeddings under the paper's embedding convention, with simplicity imposed separately."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:gsw2023-theorem-4-16",
+      "verdict": "faithful-refinement",
+      "note": "Encodes exactly the attributed equivalence between Barnette's conjecture and P4-Hamiltonicity for finite simple cubic, 3-vertex-connected, bipartite Pfaffian graphs; all domain predicates are defined."
+    },
+    {
+      "obj_id": "lem:gsw2023-theorem-4-6",
+      "verdict": "faithful-refinement",
+      "note": "Encodes exactly the attributed assertion that every finite simple planar graph admits a Pfaffian orientation, without assuming the passage's subsequent conclusions."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm416",
+      "statement": "Barnette's conjecture is equivalent to P4-Hamiltonicity of every finite simple cubic, 3-vertex-connected, bipartite Pfaffian graph.",
+      "classical_fact": "GSW2023, Theorem 4.16, equivalence of conditions (i) and (v); the supplied source excerpt does not contain this assertion.",
+      "missing_infra": "Deferred cited equivalence.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-16",
+        "locator": "Theorem 4.16"
+      },
+      "check_status": "cited-source-unverifiable"
+    },
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm46",
+      "statement": "Every finite simple planar graph is Pfaffian.",
+      "classical_fact": "GSW2023, Theorem 4.6; the supplied source excerpt does not contain this assertion.",
+      "missing_infra": "Deferred cited planar Pfaffian-orientation theorem.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-6",
+        "locator": "Theorem 4.6"
+      },
+      "check_status": "cited-source-unverifiable"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:intermediate-plane-graphs","verdict":"matched","note":"IntermediatePlaneGraph := SphereMap, which extends RotationSystem. RotationSystem has finite Vertex and Dart types (Fintype), a fixed-point-free involution edgeInv and a vertex rotation rot. It does not force vert d ≠ head d, so loops are allowed, and it does not force distinct edges to have distinct endpoint pairs, so parallel edges are allowed. Simplicity is a separate predicate (SphereMap.IsSimple) that only the simple-graph and triangulation consumers impose. Edge-side incidences come from darts and faces (faceOf, edgeOnFace). Finiteness satisfies the pinned reading ass:bk-1 ('M is finite'). genusZero, Face, boundaryFace, placement_connected and placement_card pin a sphere embedding, possibly disconnected, which is the plane setting the NL presupposes. Connectedness is not forced, and the NL does not ask for it. Both directions hold: every finite plane multigraph with loops or parallel edges and its usual incidences is a SphereMap, and every SphereMap is such a graph."}],"assumption_verdicts":[{"obj_id":"lem:gsw2023-theorem-4-16","verdict":"faithful-refinement","note":"The Lean is (∀ n, G on Fin n, MainDomain G → IsHamiltonian) ↔ (∀ n, G, PfaffianPathsGraph ∧ PfaffianPathsBipartite → IsP4Hamiltonian). Unfolded: MainDomain = cubic ∧ 2-colorable ∧ planar ∧ 3-connected, which is Barnette's conjecture, GSW (i) 'All graphs in B are Hamiltonian'. The right side is cubic ∧ 3-connected ∧ Pfaffian ∧ bipartite → every path of length 3 lies in some Hamiltonian cycle, which is GSW (v). GSW's P4-Hamiltonian definition requires at least 4 vertices; that is implied by IsVertexConnected G 3 (3 < card V). Lean's Pfaffian orientation counts odd forward darts on every even cycle C such that G − V(C) has a perfect matching. These are exactly the M-conformal cycles, and for an even cycle the parity is the same in both directions of traversal, so it matches the source's definition. Only the attributed equivalence (i)⇔(v) is assumed. It is self-contained and over finite simple graphs on Fin n, which is isomorphism-invariant."},{"obj_id":"lem:gsw2023-theorem-4-6","verdict":"faithful-refinement","note":"The Lean is ∀ n (G : SimpleGraph (Fin n)), IsPlanar G → IsPfaffian G, i.e. 'every planar graph is Pfaffian'. This is the attributed assertion (Kasteleyn, quoted in GSW as thm:planarpfaff, 'All planar graphs are Pfaffian'). IsPlanar (simple realization by a SphereMap) and IsPfaffian (a Pfaffian orientation condition) are both defined predicates, so the carrier is self-contained. The corollary remark ('so the corollary includes the graphs of thm:main') is left to thm:pfaffian-paths and is not assumed here."}],"substrate_gates":[{"name":"OaiPairedStatesHamiltonian.GSW2023Thm416","statement":"(∀ n G, MainDomain G → G.IsHamiltonian) ↔ (∀ n G, PfaffianPathsGraph G → PfaffianPathsBipartite G → IsP4Hamiltonian G)","classical_fact":"GSW2023 thm:mainthmpfaffian, equivalence of (i) 'All graphs in B are Hamiltonian' and (v) 'All cubic, 3-connected, Pfaffian, bipartite graphs are P4-Hamiltonian'. Located by content in the cached discovery/cited_sources/GSW2023.arxiv.tex, lines 2453-2467, with the P_k-Hamiltonian definition at line 2111 and the Pfaffian definition at line 2310. The prompt's excerpt did not include it; the statement was read directly from the cached source.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:gsw2023-thm-4-16","locator":"Theorem 4.16"},"check_status":"cited-verified"},{"name":"OaiPairedStatesHamiltonian.GSW2023Thm46","statement":"∀ n (G : SimpleGraph (Fin n)), IsPlanar G → IsPfaffian G","classical_fact":"GSW2023 thm:planarpfaff (Kasteleyn): 'All planar graphs are Pfaffian'. Located in the cached discovery/cited_sources/GSW2023.arxiv.tex, lines 2314-2316. The prompt's excerpt did not include it; the statement was read directly from the cached source.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:gsw2023-thm-4-6","locator":"Theorem 4.6"},"check_status":"cited-verified"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[lem:gsw2023-theorem-4-16,lem:gsw2023-theorem-4-6] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:gsw2023-theorem-4-16",
+      "verdict": "faithful-refinement",
+      "note": "Encodes exactly the attributed equivalence between Barnette's conjecture and universal P4-Hamiltonicity for finite cubic, 3-vertex-connected, Pfaffian bipartite graphs; Fin n and decidable adjacency preserve the finite graph domain."
+    },
+    {
+      "obj_id": "lem:gsw2023-theorem-4-6",
+      "verdict": "faithful-refinement",
+      "note": "Encodes exactly the attributed assertion that every finite simple planar graph admits a Pfaffian orientation, without assuming the passage's subsequent conclusions."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm416",
+      "statement": "Barnette's conjecture is equivalent to every finite cubic, 3-vertex-connected, Pfaffian bipartite graph being P4-Hamiltonian.",
+      "classical_fact": "GSW2023, Theorem 4.16, conditions (i) and (v).",
+      "missing_infra": "The cited statement is absent from the supplied source excerpt, so source support cannot be verified.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-16",
+        "locator": "Theorem 4.16"
+      },
+      "check_status": "cited-source-unverifiable"
+    },
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm46",
+      "statement": "Every finite simple planar graph is Pfaffian.",
+      "classical_fact": "GSW2023, Theorem 4.6.",
+      "missing_infra": "The cited statement is absent from the supplied source excerpt, so source support cannot be verified.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:gsw2023-thm-4-6",
+        "locator": "Theorem 4.6"
+      },
+      "check_status": "cited-source-unverifiable"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:gsw2023-theorem-4-16",
+      "verdict": "faithful-refinement",
+      "note": "Matches the frozen node in both directions. The Lean is exactly (i) ⟺ (v) of the theorem labelled thm:mainthmpfaffian in the cached GSW2023 source (lines 2453-2467). Left side: for every n and every G on Fin n, MainDomain G (3-regular, Colorable 2, IsPlanar, IsVertexConnected G 3) implies G.IsHamiltonian. That is 'all graphs in Barn are Hamiltonian', with Barn = cubic, 3-connected, planar, bipartite. Right side: PfaffianPathsGraph (cubic, IsVertexConnected 3, Nonempty IsPfaffian) and PfaffianPathsBipartite (Colorable 2) imply IsP4Hamiltonian. That is source condition (v). IsP4Hamiltonian requires every path of length 3 (4 vertices) to have all its edges on some Hamiltonian cycle, the same as the source's 'path of length three' (l.2377). Edge cases: IsVertexConnected requires k < card V, which rules out the empty graph. Cubicity rules out the single-vertex case of Mathlib's IsHamiltonian. So the card≠1 guard is harmless and neither side becomes vacuous. Graphs on Fin n cover every finite graph up to isomorphism. The DecidableRel binder is a subsingleton instance, so it changes nothing. Inline-citation scope: only the attributed equivalence is stated. The fact that thm:main establishes (i) is not assumed here; that is left to thm:pfaffian-paths. IsPfaffian is self-contained. It asks for an antisymmetric orientation on edges such that every even cycle C whose complement G−V(C) has a perfect matching gets an odd number of forward darts. This is the standard equivalent form of 'odd for every M-conformal cycle of every perfect matching M, in either direction': on an even cycle the forward and backward counts have the same parity."
+    },
+    {
+      "obj_id": "lem:gsw2023-theorem-4-6",
+      "verdict": "faithful-refinement",
+      "note": "Matches the frozen node. The Lean says ∀ n (G : SimpleGraph (Fin n)), IsPlanar G → IsPfaffian G. That is the attributed assertion 'Every planar graph is Pfaffian', which is Kasteleyn's theorem as cited in the GSW2023 source (thm:planarpfaff, lines 2314-2316: 'All planar graphs are Pfaffian'). The rest of the passage ('so the corollary includes the graphs of Theorem main …') is not assumed. IsPlanar has no connectedness restriction: it means a simple SphereMap whose graph is isomorphic to G, which matches the source's quantification over all planar graphs. IsPfaffian is a defined orientation predicate, as described for lem:gsw2023-theorem-4-16, so the carrier is self-contained."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm416",
+      "statement": "(∀ finite G, cubic ∧ bipartite ∧ planar ∧ 3-vertex-connected → Hamiltonian) ↔ (∀ finite G, cubic ∧ 3-vertex-connected ∧ Pfaffian ∧ bipartite → P4-Hamiltonian)",
+      "classical_fact": "Gorsky–Steiner–Wiederrecht 2023, Theorem 4.16 (thm:mainthmpfaffian), equivalence of items (i) and (v). The statement was located by its content in the cached arXiv TeX (discovery/cited_sources/GSW2023.arxiv.tex, lines 2453-2467), not in the page excerpt.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": { "cite_id": "cite:gsw2023-thm-4-16", "locator": "Theorem 4.16" },
+      "check_status": "cited-verified"
+    },
+    {
+      "name": "OaiPairedStatesHamiltonian.GSW2023Thm46",
+      "statement": "∀ finite simple graph G, IsPlanar G → IsPfaffian G",
+      "classical_fact": "Kasteleyn's theorem, all planar graphs are Pfaffian, as cited in GSW2023 Theorem 4.6 (thm:planarpfaff). The statement was located by its content in the cached arXiv TeX (lines 2314-2316), not in the page excerpt.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": { "cite_id": "cite:gsw2023-thm-4-6", "locator": "Theorem 4.6" },
+      "check_status": "cited-verified"
+    }
+  ],
+  "escalate": null
+}

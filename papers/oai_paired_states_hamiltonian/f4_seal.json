@@ -1,0 +1,1271 @@
+{
+  "version": 1,
+  "slug": "oai_paired_states_hamiltonian",
+  "paper_sha256": "f8d9d68f47f4793275f5b1ea167f683287c029f07e0848e424f89a696282abd1",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:bk-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e013d7ff0e04bcc644a657832470fc1ab7a14730"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e013d7ff0e04bcc644a657832470fc1ab7a14730"
+      }
+    },
+    {
+      "id": "ass:bk-2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1c858f0fd1730ab2b5de91e1d54ee05b36246e06"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1c858f0fd1730ab2b5de91e1d54ee05b36246e06"
+      }
+    },
+    {
+      "id": "ass:cancel-cyclic",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c5c1313fed8a5dad4fd754880d036b5cb32ef077"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c5c1313fed8a5dad4fd754880d036b5cb32ef077"
+      }
+    },
+    {
+      "id": "ass:duality-embedding",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7791c3dfce4f477a6725998d8c33437b4e9a01ed"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7791c3dfce4f477a6725998d8c33437b4e9a01ed"
+      }
+    },
+    {
+      "id": "ass:edge-avoidance-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d12dcf398af876defd86a547f64b451b55048d79"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d12dcf398af876defd86a547f64b451b55048d79"
+      }
+    },
+    {
+      "id": "ass:main-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "33e513182da7e28861aafbbd934a7e4fd9e603a6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "33e513182da7e28861aafbbd934a7e4fd9e603a6"
+      }
+    },
+    {
+      "id": "ass:pair-distinct",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73064f9eb3cceb6c7f8af1096d1e96b67e47909c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73064f9eb3cceb6c7f8af1096d1e96b67e47909c"
+      }
+    },
+    {
+      "id": "ass:pair-existence",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "660941c6c2807e92e48948ee69729dee6001a0a5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "660941c6c2807e92e48948ee69729dee6001a0a5"
+      }
+    },
+    {
+      "id": "ass:pairs-no-separating",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a041b9a4e943c53592fb6fd78d2cf59c1e41652b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a041b9a4e943c53592fb6fd78d2cf59c1e41652b"
+      }
+    },
+    {
+      "id": "ass:partition-coloring",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fec45810d4a1acb50a6fb2faab2208b1f43cfab5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fec45810d4a1acb50a6fb2faab2208b1f43cfab5"
+      }
+    },
+    {
+      "id": "ass:pfaffian-orientation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "03fa2396ed4edf980a3d1298abc4554378d125d1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "03fa2396ed4edf980a3d1298abc4554378d125d1"
+      }
+    },
+    {
+      "id": "ass:pfaffian-paths-bipartite",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b3479ce28f2dc10a5eda2079d2355c7a53e06822"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b3479ce28f2dc10a5eda2079d2355c7a53e06822"
+      }
+    },
+    {
+      "id": "ass:pfaffian-paths-graph",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fb46481439f7e94b9ab38828dd109d45defd0ed5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fb46481439f7e94b9ab38828dd109d45defd0ed5"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "25bebbf8aa32bf43e1e777fa8e2949bab0d76e21"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "25bebbf8aa32bf43e1e777fa8e2949bab0d76e21"
+      }
+    },
+    {
+      "id": "ass:pin-2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "12d9065e2ff80137f1acd0dd3d1ffb64d23dbdaf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "12d9065e2ff80137f1acd0dd3d1ffb64d23dbdaf"
+      }
+    },
+    {
+      "id": "ass:pin-3",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3262dc25640ce93378debf99f29f92b4bee02b9e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3262dc25640ce93378debf99f29f92b4bee02b9e"
+      }
+    },
+    {
+      "id": "ass:pin-4",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f49dedcfa359a8629f14fc4c74151cd3b0482ee5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f49dedcfa359a8629f14fc4c74151cd3b0482ee5"
+      }
+    },
+    {
+      "id": "ass:root-forest",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "578d51caa91bf431957abb0b7f0dc7f0286ab5dc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "578d51caa91bf431957abb0b7f0dc7f0286ab5dc"
+      }
+    },
+    {
+      "id": "ass:separating-triangle-properties",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ceec7a7236bfc79a11403526b6b351ec5336a133"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ceec7a7236bfc79a11403526b6b351ec5336a133"
+      }
+    },
+    {
+      "id": "ass:spanning-forest-properties",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9adf8ed80fcafc0020c1d63b7326054b825b7b54"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9adf8ed80fcafc0020c1d63b7326054b825b7b54"
+      }
+    },
+    {
+      "id": "ass:sphere-triangulation-properties",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "892a899f291c3f85c0ff7af8d45e3bd57d92eb15"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "892a899f291c3f85c0ff7af8d45e3bd57d92eb15"
+      }
+    },
+    {
+      "id": "ass:state-bijection",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "72ca8c69650da116d89e404c3694f3c7280905d6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "72ca8c69650da116d89e404c3694f3c7280905d6"
+      }
+    },
+    {
+      "id": "ass:state-incidence",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8c61c32c01b180b34106c9b1c20de9714baa7a4d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8c61c32c01b180b34106c9b1c20de9714baa7a4d"
+      }
+    },
+    {
+      "id": "ass:trees-no-separating",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fa4fe1b00ec8d51fdf5b1b0be4e1f34755e805e6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fa4fe1b00ec8d51fdf5b1b0be4e1f34755e805e6"
+      }
+    },
+    {
+      "id": "def:black-face-count",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d0f7e6c930c0f7cfdf2a58343d5df6188dbc0c51"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d0f7e6c930c0f7cfdf2a58343d5df6188dbc0c51"
+      }
+    },
+    {
+      "id": "def:counts",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9f541ee9e6ecd1e908de32fd8c2a5c9b337dda75"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9f541ee9e6ecd1e908de32fd8c2a5c9b337dda75"
+      }
+    },
+    {
+      "id": "def:cycle-weights",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "76210d6d6a5ea819dbcb4605c05abb7f7603bd32"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "76210d6d6a5ea819dbcb4605c05abb7f7603bd32"
+      }
+    },
+    {
+      "id": "def:delta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1b591babf73f73d13f69cff309994d33cd4f20f6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1b591babf73f73d13f69cff309994d33cd4f20f6"
+      }
+    },
+    {
+      "id": "def:disk-edge-choice",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d8c92cfcbe662992b22b14467bb454edf7e190f4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d8c92cfcbe662992b22b14467bb454edf7e190f4"
+      }
+    },
+    {
+      "id": "def:embedding",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d7da1c704da5fa79a8dccbc1a29200daf3d2788f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d7da1c704da5fa79a8dccbc1a29200daf3d2788f"
+      }
+    },
+    {
+      "id": "def:face-length",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1daa8dd4b10444b1e29dffdb883a54fa12e53247"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1daa8dd4b10444b1e29dffdb883a54fa12e53247"
+      }
+    },
+    {
+      "id": "def:forest-pair",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5e8b0d8e1972b6e8201d2f97eecc18810e761046"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5e8b0d8e1972b6e8201d2f97eecc18810e761046"
+      }
+    },
+    {
+      "id": "def:h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "84a3902f36061c75c846e7674af7f0fba236c1c3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "84a3902f36061c75c846e7674af7f0fba236c1c3"
+      }
+    },
+    {
+      "id": "def:h0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f576be53149ee3fb06ee400e4f74fbeb83f29f02"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f576be53149ee3fb06ee400e4f74fbeb83f29f02"
+      }
+    },
+    {
+      "id": "def:incidence-weights",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0857b32b51fd6b79f9f1908a09d79d29acd31b68"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0857b32b51fd6b79f9f1908a09d79d29acd31b68"
+      }
+    },
+    {
+      "id": "def:induced-subgraph",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "955ec2593e35d47888b4ad1a40f2274061303145"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "955ec2593e35d47888b4ad1a40f2274061303145"
+      }
+    },
+    {
+      "id": "def:intermediate-plane-graphs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "35ab5580bb386f7778308e89dd1f228b0527ef39"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "35ab5580bb386f7778308e89dd1f228b0527ef39"
+      }
+    },
+    {
+      "id": "def:j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6a97339d90cdebdb9d0112ce55e1cddd81e281bb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6a97339d90cdebdb9d0112ce55e1cddd81e281bb"
+      }
+    },
+    {
+      "id": "def:omega",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "37183503a1d2a14d75bda9d2ba481eba43d2ba51"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "37183503a1d2a14d75bda9d2ba481eba43d2ba51"
+      }
+    },
+    {
+      "id": "def:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6e01ddab00d8cf40baa398e9bbbf3d1d68a634f7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6e01ddab00d8cf40baa398e9bbbf3d1d68a634f7"
+      }
+    },
+    {
+      "id": "def:p0-orientation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f5718148a47cf946e13973f8b7cdb3445356308e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f5718148a47cf946e13973f8b7cdb3445356308e"
+      }
+    },
+    {
+      "id": "def:pair",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6da9e249ccd732894090e7da7937645059885e70"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6da9e249ccd732894090e7da7937645059885e70"
+      }
+    },
+    {
+      "id": "def:paired-edges",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5ccec0e584132f0347af8d4dbdc57b5d7243f9a1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5ccec0e584132f0347af8d4dbdc57b5d7243f9a1"
+      }
+    },
+    {
+      "id": "def:pfaffian",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1d0ad49b84fbf3a2276787b4f3c50537354ae91b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1d0ad49b84fbf3a2276787b4f3c50537354ae91b"
+      }
+    },
+    {
+      "id": "def:qs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ca180770856e08e7b3d63265b700998ca21c650d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ca180770856e08e7b3d63265b700998ca21c650d"
+      }
+    },
+    {
+      "id": "def:qs-orientation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cf3e4a4e733eac47b8c02b47e9643b0524741269"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cf3e4a4e733eac47b8c02b47e9643b0524741269"
+      }
+    },
+    {
+      "id": "def:roots",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5eb16c391ae33c96fb36c2ca6baf5921553281ed"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5eb16c391ae33c96fb36c2ca6baf5921553281ed"
+      }
+    },
+    {
+      "id": "def:separating-triangle",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be466c3f6f72e7c60cf5b021b8fdb1fefd2031aa"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be466c3f6f72e7c60cf5b021b8fdb1fefd2031aa"
+      }
+    },
+    {
+      "id": "def:singleton-tree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0e195caa6efd432a66f1f694087a44805a78fd41"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0e195caa6efd432a66f1f694087a44805a78fd41"
+      }
+    },
+    {
+      "id": "def:spanning-forest",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "43ad18b6d5b1ec68b4c31b4537d368307a463fe6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "43ad18b6d5b1ec68b4c31b4537d368307a463fe6"
+      }
+    },
+    {
+      "id": "def:sphere-triangulation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e3a4034264cac1c26078b0cad028b1feccdf6aab"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e3a4034264cac1c26078b0cad028b1feccdf6aab"
+      }
+    },
+    {
+      "id": "def:state",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "92c6b5196cc303e950a180be5ed2d25aab9525cc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "92c6b5196cc303e950a180be5ed2d25aab9525cc"
+      }
+    },
+    {
+      "id": "def:state-cardinality",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "44139c19aaf0a173ed664f35640a1d08a1b8f07a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "44139c19aaf0a173ed664f35640a1d08a1b8f07a"
+      }
+    },
+    {
+      "id": "def:state-sets",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b6d6a40274fd7c4006f43457fb42f63cd3a98634"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b6d6a40274fd7c4006f43457fb42f63cd3a98634"
+      }
+    },
+    {
+      "id": "def:white-tree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9e9f6e4ccb4dfacbd7786379f4e87f515aebe0c0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9e9f6e4ccb4dfacbd7786379f4e87f515aebe0c0"
+      }
+    },
+    {
+      "id": "def:z",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7808cc4733e28a441285665df9293fcd537bb549"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7808cc4733e28a441285665df9293fcd537bb549"
+      }
+    },
+    {
+      "id": "lem:cancel",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2529d0f221b15b2ad9d855448c4c8b6f134a1239"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2529d0f221b15b2ad9d855448c4c8b6f134a1239"
+      }
+    },
+    {
+      "id": "lem:circulation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "13c5d3cab89324224de2f61755f2a29d32525b13"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "13c5d3cab89324224de2f61755f2a29d32525b13"
+      }
+    },
+    {
+      "id": "lem:disk",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fba994a3c3ca0e134eeefa5a6fb4c059806f7342"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fba994a3c3ca0e134eeefa5a6fb4c059806f7342"
+      }
+    },
+    {
+      "id": "lem:duality",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a1f29606e7174cfb9edec59fb6e0ac86d9ed3048"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a1f29606e7174cfb9edec59fb6e0ac86d9ed3048"
+      }
+    },
+    {
+      "id": "lem:p-forest",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9a2e6070270dd2b748e06127e7bc45a9c1e53d29"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9a2e6070270dd2b748e06127e7bc45a9c1e53d29"
+      }
+    },
+    {
+      "id": "lem:root-components",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e57e60936efb5e405d7f9dded9539c35a4ff8af6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e57e60936efb5e405d7f9dded9539c35a4ff8af6"
+      }
+    },
+    {
+      "id": "prop:forest-state",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0b5248a328f60b9749ca77720969a358d4b787ea"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0b5248a328f60b9749ca77720969a358d4b787ea"
+      }
+    },
+    {
+      "id": "prop:pairs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "de65025bb58c9eeb31717f39b5fbc4e3b9516510"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "de65025bb58c9eeb31717f39b5fbc4e3b9516510"
+      }
+    },
+    {
+      "id": "sym:\\delta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d4df90f62331eb5b717037d33b86ac6261e37be1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d4df90f62331eb5b717037d33b86ac6261e37be1"
+      }
+    },
+    {
+      "id": "sym:\\sigma_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "72c8b2bdd6e2a6cb7fa0828ade4e79d326f68653"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "72c8b2bdd6e2a6cb7fa0828ade4e79d326f68653"
+      }
+    },
+    {
+      "id": "thm:edge-avoidance",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06e3458f7fe340eeba922eea127f69e747bb8d9c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06e3458f7fe340eeba922eea127f69e747bb8d9c"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8a6ebaabfd622873d7078032e4123b04025da144"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8a6ebaabfd622873d7078032e4123b04025da144"
+      }
+    },
+    {
+      "id": "thm:partition",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0d12d648aa10e1569259686af6f0b34c713e1973"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0d12d648aa10e1569259686af6f0b34c713e1973"
+      }
+    },
+    {
+      "id": "thm:pfaffian-paths",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d1745e3bc46b51d6f4e89f86770aec4a688d08f1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d1745e3bc46b51d6f4e89f86770aec4a688d08f1"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [
+    {
+      "node_id": "lem:gsw2023-theorem-4-16",
+      "reviewer": "claude",
+      "check_status": "cited-verified",
+      "cite_id": "cite:gsw2023-thm-4-16",
+      "locator": "Theorem 4.16",
+      "evidence_hash": "4ff0c5dcca30348acd87c87a32c7ed29623f0ea9"
+    },
+    {
+      "node_id": "lem:gsw2023-theorem-4-16",
+      "reviewer": "codex",
+      "check_status": "cited-source-unverifiable",
+      "cite_id": "cite:gsw2023-thm-4-16",
+      "locator": "Theorem 4.16",
+      "evidence_hash": "4ff0c5dcca30348acd87c87a32c7ed29623f0ea9"
+    },
+    {
+      "node_id": "lem:gsw2023-theorem-4-6",
+      "reviewer": "claude",
+      "check_status": "cited-verified",
+      "cite_id": "cite:gsw2023-thm-4-6",
+      "locator": "Theorem 4.6",
+      "evidence_hash": "e76e62bcbe6906696721d74665a8f931d61c4d4b"
+    },
+    {
+      "node_id": "lem:gsw2023-theorem-4-6",
+      "reviewer": "codex",
+      "check_status": "cited-source-unverifiable",
+      "cite_id": "cite:gsw2023-thm-4-6",
+      "locator": "Theorem 4.6",
+      "evidence_hash": "e76e62bcbe6906696721d74665a8f931d61c4d4b"
+    }
+  ],
+  "reviews_sha256": "f33555e249bca8059d3707a44109e9604145ac5144f032b8a91ec215d4defd13",
+  "files": [
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "d2ee448027ae5f99e118c0a7b1041cc65100cbf23be7b297b975858462f733a9"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "76eed1f8b169cb14ab3c1b974a3aa154c45a4726aa38b50e7f666fc6ca5a8830"
+    },
+    {
+      "path": "corrected_paper/_tikz/66f7b4c79f39ea1a.pdf",
+      "sha256": "c506f4f75533f47851c0f4be9ceeedfc02eac9159065c7232b9485b43206cfcc"
+    },
+    {
+      "path": "corrected_paper/paper.tex",
+      "sha256": "8035a46ceb8872b4457a27359e9bff81b7849fedf708b646738534a26eca1bf2"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "2b14cd1cb40a1454ec2c0c23e8e7d00017e98e2c92c1266674086d4025d66b69"
+    },
+    {
+      "path": "corrected_paper/triangle-figure.tex",
+      "sha256": "2580d45ae59ff4ef03ad6c1580416b0c05bb8e67b15c604bf0fa1e0a2e089f6e"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "294da5b75dbddacddf03e7abba4a9326184d50955b206b2192a498ff6d2dc54f"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "657ddbbda1d50a6c3cac0f9fbe24f2e525daac34b9b5d082fe3658a91b49a5ec"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian.lean",
+      "sha256": "9bb6f675ddc113b9063f136bae331aaf02139cc0a08b132ffb785a42eb90ce46"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Basic.lean",
+      "sha256": "a375b4d6b9e22b807883f476779c34b75932352f9d53d3a4465fb874e654dca0"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers.lean",
+      "sha256": "f508e051659c7bc7d030eb16b270afb8abf94d1add54eda457166be901fa2c27"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Cancel.lean",
+      "sha256": "a6966981d9a1626e1749545b379b5e527812ba82c6b39c4179e834802fa2e513"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CancelCycleLift.lean",
+      "sha256": "12b030fdc7a7d7c99e7802230d9df8cfe69d1a9b3444f956e54470e1cb22dc50"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CancelDelta.lean",
+      "sha256": "e5be2e5c7beeef6db3afd653b9f3d30433273b4794d1f94fb0bfa2e17f4e9361"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CancelSwitch.lean",
+      "sha256": "8eb2f3ce64cf66131039f96c8ec394655ac2c471524e4ebed9e056d08f0e91cf"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Circulation.lean",
+      "sha256": "bdcb1d528fa076a874c74ea50ebcf909b0423de1cfce229f35c39a32274f2d9f"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CitedGates.lean",
+      "sha256": "1a6c6b9e5be186e27fa91043944da764259c6cc788ae84352887321a6135c104"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ClockwiseMatching.lean",
+      "sha256": "c88022d2dd35202f7d410e4d119706cd153ad786979fa427fa53769f03f5ba29"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ComponentEulerBound.lean",
+      "sha256": "e2743a8835ab508715d02b635ad71b35ed6b32b6919ad1d0b2f76682b68381dc"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ComponentEulerExact.lean",
+      "sha256": "f00349ec0ed81df372d1764fd24f9e54cda5e7b23c032c0a764708b1409b9f44"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ComponentMaps.lean",
+      "sha256": "abe8b9b730282795be5a27eb48b4fac8d55e8cc7c7a9d2c31d76f603ef51ed68"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleCap.lean",
+      "sha256": "fee916bcba4018cf405af01cc916dbd1d27e289a4e0e737354a750c94eee3f86"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleDisk.lean",
+      "sha256": "7864916f7a1c1cca66ea54cae7f58c8fac1d01b7783f96472a87e590ac7a4661"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleDiskEuler.lean",
+      "sha256": "fe1dbed367248d6e1e552595a53685c2c3b1da370be4e89a104ac0b73be465ff"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleExterior.lean",
+      "sha256": "52036968af0d5f0c40ec20b776285f9f318b402a53c852caf254339347094604"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleGluing.lean",
+      "sha256": "99629162ca6f51483de7afbf1efd84a9b465906be0c0a75ee1fe4981183e31e9"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleIncidence.lean",
+      "sha256": "1d3bb0d55181eb6d8d84c61b927044890c27d3560a40b9029c50ca6ac4e4b0b1"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleReversal.lean",
+      "sha256": "b9dc193bbf57f752490aa442a79c1b916fe3d4c3b4bb8d6da33a4bd21f3a41df"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleSeparation.lean",
+      "sha256": "fea5a5a0eeb0ed367e50fcddd570d8f42ae356cc8e27428c5027897f8cba30fd"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/CycleSideCount.lean",
+      "sha256": "b61949280159e06fbaa216efe6704bb162ae0fe1251a26421f47c154e86964cc"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DartRestriction.lean",
+      "sha256": "77935815416ae6a8b6a3e9fb6881a6d84b573b535e9c332ea32cc4182a37ad1f"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Density.lean",
+      "sha256": "487eb85f42410309b4f05232ae01003ae625c8dbcc6de591e6b522b70805b8bc"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DensityBoundary.lean",
+      "sha256": "4c9d3a3278af267ca8606de34eb27082f8e47f796942331f36767bbcaf10d372"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DensityComponentEuler.lean",
+      "sha256": "fb2e3c7efa30fc1c231cc4cfc01e57c6304bd7facb2192f192e190e42b81e481"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DensityComponents.lean",
+      "sha256": "334d17308a396fdb2a16a2d7948c054bbfa40b4ffbb8588b0d91f49706ae81c8"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DensityFlowCounts.lean",
+      "sha256": "28555fd71db1a05a79a37a2e49c51d85191fe2fe4d782fa583853375bacf7d6a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DensityRegions.lean",
+      "sha256": "6e47d84fa06c13d5adb5dd3daa65fdcb4d2410c39437a18291e750bb9c149d72"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Disk.lean",
+      "sha256": "0f2d0976e6585f35a21a726d3cd111045df5a2a153b24a522e47c288b48c9353"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DiskCounts.lean",
+      "sha256": "3f09726fc25897a098254ad19d045e59f70e4d4cb9c80bbf0e7bed20011c72f6"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DiskMatching.lean",
+      "sha256": "e4e419b0cba465b6d883ef15a4e5a0abe44286fa3f5b11747fea56a65fa165aa"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DualConnectivity.lean",
+      "sha256": "6ad86a8939100d943569d7c5911695530977f0b3a7c73618590c241f7bc46f3b"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/DualMap.lean",
+      "sha256": "6b963a46482cee7db447d476d2cc66045c230592590817aa45d6619b4cb2d9f8"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Duality.lean",
+      "sha256": "1370d05eb757be351f0c672169d675ee205d74ccc7fcf933318f176918a4625a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/EdgeCuts.lean",
+      "sha256": "20367210ae36cce975b5e3f83b997484ba858abb447d9d39b9e0ca5f301ccf4b"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/EdgeDeletion.lean",
+      "sha256": "dc63ece7b1874a542e0df6e8fd150eae5acda09bdafd3e8ff82d4c794b2d17ef"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/EulerBound.lean",
+      "sha256": "ac53680d108961b15aa93a8479a7104794ef98fde6da945952c48bafc4569f27"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/FaceSideLabels.lean",
+      "sha256": "d6d60a46f3d0d246bb6f3b2bd4c5dfee802b511be1e4c5b52b6107082ecf2e1e"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/FirstReturn.lean",
+      "sha256": "55ed7dd2a40e5c538e33c95802f469bbb0c37cb23c609bf6eb764be3bb1b7737"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/FirstReturnCompose.lean",
+      "sha256": "fd0967aff3d4ca3f9c446d0f17f23da34c0a92611eaef791c5df8cc52fd66a11"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/FirstReturnCounts.lean",
+      "sha256": "5dd125a2f7665ee5294c6c4c39cdcd71163abf3dc5d8daa85ebf7bc367e28def"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ForestAsymptotics.lean",
+      "sha256": "b5e5fd48dba7f756129aba4c1537d6f1249ecc27e04eacbd86e054b14cf58684"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ForestExtension.lean",
+      "sha256": "50986d9d89fbe6a375813971444f63b1bf58291414a2f54ed15b88ad6b878294"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ForestGraph.lean",
+      "sha256": "aa687e12723ceee433eeb4e6cb3f48c3a221f2f3f26e4cb4fed471163f2af91a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ForestState.lean",
+      "sha256": "ac9d57889da8742469253dd216acd05112931d71a14432ab793870fc1b94b068"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Forests.lean",
+      "sha256": "8aceba13b2777efa290c465cfe20c4b5feb23febe79b4e0a2610cea8699a08e5"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/GlobalGradients.lean",
+      "sha256": "f802d7ee844667fec185984021183a9353bbfea4a31c100600ac468c9db87699"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/GradientRestriction.lean",
+      "sha256": "02dd1b84280751a4724ecd9904440a97c45526380d38910579bac538b4f37f1e"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/GraphClasses.lean",
+      "sha256": "a7a2b3c65a87c0505db08d23610672620195e5c2679f67d2f8eaf951a9efacef"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/HamiltonianAssembly.lean",
+      "sha256": "76de56649208b64c641cab1895cd7482c2d6994c0e86247fd38148a836996e1b"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/InducedCore.lean",
+      "sha256": "45b6730e152f5474a1bf2c0794b36488542c6dcc518015e17b94df1026e4fcd8"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/InducedMaps.lean",
+      "sha256": "03b1af4e4c86fa8453a9524fcf9d287f4998cb7b2f9f78e50b3e0cfb7085403a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/InducedPlacement.lean",
+      "sha256": "0618903cd5f3029313808b9a391552ea125af4c0acb4084ef9270ec89a7ff142"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/IsolatedVertexRemoval.lean",
+      "sha256": "30c9e9f8e82ba43a01131ddf4bda3a936b0a6add16f40c9b7d5b9a5c0234d6a7"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/MapOperations.lean",
+      "sha256": "d28261a454b6bf079a0759e3860bd7a08a319d50e3a6bf412c45c5e20a60fe2d"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/OppositeEdges.lean",
+      "sha256": "9c043a46fc36d02b81bf557ab7e49e619ab786cf5bf40ac014ab4306527f8de3"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PForest.lean",
+      "sha256": "f97333dcb5590e849bb763a89d6a832191a047cd2ed6f48d5f43d66528e02d41"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PairCycleLift.lean",
+      "sha256": "b2228c3f6bc48d2bfbee91c326937866e1d3d942f67814233fcda89d90563dc5"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PairGroupProducts.lean",
+      "sha256": "82bfdfd800aa11f91cf45a3f4eb134f13e3bdcf1086b0f7db8c0ea2abf5297c3"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PairOrientations.lean",
+      "sha256": "f69df5815cbb30a02efcc47f99fed090eb733e8c8ba407cde50586f7213b5aa4"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PairPhases.lean",
+      "sha256": "20615dcd9a02f30109d21b9351ab7a4f5372982c60af514f200a9bd29e00498a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Pairs.lean",
+      "sha256": "9a572b5d612927f3d3f7d714a5ff5448620f392a0a5252e019a23ff69b01d5c5"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/PartitionAssembly.lean",
+      "sha256": "2c1e8648076c919e57a414bcbf6d41f58c2f751f64172181be0b2dd37fcab480"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/RadialRotation.lean",
+      "sha256": "7bc15ea0aef5861cc8efa2c4bd11e593d499a39964bca6247be16e4e7a7a4257"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ReverseCycleSides.lean",
+      "sha256": "dcffa28dfa2f9101e0fd77c5f299c7e02ce4839b1c47e72c203e2ded648e891c"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/RootComponents.lean",
+      "sha256": "24e6e208f5e741533b900cfe2a144f6f7099ab533f2839adb96977339c9a9231"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/RotationEquiv.lean",
+      "sha256": "47f5e64be6913bdc63d7a0e591a9b204b8af5a6095e48112faf7a0d049d41e82"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/RotationEulerBound.lean",
+      "sha256": "b15d379c1e818df6662fbdc369cd7a57444fb78310300b2102fce1cdaa8b6b8a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Selection.lean",
+      "sha256": "fd665773b2042e7e22748aae0964b07fffa6b613cca0cf59c4c1f32d20b66fc3"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SelectionAcyclic.lean",
+      "sha256": "34f17b7fd10261f79db05ad8f97e3436a27a7c6f322a895456aaa409f997e32c"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SelectionCounting.lean",
+      "sha256": "00568ce24bbf5110bc749a4cd2e612d8ace50fd4ad51f595c0d7b922e4b66bcb"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SelectionCycles.lean",
+      "sha256": "2901e6c9dc8615ce173d2cd6b38018c03c400a73ec6c483ae9b184108c033b79"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SelectionWhite.lean",
+      "sha256": "2fbbf62290b0dacd780f7221bcff77895cf8e93ec8c725ced50d756a291157fe"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/ShortFaces.lean",
+      "sha256": "9e31f3dd48b0acf7cf0947304b07cbeb3741cc1042f23a6aed56b39132510447"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SphereMaps.lean",
+      "sha256": "8391f16cedd77700609ade4589ed90c609af01b370f5f36e1757e8721d7b2730"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeCore.lean",
+      "sha256": "784b9b4441bb9aa78d11eceffe08765787e383b84263aa2ce6477dd74f9ac973"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeEdges.lean",
+      "sha256": "28a81c80cbf53b9b4d1cadd08d17e63ee272cb207b935346cb08f540e923bce5"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeGenus.lean",
+      "sha256": "5796094c832c15520054cab0e47f497a17f821c4b4cab6c56253e4f6a12ef7d2"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeLocalSides.lean",
+      "sha256": "0d735bd35a934a1f84dccb55a5e3da0e6c449c1415940ad57b5c544076e8d735"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeMaps.lean",
+      "sha256": "49f7192b13f00010f2f91f5fe7558c549ec34a7b6e082af5ffa10218f89a70c4"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokePlacement.lean",
+      "sha256": "ebf473290977f355874b955c76e5f4447c8c87e902f7caf68c38160255e87e0b"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeProjection.lean",
+      "sha256": "d95b0a61588485c27ec8a2e5e0a1a54adabcfde2acbaf56677d055123f20e7ae"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeRegions.lean",
+      "sha256": "aca36de0a904c5c756cb69ce9d6543faffa13fae04f55a2441fe0fb224d6f81a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SpokeSectors.lean",
+      "sha256": "8bb7d371ea51db23be8d255f97943efdde08c82c7a1b3167f5054dc703b20c08"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Spokes.lean",
+      "sha256": "3437770be29c20ef3d3c62ee1f361c8d6fdc7bfe9c5b071516bbe50f48038591"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/States.lean",
+      "sha256": "1cc9c0ee31e844bfea8a624c9b5926b4a149cc2333c302b36ee4c10d2d0b7705"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/StatesCore.lean",
+      "sha256": "00bdf0c78e86dfcd12fd1e7c23100d6421a655a77077b808b9f7fb25bd61dd10"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/SwapOrbitCounts.lean",
+      "sha256": "f0e0c252c78a214de8fe16328c39cd44dc7f339892780794e6ce7dc304819a74"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TreeBranches.lean",
+      "sha256": "3c768a289124cab6510b92a79170be148da2cf57d41d06ef54bfaa284d2917cb"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TreeCardinality.lean",
+      "sha256": "a6e5c578e3fe59d37e20de285e06d843dd0665307f7d461e78f75be3920b8b7a"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TreeGluing.lean",
+      "sha256": "fceb3da9012bcc7707fc2b657808c8876dee268ed110de9dac5300995c6e8e33"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TriangleCapIncidence.lean",
+      "sha256": "ea25eb7833ff8947127dfc5cdd5e930262a3d04fa2ee38fb30c2d33f4b3b8ff2"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TriangleCaps.lean",
+      "sha256": "fdf88eea11c2f358cfcdfc6ffadffb1abd021580a936904b27d4f199477ec928"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/TrianglePartitionMatching.lean",
+      "sha256": "a729a1c4a360932c1ecd526ec9f1f74c7f4acffa9ef29373b57c323f42989c68"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Helpers/Triangulation.lean",
+      "sha256": "850b426c045d8edd480cc7c5232b39d679747e146d7212f675b4051d229c0b0c"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/Main.lean",
+      "sha256": "90b829f5d1716ec2ee14388101912af504e0e6fedfd83d89203bb011c5bed487"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/TEdgeAvoidance.lean",
+      "sha256": "03b2d8cd53497c74de9ae6cf215e2120843291f5645015123163776899a74fd3"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/TMain.lean",
+      "sha256": "3be224979efa9c2e525f9ba51ac468f934e0beb9e19540b4e66fa0b29a75b706"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/TPartition.lean",
+      "sha256": "96c9787547b41df701704c5ead7e42fe7187655bea1d55a9c98e3abab32c554e"
+    },
+    {
+      "path": "lean/Papers/OaiPairedStatesHamiltonian/TPfaffianPaths.lean",
+      "sha256": "0b791040393bb53d900a773e64c0b55cdf67a8daf215faebb3d6d74ebec5bc8b"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "0e40189d9cfbd1783f303e3c58af7a29d1df9030fd8372d68823fec8f594d45e"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "936ab71d88be23795eebc0e29e7f1acfe1c052543ba937dc91ddb3c8a5aeee95"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "c2c93745180fe55f6e25a6c496ab4ed56ec34b8743a66e13357882b651b4c00e"
+    }
+  ],
+  "code": "b7a6f9e6bb1f2e19c004dab9abaf8d4a2c33fd4ddc0e3d75041dc2d0e5034f79"
+}

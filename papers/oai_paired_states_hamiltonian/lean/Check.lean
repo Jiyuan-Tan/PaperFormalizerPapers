@@ -1,0 +1,15 @@
+import Papers
+
+-- The paper's results: each must list no axiom beyond propext, Classical.choice and Quot.sound.
+#print axioms OaiPairedStatesHamiltonian.isHamiltonian_of_mainDomain
+#print axioms OaiPairedStatesHamiltonian.SphereMap.dual_compl_spanning
+#print axioms OaiPairedStatesHamiltonian.exists_tree_partition
+#print axioms OaiPairedStatesHamiltonian.exists_pair_of_noSeparatingTriangle
+#print axioms OaiPairedStatesHamiltonian.delta_sum_of_simple_cycle
+#print axioms OaiPairedStatesHamiltonian.exists_pair_qs_forest
+#print axioms OaiPairedStatesHamiltonian.sum_Z_terms_eq_zero_of_cyclic
+#print axioms OaiPairedStatesHamiltonian.exists_positive_spoke_weights
+#print axioms OaiPairedStatesHamiltonian.qs_component_contains_unique_root
+#print axioms OaiPairedStatesHamiltonian.selectedSet_isForest
+#print axioms OaiPairedStatesHamiltonian.exists_hamiltonian_avoiding_edge
+#print axioms OaiPairedStatesHamiltonian.p4Hamiltonian_of_pfaffian
