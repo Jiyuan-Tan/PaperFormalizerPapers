@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Causalean",
+    "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+    "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+    "uncommitted": 0,
+    "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+    "files": {
+      "Causalean/Mathlib/Analysis/BernoulliKL.lean": "5f2e2472d285e90df84307fb8f505abaca47eda9",
+      "Causalean/Mathlib/Probability/BernoulliMeasure.lean": "5fb1d3bdf39fc259dd75a8882a60918d2124587f",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Foundations.lean": "2000aa816f4d5177f69131ff7c4009a6da6b9249",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/L2Closure.lean": "8638851d3d824d13770a59fc743e25859017b7fe",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Scalar.lean": "dd0e25ff5d0a10ba46fc9a62b4daf243cf14ebb4",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Series.lean": "6728b5e0aa2bd6debc2a0e39f23172b33f8f351e",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Tensorization.lean": "7ba656b75ff81e29025902d151c467ba9c69e0e2",
+      "Causalean/Mathlib/Probability/VarianceProd.lean": "e8f3a44515db87ad8728a3f908ef2e3d2e0bb23d"
+    },
+    "status": "unverified"
+  }
+]

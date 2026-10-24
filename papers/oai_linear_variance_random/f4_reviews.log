@@ -1,0 +1,631 @@
+===== reviewer convergence/dual :: medium :: batch[ass:omission-n,ass:tests-time,ass:occupation-time,ass:duration-time,ass:delay-index] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:omission-n","verdict":"faithful-refinement","note":"6 ≤ n is exactly n ≥ 6 on ℕ."},{"obj_id":"ass:tests-time","verdict":"faithful-refinement","note":"The conjunction i ≤ m ∧ m < L exactly expresses the stated index range."},{"obj_id":"ass:occupation-time","verdict":"faithful-refinement","note":"The predicate exactly specifies the range i ≤ m < L for each quantified choice of indices."},{"obj_id":"ass:duration-time","verdict":"faithful-refinement","note":"The conjunction i ≤ m ∧ m < L exactly expresses the stated index range."},{"obj_id":"ass:delay-index","verdict":"faithful-refinement","note":"The conjunction 1 ≤ i ∧ i ≤ L exactly expresses 1 ≤ i ≤ L."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts": [], "assumption_verdicts": [{"obj_id": "ass:omission-n", "verdict": "faithful-refinement", "note": "OmissionN n := 6 ≤ n on ℕ is exactly the paper's assumption n ≥ 6; equivalent both ways."}, {"obj_id": "ass:tests-time", "verdict": "faithful-refinement", "note": "TestsTime i m L := i ≤ m ∧ m < L on ℕ is exactly the paper's range i ≤ m < L; equivalent both ways."}, {"obj_id": "ass:occupation-time", "verdict": "faithful-refinement", "note": "OccupationTime i m L := i ≤ m ∧ m < L is exactly the paper's range i ≤ m < L. The 'for every' quantifier belongs to the consuming statement, not to this range predicate."}, {"obj_id": "ass:duration-time", "verdict": "faithful-refinement", "note": "DurationTime i m L := i ≤ m ∧ m < L on ℕ is exactly the paper's range i ≤ m < L; equivalent both ways."}, {"obj_id": "ass:delay-index", "verdict": "faithful-refinement", "note": "DelayIndex i L := 1 ≤ i ∧ i ≤ L on ℕ is exactly the paper's range 1 ≤ i ≤ L; equivalent both ways."}], "substrate_gates": [], "escalate": null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:wilson-levels,ass:wilson-endpoints,ass:window-eta,ass:main-law,ass:one-clause-law] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:wilson-levels","verdict":"faithful-refinement","note":"Exactly the chained inequalities 1 > p1 > p2 > 0, reordered as conjunctions."},{"obj_id":"ass:wilson-endpoints","verdict":"faithful-refinement","note":"Exactly the two stated survival inequalities, retaining integer endpoints and their respective levels."},{"obj_id":"ass:window-eta","verdict":"faithful-refinement","note":"Exactly 0 < η < 1/2 for the fixed real level parameter."},{"obj_id":"ass:main-law","verdict":"faithful-refinement","note":"Positive-index measurability, full mutual independence reindexed by j+1, and uniform marginal laws exactly express the sampling assumption; the proper-clause carrier has 8·choose(n,3) elements in the standing n≥3 setting."},{"obj_id":"ass:one-clause-law","verdict":"faithful-refinement","note":"Normalized counting on distinct-variable literal sets is equivalent to uniform variable supports with independent fair signs: each a-variable support has exactly 2^a sign assignments, establishing both directions on the stated sampling domain."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:wilson-levels","verdict":"faithful-refinement","note":"The Lean `0 < p2 ∧ p2 < p1 ∧ p1 < 1` states exactly the paper's `1 > p_1 > p_2 > 0` over ℝ, so the two are equivalent in both directions."},{"obj_id":"ass:wilson-endpoints","verdict":"faithful-refinement","note":"The Lean takes integers m1 and m2 with `p1 ≤ sn m1 ∧ sn m2 ≤ p2`. This is exactly `s_n(m_1) ≥ p_1` and `s_n(m_2) ≤ p_2`. sn is passed in as ℤ → ℝ, and the consumer instantiates it with the paper's s_n."},{"obj_id":"ass:window-eta","verdict":"faithful-refinement","note":"The Lean `0 < η ∧ η < 1/2` is exactly the paper's `0 < η < 1/2`."},{"obj_id":"ass:main-law","verdict":"faithful-refinement","note":"ProperClause n is a 3-element set of literals on 3 distinct variables over Fin n, so there are 8·C(n,3) of them. `uniformOn univ` is the uniform law on that set. `iIndepFun` over the shifted sequence (Cseq (j+1)) gives independence of C_1, C_2, …. The measurability conjunct is needed for the law to make sense because the clause σ-algebra is ⊤ (all subsets measurable); it is implied by the paper's statement that C_j are random clauses. The value Cseq 0 is a Lean-only index with no constraint, which conservatively extends the paper model. Because the pushforward law is a probability measure (n ≥ 3, as the paper presumes), μ is also forced to be a probability measure."},{"obj_id":"ass:one-clause-law","verdict":"faithful-refinement","note":"Choosing the a distinct variables uniformly and giving each an independent fair sign puts mass 1/(C(u,a)·2^a) on every proper a-clause. That is the uniform counting law on ProperClauseA u a, which is `uniformClauseMeasure u a`, so the two sides are equivalent. The specified variable set is represented as Fin u, which is a relabeling."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:main-n,ass:one-u,ass:one-nonempty,ass:potential-d,ass:potential-clause] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:main-n",
+      "verdict": "faithful-refinement",
+      "note": "Natural numbers satisfying 3 ≤ n correspond exactly to the stated integers n ≥ 3."
+    },
+    {
+      "obj_id": "ass:one-u",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the domain u ≥ 3; working independently of the clause process introduces no stochastic independence condition on the deterministic dimension."
+    },
+    {
+      "obj_id": "ass:one-nonempty",
+      "verdict": "faithful-refinement",
+      "note": "Finset nonemptiness is exactly nonemptiness of an assignment set on the finite space {0,1}^u."
+    },
+    {
+      "obj_id": "ass:potential-d",
+      "verdict": "faithful-refinement",
+      "note": "Natural numbers satisfying 1 ≤ d correspond exactly to positive integers."
+    },
+    {
+      "obj_id": "ass:potential-clause",
+      "verdict": "faithful-refinement",
+      "note": "In the stated auxiliary sampling setting, uniform counting on three distinct signed variables gives exactly the proper 3-clause law, and joint j = (νj j).prod ν is equivalent to independence from each auxiliary clause family."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:main-n","verdict":"faithful-refinement","note":"The paper says 'Fix an integer n≥3'. In Lean, `MainN n := 3 ≤ n` with n : ℕ. Since n ≥ 3 is positive, ℕ and ℤ give the same set of values, so the two are equivalent."},{"obj_id":"ass:one-u","verdict":"faithful-refinement","note":"`OneU u := 3 ≤ u` over ℕ is equivalent to 'u≥3 variables'. The phrase 'independently of the clause process' only says the lemma is stated for an abstract dimension u, not tied to n. It adds no condition, and the Lean leaves u universally quantified, which matches."},{"obj_id":"ass:one-nonempty","verdict":"faithful-refinement","note":"`OneNonempty S := S.Nonempty` with S : Finset (Fin u → Bool). This is exactly a nonempty subset of {0,1}^u, so the two are equivalent."},{"obj_id":"ass:potential-d","verdict":"faithful-refinement","note":"`PotentialD d := 1 ≤ d` over ℕ is equivalent to 'every integer d≥1'."},{"obj_id":"ass:potential-clause","verdict":"faithful-refinement","note":"Under the core's standing condition, a random proper a-clause is uniform over clauses on a distinct variables with independent fair signs. That law is exactly uniformOn univ over ProperClauseA u 3 (card = 3 literals on 3 distinct variables), so the first conjunct ν = uniformClauseMeasure u 3 matches. 'Independent' is rendered as: the joint law of C with every auxiliary family of j 2-clauses is the product (νj j).prod ν. This matches independence from the 2-clause families that define q_j. νj itself is pinned to the with-replacement uniform law by the separate hypothesis ass:one-replacement (SampledWithReplacement) at the consumer potential_drift. The conjunction is therefore equivalent to the paper's assumption."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:one-empty-conventions,def:one-beta,def:one-h,def:potential,def:omission-cap] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:one-empty-conventions",
+      "verdict": "matched",
+      "note": "States both conventions exactly on the standing domain u ≥ 3; uniform finite counting gives probability one for empty S and zero for nonempty S with no clauses."
+    },
+    {
+      "obj_id": "def:one-beta",
+      "verdict": "matched",
+      "note": "Defines the fixed real exponent β = 3/2 exactly."
+    },
+    {
+      "obj_id": "def:one-h",
+      "verdict": "matched",
+      "note": "On nonempty S, u ≥ 3 and a ∈ {2,3}, the counting ratio is exactly the uniform proper-clause killing probability; survivors uses ordinary clause satisfaction."
+    },
+    {
+      "obj_id": "def:potential",
+      "verdict": "matched",
+      "note": "Finset.range d enumerates precisely j = 0,…,d−1, giving the stated sum for every d ≥ 1."
+    },
+    {
+      "obj_id": "def:omission-cap",
+      "verdict": "matched",
+      "note": "Takes the minimum of the first unsatisfiable prefix index and 10n; the no-hit fallback also yields the cap, preserving the capped quantity."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:one-empty-conventions","verdict":"matched","note":"The Prop says that for every u≥3 (the core gives u∈ℕ_{≥3}), killProb j ∅ = 1 for all j and killProb 0 S = 0 for S≠∅. Unfolding: familySurvivors j ∅ cs = ∅ for every cs, so the count is card(Fin j → ProperClauseA u 2)/itself = 1. That denominator is >0 because proper 2-clauses exist when u≥3. With j=0 the survivors are S itself, which is ≠∅, so the count is 0. This is exactly the paper's two conventions over its domain."},{"obj_id":"def:one-beta","verdict":"matched","note":"beta : ℝ := 3/2, exactly as the paper fixes β=3/2."},{"obj_id":"def:one-h","verdict":"matched","note":"h_a(S) is the uniform fraction of proper a-clauses C (a literals on a distinct variables) with S.filter(ClauseSat C)=∅, i.e. the probability that one uniform random proper a-clause kills S. The Lean def is total in S and a, but agrees with the paper on its stated domain (S nonempty, a=2,3). Extending the domain like this does not change the object the paper defines."},{"obj_id":"def:potential","verdict":"matched","note":"P_d(S) = ∑_{j∈range d} killProb j S = ∑_{j=0}^{d-1} q_j(S). killProb is the uniform with-replacement probability (Fin j → ProperClauseA u 2) that j independent proper 2-clauses kill S, matching the core's q_j. The d≥1 restriction is a domain condition only, and the formula is identical wherever it applies."},{"obj_id":"def:omission-cap","verdict":"matched","note":"cappedTime = min(hittingTime c, 10n), where hittingTime is sInf{m≥1 : ¬PrefixSat c m}. PrefixSat means some assignment satisfies clauses 1..m, so hittingTime = H_n = min{m≥1 : F_m unsat}. When no such m exists, hittingTime falls back to capL. This fallback is harmless because min(∞, L) = L, so T = min(H_n, L) holds in every case. The n≥6 domain is not needed to state the definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:moments-range,ass:one-replacement,def:main-process,def:one-survivors,def:one-killing] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:main-process",
+      "verdict": "matched",
+      "note": "PrefixSat expresses satisfaction of exactly clauses 1 through m, including the empty prefix. hittingTime is their first unsatisfiable index almost surely: under the standing uniform iid law, the probability of a satisfiable m-prefix is at most 2^n(7/8)^m, so the fallback affects only a null event."
+    },
+    {
+      "obj_id": "def:one-survivors",
+      "verdict": "matched",
+      "note": "Filtering S by existence of a satisfied literal gives exactly the assignments in S satisfying C; finite sets represent every subset of the finite assignment space."
+    },
+    {
+      "obj_id": "def:one-killing",
+      "verdict": "matched",
+      "note": "On the standing domain u≥3, the denominator is positive and the cardinality ratio is exactly the killing probability for independent uniform proper 2-clauses sampled with replacement, including j=0 and empty S."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:moments-range",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the domain n≥6 and 1≤i≤L=10n specified by the typed core; it imposes no restriction on the fixed clause value."
+    },
+    {
+      "obj_id": "ass:one-replacement",
+      "verdict": "faithful-refinement",
+      "note": "Equality of each collection's joint law with the product of its common clause law is equivalent to independent sampling with replacement; uniformity is supplied by the standing sampling model."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:main-process","verdict":"matched","note":"PrefixSat c m is ∃z with ClauseSat (c j) z for all j∈[1,m], which is the satisfiability of F_m; at m=0 it holds vacuously, matching the convention that F_0 is satisfiable. hittingTime is sInf{m≥1 : ¬PrefixSat c m}, which is H_n, whenever that set is nonempty. The paper's min presupposes the set is nonempty. Under the sampling_model law (i.i.d. uniform proper 3-clauses, n≥3) it is nonempty almost surely, since all 8 sign patterns on one variable triple eventually appear. So the fallback capL n is a junk value used only off the min's domain, and on a null set. It also agrees with the downstream T=min(H_n,L). c 0 is unused because indices start at 1."},{"obj_id":"def:one-survivors","verdict":"matched","note":"S.filter (ClauseSat C) is {z∈S : z⊨C}. ClauseSat means some literal (v,b) of C has z v = b, which is the standard clause satisfaction. The definition is the same for any arity a, which covers 'a clause C'."},{"obj_id":"def:one-killing","verdict":"matched","note":"killProb is #{cs : Fin j → ProperClauseA u 2 with familySurvivors = ∅} divided by #(Fin j → ProperClauseA u 2). That is the probability under j i.i.d. uniform draws, with replacement, of proper 2-clauses. Uniform over distinct-variable supports with fair signs equals uniform over ProperClauseA u 2, which is the law the sampling_model assignment_set_potential pins. 'Kill' means no z∈S satisfies every cs k, which is exactly familySurvivors = ∅. At j=0 there is a single empty family and survivors = S, so q_0(S)=0 for S≠∅ and q_j(∅)=1, as the conventions require."}],"assumption_verdicts":[{"obj_id":"ass:moments-range","verdict":"faithful-refinement","note":"The typed core's fixed_omitted_clause_and_root_exposure setting fixes the range as n≥6 and 1≤i≤L=10n. MomentsRange states exactly 6≤n ∧ 1≤i ∧ i≤capL n, where capL n = 10n. The 'uniformly in …' and 'fixed value of C_i' parts are a quantifier order on the consumer lem:moments, which must quantify ∀C_i and keep its O-constants independent of n, i and C_i. They are not content of this range predicate."},{"obj_id":"ass:one-replacement","verdict":"faithful-refinement","note":"νj j = Measure.pi (fun _ => ν) for every j means a j-collection is j independent copies of the single-clause law ν. That is i.i.d. sampling with replacement, both directions. Uniformity of ν is a separate part of the sampling model and is not asserted by this node."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:one,lem:potential,lem:omission] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:one",
+      "verdict": "matched",
+      "note": "The counting ratios give exactly the uniform proper-clause killing probabilities, with beta = 3/2 and u ≥ 3; the auxiliary law parameters admit canonical choices and add no restriction."
+    },
+    {
+      "obj_id": "lem:potential",
+      "verdict": "matched",
+      "note": "The finite-family counting definition equals the with-replacement killing probability; the bounds, shrinking-set monotonicity, indicator, and drift inequality match exactly. Product-law parameters faithfully encode the stated independence."
+    },
+    {
+      "obj_id": "lem:omission",
+      "verdict": "matched",
+      "note": "The process law is precisely independent uniform proper 3-clause sampling; T is capped at L = 10n, omission retains original indices, and natural subtraction equals the nonnegative delay. The variance bound and summation range match."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:one","verdict":"matched","note":"The Lean conclusion is (oneKillProb 2 S)^beta ≤ 3*oneKillProb 3 S + u^(-3). Here oneKillProb a S is the uniform counting probability that a proper a-clause (exactly a literals on a distinct variables) leaves no member of S satisfying it, and the clause is satisfied by any one of its literals, so this is h_a(S). beta = 3/2 and u ≥ 3 (OneU), and S nonempty is OneNonempty. The extra binders ν, hclause, νj and hreplacement are satisfiable law pins (uniformClauseMeasure, Measure.pi) and do not enter the conclusion, so they restrict no model. The two statements are equivalent."},{"obj_id":"lem:potential","verdict":"matched","note":"potential d S = Σ_{j<d} killProb j S, which is P_d. killProb j is the uniform count over Fin j → proper 2-clauses, i.e. j independent clauses drawn with replacement, and it kills S when familySurvivors is empty. This reproduces q_0(S)=0 for S≠∅ and q_j(∅)=1. The conclusion has three parts: the bounds 0 ≤ P_d ≤ d; monotonicity, stated as S' ⊆ S → P_d(S) ≤ P_d(S'); and the drift inequality. In the drift inequality the indicator is S.Nonempty, E_C is the integral against ν 3, which hclause/hC pin to the uniform proper 3-clause law, survivors S C = S[C], and the factor is d^(beta-1). PotentialD encodes d ≥ 1. The independence pin on joint/hC is satisfiable (a product measure) and does not change the claim. The two statements are equivalent."},{"obj_id":"lem:omission","verdict":"matched","note":"IsUniformClauseProcess makes C_1, C_2, … i.i.d. uniform proper 3-clauses (ass:main-law). cappedTime = min(H_n, 10n). The hittingTime fallback to capL on the no-hit branch agrees with min(∞, L) = L. omittedCappedTime is hittingBtwn over Icc 1 L of ¬B_m^{(i)}, where B_m^{(i)} keeps the original indices and excludes j = i, and it equals L when no index in that range hits. So it is T^(i) capped at L. delay is T^(i) − T in ℕ; the paper states D_i ≥ 0, so the truncated subtraction matches. The conclusion Var(T) ≤ Σ_{i ∈ Icc 1 L} E[D_i^2] with n ≥ 6 (OmissionN) is exactly the paper's statement."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:tests,lem:occupation,lem:moments] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:tests",
+      "verdict": "matched",
+      "note": "Under the standing fixed-clause law, the two a.e. conditional-expectation bounds exactly express the conditional probabilities on V=0 and V=1, with the specified filtrations, indicators, and powers."
+    },
+    {
+      "obj_id": "lem:occupation",
+      "verdict": "matched",
+      "note": "The a.e. bound uses precisely the sum from m through L−1, conditioning on H_m, with p_s=q_d(S_s), K=7, and beta=3/2."
+    },
+    {
+      "obj_id": "lem:moments",
+      "verdict": "matched",
+      "note": "One positive constant uniform over n, admissible i, and every fixed clause equivalently bounds all three nonnegative quantities at the stated rates; the index restriction follows the standing omitted-clause setting."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:tests","verdict":"matched","note":"Matched. The Lean works under fixedClauseMeasure, i.e. μ conditioned on {C_i = c0}, for every c0; this is the paper's 'fixed value of C_i' setting. It takes 1≤i≤m<L with L=10n and n≥6. pivotalEvent is {B_m satisfiable and B_m∧C_i unsatisfiable}, which is A_m. ordinaryFiltration is the exposure σ-field ℰ over j∈[1,L]∖{i} (future indices included) joined with the ordinary contents through m, which is 𝒢_m. collisionCount is V (indices j≠i meeting at least two roots). nonrootSolutions is S_m (nonroot assignments glued with the falsifier w). killProcess is q_d(S_m) with d=max(1,Z), which is p_m. The two bounds, with p_m^3 on {V=0} and p_m^2 on {V=1}, are stated as a.e. implications on the events, the standard reading of 'on {V=k}' for conditional probabilities."},{"obj_id":"lem:occupation","verdict":"matched","note":"Matched. The sum over Finset.Ico m (capL n) is Σ_{s=m}^{L-1}. occupationTerm is 1{S_s≠∅}·p_s^β with β=3/2 (real power). testFiltration is 𝒢_m joined with the test parts through m, which is ℋ_m. The bound is the a.e. conditional-expectation inequality ≤ 7·d^β with d=max(1,Z) and K=7. It is stated under the fixed-C_i law for all 1≤i≤m<L."},{"obj_id":"lem:moments","verdict":"matched","note":"Matched. There is one constant A>0, uniform over n≥6, 1≤i≤L, every probability space carrying an i.i.d. uniform proper 3-clause sequence, and every fixed value c0 of C_i. It bounds E d^3 ≤ A, E[d^{3/2}·1{V≥1}] ≤ A/n and P(V≥2) ≤ A/n². This is equivalent to the paper's uniform O(1), O(n^{-1}), O(n^{-2}): each quantity is bounded by a power of L=10n for fixed n, so 'eventually' and 'for all n≥6' agree after enlarging the constant. Quantifying over all Ω is harmless because every quantity depends only on the law. Only C_j with j≥1 enter."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:omission-formula,def:omission-time-delay,def:tests-omitted-alias,def:tests-roots,def:tests-nonroots] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:omission-formula",
+      "verdict": "matched",
+      "note": "Encodes satisfiability of exactly the original-index clauses 1 through m excluding i, using one common Boolean assignment."
+    },
+    {
+      "obj_id": "def:omission-time-delay",
+      "verdict": "matched",
+      "note": "Unfolding hittingBtwn gives the first unsatisfiable original index in [1,L], defaulting to L; companion delay defines T^(i)−T, nonnegative because omission preserves satisfiability."
+    },
+    {
+      "obj_id": "def:tests-omitted-alias",
+      "verdict": "matched",
+      "note": "Definitionally identical to the omitted-prefix satisfiability predicate with the same fixed omitted index."
+    },
+    {
+      "obj_id": "def:tests-roots",
+      "verdict": "matched",
+      "note": "ProperClause ensures exactly three distinct variables; roots extracts precisely these, and companion rootFalsifier assigns each the unique value falsifying its literal."
+    },
+    {
+      "obj_id": "def:tests-nonroots",
+      "verdict": "matched",
+      "note": "Defines u=n−3 exactly; three distinct roots make this the complement cardinality, and the standing n≥6 setting entails u≥3."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:omission-formula","verdict":"matched","note":"omittedPrefixSat c i m is the proposition 'B_m^{(i)} is satisfiable': some z satisfies ClauseSat (c j) z for every original index j in [1,m] with j≠i. Original indices are kept and C_i is left out, as the NL says. ProperClause = ProperClauseA n 3, i.e. exactly 3 literals on 3 distinct variables. The paper uses B_m^{(i)} in only two ways: its unsatisfiability in T^{(i)}, which this predicate gives directly, and 'satisfying B_m' in S_m, where nonrootSolutions (RootExposure.lean:226) writes out the same conjunction ∀ j∈Icc 1 m, j≠i → ClauseSat word for word. So every consumer has the same truth value under this representation."},{"obj_id":"def:omission-time-delay","verdict":"matched","note":"hittingBtwn (¬omittedPrefixSat c i ·) {True} 1 (capL n) returns the least m in [1,L] at which B_m^{(i)} is unsatisfiable, and L if there is none. That equals min(first unsatisfiable index, L), the NL's 'first index … capped at L', with L = capL n = 10n. D_i is the adjacent def delay = omittedCappedTime c i - cappedTime c (Basic.lean:262). The truncated ℕ subtraction is faithful because T^{(i)} ≥ T always holds: if B_m^{(i)} is unsatisfiable then the full prefix B_m is too, so T ≤ T^{(i)}. That matches the paper's D_i ≥ 0. cappedTime is defined as min(H_n, L), and cappedTime_eq_hittingBtwn shows it uses the same construction."},{"obj_id":"def:tests-omitted-alias","verdict":"matched","note":"omittedPrefixSatAt c i m is definitionally omittedPrefixSat c i m, with i fixed as the NL's shorthand B_m = B_m^{(i)} requires."},{"obj_id":"def:tests-roots","verdict":"matched","note":"roots c0 = clauseVars c0, the image of the clause's literals under Prod.fst, i.e. the set R of the clause's variables. roots_card proves |R| = 3 from the distinct-variable condition in ProperClauseA. The companion rootFalsifier (RootExposure.lean:65) assigns each root the negation of its literal's sign. rootFalsifier_unique proves ¬ClauseSat c0 z ↔ z agrees with rootFalsifier on R. So w exists, is unique and falsifies C_i, as the NL says."},{"obj_id":"def:tests-nonroots","verdict":"matched","note":"nonrootCount n = n - 3 = u. The truncated subtraction does not matter because the setting assumes n ≥ 6 (MomentsRange/OmissionN), and there n - 3 is the true difference and u ≥ 3 follows. That bound is a property of the setting, not a separate clause of this definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:tests-d,def:tests-filtrations,def:p,def:occupation-k,def:window-levels] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:tests-d",
+      "verdict": "matched",
+      "note": "Exactly max{1,Z}, with Z counting root-meeting indices other than i throughout the cap."
+    },
+    {
+      "obj_id": "def:tests-filtrations",
+      "verdict": "matched",
+      "note": "ordinaryFiltration and the companion testFiltration give exactly the two stated joins; masked contents reveal precisely the ordinary clauses and test parts, respectively."
+    },
+    {
+      "obj_id": "def:p",
+      "verdict": "matched",
+      "note": "Exactly q_d(S_m): killProb counts uniform independent clause families, incidenceParam supplies d, and nonrootSolutions supplies S_m under the falsifying root assignment."
+    },
+    {
+      "obj_id": "def:occupation-k",
+      "verdict": "matched",
+      "note": "Defines K as exactly seven."
+    },
+    {
+      "obj_id": "def:window-levels",
+      "verdict": "matched",
+      "note": "survivalFn gives Pr(H_n>m); companion levelLocation takes the least nonnegative integer crossing. For probability laws and 0<p<1 this crossing exists; the negative-integer extension equals one since H_n is nonnegative."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:tests-d","verdict":"matched","note":"incidenceParam = max 1 (incidenceCount ...), which is d = max{1,Z}. Z (incidenceCount) counts the indices j in [1, capL n] other than i whose clause has at least one root literal. That is 'exposed indices meeting at least one root' as def:tests-counts and def:tests-exposure define it (every j ≤ L other than i)."},{"obj_id":"def:tests-filtrations","verdict":"matched","note":"ordinaryFiltration (G_m) = exposureSigma (E: root literals of C_j for every j ≤ L other than i, plus full contents of each clause that is neither ordinary nor a test, future indices included), joined with σ(ordinaryContents of C_j) for j in [1,m] other than i. ordinaryContents reveals the clause exactly when it is ordinary; whether a clause is ordinary is already E-measurable, so this is σ(ordinary contents through m). H_m is realized by testFiltration (RootExposure.lean:301, tagged @realizes \\cH_m) = G_m joined with σ(testContents) for j in [1,m] other than i. testContents gives the two nonroot literals of a test clause. isTest = exactly one root literal, true under w; the sign check l.2 ≠ [(l.1,true) ∈ c0] matches w falsifying c0. Both directions hold. The paper's range i ≤ m ≤ L is a domain restriction left to consumers, which is harmless."},{"obj_id":"def:p","verdict":"matched","note":"killProcess = killProb d S_m. Here d = incidenceParam (matched above). S_m = nonrootSolutions: the nonroot y in {0,1}^u, u = n-3, such that glueAssignment c0 y (y together with the falsifying roots w) satisfies every C_j with j in [1,m], j ≠ i, which is B_m. killProb is the tagged realization of q_j. So the definition is exactly p_m = q_d(S_m)."},{"obj_id":"def:occupation-k","verdict":"matched","note":"occupationK : ℝ := 7, exactly K = 7."},{"obj_id":"def:window-levels","verdict":"matched","note":"survivalFn μ H m = μ.real{m < H} for m ≥ 0 and 1 for m < 0. Since H is ℕ-valued, under the paper's probability measure P(H>m) = 1 for m < 0, so this agrees with s_n(m) = P(H_n > m) on all integers. levelLocation (Basic.lean:443) = sInf{m : ℕ | s(m) ≤ p} realizes r_n(p) = min{m ≥ 0 : s_n(m) ≤ p}. For 0 < p < 1 the set is nonempty because P(H > m) → 0 for an ℕ-valued H under a probability measure, so sInf is the minimum. The restriction 0 < p < 1 is left to consumers, which is harmless."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:i,sym:S,sym:z,sym:S[C],sym:q_j] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:i",
+      "verdict": "matched",
+      "note": "DelayIndex imposes exactly 1 ≤ i ≤ L; MomentsRange imposes the same index range with L = capL n in the stated omission regime."
+    },
+    {
+      "obj_id": "sym:S",
+      "verdict": "matched",
+      "note": "Finset (Fin u → Bool) represents every subset of the finite Boolean assignment space; OneNonempty records the core's explicit nonemptiness premise for the one-clause inequality."
+    },
+    {
+      "obj_id": "sym:z",
+      "verdict": "matched",
+      "note": "ClauseSat takes z : Fin n → Bool, exactly a Boolean assignment on the indicated finite variable set."
+    },
+    {
+      "obj_id": "sym:S[C]",
+      "verdict": "matched",
+      "note": "survivors filters S by ClauseSat C, producing exactly the subset of assignments in S satisfying C."
+    },
+    {
+      "obj_id": "sym:q_j",
+      "verdict": "matched",
+      "note": "killProb divides the number of killing clause families by the number of all clause families; subtype cardinality bounds put its value in [0,1], and uniform counting realizes independent sampling with replacement."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:i","verdict":"matched","note":"The two tagged members pin the space {1,…,L}. DelayIndex i L is `1 ≤ i ∧ i ≤ L`. MomentsRange n i is `6 ≤ n ∧ 1 ≤ i ∧ i ≤ capL n`, where capL n is the paper's cap L. Together they pin i to exactly {1,…,L}."},{"obj_id":"sym:S","verdict":"matched","note":"The carrier `Finset (Fin u → Bool)` is exactly the set of subsets of {0,1}^u, which is the declared space P({0,1}^u). The tagged OneNonempty (`S.Nonempty`) adds only the scoped 'S is nonempty' condition the core attaches to lem:one, used as a local hypothesis (e.g. killProb_zero_of_nonempty). It is not a global restriction, so the empty set stays available for the q_j(∅)=1 convention."},{"obj_id":"sym:z","verdict":"matched","note":"In ClauseSat (Basic.lean:47), z is typed `Fin n → Bool`, which is exactly {0,1}^n. At its use sites (survivors, familySurvivors) n is u, so z ranges over {0,1}^u. The satisfaction relation `∃ l ∈ C, z l.1 = l.2` is the standard literal semantics for z ⊨ C."},{"obj_id":"sym:S[C]","verdict":"matched","note":"survivors S C = `S.filter (ClauseSat C)` is a def that computes {z ∈ S : z ⊨ C}. It is a Finset of `Fin u → Bool`, so its range is P({0,1}^u) by construction."},{"obj_id":"sym:q_j","verdict":"matched","note":"killProb j S is a def. It equals the number of j-tuples of proper 2-clauses whose family kills S (familySurvivors = ∅), divided by the total number of j-tuples. That is the uniform, independent, with-replacement probability that j random proper 2-clauses kill S. As a count ratio its value lies in [0,1] by construction. Its domain is all of P({0,1}^u). The conventions q_j(∅)=1 and q_0(S)=0 for S≠∅ are proved on the standing domain u≥3 (killProb_empty, killProb_zero_of_nonempty)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:a,def:delay,def:tests-solution-set,def:tests-exposure,def:tests-counts] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:a",
+      "verdict": "matched",
+      "note": "Unfolding omittedPrefixSat gives exactly satisfiability of B_m and unsatisfiability after adjoining C_i; on i ≤ m < L this is the stated stopping-time event."
+    },
+    {
+      "obj_id": "def:delay",
+      "verdict": "matched",
+      "note": "The cardinality of the filtered interval Ico i L equals the sum of pivotal-event indicators from i through L−1."
+    },
+    {
+      "obj_id": "def:tests-solution-set",
+      "verdict": "matched",
+      "note": "The nonroot equivalence enumerates precisely the complement of the three roots; glueAssignment extends each assignment by the unique falsifying root assignment, and the filter imposes exactly satisfaction of B_m."
+    },
+    {
+      "obj_id": "def:tests-exposure",
+      "verdict": "matched",
+      "note": "expose records all root literals, hides the remaining contents exactly for ordinary and test clauses, and otherwise records the full clause; the supremum generates precisely their joint exposure sigma-field across all capped indices except i."
+    },
+    {
+      "obj_id": "def:tests-counts",
+      "verdict": "derived",
+      "note": "The supplied definition realizes Z exactly but omits V, so it captures only part of the frozen definition; also realize V as the count of capped indices other than i whose rootLiterals cardinality is at least two."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:a","verdict":"matched","note":"pivotalEvent is {ω | ∃z satisfying every C_j (1≤j≤m, j≠i)} ∩ {¬∃z satisfying those C_j and also C_i}. This is exactly {B_m^{(i)} satisfiable and B_m∧C_i unsatisfiable}, with B_m^{(i)} as defined in the core (original indices kept, C_i left out). ClauseSat is literal satisfaction z l.1 = l.2. The Lean def also covers m outside i≤m<L; that only extends the definition, and the paper's domain is the restriction. The NL's second equality {T≤m<T^{(i)}} is a stated identity for consumers to prove, not part of the definition."},{"obj_id":"def:delay","verdict":"matched","note":"delayIndicatorSum counts the m in Finset.Ico i (capL n) = {i,…,L−1} (L=10n) with ω∈A_m. As a natural number this equals Σ_{m=i}^{L−1} 1_{A_m}(ω), which is eq:delay exactly."},{"obj_id":"def:tests-solution-set","verdict":"matched","note":"nonrootSolutions is the set of y:{0,1}^{u} (u=nonrootCount n=n−3, matching def:tests-nonroots) such that glueAssignment c0 y satisfies every C_j with 1≤j≤m, j≠i (that is, B_m). glueAssignment puts the root falsifier w on R=vars(c0) (for each root v, w(v) = !(v positive in c0), the unique assignment falsifying c0) and y on the nonroots through a fixed bijection. The paper leaves that labelling of nonroots implicit. c0 stands for the value of C_i: R and w depend on C_i only. Lean is defined for all m, which extends the domain i≤m≤L."},{"obj_id":"def:tests-exposure","verdict":"matched","note":"exposureSigma is ⨆_{j∈[1,L]\\{i}} comap(expose c0 ∘ C_j)⊤. expose reveals rootLiterals (the root variables C_j meets, with their signs) and reveals the full clause unless it is ordinary (rootLiterals=∅) or a test (exactly one root literal, with sign ≠ decide((v,true)∈c0), i.e. true under w). These are the paper's three cases. It covers every index ≤L other than i, which includes future indices, as the core symbol \\cE states. Roots are fixed by the value c0 of C_i, consistent with R and w being functions of C_i."},{"obj_id":"def:tests-counts","verdict":"matched","note":"incidenceCount counts the j∈[1,L]\\{i} with |rootLiterals c0 C_j|≥1, i.e. C_j meets R. This equals the core symbol Z = |{j:1≤j≤L, j≠i, C_j meets R}| (the 'exposed indices' are the whole capped exposure). The node's V is realized by the sibling collisionCount, the same filter with ≥2, which matches the core symbol V. rootLiterals filters the literals of a proper clause, whose variables are distinct, so its cardinality equals |vars(C_j)∩R|."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:D_i,sym:w,sym:S_m,sym:Z,sym:V] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:D_i","verdict":"matched","note":"Basic.lean:262 defines a natural-number difference of capped times, hence a value in {0,…,L}; RootExposure.lean:175 counts a filtered interval contained in {0,…,L−1}, also bounded by L."},{"obj_id":"sym:w","verdict":"matched","note":"RootExposure.lean:65 computes a Bool for every member of roots c0, exactly realizing {0,1}^R."},{"obj_id":"sym:S_m","verdict":"matched","note":"RootExposure.lean:226 computes a finite subset of Boolean assignments on Fin (n−3), filtering precisely by satisfaction with the fixed falsifying roots; this realizes the stated powerset."},{"obj_id":"sym:Z","verdict":"matched","note":"RootExposure.lean:262 computes a natural-number count; exposure_counts_range at line 496 bounds it by L−1 for the omitted index 1≤i≤L, exactly establishing the declared space."},{"obj_id":"sym:V","verdict":"matched","note":"RootExposure.lean:269 computes a natural-number count; exposure_counts_range at line 496 bounds it by L−1 for the omitted index 1≤i≤L, exactly establishing the declared space."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:D_i","verdict":"matched","note":"Both members are computed ℕ-valued defs. delay = omittedCappedTime − cappedTime (Basic.lean:262), where omittedCappedTime is a hittingBtwn capped at capL n, so 0 ≤ D_i ≤ L. delayIndicatorSum (RootExposure.lean:175) is the card of a filter of Ico i (capL n), so it is at most L. delay_eq_delayIndicatorSum ties the two together. The range {0,…,L} holds by construction."},{"obj_id":"sym:w","verdict":"matched","note":"rootFalsifier (RootExposure.lean:65) is a def of type roots c0 → Bool, and roots c0 has card 3 (roots_card), so it is exactly an element of {0,1}^R. rootFalsifier_unique shows it is the unique root assignment that falsifies c0, which agrees with the member's hint."},{"obj_id":"sym:S_m","verdict":"matched","note":"nonrootSolutions (RootExposure.lean:226) is a Finset of (Fin (nonrootCount n) → Bool) with nonrootCount n = n − 3 = u (card_nonroots), so it is a subset of {0,1}^u. It filters for the glued assignments, with roots fixed at rootFalsifier, that satisfy every clause j ∈ [1,m] with j ≠ i. That matches the hint."},{"obj_id":"sym:Z","verdict":"matched","note":"incidenceCount (RootExposure.lean:262) is the card of a filter of (Icc 1 L).erase i, so it is ℕ-valued and nonnegative. exposure_counts_range (RootExposure.lean:496) proves incidenceCount ≤ capL n − 1 under DelayIndex i (capL n) via card_erase_of_mem. Together these pin Z to {0,…,L−1}."},{"obj_id":"sym:V","verdict":"matched","note":"collisionCount (RootExposure.lean:269) is the card of the indices j ∈ (Icc 1 L).erase i that meet at least two roots, so it is ℕ-valued. exposure_counts_range proves collisionCount ≤ capL n − 1. Together these pin V to {0,…,L−1}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:P_d,sym:p,sym:h_a,sym:T,sym:T^{(i)}] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:P_d",
+      "verdict": "matched",
+      "note": "potential sums d cardinality ratios, each in [0,1] because the numerator counts a subtype of the denominator's finite type; its range is [0,d] by construction."
+    },
+    {
+      "obj_id": "sym:p",
+      "verdict": "matched",
+      "note": "The tagged hp binder explicitly requires 0 < p < 1, hence p ∈ [0,1]; the typed core explicitly specifies this open interval for the probability-level role realized by this cluster."
+    },
+    {
+      "obj_id": "sym:h_a",
+      "verdict": "matched",
+      "note": "oneKillProb is the cardinality of killing clauses divided by all proper clauses, so its values lie in [0,1], in particular on every nonempty assignment set."
+    },
+    {
+      "obj_id": "sym:T",
+      "verdict": "matched",
+      "note": "cappedTime is min(hittingTime,L); the first-hit branch is positive and the no-hit branch equals L. Its clause-sequence argument itself forces n ≥ 3, so L = 10n is positive and T ∈ {1,…,L}."
+    },
+    {
+      "obj_id": "sym:T^{(i)}",
+      "verdict": "matched",
+      "note": "omittedCappedTime searches original indices in [1,L] and returns L if none hits; its clause-sequence argument forces L > 0, giving values in {1,…,L} by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:P_d","verdict":"matched","note":"potential d S is defined as Σ_{j<d} killProb j S. Each killProb j S is a count of killing j-tuples divided by the total count, so it lies in [0,1] (division by zero gives 0). The sum therefore lies in [0,d] by construction, and the def's domain Finset (Fin u → Bool) is P({0,1}^u)."},{"obj_id":"sym:p","verdict":"matched","note":"The core gives p two uses: the shorthand p=q_d(S), and a deterministic level with 0<p<1 in r_n(p). For the level use, levelLocation takes p : ℝ, and its tagged companion levelLocation_pos_and_spec (Basic.lean:526) carries hp : 0<p ∧ p<1, which is exactly the core's level condition. The shorthand use is computed by killProb and lies in [0,1] by construction, so both uses fall in [0,1]."},{"obj_id":"sym:h_a","verdict":"matched","note":"oneKillProb a S is the number of killing proper a-clauses divided by the number of proper a-clauses, so it lies in [0,1] by construction. Lean also defines it at S=∅, which the paper excludes; this only extends the domain, and on nonempty S it agrees with the paper's h_a."},{"obj_id":"sym:T","verdict":"matched","note":"cappedTime = min(hittingTime, capL n) with capL n = 10n. hittingTime is either an sInf over m ≥ 1 or capL n, so cappedTime lies in {1,…,L} whenever L ≥ 1, i.e. n ≥ 1, the paper's standing range. cappedTime_eq_hittingBtwn confirms that it agrees with the capped first-unsatisfiable-prefix construction."},{"obj_id":"sym:T^{(i)}","verdict":"matched","note":"omittedCappedTime is hittingBtwn over [1, capL n] of the omitted-prefix unsatisfiability. It returns the first hit in [1,L], or L if there is none, so it lies in {1,…,L} by construction and matches 'first unsatisfiable original index with i omitted, capped at L'."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:p_2,sym:\eta,sym:b,sym:Y,sym:p_{\rm hit}] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_2","verdict":"matched","note":"WilsonLevels explicitly imposes 0 < p2 and p2 < p1, exactly the stated lower-level interval."},{"obj_id":"sym:\\eta","verdict":"matched","note":"WindowEta explicitly imposes 0 < η and η < 1/2."},{"obj_id":"sym:b","verdict":"matched","note":"frozenCount counts a filtered subset of Fin u, so its natural-number value lies between zero and u by construction."},{"obj_id":"sym:Y","verdict":"matched","note":"familySurvivors returns a finite subset of Boolean assignments satisfying every auxiliary clause; at j = 0 the condition is vacuous."},{"obj_id":"sym:p_{\\rm hit}","verdict":"matched","note":"hitProbability is the uniform counting measure of the root-incidence event; its cardinality ratio lies in [0,1], including the empty-carrier case."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_2","verdict":"matched","note":"WilsonLevels (Basic.lean:449-452) has the conjuncts 0 < p2 and p2 < p1, which pin p_2 to (0,p_1) exactly. The third conjunct, p1 < 1, constrains p_1 and does not over-constrain p_2."},{"obj_id":"sym:\\eta","verdict":"matched","note":"WindowEta (Basic.lean:460-462) is 0 < η ∧ η < 1/2, which is exactly (0,1/2)."},{"obj_id":"sym:b","verdict":"matched","note":"frozenCount (AssignmentSets.lean:151) is a computed def: the card of a filter of Finset.univ over Fin u. By construction it is a natural number between 0 and u, i.e. in {0,…,u}, and it counts the coordinates that are constant on S, which is what the hint says."},{"obj_id":"sym:Y","verdict":"matched","note":"familySurvivors (AssignmentSets.lean:67) is a computed def of type Finset (Fin u → Bool), and a Finset of assignments is exactly an element of P({0,1}^u). It is S filtered by satisfying all j clauses; for j=0 the condition ∀ k : Fin 0 is vacuous, giving S, so the hint's 'including j zero' holds."},{"obj_id":"sym:p_{\\rm hit}","verdict":"matched","note":"hitProbability (Moments.lean:26) is a computed def: the measureReal of a set under uniformClauseMeasure n 3. That measure is a probability measure whenever ProperClause n is nonempty, which the c0 argument guarantees (OrdinaryHiddenClauses.lean:77-80), so the value lies in [0,1] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:p_m,sym:W_m,sym:s_n,sym:r_n,sym:p_1] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:p_m",
+      "verdict": "matched",
+      "note": "killProcess computes a finite killing probability; the tagged bounds and monotonicity lemmas confirm its range [0,1] and prefix monotonicity."
+    },
+    {
+      "obj_id": "sym:W_m",
+      "verdict": "matched",
+      "note": "durationBound computes the capped nonnegative expression, and durationBound_range establishes both endpoints of [0,L]."
+    },
+    {
+      "obj_id": "sym:s_n",
+      "verdict": "drift",
+      "note": "The cluster does not enforce the upper bound one: survivalFn accepts arbitrary measures. A Lean-checked example gives survivalFn (2 • Measure.dirac ()) (fun _ : Unit => 1) 0 = 2. Add a probability-measure restriction to the tagged definition or a tagged well-formedness clause enforcing it."
+    },
+    {
+      "obj_id": "sym:r_n",
+      "verdict": "matched",
+      "note": "levelLocation has natural-number codomain; the tagged specification confirms the finite positive first crossing for levels in (0,1) in the stated sampling setting."
+    },
+    {
+      "obj_id": "sym:p_1",
+      "verdict": "matched",
+      "note": "WilsonLevels jointly imposes 0 < p2 < p1 < 1, hence exactly the required open-unit-interval range for p1."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:s_n",
+    "reason": "Basic.lean:439 permits arbitrary measures, and no member of the s_n cluster restricts them to probability measures, allowing survival values above one.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_m","verdict":"matched","note":"killProcess (RootExposure.lean:310) defines p_m as killProb of the nonroot solution set. killProcess_bounds (l.510) proves 0 ≤ p_m ≤ 1 for every c0, Cseq, i, m, ω, so the cluster's own members pin p_m to [0,1]. killProcess_monotone (l.518) adds the stated monotonicity in prefix time."},{"obj_id":"sym:W_m","verdict":"matched","note":"durationBound (l.339) computes W_m: min(L, K·d^β·p_m^{-β}) when p_m > 0, and L otherwise. durationBound_range (l.527) proves 0 ≤ W_m ≤ capL n for all arguments, which pins W_m to [0,L]."},{"obj_id":"sym:s_n","verdict":"matched","note":"survivalFn (Basic.lean:439) computes s_n(m) = μ.real{m < H} for m ≥ 0. Under the paper's probability law this value lies in [0,1] by construction. The value 1 at negative integers is a conservative Lean-only extension: it leaves s_n on ℤ≥0 unchanged."},{"obj_id":"sym:r_n","verdict":"matched","note":"levelLocation (l.443) is sInf{m : ℕ | s_n(m) ≤ p}, which matches the core definition r_n(p) = min{m ≥ 0 : s_n(m) ≤ p}. levelLocation_pos_and_spec (l.523) proves, for 0 < p < 1, that the value is positive, that s_n(r_n) ≤ p, and that s_n(m) > p for every m < r_n. So the infimum is attained and finite, and r_n maps (0,1) into ℤ≥0 as the core states."},{"obj_id":"sym:p_1","verdict":"matched","note":"WilsonLevels (l.449) is 0 < p2 ∧ p2 < p1 ∧ p1 < 1. Together these give 0 < p1 < 1, so the member pins p_1 to (0,1)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:p_{\rm coll} =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_{\\rm coll}","verdict":"matched","note":"The tagged definition computes the uniform fraction of proper three-literal clauses meeting at least two root variables; its numerator counts a subset of the finite clause space, so its value lies in [0,1] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_{\\rm coll}","verdict":"matched","note":"collisionProbability (Helpers/Moments.lean:32) computes the value as (uniformClauseMeasure n 3).real {c | 2 ≤ (rootLiterals c0 c).card}. Basic.lean:51 defines uniformClauseMeasure as ProbabilityTheory.uniformOn Set.univ on a finite type. That measure is at most 1, and it is a probability measure when the type is nonempty; several helper files instantiate it with infer_instance. The .real of a measure at most 1 always lies in [0,1], so the def pins the declared space [0,1] by construction. The @realizes hint ('uniform probability of meeting two or more roots') matches the decl. The value depends only on n and the fixed clause c0, which fits the core's statement that p_coll is the common probability P(J_j) and depends only on n."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:delay =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:delay",
+      "verdict": "matched",
+      "note": "Equivalent under the frozen fixed-omitted-clause sampling setup: every clause value has positive probability, so quantifying c0 preserves conditioning on C_i; the a.e. conditional bound retains exactly the stated index range, delay, exposure, constants, exponents, and three collision cases."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:delay","verdict":"matched","note":"The Lean and the paper say the same thing. Hypotheses: n≥6 (OmissionN) and 1≤i≤L with L=capL n=10n (DelayIndex). The paper works with the value of C_i held fixed, and the Lean does this with fixedClauseMeasure = cond μ {C_i=c0} for every c0. Each proper clause has positive probability under the uniform law, so no c0 makes this vacuous. The σ-field exposureSigma joins, over j∈[1,L] with j≠i, the information expose c0 (C_j) = (root literals, full clause unless the clause is ordinary or a test). isTest asks for exactly one root literal that is true under w, since l.2 ≠ [(v,true)∈c0] is the same as l.2 = w(v). This matches def:tests-exposure, including future indices. collisionCount counts the same indices with ≥2 roots (V). incidenceParam = max 1 Z (d). K=7 (def:occupation-k) and β=3/2 (def:one-beta), so d^β = d^{3/2}. D_i = T^(i) − T is nonnegative, so natural-number subtraction is harmless, and D_i is cast to ℝ before squaring. The bound 2K²d³·1{V=0} + 2KLd^{3/2}·1{V=1} + L²·1{V≥2} matches term by term. The inequality holds a.e. for the conditional expectation, which is the standard convention. The proof's sorry status is out of scope."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:wilson =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "thm:wilson",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent quantifiers, level-dependent positive constant, eventual n, integer endpoints, and separation bound under the standing iid uniform proper 3-clause law. The hittingTime fallback affects only a null event: P(F_m satisfiable) ≤ 2^n(7/8)^m → 0."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiLinearVarianceRandom.WilsonSeparation",
+      "statement": "For fixed 1 > p1 > p2 > 0, there exist a > 0 and N such that every n ≥ N with n ≥ 3 and every iid uniform proper 3-clause process satisfy m2 − m1 ≥ a√n whenever s_n(m1) ≥ p1 and s_n(m2) ≤ p2.",
+      "classical_fact": "Wilson (2002), Corollary 4, under the supplied encoding-only attestation contract.",
+      "missing_infra": "Deferred proof of the cited separation theorem.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:wilson2002",
+        "locator": "Corollary 4"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"thm:wilson","verdict":"faithful-refinement","note":"I unfolded every referenced definition and the Lean is equivalent to the frozen node in both directions. WilsonLevels is exactly 0<p2<p1<1. `a` is chosen after p1,p2 and before n, with 0<a, so it depends only on the levels. ∃N ∀n≥N is 'for all sufficiently large n'; the extra MainN n (n≥3) is harmless under ∃N. IsUniformClauseProcess (measurable C_j for j≥1, iIndepFun over j≥1, each law uniform on ProperClauseA n 3, i.e. 3 distinct variables with signs, 8·C(n,3) clauses) is ass:main-law. hittingTime is min{m≥1 : F_m unsat}. Its capL fallback applies only on the event that no prefix is ever unsatisfiable, which has probability zero under the law, so it does not change survivalFn. survivalFn equals P(H_n>m) for every integer m: the m<0 branch returns 1, which agrees because H_n≥1. WilsonEndpoints is s_n(m1)≥p1 ∧ s_n(m2)≤p2, and the conclusion a√n ≤ m2−m1 runs in the same direction as the paper's. The claim quantifies universally over Ω, μ and Cseq, which is equivalent to the paper's claim because s_n depends only on the law of the process. The declaration is self-contained: the model class is fully defined, with no free abstract class."}],"substrate_gates":[{"name":"Papers.OaiLinearVarianceRandom.WilsonSeparation","statement":"∀ 0<p2<p1<1, ∃ a>0, ∃ N, ∀ n≥N (n≥3), for every i.i.d. uniform proper-3-clause process and all integers m1,m2: s_n(m1)≥p1 ∧ s_n(m2)≤p2 → a√n ≤ m2−m1, where s_n(m)=P(H_n>m) and H_n is the first unsatisfiable prefix index","classical_fact":"Wilson (2002), Corollary 4: the random 3-SAT satisfiability threshold window has width Ω(√n) in the clause count","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:wilson2002","locator":"Corollary 4"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "Equivalent modulo the explicitly exempted WilsonSeparation: constants precede n and every probability-space realization, and the unfolded process is precisely iid uniform proper 3-clauses. The bound P(H_n>m) ≤ 2^n(7/8)^m ensures termination a.s. and finite second moments, so null-event totalization preserves variance. A real threshold is equivalent to an integer threshold by rounding; the two bounds imply Θ(n)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"I checked both directions and they agree. Upper bound: ∃C, then for every n≥3 (MainN), every probability space, and every C_j process that is i.i.d. uniform over ProperClause n (3 distinct variables with signs, so 8·C(n,3) clauses; uniformOn univ; iIndepFun over j≥1; measurable), Var(H_n) ≤ C·n. C is chosen before n and before the world, so it is absolute. Lower bound: ∃c>0, ∃n0, then for all n≥n0 with n≥3, c·n ≤ Var(H_n). The MainN conjunct is redundant once n0≥3, so the statement is equivalent to the paper's. hittingTime equals min{m≥1 : C_1..C_m unsatisfiable} (PrefixSat/ClauseSat unfold correctly). The capL fallback is used only when no prefix is ever unsatisfiable, which has probability zero under uniform sampling, so it changes neither Var nor the claim. Because H_n ≤ 10n on the event where it hits, Mathlib's variance (evariance.toReal) is finite and the toReal truncation does not apply. Cseq 0 is unconstrained and unused. Θ(n) is the conjunction of the two bounds. WilsonSeparation is the source-verified cited carrier for thm:wilson and is exempt as an explicit hypothesis. Per the scope rules it is not judged here; it quantifies over n≥N with MainN, a>0 depending only on (p1,p2), and the same world class."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:window =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:window",
+      "verdict": "matched",
+      "note": "The positive constants and eventual bounds express exactly Θ_η(√n), uniformly over realizations of the paper’s iid uniform proper-clause law. Level locations match the stated minima; hitting-time totalization affects only a null event. WilsonSeparation is an explicitly exempt cited premise."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:window","verdict":"matched","note":"The two statements are logically equivalent, judged modulo the cited WilsonSeparation hypothesis (thm:wilson), which is exempt. The Lean fixes η with WindowEta (0<η<1/2) and then gives c1>0, c2>0 and N depending only on η. For every n≥N with MainN (n≥3), and for every probability space carrying an IsUniformClauseProcess (measurable, iIndep, uniform over proper 3-clauses, which is the sampling_model law), it proves c1√n ≤ r_n(η)−r_n(1−η) ≤ c2√n. That is exactly Θ_η(√n). levelLocation = sInf{m:ℕ | survivalFn m ≤ p} = min{m≥0 : s_n(m) ≤ p}, matching def:window-levels. survivalFn at m≥0 is μ.real{H>m} = P(H_n>m). hittingTime is min{m≥1 : F_m unsat}, matching def:main-process, except that it falls back to capL=10n on the event that F_m is never unsatisfiable. That event has probability zero: a.s. some triple of variables eventually receives all 8 sign patterns. So the survival function, and hence r_n, is unchanged. The bounds being uniform over all realizing probability spaces is harmless, because the law of H_n is fixed by the process law."}],"assumption_verdicts":[],"substrate_gates":[{"name":"hWilson_of_gate","statement":"WilsonSeparation: for levels 1>p1>p2>0 there are a>0 and N such that for n≥N, n≥3, under the uniform clause process, s_n(m1)≥p1 and s_n(m2)≤p2 imply m2−m1 ≥ a√n","classical_fact":"thm:wilson, the cited Wilson separation of survival levels for the random 3-SAT hitting time","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:wilson","locator":"thm:wilson"},"check_status":"cited-verified"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:duration =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:duration","verdict":"matched","note":"Under the standing law conditional on C_i=c0, Lean states the same a.e. conditional duration bound and G_m-measurability, with matching indices, events, filtrations, d, p_m, K=7 and β=3/2. Since p_m≥0, the fallback branch is exactly p_m=0; real-valued strong measurability is equivalent to measurability."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:duration","verdict":"matched","note":"The Lean statement is logically equivalent to cor:duration. main.tex:309 says 'Fix i and condition on the value of C_i', and the Lean does exactly that: c0 is universally quantified and fixedClauseMeasure is cond μ {C_i = c0}, so roots, the exposure field E, d, p_m and A_m are built from c0, which equals C_i almost surely under that measure. The sum over s from m to L-1 is Finset.Ico m (capL n) with capL n = 10n = L. pivotalEvent is '{B_s satisfiable and B_s ∧ C_i unsatisfiable}'. testFiltration is G_m joined with σ(test nonroot literals at indices j ≤ m, j ≠ i), which is H_m. ordinaryFiltration is E joined with σ(masked ordinary contents at indices j ≤ m, j ≠ i), which is G_m, and exposureSigma covers future indices up to L. durationBound is min{L, 7·d^{3/2}·p_m^{-3/2}} when p_m > 0 and L otherwise, with d = max{1, Z} and p_m = killProb d (nonroot solution set) = q_d(S_m). The inequality holds a.e. under the conditioned law, which is the standard reading of a conditional expectation. Strong measurability of W_m with respect to ordinaryFiltration gives 'W_m is G_m-measurable'. The hypotheses n ≥ 6, 1 ≤ i ≤ L and i ≤ m < L, plus the i.i.d. uniform clause law, are the paper's. Because the Cseq j are measurable for j ≥ 1 and the clause space carries ⊤, testFiltration is a sub-σ-algebra of the ambient one, so condExp is not the junk default. nonrootSolutions was not unfolded here; it was taken as the def:tests-solution-set realization."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:p,sym:s_n,sym:r_n] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:p",
+      "verdict": "matched",
+      "note": "The tagged hp clause in Basic.lean:543 pins 0 < p < 1, exactly the deterministic-level role specified in the typed core and within the declared probability space [0,1]."
+    },
+    {
+      "obj_id": "sym:s_n",
+      "verdict": "matched",
+      "note": "survivalFn computes μ.real {ω | m < H ω} for natural m; probability-measure bounds establish values in [0,1] by construction."
+    },
+    {
+      "obj_id": "sym:r_n",
+      "verdict": "matched",
+      "note": "levelLocation returns a natural number by construction; its tagged companion lemma establishes the attained positive first crossing for every 0 < p < 1 under the paper's process assumptions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p","verdict":"matched","note":"The core says p has two roles: the shorthand q_d(S) in the introduction, and a deterministic level with 0<p<1 inside r_n(p). This cluster realizes only the level role. levelLocation (Basic.lean:452) takes p : ℝ, and levelLocation_pos_and_spec (Basic.lean:543) pins it with hp : 0 < p ∧ p < 1. That is exactly the core's 0<p<1 condition for r_n(p), which lies inside the declared space [0,1]. Every consumer reaches p through levelLocation or survivalLevels, so the free ℝ is constrained by a tagged member."},{"obj_id":"sym:s_n","verdict":"matched","note":"survivalFn μ H m := μ.real {ω | m < H ω} (Basic.lean:440), with m : ℕ = ℤ≥0 and [IsProbabilityMeasure μ]. This is P(H_n > m), so by construction its value lies in [0,1]. Domain, range and formula all match the core's s_n(m)=P(H_n>m)."},{"obj_id":"sym:r_n","verdict":"matched","note":"levelLocation μ H p := sInf {m : ℕ | survivalFn μ H m ≤ p} (Basic.lean:452) is min{m≥0 : s_n(m)≤p}, and it depends on (μ,H) only through s_n, i.e. through the law of H_n. For n≥3, the uniform clause process and 0<p<1, levelLocation_pos_and_spec (Basic.lean:540-546) proves the set is nonempty (so sInf is a true minimum, not the empty-set default 0), the value is positive, s_n(r_n)≤p, and p<s_n(m) for every m<r_n. levelLocation_minimum (Basic.lean:597) restates this as IsLeast. Together these give the core's 'finite positive integer' on (0,1)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:tests-counts,def:window-levels,thm:wilson] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:tests-counts",
+      "verdict": "matched",
+      "note": "Counts precisely the indices in {1,…,L} excluding i whose clauses meet at least one or at least two root variables; proper clauses ensure literal counts equal distinct-root counts."
+    },
+    {
+      "obj_id": "def:window-levels",
+      "verdict": "matched",
+      "note": "Survival is Pr(H>m), and the natural-number infimum is the specified minimum for 0<p<1 on the paper's measurable, almost surely finite hitting-time domain."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "thm:wilson",
+      "verdict": "faithful-refinement",
+      "note": "Encodes the stated level inequalities, a positive constant and eventual threshold depending only on the levels, and integer endpoint separation uniformly over the defined iid uniform proper-3-clause model; the fallback hitting-time value affects only a null event."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiLinearVarianceRandom.WilsonSeparation",
+      "statement": "For fixed 0<p2<p1<1, eventually in n≥3, every pair of integer survival endpoints at these levels is separated by at least a(p1,p2)√n, with a(p1,p2)>0.",
+      "classical_fact": "Wilson (2002), Corollary 4, under the supplied attested carrier contract.",
+      "missing_infra": "Deferred logical cited assumption.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:wilson2002",
+        "locator": "Corollary 4"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:tests-counts","verdict":"matched","note":"Matched. exposureCounts = (incidenceCount, collisionCount). Both count the indices j in Icc 1 (capL n) with j ≠ i, which are the exposed indices of def:tests-exposure (every j ≤ L other than i, with capL n = 10n = L). Z keeps the j with |rootLiterals c0 (C_j)| ≥ 1 and V the j with |rootLiterals c0 (C_j)| ≥ 2. rootLiterals filters C_j's literals to those whose variable is in roots c0 = clauseVars c0, which is R, the three variables of the omitted clause. A proper clause has distinct variables, so this card equals the number of roots C_j meets. c0 is an explicit parameter standing for C_i; with c0 = C_i (or conditioning on C_i = c0) this is exactly the paper's Z and V."},{"obj_id":"def:window-levels","verdict":"matched","note":"Matched. survivalFn μ H m = μ.real{m < H} = P(H_n > m) on natural m. survivalFnInt extends it with value 1 for m < 0, which agrees with P(H_n > m) because H_n ≥ 0. levelLocation = sInf{m : ℕ | s(m) ≤ p} = min{m ≥ 0 : s_n(m) ≤ p}. For the clause process and 0 < p < 1 the set is nonempty (s_n tends to 0), so sInf is the min. Its junk value outside that domain (p not in (0,1), or a general H) is never paper-facing. hittingTime equals the paper's uncapped H_n except on the null event that no prefix is ever unsatisfiable, so the survival law is unchanged."}],"assumption_verdicts":[{"obj_id":"thm:wilson","verdict":"faithful-refinement","note":"Faithful encoding. Quantifiers: ∀ p1 p2 with 0 < p2 < p1 < 1 → ∃ a > 0 depending only on (p1, p2) → ∃ N, ∀ n ≥ N ('sufficiently large n') → ∀ integers m1, m2 with s_n(m1) ≥ p1 and s_n(m2) ≤ p2 → a√n ≤ m2 − m1. The extra MainN n (n ≥ 3) is absorbed by taking N ≥ 3, so the two statements are equivalent. Quantifying over every probability space carrying an iid uniform proper-3-clause process is equivalent to the paper's single model, because s_n depends only on the law of H_n, which the process law fixes. survivalFnInt handles negative integers as P(H_n > m) = 1. H_n is hittingTime, which differs from the paper's H_n only on a null event. The cited model class (iid uniform proper 3-clauses, first unsatisfiable prefix) is fully encoded by defined predicates."}],"substrate_gates":[{"name":"Papers.OaiLinearVarianceRandom.WilsonSeparation","statement":"For 0<p2<p1<1 there is a>0 and N such that for n≥N (n≥3) and every iid uniform proper 3-clause process, any integers m1,m2 with s_n(m1)≥p1 and s_n(m2)≤p2 satisfy m2−m1 ≥ a√n.","classical_fact":"Wilson (2002), On the critical exponent of random k-SAT, Corollary 4: the scaling window of random 3-SAT has width at least of order √n.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:wilson2002","locator":"Corollary 4"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:window =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:window","verdict":"matched","note":"Modulo the exempt WilsonSeparation carrier, the statement gives exactly the eventual two-sided positive bounds defining Θ_η(√n), with constants and threshold depending only on η. The process is the stipulated independent uniform proper-clause process; hittingTime's fallback occurs only on a null event and preserves survival probabilities and level locations."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:window","verdict":"matched","note":"For each η satisfying WindowEta (0<η<1/2), the Lean gives constants c1,c2>0 that depend on η and a threshold N, and for every n≥N with n≥3 it gives c1√n ≤ r_n(η)−r_n(1−η) ≤ c2√n. That is the standard reading of Θ_η(√n) as a two-sided bound for all large n. levelLocation is sInf{m:ℕ | μ.real{m<H} ≤ p}, which matches the core definition r_n(p)=min{m≥0 : s_n(m)≤p} with s_n(m)=P(H_n>m) (def:window-levels). The statement quantifies over every probability space carrying an i.i.d. uniform proper 3-clause process. r_n depends only on the law of H_n, which that process fixes, so this is equivalent to the paper's single model. The capL fallback in hittingTime applies only on the event that every prefix stays satisfiable. That event is null and does not change s_n. WilsonSeparation is the source-matched cited thm:wilson carrier, so it is exempt as a hypothesis."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "Modulo the exempt WilsonSeparation carrier, both bounds match, with constants uniform in n and the probability model. The unfolded process is iid uniform proper 3-clauses; hittingTime equals the first unsatisfiable index almost surely, and the sampling law gives finite second moments. A real threshold is equivalent to a natural threshold, and the two bounds imply Θ(n)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement matches the paper in both directions. Upper bound: a single real C is chosen before n and before the probability space, and Var(H_n) ≤ C·n holds for every n ≥ 3 (MainN) and every independent, uniform proper-3-clause process. Lower bound: c > 0 and a threshold n0 are both chosen before n; a real n0 is equivalent to a natural-number n_0. Uniform constants: since the variance depends only on the law of (C_j), quantifying over all (Ω, μ, Cseq) is the same as fixing one process. ProperClauseA n 3 is exactly the set of 8·binom(n,3) proper 3-clauses, and uniformClauseMeasure is the counting measure on it. IsUniformClauseProcess makes C_1, C_2, … measurable, mutually independent (iIndepFun over j+1) and each uniform; C_0 is unconstrained and never used. hittingTime is min{m ≥ 1 : F_m unsatisfiable}. Its fallback value capL n applies only when no prefix is ever unsatisfiable, which has probability 0 under the uniform law (the 8 sign patterns on one variable triple eventually appear), so the variance is unchanged. H_n has geometric tails, so the variance is finite and ProbabilityTheory.variance is the true variance. Θ(n) is the stated consequence of the two bounds. The WilsonSeparation hypothesis is the exempt cited carrier (thm:wilson), with s_n(m) = P(H_n > m) realized by survivalFnInt; it adds no paper-owned premise."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:wilson =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "thm:wilson",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: positive a and eventual threshold N depend only on the levels; the encoded process is exactly iid uniform proper 3-clause sampling. The hitting-time fallback affects only a null event, and negative integer times have survival probability one."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiLinearVarianceRandom.WilsonSeparation",
+      "statement": "For each 0 < p2 < p1 < 1, uniformly for sufficiently large n and iid uniform proper 3-clause processes, the stated survival endpoints imply m2 - m1 ≥ a√n for some a > 0 depending only on the levels.",
+      "classical_fact": "Wilson (2002), Corollary 4, as attested in the frozen node.",
+      "missing_infra": "Deferred cited separation theorem.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:wilson2002",
+        "locator": "Corollary 4"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"thm:wilson","verdict":"faithful-refinement","note":"Equivalent to the frozen node. WilsonLevels(p1,p2) encodes 0<p2<p1<1. The order of quantifiers matches: ∃a>0 depends only on (p1,p2) and comes before ∃N ∀n≥N ('for all sufficiently large n'). The extra MainN n (n≥3) only enlarges N, so it does not change the claim. Over all integers m1,m2, WilsonEndpoints gives s_n(m1)≥p1 ∧ s_n(m2)≤p2 and the conclusion is a√n ≤ m2−m1. s_n is survivalFnInt of the unsatisfiability hitting time of an i.i.d. sequence of uniform proper 3-clauses (IsUniformClauseProcess: measurable, iIndep, law uniformClauseMeasure n 3 on clauses with 3 distinct variables). This matches the core sampling model and def s_n(m)=P(H_n>m). For integers m<0, survivalFnInt=1, which equals P(H_n>m) because H_n≥0. The capL value of hittingTime is used only on the event of no unsatisfiable prefix, which has probability zero, so s_n is unaffected. s_n depends only on the law, so quantifying over every probability space that carries the process is equivalent to the paper's single process. Everything is self-contained: model, levels and endpoints are all defined predicates."}],"substrate_gates":[{"name":"Papers.OaiLinearVarianceRandom.WilsonSeparation","statement":"∀ p1 p2, 0<p2<p1<1 → ∃ a>0, ∃ N, ∀ n≥N (n≥3), for every i.i.d. uniform proper-3-clause process and all integers m1,m2 with s_n(m1)≥p1 and s_n(m2)≤p2: a√n ≤ m2−m1","classical_fact":"Wilson (2002), On the critical exponents of random k-SAT, Corollary 4: the random 3-SAT satisfiability window has width at least of order √n","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:wilson2002","locator":"Corollary 4"},"check_status":"cited-verified-attested"}],"escalate":null}

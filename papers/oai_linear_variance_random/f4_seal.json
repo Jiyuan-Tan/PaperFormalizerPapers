@@ -1,0 +1,1061 @@
+{
+  "version": 1,
+  "slug": "oai_linear_variance_random",
+  "paper_sha256": "9f961bc4e490c1d668014b02866b32020126ad7c8b0f94732a227554ab6d4404",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:delay-index",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a6de4f3d0a2c51c9e2ba101685e17f44bc4bfb4d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a6de4f3d0a2c51c9e2ba101685e17f44bc4bfb4d"
+      }
+    },
+    {
+      "id": "ass:duration-time",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "493e9dde0d957a12c8329f1d7dc5783222ab0036"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "493e9dde0d957a12c8329f1d7dc5783222ab0036"
+      }
+    },
+    {
+      "id": "ass:main-law",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6fc0d202057cc1b822ef3b471a10aa26ab568e67"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6fc0d202057cc1b822ef3b471a10aa26ab568e67"
+      }
+    },
+    {
+      "id": "ass:main-n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "66caae840e394b8822cb5851e3309ac47719a3bb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "66caae840e394b8822cb5851e3309ac47719a3bb"
+      }
+    },
+    {
+      "id": "ass:moments-range",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "41f534d44555181325468c0719a8a251e7fc6e5a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "41f534d44555181325468c0719a8a251e7fc6e5a"
+      }
+    },
+    {
+      "id": "ass:occupation-time",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2a7513f73e25c1015e4bc481ca4ddbda6ce50776"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2a7513f73e25c1015e4bc481ca4ddbda6ce50776"
+      }
+    },
+    {
+      "id": "ass:omission-n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0cac4ca46b9924a04544bcf37c71323a7e5b4c2d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0cac4ca46b9924a04544bcf37c71323a7e5b4c2d"
+      }
+    },
+    {
+      "id": "ass:one-clause-law",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73f946528a269203ac4d45c72ecced3866d2e2f7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73f946528a269203ac4d45c72ecced3866d2e2f7"
+      }
+    },
+    {
+      "id": "ass:one-nonempty",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1bc808648fa82b19209570197f77bf4e1c0d58b8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1bc808648fa82b19209570197f77bf4e1c0d58b8"
+      }
+    },
+    {
+      "id": "ass:one-replacement",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "79573aa683a588023c345da4724cd905718ea86f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "79573aa683a588023c345da4724cd905718ea86f"
+      }
+    },
+    {
+      "id": "ass:one-u",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7f32655acc86c51359812b856e63b4e1831b7c3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7f32655acc86c51359812b856e63b4e1831b7c3"
+      }
+    },
+    {
+      "id": "ass:potential-clause",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8efc7bd48cf1d9a40cf4fb0fcae6502054d0d966"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8efc7bd48cf1d9a40cf4fb0fcae6502054d0d966"
+      }
+    },
+    {
+      "id": "ass:potential-d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a2cd16179602933dd0e9dabb1935a52ce8867f6c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a2cd16179602933dd0e9dabb1935a52ce8867f6c"
+      }
+    },
+    {
+      "id": "ass:tests-time",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1da9ac37c40acdac6f89b3e3d1dec533e059b4e6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1da9ac37c40acdac6f89b3e3d1dec533e059b4e6"
+      }
+    },
+    {
+      "id": "ass:wilson-endpoints",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "74c1168ae14cd74dbca22e9dcc72683e8a45130b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "74c1168ae14cd74dbca22e9dcc72683e8a45130b"
+      }
+    },
+    {
+      "id": "ass:wilson-levels",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f1c0dc61b6637a0935088e8cf5135086e629a37a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f1c0dc61b6637a0935088e8cf5135086e629a37a"
+      }
+    },
+    {
+      "id": "ass:window-eta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6ea28ea64b508b8f22679c9975e9c3f1cc866be1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6ea28ea64b508b8f22679c9975e9c3f1cc866be1"
+      }
+    },
+    {
+      "id": "def:a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2d1279e088d7acb067a6fd9b9cccc1a40d8ff25e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2d1279e088d7acb067a6fd9b9cccc1a40d8ff25e"
+      }
+    },
+    {
+      "id": "def:delay",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5e383711fbb496c386c1d848dfff3c0b09699ffb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5e383711fbb496c386c1d848dfff3c0b09699ffb"
+      }
+    },
+    {
+      "id": "def:main-process",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9785ee550e978f6f2397c14249b3cae5b685a4c4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9785ee550e978f6f2397c14249b3cae5b685a4c4"
+      }
+    },
+    {
+      "id": "def:occupation-k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3e02b25bbf622493d07129801d20de2b70a7e682"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3e02b25bbf622493d07129801d20de2b70a7e682"
+      }
+    },
+    {
+      "id": "def:omission-cap",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9f3b112eac609801bf0df0bcc904ce1144fdda46"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9f3b112eac609801bf0df0bcc904ce1144fdda46"
+      }
+    },
+    {
+      "id": "def:omission-formula",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f650434543338f55dbdbf2d9767de369e62272f6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f650434543338f55dbdbf2d9767de369e62272f6"
+      }
+    },
+    {
+      "id": "def:omission-time-delay",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06746e5b90d9a7a5bfb62b7007edb282d48045c4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06746e5b90d9a7a5bfb62b7007edb282d48045c4"
+      }
+    },
+    {
+      "id": "def:one-beta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "af437e5a34b658c7f360f4951ace0e54684bcaa9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "af437e5a34b658c7f360f4951ace0e54684bcaa9"
+      }
+    },
+    {
+      "id": "def:one-empty-conventions",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bb933ffb2aabffc311085f258ef9e7a903310e30"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bb933ffb2aabffc311085f258ef9e7a903310e30"
+      }
+    },
+    {
+      "id": "def:one-h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a3386d1217ee808a143c9278b7fa51e627872c0a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a3386d1217ee808a143c9278b7fa51e627872c0a"
+      }
+    },
+    {
+      "id": "def:one-killing",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fec177819cb25ec9467cf78b19385a161a94d817"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fec177819cb25ec9467cf78b19385a161a94d817"
+      }
+    },
+    {
+      "id": "def:one-survivors",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0a610875768dc475953534e9f88ef28ee0bc54e0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0a610875768dc475953534e9f88ef28ee0bc54e0"
+      }
+    },
+    {
+      "id": "def:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "13e6f13ad5f44aee34c7448a1779d1b0ac8300c8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "13e6f13ad5f44aee34c7448a1779d1b0ac8300c8"
+      }
+    },
+    {
+      "id": "def:potential",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06a4b6161472192501fdf0c3b97d5093f99d6ee9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06a4b6161472192501fdf0c3b97d5093f99d6ee9"
+      }
+    },
+    {
+      "id": "def:tests-counts",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6649dc4e1a7e92dcf908e9b53969645d025fb6ca"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6649dc4e1a7e92dcf908e9b53969645d025fb6ca"
+      }
+    },
+    {
+      "id": "def:tests-d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5dfb174164e632d0c2e45d3446cc3f24ebc9a0a9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5dfb174164e632d0c2e45d3446cc3f24ebc9a0a9"
+      }
+    },
+    {
+      "id": "def:tests-exposure",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0687d8ec8c5ce4f818ce7ec00dbd75ce1907d6d2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0687d8ec8c5ce4f818ce7ec00dbd75ce1907d6d2"
+      }
+    },
+    {
+      "id": "def:tests-filtrations",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b0b58e36292d6241b5344691f6cae0cbe378503a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b0b58e36292d6241b5344691f6cae0cbe378503a"
+      }
+    },
+    {
+      "id": "def:tests-nonroots",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "12ccf3e137f26e4d0cd00bb60ad31809f63c0ef4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "12ccf3e137f26e4d0cd00bb60ad31809f63c0ef4"
+      }
+    },
+    {
+      "id": "def:tests-omitted-alias",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8da7a944af16406257dfb8ae260a52c37045c54c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8da7a944af16406257dfb8ae260a52c37045c54c"
+      }
+    },
+    {
+      "id": "def:tests-roots",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1f5098cb48b652a28c084d079dc574ccd5d33f44"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1f5098cb48b652a28c084d079dc574ccd5d33f44"
+      }
+    },
+    {
+      "id": "def:tests-solution-set",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "02ac1e40b908bea2ff7d4d971349f6a50ed1cd36"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "02ac1e40b908bea2ff7d4d971349f6a50ed1cd36"
+      }
+    },
+    {
+      "id": "def:window-levels",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2c3df76f1c44a76e37e71b7db4deb76a17b04e2b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2c3df76f1c44a76e37e71b7db4deb76a17b04e2b"
+      }
+    },
+    {
+      "id": "lem:moments",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7eafcaad2ff523e8128e4078ac45da14a2c4654"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7eafcaad2ff523e8128e4078ac45da14a2c4654"
+      }
+    },
+    {
+      "id": "lem:occupation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bd59e39767c216c584c487fc570350554c2b4a11"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bd59e39767c216c584c487fc570350554c2b4a11"
+      }
+    },
+    {
+      "id": "lem:omission",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3775fb5420da1091699c14013df1be9890a1844e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3775fb5420da1091699c14013df1be9890a1844e"
+      }
+    },
+    {
+      "id": "lem:one",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6a2069e8ebb6e3c19236f213199083ea9774c066"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6a2069e8ebb6e3c19236f213199083ea9774c066"
+      }
+    },
+    {
+      "id": "lem:potential",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "46340a3a9e271d58d52440d617029a39d7050b47"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "46340a3a9e271d58d52440d617029a39d7050b47"
+      }
+    },
+    {
+      "id": "lem:tests",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2bd65244e2be62b30624bf8c568adf9dd02eb855"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2bd65244e2be62b30624bf8c568adf9dd02eb855"
+      }
+    },
+    {
+      "id": "prop:delay",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6956bc43667b67fa3052c23516ef7a57222f660e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6956bc43667b67fa3052c23516ef7a57222f660e"
+      }
+    },
+    {
+      "id": "sym:D_i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3f9f9e974f792d8908b240eb7fdfcddf28deb686"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3f9f9e974f792d8908b240eb7fdfcddf28deb686"
+      }
+    },
+    {
+      "id": "sym:P_d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a8be368e10b1568d74f0e00a113fc06a3eed27c0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a8be368e10b1568d74f0e00a113fc06a3eed27c0"
+      }
+    },
+    {
+      "id": "sym:S",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e11d620f651b4851a843f2f20c0e1e04ae3f6a61"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e11d620f651b4851a843f2f20c0e1e04ae3f6a61"
+      }
+    },
+    {
+      "id": "sym:S[C]",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "21b20f8c109c98c4b2ac0aec3ff626e39e2a9d27"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "21b20f8c109c98c4b2ac0aec3ff626e39e2a9d27"
+      }
+    },
+    {
+      "id": "sym:S_m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7f5ef0565bb1253a8271f4c491077d1ba0524448"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7f5ef0565bb1253a8271f4c491077d1ba0524448"
+      }
+    },
+    {
+      "id": "sym:T",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f1ecd0af8b5864ffb2e88266c1d0d0785ad65d4e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f1ecd0af8b5864ffb2e88266c1d0d0785ad65d4e"
+      }
+    },
+    {
+      "id": "sym:T^{(i)}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "206449d28728860d21276d864e958333a3731101"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "206449d28728860d21276d864e958333a3731101"
+      }
+    },
+    {
+      "id": "sym:V",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1dc470a7c9f4337dd25196eb8b064879f1fe8113"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1dc470a7c9f4337dd25196eb8b064879f1fe8113"
+      }
+    },
+    {
+      "id": "sym:W_m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ecc410cac82dec7e2a683970cf1031ddf587334e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ecc410cac82dec7e2a683970cf1031ddf587334e"
+      }
+    },
+    {
+      "id": "sym:Y",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b10ea68c17278060cbd656343c1587d651e5a821"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b10ea68c17278060cbd656343c1587d651e5a821"
+      }
+    },
+    {
+      "id": "sym:Z",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c7b7f6feb1a15f3d622f9fcaf73b17d4aa80c48d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c7b7f6feb1a15f3d622f9fcaf73b17d4aa80c48d"
+      }
+    },
+    {
+      "id": "sym:\\eta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "623c0e1333f40090c42560f774ca5d30e3677804"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "623c0e1333f40090c42560f774ca5d30e3677804"
+      }
+    },
+    {
+      "id": "sym:b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "030b1ab0a99ede2f29bbaffd0a35dd9e664735a8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "030b1ab0a99ede2f29bbaffd0a35dd9e664735a8"
+      }
+    },
+    {
+      "id": "sym:h_a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "14bc69e8f647a69c06ef8b4987aeb282d48f2782"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "14bc69e8f647a69c06ef8b4987aeb282d48f2782"
+      }
+    },
+    {
+      "id": "sym:i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d8acbd590a5031dac70153ce92f9174977e9543d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d8acbd590a5031dac70153ce92f9174977e9543d"
+      }
+    },
+    {
+      "id": "sym:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d882b7ff62f77e4e05fc7799d842ce548443ff1f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d882b7ff62f77e4e05fc7799d842ce548443ff1f"
+      }
+    },
+    {
+      "id": "sym:p_1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3f13632aca80aa0b2d87ed039cfa820deb5112f7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3f13632aca80aa0b2d87ed039cfa820deb5112f7"
+      }
+    },
+    {
+      "id": "sym:p_2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "edb23e0985f8b8af0f395cc847090df871d51437"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "edb23e0985f8b8af0f395cc847090df871d51437"
+      }
+    },
+    {
+      "id": "sym:p_m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "958c983400414692dba59e1a341af7f248c9eef5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "958c983400414692dba59e1a341af7f248c9eef5"
+      }
+    },
+    {
+      "id": "sym:p_{\\rm coll}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "13212275e71e9e4429ddcd0477c912bacf054ae0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "13212275e71e9e4429ddcd0477c912bacf054ae0"
+      }
+    },
+    {
+      "id": "sym:p_{\\rm hit}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a1f76d9262b4e12362a864993e428e1d9f115f9d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a1f76d9262b4e12362a864993e428e1d9f115f9d"
+      }
+    },
+    {
+      "id": "sym:q_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "39dc30acaf4832a0e05ef4ef4ded345185775e00"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "39dc30acaf4832a0e05ef4ef4ded345185775e00"
+      }
+    },
+    {
+      "id": "sym:r_n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5d8467b091082bad7d325cce6def832ca5278ca9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5d8467b091082bad7d325cce6def832ca5278ca9"
+      }
+    },
+    {
+      "id": "sym:s_n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "36b585be51aaa93f4cc90ae57b32eee598854b57"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "36b585be51aaa93f4cc90ae57b32eee598854b57"
+      }
+    },
+    {
+      "id": "sym:w",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5f24a11b521a6ab9c27a2ac107c60a17be838cf5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5f24a11b521a6ab9c27a2ac107c60a17be838cf5"
+      }
+    },
+    {
+      "id": "sym:z",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d59b891dac59de9457c3906b6a489a17bfdcce5e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d59b891dac59de9457c3906b6a489a17bfdcce5e"
+      }
+    },
+    {
+      "id": "thm:duration",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "87acdff6adca56807083552eab933b6e55b427d4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "87acdff6adca56807083552eab933b6e55b427d4"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "26c39972c83f023e727f32d24b969e09df77ff42"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "26c39972c83f023e727f32d24b969e09df77ff42"
+      }
+    },
+    {
+      "id": "thm:window",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "63495090215bfb96a1a49d502f8cfa802ab1b599"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "63495090215bfb96a1a49d502f8cfa802ab1b599"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [
+    {
+      "node_id": "thm:wilson",
+      "reviewer": "claude",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:wilson2002",
+      "locator": "Corollary 4",
+      "evidence_hash": "6883f2ad8554daeef13f26b4d21128d52e14125c"
+    },
+    {
+      "node_id": "thm:wilson",
+      "reviewer": "codex",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:wilson2002",
+      "locator": "Corollary 4",
+      "evidence_hash": "6883f2ad8554daeef13f26b4d21128d52e14125c"
+    }
+  ],
+  "reviews_sha256": "e3da4809a60d0f6a9602601945f9ecfa7da09f9a5f24fa7ea06c7c1c09eefe2c",
+  "files": [
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "3a80153b4acd0c07b2c1e3ae63c6c3f61a1e966dc9266b5bc45efdf58a9ca0a3"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "e9bc50bec2f09a597d684fa5e195017d0637caf3f1482584113028827814ac81"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "48b9643a7ab5567abdc34e525af5f565c6f157f7845d61709ac90d128ffdb0b1"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "5d7cc7f8a907d24dd2edbd62eac3d57fb196cc2a35b6920ab1484b31cb1dc33c"
+    },
+    {
+      "path": "corrected_paper/source/main.tex",
+      "sha256": "888db8d247151937a55c67a14f7b014bb9a6c812639680dd300ea5df94adfcf4"
+    },
+    {
+      "path": "corrected_paper/source/references.bib",
+      "sha256": "5d7cc7f8a907d24dd2edbd62eac3d57fb196cc2a35b6920ab1484b31cb1dc33c"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "69d78149e7dadfd01d079296c705640ca3df20d50fa907a43bebe53c8923096d"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "0a941fe03f976343e2dcac1f13b1e16134a4b9f92c1f1e5ded60b13173a2cbaf"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom.lean",
+      "sha256": "a1961e834a0899587b490666c72dc41c5b349a18452386b65b15dcdbdb820aa8"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/All.lean",
+      "sha256": "0669a849a6abc7c0f4b8bce4b11c527b036db32c200ed6ac7b4dee6f15a79817"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Basic.lean",
+      "sha256": "f727380c14ac856de2670454ab3da597def541c9b231c550060b4c4db21a96ef"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers.lean",
+      "sha256": "eac794942cda3dbb15d54831689756905572a6aaae4124f8b22dfa54c2ceead6"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/AssignmentSets.lean",
+      "sha256": "858d3e1881b82cdce4517544d0d3c52bbaa261b4e44f3c88a165e7d6a0837995"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/ClauseCounting.lean",
+      "sha256": "5d99679b55aca40daa6794db73b6aafc8f877d3612cc5442b8273b43ab8166dd"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/DelayTools.lean",
+      "sha256": "b43f4138bf76942d9b6c970d3dc5363a92cadd4a54ec4508932b5c1bf255ee10"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/DelayTowers.lean",
+      "sha256": "6f864c4e40d5654935696e40c79d75d48602a4afc367c0a7c12b10ed93379da1"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/HiddenClauses.lean",
+      "sha256": "021661a80ccd74f132a142b5723c5b99a2d1da57a7e65e11ad173e49a1c9beec"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/HittingMoments.lean",
+      "sha256": "515c8f244c691ca7515394be689999ab3a51274e42e87fdc13f340360ccaabc1"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/HittingTail.lean",
+      "sha256": "4f47ce3dbe569b46599ce4ba0b8556bcf74530624f1ef88ac0ea1ffe6ff71db8"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/MomentLaws.lean",
+      "sha256": "4179c9adfae8c816df69ce856c57c51facc6d189a773fbaaed1eca7461a06bf4"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/Moments.lean",
+      "sha256": "5bf5a819753e50cdbf8704c7a6eb83bbbe436e139497267cc781d3b27fe1316b"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/OccupationMeasure.lean",
+      "sha256": "8598d9dcc118764e1988efcb87ac41b89956f4ef8d2d631bef08d84ec3b1b54a"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/OccupationPaths.lean",
+      "sha256": "3341ad2a7f525e51cbc127834d524b72b0dd565e12df29eb0b183ad5c2a38f88"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/Omission.lean",
+      "sha256": "9ff030ec8c824bbff482a3f3dc86b43d7cecf46609aebef5214afe3958dd98ba"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/OrdinaryClauses.lean",
+      "sha256": "21d710f5dae9bb751c3f86811dda3032d8608388f3c158a1372cfd5039c0d9be"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/OrdinaryDrift.lean",
+      "sha256": "49365050b26b89165332b74dd97a7ded481bf192f7c946215211107eb9d256e4"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/OrdinaryHiddenClauses.lean",
+      "sha256": "b09fad8ffe214d873279c167816744c8d38e1dc447c6b12508c3ccbe15f9bc3a"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/PivotalVector.lean",
+      "sha256": "8141702e0e59d322202a92e8f637534bd7084ac5a385b0bf9072e078eb5367ef"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/Pivotality.lean",
+      "sha256": "7d413c91510a295f3750e1e5661c4a3425a5ecaa38f5f9c17e2d9b3b5879578e"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/Potential.lean",
+      "sha256": "3c7af0d6e30f23b65dbf979dc8cad813b1ae8209a192d7f33f13a5ca0b3983b7"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/RefinedHiddenClauses.lean",
+      "sha256": "c22bf71f81d05134d9e3ac671537d030695939c9afd47a31960cb267dd389b81"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/RootExposure.lean",
+      "sha256": "0624dee341ce2c328d713de05016b9395c864bed02041e6aefe2bdd7bcabdf74"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/TestClauses.lean",
+      "sha256": "ebeeed7ffc2410e8a9cb389d9954b93e7a860aa761c7c6b69e485c29439e0073"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/TestFamilyBounds.lean",
+      "sha256": "1d188b0fff2ceef4febb6c727fe3172ebf7fa9e3e1f7224e9e827d2a294aed56"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/TestFamilyConditioning.lean",
+      "sha256": "78d2588ffd29b5ca1c4f474f145caedd06a16618279b361bbec4ecdf06bd33e1"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/TestNecessity.lean",
+      "sha256": "47d7e70fdaeb62645c60291c30d79f492d129b8415a9cda7fc0e41a3b0cbe402"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/Helpers/UpperVariance.lean",
+      "sha256": "5c8b2aaa64b09937023f0650d61710a170be04a292a1687f118a7bca780951b1"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/TDelay.lean",
+      "sha256": "2a1ac9b2b13d22e772d14f5c72c085b72bccfa015a4db3b68f814cb2d42b0055"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/TDuration.lean",
+      "sha256": "444cdb9b081bef3eced6d38e2675d6db694db77ebf8f65978e0ed9d7c1fe466a"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/TMain.lean",
+      "sha256": "f0ffe5a65783fec828a8cce4bd3697c206c841ded1f1f0a1e30f2af79861bd47"
+    },
+    {
+      "path": "lean/Papers/OaiLinearVarianceRandom/TWindow.lean",
+      "sha256": "c724776395de44af6442e7c4a31cc96a3e1c94e982eef6b5f31333e2ded86537"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "048c715d935a554cdc345ad60d6d2b5dd01fc0653b7ef68941b8aeb2eccb516c"
+    },
+    {
+      "path": "lean/Toolkit.lean",
+      "sha256": "956fd36fcd17fa6a69019d972c6d700c704b443f2036372260f8402fe4eb549f"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Probability/Processes/DriftRecursion.lean",
+      "sha256": "448adf62092a67917443725ba9c3f770f61ffd827e756b82c61bb9afb819cda2"
+    },
+    {
+      "path": "lean/built-against.json",
+      "sha256": "7f4d2d61db41cb336212ad76977e3fd3cab91d5e630a4ff8e8465e778ce72b5d"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "cf10bb7c0850503eced92df8b3ea1ce1e3cec2757edc6cc28569cf0fffa201f6"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "459e12a1b19fd8927f1a2e49fa4b8c430e6de7dba3732b0ebe73b969ba668a9c"
+    }
+  ],
+  "code": "ad725eda2ce38123a42ea218b690990bfa169acd8107a0c3863e8db0f5046d2b"
+}

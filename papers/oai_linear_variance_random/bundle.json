@@ -1,0 +1,92 @@
+{
+  "slug": "oai_linear_variance_random",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 11,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 33,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Probability.Processes.DriftRecursion"
+    ],
+    "requires": [
+      {
+        "name": "Causalean",
+        "form": "git",
+        "git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "rev": "a7085d88d2e4b30003db7097ca374f4718da0f01"
+      },
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [
+      {
+        "name": "Causalean",
+        "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+        "uncommitted": 0,
+        "changed": [],
+        "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+        "files": {
+          "Causalean/Mathlib/Analysis/BernoulliKL.lean": "5f2e2472d285e90df84307fb8f505abaca47eda9",
+          "Causalean/Mathlib/Probability/BernoulliMeasure.lean": "5fb1d3bdf39fc259dd75a8882a60918d2124587f",
+          "Causalean/Mathlib/Probability/Poisson/Poincare/Foundations.lean": "2000aa816f4d5177f69131ff7c4009a6da6b9249",
+          "Causalean/Mathlib/Probability/Poisson/Poincare/L2Closure.lean": "8638851d3d824d13770a59fc743e25859017b7fe",
+          "Causalean/Mathlib/Probability/Poisson/Poincare/Scalar.lean": "dd0e25ff5d0a10ba46fc9a62b4daf243cf14ebb4",
+          "Causalean/Mathlib/Probability/Poisson/Poincare/Series.lean": "6728b5e0aa2bd6debc2a0e39f23172b33f8f351e",
+          "Causalean/Mathlib/Probability/Poisson/Poincare/Tensorization.lean": "7ba656b75ff81e29025902d151c467ba9c69e0e2",
+          "Causalean/Mathlib/Probability/VarianceProd.lean": "e8f3a44515db87ad8728a3f908ef2e3d2e0bb23d"
+        },
+        "status": "unverified",
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 8 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_linear_variance_random --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      }
+    ],
+    "warnings": [],
+    "notes": [
+      "built against a local copy of Causalean (its commit 5ca94e0ac387): 8 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_linear_variance_random --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+    ]
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "ad725eda2ce38123a42ea218b690990bfa169acd8107a0c3863e8db0f5046d2b",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.1",
+    "lem:one": "Lemma 2.1",
+    "lem:potential": "Lemma 2.2",
+    "lem:omission": "Lemma 3.1",
+    "lem:tests": "Lemma 3.2",
+    "lem:occupation": "Lemma 4.1",
+    "thm:duration": "Corollary 4.2",
+    "prop:delay": "Proposition 4.3",
+    "lem:moments": "Lemma 4.4",
+    "thm:wilson": "Theorem 5.1",
+    "thm:window": "Corollary 5.2"
+  },
+  "todo_items": []
+}

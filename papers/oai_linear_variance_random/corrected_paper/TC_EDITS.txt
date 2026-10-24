@@ -1,0 +1,2 @@
+2026-10-24: Added an identical copy of source/references.bib at references.bib so the parser resolves the existing bibliography command from the source-tree root. Original main.tex and bibliography unchanged.
+2026-10-24: Added a byte-identical main.tex at the source-tree root and selected it as the run main file. This aligns TeX output paths with runner lookup paths for a nested original main; no statements or proofs changed. Re-enter V1 to regenerate source locators.
