@@ -1,0 +1,1757 @@
+\section{Proof of the General Oracle Guarantee}\label{sec:proof_common_dp}
+
+\begin{proof}[Proof of \cref{thm:common_dp}]
+The proof has three steps. First, we prove that the oracle point is always accepted.  The rule therefore stops no later than that point, and acceptance together with monotonicity turns the error bounds into the stated rates.
+
+First, by \eqref{eq:common_discrepancy_bound} and
+\eqref{eq:common_oracle_crossing},
+\[
+D_n(\hat h_{\lambda^\circ})
+\leqslant A_n(\lambda^\circ)
++B_n(\lambda^\circ)
+\leqslant\frac32 A_n(\lambda^\circ).
+\]
+Thus $\lambda^\circ$ is accepted, so some candidate clears its threshold and the fallback is not reached. Second, since \cref{alg:discrepancy} searches from larger to smaller regularization and stops at the first acceptance, it returns a point
+$\lambda_{\mathrm{dp}}\geqslant\lambda^\circ$.
+Third, every grid point between $\lambda^\circ$ and $2$ lies in $\mathcal S_n$, so
+\eqref{eq:common_accepted_bounds} applies at the selected point. The rule accepted
+$\lambda_{\mathrm{dp}}$, so $D_n(\hat h_{\lambda_{\mathrm{dp}}})\leqslant\tfrac32A_n(\lambda_{\mathrm{dp}})$ and
+\[
+D_n(\hat h_{\lambda_{\mathrm{dp}}})+A_n(\lambda_{\mathrm{dp}})
+\leqslant\frac52 A_n(\lambda_{\mathrm{dp}}).
+\]
+Because $A_n$ is nonincreasing over the grid points in $[\lambda^\circ,2]$ and $\lambda\mapsto1/\lambda$ decreases, the product $A_n(\lambda)/\lambda$ is nonincreasing there as well, so
+\[
+A_n(\lambda_{\mathrm{dp}})
+\leqslant A_n(\lambda^\circ),
+\qquad
+\frac{A_n(\lambda_{\mathrm{dp}})}{\lambda_{\mathrm{dp}}}
+\leqslant\frac{A_n(\lambda^\circ)}{\lambda^\circ}.
+\]
+Substituting the last two displays into \eqref{eq:common_accepted_bounds} proves
+\eqref{eq:common_rate}.
+\end{proof}
+
+The following consequence of the source condition allows us to compare
+both one-step estimators directly with $h_0$.
+
+\begin{lemma}[Variational source inequality]\label{lemma:variational_source}
+Let $\mathcal A=\mathcal T^*\mathcal T$,
+$b=\min\{\beta,1\}$, $p=1+b$, and $\alpha=b/(1+b)$. Under
+\cref{asp:source_condition}, every $u\in\widetilde{\mathcal H}$ satisfies
+\[
+|\langle h_0,u\rangle|
+\leqslant \|w_0\|\,\|\mathcal Tu\|^b\|u\|^{1-b}.
+\]
+Consequently, for every fixed $\epsilon\in(0,1)$ and
+$\lambda\in(0,2]$,
+\begin{align*}
+2\lambda|\langle h_0,u\rangle|
+&\leqslant
+\epsilon\{\|\mathcal Tu\|^2+\lambda\|u\|^2\}
++C_\epsilon\|w_0\|^2\lambda^p,\\
+2|\langle h_0,u\rangle|
+&\leqslant
+\epsilon\|u\|^2
++C_\epsilon\|w_0\|^{2/(1+b)}
+\|\mathcal Tu\|^{2b/(1+b)}.
+\end{align*}
+\end{lemma}
+
+\begin{proof}
+For $0<\beta\leqslant1$, spectral interpolation and
+$\|\mathcal A\|\leqslant1$ give
+\[
+|\langle h_0,u\rangle|
+=|\langle w_0,\mathcal A^{\beta/2}u\rangle|
+\leqslant
+\|w_0\|\,\|\mathcal A^{1/2}u\|^\beta\|u\|^{1-\beta}.
+\]
+For $\beta>1$, the positive self-adjoint operator $\mathcal A$ has spectrum
+in $[0,1]$ because $\|\mathcal A\|\leqslant1$. Let $\mu_u$ denote its
+spectral measure associated with $u$. Since $s^\beta\leqslant s$ for
+$s\in[0,1]$,
+\[
+\|\mathcal A^{\beta/2}u\|^2
+=\int_{[0,1]}s^\beta\,d\mu_u(s)
+\leqslant\int_{[0,1]}s\,d\mu_u(s)
+=\|\mathcal A^{1/2}u\|^2.
+\]
+Since $\|\mathcal A^{1/2}u\|=\|\mathcal Tu\|$, these two cases prove
+the first display. To obtain the first consequence, set
+$E_\lambda=\|\mathcal Tu\|^2+\lambda\|u\|^2$ and observe that
+\[
+2\lambda|\langle h_0,u\rangle|
+\leqslant 2\|w_0\|\lambda^{(1+b)/2}E_\lambda^{1/2}.
+\]
+The inequality $2uv\leqslant\epsilon u^2+\epsilon^{-1}v^2$ gives the first consequence with $C_\epsilon=\epsilon^{-1}$, uniformly over $b\in(0,1]$. Its coefficient is independent of $\beta$ and $\|w_0\|$. Applying the weighted form
+of the same inequality to
+$2\|w_0\|\|\mathcal Tu\|^b\|u\|^{1-b}$ gives the second consequence.
+\end{proof}
+
+\section[Proofs for RDIV]{Proofs of \cref{sec:rdiv}}
+
+Throughout the appendix, $R^\lambda(h)=L(h)+\lambda\|h\|^2$ and
+$R_n^\lambda(h)=L_n(h)+\lambda\|h\|_{2,n}^2$, where
+\[
+\|h\|_{2,n}:=\{\mathbb E_n[h(X)^2]\}^{1/2}.
+\]
+In this section, $\mathbb E_n$ is the average on $I_{\mathrm{fit}}$,
+$L(h)=\sigma^2_{Y\mid Z}+\|\mathcal T(h-h_0)\|^2$, and $D_n$ is the projected discrepancy in \eqref{eq:rdiv_projected_loss}. We use the scales in \eqref{eq:delta_deepiv}. Constants may depend on the fixed bounds and population quantities; they are uniform over $n$ and the regularization grid.
+
+\begin{lemma}[Preliminary RDIV nuisance and operator bounds]\label{lemma:t_err_dp}
+Under \cref{asp:re_cd,asp:cr_deepiv}, with probability at least $1-\xi$,
+\begin{align}
+\mathbb E_Z\!\left[H^2\{\hat g(\cdot\mid Z),g_0(\cdot\mid Z)\}\right]
+&\leqslant C\delta_{n,\mathcal G}^2,
+\label{eq:rdiv_mle_hellinger}\\
+\|\hat r-r_0\|_{L_2(Z)}&\leqslant \delta_{n,r},\nonumber\\
+\sup_{h\in\mathcal H}
+\|(\hat{\mathcal T}-\mathcal T)h\|_{L_2(Z)}
+&\leqslant C\delta_{n,\mathcal G},\label{eq:rdiv_op_global}\\
+\|(\hat{\mathcal T}-\mathcal T)(h-h')\|_{L_1(Z)}
+&\leqslant C\delta_{n,\mathcal G}\|h-h'\|,
+\qquad h,h'\in\mathcal H.\label{eq:rdiv_op_relative}
+\end{align}
+Moreover, if
+\[
+\widehat L(h):=\mathbb E[(Y-\hat{\mathcal T}h(Z))^2\mid I_{\mathrm{pre}}],
+\]
+then, uniformly over $h,h'\in\mathcal H$,
+\begin{equation}\label{eq:rdiv_first_stage_loss}
+|\{\widehat L(h)-\widehat L(h')\}-\{L(h)-L(h')\}| \leqslant C\delta_{n,\mathcal G}\|h-h'\|.
+\end{equation}
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{lemma}
+
+\emph{Additional condition.} For another result of the paper: Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+
+\noindent\textit{Remark (notation).} $H^2(g_1,g_2)=\int(\sqrt{g_1(x)}-\sqrt{g_2(x)})^2\,\mu(dx)$ is defined for probability densities $g_1,g_2$ with respect to the common measure $\mu$ on $\mathcal X$; for conditional densities it is evaluated at each fixed $z$, with any averaging over $Z$ written separately.
+
+\begin{proof}
+Allocate failure probability $\xi/2$ to the conditional-density estimator and
+$\xi/2$ to the pilot regression. As elsewhere, evaluate the corresponding
+deterministic accuracy bounds at these confidence levels and relabel them
+$\delta_{n,\mathcal G}$ and $\delta_{n,r}$.
+We establish the density bound directly using the Localized Concentration lemma of \citet{li2024regularized}. Write $P=\mathbb E_{X,Z}$ and $P_n=\mathbb E_{n,\mathrm{pre}}$, and define
+
+\[
+f_g(x,z)=\sqrt{\frac{g(x\mid z)+g_0(x\mid z)}{2g_0(x\mid z)}},\qquad
+\mathcal U=\{f_g-1:g\in\mathcal G\}.
+\]
+
+Realizability gives $f_{g_0}=1$, so $0\in\mathcal U$. The density bounds give
+
+\[
+2^{-1/2}\leqslant f_g\leqslant M,\qquad
+M=\sqrt{\frac{C_G/c_0+1}{2}}.
+\]
+
+Thus $\mathcal U$ is uniformly bounded by a fixed constant. Define the globally Lipschitz loss
+
+\[
+\ell(v)=-\log\bigl(\max\{1+v,2^{-1/2}\}\bigr).
+\]
+
+The maximum map is $1$-Lipschitz, and the derivative of $-\log t$ has absolute value at most $\sqrt2$ for $t\geqslant2^{-1/2}$. Hence $\ell$ is $\sqrt2$-Lipschitz, $\ell(0)=0$, and $\ell(f_g-1)=-\log f_g$. 
+
+We verify the localized complexity condition for this application. Put $\mathcal S=\operatorname{star}(\mathcal G_0-\mathcal G_0)$ and choose a deterministic critical radius $d\leqslant\delta_{n,\mathcal G}$ as supplied by Assumption~\ref{asp:cr_deepiv}. By the critical-radius definition, $\mathfrak R_n(d;\mathcal S)\leqslant d^2$. For $s\geqslant d$, star-shapedness implies that $(d/s)v\in\mathcal S$ and $\|(d/s)v\|_{L_2(X,Z)}\leqslant d$ whenever $v\in\mathcal S$ and $\|v\|_{L_2(X,Z)}\leqslant s$. Scaling inside the Rademacher supremum therefore gives
+
+\[
+\mathfrak R_n(s;\mathcal S)
+\leqslant\frac{s}{d}\mathfrak R_n(d;\mathcal S)
+\leqslant sd.
+\]
+
+Since $1\in\mathcal G_0$, we have $\operatorname{star}(\mathcal U)\subseteq\mathcal S$. Taking $s=\delta_{n,\mathcal G}$ yields
+
+\[
+\mathfrak R_n\bigl(\delta_{n,\mathcal G};\operatorname{star}(\mathcal U)\bigr)
+\leqslant\delta_{n,\mathcal G}d
+\leqslant\delta_{n,\mathcal G}^2.
+\]
+
+Apply the cited localized concentration lemma with input $(X,Z)$, one coordinate, class $\mathcal U$, fixed comparator $0$, loss $\ell$, and failure probability $\xi/2$. The measurability and logarithmic radius floor are supplied by Assumption~\ref{asp:cr_deepiv}, with the confidence evaluation specified in the proof. Consequently, for a fixed constant $A>0$, with probability at least $1-\xi/2$,
+
+\[
+\left|(P_n-P)(-\log f_g)\right|
+\leqslant A\left\{\delta_{n,\mathcal G}\|f_g-1\|_{L_2(X,Z)}+\delta_{n,\mathcal G}^2\right\},
+\qquad g\in\mathcal G.
+\]
+ 
+
+To use empirical optimality, note that $P_n\log g_0(X\mid Z)$ is finite by the density bounds. Since $\hat g$ maximizes the empirical log likelihood and all candidate densities are bounded above, $\hat g(X_i\mid Z_i)>0$ at every preliminary observation, almost surely. For $a>0$, the arithmetic-geometric mean inequality gives $(a+1)/2\geqslant\sqrt a$, and hence
+
+\[
+-\log\sqrt{\frac{a+1}{2}}\leqslant-\frac14\log a.
+\]
+
+Taking $a=\hat g(X_i\mid Z_i)/g_0(X_i\mid Z_i)$ and averaging gives
+
+\[
+P_n(-\log f_{\hat g})
+\leqslant-\frac14P_n\log\frac{\hat g(X\mid Z)}{g_0(X\mid Z)}
+\leqslant0.
+\]
+
+For every $g\in\mathcal G$, conditional density normalization gives
+
+\[
+P f_g^2
+=\mathbb E_Z\int\frac{g(x\mid Z)+g_0(x\mid Z)}2\,\mu(dx)=1.
+\]
+
+Since $\log t\leqslant t-1$ for $t>0$, it follows that
+
+\[
+P(-\log f_g)\geqslant1-Pf_g
+=\frac12P(f_g-1)^2.
+\]
+
+On the concentration event, put $b=\|f_{\hat g}-1\|_{L_2(X,Z)}$. Combining these inequalities and using Young's inequality gives
+
+\[
+\frac{b^2}{2}
+\leqslant P(-\log f_{\hat g})
+\leqslant A\delta_{n,\mathcal G}b+A\delta_{n,\mathcal G}^2
+\leqslant\frac{b^2}{4}+(A^2+A)\delta_{n,\mathcal G}^2.
+\]
+
+Thus $b^2\leqslant4(A^2+A)\delta_{n,\mathcal G}^2$. 
+
+Finally, for $t\geqslant0$ and $f=\sqrt{(t^2+1)/2}$, we have $f\leqslant t+1$ and
+
+\[
+|t-1|=\frac{2(f+1)}{t+1}|f-1|\leqslant4|f-1|.
+\]
+
+Apply this pointwise with $t=\sqrt{\hat g/g_0}$ and integrate under the true joint distribution to obtain
+
+\[
+\begin{aligned}
+\mathbb E_Z\!\left[H^2\{\hat g(\cdot\mid Z),g_0(\cdot\mid Z)\}\right]
+&=P\left(\sqrt{\frac{\hat g(X\mid Z)}{g_0(X\mid Z)}}-1\right)^2\\
+&\leqslant16b^2
+\leqslant64(A^2+A)\delta_{n,\mathcal G}^2.
+\end{aligned}
+\]
+
+This proves \eqref{eq:rdiv_mle_hellinger} with probability at least $1-\xi/2$. The
+nuisance-rate assumption gives
+$\|\hat r-r_0\|_{L_2(Z)}\leqslant\delta_{n,r}$ with probability at least
+$1-\xi/2$. Therefore, without requiring independence between $\hat g$ and
+$\hat r$, the union bound shows that both inequalities hold simultaneously
+with probability at least $1-\xi$. We work on this intersection for
+the rest of the proof. Here
+\[
+H^2(g_1,g_2)=\int\{\sqrt{g_1(x)}-\sqrt{g_2(x)}\}^2\,\mu(dx).
+\]
+
+Let $P_X$ be the true marginal distribution of $X$ and let $\hat P_X$ be the marginal induced by $Z\sim P_Z$ and $X\mid Z\sim\hat g(\cdot\mid Z)$. The density bounds in \cref{asp:re_cd} give $\hat g(x\mid z)/g_0(x\mid z)\leqslant C_G/c_0$ and hence
+\[
+\frac{d\hat P_X}{dP_X}\leqslant \frac{C_G}{c_0}.
+\]
+The total-variation--Hellinger inequality and $\|h\|_\infty\leqslant B$ give
+\[
+\|(\hat{\mathcal T}-\mathcal T)h\|^2
+\leqslant B^2\mathbb E_Z
+\left[\left\{\int|\hat g(x\mid Z)-g_0(x\mid Z)|\,\mu(dx)\right\}^2\right]
+\leqslant C B^2\delta_{n,\mathcal G}^2,
+\]
+which proves \eqref{eq:rdiv_op_global}. For $u=h-h'$, factor
+$\hat g/g_0-1=(\sqrt{\hat g/g_0}-1)(\sqrt{\hat g/g_0}+1)$.
+Cauchy--Schwarz and the conditional density-ratio bound yield
+\begin{align*}
+\|(\hat{\mathcal T}-\mathcal T)u\|_1
+&\leqslant
+\mathbb E\left[|u(X)|
+\left|\sqrt{\frac{\hat g(X\mid Z)}{g_0(X\mid Z)}}-1\right|
+\left\{\sqrt{\frac{\hat g(X\mid Z)}{g_0(X\mid Z)}}+1\right\}\right]\\
+&\leqslant C\|u\|
+\mathbb E_Z\!\left[H^2\{\hat g(\cdot\mid Z),g_0(\cdot\mid Z)\}\right]^{1/2}
+\leqslant C\delta_{n,\mathcal G}\|u\|,
+\end{align*}
+which proves \eqref{eq:rdiv_op_relative}. \citet{li2024regularized} use the same operator argument in their MLE analysis.
+
+Finally, write $e_h=(\hat{\mathcal T}-\mathcal T)h$. Pointwise,
+\begin{align*}
+&(Y-\hat{\mathcal T}h)^2-(Y-\hat{\mathcal T}h')^2
+-\{(Y-\mathcal T h)^2-(Y-\mathcal T h')^2\}\\
+&\quad=-(\hat{\mathcal T}-\mathcal T)u
+(2Y-\hat{\mathcal T}h-\hat{\mathcal T}h')
++\mathcal T u(e_h+e_{h'}).
+\end{align*}
+The expectation of the first term is at most
+$4B\|(\hat{\mathcal T}-\mathcal T)u\|_1$; the second is at most
+$\|\mathcal T u\|(\|e_h\|+\|e_{h'}\|)$. Apply
+\eqref{eq:rdiv_op_global}, \eqref{eq:rdiv_op_relative}, and conditional Jensen to obtain \eqref{eq:rdiv_first_stage_loss}.
+\end{proof}
+
+\begin{lemma}[Uniform RDIV empirical comparisons]\label{lemma:err_l_dp}
+Under \cref{asp:range,asp:closeness_deepiv,asp:re_cd,asp:cr_deepiv}, there is an event $\mathcal E_n^{\mathrm R}$ with probability at least $1-\xi$ on which, simultaneously for every $\lambda\in\Lambda_n$ and $h\in\mathcal H$,
+\begin{align}
+&\left|\{\widehat R^\lambda(h)-\widehat R^\lambda(h_0)\}
+-\{R_n^\lambda(h)-R_n^\lambda(h_0)\}\right|
+\leqslant C\{\delta_{n,\mathcal H}\|h-h_0\|
++\delta_{n,\mathcal H}^2\},\label{eq:rdiv_fit_comparison}\\
+&\left|D_n(\hat h_\lambda)
+-\|\mathcal T(\hat h_\lambda-h_0)\|^2\right|
+\leqslant C\nu_n\|\mathcal T(\hat h_\lambda-h_0)\|+C\nu_n^2,
+\label{eq:rdiv_projected_comparison}
+\end{align}
+where $\widehat R^\lambda(h)=\widehat L(h)+\lambda\|h\|^2$.
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{lemma}
+
+\emph{Additional conditions.} For a result cited in the proof of Lemma~\ref{lemma:err_l_dp}: For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For a result cited in the proof of Lemma~\ref{lemma:err_l_dp}: For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For a result cited in the proof of Lemma~\ref{lemma:err_l_dp}: For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. For a result cited in the proof of Lemma~\ref{lemma:err_l_dp}: Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+
+\noindent\textit{Remark (notation).} $\mathcal E_n^{\mathrm R}$ is the intersection of the preliminary, fitting, and calibration events under the paper's confidence convention, with probability at least $1-\xi$, on which the fitting comparisons hold simultaneously for every $h\in\mathcal H$ and $\lambda\in\Lambda_n$, and the projected calibration comparisons hold simultaneously for the fitted candidates $\hat h_\lambda$, $\lambda\in\Lambda_n$.
+
+\begin{proof}
+First condition on $I_{\mathrm{pre}}$, so that $\hat{\mathcal T}$ is fixed and the expected critical-radius bounds apply to the independent fitting sample. For each fixed $\lambda\in\Lambda_n$, apply the localized concentration inequality in \citet[Lemma~14]{foster2023orthogonal} to the two-coordinate class
+\[
+h\longmapsto\{\hat{\mathcal T}h(Z),h(X)\}
+\]
+at the fixed comparator $h_0$ and to the loss
+$\phi_\lambda(y,u,v)=(y-u)^2+\lambda v^2$. This loss is uniformly Lipschitz on the bounded range because $\lambda\leqslant2$. The critical-radius bounds in \cref{asp:cr_deepiv} give
+\[
+\left|\{\widehat R^\lambda(h)-\widehat R^\lambda(h_0)\}
+-\{R_n^\lambda(h)-R_n^\lambda(h_0)\}\right|
+\leqslant C\left[\delta_{n,\mathcal H}
+\{\|\hat{\mathcal T}(h-h_0)\|+\|h-h_0\|\}
++\delta_{n,\mathcal H}^2\right].
+\]
+Conditional Jensen and the density-ratio bound in the proof of \cref{lemma:t_err_dp} give
+$\|\hat{\mathcal T}u\|\leqslant(C_G/c_0)^{1/2}\|u\|$.
+Thus, a union bound over the $K_n+1$ deterministic grid points gives \eqref{eq:rdiv_fit_comparison}. The definition of $\eta_n$ makes its total failure probability at most $\xi$.
+
+For calibration, condition on $I_{\mathrm{pre}}$ and $I_{\mathrm{fit}}$, and set
+\[
+q_\lambda=\hat r-\hat{\mathcal T}\hat h_\lambda, \qquad u_\lambda=r_0-\mathcal T\hat h_\lambda.
+\]
+The functions $q_\lambda$ are fixed under this conditioning and bounded by $2B$. Bernstein's inequality and a union bound over $\Lambda_n$ give, with conditional failure probability at most $\xi$,
+\[
+|D_n(\hat h_\lambda)-\|q_\lambda\|^2|
+\leqslant C\{\delta_{n,\xi}\|q_\lambda\|+\delta_{n,\xi}^2\},
+\qquad \lambda\in\Lambda_n.
+\]
+The simultaneous preliminary-sample bounds in \cref{lemma:t_err_dp} give
+\[
+\|q_\lambda-u_\lambda\|
+\leqslant\|\hat r-r_0\|
++\|(\hat{\mathcal T}-\mathcal T)\hat h_\lambda\|
+\leqslant \delta_{n,r}+C\delta_{n,\mathcal G}.
+\]
+The identity $|\|q_\lambda\|^2-\|u_\lambda\|^2|\leqslant
+2\|u_\lambda\|\|q_\lambda-u_\lambda\|+\|q_\lambda-u_\lambda\|^2$, together with
+$\|q_\lambda\|\leqslant\|u_\lambda\|+\delta_{n,r}+C\delta_{n,\mathcal G}$, proves \eqref{eq:rdiv_projected_comparison}. Combining the preliminary, fitting, and calibration events under the confidence convention gives the stated probability. All remaining RDIV arguments take place on $\mathcal E_n^{\mathrm R}$.
+\end{proof}
+
+\begin{lemma}[RDIV population--empirical risk comparison]\label{lemma:err_r_dp}
+On $\mathcal E_n^{\mathrm R}$, uniformly over $h\in\mathcal H$ and $\lambda\in\Lambda_n$,
+\[
+\left|
+R^\lambda(h)-R^\lambda(h_0)
+-\{R_n^\lambda(h)-R_n^\lambda(h_0)\}
+\right|
+\leqslant C\{\delta_n\|h-h_0\|+\delta_n^2\}.
+\]
+\end{lemma}
+\begin{proof}
+Apply \eqref{eq:rdiv_first_stage_loss} and \eqref{eq:rdiv_fit_comparison}. Since
+$\delta_n\geqslant\delta_{n,\mathcal G}+\delta_{n,\mathcal H}$, their sum is bounded by the displayed right-hand side. The fitting event already holds simultaneously over the finite grid.
+\end{proof}
+
+\begin{lemma}[Direct RDIV control]\label{lemma:str_dp}
+On $\mathcal E_n^{\mathrm R}$, for every $\lambda\in\Lambda_n$,
+\[
+\|\mathcal T(\hat h_\lambda-h_0)\|^2
++\lambda\|\hat h_\lambda-h_0\|^2
+\leqslant C\left\{\frac{\delta_n^2}{\lambda}
++\|w_0\|^2\lambda^p\right\},
+\qquad p=\min\{\beta+1,2\}.
+\]
+\end{lemma}
+\begin{proof}
+Set $e_\lambda=\hat h_\lambda-h_0$. Since $h_0\in\mathcal H$,
+empirical optimality and \cref{lemma:err_r_dp} give
+\[
+\|\mathcal T e_\lambda\|^2+\lambda\|e_\lambda\|^2
+\leqslant
+C\{\delta_n\|e_\lambda\|+\delta_n^2\}
++2\lambda|\langle h_0,e_\lambda\rangle|.
+\]
+Apply the first consequence of \cref{lemma:variational_source} and
+$C\delta_n\|e_\lambda\|\leqslant
+\lambda\|e_\lambda\|^2/4+C\delta_n^2/\lambda$.
+Since $\lambda\leqslant2$, the remaining $\delta_n^2$ term is covered by
+$C\delta_n^2/\lambda$. Absorbing the quadratic terms proves the claim.
+\end{proof}
+
+\begin{corollary}[RDIV discrepancy bound]\label{cor:rdiv_discrepancy_bound}
+Under the assumptions of \cref{thm:deepiv_rate}, the calibrated RDIV scales satisfy \eqref{eq:rdiv_discrepancy_bound} simultaneously for every $\lambda\in\Lambda_n$ on $\mathcal E_n^{\mathrm R}$, for a fixed constant $C_{\mathrm R}>0$.
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{corollary}
+
+\noindent\textit{Remark.} The assumptions imported from Theorem~\ref{thm:deepiv_rate} are the general hypotheses of Proposition~\ref{prop:exist_lambda_deepiv}, without imposing $h_0=0$.
+
+\begin{proof}
+Let $\zeta_\lambda=\|\mathcal T(\hat h_\lambda-h_0)\|$. By
+\cref{lemma:err_l_dp,lemma:str_dp},
+\[
+D_n(\hat h_\lambda)
+\leqslant \zeta_\lambda^2+C\nu_n\zeta_\lambda+C\nu_n^2
+\leqslant c_{\mathrm R}
+\left(\frac{\delta_n^2}{\lambda}+\nu_n^2\right)
++C_{\mathrm R}\|w_0\|^2\lambda^p
+\]
+for fixed constants $c_{\mathrm R},C_{\mathrm R}>0$, where the second inequality follows from Young's inequality. The constant $c_{\mathrm R}$ depends only on the fixed bounds and population constants. Multiplying both $\delta_n$ and $\nu_n$ by $\sqrt{\max\{c_{\mathrm R},1\}}$ and relabeling the resulting upper bounds gives \eqref{eq:rdiv_discrepancy_bound}. The noise coefficients are independent of $\beta$ and $\|w_0\|$; the source dependence remains in the displayed bias term. These fixed multipliers are chosen in advance under the noise-calibration convention in \cref{sec:dp_regularization}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:exist_lambda_deepiv}]
+Throughout the proof, we work on $\mathcal E_n^{\mathrm R}$. Since the projected residual is bounded by $2B$,
+$D_n(\hat h_\lambda)\leqslant4B^2$. At the terminal grid point,
+\[
+\frac{\delta_n^2}{\lambda_{K_n}}
+\geqslant\frac{\delta_{n,\xi}^2}{\lambda_{K_n}}
+\geqslant n\log\{(K_n+1)/\xi\}
+\geqslant n\log2.
+\]
+For $n\geqslant N_{\mathrm R}(B)$, its threshold is therefore at least $4B^2$, so the terminal point is accepted and the algorithm stops within $K_n+1=O(\log n)$ fits.
+
+If $h_0=0$, take the source element $w_0=0$. Then \eqref{eq:rdiv_discrepancy_bound} gives
+\[
+D_n(\hat h_2)\leqslant\delta_n^2/2+\nu_n^2 \leqslant \tfrac32(\delta_n^2/2+\nu_n^2),
+\]
+so the initial point is accepted. In general, let $k^*$ be the first accepted index. If $k^*=0$, the algorithm returns through the initial-acceptance branch. If $k^*\geqslant1$, its predecessor is rejected, and $\rho\geqslant1/2$ gives \eqref{eq:discrepancy_principle}.
+\end{proof}
+
+\begin{lemma}[RDIV error bounds]\label{lemma:rdiv_accepted_bounds}
+Under the assumptions of \cref{thm:deepiv_rate}, for every
+$\lambda\in\Lambda_n$, on $\mathcal E_n^{\mathrm R}$,
+\begin{align*}
+\|\mathcal T(\hat h_\lambda-h_0)\|^2
+&\leqslant C \{D_n(\hat h_\lambda)+A_n^{\mathrm R}(\lambda)\},\\
+\|\hat h_\lambda-h_0\|^2
+&\leqslant C\left[V_n^{\mathrm R}(\lambda)
++\{D_n(\hat h_\lambda)+A_n^{\mathrm R}(\lambda)\}^\alpha\right],
+\end{align*}
+where the noise level and stability bound are defined in \eqref{eq:rdiv_common_scales} and
+$\alpha=\min\{\beta,1\}/\{1+\min\{\beta,1\}\}$.
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{lemma}
+
+\noindent\textit{Remark.} The assumptions of \cref{thm:deepiv_rate} mean its standing hypotheses inherited from \cref{prop:exist_lambda_deepiv}; the bounds here hold for arbitrary $h_0$, without imposing $h_0=0$.
+
+\begin{proof}
+Let $\zeta_\lambda=\|\mathcal T(\hat h_\lambda-h_0)\|$. By \eqref{eq:rdiv_projected_comparison},
+\[
+\zeta_\lambda^2\leqslant D_n(\hat h_\lambda)
++C\nu_n\zeta_\lambda+C\nu_n^2.
+\]
+Since $\nu_n^2\leqslant A_n^{\mathrm R}(\lambda)$, Young's inequality therefore yields
+\[
+\zeta_\lambda^2\leqslant C \{D_n(\hat h_\lambda)+A_n^{\mathrm R}(\lambda)\}.
+\]
+Set $e_\lambda=\hat h_\lambda-h_0$. Empirical optimality and
+\cref{lemma:err_r_dp} give
+\[
+\lambda\{\|\hat h_\lambda\|^2-\|h_0\|^2\}
+\leqslant C\{\delta_n\|e_\lambda\|+\delta_n^2\}.
+\]
+Using $\|\hat h_\lambda\|^2-\|h_0\|^2
+=\|e_\lambda\|^2+2\langle h_0,e_\lambda\rangle$ and dividing by
+$\lambda$ yield
+\[
+\|e_\lambda\|^2
+\leqslant C\frac{\delta_n}{\lambda}\|e_\lambda\|
++C\frac{\delta_n^2}{\lambda}
++2|\langle h_0,e_\lambda\rangle|.
+\]
+Apply the second consequence of \cref{lemma:variational_source}, the
+weak bound above, and Young's inequality. Since $\lambda\leqslant2$, this gives
+\[
+\|e_\lambda\|^2
+\leqslant C\left[\frac{\delta_n^2}{\lambda^2}
++\{D_n(\hat h_\lambda)+A_n^{\mathrm R}(\lambda)\}^\alpha\right],
+\]
+which is the second claim.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:deepiv_rate}]
+If $h_0=0$, \cref{prop:exist_lambda_deepiv} selects $\lambda=2$, and \cref{lemma:str_dp} gives both squared errors of order $\delta_n^2$.
+
+Suppose $h_0\ne0$. If $\max\{\delta_n,\nu_n\}>1$, boundedness and the contraction property of $\mathcal T$ give the stated rates directly. We may therefore assume $\max\{\delta_n,\nu_n\}\leqslant1$. The discrepancy bound \eqref{eq:rdiv_discrepancy_bound} gives
+\eqref{eq:common_discrepancy_bound} with
+$A_n=A_n^{\mathrm R}$ and $q=p$.
+\Cref{lemma:rdiv_accepted_bounds} establishes
+\eqref{eq:common_accepted_bounds} on $\mathcal S_n=(0,2]$ with
+$\gamma=\alpha$, since $D_n\geqslant0$ and
+$V_n^{\mathrm R}(\lambda)\leqslant A_n^{\mathrm R}(\lambda)/\lambda$.
+For all sufficiently large $n$, the grid point
+$\lambda_{\mathrm R}^\circ$ defined before
+\eqref{eq:rdiv_oracle_scales} exists and satisfies
+\eqref{eq:common_oracle_crossing}. The noise level in
+\eqref{eq:rdiv_common_scales} is nonincreasing. Moreover,
+$A_n^{\mathrm R}(\lambda_{\mathrm R}^\circ)/\lambda_{\mathrm R}^\circ
+=V_n^{\mathrm R}(\lambda_{\mathrm R}^\circ)+\nu_n^2/\lambda_{\mathrm R}^\circ$, and
+$\lambda_{\mathrm R}^\circ\asymp\max\{\delta_n^{2/(p+1)},\nu_n^{2/p}\}$ with $\alpha=(p-1)/p$ give
+$\nu_n^2/\lambda_{\mathrm R}^\circ
+=O\{V_n^{\mathrm R}(\lambda_{\mathrm R}^\circ)+\varepsilon_{n,\beta}^\alpha\}$.
+Apply
+\cref{thm:common_dp} and then
+\eqref{eq:rdiv_oracle_scales} to obtain the refined weak- and
+strong-error bounds. Boundedness covers the remaining finitely many $n$, after we enlarge the fixed constants. Finally,
+$(p-1)/p=\alpha$ and $\varepsilon_{n,\beta}\geqslant
+\delta_n^{2p/(p+1)}$ imply its simpler stated form.
+\end{proof}
+
+\subsection{Iterative RDIV}
+
+The population recursion \eqref{eq:iter_population} uses the squared weak
+loss for both RDIV and TRAE. The following spectral calculation gives its
+bias bounds.
+
+\begin{lemma}[Iterative Tikhonov bias]\label{lemma:iter_bias}
+Let $\mathcal A=\mathcal T^*\mathcal T$ and $r_\lambda(u)=\lambda/(u+\lambda)$. For every $j\geqslant1$,
+\begin{align}
+h_0-h_{j,\lambda}^*&=r_\lambda(\mathcal A)^j h_0
+=\mathcal A^{\beta/2}r_\lambda(\mathcal A)^j w_0,
+\label{eq:iter_bias_identity}\\
+\|h_{j,\lambda}^*-h_0\|^2
+&\leqslant C\|w_0\|^2\lambda^{\min\{\beta,2j\}},
+\label{eq:iter_strong_bias}\\
+\|\mathcal T(h_{j,\lambda}^*-h_0)\|^2
+&\leqslant C\|w_0\|^2\lambda^{\min\{\beta+1,2j\}}.
+\label{eq:iter_weak_bias}
+\end{align}
+Moreover, if $z_{j,\lambda}=r_\lambda(\mathcal A)^jw_0$, then $\|z_{j,\lambda}\|\leqslant\|w_0\|$ and
+\begin{equation}\label{eq:iter_bias_interpolation}
+\|h_{j,\lambda}^*-h_0\|^2
+\leqslant
+\|w_0\|^{2/(\beta+1)}
+\|\mathcal T(h_{j,\lambda}^*-h_0)\|^{2\beta/(\beta+1)}.
+\end{equation}
+\end{lemma}
+
+\noindent\textit{Remark (notation).} $r_\lambda(u)=\lambda/(u+\lambda)$ for finite $\lambda>0$ and $u\geqslant0$, and $r_\lambda(\mathcal A)$ denotes this function applied to $\mathcal A$ by spectral functional calculus.
+
+\begin{proof}
+The normal equation for \eqref{eq:iter_population} is
+\[
+(\mathcal A+\lambda I)h_{j,\lambda}^* =\mathcal A h_0+\lambda h_{j-1,\lambda}^*.
+\]
+Subtracting this identity from $(\mathcal A+\lambda I)h_0$ and iterating from $h_{0,\lambda}^*=0$ gives \eqref{eq:iter_bias_identity}. Conditional Jensen gives $\|\mathcal A\|\leqslant1$. For every $\gamma>0$,
+\[
+\sup_{0\leqslant u\leqslant1}
+u^\gamma\left(\frac{\lambda}{u+\lambda}\right)^{2j}
+\leqslant C_{\gamma,j}\lambda^{\min\{\gamma,2j\}}.
+\]
+When $\gamma\leqslant2j$, substitute $u=\lambda v$ and bound $v^\gamma/(1+v)^{2j}$. When $\gamma>2j$, use $u^{\gamma-2j}\leqslant1$ and $u\lambda/(u+\lambda)\leqslant\lambda$. Functional calculus with $\gamma=\beta$ and $\gamma=\beta+1$ proves \eqref{eq:iter_strong_bias} and \eqref{eq:iter_weak_bias}. Finally, H\"older's inequality for the spectral measure of $\mathcal A$, applied to $\mathcal A^{\beta/2}z_{j,\lambda}$, gives \eqref{eq:iter_bias_interpolation}.
+\end{proof}
+
+\begin{lemma}[Recursive RDIV stability]\label{lemma:iter_rdiv_stability}
+Under the assumptions of \cref{thm:iter_rdiv_rate}, there is an event $\mathcal E_{n,t}^{\mathrm{IR}}$ with probability at least $1-\xi$ on which, simultaneously for $j=1,\ldots,t$ and $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IR}}^\circ,2]$,
+\begin{align}
+\lambda\|\hat h_{j,\lambda}-h_{j,\lambda}^*\|^2
++\|\mathcal T(\hat h_{j,\lambda}-h_{j,\lambda}^*)\|^2
+&\leqslant a_j\frac{\delta_n^2}{\lambda},
+\label{eq:iter_rdiv_stability}\\
+\|\hat h_{j,\lambda}-h_{j,\lambda}^*\|^2
+&\leqslant a_j\frac{\delta_n^2}{\lambda^2},
+\label{eq:iter_rdiv_strong_stability}
+\end{align}
+where $a_j\geqslant1$ is a deterministic constant that depends only on $j$
+and fixed population quantities.
+On the same event, the final fitted candidates also satisfy
+\begin{equation}\label{eq:iter_rdiv_projected_comparison}
+\left|D_n(\hat h_{t,\lambda})
+-\|\mathcal T(\hat h_{t,\lambda}-h_0)\|^2\right|
+\leqslant C\nu_n\|\mathcal T(\hat h_{t,\lambda}-h_0)\|+C\nu_n^2
+\end{equation}
+simultaneously over $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IR}}^\circ,2]$.
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. For the fixed-population-center fitting argument in Lemma~\ref{lemma:iter_rdiv_stability}, use the following measurable-version convention in addition to the existing $h_0$-centered convention. Let $Q$ be the law of $W$, let $a$ be the preliminary observations, and let $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple. For every $n\geqslant1$, $t\geqslant1$, $\lambda\in\Lambda_n$, $1\leqslant j\leqslant t$, and positive rational $q$, define \[ \ell^{(j)}_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda\{h(X(w))-h_{j-1,\lambda}^*(X(w))\}^2 \] and \[ S^{(j)}_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\lVert h-h_{j,\lambda}^*\rVert\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell^{(j)}_{\lambda,a}(h)-\ell^{(j)}_{\lambda,a}(h_{j,\lambda}^*)\}\right|. \] For $1\leqslant k\leqslant t$, also define \[ U^{(k)}_{n,\lambda,q}(\mathbf w)=\sup_{\substack{h\in\mathcal H\\\lVert h-h_{k,\lambda}^*\rVert\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{h(X)-h_{k,\lambda}^*(X)\}^2\right|. \] Each of these suprema admits an extended nonnegative version jointly measurable in the preliminary observations and fresh fitting tuple (with $U^{(k)}$ viewed as constant in $a$). The version agrees with the indicated supremum for $Q^n$-almost every tuple for almost every preliminary realization and agrees almost surely at the actual independent preliminary and fitting blocks. Use exactly the same function representatives as the empirical objective and empirical squared distance. The zero-iterate comparison is the identity $\hat h_{0,\lambda}=h_{0,\lambda}^*=0$ and requires no extra process. This is solely measurability and evaluation coherence for the displayed fixed-center processes; it assumes no deviation inequality, rate, event probability, countability, separability, or additional statistical restriction. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{lemma}
+
+\emph{Additional condition.} For another result of the paper: For the fixed-population-center fitting argument in Lemma~\ref{lemma:iter_rdiv_stability}, use the following measurable-version convention in addition to the existing $h_0$-centered convention. Let $Q$ be the law of $W$, let $a$ be the preliminary observations, and let $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple. For every $n\geqslant1$, $t\geqslant1$, $\lambda\in\Lambda_n$, $1\leqslant j\leqslant t$, and positive rational $q$, define \[ \ell^{(j)}_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda\{h(X(w))-h_{j-1,\lambda}^*(X(w))\}^2 \] and \[ S^{(j)}_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\lVert h-h_{j,\lambda}^*\rVert\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell^{(j)}_{\lambda,a}(h)-\ell^{(j)}_{\lambda,a}(h_{j,\lambda}^*)\}\right|. \] For $1\leqslant k\leqslant t$, also define \[ U^{(k)}_{n,\lambda,q}(\mathbf w)=\sup_{\substack{h\in\mathcal H\\\lVert h-h_{k,\lambda}^*\rVert\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{h(X)-h_{k,\lambda}^*(X)\}^2\right|. \] Each of these suprema admits an extended nonnegative version jointly measurable in the preliminary observations and fresh fitting tuple (with $U^{(k)}$ viewed as constant in $a$). The version agrees with the indicated supremum for $Q^n$-almost every tuple for almost every preliminary realization and agrees almost surely at the actual independent preliminary and fitting blocks. Use exactly the same function representatives as the empirical objective and empirical squared distance. The zero-iterate comparison is the identity $\hat h_{0,\lambda}=h_{0,\lambda}^*=0$ and requires no extra process. This is solely measurability and evaluation coherence for the displayed fixed-center processes; it assumes no deviation inequality, rate, event probability, countability, separability, or additional statistical restriction.
+
+\noindent\textit{Remark (notation).} $\{a_j\}_{j=0}^t$ is a deterministic RDIV propagation sequence initialized at $a_0=0$, with $a_j\geqslant1$ for $1\leqslant j\leqslant t$; each positive-index term depends only on $j$ and fixed population quantities and is independent of $n$ and $\lambda$. $\mathcal E_{n,t}^{\mathrm{IR}}$ is the common preliminary, recursive fitting, and final calibration event constructed with allocation $\eta_{n,t}=\xi/\{t(K_n+1)\}$, of probability at least $1-\xi$, on which the recursive RDIV stability comparisons hold simultaneously for $j=1,\ldots,t$ and $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IR}}^\circ,2]$, and the projected calibration comparison holds for the final candidates on that same grid segment.
+
+\begin{proof}
+Fix $j$ and $\lambda$, and write
+\[
+e_j=\hat h_{j,\lambda}-h_{j,\lambda}^*, \qquad e_{j-1}=\hat h_{j-1,\lambda}-h_{j-1,\lambda}^*.
+\]
+Apply the fitting and first-stage comparisons in
+\cref{lemma:t_err_dp,lemma:err_l_dp} with fixed comparator
+$h_{j,\lambda}^*$ and penalty center $h_{j-1,\lambda}^*$.
+The fitting loss is Lipschitz in the two coordinates
+$\{\hat{\mathcal T}h(Z),h(X)\}$, uniformly over these bounded centers. This is the fixed-comparator fitting application of \citet[Lemma~14]{foster2023orthogonal}, with comparator $h_{j,\lambda}^*$ and penalty center $h_{j-1,\lambda}^*$.
+The critical-radius convention for $\mathcal H$ controls its differences
+from the fixed comparator. A union bound over the deterministic
+iteration--grid pairs, with probability allocation $\eta_{n,t}$, gives
+\begin{align}
+&\lambda\|e_j\|^2+\|\mathcal T e_j\|^2\nonumber\\
+&\quad\leqslant
+R_{n,j}^{\lambda,*}(\hat h_{j,\lambda})
+-R_{n,j}^{\lambda,*}(h_{j,\lambda}^*)
++C\{\delta_n\|e_j\|+\delta_n^2\},
+\label{eq:iter_rdiv_fixed_center}
+\end{align}
+where
+\[
+R_{n,j}^{\lambda,*}(h) =L_n(h)+\lambda\|h-h_{j-1,\lambda}^*\|_{2,n}^2.
+\]
+Empirical optimality in \eqref{eq:iter_rdiv_estimator} and the identity
+\begin{align*}
+&\|\hat h_{j,\lambda}-h_{j-1,\lambda}^*\|_{2,n}^2
+-\|h_{j,\lambda}^*-h_{j-1,\lambda}^*\|_{2,n}^2\\
+&\quad-
+\|\hat h_{j,\lambda}-\hat h_{j-1,\lambda}\|_{2,n}^2
++\|h_{j,\lambda}^*-\hat h_{j-1,\lambda}\|_{2,n}^2
+=2\langle e_j,e_{j-1}\rangle_n
+\end{align*}
+show that the empirical difference in \eqref{eq:iter_rdiv_fixed_center} is at most $2\lambda\langle e_j,e_{j-1}\rangle_n$.
+Apply the localized squared-loss comparison to
+$(h-h_{k,\lambda}^*)^2$, whose comparator and center are fixed. Here the localized squared-loss comparison is the scalar application of \citet[Lemma~14]{foster2023orthogonal} at the fixed comparator $h_{k,\lambda}^*$.
+Young's inequality gives, on the same simultaneous event,
+\[
+\|e_k\|_{2,n}\leqslant C(\|e_k\|+\delta_n), \qquad k=j-1,j.
+\]
+Young's inequality yields, for a fixed constant $C>1$ independent of
+$n$, $\lambda$, $j$, $\beta$, and $\|w_0\|$,
+\[
+\lambda\|e_j\|^2+\|\mathcal T e_j\|^2
+\leqslant
+C\frac{\delta_n^2}{\lambda}+C\lambda\|e_{j-1}\|^2.
+\]
+Starting from $e_0=0$, choose $a_0=0$ and
+$a_j=C(1+a_{j-1})$. Induction proves
+\eqref{eq:iter_rdiv_stability}; division by $\lambda$ gives
+\eqref{eq:iter_rdiv_strong_stability}. Hence, for each fixed $j$, $a_j$
+depends only on $j$ and the fixed constants.
+
+For calibration, condition on the preliminary and fitting samples, so the final candidates are fixed functions. The Bernstein and nuisance-comparison argument in the proof of \cref{lemma:err_l_dp}, followed by a union bound over the oracle grid segment, gives \eqref{eq:iter_rdiv_projected_comparison}. Intersecting this calibration event with the recursive fitting event under the confidence allocation $\eta_{n,t}$ gives $\mathcal E_{n,t}^{\mathrm{IR}}$ with probability at least $1-\xi$.
+\end{proof}
+
+\begin{corollary}[Iterative RDIV discrepancy bound]\label{cor:iter_rdiv_discrepancy_bound}
+Under the assumptions of \cref{thm:iter_rdiv_rate}, on $\mathcal E_{n,t}^{\mathrm{IR}}$, simultaneously for every $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IR}}^\circ,2]$,
+\[
+D_n(\hat h_{t,\lambda})
+\leqslant
+\frac{a_t\delta_n^2}{\lambda}+\nu_n^2
++C_{\mathrm{IR}}\|w_0\|^2\lambda^{q_t},
+\qquad q_t=\min\{\beta+1,2t\}.
+\]
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{corollary}
+\begin{proof}
+By \cref{lemma:iter_bias,lemma:iter_rdiv_stability} and the squared triangle inequality,
+\[
+\|\mathcal T(\hat h_{t,\lambda}-h_0)\|^2
+\leqslant
+C\frac{a_t\delta_n^2}{\lambda}
++C\|w_0\|^2\lambda^{q_t}.
+\]
+The calibration comparison \eqref{eq:iter_rdiv_projected_comparison} applies to the final fitted candidate at each grid point. Young's inequality absorbs its linear term into the displayed weak error and $\nu_n^2$. Enlarging the fixed constants if necessary gives \eqref{eq:iter_rdiv_discrepancy_bound}.
+\end{proof}
+
+\begin{lemma}[Iterative RDIV error bounds]\label{lemma:iter_rdiv_accepted_bounds}
+Under the assumptions of \cref{thm:iter_rdiv_rate}, for every
+$\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IR}}^\circ,2]$, on
+$\mathcal E_{n,t}^{\mathrm{IR}}$,
+\begin{align*}
+\|\mathcal T(\hat h_{t,\lambda}-h_0)\|^2
+&\leqslant C_t \{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm R}(\lambda)\},\\
+\|\hat h_{t,\lambda}-h_0\|^2
+&\leqslant C_t\left[
+V_{n,t}^{\mathrm R}(\lambda)
++\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm R}(\lambda)\}^{\beta/(\beta+1)}
+\right],
+\end{align*}
+where the noise level and stability bound are defined in
+\eqref{eq:iter_rdiv_common_scales}.
+
+\emph{Additional conditions.} For the conditional fitting argument in Lemma~\ref{lemma:err_l_dp}, use the following measurable-version convention. Let $Q$ denote the law of one observation $W$, let $a$ denote the preliminary observations, and put $Q_n^{\mathbf w}=n^{-1}\sum_{i=1}^n\delta_{w_i}$ for a fresh fitting tuple $\mathbf w=(w_1,\ldots,w_n)$. Define \[ \ell_{\lambda,a}(h;w)=\{Y(w)-(\hat{\mathcal T}_a h)(Z(w))\}^2+\lambda h(X(w))^2, \qquad S_{n,\lambda,q}(a,\mathbf w)=\sup_{\substack{h\in\mathcal H\\\|h-h_0\|\leqslant q}}\left|(Q_n^{\mathbf w}-Q)\{\ell_{\lambda,a}(h)-\ell_{\lambda,a}(h_0)\}\right|. \] For each $n\geqslant1$, $\lambda\in\Lambda_n$ and positive rational $q$, $S_{n,\lambda,q}$ admits an extended nonnegative version jointly measurable in the preliminary observations and the fresh fitting tuple. This version agrees with $S_{n,\lambda,q}(a,\cdot)$ for $Q^n$-almost every tuple for almost every preliminary realization, and agrees almost surely with $S_{n,\lambda,q}(I_{\mathrm{pre}},(W_i)_{i\in I_{\mathrm{fit}}})$ at the actual independent fitting block. All losses use the same function representatives as the empirical objective. This is only a measurability and evaluation-coherence convention; no deviation bound, rate, countability or separability is assumed. For the fitted conditional density in the RDIV preliminary construction, use a coherent measurable version at independent calibration observations. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected density $\hat g_{n,a}(x\mid z)$ admits a nonnegative version $\bar g_n(a,x,z)$ jointly measurable in the preliminary observations, $x$ and $z$. For almost every preliminary realization $a$, for $P_Z$-almost every $z$, the functions $\bar g_n(a,\cdot,z)$ and $\hat g_{n,a}(\cdot\mid z)$ agree $\mu$-almost everywhere. Almost surely, this same agreement holds at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$. The empirical objectives and selected maximizer remain those defined using the original supplied representatives: this convention does not replace the optimizer. It supplies only measurability and coherence of the fitted density evaluated on the independent calibration sample; it assumes no normalization event, probability inequality, rate, countability or separability. For the preliminary regression estimate used in the RDIV calibration loss, take a coherent measurable version on the independent calibration sample. For each $n\geqslant1$, writing $a=I_{\mathrm{pre}}$, the selected $L_2(Z)$ pilot has a version $\bar r_n(a,z)$ jointly measurable in the preliminary observations and $z$. For almost every preliminary realization $a$, $\bar r_n(a,z)=\hat r_{n,a}(z)$ for $P_Z$-almost every $z$. Almost surely, the same equality holds simultaneously at every actual calibration observation $Z_i$, $i\in I_{\mathrm{cal}}$, for the supplied representatives used in $D_n$. This is only a measurability and evaluation-coherence convention. It imposes no exact joint measurability on every supplied representative, does not replace an empirical objective or selected optimizer, and supplies no boundedness event, probability inequality, error rate, countability or separability assumption. The existing pilot accuracy and envelope assumptions remain unchanged. Use the following well-definedness convention for the likelihood-transform critical-radius and concentration arguments in Assumption~\ref{asp:cr_deepiv} and Lemma~\ref{lemma:t_err_dp}, separately from the existing hypothesis-class, density-image and fitted-process conventions. Let $Q$ be the true joint law of $(X,Z)$, let $\mathcal G_0$ be the likelihood-transform class already defined in Assumption~\ref{asp:cr_deepiv}, and put \[ \mathcal A_r=\{f\in\operatorname{star}(\mathcal G_0-\mathcal G_0):\|f\|_{L_2(Q)}\leqslant r\}. \] For every integer $n\geqslant1$ and every $r>0$, the three processes \[ \sup_{f\in\mathcal G_0}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}|(Q_n-Q)f|,\qquad \sup_{f\in\mathcal A_r}\left|\frac1n\sum_{i=1}^n\epsilon_i f(X_i,Z_i)\right| \] regarded as extended nonnegative quantities, are measurable under $Q^n$ for the first two and under the product of $Q^n$ with the independent Rademacher law for the third. The functions use the same fixed density representatives as the likelihood objective. This convention only makes these empirical processes and their expectations well defined. It supplies no concentration event, deviation inequality, probability bound, rate, countability, separability, or additional statistical restriction.
+\end{lemma}
+\begin{proof}
+Let $\zeta=\|\mathcal T(\hat h_{t,\lambda}-h_0)\|$. By
+\eqref{eq:iter_rdiv_projected_comparison},
+\[
+\zeta^2 \leqslant D_n(\hat h_{t,\lambda}) +C\nu_n\zeta+C\nu_n^2,
+\]
+and $\nu_n^2\leqslant A_{n,t}^{\mathrm R}(\lambda)$.
+Young's inequality proves the first bound. The same bound, the weak part of
+\eqref{eq:iter_rdiv_stability}, and the squared triangle inequality give
+\[
+\|\mathcal T(h_{t,\lambda}^*-h_0)\|^2
+\leqslant C_t\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm R}(\lambda)\}.
+\]
+Apply \eqref{eq:iter_bias_interpolation} to this bound, combine the result
+with \eqref{eq:iter_rdiv_strong_stability}, and use the squared triangle
+inequality to obtain the second claim.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:exist_lambda_iter_rdiv}]
+At the terminal point, $D_n(\hat h_{t,\lambda_{K_n}})\leqslant4B^2$, while
+\[
+\frac{a_t\delta_n^2}{\lambda_{K_n}}
+\geqslant\frac{\delta_{n,\xi}^2}{\lambda_{K_n}}
+\geqslant n\log2.
+\]
+Thus the terminal candidate is accepted for $n\geqslant N_{\mathrm R}(B)$. If
+$h_0=0$, every population iterate equals $0\in\mathcal H$, so the
+discrepancy-bound argument at $\lambda=2$, with $w_0=0$, gives initial acceptance on
+the corresponding concentration event. For $h_0\ne0$, the first accepted index is either zero or
+has a rejected predecessor in $[\lambda,2\lambda]$. Each candidate requires
+$t$ recursive fits, so the total number is at most $t(K_n+1)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:iter_rdiv_rate}]
+Write $s=s_{n,t}^{\mathrm R}$ and $q=q_t$. Boundedness gives the result directly when $s>1$ or $\nu_n>1$, so consider
+$s\vee\nu_n\leqslant1$. The discrepancy bound
+\eqref{eq:iter_rdiv_discrepancy_bound} gives
+\eqref{eq:common_discrepancy_bound} with the bounds in
+\eqref{eq:iter_rdiv_common_scales}.
+\Cref{lemma:iter_rdiv_accepted_bounds} establishes
+\eqref{eq:common_accepted_bounds} on
+$\mathcal S_n=[\lambda_{\mathrm{IR}}^\circ,2]$ with
+$\gamma=\beta/(\beta+1)$, since $D_n\geqslant0$ and
+$V_{n,t}^{\mathrm R}(\lambda)\leqslant A_{n,t}^{\mathrm R}(\lambda)/\lambda$.
+For all sufficiently large $n$, the point
+$\lambda_{\mathrm{IR}}^\circ$ defined in the main text exists and
+satisfies \eqref{eq:common_oracle_crossing}. The noise level is
+nonincreasing. Applying \cref{thm:common_dp} gives
+$\lambda_{\mathrm{dp},t}^{\mathrm R}\geqslant\lambda_{\mathrm{IR}}^\circ$
+and the stated weak bound. For the strong bound, use the sharper
+method-specific bound in
+\cref{lemma:iter_rdiv_accepted_bounds}. Acceptance and the monotonicity of
+$A_{n,t}^{\mathrm R}$ and $V_{n,t}^{\mathrm R}$ give
+\[
+\begin{aligned}
+\|\hat h_{t,\lambda_{\mathrm{dp},t}^{\mathrm R}}-h_0\|^2
+&\leqslant C_t\left[
+V_{n,t}^{\mathrm R}(\lambda_{\mathrm{dp},t}^{\mathrm R})
++\{D_n(\hat h_{t,\lambda_{\mathrm{dp},t}^{\mathrm R}})
++A_{n,t}^{\mathrm R}(\lambda_{\mathrm{dp},t}^{\mathrm R})\}^{\beta/(\beta+1)}
+\right]\\
+&\leqslant C_t\left[
+V_{n,t}^{\mathrm R}(\lambda_{\mathrm{IR}}^\circ)
++A_{n,t}^{\mathrm R}(\lambda_{\mathrm{IR}}^\circ)^{\beta/(\beta+1)}
+\right].
+\end{aligned}
+\]
+Now \eqref{eq:iter_rdiv_oracle_scales} proves the stated strong bound.
+Boundedness covers the remaining finitely many $n$, after we enlarge the
+fixed constants. When $2t\geqslant\beta+1$, $q=\beta+1$.
+Under $\nu_n=O(\delta_n)$ and fixed $t$, the strong bound has order
+$\delta_n^{2\beta/(\beta+2)}$, and the weak bound has order
+$\delta_n^{2(\beta+1)/(\beta+2)}$.
+\end{proof}
+
+
+\section[Proofs for TRAE]{Proofs of \cref{sec:trae}}
+
+Throughout this section, $L_n$ and $L$ denote the TRAE losses, $D_n=L_n$, and $\delta_n$ is the TRAE scale in \eqref{eq:delta_trae}. The finite grid $\Lambda_n=\{2\rho^k:k=0,\ldots,K_n\}$ is defined in \cref{alg:discrepancy}, and $\mathcal E_n$ is the common event defined after \eqref{eq:delta_trae}. All bounds below hold simultaneously on $\mathcal E_n$.
+
+\begin{lemma}[Uniform TRAE loss comparison]\label{lemma:concentrate_l}
+Under \cref{asp:closeness,asp:mean_sq_continuity,asp:critical_radius}, on $\mathcal E_n$, the following inequalities hold simultaneously for all $h\in\mathcal H$:
+\[
+\frac{1}{2} L( h) -O\left( \delta _{n}^{2}\right) \leqslant L_{n}( h) \leqslant \frac{5}{4} L( h) +O\left( \delta _{n}^{2}\right) .
+\]
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{lemma}
+
+\emph{Additional condition.} For a result cited in the proof of Lemma~\ref{lemma:concentrate_l}: Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\begin{proof}
+Let $f_h=\mathcal T(h_0-h)\in\mathcal F$.
+The localized concentration bound used in \citet[Lemma~9]{bennett2023source}
+gives
+\begin{align*}
+L( h) &=\sup_{f\in \mathcal{F}}\mathbb{E}\left[ 2( m( W;f) -f( Z) h( X)) -f^{2}( Z)\right] \\
+& =\mathbb{E}\left[ 2( m( W;f_{h}) -f_{h}( Z) h( X)) -f_{h}^{2}( Z)\right]\\
+ & \leqslant \mathbb{E}_{n}\left[ 2( m( W;f_{h}) -f_{h}( Z) h( X)) -f_{h}^{2}( Z)\right] +O\left( \delta _{n}^{2} +\delta _{n} \| f_{h} \| \right)\\
+ & \leqslant \sup_{f\in \mathcal{F}}\mathbb{E}_{n}\left[ 2( m( W;f) -f( Z) h( X)) -f^{2}( Z)\right] +O\left( \delta _{n}^{2} +\delta _{n} \| f_{h} \| \right)\\
+ & \leqslant L_{n}( h) +O\left( \delta _{n}^{2} +\delta _{n} \| f_{h} \| \right) .
+\end{align*}
+Since $\|f_h\|^2=L(h)$, Young's inequality gives
+\[
+L( h) \leqslant 2L_{n}( h) +O\left( \delta _{n}^{2}\right) .
+\]
+Similarly, 
+\begin{align*}
+L_{n}( h)&  =\sup_{f\in \mathcal{F}}\mathbb{E}_{n}\left[ 2( m( W;f) -f( Z) h( X)) -f^{2}( Z)\right] \\
+ & \leqslant \sup_{f\in\mathcal F}\left\{\mathbb E\left[2(m(W;f)-f(Z)h(X))-f(Z)^2\right]+C\left(\delta_n^2+\delta_n\|f\|\right)\right\}\\
+ & \leqslant \sup_{f\in\widetilde{\mathcal Q}}\mathbb{E}\left[ 2( m( W;f) -f( Z) h( X)) -\frac{4}{5} f^{2}( Z)\right] +O\left( \delta _{n}^{2}\right)\\
+ & =\frac{5}{4}\|\mathcal T(h_0-h)\|^2+O\left( \delta _{n}^{2}\right)\\
+ & =\frac{5}{4} L( h) +O\left( \delta _{n}^{2}\right) .
+\end{align*}
+Here Young's inequality bounds $C\delta_n\|f\|$ by $\|f\|^2/5+O(\delta_n^2)$. We then enlarge the supremum from $\mathcal F$ to $\widetilde{\mathcal Q}$ and complete the square. The feasible residual $f_h$ gives the lower bound, and the enlarged supremum gives the upper bound under \cref{asp:closeness}.
+\end{proof}
+
+\begin{lemma}[Direct TRAE control]\label{lemma:strong_convexity}
+Under the assumptions of \cref{thm:tikhonv_rate}, on $\mathcal E_n$, the
+following bound holds simultaneously for all $\lambda\in\Lambda_n$:
+\[
+L_n(\hat h_\lambda)+\frac{\lambda}{2}
+\|\hat h_\lambda-h_0\|^2
+\leqslant C\{\delta_n^2+\|w_0\|^2\lambda^p\},
+\qquad p=\min\{\beta+1,2\}.
+\]
+Moreover, for all $\lambda\in\Lambda_n$,
+\[
+\|\hat h_\lambda-h_0\|^2
+\leqslant C\left[\frac{\delta_n^2}{\lambda}
++\{L_n(\hat h_\lambda)+\delta_n^2\}^{\alpha}\right],
+\qquad
+\alpha=\frac{\min\{\beta,1\}}{1+\min\{\beta,1\}}.
+\]
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{lemma}
+
+\emph{Additional condition.} For a result cited in the proof of Lemma~\ref{lemma:strong_convexity}: Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\begin{proof}
+Write $e_\lambda=\hat h_\lambda-h_0$. The localized squared-norm inequality in \citet[Lemma~14]{foster2023orthogonal}, applied using the squared-loss measurability condition in Assumption~\ref{asp:critical_radius}, gives, uniformly over $h\in\mathcal H$,
+
+\[
+\left|\{\|h\|_{2,n}^2-\|h_0\|_{2,n}^2\}
+-\{\|h\|^2-\|h_0\|^2\}\right|
+\leqslant C\{\delta_n\|h-h_0\|+\delta_n^2\}.
+\]
+
+\footnote{Put $M=\max\{1,B\}$, $\mathcal U=\{h/M:h\in\mathcal H\}$, and $u_0=h_0/M$. Assumption~\ref{asp:closeness_deepiv} gives $u_0\in\mathcal U$, and boundedness gives $|u(X)|\leqslant1$ uniformly over $u\in\mathcal U$ on the common full-probability set. The loss
+
+\[
+\ell(v)=M^2\bigl(\max\{-1,\min\{v,1\}\}\bigr)^2
+\]
+
+is $L$-Lipschitz with $L=2M^2$, since clipping is $1$-Lipschitz and $|a^2-b^2|\leqslant2|a-b|$ for $a,b\in[-1,1]$. Moreover, $\ell(h(X)/M)=h(X)^2$. 
+
+Set $\mathcal S=\operatorname{star}(\mathcal H-\mathcal H)$. By Assumption~\ref{asp:critical_radius} and \eqref{eq:delta_trae}, there is a deterministic critical radius $d\leqslant\delta_n$ for $\mathcal S$. Since $0\in\mathcal S$, we have $\mathcal S\subseteq\operatorname{star}(\mathcal S-\mathcal S)$, so the critical-radius definition implies $\mathfrak R_n(d;\mathcal S)\leqslant d^2$. For $s\geqslant d$, scaling by $d/s$ preserves membership in $\mathcal S$ and gives
+
+\[
+\mathfrak R_n(s;\mathcal S)
+\leqslant\frac{s}{d}\mathfrak R_n(d;\mathcal S)
+\leqslant sd.
+\]
+
+Also, $h_0\in\mathcal H$ implies $\operatorname{star}(\mathcal H-h_0)\subseteq\mathcal S$. Thus, for every $s\geqslant\delta_n$,
+
+\[
+\begin{split}
+\mathfrak R_n\bigl(s;\operatorname{star}(\mathcal U-u_0)\bigr)
+&=M^{-1}\mathfrak R_n\bigl(Ms;\operatorname{star}(\mathcal H-h_0)\bigr)\\
+&\leqslant M^{-1}\mathfrak R_n(Ms;\mathcal S)
+\leqslant sd\leqslant s\delta_n.
+\end{split}
+\]
+
+In particular, every $r\geqslant\delta_n$ satisfies the anchored fixed-point inequality for the normalized class. 
+
+For $R>0$, define
+
+\[
+Z_n(R)=\sup_{\substack{u\in\mathcal U\\\|u-u_0\|\leqslant R}}
+\left|(\mathbb E_n-\mathbb E)[\ell(u(X))-\ell(u_0(X))]\right|.
+\]
+
+Its empirical and Rademacher suprema are precisely the squared-loss suprema in Assumption~\ref{asp:critical_radius}, with localization radius $MR$, and hence are measurable. The localized concentration inequality used in the proof of \citet[Lemma~14]{foster2023orthogonal}, applied to this measurable loss process and the anchored fixed point, gives universal constants $c_1,c_2>0$ such that, for $R\geqslant r\geqslant\delta_n$ and $v>0$,
+
+\[
+\mathbb P\{Z_n(R)\geqslant16LRr+v\}
+\leqslant c_1\exp\left\{-\frac{c_2nv^2}{L^2R^2+2Lv}\right\}.
+\]
+
+Taking $v=LRr$ and using $r\leqslant R$ gives
+
+\[
+\mathbb P\{Z_n(R)\geqslant17LRr\}
+\leqslant c_1\exp\{-c_2nr^2/3\}.
+\]
+
+Choose $r=a\delta_n$ with a fixed sufficiently large $a\geqslant1$. If $r\geqslant2$, set $J=0$; otherwise set $J=\lceil\log(2/r)/\log2\rceil$. Put $R_j=2^jr$ for $j=0,\ldots,J$. A union bound shows that the measurable event
+
+\[
+Z_n(R_j)<17LR_jr,\qquad j=0,\ldots,J,
+\]
+
+has failure probability at most $(J+1)c_1\exp\{-c_2nr^2/3\}$. Since $r\geqslant\delta_n\geqslant n^{-1/2}$, there is a universal constant $C_0$ such that $J+1\leqslant C_0\log(en)$. Equation~\eqref{eq:delta_trae} gives $n\delta_n^2\geqslant1$ and a fixed positive lower bound for
+
+\[
+\frac{n\delta_n^2}{\log\log(en)+\log(1/\eta_n)}.
+\]
+
+Consequently, a fixed sufficiently large $a$ makes this failure probability at most $\eta_n/4$. 
+
+On this event, let $u\in\mathcal U$ and write $b=\|u-u_0\|$. If $b\leqslant r$, the loss increment is bounded by $Z_n(r)<17Lr^2$. If $b>r$, boundedness gives $b\leqslant2$, so there is an index $j\in\{1,\ldots,J\}$ with $R_{j-1}<b\leqslant R_j$. Then $R_j<2b$, and the loss increment is bounded by $Z_n(R_j)<34Lrb$. Thus, in both cases,
+
+\[
+\left|(\mathbb E_n-\mathbb E)[\ell(u(X))-\ell(u_0(X))]\right|
+\leqslant34Lr(b+r).
+\]
+
+Substitution of $u=h/M$, $L=2M^2$, and $r=a\delta_n$ bounds the squared-norm difference by
+
+\[
+68M^2a\delta_n\{\|h-h_0\|/M+a\delta_n\}
+\leqslant C\{\delta_n\|h-h_0\|+\delta_n^2\},
+\]
+
+uniformly over $h\in\mathcal H$. The constant depends only on the fixed boundedness and calibration constants. Allocating $\eta_n/4$ to this comparison at each grid point uses at most $(K_n+1)\eta_n/4=\xi/4$ of the total failure probability, supplying the squared-norm comparison included in $\mathcal E_n$.}
+The event $\mathcal E_n$ includes this bound and
+$L_n(h_0)\leqslant C\delta_n^2$. Empirical optimality relative to
+$h_0\in\mathcal H$ therefore gives
+\begin{equation}\label{eq:trae_empirical_optimality}
+L_n(\hat h_\lambda)
++\lambda\{\|e_\lambda\|^2+2\langle h_0,e_\lambda\rangle\}
+\leqslant C\{\delta_n^2+\lambda\delta_n\|e_\lambda\|\}.
+\end{equation}
+
+By \cref{lemma:concentrate_l},
+$L(\hat h_\lambda)\leqslant2L_n(\hat h_\lambda)+C\delta_n^2$.
+Apply the first consequence of \cref{lemma:variational_source} to the
+inner-product term in \eqref{eq:trae_empirical_optimality}. Young's inequality also
+gives
+$C\lambda\delta_n\|e_\lambda\|
+\leqslant\lambda\|e_\lambda\|^2/8+C\delta_n^2$.
+Absorbing the resulting empirical-loss and squared-norm terms proves the
+first bound.
+
+For the second bound, the lower comparison in
+\cref{lemma:concentrate_l} gives
+\[
+L(\hat h_\lambda)\leqslant2L_n(\hat h_\lambda)+C\delta_n^2
+\leqslant C \{L_n(\hat h_\lambda)+\delta_n^2\}.
+\]
+By \cref{asp:closeness_deepiv,asp:closeness}, taking $h=h_0$ gives
+$0=\mathcal T(h_0-h_0)\in\mathcal F$. Hence
+$L_n(\hat h_\lambda)\geqslant0$. Drop this term
+from \eqref{eq:trae_empirical_optimality}, divide by $\lambda$, and apply Young's
+inequality to obtain
+\[
+\|e_\lambda\|^2
+\leqslant C\frac{\delta_n^2}{\lambda}
++C|\langle h_0,e_\lambda\rangle|.
+\]
+The second consequence of \cref{lemma:variational_source} and the
+weak bound above complete the proof.
+\end{proof}
+
+\begin{corollary}[TRAE discrepancy bound]\label{cor:trae_discrepancy_bound}
+Under the assumptions of \cref{thm:tikhonv_rate}, the calibrated TRAE scale satisfies \eqref{eq:trae_discrepancy_bound} simultaneously for every $\lambda\in\Lambda_n$ on $\mathcal E_n$, for a fixed constant $C_{\mathrm T}>0$.
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{corollary}
+\begin{proof}
+Because $L(h_0)=0$, \cref{lemma:concentrate_l} gives
+$L_n(h_0)\leqslant C_0\delta_n^2$. The first bound in
+\cref{lemma:strong_convexity} gives
+\[
+L_n(\hat h_\lambda)
+\leqslant a_{\mathrm T}\delta_n^2
++C_{\mathrm T}\|w_0\|^2\lambda^{\min\{\beta+1,2\}}
+\]
+for fixed constants $a_{\mathrm T},C_{\mathrm T}>0$. The constants $C_0$ and $a_{\mathrm T}$ depend only on the prescribed boundedness and continuity constants, independently of $\beta$ and $\|w_0\|$. Multiplying $\delta_n$ by $\sqrt{\max\{C_0,a_{\mathrm T},1\}}$ and relabeling the resulting upper bound gives \eqref{eq:trae_discrepancy_bound}.
+\end{proof}
+
+
+The next lemma bounds the weak and strong errors at every grid point.
+\begin{lemma}[TRAE error bounds]\label{lemma:trae_accepted_bounds}
+Suppose that the assumptions of \cref{thm:tikhonv_rate} hold. For every
+$\lambda\in\Lambda_n$, on $\mathcal E_n$,
+\begin{align*}
+\|\mathcal T(\hat h_\lambda-h_0)\|^2
+&\leqslant C \{L_n(\hat h_\lambda)+\delta_n^2\},\\
+\|\hat h_\lambda-h_0\|^2
+&\leqslant C\left[V_n^{\mathrm T}(\lambda)
++\{L_n(\hat h_\lambda)+\delta_n^2\}^\alpha\right],
+\end{align*}
+where the noise level and stability bound are defined in \eqref{eq:trae_common_scales} and
+$\alpha=\min\{\beta,1\}/\{1+\min\{\beta,1\}\}$.
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{lemma}
+
+\begin{proof}
+\Cref{lemma:concentrate_l} gives
+\[
+\|\mathcal T(\hat h_\lambda-h_0)\|^2=L(\hat h_\lambda)
+\leqslant 2L_n(\hat h_\lambda)+O(\delta_n^2)
+\leqslant C \{L_n(\hat h_\lambda)+\delta_n^2\}.
+\]
+The second conclusion of \cref{lemma:strong_convexity} gives
+\[
+\|\hat h_\lambda-h_0\|^2
+\leqslant C\left[\frac{\delta_n^2}{\lambda}
++\{L_n(\hat h_\lambda)+\delta_n^2\}^{\alpha}\right]
+=C\left[V_n^{\mathrm T}(\lambda)
++\{L_n(\hat h_\lambda)+\delta_n^2\}^\alpha\right].
+\]
+\end{proof}
+We first establish termination, then combine the discrepancy and error bounds over the grid to prove the rates.
+
+\begin{proof}[Proof of \cref{prop:exist_lambda}]
+Throughout the proof, we work on $\mathcal E_n$. Empirical optimality and $h_0\in\mathcal H$ give
+\[
+L_n(\hat h_{\lambda_{K_n}})\leqslant L_n(h_0)+\lambda_{K_n}\|h_0\|_{2,n}^2
+\leqslant\delta_n^2+B^2n^{-2}.
+\]
+Here we used \eqref{eq:trae_discrepancy_bound}, $\lambda_{K_n}\leqslant n^{-2}$, and the bound $|h_0|\leqslant B$. Since $\delta_n^2\geqslant n^{-1}$ and $n\geqslant N_{\mathrm T}(B)$,
+\[
+B^2n^{-2}\leqslant\tfrac12 n^{-1} \leqslant\tfrac12\delta_n^2.
+\]
+Thus the terminal point passes the threshold, and the algorithm returns an estimator after at most $K_n+1=O(\log n)$ optimization problems.
+
+Let the selected index be
+\[
+k^*:=\min\{0\leqslant k\leqslant K_n:L_n(\hat h_{2\rho^k})\leqslant \tfrac32\delta_n^2\},
+\]
+whose existence follows from the preceding argument. If $k^*=0$, the algorithm returns through the initial-acceptance branch. If $k^*\geqslant1$, its minimality gives
+\[
+L_n(\hat h_{2\rho^{k^*}}) \leqslant \tfrac32\delta_n^2 < L_n(\hat h_{2\rho^{k^*-1}}).
+\]
+Because $1/2\leqslant\rho<1$, the companion parameter $2\rho^{k^*-1}=\lambda_{\mathrm{dp}}/\rho$ belongs to $[\lambda_{\mathrm{dp}},2\lambda_{\mathrm{dp}}]$. This argument covers both zero and nonzero signals.
+
+\end{proof}
+
+\Cref{thm:common_dp} now combines the discrepancy bound with the weak- and strong-error bounds at every grid point. The same argument is uniform over a fixed source ball $\{(\mathcal T^*\mathcal T)^{\beta/2}w:\|w\|\leqslant \varrho\}$ when the realizability conditions and the concentration event $\mathcal E_n$ hold uniformly over that ball; the stated theorem is pointwise in $h_0$.
+
+
+\begin{proof}[Proof of \cref{thm:tikhonv_rate}]
+Throughout the proof, we work on $\mathcal E_n$ and write $p=\min\{\beta+1,2\}$.
+If $\delta_n>1$, boundedness and the contraction property of $\mathcal T$ give both stated rates directly. Suppose $\delta_n\leqslant1$. The discrepancy bound \eqref{eq:trae_discrepancy_bound} gives \eqref{eq:common_discrepancy_bound} with $q=p$ and the bounds in \eqref{eq:trae_common_scales}. \Cref{lemma:trae_accepted_bounds} establishes \eqref{eq:common_accepted_bounds} on $\mathcal S_n=(0,2]$ with $\gamma=(p-1)/p$, since $D_n=L_n\geqslant0$ and $V_n^{\mathrm T}(\lambda)=A_n^{\mathrm T}(\lambda)/\lambda$. For all sufficiently large $n$, the point $\lambda_{\mathrm T}^\circ$ defined in the main text exists and satisfies \eqref{eq:common_oracle_crossing}; the noise level is nonincreasing. Apply \cref{thm:common_dp} and \eqref{eq:trae_oracle_scales}. The strong bound has order $\delta_n^{2(p-1)/p}$, which is the stated rate because $p-1=\min\{\beta,1\}$. Boundedness covers the remaining finitely many $n$, after we enlarge the fixed constants.
+\end{proof}
+
+\subsection{Iterative TRAE}
+
+For this subsection, $\mathcal E_{n,t}^{\mathrm{IT}}$ denotes the common concentration event formed with probability allocation $\eta_{n,t}=\xi/\{t(K_n+1)\}$. The additional class $\operatorname{star}(\mathcal H-\mathcal H)$ in \cref{asp:critical_radius} controls the random centers in the iterative penalties.
+
+\noindent\textit{Remark (notation).} $\mathcal E_{n,t}^{\mathrm{IT}}$ is the common iterative TRAE concentration event obtained by intersecting the requisite iteration--grid concentration events with failure-probability allocation $\eta_{n,t}=\xi/\{t(K_n+1)\}$, with probability at least $1-\xi$ under the paper's confidence convention. In Lemma~\ref{eq:iter_trae_strong_propagation}, Corollary~\ref{cor:iter_trae_discrepancy_bound}, Lemma~\ref{lemma:iter_trae_accepted_stability}: The concentration comparisons are simultaneous over the oracle-relevant grid segment $\Lambda_n\cap[\lambda_{\mathrm{IT}}^\circ,2]$, including the recursive comparisons for $j=1,\ldots,t$.
+
+
+\begin{lemma}[Iterative TRAE propagation]
+Under the assumptions of \cref{thm:iter_trae_rate}, there is a nondecreasing deterministic sequence with $b_0=0$ and $b_j\geqslant2$, $j=1,\ldots,t$, where each $b_j$ depends only on $j$ and the prescribed boundedness and mean-square-continuity constants, independently of $\beta$ and $\|w_0\|$. This sequence may be calibrated so that, on $\mathcal E_{n,t}^{\mathrm{IT}}$, simultaneously for $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IT}}^\circ,2]$,
+\begin{align}
+\|\hat h_{j,\lambda}-h_{j,\lambda}^*\|^2
+&\leqslant C\frac{b_j\delta_n^2}{\lambda^2},
+\qquad j=1,\ldots,t,
+\label{eq:iter_trae_strong_propagation}\\
+L(\hat h_{t,\lambda})
+&\leqslant C\left[
+\delta_n^2+\min\left\{\lambda,
+\frac{b_t\delta_n^2}{\lambda}\right\}
++\|w_0\|^2\lambda^{q_t}
+\right].
+\label{eq:iter_trae_weak_propagation}
+\end{align}
+
+\emph{Additional conditions.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}. With $\mathcal U$ and $\ell_B$ as in Assumption~\ref{asp:critical_radius}, for every fixed iteration--grid pair $(j,\lambda)$ under consideration and every $r>0$, both $\sup_{u\in\mathcal U,\,\|u-u_{j,\lambda}^*\|_{L_2(W;\mathbb R^3)}\leqslant r}|(\mathbb E_n-\mathbb E)\{\ell_B(u(W))-\ell_B(u_{j,\lambda}^*(W))\}|$ and $\sup_{u\in\mathcal U,\,\|u-u_{j,\lambda}^*\|_{L_2(W;\mathbb R^3)}\leqslant r}|n^{-1}\sum_{i=1}^n\epsilon_i\{\ell_B(u(W_i))-\ell_B(u_{j,\lambda}^*(W_i))\}|$ are measurable under the fitting-sample law and its product with the independent Rademacher law, respectively, where $f_j^*=\mathcal T(h_0-h_{j,\lambda}^*)$ and $u_{j,\lambda}^*(W)=(m(W;f_j^*),h_{j,\lambda}^*(X)f_j^*(Z),f_j^*(Z))$.
+\end{lemma}
+
+\emph{Additional condition.} For another result of the paper: Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+
+\noindent\textit{Remark (notation).} $\{b_j\}_{j=0}^t$ is a nondecreasing deterministic propagation sequence with $b_0=0$ and $b_j\geqslant2$ for $1\leqslant j\leqslant t$, each positive-index term depending only on $j$ and the fixed boundedness and mean-square-continuity constants, independently of $\beta$ and $\|w_0\|$.
+
+\begin{proof}
+We adapt the iterative argument of \citet[Theorem~6]{bennett2023source} to the finite grid and give the recursive comparison explicitly. Fix $j$ and $\lambda$, and set
+\[
+e_j=\|\hat h_{j,\lambda}-h_{j,\lambda}^*\|,
+\qquad
+u_j=\|\mathcal T(\hat h_{j,\lambda}-h_{j,\lambda}^*)\|,
+\qquad
+f_j^*=\mathcal T(h_0-h_{j,\lambda}^*).
+\]
+Also define
+\[
+M_{\leqslant j} =\max_{1\leqslant\ell\leqslant j}
+\left\{\lambda,\|f_\ell^*\|_\infty^2\right\}.
+\]
+By \cref{asp:iter_realizability_trae,asp:closeness}, $f_\ell^*\in\mathcal F$. The boundedness part of \cref{asp:critical_radius} therefore gives
+$M_{\leqslant j}\leqslant\max\{2,B^2\}$ for every grid point under
+consideration.
+
+To track the random penalty center, write
+\begin{align*}
+I_{n,j}
+&=\|h_{j,\lambda}^*-\hat h_{j-1,\lambda}\|_{2,n}^2
+-\|\hat h_{j,\lambda}-\hat h_{j-1,\lambda}\|_{2,n}^2,\\
+I_j
+&=\|h_{j,\lambda}^*-h_{j-1,\lambda}^*\|^2
+-\|\hat h_{j,\lambda}-h_{j-1,\lambda}^*\|^2.
+\end{align*}
+We derive the excess-loss comparison directly. Write $g=h_{j,\lambda}^*$, $k=f_j^*$, $\bar f=\mathcal T(h_0-\hat h_{j,\lambda})$, and
+
+\[
+\ell(h,f)=2m(W;f)-2h(X)f(Z)-f(Z)^2.
+\]
+
+By \cref{asp:closeness,asp:iter_realizability_trae}, $k,\bar f\in\mathcal F$. For every $h\in\mathcal H$ and $f\in\mathcal F$, the Riesz identity in Section~\ref{sec:pre} and the definition of the projected operator give
+
+\[
+\mathbb E[\ell(h,f)]
+=2\langle\mathcal T(h_0-h),f\rangle-\|f\|^2
+=\|\mathcal T(h_0-h)\|^2-\|f-\mathcal T(h_0-h)\|^2.
+\]
+
+Indeed, $f\in\widetilde{\mathcal Q}$ implies $\mathbb E[h(X)f(Z)]=\langle\mathcal T h,f\rangle$, and $\mathbb E[m(W;f)]=\langle r_0,f\rangle=\langle\mathcal T h_0,f\rangle$. 
+
+Apply the localized concentration inequality of \citet[Lemma~9]{bennett2023source} to the product and moment-image classes in \cref{asp:critical_radius}, and apply its bounded Lipschitz version to the squared test functions. With the deterministic anchors $g$ and $k$, these inequalities give, uniformly over $h\in\mathcal H$ and $f\in\mathcal F$,
+
+\[
+\begin{split}
+&\left|(\mathbb E_n-\mathbb E)[\ell(h,f)-\ell(g,k)]\right|\\
+&\quad\leqslant C\delta_n\left\{
+\bigl(\mathbb E[m(W;f-k)^2]\bigr)^{1/2}
++\|h(X)f(Z)-g(X)k(Z)\|_{L_2(W)}
++\|f-k\|\right\}+C\delta_n^2\\
+&\quad\leqslant C\left\{\delta_n\|h-g\|\|k\|_\infty
++\delta_n\|f-k\|+\delta_n^2\right\}.
+\end{split}
+\]
+
+For the second inequality, \cref{asp:iter_mean_sq_continuity} bounds the first norm by $C\|f-k\|$, while
+
+\[
+h(X)f(Z)-g(X)k(Z)
+=h(X)(f-k)(Z)+(h-g)(X)k(Z)
+\]
+
+implies that the product norm is at most $B\|f-k\|+\|h-g\|\|k\|_\infty$. The square map is $2B$-Lipschitz on the range of the test functions. Also, $h_0\in\mathcal H$ and \cref{asp:closeness} imply $0\in\mathcal F$. Applying the same concentration inequality with zero moment, product, and test-function anchors, and using \cref{asp:mean_sq_continuity}, gives
+
+\[
+\left|(\mathbb E_n-\mathbb E)\ell(h,f)\right|
+\leqslant C\{\delta_n\|f\|+\delta_n^2\},
+\qquad h\in\mathcal H,\ f\in\mathcal F.
+\]
+
+Allocate fixed fractions of $\eta_{n,t}$ to these finitely many concentration inequalities and to the comparison of Lemma~\ref{lemma:concentrate_l} used below, absorbing the resulting fixed constants into the calibrated scale. 
+
+Taking $h=g$ in the increment bound and using the population identity yields
+
+\[
+\begin{split}
+\mathbb E_n[\ell(g,f)-\ell(g,k)]
+&\leqslant-\|f-k\|^2+C\delta_n\|f-k\|+C\delta_n^2\\
+&\leqslant C\delta_n^2.
+\end{split}
+\]
+
+Taking the supremum over $f\in\mathcal F$ therefore proves
+
+\[
+0\leqslant L_n(g)-\mathbb E_n\ell(g,k)\leqslant C\delta_n^2,
+\]
+
+without requiring an empirical maximizing test function. Next, $\|\bar f-k\|=u_j$, so the increment bound at $(\hat h_{j,\lambda},\bar f)$ gives
+
+\[
+\begin{split}
+L(\hat h_{j,\lambda})-L(g)
+&\leqslant\mathbb E_n[\ell(\hat h_{j,\lambda},\bar f)-\ell(g,k)]
++C\{\delta_ne_j\|k\|_\infty+\delta_nu_j+\delta_n^2\}\\
+&\leqslant L_n(\hat h_{j,\lambda})-L_n(g)
++C\{\delta_ne_j\|k\|_\infty+\delta_nu_j+\delta_n^2\}.
+\end{split}
+\]
+
+Empirical optimality relative to $g\in\mathcal H$ gives $L_n(\hat h_{j,\lambda})-L_n(g)\leqslant\lambda I_{n,j}$, including when the penalty center is random. Consequently,
+\begin{equation}\label{eq:iter_trae_biasless}
+L(\hat h_{j,\lambda})-L(h_{j,\lambda}^*)
+\leqslant \lambda I_{n,j}
++C\left\{
+\delta_ne_j\|f_j^*\|_\infty
++\delta_nu_j+\delta_n^2
+\right\}.
+\end{equation}
+This comparison uses the localized bounds for
+$\operatorname{star}(\mathcal H\cdotp\mathcal F)$,
+$\operatorname{star}(m\circ\mathcal F)$, and
+$\operatorname{star}(\mathcal F)$ from \cref{asp:critical_radius}, together
+with \cref{asp:iter_mean_sq_continuity}. In
+particular, that bound controls
+$\mathbb E[m(W;f_{\hat h_{j,\lambda}}-f_j^*)^2]$ by $Cu_j^2$,
+where $f_h=\mathcal T(h_0-h)$.
+The population normal equation for $h_{j,\lambda}^*$ gives the exact quadratic lower bound
+\begin{equation}\label{eq:iter_trae_population_curvature}
+\lambda e_j^2+u_j^2 \leqslant L(\hat h_{j,\lambda})-L(h_{j,\lambda}^*)-\lambda I_j.
+\end{equation}
+The quadratic identity for \eqref{eq:iter_population}, together with
+$L(h)=\|\mathcal T(h-h_0)\|^2$ on $\mathcal H$, proves this bound.
+
+Expanding the squared penalties separates the center error as
+$2\langle\hat h_{j,\lambda}-h_{j,\lambda}^*,
+\hat h_{j-1,\lambda}-h_{j-1,\lambda}^*\rangle_n$.
+For the fixed-center squared-loss comparisons, apply the same localized concentration inequality of \citet[Lemma~9]{bennett2023source} to the bounded clipped losses corresponding to $(h-h_{j-1,\lambda}^*)^2$ at comparator $h_{j,\lambda}^*$ and $(h-h_{k,\lambda}^*)^2$ at comparator $h_{k,\lambda}^*$, for the fixed iteration--grid pairs under consideration. The fixed-population-center squared-loss measurability condition in Assumption~\ref{asp:critical_radius} supplies measurable localized empirical and Rademacher suprema for these applications. 
+
+Here is the scalar specialization and the penalty expansion. Put $M=\max\{1,B\}$ and $\mathcal U=\mathcal H/M$. For each deterministic center $c=h_{j-1,\lambda}^*$ or $c=h_{k,\lambda}^*$, use the loss
+
+\[
+\ell_c(v;X)=\{M\max\{-1,\min\{v,1\}\}-c(X)\}^2.
+\]
+
+On the common full-probability set, $|c(X)|\leqslant M$, including $c=h_{0,\lambda}^*=0$, so this loss is $4M^2$-Lipschitz in $v$ and agrees with $(h(X)-c(X))^2$ at $v=h(X)/M$.
+For a comparator $g\in\mathcal H$, the inclusion $\operatorname{star}(\mathcal H-g)\subseteq\mathcal S:=\operatorname{star}(\mathcal H-\mathcal H)$ supplies the anchored complexity. Indeed, if $d\leqslant\delta_n$ is a critical radius for $\mathcal S$, then $\mathfrak R_n(d;\mathcal S)\leqslant d^2$ because $0\in\mathcal S$ and $\mathcal S\subseteq\operatorname{star}(\mathcal S-\mathcal S)$. Star scaling gives $\mathfrak R_n(s;\mathcal S)\leqslant sd$ for $s\geqslant d$. Hence, for $s\geqslant\delta_n$,
+
+\[
+\mathfrak R_n(s;\operatorname{star}(\mathcal U-g/M))
+\leqslant M^{-1}\mathfrak R_n(Ms;\mathcal S)
+\leqslant s\delta_n.
+\]
+
+The measurable squared-loss processes in Assumption~\ref{asp:critical_radius} are exactly the loss-increment processes for the stated centers and comparators, after this normalization. Lemma~9 therefore gives, on the allocated concentration event,
+
+\[
+\left|(\mathbb E_n-\mathbb E)
+\bigl[\{h(X)-h_{j-1,\lambda}^*(X)\}^2
+-\{h_{j,\lambda}^*(X)-h_{j-1,\lambda}^*(X)\}^2\bigr]\right|
+\leqslant C\{\delta_n\|h-h_{j,\lambda}^*\|+\delta_n^2\},
+\]
+
+and, for $k=1,\ldots,t$,
+
+\[
+\left|\|h-h_{k,\lambda}^*\|_{2,n}^2-\|h-h_{k,\lambda}^*\|^2\right|
+\leqslant C\{\delta_n\|h-h_{k,\lambda}^*\|+\delta_n^2\}.
+\]
+
+Allocate fixed fractions of $\eta_{n,t}$ to these scalar comparisons. Their constants depend only on the fixed class bounds. 
+
+Write $\Delta_j=\hat h_{j,\lambda}-h_{j,\lambda}^*$ and $\Delta_0=0$. Expansion gives
+
+\[
+\begin{split}
+I_{n,j}-I_j
+={}&(\mathbb E_n-\mathbb E)
+\bigl[\{h_{j,\lambda}^*-h_{j-1,\lambda}^*\}^2
+-\{\hat h_{j,\lambda}-h_{j-1,\lambda}^*\}^2\bigr]
++2\mathbb E_n[\Delta_j(X)\Delta_{j-1}(X)].
+\end{split}
+\]
+
+The first term is at most $C(\delta_ne_j+\delta_n^2)$. The second scalar comparison and $2\delta_ne_k\leqslant e_k^2+\delta_n^2$ give
+$\|\Delta_k\|_{2,n}\leqslant C(e_k+\delta_n)$ for $k\geqslant1$; this bound also holds for $k=0$ because $\Delta_0=0$. Empirical Cauchy--Schwarz thus bounds the last term by
+
+\[
+2\|\Delta_j\|_{2,n}\|\Delta_{j-1}\|_{2,n}
+\leqslant 2Ce_je_{j-1}+C\delta_n(e_j+e_{j-1})+C\delta_n^2.
+\]
+
+Combining these bounds yields
+\begin{equation}\label{eq:iter_trae_center_comparison}
+I_{n,j}-I_j \leqslant C\delta_n(e_j+e_{j-1})+C\delta_n^2+2Ce_je_{j-1}.
+\end{equation}
+Combining \eqref{eq:iter_trae_biasless}--\eqref{eq:iter_trae_center_comparison}
+and applying Young's inequality gives
+\[
+e_j^2\leqslant C\frac{\delta_n^2M_{\leqslant j}}{\lambda^2}+Ce_{j-1}^2.
+\]
+All terms proportional to $\delta_n^2$, including those multiplied by $\lambda\leqslant2$, are covered by
+$\delta_n^2M_{\leqslant j}/\lambda$ before division by $\lambda$.
+Since $e_0=0$ and $M_{\leqslant j}$ is uniformly bounded, enlarge the fixed
+constant $C\geqslant2$ if necessary, set $b_0=0$, and recursively choose
+$b_j=C(1+b_{j-1})$. Induction gives
+\eqref{eq:iter_trae_strong_propagation}. Thus each $b_j$ depends only on $j$
+and the fixed constants.
+
+For the weak bound, put $v_j=\|\mathcal T(h_{j,\lambda}^*-h_0)\|=\|k\|$. The absolute concentration inequality established in this proof, evaluated at the feasible residual $\bar f$, gives
+
+\[
+L(\hat h_{j,\lambda})
+\leqslant L_n(\hat h_{j,\lambda})
++C\{\delta_n\|\bar f\|+\delta_n^2\}.
+\]
+
+The assumptions of Lemma~\ref{lemma:concentrate_l} are inherited from the assumptions of \cref{thm:iter_trae_rate}. Its upper comparison, applied to $g=h_{j,\lambda}^*\in\mathcal H$ with the allocated confidence level, gives
+
+\[
+L_n(g)\leqslant\frac54L(g)+C\delta_n^2
+=\frac54v_j^2+C\delta_n^2.
+\]
+
+Empirical optimality, $L(g)=v_j^2$, and $\|\bar f\|\leqslant v_j+u_j$ therefore imply
+
+\[
+\begin{split}
+L(\hat h_{j,\lambda})-L(g)
+&\leqslant\lambda I_{n,j}+\frac14v_j^2
++C\delta_n(v_j+u_j)+C\delta_n^2\\
+&\leqslant\lambda I_{n,j}+C\{v_j^2+\delta_nu_j+\delta_n^2\},
+\end{split}
+\]
+
+where the last inequality uses $\delta_nv_j\leqslant(v_j^2+\delta_n^2)/2$. Combining this with \eqref{eq:iter_trae_population_curvature} gives
+
+\[
+\lambda e_j^2+u_j^2 \leqslant C\{v_j^2+\delta_nu_j+\delta_n^2\} +\lambda(I_{n,j}-I_j).
+\]
+Substituting \eqref{eq:iter_trae_center_comparison} and absorbing the linear terms gives
+\[
+\frac{\lambda}{2}e_j^2+\frac12u_j^2 \leqslant C\left(v_j^2+\delta_n^2+\lambda e_{j-1}^2\right).
+\]
+At the final iteration, boundedness of $\mathcal H$ and
+\eqref{eq:iter_trae_strong_propagation} give the two simultaneous bounds
+\[
+\lambda e_{t-1}^2\leqslant C\lambda,
+\qquad
+\lambda e_{t-1}^2
+\leqslant C\frac{b_t\delta_n^2}{\lambda}.
+\]
+Taking their minimum, applying the squared triangle inequality, and using the
+weak-bias bound \eqref{eq:iter_weak_bias} prove
+\eqref{eq:iter_trae_weak_propagation}. The argument used only
+$\lambda\in(0,2]$, with the upper endpoint absorbed into fixed constants.
+Each comparison is applied to the fixed iteration--grid pairs in the
+oracle-relevant segment.
+The definition of $\eta_{n,t}$ and a union bound give the simultaneous event.
+\end{proof}
+
+\begin{corollary}[Iterative TRAE discrepancy bound]\label{cor:iter_trae_discrepancy_bound}
+Under the assumptions of \cref{thm:iter_trae_rate}, the calibrated iterative TRAE scales satisfy \eqref{eq:iter_trae_discrepancy_bound} simultaneously for all $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IT}}^\circ,2]$ on $\mathcal E_{n,t}^{\mathrm{IT}}$.
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{corollary}
+\begin{proof}
+On the oracle grid segment,
+$\lambda\geqslant\sqrt{s_{n,t}^{\mathrm T}}$, so
+$A_{n,t}^{\mathrm T}(\lambda)=\delta_n^2+b_t\delta_n^2/\lambda$.
+Use the propagated branch $b_t\delta_n^2/\lambda$ in
+\eqref{eq:iter_trae_weak_propagation} and apply the upper comparison in
+\cref{lemma:concentrate_l}. Calibrate the coefficients of $\delta_n^2$
+and $b_t\delta_n^2/\lambda$ into the prescribed scales. The remaining
+bias term has coefficient $C_{\mathrm{IT}}\|w_0\|^2$, which proves
+\eqref{eq:iter_trae_discrepancy_bound} on this segment.
+\end{proof}
+
+The next lemma establishes error bounds at every grid point in the stable branch of the iterative noise level.
+
+\begin{lemma}[Iterative TRAE error bounds]\label{lemma:iter_trae_accepted_stability}
+Let $\lambda\in\Lambda_n\cap[\lambda_{\mathrm{IT}}^\circ,2]$ satisfy
+$\lambda\geqslant\sqrt{s_{n,t}^{\mathrm T}}$. On
+$\mathcal E_{n,t}^{\mathrm{IT}}$,
+\begin{align}
+&\|\mathcal T(\hat h_{t,\lambda}-h_0)\|^2
+\leqslant C_t \{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\},
+\label{eq:iter_trae_accepted_total}\\
+&\|\hat h_{t,\lambda}-h_0\|^2
+\leqslant C_t\left[
+\frac{1}{\lambda}\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}
++\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}^{\beta/(\beta+1)}
+\right],
+\label{eq:iter_trae_accepted_total_strong}\\
+&\lambda\|\hat h_{t,\lambda}-h_{t,\lambda}^*\|^2
++\|\mathcal T(\hat h_{t,\lambda}-h_{t,\lambda}^*)\|^2
+\leqslant C_t \{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\},
+\label{eq:iter_trae_accepted_variance}\\
+&\|\mathcal T(h_{t,\lambda}^*-h_0)\|^2
+\leqslant C_t \{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\},
+\label{eq:iter_trae_accepted_bias}\\
+&\|\hat h_{t,\lambda}-h_{t,\lambda}^*\|^2
+\leqslant \frac{C_t}{\lambda} \{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}.
+\label{eq:iter_trae_accepted_strong}
+\end{align}
+
+\emph{Additional condition.} Interpret the uniform almost-sure boundedness in Assumption~\ref{asp:critical_radius} using one common null set for the whole function classes: there exists a set $N$ with $\mathbb P(W\in N)=0$ such that, for every $w\notin N$, every $h\in\mathcal H$ and every $f\in\mathcal F$, all three inequalities $|h(X(w))|\leqslant B$, $|f(Z(w))|\leqslant B$ and $|m(w;f)|\leqslant B$ hold simultaneously. The exceptional set does not depend on $h$ or $f$. Apply this convention separately to each primal or exchanged problem whenever that problem is assumed to satisfy Assumption~\ref{asp:critical_radius}.
+\end{lemma}
+
+\noindent\textit{Remark.} The constant $C_t$ may depend on the prescribed $t$ and fixed population quantities, including $\beta$ and $\|w_0\|$, but is independent of $n$, $\lambda$, and the realized fitting observations.
+
+\begin{proof}
+Set
+\[
+e=\|\hat h_{t,\lambda}-h_{t,\lambda}^*\|,
+\quad
+u=\|\mathcal T(\hat h_{t,\lambda}-h_{t,\lambda}^*)\|,
+\quad
+v=\|\mathcal T(h_{t,\lambda}^*-h_0)\|.
+\]
+Let
+\begin{align*}
+Q_t^\lambda(h)
+&=L(h)+\lambda\|h-h_{t-1,\lambda}^*\|^2,\\
+\widetilde Q_{n,t}^\lambda(h)
+&=L_n(h)+\lambda\|h-h_{t-1,\lambda}^*\|_{2,n}^2,\\
+Q_{n,t}^\lambda(h)
+&=L_n(h)+\lambda\|h-\hat h_{t-1,\lambda}\|_{2,n}^2.
+\end{align*}
+The loss comparison in \cref{lemma:concentrate_l} and the localized
+squared-norm comparison, applied at the fixed comparator
+$h_{t,\lambda}^*\in\mathcal H$, give
+\begin{align*}
+&Q_t^\lambda(\hat h_{t,\lambda})-Q_t^\lambda(h_{t,\lambda}^*)
+-\{\widetilde Q_{n,t}^\lambda(\hat h_{t,\lambda})
+-\widetilde Q_{n,t}^\lambda(h_{t,\lambda}^*)\}\\
+&\qquad\leqslant
+L_n(\hat h_{t,\lambda})+\frac14v^2
++C\{\delta_n^2+\lambda\delta_ne\}.
+\end{align*}
+Empirical optimality gives
+$Q_{n,t}^\lambda(\hat h_{t,\lambda})
+\leqslant Q_{n,t}^\lambda(h_{t,\lambda}^*)$.
+Expanding the two empirical penalties yields
+\[
+\left|
+\{\widetilde Q_{n,t}^\lambda(\hat h_{t,\lambda})
+-\widetilde Q_{n,t}^\lambda(h_{t,\lambda}^*)\}
+-\{Q_{n,t}^\lambda(\hat h_{t,\lambda})
+-Q_{n,t}^\lambda(h_{t,\lambda}^*)\}
+\right|
+\leqslant2\lambda\|e_t\|_{2,n}\|e_{t-1}\|_{2,n},
+\]
+where $e_j=\hat h_{j,\lambda}-h_{j,\lambda}^*$ in this display.
+The localized norm comparison and \eqref{eq:iter_trae_strong_propagation}
+bound the last expression together with the term $C\lambda\delta_ne$
+in the fixed-center comparison by
+\[
+\epsilon\lambda e^2 +C_{\epsilon,t}\left( \delta_n^2+\frac{b_t\delta_n^2}{\lambda}\right)
+\]
+for any fixed $\epsilon\in(0,1)$. Thus $\epsilon$ is the total absorption
+allocated to both terms. Taking $\epsilon=1/4$ and using the
+population quadratic identity \eqref{eq:iter_trae_population_curvature} yields
+\begin{equation}\label{eq:iter_trae_refined_convexity}
+\frac34\lambda e^2+u^2
+\leqslant
+L_n(\hat h_{t,\lambda})+\frac14v^2
++C_t\left(\delta_n^2+\frac{b_t\delta_n^2}{\lambda}\right).
+\end{equation}
+On the branch $\lambda\geqslant\sqrt{s_{n,t}^{\mathrm T}}$,
+\[
+A_{n,t}^{\mathrm T}(\lambda) =\delta_n^2+\frac{s_{n,t}^{\mathrm T}}{\lambda}.
+\]
+Since $D_n=L_n$, \eqref{eq:iter_trae_refined_convexity} therefore gives
+\begin{equation}\label{eq:iter_trae_before_absorb}
+\frac34\lambda e^2+u^2 \leqslant \frac14v^2+C_t\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}.
+\end{equation}
+The lower comparison in \cref{lemma:concentrate_l} implies
+\[
+L(\hat h_{t,\lambda})
+\leqslant2L_n(\hat h_{t,\lambda})+C\delta_n^2
+\leqslant C_t\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}.
+\]
+This proves \eqref{eq:iter_trae_accepted_total}.
+Since $v^2\leqslant2L(\hat h_{t,\lambda})+2u^2$, substituting \eqref{eq:iter_trae_before_absorb} on the right gives
+\[
+v^2\leqslant C_t\{D_n(\hat h_{t,\lambda})+A_{n,t}^{\mathrm T}(\lambda)\}+\frac12v^2.
+\]
+Absorb the last term to obtain \eqref{eq:iter_trae_accepted_bias}, and substitute it into \eqref{eq:iter_trae_before_absorb}. Multiplying the resulting bound by $4/3$ gives \eqref{eq:iter_trae_accepted_variance}. Dividing \eqref{eq:iter_trae_accepted_variance} by $\lambda$ proves
+\eqref{eq:iter_trae_accepted_strong}. Apply
+\eqref{eq:iter_bias_interpolation} to
+\eqref{eq:iter_trae_accepted_bias} and combine the result with
+\eqref{eq:iter_trae_accepted_strong} by the squared triangle inequality.
+This proves \eqref{eq:iter_trae_accepted_total_strong}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:exist_lambda_iter_trae}]
+Throughout the proof, we work on $\mathcal E_{n,t}^{\mathrm{IT}}$. At the terminal grid point, empirical optimality at the final iteration and $h_0\in\mathcal H$ give
+\[
+L_n(\hat h_{t,\lambda_{K_n}})
+\leqslant L_n(h_0)+\lambda_{K_n}\|h_0-\hat h_{t-1,\lambda_{K_n}}\|_{2,n}^2
+\leqslant\delta_n^2+4B^2n^{-2}.
+\]
+Since $A_{n,t}^{\mathrm T}(\lambda)\geqslant\delta_n^2$, $\delta_n^2\geqslant n^{-1}$, and $n\geqslant N_{\mathrm{IT}}(B)$, the terminal point is accepted. The first accepted index is therefore well defined; it is either zero or has a rejected predecessor in $[\lambda,2\lambda]$. Each grid candidate requires $t$ minimax problems.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:iter_trae_rate}]
+Write $s=s_{n,t}^{\mathrm T}$ and $q=q_t$. Boundedness gives the result directly when $s>1$, so consider $s\leqslant1$. The discrepancy bound \eqref{eq:iter_trae_discrepancy_bound} gives \eqref{eq:common_discrepancy_bound} with the bounds in \eqref{eq:iter_trae_scale}. \Cref{lemma:iter_trae_accepted_stability} establishes \eqref{eq:common_accepted_bounds} for every $\lambda\in\mathcal S_n=[\lambda_{\mathrm{IT}}^\circ,2]$ with $\gamma=\beta/(\beta+1)$. For all sufficiently large $n$, the point $\lambda_{\mathrm{IT}}^\circ$ defined in the main text exists and satisfies \eqref{eq:common_oracle_crossing}. Since $\lambda_{\mathrm{IT}}^\circ\geqslant\sqrt{s}$, on $\mathcal S_n$,
+\[
+A_{n,t}^{\mathrm T}(\lambda)=\delta_n^2+\frac{s}{\lambda},
+\qquad
+V_{n,t}^{\mathrm T}(\lambda)=\frac{s}{\lambda^2}.
+\]
+The noise level is therefore nonincreasing, and $b_t\geqslant2$ with $\lambda\leqslant2$ give $A_{n,t}^{\mathrm T}(\lambda)/\lambda\leqslant CV_{n,t}^{\mathrm T}(\lambda)$ on that segment. Apply \cref{thm:common_dp} and \eqref{eq:iter_trae_oracle_scales}. The weak bound follows directly, while the source-bias contribution to the strong bound satisfies
+\[
+(s^{q/(q+1)})^{\beta/(\beta+1)} \leqslant s^{(q-1)/(q+1)}
+\]
+because $q\leqslant\beta+1$. This proves the two stated rates. Boundedness covers the remaining finitely many $n$, after we enlarge the fixed constants. Finally, $2t\geqslant\beta+1$ gives $q=\beta+1$ and the displayed unsaturated rates.
+\end{proof}
+
+\begin{proof}[Proof of \cref{cor:normality}]
+Apply \cref{thm:tikhonv_rate} to both nuisance estimators at the
+prescribed confidence levels $\xi_n/2$. Their rate bounds then hold on
+a common event with probability at least $1-\xi_n\to1$. Because
+$\beta_h,\beta_q>0$ and $\delta_n\to0$, these bounds give
+\begin{equation}\label{eq:conv_hq}
+\| \hat{h} -h_{0} \| =o_{p}( 1) ,\qquad \| \hat{q} -q_{0}\| =o_{p}( 1) .
+\end{equation}
+The remaining bias condition is
+\begin{equation}\label{eq:square_root}
+\sqrt{n}\mathbb{E}[(\hat{q}( Z) -q_{0}( Z))(\hat{h}( X) -h_{0}( X))] =o_{p}( 1) .
+\end{equation}
+Suppose first that $\beta_m=\beta_h\geqslant\beta_q$. By the adjoint identity and the Cauchy--Schwarz inequality,
+\begin{align*}
+\left|\mathbb{E}[(\hat{q}( Z) -q_{0}( Z))(\hat{h}( X) -h_{0}( X))]\right| & \leqslant \|\hat h-h_0\|\,\|\mathcal T^*(\hat q-q_0)\|\\
+ & =O_{p}\left( \delta _{n}^{\min\{\beta _{m} ,1\} /( 1+\min\{\beta _{m} ,1\})} \cdot \delta _{n}\right)\\
+ & =O_{p}\left( \delta _{n}^{1+\min\{\beta _{m} ,1\} /( 1+\min\{\beta _{m} ,1\})}\right) .
+\end{align*}
+If $\beta_m=\beta_q\geqslant\beta_h$, the symmetric bound
+\[
+\left|\mathbb{E}[(\hat{q}( Z) -q_{0}( Z))(\hat{h}( X) -h_{0}( X))]\right|
+\leqslant \|\hat q-q_0\|\,\|\mathcal T(\hat h-h_0)\|
+\]
+gives the same rate. By assumption, $\delta _{n} =o\left( n^{-( 1+\min\{\beta _{m} ,1\}) /( 2+4\min\{\beta _{m} ,1\})}\right)$, and hence
+\[
+\left|\mathbb{E}[(\hat{q}( Z) -q_{0}( Z))(\hat{h}( X) -h_{0}( X))]\right| =o_{p}\left( n^{-1/2}\right),
+\]
+which proves \eqref{eq:square_root}.
+
+Use the jointly measurable version of $d_n$ stipulated in Corollary~\ref{cor:normality}. Its agreement with the fitted score difference for almost every training realization and almost every fresh observation identifies its conditional population integrals with those of the score difference. Its almost sure agreement at every evaluation observation identifies its evaluation average with the difference of the two evaluated score averages.
+Conditional on the nuisance-training data, the evaluation observations
+are independent and identically distributed. Boundedness of the nuisance
+classes and the score continuity assumptions imply
+\[
+\mathbb E[d_n(W)^2\mid\text{training}]
+\leqslant C\left\{
+\|\hat h-h_0\|^{\gamma_h}+\|\hat q-q_0\|^{\gamma_q}
++\|\hat h-h_0\|^2+\|\hat q-q_0\|^2
+\right\}=o_p(1).
+\]
+Conditional Chebyshev's inequality therefore gives
+$\sqrt n(\mathbb E_{n,\mathrm{eval}}-\mathbb E)d_n=o_p(1)$,
+where $\mathbb E d_n$ integrates a fresh observation conditional on
+the training data. The primal and dual moment equations give
+\[
+\mathbb E d_n
+=-\mathbb E[(\hat h(X)-h_0(X))(\hat q(Z)-q_0(Z))].
+\]
+Combining this identity with \eqref{eq:square_root} yields
+\[
+\sqrt n\{\hat\theta(\hat h,\hat q)-\theta_0\}
+=\frac1{\sqrt n}\sum_{i=1}^n\psi_0(W_i)+o_p(1).
+\]
+The moment equations also imply $\mathbb E\psi_0(W)=0$. The
+classical central limit theorem applies because
+$0<\mathbb E[\psi_0(W)^2]<\infty$, proving the stated normal limit.
+\end{proof}
+
+
+\section{Additional Experiment Details}\label{sec:experiment_details}
+
+\paragraph{Source condition in the linear design.}
+Let $\phi_k=\mathrm{He}_k/\sqrt{k!}$ denote the normalized probabilists' Hermite polynomials, an orthonormal basis of $L_2(N(0,1))$. Since $(X,Z)$ is a standard bivariate normal pair with correlation $\rho$, Mehler's formula gives $\mathbb E[\phi_k(X)\mid Z]=\rho^k\phi_k(Z)$, so $\mathcal T^*\mathcal T\phi_k=\rho^{2k}\phi_k$. The function $h_s$ is even and centered, so $\langle h_s,\phi_0\rangle=0$ and $\langle h_s,\phi_{2k+1}\rangle=0$. For $k\geqslant1$, a direct calculation gives
+\[
+\langle h_s,\phi_{2k}\rangle=\frac{m_s}{d_s}\,\frac{(-1)^k\sqrt{(2k)!}}{2^k\,k!\,(1+s^2)^k}.
+\]
+The source condition $h_s=(\mathcal T^*\mathcal T)^{\beta/2}w_0$ holds if and only if
+\[
+\|w_0\|^2=\sum_{k\geqslant1}\frac{\langle h_s,\phi_{2k}\rangle^2}{\rho^{4k\beta}}
+=\frac{m_s^2}{d_s^2}\sum_{k\geqslant1}\binom{2k}{k}\frac{q^k}{4^k}
+=\frac{m_s^2}{d_s^2}\left\{(1-q)^{-1/2}-1\right\},
+\qquad
+q=\frac{\rho^{-4\beta}}{(1+s^2)^2},
+\]
+is finite, that is, if and only if $q<1$. This is the condition $\beta<\beta_{\max}(s,\rho)$ in \cref{sec:experiment_design}. \Cref{tab:experiment_beta} gives its values.
+
+\begin{table}[!htp]
+\centering
+\caption{Upper end $\beta_{\max}(s,\rho)$ of the source exponents satisfied by $h_s$ in the linear design. The source condition holds for every $\beta<\beta_{\max}$ and fails at $\beta_{\max}$.}
+\label{tab:experiment_beta}
+\begin{tabular}{lccc}
+\toprule
+ & $\rho=0.65$ & $\rho=0.8$ & $\rho=0.95$\\
+\midrule
+$s=0.7$ & $0.46$ & $0.89$ & $3.89$\\
+$s=2.2$ & $2.05$ & $3.95$ & $17.2$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Errors.}
+Strong errors use a trapezoid rule on $2001$ points in $[-8,8]$ for the standard normal regressor. Weak errors integrate the analytic conditional law of $X$ given the instrument over a grid in $(Z,V)$ on $[-6,6]^2$, with $241\times161$ points in the $90$-regime study and $121\times81$ points in the two-design study. In the nonlinear design, both errors use a joint grid over $(A,Z,V)$ weighted by $\mathbb P(A\mid Z)$. The plug-in target uses the second half of the sample for TRAE and the last quarter for RDIV. In the nonlinear design, the continuous regressor is standardized with the mean and standard deviation of the first half of the sample.
+
+\paragraph{RDIV nuisances and noise level.}
+The mixture density network has $20$ components and hidden width $64$. It is trained by Adam with learning rate $10^{-3}$ and weight decay $10^{-4}$ for at most $300$ epochs and stops after $25$ epochs without improvement on a quarter of the preliminary block. The pilot $\hat r$ is kernel ridge regression on the preliminary block, with the kernel of \cref{sec:experiment_estimators} and ridge $10^{-3}$. Fifty draws per observation from the fitted density, frozen across candidates, define $\hat{\mathcal T}$.
+
+Let $G$ and $G_{\mathrm{cal}}$ be the matrices that map the coordinates $\boldsymbol b$ of a hypothesis to $\hat{\mathcal T}h$ on the fitting and calibration blocks, and write $G^\top G=W\operatorname{diag}(\mu_j)W^\top$. The candidate is $\hat{\boldsymbol b}_\lambda=(G^\top G+\lambda I)^{-1}G^\top\boldsymbol y$. Let $\hat\sigma^2$ be the mean squared difference between $\boldsymbol y$ and $\hat r(Z)$ on the fitting block. Treating the noise as homoskedastic with variance $\hat\sigma^2$, the variance of $\hat{\mathcal T}\hat h_\lambda$ on the calibration block is
+\[
+\hat\sigma^2\sum_j\frac{\mu_j}{(\mu_j+\lambda)^2}\,\frac{\|G_{\mathrm{cal}}W\boldsymbol e_j\|^2}{N_{\mathrm{cal}}},
+\]
+where $\boldsymbol e_j$ is the $j$th unit vector. The pilot has the form $\hat r(z)=\boldsymbol w(z)^\top\boldsymbol y_{\mathrm{pre}}$, and its variance term is $\hat\nu^2=\hat\sigma^2N_{\mathrm{cal}}^{-1}\sum_{i\in I_{\mathrm{cal}}}\|\boldsymbol w(Z_i)\|^2$. For the operator error, the difference $\hat h_\lambda(X_i)-\hat{\mathcal T}\hat h_\lambda(Z_i)$ has conditional mean $\{(\mathcal T-\hat{\mathcal T})\hat h_\lambda\}(Z_i)$ given $Z_i$. On the calibration block, we evaluate the TRAE statistic with the kernel critic on $Z$ at this difference, subtract its sign-flip level, and take the positive part. The noise level $A_n(\lambda)$ is the sum of the three terms.
+
+\noindent\textit{Remark (notation).} $\boldsymbol y$ denotes the vector of outcomes on the fitting block, on the outcome scale used by the fit. In Proposition~\ref{prop:rkhs_qp}: $\boldsymbol y=(Y_1,\ldots,Y_N)^\top$, with $N=n_1$ the fitting-sample size.
+
+
+\paragraph{Grids.}
+\Cref{tab:experiment_grid} lists the fitting-block sizes and grid lengths. Every grid starts at $\lambda_0=2$ and halves at each step. The best fixed penalty of a regime is taken over its whole grid, and the best single fixed penalty over the grid values present at every sample size.
+
+\begin{table}[!htp]
+\centering
+\caption{Fitting-block sizes and grid lengths. $M=K_N+1$ is the number of candidates, and the grid ends at $2^{1-K_N}$.}
+\label{tab:experiment_grid}
+\small
+\begin{tabular}{r r r c r r c}
+\toprule
+$n$ & $N_{\mathrm{TRAE}}$ & $M$ & Final $\lambda$ & $N_{\mathrm{RDIV}}$ & $M$ & Final $\lambda$\\
+\midrule
+500 & 250 & 18 & $2^{-16}$ & 125 & 16 & $2^{-14}$\\
+1000 & 500 & 20 & $2^{-18}$ & 250 & 18 & $2^{-16}$\\
+2000 & 1000 & 22 & $2^{-20}$ & 500 & 20 & $2^{-18}$\\
+4000 & 2000 & 24 & $2^{-22}$ & 1000 & 22 & $2^{-20}$\\
+8000 & 4000 & 26 & $2^{-24}$ & 2000 & 24 & $2^{-22}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Pilot runs.}
+Two pilot runs on seeds $1001$--$1008$ fixed the noise-floor rule before the main seeds $2001$--$2050$ were drawn. The first used $12$ regimes of the linear design, with $\rho\in\{0.65,0.95\}$, $s=0.7$, $\sigma\in\{0.1,3\}$, and $n\in\{500,2000,8000\}$; the second used $16$ regimes of both designs at $n\in\{1000,4000\}$. For RDIV, the operator-error term was added after the pilot showed that without it the search reached the end of the grid in up to $38\%$ of the data sets. On the pilot, the fixed-scale RDIV level $\delta_N^2/\lambda+\nu_N^2$ performed about as well on the strong error and worse on the weak and target errors.
+
+\paragraph{Provenance.}
+The two studies are \texttt{20261001-\allowbreak gaussian-\allowbreak regimes} ($90$ regimes, TRAE) and \texttt{20261001-\allowbreak regimes-\allowbreak v2} (two designs, TRAE and RDIV) in the project's experiment directory at source revision \texttt{5985a2c}. Both contain every fitted candidate with its discrepancy, noise level, and errors, so all tables and figures can be rebuilt from them. In both studies the linear-design TRAE fits at $s=0.7$ coincide. The kernel computations ran on CPUs; the mixture density networks for RDIV ran on GPUs.
+
+\subsection{RKHS computation}\label{sec:rkhs_computation}
+
+Let $N=n_1$ be the fitting-sample size, $\boldsymbol y=(Y_1,\ldots,Y_N)^\top$, and define the Gram matrices
+\[
+[K_{\mathcal H}]_{ij}=k_{\mathcal H}(X_i,X_j),
+\qquad
+[K_{\mathcal F}]_{ij}=k_{\mathcal F}(Z_i,Z_j),
+\qquad
+P_\eta=K_{\mathcal F}(K_{\mathcal F}+N\eta I_N)^{-1}.
+\]
+For the minimum-RKHS-norm representative $h_\alpha(x)=\sum_{j=1}^N\alpha_j k_{\mathcal H}(X_j,x)$, the critic can be profiled out in closed form. Before the spectral restriction below, the RKHS TRAE fit at a positive candidate $\lambda$ solves the convex quadratic program
+\begin{equation}
+\label{eq:rkhs_qp}
+\widehat\alpha_\lambda
+\in\arg\min_{\alpha\in\mathbb R^N}
+\left\{
+(\boldsymbol y-K_{\mathcal H}\alpha)^\top P_\eta
+(\boldsymbol y-K_{\mathcal H}\alpha)
++\lambda\alpha^\top K_{\mathcal H}^2\alpha
+\right\}.
+\end{equation}
+Equivalently, after dropping the constant $\boldsymbol y^\top P_\eta\boldsymbol y$, the objective is
+\[
+\alpha^\top(K_{\mathcal H}P_\eta K_{\mathcal H}
++\lambda K_{\mathcal H}^2)\alpha
+-2\alpha^\top K_{\mathcal H}P_\eta\boldsymbol y.
+\]
+Both $P_\eta$ and $K_{\mathcal H}$ are positive semidefinite, so this objective is convex and its stationarity condition
+\begin{equation}\label{eq:rkhs_normal}
+\left(K_{\mathcal H}P_\eta K_{\mathcal H}+\lambda K_{\mathcal H}^{2}\right)\alpha
+=K_{\mathcal H}P_\eta\boldsymbol y
+\end{equation}
+identifies the minimizer. \Cref{prop:rkhs_qp} gives its minimum-Euclidean-norm solution, $\widehat\alpha_\lambda=(K_{\mathcal H}P_\eta K_{\mathcal H}+\lambda K_{\mathcal H}^{2})^{\dagger}K_{\mathcal H}P_\eta\boldsymbol y$. Each candidate therefore costs a linear solve, with no iterative optimization.
+
+A change of variable gives a well-conditioned computation on a prescribed spectral subspace. Let $Q_{\mathcal H}$ contain the orthonormal eigenvectors of $K_{\mathcal H}$ whose eigenvalues exceed $\epsilon_{\mathcal H}\lambda_{\max}(K_{\mathcal H})$, and let $D_{\mathcal H}$ contain those eigenvalues. The default relative tolerance is $\epsilon_{\mathcal H}=\sqrt{N\epsilon_{\mathrm{mach}}}$. Restrict the hypothesis to the corresponding kernel span. Its fitting values have the form $\boldsymbol v=Q_{\mathcal H}\boldsymbol a$, and its coefficients are $\alpha=Q_{\mathcal H}D_{\mathcal H}^{-1}\boldsymbol a$. With
+\[
+M=Q_{\mathcal H}^\top P_\eta Q_{\mathcal H},
+\qquad
+\boldsymbol b=Q_{\mathcal H}^\top P_\eta\boldsymbol y,
+\]
+the restricted quadratic program becomes
+\begin{equation}\label{eq:rkhs_value_program}
+\widehat{\boldsymbol a}_\lambda
+=\arg\min_{\boldsymbol a}
+\left\{(\boldsymbol y-Q_{\mathcal H}\boldsymbol a)^\top P_\eta
+(\boldsymbol y-Q_{\mathcal H}\boldsymbol a)+\lambda\|\boldsymbol a\|^2\right\},
+\qquad
+(M+\lambda I)\widehat{\boldsymbol a}_\lambda=\boldsymbol b.
+\end{equation}
+The matrix $M$ is positive semidefinite with spectrum in $[0,1)$, so the system has condition number at most $(1+\lambda)/\lambda$ for $\lambda>0$.
+
+Write $M=V\operatorname{diag}(m_i)V^\top$ and $\boldsymbol t=V^\top\boldsymbol b$. Then the whole regularization path follows from
+\begin{equation}\label{eq:rkhs_path}
+\widehat{\boldsymbol a}_\lambda
+=V\operatorname{diag}\!\left(\frac{1}{m_i+\lambda}\right)\boldsymbol t,
+\qquad
+L_{N,\eta}(\widehat h_\lambda)
+=\frac1N(\boldsymbol y-Q_{\mathcal H}\widehat{\boldsymbol a}_\lambda)^\top
+P_\eta(\boldsymbol y-Q_{\mathcal H}\widehat{\boldsymbol a}_\lambda).
+\end{equation}
+At $\lambda=0$, we use the minimum-Euclidean-norm solution after retaining compressed eigenvalues larger than the absolute numerical tolerance $10^{-12}$. The selection statistic and predictions use the same fitted function, since $K_{\mathcal H}\widehat\alpha_\lambda=Q_{\mathcal H}\widehat{\boldsymbol a}_\lambda$ on the retained subspace. Kernel and compressed-matrix eigendecompositions are computed once; each subsequent candidate costs at most $O(N^2)$ operations. The computed fit minimizes the objective on the retained hypothesis span, up to numerical error. This restriction is an additional regularization choice and must be included in the experiment settings.
+
+For RDIV, let $\boldsymbol y$ be the standardized outcomes on the fitting block, and restrict the hypothesis to the retained span as above, with coordinates $\boldsymbol b$. Averaging the hypothesis features over the frozen draws from the fitted density gives a matrix $G$ with $G\boldsymbol b=(\hat{\mathcal T}h(Z_i))_{i=1}^N$. The candidate minimizes $N^{-1}\{\|\boldsymbol y-G\boldsymbol b\|^2+\lambda\|\boldsymbol b\|^2\}$, so that
+\[
+(G^\top G+\lambda I)\widehat{\boldsymbol b}_\lambda=G^\top\boldsymbol y,
+\]
+and one eigendecomposition of $G^\top G$ gives the whole path. The discrepancy is $N_{\mathrm{cal}}^{-1}\|\hat{\boldsymbol r}_{\mathrm{cal}}-G_{\mathrm{cal}}\widehat{\boldsymbol b}_\lambda\|^2$, where $G_{\mathrm{cal}}$ is formed in the same way on the calibration block and $\hat{\boldsymbol r}_{\mathrm{cal}}$ contains the pilot values there. The retained span and the critic ridge are computational choices; the guarantees for bounded classes do not follow from these reductions alone.
+
+
+\subsection{RKHS reduction}
+
+For the kernel TRAE estimator in \cref{sec:experiment_estimators}, define the ridge-stabilized empirical adversarial loss
+\begin{equation}
+\label{eq:rkhs_adversarial_loss}
+L_{N,\eta}(h)
+:=\sup_{f\in\mathcal F}
+\left\{
+\frac{2}{N}\sum_{i=1}^N\{Y_i-h(X_i)\}f(Z_i)
+-\frac{1}{N}\sum_{i=1}^N f(Z_i)^2
+-\eta\|f\|_{\mathcal F}^2
+\right\},
+\end{equation}
+where $\mathcal F$ is the RKHS generated by $k_{\mathcal F}$ and $\eta>0$. The fitted hypothesis minimizes
+\[
+L_{N,\eta}(h)+\frac{\lambda}{N}\sum_{i=1}^N h(X_i)^2.
+\]
+
+\begin{proposition}[RKHS quadratic reduction]
+\label{prop:rkhs_qp}
+Let $\mathcal H$ and $\mathcal F$ be the RKHSs generated by $k_{\mathcal H}$ and $k_{\mathcal F}$, and let $K_{\mathcal H}$, $K_{\mathcal F}$, and $P_\eta$ be defined as in \cref{sec:rkhs_computation}. Among functions with the same fitting-sample evaluations, take the representative with minimum RKHS norm. Then the minimizer of
+\[
+L_{N,\eta}(h)+\lambda\mathbb E_N[h(X)^2]
+\]
+has the form $\widehat h_\lambda(\cdot)=\sum_{j=1}^N\widehat\alpha_{\lambda,j}k_{\mathcal H}(X_j,\cdot)$, where $\widehat\alpha_\lambda$ solves \eqref{eq:rkhs_qp}. The minimum-Euclidean-norm coefficient vector is
+\begin{equation}
+\label{eq:rkhs_closed_form}
+\widehat\alpha_\lambda
+=\left(K_{\mathcal H}P_\eta K_{\mathcal H}
++\lambda K_{\mathcal H}^2\right)^\dagger
+K_{\mathcal H}P_\eta\boldsymbol y,
+\end{equation}
+where $A^\dagger$ denotes the Moore--Penrose pseudoinverse of $A$.
+\end{proposition}
+
+\begin{proof}
+Fix $h$ and write $\boldsymbol r_h=(Y_i-h(X_i))_{i=1}^N$. The representer theorem gives a maximizing critic of the form
+\[
+f_\gamma(\cdot)=\sum_{j=1}^N\gamma_j k_{\mathcal F}(Z_j,\cdot).
+\]
+Its fitting-sample evaluations are $K_{\mathcal F}\gamma$ and its squared RKHS norm is $\gamma^\top K_{\mathcal F}\gamma$. Substitution into \eqref{eq:rkhs_adversarial_loss} gives
+\[
+\sup_{\gamma\in\mathbb R^N}
+\left\{
+\frac{2}{N}\boldsymbol r_h^\top K_{\mathcal F}\gamma
+-\frac{1}{N}\gamma^\top K_{\mathcal F}^2\gamma
+-\eta\gamma^\top K_{\mathcal F}\gamma
+\right\}.
+\]
+The first-order condition is
+\[
+K_{\mathcal F}
+\{(K_{\mathcal F}+N\eta I_N)\gamma-\boldsymbol r_h\}=0.
+\]
+We may therefore take
+\[
+\widehat\gamma_h=(K_{\mathcal F}+N\eta I_N)^{-1}\boldsymbol r_h.
+\]
+Evaluating the objective at this coefficient vector yields
+\begin{equation}
+\label{eq:rkhs_profiled_loss}
+L_{N,\eta}(h)
+=\frac{1}{N}\boldsymbol r_h^\top
+K_{\mathcal F}(K_{\mathcal F}+N\eta I_N)^{-1}
+\boldsymbol r_h
+=\frac{1}{N}\boldsymbol r_h^\top P_\eta\boldsymbol r_h.
+\end{equation}
+
+The objective depends on $h$ only through its fitting-sample evaluations. Its minimum-RKHS-norm representative consequently has the form $h_\alpha(\cdot)=\sum_{j=1}^N\alpha_j k_{\mathcal H}(X_j,\cdot)$, with evaluation vector $K_{\mathcal H}\alpha$. Combining \eqref{eq:rkhs_profiled_loss} with
+\[
+\mathbb E_N[h_\alpha(X)^2]
+=\frac{1}{N}\alpha^\top K_{\mathcal H}^2\alpha
+\]
+and multiplying the objective by $N$ gives \eqref{eq:rkhs_qp}. Since $P_\eta$ is positive semidefinite, this is a convex quadratic program. Its first-order condition is
+\[
+\left(K_{\mathcal H}P_\eta K_{\mathcal H}
++\lambda K_{\mathcal H}^2\right)\alpha
+=K_{\mathcal H}P_\eta\boldsymbol y.
+\]
+The Moore--Penrose solution in \eqref{eq:rkhs_closed_form} is the minimum-Euclidean-norm solution of this system.
+\end{proof}
+

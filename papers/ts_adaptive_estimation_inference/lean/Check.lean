@@ -1,0 +1,31 @@
+import Papers
+
+-- The paper's results: each must list no axiom beyond propext, Classical.choice and Quot.sound.
+#print axioms Papers.TsAdaptiveEstimationInference.common_dp
+#print axioms Papers.TsAdaptiveEstimationInference.exist_lambda_deepiv
+#print axioms Papers.TsAdaptiveEstimationInference.deepiv_rate
+#print axioms Papers.TsAdaptiveEstimationInference.exist_lambda_iter_rdiv
+#print axioms Papers.TsAdaptiveEstimationInference.iter_rdiv_rate
+#print axioms Papers.TsAdaptiveEstimationInference.exist_lambda
+#print axioms Papers.TsAdaptiveEstimationInference.tikhonov_rate
+#print axioms Papers.TsAdaptiveEstimationInference.exist_lambda_iter_trae
+#print axioms Papers.TsAdaptiveEstimationInference.iter_trae_rate
+#print axioms Papers.TsAdaptiveEstimationInference.dr_asymptotic_normality
+#print axioms Papers.TsAdaptiveEstimationInference.variational_source_uniform
+#print axioms Papers.TsAdaptiveEstimationInference.t_err_dp
+#print axioms Papers.TsAdaptiveEstimationInference.err_l_dp
+#print axioms Papers.TsAdaptiveEstimationInference.err_r_dp
+#print axioms Papers.TsAdaptiveEstimationInference.str_dp
+#print axioms Papers.TsAdaptiveEstimationInference.rdiv_discrepancy_bound
+#print axioms Papers.TsAdaptiveEstimationInference.rdiv_accepted_bounds
+#print axioms Papers.TsAdaptiveEstimationInference.iter_bias
+#print axioms Papers.TsAdaptiveEstimationInference.iter_rdiv_discrepancy_bound
+#print axioms Papers.TsAdaptiveEstimationInference.iter_rdiv_accepted_bounds
+#print axioms Papers.TsAdaptiveEstimationInference.concentrate_l
+#print axioms Papers.TsAdaptiveEstimationInference.strong_convexity
+#print axioms Papers.TsAdaptiveEstimationInference.trae_discrepancy_bound
+#print axioms Papers.TsAdaptiveEstimationInference.trae_accepted_bounds
+#print axioms Papers.TsAdaptiveEstimationInference.iter_trae_strong_propagation
+#print axioms Papers.TsAdaptiveEstimationInference.iter_trae_discrepancy_bound
+#print axioms Papers.TsAdaptiveEstimationInference.iter_trae_accepted_stability
+#print axioms Papers.TsAdaptiveEstimationInference.rkhs_qp

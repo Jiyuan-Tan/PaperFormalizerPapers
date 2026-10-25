@@ -1,0 +1,302 @@
+\begin{thebibliography}{40}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ai and Chen(2003)]{aiEfficientEstimationModels2003}
+Chunrong Ai and Xiaohong Chen.
+\newblock Efficient estimation of models with conditional moment restrictions
+  containing unknown functions.
+\newblock \emph{Econometrica}, 71\penalty0 (6):\penalty0 1795--1843, 2003.
+\newblock \doi{10.1111/1468-0262.00470}.
+
+\bibitem[Bennett and Kallus(2023)]{bennett2023variational}
+Andrew Bennett and Nathan Kallus.
+\newblock The variational method of moments.
+\newblock \emph{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 85\penalty0 (3):\penalty0 810--841, 2023.
+
+\bibitem[Bennett et~al.(2023)Bennett, Kallus, Mao, Newey, Syrgkanis, and
+  Uehara]{bennett2023source}
+Andrew Bennett, Nathan Kallus, Xiaojie Mao, Whitney Newey, Vasilis Syrgkanis,
+  and Masatoshi Uehara.
+\newblock Source condition double robust inference on functionals of inverse
+  problems.
+\newblock \emph{arXiv preprint arXiv:2307.13793}, 2023.
+
+\bibitem[Bennett et~al.(2026)Bennett, Kallus, Mao, Newey, Syrgkanis, and
+  Uehara]{bennettInferenceStronglyIdentified2023a}
+Andrew Bennett, Nathan Kallus, Xiaojie Mao, Whitney~K. Newey, Vasilis
+  Syrgkanis, and Masatoshi Uehara.
+\newblock Inference on strongly identified functionals of weakly identified
+  functions.
+\newblock \emph{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 88\penalty0 (3):\penalty0 998--1028, 2026.
+\newblock \doi{10.1093/jrsssb/qkaf075}.
+
+\bibitem[Blanchard et~al.(2018)Blanchard, Hoffmann, and
+  Rei{\ss}]{blanchard2018optimal}
+Gilles Blanchard, Marc Hoffmann, and Markus Rei{\ss}.
+\newblock Optimal adaptation for early stopping in statistical inverse
+  problems.
+\newblock \emph{SIAM/ASA Journal on Uncertainty Quantification}, 6\penalty0
+  (3):\penalty0 1043--1075, 2018.
+\newblock \doi{10.1137/17M1154096}.
+
+\bibitem[Breunig and Haan(2021)]{breunig2021nonparametric}
+Christoph Breunig and Peter Haan.
+\newblock Nonparametric regression with selectively missing covariates.
+\newblock \emph{Journal of Econometrics}, 223\penalty0 (1):\penalty0 28--52,
+  2021.
+
+\bibitem[Breunig and Johannes(2016)]{breunig2016adaptive}
+Christoph Breunig and Jan Johannes.
+\newblock Adaptive estimation of functionals in nonparametric instrumental
+  regression.
+\newblock \emph{Econometric Theory}, 32\penalty0 (3):\penalty0 612--654, 2016.
+\newblock \doi{10.1017/S0266466614000966}.
+
+\bibitem[Carrasco et~al.(2007)Carrasco, Florens, and
+  Renault]{carrascoChapter77Linear2007}
+Marine Carrasco, Jean-Pierre Florens, and Eric Renault.
+\newblock \emph{Linear inverse problems in structural econometrics: Estimation
+  based on spectral decomposition and regularization}, pages 5633--5751.
+\newblock Elsevier, 2007.
+\newblock ISBN 978-0-444-53200-8.
+\newblock \doi{10.1016/s1573-4412(07)06077-1}.
+
+\bibitem[Celisse and Wahl(2021)]{celisse2021discrepancy}
+Alain Celisse and Martin Wahl.
+\newblock Analyzing the discrepancy principle for kernelized spectral filter
+  learning algorithms.
+\newblock \emph{Journal of Machine Learning Research}, 22\penalty0
+  (76):\penalty0 1--59, 2021.
+\newblock URL \url{https://www.jmlr.org/papers/v22/20-358.html}.
+
+\bibitem[Chen and Pouzo(2012)]{chenEstimationNonparametricConditional2012}
+Xiaohong Chen and Demian Pouzo.
+\newblock Estimation of {{Nonparametric Conditional Moment Models With Possibly
+  Nonsmooth Generalized Residuals}}.
+\newblock \emph{Econometrica}, 80\penalty0 (1):\penalty0 277--321, 2012.
+\newblock ISSN 1468-0262.
+\newblock \doi{10.3982/ECTA7888}.
+
+\bibitem[Chen and Reiss(2011)]{chenRATEOPTIMALITYILLPOSED2011}
+Xiaohong Chen and Markus Reiss.
+\newblock On rate optimality for ill-posed inverse problems in econometrics.
+\newblock \emph{Econometric Theory}, 27\penalty0 (3):\penalty0 497--521, June
+  2011.
+\newblock ISSN 1469-4360, 0266-4666.
+\newblock \doi{10.1017/S0266466610000381}.
+
+\bibitem[Chen et~al.(2025)Chen, Christensen, and Kankanala]{chen2025adaptive}
+Xiaohong Chen, Timothy Christensen, and Sid Kankanala.
+\newblock Adaptive estimation and uniform confidence bands for nonparametric
+  structural functions and elasticities.
+\newblock \emph{The Review of Economic Studies}, 92\penalty0 (1):\penalty0
+  162--196, 2025.
+\newblock \doi{10.1093/restud/rdae025}.
+
+\bibitem[Darolles et~al.(2011)Darolles, Fan, Florens, and
+  Renault]{darollesNonparametricInstrumentalRegression2011}
+Serge Darolles, Yanqin Fan, Jean-Pierre Florens, and Eric Renault.
+\newblock Nonparametric instrumental regression.
+\newblock \emph{Econometrica}, 79\penalty0 (5):\penalty0 1541--1565, 2011.
+\newblock \doi{10.3982/ECTA6539}.
+
+\bibitem[Dikkala et~al.(2020)Dikkala, Lewis, Mackey, and
+  Syrgkanis]{dikkala2020minimax}
+Nishanth Dikkala, Greg Lewis, Lester Mackey, and Vasilis Syrgkanis.
+\newblock Minimax estimation of conditional moment models.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 12248--12262, 2020.
+
+\bibitem[d’Haultfoeuille(2010)]{d2010new}
+Xavier d’Haultfoeuille.
+\newblock A new instrumental method for dealing with endogenous selection.
+\newblock \emph{Journal of Econometrics}, 154\penalty0 (1):\penalty0 1--15,
+  2010.
+
+\bibitem[Engl et~al.(1996)Engl, Hanke, and Neubauer]{engl1996regularization}
+Heinz~Werner Engl, Martin Hanke, and Andreas Neubauer.
+\newblock \emph{Regularization of inverse problems}, volume 375.
+\newblock Springer Science \& Business Media, 1996.
+
+\bibitem[Florens et~al.(2011)Florens, Johannes, and van
+  Bellegem]{florensIDENTIFICATIONESTIMATIONPENALIZATION2011}
+Jean-Pierre Florens, Jan Johannes, and S{\'e}bastien van Bellegem.
+\newblock Identification and estimation by penalization in nonparametric
+  instrumental regression.
+\newblock \emph{Econometric Theory}, 27\penalty0 (3):\penalty0 472--496, June
+  2011.
+\newblock ISSN 1469-4360, 0266-4666.
+\newblock \doi{10.1017/S026646661000037X}.
+
+\bibitem[Foster and Syrgkanis(2023)]{foster2023orthogonal}
+Dylan~J. Foster and Vasilis Syrgkanis.
+\newblock Orthogonal statistical learning.
+\newblock \emph{The Annals of Statistics}, 51\penalty0 (3):\penalty0 879--908,
+  2023.
+\newblock \doi{10.1214/23-AOS2258}.
+
+\bibitem[Hall and Horowitz(2005)]{hallNonparametricMethodsInference2005}
+Peter Hall and Joel~L. Horowitz.
+\newblock Nonparametric methods for inference in the presence of instrumental
+  variables.
+\newblock \emph{The Annals of Statistics}, 33\penalty0 (6):\penalty0
+  2904--2929, 2005.
+\newblock \doi{10.1214/009053605000000714}.
+
+\bibitem[Hansen(1992)]{hansen1992analysis}
+Per~Christian Hansen.
+\newblock Analysis of discrete ill-posed problems by means of the {L}-curve.
+\newblock \emph{SIAM Review}, 34\penalty0 (4):\penalty0 561--580, 1992.
+\newblock \doi{10.1137/1034115}.
+
+\bibitem[Harrach et~al.(2020)Harrach, Jahn, and Potthast]{harrach2020beyond}
+Bastian Harrach, Tim Jahn, and Roland Potthast.
+\newblock Beyond the {Bakushinkii} veto: regularising linear inverse problems
+  without knowing the noise distribution.
+\newblock \emph{Numerische Mathematik}, 145:\penalty0 581--603, 2020.
+\newblock \doi{10.1007/s00211-020-01122-2}.
+
+\bibitem[Hartford et~al.(2017)Hartford, Lewis, Leyton-Brown, and
+  Taddy]{hartford2017deep}
+Jason Hartford, Greg Lewis, Kevin Leyton-Brown, and Matt Taddy.
+\newblock Deep iv: A flexible approach for counterfactual prediction.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  1414--1423. PMLR, 2017.
+
+\bibitem[Horowitz(2014{\natexlab{a}})]{horowitz2014adaptive}
+Joel~L. Horowitz.
+\newblock Adaptive nonparametric instrumental variables estimation: Empirical
+  choice of the regularization parameter.
+\newblock \emph{Journal of Econometrics}, 180\penalty0 (2):\penalty0 158--173,
+  2014{\natexlab{a}}.
+\newblock \doi{10.1016/j.jeconom.2014.03.006}.
+
+\bibitem[Horowitz(2014{\natexlab{b}})]{horowitz2014ill}
+Joel~L Horowitz.
+\newblock Ill-posed inverse problems in economics.
+\newblock \emph{Annu. Rev. Econ.}, 6\penalty0 (1):\penalty0 21--51,
+  2014{\natexlab{b}}.
+
+\bibitem[Johannes and Schwarz(2011)]{johannes2011partially}
+Jan Johannes and Maik Schwarz.
+\newblock Partially adaptive nonparametric instrumental regression by model
+  selection.
+\newblock \emph{Journal of the Indian Statistical Association}, 49\penalty0
+  (2):\penalty0 149--175, 2011.
+\newblock URL \url{https://arxiv.org/abs/1003.3128}.
+
+\bibitem[Lewis and Syrgkanis(2018)]{lewis2018adversarial}
+Greg Lewis and Vasilis Syrgkanis.
+\newblock Adversarial generalized method of moments.
+\newblock \emph{arXiv preprint arXiv:1803.07164}, 2018.
+
+\bibitem[Li et~al.(2023)Li, Miao, and Tchetgen~Tchetgen]{li2023non}
+Wei Li, Wang Miao, and Eric~J. Tchetgen~Tchetgen.
+\newblock Non-parametric inference about mean functionals of non-ignorable
+  non-response data without identifying the joint distribution.
+\newblock \emph{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 85\penalty0 (3):\penalty0 913--935, 2023.
+\newblock \doi{10.1093/jrsssb/qkad047}.
+
+\bibitem[Li et~al.(2024)Li, Lan, Syrgkanis, Wang, and
+  Uehara]{li2024regularized}
+Zihao Li, Hui Lan, Vasilis Syrgkanis, Mengdi Wang, and Masatoshi Uehara.
+\newblock Regularized deepiv with model selection.
+\newblock \emph{arXiv preprint arXiv:2403.04236}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2403.04236}.
+
+\bibitem[Liao et~al.(2020)Liao, Chen, Yang, Dai, Kolar, and
+  Wang]{liao2020provably}
+Luofeng Liao, You-Lin Chen, Zhuoran Yang, Bo~Dai, Mladen Kolar, and Zhaoran
+  Wang.
+\newblock Provably efficient neural estimation of structural equation models:
+  An adversarial approach.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 8947--8958, 2020.
+
+\bibitem[Miao et~al.(2024{\natexlab{a}})Miao, Liu, Li, Tchetgen~Tchetgen, and
+  Geng]{miao2015identification}
+Wang Miao, Lan Liu, Yilin Li, Eric~J. Tchetgen~Tchetgen, and Zhi Geng.
+\newblock Identification and semiparametric efficiency theory of nonignorable
+  missing data with a shadow variable.
+\newblock \emph{ACM/IMS Journal of Data Science}, 1\penalty0 (2):\penalty0
+  1--23, 2024{\natexlab{a}}.
+\newblock \doi{10.1145/3592389}.
+\newblock Article 5.
+
+\bibitem[Miao et~al.(2024{\natexlab{b}})Miao, Shi, Li, and
+  Tchetgen~Tchetgen]{miao2018confounding}
+Wang Miao, Xu~Shi, Yilin Li, and Eric~J. Tchetgen~Tchetgen.
+\newblock A confounding bridge approach for double negative control inference
+  on causal effects.
+\newblock \emph{Statistical Theory and Related Fields}, 8\penalty0
+  (4):\penalty0 262--273, 2024{\natexlab{b}}.
+\newblock \doi{10.1080/24754269.2024.2390748}.
+
+\bibitem[Morozov(1966)]{morozov1966solution}
+V.~A. Morozov.
+\newblock On the solution of functional equations by the method of
+  regularization.
+\newblock \emph{Doklady Akademii Nauk SSSR}, 167\penalty0 (3):\penalty0
+  510--512, 1966.
+\newblock URL \url{https://www.mathnet.ru/eng/dan32161}.
+
+\bibitem[Morozov(1984)]{morozov1984methods}
+Vladimir~A. Morozov.
+\newblock \emph{Methods for Solving Incorrectly Posed Problems}.
+\newblock Springer, New York, 1984.
+\newblock \doi{10.1007/978-1-4612-5280-1}.
+
+\bibitem[Muandet et~al.(2020)Muandet, Mehrjou, Lee, and Raj]{muandet2020dual}
+Krikamol Muandet, Arash Mehrjou, Si~Kai Lee, and Anant Raj.
+\newblock Dual instrumental variable regression.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 2710--2721, 2020.
+
+\bibitem[Nair et~al.(2003)Nair, Schock, and Tautenhahn]{nair2003morozov}
+M.~Thamban Nair, E.~Schock, and Ulrich Tautenhahn.
+\newblock {Morozov}'s discrepancy principle under general source conditions.
+\newblock \emph{Zeitschrift f{\"u}r Analysis und ihre Anwendungen}, 22\penalty0
+  (1):\penalty0 199--214, 2003.
+\newblock \doi{10.4171/ZAA/1140}.
+
+\bibitem[Newey(2013)]{neweyNonparametricInstrumentalVariables2013}
+Whitney~K. Newey.
+\newblock Nonparametric {{Instrumental Variables Estimation}}.
+\newblock \emph{The American Economic Review}, 103\penalty0 (3):\penalty0
+  550--556, 2013.
+\newblock ISSN 0002-8282.
+
+\bibitem[Newey and Powell(2003)]{neweyInstrumentalVariableEstimation2003}
+Whitney~K. Newey and James~L. Powell.
+\newblock Instrumental variable estimation of nonparametric models.
+\newblock \emph{Econometrica}, 71\penalty0 (5):\penalty0 1565--1578, 2003.
+\newblock \doi{10.1111/1468-0262.00459}.
+
+\bibitem[Singh et~al.(2019)Singh, Sahani, and Gretton]{singh2019kernel}
+Rahul Singh, Maneesh Sahani, and Arthur Gretton.
+\newblock Kernel instrumental variable regression.
+\newblock \emph{Advances in Neural Information Processing Systems}, 32, 2019.
+
+\bibitem[Tchetgen~Tchetgen et~al.(2024)Tchetgen~Tchetgen, Ying, Cui, Shi, and
+  Miao]{tchetgen2020introduction}
+Eric~J. Tchetgen~Tchetgen, Andrew Ying, Yifan Cui, Xu~Shi, and Wang Miao.
+\newblock An introduction to proximal causal learning.
+\newblock \emph{Statistical Science}, 39\penalty0 (3):\penalty0 375--390, 2024.
+\newblock \doi{10.1214/23-STS911}.
+
+\bibitem[Xu et~al.(2021)Xu, Chen, Srinivasan, de~Freitas, Doucet, and
+  Gretton]{xu2021features}
+Liyuan Xu, Yutian Chen, Siddarth Srinivasan, Nando de~Freitas, Arnaud Doucet,
+  and Arthur Gretton.
+\newblock Learning deep features in instrumental variable regression.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+\newblock URL \url{https://openreview.net/forum?id=sy4Kg_ZQmS7}.
+
+\end{thebibliography}

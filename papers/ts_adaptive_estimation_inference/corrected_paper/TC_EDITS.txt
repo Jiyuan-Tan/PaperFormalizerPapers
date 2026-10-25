@@ -1,0 +1,1 @@
+2026-10-17: main.tex:898,942: omit two table-only addlinespace commands; main.tex:963: resolve IfFileExists to input{appendices}, because appendices.tex is present. Preserve all table data, statements, proofs, and line counts.

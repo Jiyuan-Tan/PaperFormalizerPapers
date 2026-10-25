@@ -1,0 +1,182 @@
+{
+  "slug": "ts_adaptive_estimation_inference",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 96,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 129,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Analysis.SpecialFunctions.TikhonovFilter",
+      "Toolkit.Foundations.LinearAlgebra.Matrix.PosSemidef",
+      "Toolkit.Foundations.LinearAlgebra.Matrix.TraceExponential",
+      "Toolkit.Foundations.Probability.Independence.ProductConditioning"
+    ],
+    "requires": [
+      {
+        "name": "Causalean",
+        "form": "git",
+        "git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "rev": "a7085d88d2e4b30003db7097ca374f4718da0f01"
+      },
+      {
+        "name": "StatLean",
+        "form": "vendored",
+        "path": "vendor/StatLean"
+      },
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [
+      {
+        "name": "Causalean",
+        "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+        "uncommitted": 2,
+        "changed": [],
+        "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+        "files": {
+          "Causalean/Estimation/NPIV/Operator.lean": "6e5c8cb133a861fac53fcd97bf034fbf3bd789d5",
+          "Causalean/Estimation/NPIV/Operator/Adjoint.lean": "8848dabcc29b630c296b4d514efadeaf09f1ca0f",
+          "Causalean/Estimation/NPIV/Operator/Complexification.lean": "0fda3a1ce430c849856ab3bb1deed087f2273f98",
+          "Causalean/Estimation/NPIV/Operator/Complexification_Part1.lean": "f85468b9179c59da652894138bb276d8c7e7447b",
+          "Causalean/Estimation/NPIV/Operator/Complexification_Part2.lean": "06557319ccda727dcdd54d0f0ceea88b502a9937",
+          "Causalean/Estimation/NPIV/Setup.lean": "f9bbc5bb2b1e6b72faef73849178ba62ca015cf5",
+          "Causalean/Experimentation/DesignBased/Designs/CompleteRandomization.lean": "862a25aff3539f1a814c83cfddfb5e5af1a396fa",
+          "Causalean/Experimentation/DesignBased/Estimators/DifferenceInMeans.lean": "4192ef8233100d90f7c6866b5a72a8abd23e7ea9",
+          "Causalean/Experimentation/DesignBased/Estimators/NeymanVariance.lean": "1f5d9e857c82cd62fce4cd6beafd2e64c2dad680",
+          "Causalean/Experimentation/DesignBased/FinitePopulationCLT/PermutationTransport.lean": "4ea521acc184bc55a4cd141dee6af8d8a72623e6",
+          "Causalean/Experimentation/DesignBased/FinitePopulationVariance.lean": "31bb79558ace5e5fae861e5aef7e08e2a99fdc00",
+          "Causalean/Experimentation/DesignBased/InProb.lean": "f48b647321e5c8d0ac81bc7d44f251ce4705d9d4",
+          "Causalean/Experimentation/DesignBased/Risk.lean": "5399b43574d607a02428b8c89fc43df96a853ab2",
+          "Causalean/Experimentation/DesignBased/SequentialSampling.lean": "5a73502efed6e2ce7835e907ee2d83e01ca288ad",
+          "Causalean/Experimentation/FinitePopulationMoments.lean": "2c0dc00f2de106e841ebfb7dabfb1e93b4700152",
+          "Causalean/Mathlib/Analysis/InnerProductSpace/Gram.lean": "c55c3b061271c29433862bf05c3a32b8afa4b65e",
+          "Causalean/Mathlib/Analysis/MatrixEuclidean.lean": "d953e94fec05f75f5b57403e39626dd3caad5ae5",
+          "Causalean/Mathlib/Analysis/MoorePenrose.lean": "38d346a3cc4b8b1885e6ee7d346a1fc6807577b6",
+          "Causalean/Mathlib/MeasureTheory/Function/LpSeminorm/Measurable.lean": "78e84fe5e3850a7de487c30d1102b4c542b7627f",
+          "Causalean/Mathlib/Probability/ConvergenceInDistribution.lean": "27da99611b68f3c2317b21df53fcffb07510c0c5",
+          "Causalean/Mathlib/Probability/CovarianceCauchySchwarz.lean": "70089fac31b1d641cdfe39a07e87377f365f40ed",
+          "Causalean/Mathlib/Probability/Distributions/Gaussian/Standard.lean": "107d70b0abc93d7a1ea5fdf4e72c49b82b29c2e0",
+          "Causalean/Mathlib/Probability/IdentDistrib/CenteredSum.lean": "e35b3bda8dca0c49ad64b4238fcfb2d0084a66c0",
+          "Causalean/Mathlib/Probability/Independence/Integral.lean": "5bafcbfa2a2017597269a4b535a8461e4d7536d1",
+          "Causalean/Stat/CLT/AsymptoticLinearity.lean": "590b0aeffb3d844f447bd33ccc4c74bcaf7534f8",
+          "Causalean/Stat/CLT/ChiSquared.lean": "bf1d47fa5a7760d57bd3950d8414daa37ce2a6f6",
+          "Causalean/Stat/CLT/FiniteDesignConditioning.lean": "7a5bcfa6a8e61d0932cb22aa02fd7a2d8bcbe8cd",
+          "Causalean/Stat/CLT/GaussianCharFunBridge.lean": "a0e1b89203461472c427f611a627ec6950991c66",
+          "Causalean/Stat/CLT/Martingale/Basic.lean": "46b8c6f94cbfdacaeca3c39492867c982af21416",
+          "Causalean/Stat/Concentration/Covering/CoveringNumber.lean": "ba44ca5e2369a0986c305c0a86e6ff098c8f087b",
+          "Causalean/Stat/Concentration/Covering/EmpiricalPseudoMetric.lean": "95bd35386d36befd73389a8c746a9b60a879784f",
+          "Causalean/Stat/Concentration/Rademacher/Rademacher.lean": "1ddd5aea7bab693b80821925d4f6c2226d042721",
+          "Causalean/Stat/Concentration/TailBounds/Bernstein.lean": "060a8b232e94f8d1f712cc31764e35cbb054af49",
+          "Causalean/Stat/Concentration/TailBounds/BinomialCount.lean": "bedb12bff7354c01614751465e28c3e9c5421251",
+          "Causalean/Stat/Concentration/TailBounds/ConfidenceInterval.lean": "7a581ce7606c6b55336579373b895e4f2190d6cc",
+          "Causalean/Stat/Concentration/TailBounds/Hoeffding.lean": "5de86130285634ad0b4b1a1576e1a67c15b9cc8e",
+          "Causalean/Stat/Concentration/TailBounds/SubExponential.lean": "edced02b1bd998d8c554ed52ac11de91150050d3",
+          "Causalean/Stat/Coupling/Basic.lean": "454bf74d83ec9e42c81488dddb410e52b37b5ee3",
+          "Causalean/Stat/FiniteDesign/Chebyshev.lean": "6e3dcdf38d9d2b7e378a3a0aefafcde30b41ad7c",
+          "Causalean/Stat/FiniteDesign/DesignCore.lean": "b486f7bf67f77e85c88cd9b4ae1c0ac53830d43a",
+          "Causalean/Stat/FiniteDesign/FiniteDesignMeasure.lean": "cfd2e1e1b63b1a51257c8db2499eb1802ada5b4f",
+          "Causalean/Stat/FiniteDesign/MeasureBridge.lean": "077091526899fdf8adf7ed5ed21968b0a79ce55b",
+          "Causalean/Stat/FiniteDesign/Product.lean": "55b688817ff1a27ad54a487684672ce9b66154d8",
+          "Causalean/Stat/FiniteDesign/ProductMeasure.lean": "a0013170dc648cd8f84a9efb395b76b997efac08",
+          "Causalean/Stat/FiniteRaoBlackwell/DesignPushforward.lean": "319e30886940c6f5426b9f3dcb231f6e1030eceb",
+          "Causalean/Stat/Limit/Convergence.lean": "b5f4e3a17b8f8766ed3383578ce1897f227f493d",
+          "Causalean/Stat/Limit/ConvergenceVec.lean": "c36f2acd1956ace3b134180c44412f4a163d81a4",
+          "Causalean/Stat/Limit/Modes.lean": "49e9c06bac1dd7c6427912e6e46936028d2cc036",
+          "Causalean/Stat/Limit/StochasticOrder.lean": "bc96a54c6694f9aa06740f705faff20700d77336",
+          "Causalean/Stat/Limit/StochasticOrderEnvelope.lean": "fcff581ed8c40792d16a95e1de031f97eb416f95",
+          "Causalean/Stat/Limit/WLLN.lean": "afa84349416e72cc3f0f3aece40b9f47b148ddc8",
+          "Causalean/Stat/Minimax/HellingerAffinity.lean": "ec3a50a3e782e7801bf6c72f4b56072129dd983a",
+          "Causalean/Stat/Minimax/Scheffe.lean": "419a8a5dfec35e4a97dd34eb7a9475e42dabb6ae",
+          "Causalean/Stat/Minimax/SharpHellinger.lean": "d21fc5081cb739a9131d923d5060a330ecaabfb4",
+          "Causalean/Stat/Minimax/TotalVariation.lean": "e74dc9adb4f7001ade92fcba09827e4878c95b80",
+          "Causalean/Stat/Sample.lean": "04083e8b79ea8d0669f52e44dbc37bba46b88d9d",
+          "Causalean/Stat/Sample/PiTransport.lean": "9f795270a69f6944b0238c4cc2a6b06562141a84",
+          "Causalean/Stat/SampleSplit/FiniteCategoryPilot.lean": "dfe4b062d07169ee2046de6f0b382a1ba3dd21f4",
+          "Causalean/Stat/SampleSplit/FiniteSelector.lean": "4795a3ad69e4d8835e0128578724291fb8abb501",
+          "Causalean/Stat/SampleSplit/FoldBEmpiricalProcess.lean": "226a87271ee57b21f46571429f7b269dac4d3edf",
+          "Causalean/Stat/SampleSplit/FoldBWLLN.lean": "9af6190962e70b75c00357d54578103cf9e16b30",
+          "Causalean/Stat/SampleSplit/KFold.lean": "fb66daf5e3a219ece1c6d866636e8b8a12a0371c",
+          "Causalean/Stat/SampleSplit/OneShot.lean": "751986595c21fdd48e0d8980480bec150ffd863e",
+          "Causalean/Stat/SampleSplit/PartialFoldCLT.lean": "c10a2919957be2ca82c00d2fb85344b6a0e8f008",
+          "Causalean/Tactic/Attr.lean": "ea7f7d8d1320b7b0e491af41e84f3acc9d904099",
+          "Causalean/Tactic/IntegralLinearity.lean": "f4eac70bc1f97bcc31431e164cd7f4ad61219ec3",
+          "third_party/lean-rademacher/FoML/BoundedDifference.lean": "396f0b5c1038c2c2f363ea1ac02af064b847bfcb",
+          "third_party/lean-rademacher/FoML/Defs.lean": "3180eb246d711c3a348d6275aaa3bdd238940fe2",
+          "third_party/lean-rademacher/FoML/ExpectationInequalities.lean": "12ffaa025ce711c63e72bda184b4072ee848c4bc",
+          "third_party/lean-rademacher/FoML/MeasurePiLemmas.lean": "e5a46bc5e2a396688c33b8ff95be71c01874ff9f",
+          "third_party/lean-rademacher/FoML/Rademacher.lean": "eb58fca68e492ea6bcb89f87e743a84647bcfff2",
+          "third_party/lean-rademacher/FoML/Symmetrization.lean": "d68c7374d0b33cdf6fbfb50b09fe5188e53dbffd"
+        },
+        "status": "unverified",
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387, with 2 of the files reached changed since): 72 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report ts_adaptive_estimation_inference --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      }
+    ],
+    "warnings": [],
+    "notes": [
+      "built against a local copy of Causalean (its commit 5ca94e0ac387, with 2 of the files reached changed since): 72 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report ts_adaptive_estimation_inference --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+    ]
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "37af8cef98ae269d5f3b15474c1ef7e92f33de9fa3b81499d6deab8483093668",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:common-dp": "Theorem 3.1",
+    "prop:exist-lambda-deepiv": "Proposition 3.5",
+    "thm:deepiv-rate": "Theorem 3.6",
+    "prop:exist-lambda-iter-rdiv": "Proposition 3.8",
+    "thm:iter-rdiv-rate": "Theorem 3.9",
+    "prop:exist-lambda": "Proposition 3.13",
+    "thm:tikhonv-rate": "Theorem 3.14",
+    "prop:exist-lambda-iter-trae": "Proposition 3.17",
+    "thm:iter-trae-rate": "Theorem 3.18",
+    "thm:normality": "Corollary 3.19",
+    "lem:variational-source": "Lemma A.1",
+    "lem:t-err-dp": "Lemma B.1",
+    "lem:err-l-dp": "Lemma B.2",
+    "lem:err-r-dp": "Lemma B.3",
+    "lem:str-dp": "Lemma B.4",
+    "thm:rdiv-discrepancy-bound": "Corollary B.5",
+    "lem:rdiv-accepted-bounds": "Lemma B.6",
+    "lem:iter-bias": "Lemma B.7",
+    "lem:iter-rdiv-squared-loss-concentration-lemma-14": "Lemma B.8",
+    "thm:iter-rdiv-discrepancy-bound": "Corollary B.9",
+    "lem:iter-rdiv-accepted-bounds": "Lemma B.10",
+    "lem:concentrate-l": "Lemma C.1",
+    "lem:strong-convexity": "Lemma C.2",
+    "thm:trae-discrepancy-bound": "Corollary C.3",
+    "lem:trae-accepted-bounds": "Lemma C.4",
+    "lem:iter-trae-strong-propagation": "Lemma C.2",
+    "thm:iter-trae-discrepancy-bound": "Corollary C.6",
+    "lem:iter-trae-accepted-stability": "Lemma C.7",
+    "prop:rkhs-qp": "Proposition D.1"
+  },
+  "todo_items": []
+}
