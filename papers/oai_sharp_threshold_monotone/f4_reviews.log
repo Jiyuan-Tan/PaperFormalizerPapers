@@ -1,0 +1,682 @@
+===== reviewer convergence/dual :: medium :: batch[ass:threshold-epsilon,ass:variance-n,ass:variance-symmetry,ass:variance-bias,ass:low-degree-m] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:threshold-epsilon",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated open real range 0 < ε < 1/2."
+    },
+    {
+      "obj_id": "ass:variance-n",
+      "verdict": "faithful-refinement",
+      "note": "Natural numbers satisfying 2 ≤ n correspond exactly to integers n ≥ 2."
+    },
+    {
+      "obj_id": "ass:variance-symmetry",
+      "verdict": "faithful-refinement",
+      "note": "GraphEdge consists of two-element vertex subsets; edgePerm maps their vertices by τ. Quantifying over all permutations gives exactly vertex-permutation invariance of Boolean graph functions."
+    },
+    {
+      "obj_id": "ass:variance-bias",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated open real range 0 < p < 1."
+    },
+    {
+      "obj_id": "ass:low-degree-m",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated real parameter domain m ≥ 2."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:threshold-epsilon","verdict":"faithful-refinement","note":"The NL says 'every 0<ε<1/2'. ThresholdEpsilon ε := 0 < ε ∧ ε < 1/2 with ε : ℝ is the same open real interval, so each side implies the other."},{"obj_id":"ass:variance-n","verdict":"faithful-refinement","note":"The NL says 'every integer n≥2'. VarianceVertexCount n := 2 ≤ n with n : ℕ (n is a vertex count, so it is nonnegative) is the same domain, so each side implies the other."},{"obj_id":"ass:variance-symmetry","verdict":"faithful-refinement","note":"The NL asks for a Boolean f on E_n invariant under vertex permutations. Unfolded: GraphConfig n = GraphEdge n → Bool, where GraphEdge n = {e : Finset (Fin n) // e.card = 2} (the edge set E_n). GraphSymmetric f := ∀ τ : Perm (Fin n), ∀ x, f (x ∘ edgePerm τ) = f x, and edgePerm τ maps an edge e to e.map τ. This is invariance under every vertex permutation acting on edge coordinates, so it is equivalent to the NL; using x∘τ or x∘τ⁻¹ makes no difference because the condition quantifies over the whole group."},{"obj_id":"ass:variance-bias","verdict":"faithful-refinement","note":"The NL says 'every 0<p<1'. VarianceBias p := 0 < p ∧ p < 1 with p : ℝ is the same open real interval, so each side implies the other."},{"obj_id":"ass:low-degree-m","verdict":"faithful-refinement","note":"The NL says 'Let m≥2 be real'. LowDegreeParam m := 2 ≤ m with m : ℝ is exactly the same condition, so each side implies the other."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:interior-bias,ass:graph-symmetry,ass:restriction-boolean-function,ass:threshold-n,ass:threshold-property] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:interior-bias",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated strict inequalities 0 < p < 1."
+    },
+    {
+      "obj_id": "ass:graph-symmetry",
+      "verdict": "faithful-refinement",
+      "note": "GraphEdge consists of two-element vertex subsets; edgePerm induces vertex relabeling, and the universal equality is exactly permutation invariance."
+    },
+    {
+      "obj_id": "ass:restriction-boolean-function",
+      "verdict": "faithful-refinement",
+      "note": "The Bool codomain encodes every Boolean graph function; boolValue is its exact 0/1 cast, so the predicate adds no restriction."
+    },
+    {
+      "obj_id": "ass:threshold-n",
+      "verdict": "faithful-refinement",
+      "note": "Natural numbers satisfying 2 ≤ n encode exactly the stated integers n ≥ 2."
+    },
+    {
+      "obj_id": "ass:threshold-property",
+      "verdict": "faithful-refinement",
+      "note": "The conjunction states exactly vertex-permutation invariance, upward closure under edge addition (pointwise false ≤ true), and a nonempty proper family."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:interior-bias","verdict":"faithful-refinement","note":"BiasInterior p := 0 < p ∧ p < 1 states exactly the paper's '0<p<1' for real p. The two are equivalent in both directions."},{"obj_id":"ass:graph-symmetry","verdict":"faithful-refinement","note":"GraphSymmetric f := ∀ τ x, f (x ∘ edgePerm τ) = f x. Here edgePerm τ maps an edge {i,j}, a 2-element Finset of Fin n (GraphEdge, Basic.lean:180), to {τ i, τ j}. This is exactly invariance of f on {0,1}^{E_n} under every vertex permutation acting on edge coordinates. Quantifying over all τ makes the τ versus τ⁻¹ convention irrelevant, so both directions hold."},{"obj_id":"ass:restriction-boolean-function","verdict":"faithful-refinement","note":"f is Bool-valued by its type GraphConfig n → Bool, and the predicate requires boolValue f x ∈ {0,1}. That holds for every Bool f, so the predicate is exactly the paper's domain condition 'f Boolean' and is equivalent to it. It adds no restriction."},{"obj_id":"ass:threshold-n","verdict":"faithful-refinement","note":"ThresholdVertexCount n := 2 ≤ n for n : ℕ states exactly the paper's 'integer n ≥ 2'. A vertex count cannot be negative, so ℕ is the paper's domain."},{"obj_id":"ass:threshold-property","verdict":"faithful-refinement","note":"Each part matches the paper. GraphPropertyInvariant requires every vertex permutation to preserve membership both ways (↔), which is 'invariant under all vertex permutations'. IncreasingFamily uses the pointwise order on GraphEdge n → Bool with false ≤ true, so x ≤ y means x's edges are a subset of y's and the condition is upward closure under adding edges. NontrivialFamily is P.Nonempty ∧ P ≠ univ, which matches the core definition def:nontrivial-graph-property, 'neither empty nor the whole space'. The conjunction is equivalent in both directions."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:graph-property-invariance,ass:increasing-family,ass:nontrivial-family,ass:natural-logarithms,ass:finite-coordinate-set] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:graph-property-invariance",
+      "verdict": "faithful-refinement",
+      "note": "GraphEdge consists of two-element vertex subsets; edgePerm relabels their vertices. Quantification over all permutations gives exactly invariance under every vertex relabeling."
+    },
+    {
+      "obj_id": "ass:increasing-family",
+      "verdict": "faithful-refinement",
+      "note": "Function order is pointwise, and Bool order has false ≤ true; thus x ≤ y means precisely that y is obtained by adding edges."
+    },
+    {
+      "obj_id": "ass:nontrivial-family",
+      "verdict": "faithful-refinement",
+      "note": "P.Nonempty is equivalent to P ≠ ∅, so the conjunction states exactly that P is neither empty nor the whole configuration space."
+    },
+    {
+      "obj_id": "ass:natural-logarithms",
+      "verdict": "derived",
+      "note": "The convention implies the displayed natural-log identity, but that identity does not constrain the logarithms used elsewhere. Realize the convention by identifying the paper's logarithm with Real.log throughout its public expressions, rather than assuming this isolated identity."
+    },
+    {
+      "obj_id": "ass:finite-coordinate-set",
+      "verdict": "faithful-refinement",
+      "note": "Finite J states exactly that the coordinate carrier has finitely many elements; it requires neither an ordering nor a chosen enumeration."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "ass:natural-logarithms",
+    "reason": "The frozen convention specifies every paper logarithm, whereas NaturalLogarithms states only Real.log (Real.exp 1) = 1; realize the convention through the logarithm used in public expressions.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:graph-property-invariance","verdict":"faithful-refinement","note":"GraphConfig n = (2-subsets of Fin n) → Bool, which is {0,1}^{E_n}. edgePerm τ sends an edge {u,v} to {τu,τv}. The Lean says: for every τ and x, x∘edgePerm τ ∈ P ↔ x ∈ P. That is the same as P^τ = P for every permutation of [n], so the two statements are equivalent both ways."},{"obj_id":"ass:increasing-family","verdict":"faithful-refinement","note":"The ≤ on GraphConfig n = GraphEdge n → Bool is the pointwise Pi order with false ≤ true. So x ≤ y means y's edge set contains x's, i.e. y comes from x by adding edges. 'x ∈ P and x ≤ y imply y ∈ P' is exactly 'adding edges preserves membership'. Equivalent both ways."},{"obj_id":"ass:nontrivial-family","verdict":"faithful-refinement","note":"P.Nonempty ∧ P ≠ Set.univ on GraphConfig n is word for word 'neither empty nor the whole space {0,1}^{E_n}'. Equivalent."},{"obj_id":"ass:natural-logarithms","verdict":"faithful-refinement","note":"Core node kind is 'convention'. Real.log is the natural logarithm, and the Prop log(e) = 1 just records that base. It is true, adds no restriction to any consumer, and matches the convention exactly."},{"obj_id":"ass:finite-coordinate-set","verdict":"faithful-refinement","note":"Core node kind is 'domain' ('Let J be a finite coordinate set'). Finite J says exactly that the index type is finite. Equivalent."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:low-degree-small-influences,ass:low-degree-cutoff,ass:restriction-free-edges,ass:restriction-law,ass:restriction-cutoff] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:low-degree-small-influences",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the coordinatewise influence bound: Boolean section differences detect pivotality, and biasedLaw is the Bernoulli-p product law on the standing domain 0<p<1."
+    },
+    {
+      "obj_id": "ass:low-degree-cutoff",
+      "verdict": "faithful-refinement",
+      "note": "Exactly k=σ log(m)/64, with σ=√(p(1-p)) and Real.log the natural logarithm."
+    },
+    {
+      "obj_id": "ass:restriction-free-edges",
+      "verdict": "faithful-refinement",
+      "note": "Finset (GraphEdge n) represents every subset of the finite edge set; inclusion in Finset.univ imposes exactly F⊆E_n."
+    },
+    {
+      "obj_id": "ass:restriction-law",
+      "verdict": "faithful-refinement",
+      "note": "Specifying every configuration mass as the product of Bernoulli-p masses is equivalent to the full product law on E_n\\F; FiniteDesign adds only probability normalization and nonnegativity."
+    },
+    {
+      "obj_id": "ass:restriction-cutoff",
+      "verdict": "faithful-refinement",
+      "note": "The real binder and predicate 0<k exactly specify a positive real cutoff."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:low-degree-small-influences","verdict":"faithful-refinement","note":"The Lean condition is ∀ i : J, coordInfluence p h i ≤ totalCoordInfluence p h / m. Here coordInfluence is the biased-law probability Pr(Δ_i h ≠ 0), where Δ_i h is the difference of boolValue h under coordinate replacement, so it equals the core I_i(h). totalCoordInfluence is ∑_i I_i(h), which is I(h). m : ℝ matches the pinned reading that m is any real number. The requirement m ≥ 2 is a separate scoped condition of lem:low-degree, not part of this comparison. biasedLaw clamps p to [0,1], which changes nothing under the global assumption 0<p<1. Both directions hold."},{"obj_id":"ass:low-degree-cutoff","verdict":"faithful-refinement","note":"The Lean condition is k = biasScale p * log m / 64 with biasScale p = √(p(1−p)). This is exactly k = σ log m / 64, with σ = √(p(1−p)) as defined in the core construction, and m real as the pin for lem:low-degree requires. The two are equivalent."},{"obj_id":"ass:restriction-free-edges","verdict":"faithful-refinement","note":"F is a Finset (GraphEdge n), where GraphEdge n is the set of 2-element vertex subsets, i.e. E_n. So the type already pins F ⊆ E_n, and the clause F ⊆ univ restates it. The paper domain and the Lean domain are the same."},{"obj_id":"ass:restriction-law","verdict":"faithful-refinement","note":"ν is a law on the exterior coordinates {e // e ∉ F} → Bool, i.e. on {0,1}^H with H = E_n∖F. Its mass function is ∏_e (p if y_e else 1−p), which is exactly the Bernoulli-p product law, and for 0<p<1 the condition determines ν uniquely. The two are equivalent."},{"obj_id":"ass:restriction-cutoff","verdict":"faithful-refinement","note":"The Lean condition is 0 < k with k : ℝ. This matches 'for every real k>0' and the pinned reading for lem:restriction (any positive real, with no tie to m)."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:block-m,ass:block-law,ass:block-capture-size,def:graph-coordinates,def:property-probability] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:graph-coordinates",
+      "verdict": "matched",
+      "note": "Two-element subsets of Fin n encode exactly the unordered edges on [n], via vertex relabeling i ↦ i+1."
+    },
+    {
+      "obj_id": "def:property-probability",
+      "verdict": "matched",
+      "note": "On the paper's domain p ∈ [0,1], clipping leaves p unchanged; unfolding Pr, bernoulliDesign, prodDesign and coinDesign gives precisely the event probability under independent Bernoulli-p edges."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:block-m",
+      "verdict": "faithful-refinement",
+      "note": "The natural-number bounds 3 ≤ m ∧ m ≤ n are equivalent to the stated integer bounds, which already force m to be natural."
+    },
+    {
+      "obj_id": "ass:block-law",
+      "verdict": "faithful-refinement",
+      "note": "FiniteDesign supplies a normalized nonnegative mass function on exactly the m-element vertex subsets; the predicate assigns every subset the reciprocal cardinality, exactly uniformity."
+    },
+    {
+      "obj_id": "ass:block-capture-size",
+      "verdict": "faithful-refinement",
+      "note": "Substituting the defined abbreviation t = log n gives exactly 16 ≤ Real.log n."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the coin design's orientation and the graph-encoding convention before giving verdicts.
+{"statement_verdicts":[{"obj_id":"def:graph-coordinates","verdict":"matched","note":"GraphEdge n = {e : Finset (Fin n) // e.card = 2} is exactly the set of 2-element subsets of [n] (Fin n ≅ [n]), i.e. E_n = binom([n],2), the edge set of K_n. The Lean also defines it for n<2 (where it is empty); on the paper's domain n≥2 the extension is the same."},{"obj_id":"def:property-probability","verdict":"matched","note":"Unfolded: GraphConfig n = GraphEdge n → Bool, with true meaning the edge is present (def:graph-encoding identifies graphs with {0,1}^{E_n}). biasedLaw is bernoulliDesign = prodDesign of coinDesign(clamp p), and coinDesign gives mass p to true and 1-p to false. FiniteDesign.Pr(A) = E[1_A]. So propertyProb p P is the probability, under independent Bernoulli(p) edges, that the graph lies in P, which is μ_p(P). For p in [0,1] the clamp max 0 (min p 1) is the identity. Outside [0,1] the paper leaves μ_p undefined and the Lean extends it to the endpoint value, which adds no constraint on the paper's domain."}],"assumption_verdicts":[{"obj_id":"ass:block-m","verdict":"faithful-refinement","note":"BlockSize m n := 3 ≤ m ∧ m ≤ n with m n : ℕ, which is exactly 'let 3≤m≤n be an integer'. Integrality comes from the ℕ type."},{"obj_id":"ass:block-law","verdict":"faithful-refinement","note":"π is a FiniteDesign (mass function that is nonnegative and sums to 1) on {B : Finset (Fin n) // B.card = m}, the m-subsets of [n]. The condition that every B has mass 1/card is exactly the uniform law on m-subsets. The two directions are equivalent because the support is finite and nonempty when m≤n, and the law is identified with its pmf."},{"obj_id":"ass:block-capture-size","verdict":"faithful-refinement","note":"CaptureLogSize n := 16 ≤ Real.log n, which is t = log n ≥ 16 with the natural log. The core confirms the natural log: its complementary proof branch is 2≤n<e^{16}. Naming t is a let-binding with no content."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:property-quantile,def:graph-property,def:increasing-graph-property,def:nontrivial-graph-property,def:graph-influences] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:property-quantile",
+      "verdict": "matched",
+      "note": "For 0<a<1, this is exactly the real infimum of the stated subset of [0,1]; the product-law clamping is the identity on that interval."
+    },
+    {
+      "obj_id": "def:graph-property",
+      "verdict": "matched",
+      "note": "The sole constraint is invariance under every vertex permutation acting on two-element edge subsets, exactly as stated."
+    },
+    {
+      "obj_id": "def:increasing-graph-property",
+      "verdict": "matched",
+      "note": "For graph properties, pointwise Boolean upward closure is equivalent to preserving membership when edges are added; invariance retains the graph-property domain."
+    },
+    {
+      "obj_id": "def:nontrivial-graph-property",
+      "verdict": "matched",
+      "note": "For graph properties, Nonempty and inequality with Set.univ express exactly neither empty nor the whole configuration space."
+    },
+    {
+      "obj_id": "def:graph-influences",
+      "verdict": "matched",
+      "note": "Coordinate replacement is Function.update, edgeInfluence is the stated disagreement probability under the Bernoulli product law, and graphTotalInfluence sums it over all edges."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:property-quantile","verdict":"matched","note":"Lean: sInf {p ∈ Icc 0 1 | a ≤ propertyProb p P}. propertyProb is the Pr of the event x∈P under biasedLaw, which is the Bernoulli product with the bias clamped to [0,1]; on [0,1] it equals μ_p(P), and only those p enter the set. The set is bounded below by 0, so wherever it is nonempty, Real sInf equals the paper's infimum (the core symbol says 'whenever this defining set is nonempty'). The Lean def also accepts any a and an empty set, giving the junk value 0 there. That is a total extension outside the paper's domain (0<a<1, nonempty set) and changes nothing on it. Consumers must keep 0<a<1 and the nonemptiness (automatic for nontrivial increasing P, since μ_1(P)=1)."},{"obj_id":"def:graph-property","verdict":"matched","note":"P : Set (GraphEdge n → Bool), with GraphEdge n = the two-element subsets of Fin n, is exactly 𝒫 ⊆ {0,1}^{E_n}. GraphPropertyInvariant asks, for every τ ∈ Perm(Fin n), that (x ∘ edgePerm τ ∈ P ↔ x ∈ P), where edgePerm maps {u,v} to {τu,τv}. This is the induced vertex-relabeling action of τ⁻¹, and ranging over all τ covers the whole group, so it is equivalent to invariance under every permutation of [n] in both directions."},{"obj_id":"def:increasing-graph-property","verdict":"matched","note":"'It' is a graph property, so the structure needs invariance plus IncreasingFamily: ∀ x ≤ y, x ∈ P → y ∈ P. Here ≤ is the Pi order on GraphEdge n → Bool with false < true, i.e. edgewise inclusion, so y is x with edges added. Adding any set of edges is a sequence of single-edge additions, so this matches 'adding edges preserves membership' in both directions."},{"obj_id":"def:nontrivial-graph-property","verdict":"matched","note":"The structure is graph-property invariance plus NontrivialFamily := P.Nonempty ∧ P ≠ Set.univ. That is exactly 'neither empty nor the whole space {0,1}^{E_n}', applied to a graph property; equivalent both ways."},{"obj_id":"def:graph-influences","verdict":"matched","note":"edgeInfluence p f e = Pr under biasedLaw of f(coordinateReplace e x true) ≠ f(coordinateReplace e x false). coordinateReplace is Function.update x e b, i.e. x_{e←b}, and for p ∈ [0,1] biasedLaw is the i.i.d. Bernoulli(p) product, so this is I_{e,p}(f). graphTotalInfluence is the Finset sum of these over all of GraphEdge n = E_n, which is I_p(f). Clamping only extends the definition to biases outside [0,1], where the paper does not define it."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:bias-scale,def:product-norm,def:fourier-characters,def:fourier-coefficients,def:eq-parseval] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:bias-scale",
+      "verdict": "matched",
+      "note": "Exactly sqrt(p(1-p)) on the stated domain 0<p<1."
+    },
+    {
+      "obj_id": "def:product-norm",
+      "verdict": "matched",
+      "note": "The expectation is the finite product Bernoulli expectation: clipping leaves interior p unchanged, and the real-power formula is exactly (E|g|^q)^(1/q)."
+    },
+    {
+      "obj_id": "def:fourier-characters",
+      "verdict": "matched",
+      "note": "Unfolding coordChar gives (x_i-p)/sqrt(p(1-p)); the finite product gives chi_S, including empty product one."
+    },
+    {
+      "obj_id": "def:fourier-coefficients",
+      "verdict": "matched",
+      "note": "Exactly E[g chi_S] under the product Bernoulli law on the paper's interior-bias domain."
+    },
+    {
+      "obj_id": "def:eq-parseval",
+      "verdict": "matched",
+      "note": "Under the stated interior-bias setting, the predicate is exactly Fourier reconstruction, Parseval's second-moment identity, and the variance sum over nonempty subsets; Var unfolds to E[(g-Eg)^2]."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the core node for the Parseval display's context, then emitting verdicts.
+{"statement_verdicts":[{"obj_id":"def:bias-scale","verdict":"matched","note":"biasScale p = Real.sqrt (p*(1-p)) is literally σ=√(p(1-p)). The Lean def is total in p but agrees with the paper on the paper's domain 0<p<1 (pinned by BiasInterior). The value outside that domain is unused junk and does not change the extension on the stated domain."},{"obj_id":"def:product-norm","verdict":"matched","note":"cubeNorm p q g = (E_{μ_p}|g|^q)^{1/q}. biasedLaw J p is bernoulliDesign with per-coordinate probability max 0 (min p 1), a product of coinDesigns that put mass p on true (x_i=1). For p in [0,1] (so for 0<p<1) this is exactly μ_p, and FiniteDesign.E is the finite weighted sum. The argument |g|^q ≥ 0, so rpow behaves as the paper's power, and the formula matches ‖g‖_q exactly for q≥1."},{"obj_id":"def:fourier-characters","verdict":"matched","note":"coordChar p i x = (𝟙[x i] - p)/biasScale p is χ_i(x)=(x_i-p)/σ, with Bool true encoding x_i=1. That matches biasedLaw, where true has probability p. fourierChar p S x = ∏_{i∈S} coordChar p i x is χ_S, and the empty Finset product is 1, so χ_∅=1."},{"obj_id":"def:fourier-coefficients","verdict":"matched","note":"fourierCoeffR p g S = E_{μ_p}[g·χ_S], with E under the product Bernoulli(p) law (biasedLaw, which equals μ_p for 0<p<1). This is literally ĝ(S)=E[gχ_S]."},{"obj_id":"def:eq-parseval","verdict":"matched","note":"Under BiasInterior p (0<p<1, the paper's standing domain) the Prop asserts the three displayed identities. (1) g = fourierExpansion p g, the pointwise sum over all S ⊆ J (Finset.univ on Finset J) of ĝ(S)χ_S. (2) E g^2 = Σ_S ĝ(S)^2. (3) Var g = Σ over S ≠ ∅ of ĝ(S)^2, where FiniteDesign.Var g = E(g-Eg)^2 under the same law μ_p. All three match the display, with the same g : {0,1}^J→ℝ and the same p-dependent characters and coefficients."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:low-degree,lem:restriction,prop:block] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:low-degree",
+      "verdict": "matched",
+      "note": "Unfolding gives the same Bernoulli-p Fourier coefficients, pivotal influences, small-influence hypothesis, cutoff σ log(m)/64, and bound; the literal real cutoff makes the sum empty when k < 1."
+    },
+    {
+      "obj_id": "lem:restriction",
+      "verdict": "matched",
+      "note": "Both identities match exactly: the exterior mass function is the Bernoulli-p product law, mergeAssignment implements f(x,y), and subtype subsets correspond bijectively to subsets of F; BooleanGraphFunction and FreeEdgeSet add only tautologies."
+    },
+    {
+      "obj_id": "prop:block",
+      "verdict": "matched",
+      "note": "The uniform law on m-element vertex subsets, vertex-permutation invariance, incident-edge set F_B, cutoff, Fourier mass, and factor (2m/n)m^(-1/4) all match the frozen statement."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the `FiniteDesign` expectation and probability definitions in Causalean before giving the verdicts.
+{"statement_verdicts":[{"obj_id":"lem:low-degree","verdict":"matched","note":"The hypotheses match the paper's: J is finite, 0<p<1, m≥2 is real, every coordinate influence satisfies I_i(h) ≤ I(h)/m, and k = biasScale p·log m/64 (σ = √(p(1−p)), natural log). The sum runs over S with 1≤|S| and (|S|:ℝ)≤k, so it is the paper's literal integer-degree cutoff and is empty when k<1. fourierCoeff is E_p[1_h·χ_S] under the p-biased product law, and totalCoordInfluence is the sum of the pivotal probabilities (coordDiffR ≠ 0). The conclusion is m^{-1/4}·I(h). The two statements are equivalent."},{"obj_id":"lem:restriction","verdict":"matched","note":"F ⊆ E_n. ν is a FiniteDesign (nonnegative, sums to 1) on the exterior assignments {e∉F}→Bool, with ν.p pinned to the Bernoulli-p product, so ν.E is E_y. restrictFn f F y = f(mergeAssignment x y) is f_y. Its Fourier coefficients and total influence are taken under the p-biased law on {0,1}^F. Both conjuncts match eq:restriction-mass (filter 1≤|S∩F|≤k over all S⊆E_n, against graphFourierCoeff = fourierCoeff on the full graph cube) and eq:restriction-influence (∑_{e∈F} edgeInfluence, a pivotal probability), for real k>0. BooleanGraphFunction holds trivially because boolValue takes values in {0,1}. This is harmless, and the statements are equivalent."},{"obj_id":"prop:block","verdict":"matched","note":"m:ℕ with 3≤m≤n is the integer block size. π is a FiniteDesign over the m-subsets of Fin n with uniform mass 1/C(n,m), so it is the law of B. freeEdges B = {e : e∩B≠∅} is F_B. lowCutoff p m = σ·log m/64, with m cast to ℝ. π.Pr is the design probability of 1≤|S∩F_B|≤k (literal real comparison). The weights multiply graphFourierCoeff² and are summed over all S⊆E_n. The right-hand side is (2m/n)·m^{-1/4}·graphTotalInfluence, where graphTotalInfluence is the sum of edge influences = I(f). GraphSymmetric is invariance under vertex permutations acting on the edges. The statements are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:restricted-function,def:block-parameters,def:block-capture-parameters,def:graph-encoding,def:low-degree-noise-parameter] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:restricted-function",
+      "verdict": "matched",
+      "note": "The core defines H = E_n \\ F; mergeAssignment uniquely glues x on F and y on H, so restrictFn is exactly f_y(x) = f(x,y)."
+    },
+    {
+      "obj_id": "def:block-parameters",
+      "verdict": "matched",
+      "note": "For an m-element block B, freeEdges contains exactly the edges meeting B, and lowCutoff equals sqrt(p(1-p)) log(m)/64, with the core's σ = sqrt(p(1-p))."
+    },
+    {
+      "obj_id": "def:block-capture-parameters",
+      "verdict": "matched",
+      "note": "Nat.sqrt n is floor(sqrt(n)); the second component is exactly σ log(m)/64 for that m."
+    },
+    {
+      "obj_id": "def:graph-encoding",
+      "verdict": "matched",
+      "note": "Two-element subsets of Fin n represent E_n under vertex relabeling, and Bool-valued functions on them correspond bijectively to {0,1}^{E_n}."
+    },
+    {
+      "obj_id": "def:low-degree-noise-parameter",
+      "verdict": "matched",
+      "note": "Unfolding biasScale gives sqrt(p(1-p))/4, exactly σ/4 under the core's definition of σ."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:restricted-function","verdict":"matched","note":"For any F ⊆ E_n (the 2-subsets of Fin n) and y : {e // e ∉ F} → Bool, which is {0,1}^H with H = E_n \\ F as in def:restriction-exterior, restrictFn gives the function x : {0,1}^F ↦ f(mergeAssignment F x y). mergeAssignment glues x on F with y off F, so this is exactly f(x,y). f is Bool-valued, matching the core's Boolean f:{0,1}^{E_n}→{0,1}. Same extension in both directions."},{"obj_id":"def:block-parameters","verdict":"matched","note":"freeEdges B is the set of e ∈ E_n with (e ∩ B) nonempty, which is F_B = {e∈E_n : e∩B≠∅}. B is restricted to card m, as prop:block / ass:block-m require of the block. lowCutoff p m = sqrt(p(1-p))·Real.log m/64, which is σ log m/64 with σ from def:bias-scale and natural log per ass:natural-logarithms. The pair records both objects exactly."},{"obj_id":"def:block-capture-parameters","verdict":"matched","note":"sqrtBlockSize n = Nat.sqrt n = ⌊√n⌋. The second component is lowCutoff p (Nat.sqrt n) = σ·log m/64 with m = ⌊√n⌋ cast to ℝ, which is exactly the paper's (m, k)."},{"obj_id":"def:graph-encoding","verdict":"matched","note":"GraphConfig n := GraphEdge n → Bool, and GraphEdge n = {e : Finset (Fin n) // e.card = 2} = binom([n],2) = E_n (Fin n relabels [n]). So GraphConfig n is {0,1}^{E_n}, identified bijectively with simple graphs on n vertices. The standing condition n≥2 is a hypothesis on n elsewhere, not part of this encoding."},{"obj_id":"def:low-degree-noise-parameter","verdict":"matched","note":"noiseParameter p = biasScale p / 4 = sqrt(p(1-p))/4 = σ/4 = ρ. On the paper's domain 0<p<1 (def:bias-scale), Real.sqrt is the ordinary square root, so the two agree there."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:low-degree-noise-operator,def:low-degree-projection] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:low-degree-noise-operator","verdict":"matched","note":"On the standing finite Bernoulli-p cube with 0<p<1, the characters form an orthonormal basis; the displayed Fourier multiplier is exactly the unique linear operator with Tρ χS = ρ^|S| χS, in both directions."},{"obj_id":"def:low-degree-projection","verdict":"matched","note":"On the standing interior-bias product cube, the characters are an orthonormal basis, so retaining precisely coefficients with |S|≤d is exactly the orthogonal projection onto their span for every real d≥0."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:low-degree-noise-operator","verdict":"matched","note":"noiseOperator p ρ g = Σ_S ρ^|S|·ĝ(S)·χ_S. ĝ(S) is E_p[g·χ_S] under biasedLaw, which equals Bernoulli(p)^J for p∈[0,1]. χ_S = ∏_{i∈S}(1[x_i]−p)/√(p(1−p)), with the empty product equal to 1. On the paper's domain 0<p<1 (ass:interior-bias, the setting of lem:low-degree) the χ_S form an orthonormal basis (see fourierIdentities). So this map is linear, and applied to χ_T it returns ρ^|T|·χ_T. It is therefore the unique linear operator with T_ρχ_S = ρ^|S|χ_S, and the two directions agree. With ρ=0, 0^0=1 keeps the constant term, matching the paper's formula. At p∉(0,1) the paper's characters are undefined, so the Lean values there are junk outside the paper's domain. The extra argument p is only the dependence of χ_S on p, which the paper leaves implicit."}, {"obj_id":"def:low-degree-projection","verdict":"matched","note":"lowProjection p d g = Σ_{S : (|S|:ℝ) ≤ d} ĝ(S)·χ_S, with ĝ(S) the L²(μ_p) inner product with χ_S. For 0<p<1 the χ_S are orthonormal and span the space, so this sum is exactly the orthogonal projection onto span{χ_S : |S| ≤ d}. Degree is read literally as the integer |S| compared with the real d, which matches the core's literal-cutoff convention. Lean also accepts d<0: the filter is then empty and the result is the zero map, i.e. projection onto the span of the empty set. The paper's case d≥0 is reproduced exactly, so the extensions agree on the paper's domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:coordinate-difference,def:product-influences,def:eq-dirichlet,def:graph-bias-convention,def:restriction-exterior] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:coordinate-difference",
+      "verdict": "matched",
+      "note": "coordinateReplace is Function.update; the difference has exactly the stated values and is independent of x i, hence factors uniquely through the remaining coordinates."
+    },
+    {
+      "obj_id": "def:product-influences",
+      "verdict": "matched",
+      "note": "Unfolding gives the sum of pivotal-event probabilities under the Bernoulli product law; the Boolean real cast preserves whether the coordinate difference is nonzero."
+    },
+    {
+      "obj_id": "def:eq-dirichlet",
+      "verdict": "matched",
+      "note": "Both finite spectral sums and factors agree exactly; BiasInterior makes explicit the standing domain 0 < p < 1, on which the implication is equivalent to the displayed conjunction."
+    },
+    {
+      "obj_id": "def:graph-bias-convention",
+      "verdict": "matched",
+      "note": "graphVariance is the variance of the Boolean real cast under the same p-biased product law used by Fourier coefficients and edge influences; clipping p is inactive on the paper's domain."
+    },
+    {
+      "obj_id": "def:restriction-exterior",
+      "verdict": "matched",
+      "note": "GraphEdge n represents unordered two-element vertex subsets, so Finset.univ minus F is exactly E_n minus F."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:coordinate-difference",
+      "verdict": "matched",
+      "note": "coordinateReplace unfolds to Causalean's coordinateReplace = Function.update x i b, so coordDiffR g i x = g(x with x_i:=1) − g(x with x_i:=0). This ignores x_i, so it is exactly the paper's Δ_i g as a function of x_{J∖{i}}. Writing it on the full cube with the value constant in x_i is the standard encoding and has the same extension."
+    },
+    {
+      "obj_id": "def:product-influences",
+      "verdict": "matched",
+      "note": "coordInfluence p h i = Pr_{biasedLaw J p}(Δ_i(boolValue h) ≠ 0), and totalCoordInfluence sums it over i : J (Fintype). boolValue embeds {0,1}-valued h into ℝ. The event does not depend on x_i, so its probability under the full product law equals the paper's Pr over the remaining coordinates. For p ∈ (0,1), the paper's bias, biasedLaw is the Bernoulli(p) product law; clamping only changes p outside [0,1], where the paper defines nothing."
+    },
+    {
+      "obj_id": "def:eq-dirichlet",
+      "verdict": "matched",
+      "note": "Unfolded: coordSpectralMass = Σ_{S∋i} fourierCoeff(S)², and weightedSpectralMass = Σ_S |S|·fourierCoeff(S)². fourierCoeff = E_p[boolValue h · χ_S] with χ_S = ∏_{i∈S}(x_i − p)/σ, matching def:fourier-characters and def:fourier-coefficients. biasScale = √(p(1−p)) = σ, and the influences are the matched defs above. The Prop states both identities of eq:dirichlet as stated in the paper, under BiasInterior p (ass:interior-bias, the paper's standing p ∈ (0,1)). Check of the normalization: Δ_i χ_S = χ_{S∖i}/σ and Δ_i h ∈ {−1,0,1}, so the σ² factor is right."
+    },
+    {
+      "obj_id": "def:graph-bias-convention",
+      "verdict": "matched",
+      "note": "The convention fixes one bias p for all graph Fourier coefficients, variances and influences. The anchor graphVariance p f = Var of boolValue f under biasedLaw (GraphEdge n) p, the p-biased product law on the edge coordinates {0,1}^{E_n} (def:graph-encoding). The sibling graph quantities are indexed by the same p: graphFourierCoeff = fourierCoeff p, and graphTotalInfluence equals totalCoordInfluence p by graphTotalInfluence_eq_totalCoordInfluence. So the convention holds, and endpoint clamping does not matter for p ∈ (0,1)."
+    },
+    {
+      "obj_id": "def:restriction-exterior",
+      "verdict": "matched",
+      "note": "GraphEdge n = 2-element subsets of Fin n, i.e. E_n for the complete graph on n vertices. exteriorEdges F = Finset.univ \\ F is exactly E_n ∖ F."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:p_a(\mathcal P),sym:\varepsilon,sym:f,sym:x,sym:b] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_a(\\mathcal P)","verdict":"matched","note":"Basic.lean:361 defines the infimum over a subset of [0,1]; propertyQuantile_spec at Helpers/RussoMargulis.lean:329 establishes the interior unique solution under the stated threshold-property and level conditions."},{"obj_id":"sym:\\varepsilon","verdict":"matched","note":"ThresholdEpsilon at Basic.lean:376 is exactly 0 < ε ∧ ε < 1/2."},{"obj_id":"sym:f","verdict":"matched","note":"GraphConfig n → Bool is exactly the Boolean graph-function space; GraphSymmetric expresses vertex-permutation invariance, and BooleanGraphFunction uses the exact 0/1 real cast."},{"obj_id":"sym:x","verdict":"matched","note":"The verified declarations use Boolean configurations on J, graph edges, the coordinates excluding i, and the free-edge subtype respectively, exactly realizing all listed configuration spaces."},{"obj_id":"sym:b","verdict":"matched","note":"coordinateReplace takes a Bool replacement; coordinateFourier returns a real function on the remaining Boolean coordinates; oneCoordinate_fourthMoment_le quantifies over an arbitrary real scalar b."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p_a(\\mathcal P)","verdict":"matched","note":"propertyQuantile (Basic.lean:361) is sInf of {p ∈ Icc 0 1 | a ≤ propertyProb p P}. It is a computed def, so its range comes from the formula: the set is bounded below by 0, so the infimum is ≥ 0 when the set is nonempty, and it is ≤ 1 because every member is ≤ 1; when the set is empty, Real.sInf ∅ = 0. So the value always lies in [0,1]. propertyQuantile_spec (RussoMargulis.lean:329) also shows that, for a ∈ (0,1) under ThresholdProperty, the value is the unique solution of propertyProb p P = a and lies in Ioo 0 1 ⊆ [0,1]. The cluster pins the space [0,1]."},{"obj_id":"sym:\\varepsilon","verdict":"matched","note":"ThresholdEpsilon ε := 0 < ε ∧ ε < 1/2 (Basic.lean:376-377) is exactly the open interval (0,1/2). The carrier ℝ plus this range predicate is the standard faithful idiom, and consumers (threshold_logarithm_bound and the Russo–Margulis width lemma) take ε under hε : ThresholdEpsilon ε."},{"obj_id":"sym:f","verdict":"matched","note":"GraphSymmetric (Basic.lean:220) and BooleanGraphFunction (Basic.lean:225) both type f as GraphConfig n → Bool. Here GraphConfig n = GraphEdge n → Bool and GraphEdge n = {e : Finset (Fin n) // e.card = 2}, so f ∈ {0,1}^{{0,1}^{E_n}} is fixed by the type itself. BooleanGraphFunction's 0/1 clause on boolValue holds by construction. GraphSymmetric adds the vertex-permutation invariance, which belongs to the ass:graph-symmetry node rather than to the symbol's space."},{"obj_id":"sym:x","verdict":"matched","note":"Each listed use is pinned by a member's type. In boolValue (Basic.lean:33-34), x : J → Bool, which is {0,1}^J for the product Fourier basis; with J = GraphEdge n it is also the {0,1}^{E_n} argument of coordinateReplace. In coordDiffRemaining (Basic.lean:117-118), x : {j // j ≠ i} → Bool, which is {0,1}^{J∖{i}}. In restrictFn (Basic.lean:272-275), the free-coordinate configuration is ({e // e ∈ F} → Bool), which is {0,1}^F in f_y(x) = f(x,y)."},{"obj_id":"sym:b","verdict":"matched","note":"Each listed use is pinned by a member. In coordinateReplace (Basic.lean:58-59), b : Bool, which is {0,1}. In oneCoordinate_fourthMoment_le (NoiseTensorization.lean:19), b : ℝ is universally quantified, which is the arbitrary real scalar. In coordinateFourier (NoiseBasics.lean:27-29), b is a computed def of type ({j // j ≠ i} → Bool) → ℝ, which is ℝ^{{0,1}^{J∖{i}}}. Its formula σ·Δ_i g equals the χ_i-coefficient E_{x_i}[g χ_i] = p(1−p)(g1−g0)/σ, which confirms the decomposition g = a + b χ_i."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:x_{e\leftarrow b},sym:I_{e,p}(f),sym:I_p(f),sym:\Var_p(f),sym:\sigma] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:x_{e\\leftarrow b}",
+      "verdict": "matched",
+      "note": "coordinateReplace unfolds to Function.update on Boolean configurations; specializing J to GraphEdge n preserves exactly the graph configuration space."
+    },
+    {
+      "obj_id": "sym:I_{e,p}(f)",
+      "verdict": "matched",
+      "note": "edgeInfluence computes an event probability under a finite design with nonnegative masses summing to one, so its value lies in [0,1]."
+    },
+    {
+      "obj_id": "sym:I_p(f)",
+      "verdict": "matched",
+      "note": "graphTotalInfluence sums one probability in [0,1] per graph edge, giving a value in [0,|E_n|] by construction."
+    },
+    {
+      "obj_id": "sym:\\Var_p(f)",
+      "verdict": "matched",
+      "note": "graphVariance computes the variance of a Boolean indicator under a probability design: writing its mean as a ∈ [0,1], the variance is a(1−a) ∈ [0,1/4]."
+    },
+    {
+      "obj_id": "sym:\\sigma",
+      "verdict": "matched",
+      "note": "biasScale is sqrt(p(1−p)); the tagged biasScale_pos_le_half lemma establishes exactly 0 < biasScale p ≤ 1/2 under BiasInterior p, namely 0 < p < 1."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:x_{e\\leftarrow b}","verdict":"matched","note":"coordinateReplace (Basic.lean:58) is an abbrev for Causalean's PoissonAddOnePoincare.coordinateReplace i x b with type J → Bool. At J = GraphEdge n this is GraphConfig n = GraphEdge n → Bool, i.e. {0,1}^{E_n}, so the type itself pins the space. Hint 'update one coordinate' confirmed."},{"obj_id":"sym:I_{e,p}(f)","verdict":"matched","note":"edgeInfluence (Basic.lean:228) is the computed def (biasedLaw (GraphEdge n) p).Pr {x | f(x_{e←1}) ≠ f(x_{e←0})}. biasedLaw clamps p into [0,1], so it is always a probability design, and the value lies in [0,1] by construction. Hint 'edge pivotal probability' confirmed."},{"obj_id":"sym:I_p(f)","verdict":"matched","note":"graphTotalInfluence (Basic.lean:236) is the computed def ∑ e, edgeInfluence p f e over the Fintype GraphEdge n. Each term lies in [0,1], so the sum lies in [0,|E_n|] by construction. Hint 'sum of edge influences' confirmed."},{"obj_id":"sym:\\Var_p(f)","verdict":"matched","note":"graphVariance (Basic.lean:241) is the computed def (biasedLaw (GraphEdge n) p).Var (boolValue f), the variance of a {0,1}-valued statistic under a probability design. Its range is [0,1/4] by construction. Hint 'Bernoulli product variance' confirmed."},{"obj_id":"sym:\\sigma","verdict":"matched","note":"biasScale (Basic.lean:64) is the computed def √(p(1−p)). biasScale_pos_le_half (Helpers/Fourier.lean:25) proves 0 < biasScale p ∧ biasScale p ≤ 1/2 under BiasInterior p (0<p<1), the domain on which σ is used. Together the members pin (0,1/2]. Both hints confirmed against the decls."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:g,sym:q,sym:\|g\|_q,sym:\chi_i,sym:\chi_S] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:g","verdict":"matched","note":"Basic.lean:69 binds g as an arbitrary real-valued function on J → Bool, exactly the stated function space."},{"obj_id":"sym:q","verdict":"matched","note":"Basic.lean:68 supplies q : ℝ and Helpers/NoiseBasics.lean:33 supplies the tagged constraint 1 ≤ q; together they pin [1,∞)."},{"obj_id":"sym:\\|g\\|_q","verdict":"matched","note":"Basic.lean:68–71 computes the product norm; nonnegative probability weights and real powers of nonnegative bases ensure its value lies in [0,∞)."},{"obj_id":"sym:\\chi_i","verdict":"matched","note":"Basic.lean:73–74 defines the normalized centered bit as a real-valued function on J → Bool."},{"obj_id":"sym:\\chi_S","verdict":"matched","note":"Basic.lean:77–79 defines a real-valued function on J → Bool by the finite product of coordinate characters, with empty product one."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:g","verdict":"matched","note":"cubeNorm (Basic.lean:69) types g as (J → Bool) → ℝ, with J a Fintype and Bool standing for {0,1}. That is exactly ℝ^{\\{0,1\\}^J}, with no extra constraint."},{"obj_id":"sym:q","verdict":"matched","note":"The carrier is ℝ (cubeNorm, Basic.lean:68), and the tagged member cubeNorm_nonneg (Helpers/NoiseBasics.lean:33) carries the clause hq : 1 ≤ q, which pins the space [1,∞). Every consumer found uses q in {2, 4, 4/3} or a Hölder-conjugate pair (cube_holder), so each has q ≥ 1. Defining the formula for all real q only extends its domain and changes nothing on [1,∞)."},{"obj_id":"sym:\\|g\\|_q","verdict":"matched","note":"cubeNorm p q g = ((biasedLaw J p).E (|g x|^q))^(1/q) is exactly (E|g|^q)^{1/q} under the Bernoulli-p product law, since biasedLaw clamps p, which leaves p unchanged on [0,1]. Its range lies in [0,∞) by construction: Real.rpow of a nonnegative expectation, as cubeNorm_nonneg also states."},{"obj_id":"sym:\\chi_i","verdict":"matched","note":"coordChar p i x = ((if x i then 1 else 0) - p) / biasScale p, where biasScale p = √(p(1-p)) = σ. This is χ_i(x) = (x_i - p)/σ, and its type (J → Bool) → ℝ is ℝ^{\\{0,1\\}^J}."},{"obj_id":"sym:\\chi_S","verdict":"matched","note":"fourierChar p S x = ∏ i ∈ S, coordChar p i x is χ_S = ∏_{i∈S} χ_i. The empty Finset product is 1, so χ_∅ = 1. Its type (J → Bool) → ℝ matches the space."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:E_n,sym:\mathcal P,sym:p,sym:\mu_p(\mathcal P),sym:a] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:E_n",
+      "verdict": "matched",
+      "note": "GraphEdge n is exactly the two-element subsets of Fin n, faithfully relabeling the core definition E_n = binom([n],2)."
+    },
+    {
+      "obj_id": "sym:\\mathcal P",
+      "verdict": "matched",
+      "note": "The cluster supplies families of Boolean graph configurations, vertex-permutation invariance, and the scoped increasing and nontrivial conditions through ThresholdProperty."
+    },
+    {
+      "obj_id": "sym:p",
+      "verdict": "matched",
+      "note": "ProbabilityBias pins [0,1]; BiasInterior and VarianceBias pin (0,1) for the specified interior-bias contexts."
+    },
+    {
+      "obj_id": "sym:\\mu_p(\\mathcal P)",
+      "verdict": "matched",
+      "note": "propertyProb computes event probability under the independent Bernoulli product design; nonnegative normalized masses ensure its range is [0,1], and clamping agrees with p on its stated domain."
+    },
+    {
+      "obj_id": "sym:a",
+      "verdict": "matched",
+      "note": "propertyQuantile_spec supplies 0<a<1; the scalar lemma quantifies over arbitrary real a; coordinateMean computes a real function on the remaining Boolean coordinates."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:E_n","verdict":"matched","note":"GraphEdge n := {e : Finset (Fin n) // e.card = 2} (Basic.lean:180) is exactly the set of two-element vertex subsets, i.e. binom([n],2) with [n] relabeled to Fin n (zero-indexed bijection, disclosed). That is the core def:graph-coordinates E_n, an element of 2^{binom(N,2)} up to the relabeling."},{"obj_id":"sym:\\mathcal P","verdict":"matched","note":"The space is an arbitrary subset of {0,1}^{E_n}. The S4 variable P : Set (GraphConfig n) with GraphConfig n = GraphEdge n → Bool (Basic.lean:185, 340) pins exactly that space. The other members (GraphPropertyInvariant, IncreasingFamily, NontrivialFamily, the IsGraphProperty/IsIncreasingGraphProperty/IsNontrivialGraphProperty structures, ThresholdProperty) are hypotheses for the results that need them, not restrictions of the space. Each matches its clause hint: invariance under edgePerm, upward closure under the pointwise ≤ on Bool, and P.Nonempty ∧ P ≠ univ."},{"obj_id":"sym:p","verdict":"matched","note":"Carrier ℝ, with ProbabilityBias p := 0 ≤ p ∧ p ≤ 1 (Basic.lean:47) pinning the [0,1] space; this is the standard carrier-plus-predicate idiom. BiasInterior and VarianceBias (both 0<p<1) are interior sub-domains used by specific results. biasedLaw clamps p into [0,1], so the law is the Bernoulli(p) product law on [0,1]. Hints verified."},{"obj_id":"sym:\\mu_p(\\mathcal P)","verdict":"matched","note":"propertyProb p P := (biasedLaw (GraphEdge n) p).Pr (· ∈ P) (Basic.lean:346) is a def that computes the probability under independent Bernoulli-p edges (bernoulliDesign with clamped bias, equal to p on [0,1]). Its range [0,1] holds by construction."},{"obj_id":"sym:a","verdict":"matched","note":"All three paper uses are realized and checked. (1) Quantile level: propertyQuantile a P := sInf{p ∈ Icc 0 1 | a ≤ propertyProb p P} (Basic.lean:361) matches the core def:property-quantile formula. The (0,1) domain is pinned by propertyQuantile_spec (Helpers/RussoMargulis.lean:329-330, ha : 0 < a ∧ a < 1). The def's extension to every real a does not change it on (0,1). (2) Scalar inequality: oneCoordinate_fourthMoment_le (Helpers/NoiseTensorization.lean:17-18) takes a : ℝ arbitrary, matching ℝ. (3) Tensorization: coordinateMean p g i : ({j // j ≠ i} → Bool) → ℝ (Helpers/NoiseBasics.lean:21) is a computed real function on the remaining coordinates, matching ℝ^{{0,1}^{J∖{i}}}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\Delta_i g,sym:h,sym:\Delta_i h,sym:I_i(h),sym:I(h)] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\Delta_i g",
+      "verdict": "matched",
+      "note": "coordDiffRemaining has exactly the remaining-coordinate domain and real codomain; coordDiffR is its equivalent pullback to the full cube, independent of coordinate i."
+    },
+    {
+      "obj_id": "sym:h",
+      "verdict": "matched",
+      "note": "boolValue takes an arbitrary Boolean cube function and casts its values to 0 or 1; every paper Boolean function has this representation."
+    },
+    {
+      "obj_id": "sym:\\Delta_i h",
+      "verdict": "matched",
+      "note": "coordDiff subtracts two Boolean casts, so its values lie in {-1,0,1}; coordinate replacement makes it independent of coordinate i, giving the stated remaining-coordinate representation."
+    },
+    {
+      "obj_id": "sym:I_i(h)",
+      "verdict": "matched",
+      "note": "coordInfluence is an event probability under a FiniteDesign with nonnegative masses summing to one, hence lies in [0,1] by construction."
+    },
+    {
+      "obj_id": "sym:I(h)",
+      "verdict": "matched",
+      "note": "totalCoordInfluence sums the |J| coordinate probabilities, each in [0,1], hence lies in [0,|J|] by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\Delta_i g","verdict":"matched","note":"coordDiffRemaining (Basic.lean:117) is a def with type ({j // j ≠ i} → Bool) → ℝ, i.e. exactly ℝ^{{0,1}^{J\\{i}}}, and it computes g(x,1) − g(x,0) through insertCoordinate. coordDiffR (Basic.lean:106) is the same difference pulled back to the full cube. It ignores x i by construction, since coordinateReplace overwrites coordinate i. Both are computed defs, so the space holds by construction."},{"obj_id":"sym:h","verdict":"matched","note":"The h binder of boolValue (Basic.lean:33) has type (J → Bool) → Bool, which is exactly {0,1}^{{0,1}^J}. boolValue is the computed real cast (if h x then 1 else 0) used in the real-valued formulas, with range {0,1} by construction."},{"obj_id":"sym:\\Delta_i h","verdict":"matched","note":"coordDiff (Basic.lean:110) is a computed abbrev, coordDiffR (boolValue h) i. Its value is a difference of two values in {0,1}, so its range is {-1,0,1} by construction. Its domain is the full cube, but it does not depend on x i, so it is in bijection with functions on {0,1}^{J\\{i}}; the paper's remaining-coordinate form is coordDiffRemaining."},{"obj_id":"sym:I_i(h)","verdict":"matched","note":"coordInfluence (Basic.lean:122) is (biasedLaw J p).Pr {x | Δ_i h x ≠ 0}, which matches the paper's I_i(h) = Pr(Δ_i h ≠ 0). FiniteDesign.Pr is E of an indicator under a probability design (DesignCore.lean:71), so the value lies in [0,1] by construction. Because biasedLaw clamps p, this also holds for every real p."},{"obj_id":"sym:I(h)","verdict":"matched","note":"totalCoordInfluence (Basic.lean:127) is ∑ i, coordInfluence p h i, which matches I(h) = ∑_{i∈J} I_i(h). Each term lies in [0,1], so the sum lies in [0,|J|] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\rho,sym:T_\rho,sym:d,sym:P_{\le d},sym:u] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\rho",
+      "verdict": "matched",
+      "note": "Basic.lean:158 defines sigma/4; NoiseBasics.lean:39 pins its range to (0,1/8] under the interior-bias setting."
+    },
+    {
+      "obj_id": "sym:T_\\rho",
+      "verdict": "matched",
+      "note": "Basic.lean:162 defines an endomorphism of real cube functions by a finite Fourier sum; weighted-sum coefficients are linear, and finite dimensionality ensures continuity."
+    },
+    {
+      "obj_id": "sym:d",
+      "verdict": "matched",
+      "note": "Basic.lean:167 defines ProjectionDegree d exactly as 0 ≤ d for real d, pinning precisely [0,∞)."
+    },
+    {
+      "obj_id": "sym:P_{\\le d}",
+      "verdict": "matched",
+      "note": "Basic.lean:171 computes the Fourier cutoff endomorphism on real cube functions; its finite weighted-sum formula is linear and continuous."
+    },
+    {
+      "obj_id": "sym:u",
+      "verdict": "matched",
+      "note": "NoiseOperator.lean:43,161 bind real cube functions with the stated contextual restrictions; SupportDegree.lean:77 existentially binds a Fin n vertex separately for each nonempty support."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\rho","verdict":"matched","note":"noiseParameter p := biasScale p / 4 = sqrt(p(1-p))/4 (Basic.lean:158), which matches the core def ρ=σ/4. Its range is fixed by construction. noiseParameter_bounds (Helpers/NoiseBasics.lean:39) proves 0 < ρ ≤ 1/8 under BiasInterior p, so the cluster pins exactly (0,1/8] on the paper's interior-bias domain."},{"obj_id":"sym:T_\\rho","verdict":"matched","note":"noiseOperator p ρ g := Σ_S ρ^|S|·ĝ(S)·χ_S (Basic.lean:162) is linear in g by construction, so it lies in L(ℝ^{{0,1}^J}). For interior p the characters are orthonormal, so this formula is the operator fixed by T_ρχ_S=ρ^|S|χ_S. Consumers instantiate ρ with noiseParameter p (e.g. lowDegree_norm_four_le)."},{"obj_id":"sym:d","verdict":"matched","note":"ProjectionDegree d := 0 ≤ d (Basic.lean:167): a real carrier plus a range predicate pins exactly [0,∞). Consumers carry hd : 0 ≤ d, as in lowDegree_norm_four_le and lowProjection_norm_dual."},{"obj_id":"sym:P_{\\le d}","verdict":"matched","note":"lowProjection p d g := Σ_{S : |S| ≤ d (as a real)} ĝ(S)·χ_S (Basic.lean:171) is linear by construction. With p interior the characters are orthonormal, so this sum is exactly the orthogonal projection onto the span of the characters of degree at most d, for any real d ≥ 0."},{"obj_id":"sym:u","verdict":"matched","note":"I checked each tagged member. In lowDegree_norm_four_le and lowProjection_norm_dual (Helpers/NoiseOperator.lean:43,161), u : (J → Bool) → ℝ is a real function on the cube, with the local fixed-point and unit-norm side conditions taken from the projection argument. In exists_support_vertex_degree_le (Helpers/SupportDegree.lean:77), u ∈ supportVertices S is a vertex in Fin n (the [n] relabeling) and is chosen separately for each nonempty S. This matches the core's 'ℝ^{{0,1}^J} or [n], according to context'."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:I_e(f),sym:I(f),sym:I(f_y),sym:\Var(f),sym:B] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:I_e(f)","verdict":"matched","note":"edgeInfluence is an event probability under a FiniteDesign; nonnegative normalized weights give values in [0,1]."},{"obj_id":"sym:I(f)","verdict":"matched","note":"graphTotalInfluence sums |E_n| event probabilities, each in [0,1], giving [0,|E_n|]."},{"obj_id":"sym:I(f_y)","verdict":"matched","note":"restrictedTotalInfluence sums pivotal probabilities over the subtype of edges in F, whose cardinality is |F|, giving [0,|F|]."},{"obj_id":"sym:\\Var(f)","verdict":"matched","note":"graphVariance is the variance of a {0,1}-valued statistic under normalized nonnegative weights: writing its mean as q∈[0,1], the variance is q(1−q)∈[0,1/4]."},{"obj_id":"sym:B","verdict":"matched","note":"UniformBlockLaw pins the vertex-block sample space to m-element subsets of Fin n; freeEdges computes edges meeting such a block. The coordinate-split lemma defines its local B as a real-valued function on the coordinates other than i."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:I_e(f)","verdict":"matched","note":"edgeInfluence (Basic.lean:228) is computed as (biasedLaw (GraphEdge n) p).Pr of the pivotal event, so its range is fixed by construction. biasedLaw (Basic.lean:38) is a bernoulliDesign with the bias clamped to max 0 (min p 1), so it is a probability law for every real p. The value therefore lies in [0,1]."},{"obj_id":"sym:I(f)","verdict":"matched","note":"graphTotalInfluence (Basic.lean:236) is the sum over all e : GraphEdge n of edgeInfluence, and each term is in [0,1] (see sym:I_e(f)). GraphEdge n is the subtype of 2-element vertex subsets, so it has |E_n| elements and the sum lies in [0,|E_n|] by construction."},{"obj_id":"sym:I(f_y)","verdict":"matched","note":"restrictedTotalInfluence (Basic.lean:282) is totalCoordInfluence of restrictFn f F y. That is a sum over the coordinates {e // e ∈ F} (|F| of them) of coordInfluence, each a Pr under the clamped biasedLaw and so in [0,1]. The sum lies in [0,|F|] by construction."},{"obj_id":"sym:\\Var(f)","verdict":"matched","note":"graphVariance (Basic.lean:241) is the variance of boolValue f, a function taking only the values 0 and 1, under the clamped probability law biasedLaw. A {0,1}-valued variable has variance q(1-q) for some q in [0,1], which lies in [0,1/4]. The range holds by construction."},{"obj_id":"sym:B","verdict":"matched","note":"B has two context-dependent meanings in the spec, and each is pinned by its own members. (1) Vertex block: UniformBlockLaw (Basic.lean:305) types B as {B : Finset (Fin n) // B.card = m}, i.e. the m-subsets of [n]. freeEdges (Basic.lean:314) takes a general Finset (Fin n), but its block use, blockParameters (Basic.lean:319), passes B.val from that card-m subtype. (2) Transformed coefficient: in noiseOperator_coordinate_split (Helpers/NoiseTensorization.lean:85), B is noiseOperator p ρ (coordinateFourier p g i), a real-valued function evaluated at (fun j => x j.val) : {j // j ≠ i} → Bool. That is an element of ℝ^{{0,1}^{J∖{i}}}. Both spaces match the declared space."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:v,sym:I_e(f_y),sym:s,sym:\mu(p),sym:\Delta_e f] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:v",
+      "verdict": "matched",
+      "note": "lowProjection_norm_dual leaves v an arbitrary real function on the Boolean cube; supportVertexCount computes a natural number, covering the two declared roles."
+    },
+    {
+      "obj_id": "sym:I_e(f_y)",
+      "verdict": "matched",
+      "note": "restrictedCoordInfluence is the probability of a pivotal event under a normalized nonnegative finite design, hence lies in [0,1] by construction."
+    },
+    {
+      "obj_id": "sym:s",
+      "verdict": "matched",
+      "note": "scalar_log_bound explicitly requires positivity; supportSize computes the strictly positive cardinality of a nonempty support. The core's scoped scalar domain is (0,1/2], matching the additional upper bound."
+    },
+    {
+      "obj_id": "sym:\\mu(p)",
+      "verdict": "matched",
+      "note": "propertyExpectation averages a {0,1}-valued indicator under a normalized nonnegative finite design, hence lies in [0,1] by construction."
+    },
+    {
+      "obj_id": "sym:\\Delta_e f",
+      "verdict": "matched",
+      "note": "edgeDiff subtracts two {0,1}-valued indicator sections and takes exactly the remaining edge coordinates as its argument, enforcing the declared function space."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:v","verdict":"matched","note":"The space is R^{{0,1}^J} ∪ N, and the core gives v two scoped meanings. The function reading is `v : (J → Bool) → ℝ`, a free real function in lowProjection_norm_dual (Helpers/NoiseOperator.lean:162), which is exactly R^{{0,1}^J}. The count reading is supportVertexCount (Helpers/SupportDegree.lean:21), a def returning the ℕ cardinality of the nonisolated support vertices, so it lies in N by construction. Each member pins its own branch of the union."},{"obj_id":"sym:I_e(f_y)","verdict":"matched","note":"restrictedCoordInfluence (Basic.lean:278) unfolds to coordInfluence p (restrictFn f F y) e, which is (biasedLaw {e // e ∈ F} p).Pr of {x : coordDiffR (boolValue f_y) e x ≠ 0}. That is the Bernoulli-p product probability over the free coordinates that flipping e changes f_y, with the exterior assignment y fixed, as the core definition says. Being a probability under a finite design, its value lies in [0,1] by construction."},{"obj_id":"sym:s","verdict":"matched","note":"The space is (0,∞), and the core says s is a positive scalar whose meaning is local to the argument. In scalar_log_bound (Helpers/LowDegree.lean:34), s : ℝ comes with the hypothesis 0 < s ∧ s ≤ 1/2. The extra s ≤ 1/2 is that lemma's own local domain and stays inside (0,∞). supportSize (Helpers/SupportDegree.lean:15) is a def returning S.card, and it requires S.Nonempty, so the value is at least 1 and positive by construction. Both local realizations lie in (0,∞) as positive scalars."},{"obj_id":"sym:\\mu(p)","verdict":"matched","note":"propertyExpectation (Basic.lean:351) is (biasedLaw (GraphEdge n) p).E (boolValue (propertyIndicator P)). That is E_p of the 0/1 cast of the indicator of P under the Bernoulli edge law, which is the core's μ(p) = E_p f with f = 1_P. As the expectation of a {0,1}-valued function under a probability law, its value lies in [0,1] by construction."},{"obj_id":"sym:\\Delta_e f","verdict":"matched","note":"edgeDiff (Basic.lean:355) is coordDiffRemaining (boolValue (propertyIndicator P)) e x with x : {e' // e' ≠ e} → Bool. This equals 1_P(x with e set to 1) − 1_P(x with e set to 0), which is the core's f(x_{e←1}) − f(x_{e←0}) for f = 1_P. Its domain is {0,1}^{E_n \\ {e}}, and as a difference of two 0/1 values it lies in {−1, 0, 1} by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:m,sym:k,sym:y,sym:f_y,sym:A] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:m",
+      "verdict": "drift",
+      "note": "The capture members admit values outside [2,∞): sqrtBlockSize 2 = 1 and (captureParameters p 2).1 = 1. LowDegreeParam and BlockSize constrain their respective parameters but do not constrain these computed outputs. Add a tagged capture-domain/range clause establishing the lower bound; consumer-only CaptureLogSize does not repair the cluster."
+    },
+    {
+      "obj_id": "sym:k",
+      "verdict": "drift",
+      "note": "The computed range is not always positive: (captureParameters (1/2) 2).2 = 0 because Nat.sqrt 2 = 1 and log 1 = 0. PositiveCutoff does not constrain this output. Add tagged domain/range clauses tying the computed cutoffs to their admissible parameters and establishing positivity."
+    },
+    {
+      "obj_id": "sym:y",
+      "verdict": "matched",
+      "note": "Both declarations type y as a Boolean assignment on edges outside F, exactly the complementary coordinate set H; the law retains this same assignment space."
+    },
+    {
+      "obj_id": "sym:f_y",
+      "verdict": "matched",
+      "note": "restrictFn computes x ↦ f(x,y), with Boolean output and Boolean assignments on F as its domain, exactly the stated restricted-function space."
+    },
+    {
+      "obj_id": "sym:A",
+      "verdict": "matched",
+      "note": "difference_fourierCoeff binds A as a finite subset of the remaining coordinates; noiseOperator_coordinate_split computes A as a real-valued function on their Boolean cube, matching the respective local spaces."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:m",
+    "reason": "The capture realization admits m = Nat.sqrt 2 = 1; its own tagged cluster needs a capture-domain/range clause enforcing the stated m ≥ 2.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:m","verdict":"matched","note":"All four members agree with the scoped uses. LowDegreeParam (m:ℝ) is `2 ≤ m`, i.e. [2,∞), as lem:low-degree requires. BlockSize (m n:ℕ) is `3 ≤ m ∧ m ≤ n`, the integer block size of prop:block, which lies inside [2,∞). sqrtBlockSize n := Nat.sqrt n and captureParameters.1 = sqrtBlockSize n compute ⌊√n⌋ for lem:block-capture, so their range comes from the formula; under CaptureLogSize (log n ≥ 16) it is ≥ 2."},{"obj_id":"sym:k","verdict":"matched","note":"lowCutoff p m := biasScale p * log m / 64 with biasScale p = √(p(1-p)), and blockParameters.2 and captureParameters.2 reuse it. These are defs that compute σ log m/64, which is positive when 0<p<1 and m ≥ 2. LowDegreeCutoff pins k = σ log m/64 (lem:low-degree). PositiveCutoff k is `0 < k`, the free positive real k of lem:restriction. k is real throughout and is never forced to be an integer, matching the core definition."},{"obj_id":"sym:y","verdict":"matched","note":"In mergeAssignment, y has type {e // e ∉ F} → Bool, which is exactly {0,1}^H with H = E_n \\ F. ExteriorBernoulliLaw puts the Bernoulli-p product law ∏ (if y e then p else 1-p) on that same type, so the type pins the space without a range clause."},{"obj_id":"sym:f_y","verdict":"matched","note":"restrictFn f F y : ({e // e ∈ F} → Bool) → Bool is defined as x ↦ f (mergeAssignment F x y), i.e. f(x,y) on the configuration E_n = F ∪ H. This is exactly the core's {0,1}^{{0,1}^F}."},{"obj_id":"sym:A","verdict":"matched","note":"Each local use is pinned by type. In difference_fourierCoeff, A : Finset {j // j ≠ i} is the index set 2^{J\\{i}}. In noiseOperator_coordinate_split, A := noiseOperator p ρ (coordinateMean p g i), and coordinateMean has type ({j // j ≠ i} → Bool) → ℝ, so A ∈ ℝ^{{0,1}^{J\\{i}}} (it is applied to fun j => x j.val). The 2^F reading of lem:restriction is fixed by the binder A : Finset {e // e ∈ F} in restrictedFourierCoeff (Basic.lean:287)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:variance =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:variance","verdict":"matched","note":"Equivalent under relabeling [n] as Fin n: symmetry is exactly vertex-permutation invariance, the clamped product law equals Bernoulli(p) for 0<p<1, and variance, pivotal influences, natural logarithm, and the constant match; no monotonicity premise is added."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:variance","verdict":"matched","note":"Matches the paper both ways after unfolding every definition. The 2 ≤ n hypothesis is ass:variance-n. VarianceSymmetric = GraphSymmetric, i.e. f(x∘edgePerm τ) = f x for every vertex permutation τ of Fin n, which is vertex-permutation invariance. VarianceBias is 0<p<1. GraphEdge n is the 2-element subsets of Fin n, i.e. E_n. graphVariance is FiniteDesign.Var of the 0/1 cast of f under bernoulliDesign with probability clamp(p) of true; this is the i.i.d. Bernoulli(p) product law because clamping is the identity on (0,1). graphTotalInfluence = Σ_e Pr_p(f(update x e true) ≠ f(update x e false)) = Σ_e I_{e,p}(f), as in def:graph-influences. Real.log is the natural log required by ass:natural-logarithms. The constant 2^17/(log n)^2 and the ≤ direction are unchanged. No monotonicity hypothesis is added."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:threshold =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:threshold","verdict":"matched","note":"The graph encoding, permutation invariance, upward closure, nonempty proper family, n ≥ 2, and ε range match exactly; the quantiles use the specified infimum under independent Bernoulli edges, and the bound has identical constants and natural logarithms."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:threshold","verdict":"matched","note":"Each part matches the frozen node. n ≥ 2 is ThresholdVertexCount. P is a Set of maps GraphEdge n → Bool, where GraphEdge n is the 2-subsets of Fin n, i.e. a family of graphs on n labelled vertices. ThresholdProperty has three parts: (1) GraphPropertyInvariant, which says x∘edgePerm τ ∈ P ↔ x ∈ P for every vertex permutation τ, i.e. invariance under all vertex permutations; (2) IncreasingFamily, which uses the componentwise Pi-Bool order (false ≤ true), i.e. upward closure under edge addition; (3) NontrivialFamily, which says P is nonempty and P ≠ univ. ThresholdEpsilon is 0<ε<1/2. propertyQuantile a P is sInf{p ∈ [0,1] : a ≤ μ_p(P)}, which is exactly def:property-quantile. μ_p is the probability under the product Bernoulli(p) law on edges (biasedLaw); its clamp of p to [0,1] has no effect because p is restricted to Icc 0 1. Both quantile levels are in (0,1): ε directly, and 1−ε because 0<ε<1/2. Real.log of the cast n is the natural log, matching ass:natural-logarithms. The bound 2^19/(log n)^2·log(1/(2ε)) matches the paper's term for term. No extra hypotheses; both directions hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lem:block-capture =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"lem:block-capture","verdict":"matched","note":"Equivalent in both directions: vertex relabeling preserves graph symmetry; the interior-bias product law gives the stated Fourier coefficients and pivotal influences; Nat.sqrt, lowCutoff, the filtered subset sum, and the real exponent reproduce the paper’s parameters and bound exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:block-capture","verdict":"matched","note":"The Lean statement and the frozen lemma say the same thing. Unfolded: the hypotheses are 0<p<1 (BiasInterior), invariance of f under every vertex permutation acting through edgePerm (GraphSymmetric), and 16 ≤ log n (CaptureLogSize, i.e. t = log n ≥ 16). m = Nat.sqrt n = ⌊√n⌋. k = lowCutoff p m = sqrt(p(1-p))·log m/64 = σ log m/64. The sum runs over every edge subset S of GraphEdge n (2-element vertex sets, i.e. E_n) with 1 ≤ |S| and |S| ≤ k²/2, compared in ℝ, exactly as in the paper. The coefficient f̂(S) = E_p[1{f}·χ_S], where χ_S is the product of (x_i − p)/σ, matching def:fourier-coefficients and def:fourier-characters with 0/1 coding. I(f) is the sum over edges of Pr_p(f(x_{e←1}) ≠ f(x_{e←0})), matching def:graph-influences. The right side 4·m^(−1/4)·I(f) is a real power of a nonnegative base, and m ≥ 1 under log n ≥ 16. There are no extra hypotheses, so the two statements are equivalent in both directions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\mathcal P,sym:m,sym:k] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\mathcal P","verdict":"matched","note":"The verified cluster uses Set (GraphEdge n → Bool), exactly the graph-family space, with permutation invariance and the frozen scope-specific increasing and nontrivial predicates."},{"obj_id":"sym:m","verdict":"matched","note":"LowDegreeParam specifies real m ≥ 2; BlockSize specifies integer 3 ≤ m ≤ n; sqrtBlockSize and captureParameters compute the frozen floor-square-root choice in its stated capture regime."},{"obj_id":"sym:k","verdict":"matched","note":"PositiveCutoff specifies arbitrary positive real cutoffs; the other members compute or equate k to sqrt(p(1-p)) log(m)/64, exactly matching the frozen scope-specific choices."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\mathcal P","verdict":"matched","note":"The core gives the space as 2^{{0,1}^{E_n}}: a family P ⊆ {0,1}^{E_n} that is invariant under vertex permutations. The S4 variable `P : Set (GraphConfig n)` (Basic.lean:343), with `GraphConfig n = GraphEdge n → Bool` and `GraphEdge n` the 2-element subsets of `Fin n`, is exactly a subset of {0,1}^{E_n}. Invariance is fixed by `GraphPropertyInvariant` (`(fun e => x (edgePerm τ e)) ∈ P ↔ x ∈ P` for all τ and x, :195), which is the `invariance` field of `IsGraphProperty`, `IsIncreasingGraphProperty` and `IsNontrivialGraphProperty`. Upward closure (`IncreasingFamily`, componentwise ≤ on Bool-valued functions, :200), nonempty-and-proper (`NontrivialFamily`, :204) and their conjunction `ThresholdProperty` (:373) add the restrictions that the increasing, nontrivial and threshold uses need. All member hints were checked against their declarations."},{"obj_id":"sym:m","verdict":"matched","note":"The space is [2,∞), and m's meaning changes with each use. lem:low-degree: m is any real ≥ 2, and `LowDegreeParam m := 2 ≤ m` over ℝ (:147) pins exactly that. prop:block: m is an integer with 3 ≤ m ≤ n, and `BlockSize m n := 3 ≤ m ∧ m ≤ n` over ℕ (:305) pins exactly that. lem:block-capture and thm:variance: m = ⌊√n⌋ under log n ≥ 16. Here `sqrtBlockSize n := Nat.sqrt n` (:330) is the floor of √n by construction, `captureParameters` (:334) uses it as its first component, and `CaptureLogSize` (:339, `16 ≤ Real.log n`) gives n ≥ e^16, so m ≥ 2. Every use's range follows from its own member's constraint or formula."},{"obj_id":"sym:k","verdict":"matched","note":"The space is (0,∞), with k a real cutoff whose value depends on the use. lem:low-degree: k = σ log m / 64, and `LowDegreeCutoff p m k := k = biasScale p * Real.log m / 64` (:157) pins this, with `biasScale p = √(p(1−p))`. lem:restriction: k is any positive real, and `PositiveCutoff k := 0 < k` (:299) pins exactly that. prop:block: `blockParameters` (:322) sets the second component to `lowCutoff p m` (:153) for the ℕ block size m cast to ℝ. lem:block-capture and thm:variance: `captureParameters` (:334) sets it to `lowCutoff p (Nat.sqrt n)`. These are computed defs, so their range follows from the formula: with an interior bias σ > 0, and with m ≥ 2, log m > 0, so k > 0. The defs return 0 at endpoint biases, but no scoped use has an endpoint bias, because those consumers carry the interior-bias assumption."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: ass:natural-logarithms =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:natural-logarithms","verdict":"faithful-refinement","note":"Equality with Real.log fixes the logarithm to the natural logarithm, faithfully expressing the paper’s convention."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts": [], "assumption_verdicts": [{"obj_id": "ass:natural-logarithms", "verdict": "faithful-refinement", "note": "The paper's convention says every logarithm is the natural log. The Lean predicate NaturalLogarithms(logarithm) := logarithm = Real.log pins the log function to Mathlib's natural logarithm, so the two say the same thing in both directions. Real.log's values outside (0,∞) (log 0 = 0, log x = log|x|) are a Lean totalization only. The paper applies log only to positive arguments, so these values do not change the extension. The predicate is not yet used anywhere in the paper's Lean (its only occurrence is its definition, Basic.lean:58). Consumers should either take logarithm with this hypothesis or call Real.log directly; both are faithful."}], "substrate_gates": [], "escalate": null}

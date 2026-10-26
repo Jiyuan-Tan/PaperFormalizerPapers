@@ -1,0 +1,1238 @@
+{
+  "version": 1,
+  "slug": "oai_sharp_threshold_monotone",
+  "paper_sha256": "f221dd0a595568d1b088637af795c26f3565ad2ed197f8301906386dcabc0312",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:block-capture-size",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "178624997049275426bbccdd3d0dc005cfe2c816"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "178624997049275426bbccdd3d0dc005cfe2c816"
+      }
+    },
+    {
+      "id": "ass:block-law",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ef7f0c13019adf82d3de19460aef92a58617b084"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ef7f0c13019adf82d3de19460aef92a58617b084"
+      }
+    },
+    {
+      "id": "ass:block-m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9a5606d7ba3f8a9537ed9a23a0d742e4c947f701"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9a5606d7ba3f8a9537ed9a23a0d742e4c947f701"
+      }
+    },
+    {
+      "id": "ass:finite-coordinate-set",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e1ad74b91cc9852ce554d3ee9654f27905b12e5b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e1ad74b91cc9852ce554d3ee9654f27905b12e5b"
+      }
+    },
+    {
+      "id": "ass:graph-property-invariance",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2e8ad3ef0acbc3ba59ac995e50ab2ae56e2eb15c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2e8ad3ef0acbc3ba59ac995e50ab2ae56e2eb15c"
+      }
+    },
+    {
+      "id": "ass:graph-symmetry",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "01434ec5af7e0194c0a78770ec10aff20111b29d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "01434ec5af7e0194c0a78770ec10aff20111b29d"
+      }
+    },
+    {
+      "id": "ass:increasing-family",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c0d2524c4a567afff8f8452cf18ee46d683d350f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c0d2524c4a567afff8f8452cf18ee46d683d350f"
+      }
+    },
+    {
+      "id": "ass:interior-bias",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2586ed85112f3523fcf2770469c7253082874788"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2586ed85112f3523fcf2770469c7253082874788"
+      }
+    },
+    {
+      "id": "ass:low-degree-cutoff",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be47d7a4ad16777b3185de95f7a5e10db5caaa23"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be47d7a4ad16777b3185de95f7a5e10db5caaa23"
+      }
+    },
+    {
+      "id": "ass:low-degree-m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fb6809b93d4773acab6bfd43cdee038f8a6a6368"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fb6809b93d4773acab6bfd43cdee038f8a6a6368"
+      }
+    },
+    {
+      "id": "ass:low-degree-small-influences",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "18fd650c3b0c5c0f3e77092e0156adb052d513b1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "18fd650c3b0c5c0f3e77092e0156adb052d513b1"
+      }
+    },
+    {
+      "id": "ass:natural-logarithms",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6c266a73fc7f43bb5d697c57d2cfc0ad8f978a15"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6c266a73fc7f43bb5d697c57d2cfc0ad8f978a15"
+      }
+    },
+    {
+      "id": "ass:nontrivial-family",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7c0bf054b92a07782af1d7b715468f89f34da46d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7c0bf054b92a07782af1d7b715468f89f34da46d"
+      }
+    },
+    {
+      "id": "ass:restriction-boolean-function",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c35374ee0a2628155876457d726bf19b01d3a61e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c35374ee0a2628155876457d726bf19b01d3a61e"
+      }
+    },
+    {
+      "id": "ass:restriction-cutoff",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1f2a9c4297f4eac7bbb535081fcd697bc9a54359"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1f2a9c4297f4eac7bbb535081fcd697bc9a54359"
+      }
+    },
+    {
+      "id": "ass:restriction-free-edges",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "51cc22bb45c3aa0a9fbbd07d26abd44300145521"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "51cc22bb45c3aa0a9fbbd07d26abd44300145521"
+      }
+    },
+    {
+      "id": "ass:restriction-law",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4aafd3195dcd60e9f440a9d9b5a3c52ede545160"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4aafd3195dcd60e9f440a9d9b5a3c52ede545160"
+      }
+    },
+    {
+      "id": "ass:threshold-epsilon",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "61205b10977e50cd8b06fa183644e949159f2c0f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "61205b10977e50cd8b06fa183644e949159f2c0f"
+      }
+    },
+    {
+      "id": "ass:threshold-n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "faab1e6a8bfe9c2c791694d138f626a7eda8eb72"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "faab1e6a8bfe9c2c791694d138f626a7eda8eb72"
+      }
+    },
+    {
+      "id": "ass:threshold-property",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e4ed20209544f6279f333eae8c5e76e1d2d3c1e9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e4ed20209544f6279f333eae8c5e76e1d2d3c1e9"
+      }
+    },
+    {
+      "id": "ass:variance-bias",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a2a2d378ee7c988366e9c201391d03b291c981ad"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a2a2d378ee7c988366e9c201391d03b291c981ad"
+      }
+    },
+    {
+      "id": "ass:variance-n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2a22375182eb1bd4261092a07be521da74981775"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2a22375182eb1bd4261092a07be521da74981775"
+      }
+    },
+    {
+      "id": "ass:variance-symmetry",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "44f64c1bfb65d3a4863893b00d9f89ccb93c7d44"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "44f64c1bfb65d3a4863893b00d9f89ccb93c7d44"
+      }
+    },
+    {
+      "id": "def:bias-scale",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "323c0f3bf62222518fa846a79d9447dae739b42e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "323c0f3bf62222518fa846a79d9447dae739b42e"
+      }
+    },
+    {
+      "id": "def:block-capture-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "78231af20aa6705f1c4142fbadb4a4a66ae68a5d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "78231af20aa6705f1c4142fbadb4a4a66ae68a5d"
+      }
+    },
+    {
+      "id": "def:block-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ed7bf1f68d043a50f91800a1890fecde2d1a532e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ed7bf1f68d043a50f91800a1890fecde2d1a532e"
+      }
+    },
+    {
+      "id": "def:coordinate-difference",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9e5894e1bf1d4b7e6119fd6d0478dbbae0721218"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9e5894e1bf1d4b7e6119fd6d0478dbbae0721218"
+      }
+    },
+    {
+      "id": "def:eq-dirichlet",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bdf441c5b7ad2f4d9b8bd1876f1fd3431707d82d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bdf441c5b7ad2f4d9b8bd1876f1fd3431707d82d"
+      }
+    },
+    {
+      "id": "def:eq-parseval",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "378bb0568ea480dd9c7052620016851d93313a12"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "378bb0568ea480dd9c7052620016851d93313a12"
+      }
+    },
+    {
+      "id": "def:fourier-characters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d50c51079bb994d417c50c54c8ee0efbd2441622"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d50c51079bb994d417c50c54c8ee0efbd2441622"
+      }
+    },
+    {
+      "id": "def:fourier-coefficients",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "57ea3256eb646e4e2d7fcd96bc4594a8a4daf996"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "57ea3256eb646e4e2d7fcd96bc4594a8a4daf996"
+      }
+    },
+    {
+      "id": "def:graph-bias-convention",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4843d307a3cab84c0faa7013dbf11e7bed800d4c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4843d307a3cab84c0faa7013dbf11e7bed800d4c"
+      }
+    },
+    {
+      "id": "def:graph-coordinates",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e179e8987c2ad48bd2dcb2011da978c63a15fd5c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e179e8987c2ad48bd2dcb2011da978c63a15fd5c"
+      }
+    },
+    {
+      "id": "def:graph-encoding",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c6f3a2315cfa2e1eccabbc4e00fbcdf52ab80aa3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c6f3a2315cfa2e1eccabbc4e00fbcdf52ab80aa3"
+      }
+    },
+    {
+      "id": "def:graph-influences",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ee22544b06e3853f6a91bb4b0f832c11b7b8beb0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ee22544b06e3853f6a91bb4b0f832c11b7b8beb0"
+      }
+    },
+    {
+      "id": "def:graph-property",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a6a66da67580889201d0c3651bfab5adc79297b5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a6a66da67580889201d0c3651bfab5adc79297b5"
+      }
+    },
+    {
+      "id": "def:increasing-graph-property",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fa5e39131b76dda4fb1508fce6df2e76644ff4c2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fa5e39131b76dda4fb1508fce6df2e76644ff4c2"
+      }
+    },
+    {
+      "id": "def:low-degree-noise-operator",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dad0b401f3194ae79857820b6ef6f5cc361b0e76"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dad0b401f3194ae79857820b6ef6f5cc361b0e76"
+      }
+    },
+    {
+      "id": "def:low-degree-noise-parameter",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d57f728399931ad9c37854689bcd8293a65156f8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d57f728399931ad9c37854689bcd8293a65156f8"
+      }
+    },
+    {
+      "id": "def:low-degree-projection",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4ce069ed9c0ffb312152cef477e84bb4ed6317b7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4ce069ed9c0ffb312152cef477e84bb4ed6317b7"
+      }
+    },
+    {
+      "id": "def:nontrivial-graph-property",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "90a4397f737eeae24a33be58ed95dacfed6c56d2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "90a4397f737eeae24a33be58ed95dacfed6c56d2"
+      }
+    },
+    {
+      "id": "def:product-influences",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "58d62d2e5049729eb053ea3664ceb4b10034476a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "58d62d2e5049729eb053ea3664ceb4b10034476a"
+      }
+    },
+    {
+      "id": "def:product-norm",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be8d7c3701061c63622d7e367fb727e448097227"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be8d7c3701061c63622d7e367fb727e448097227"
+      }
+    },
+    {
+      "id": "def:property-probability",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "201a4f857b5ff2f5619c6ba2c028f51e3c6a69cc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "201a4f857b5ff2f5619c6ba2c028f51e3c6a69cc"
+      }
+    },
+    {
+      "id": "def:property-quantile",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "272b3dab3a563a60976042fc7e7c954c49221812"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "272b3dab3a563a60976042fc7e7c954c49221812"
+      }
+    },
+    {
+      "id": "def:restricted-function",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ad637b4b8403121bdee53b7fa73123c3a2070eb9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ad637b4b8403121bdee53b7fa73123c3a2070eb9"
+      }
+    },
+    {
+      "id": "def:restriction-exterior",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fc70a2a2c27b3ecef7075e2ed5e2df34cc18e75a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fc70a2a2c27b3ecef7075e2ed5e2df34cc18e75a"
+      }
+    },
+    {
+      "id": "lem:block-capture",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7847d46937e6884562beda2ffec9f9689a1b7200"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7847d46937e6884562beda2ffec9f9689a1b7200"
+      }
+    },
+    {
+      "id": "lem:low-degree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1b8068fd5377b856b3423a58ab9de8f49eee6806"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1b8068fd5377b856b3423a58ab9de8f49eee6806"
+      }
+    },
+    {
+      "id": "lem:restriction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f7bca63ee55b10c63a19136eba631db496252b72"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f7bca63ee55b10c63a19136eba631db496252b72"
+      }
+    },
+    {
+      "id": "prop:block",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73ddd4474c6e39310cf3efd674d44971d5511eb6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73ddd4474c6e39310cf3efd674d44971d5511eb6"
+      }
+    },
+    {
+      "id": "sym:A",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "33ba1a01e47f43c4ffe9c86915bbc02b7ff1fe8f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "33ba1a01e47f43c4ffe9c86915bbc02b7ff1fe8f"
+      }
+    },
+    {
+      "id": "sym:B",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "adda474f19a15eb49256350b92613262c6a9b523"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "adda474f19a15eb49256350b92613262c6a9b523"
+      }
+    },
+    {
+      "id": "sym:E_n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4527ee19d82c76b963b35e57f4bbd73c48c22038"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4527ee19d82c76b963b35e57f4bbd73c48c22038"
+      }
+    },
+    {
+      "id": "sym:I(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "445f57750407350e5cb839ccbca6b44db6fb7092"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "445f57750407350e5cb839ccbca6b44db6fb7092"
+      }
+    },
+    {
+      "id": "sym:I(f_y)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b6137af92275f6c53cadd8443dd4143d07cdc885"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b6137af92275f6c53cadd8443dd4143d07cdc885"
+      }
+    },
+    {
+      "id": "sym:I(h)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "307bd4903696fd83cc4242eb6bf686ab54f2933a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "307bd4903696fd83cc4242eb6bf686ab54f2933a"
+      }
+    },
+    {
+      "id": "sym:I_e(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "55ef4340fe1ef42eaf7fad649d6da816ad82575a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "55ef4340fe1ef42eaf7fad649d6da816ad82575a"
+      }
+    },
+    {
+      "id": "sym:I_e(f_y)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "43bcfa0949ef0dd20e99d4868bba4da4aa05ab49"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "43bcfa0949ef0dd20e99d4868bba4da4aa05ab49"
+      }
+    },
+    {
+      "id": "sym:I_i(h)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f5ea6601fe52ed60c453afc52ea4d09704071ed3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f5ea6601fe52ed60c453afc52ea4d09704071ed3"
+      }
+    },
+    {
+      "id": "sym:I_p(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "362734ad68ddc5ceae578bf6aef982b89becaa14"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "362734ad68ddc5ceae578bf6aef982b89becaa14"
+      }
+    },
+    {
+      "id": "sym:I_{e,p}(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2aeafaf3c186383dd831c0d1928714bdfe2476a6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2aeafaf3c186383dd831c0d1928714bdfe2476a6"
+      }
+    },
+    {
+      "id": "sym:P_{\\le d}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "edfaf8e5ae58027488769dbff2cd4d7a06c2b92c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "edfaf8e5ae58027488769dbff2cd4d7a06c2b92c"
+      }
+    },
+    {
+      "id": "sym:T_\\rho",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c839b41df5a57502e69764e4c0f33f27fcf7bc8e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c839b41df5a57502e69764e4c0f33f27fcf7bc8e"
+      }
+    },
+    {
+      "id": "sym:\\Delta_e f",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c39defe6bc53f9e0934bf2d45768f7f595ea8c5b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c39defe6bc53f9e0934bf2d45768f7f595ea8c5b"
+      }
+    },
+    {
+      "id": "sym:\\Delta_i g",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3522b1860b4ff896be6368979c6c5b18eb872bfb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3522b1860b4ff896be6368979c6c5b18eb872bfb"
+      }
+    },
+    {
+      "id": "sym:\\Delta_i h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "05782e03e2f467cf183dfe2bfc6e14b40746a285"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "05782e03e2f467cf183dfe2bfc6e14b40746a285"
+      }
+    },
+    {
+      "id": "sym:\\Var(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "70991da2f6c6fd57277d04f3b5d45c6e56463657"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "70991da2f6c6fd57277d04f3b5d45c6e56463657"
+      }
+    },
+    {
+      "id": "sym:\\Var_p(f)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e7ef0a8c45f36433f71b68b14a18cce69cc59c2e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e7ef0a8c45f36433f71b68b14a18cce69cc59c2e"
+      }
+    },
+    {
+      "id": "sym:\\chi_S",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7d04127fd817db9ffb1581013940132c981c8005"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7d04127fd817db9ffb1581013940132c981c8005"
+      }
+    },
+    {
+      "id": "sym:\\chi_i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "aa0431155a19970c3da1211ea2c3ffe9188e298e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "aa0431155a19970c3da1211ea2c3ffe9188e298e"
+      }
+    },
+    {
+      "id": "sym:\\mathcal P",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e3059cc10da89517dbb4214edec2352c536f0f1b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e3059cc10da89517dbb4214edec2352c536f0f1b"
+      }
+    },
+    {
+      "id": "sym:\\mu(p)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a6fc1c8b8dd19fdda72a436f811b9ea0ef8b2797"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a6fc1c8b8dd19fdda72a436f811b9ea0ef8b2797"
+      }
+    },
+    {
+      "id": "sym:\\mu_p(\\mathcal P)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "033cafeb25d413da85939699fc805c7bd7392936"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "033cafeb25d413da85939699fc805c7bd7392936"
+      }
+    },
+    {
+      "id": "sym:\\rho",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8d96cddbdfe95bc5ae42f4bb8ae9f63e71c82e23"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8d96cddbdfe95bc5ae42f4bb8ae9f63e71c82e23"
+      }
+    },
+    {
+      "id": "sym:\\sigma",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7977054c8bff690c6e237feb85c991676ef92cd3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7977054c8bff690c6e237feb85c991676ef92cd3"
+      }
+    },
+    {
+      "id": "sym:\\varepsilon",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a7ebd151bc7a01fce7472e6c4663a6c8a19fa68a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a7ebd151bc7a01fce7472e6c4663a6c8a19fa68a"
+      }
+    },
+    {
+      "id": "sym:\\|g\\|_q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9f4f02ed5e107fb39abe666fbc91de78e05a1138"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9f4f02ed5e107fb39abe666fbc91de78e05a1138"
+      }
+    },
+    {
+      "id": "sym:a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1785968134f0cd00352b3af24e9a6f918c504ffc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1785968134f0cd00352b3af24e9a6f918c504ffc"
+      }
+    },
+    {
+      "id": "sym:b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fe4932fc50b79569036dbc1806feb74ccc255374"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fe4932fc50b79569036dbc1806feb74ccc255374"
+      }
+    },
+    {
+      "id": "sym:d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be5433acd27da12fe478403947bb1951d11f22a9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be5433acd27da12fe478403947bb1951d11f22a9"
+      }
+    },
+    {
+      "id": "sym:f",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0518b48bbf226cea2cf0ead456041652a8b341c6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0518b48bbf226cea2cf0ead456041652a8b341c6"
+      }
+    },
+    {
+      "id": "sym:f_y",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "93da957c977092a648372f84fcb74583cc9aa06b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "93da957c977092a648372f84fcb74583cc9aa06b"
+      }
+    },
+    {
+      "id": "sym:g",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "330d3c0876fbc5210f3b6c4344933b7681211505"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "330d3c0876fbc5210f3b6c4344933b7681211505"
+      }
+    },
+    {
+      "id": "sym:h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6c86be3df4fb721e722da51bd227b3a07c7f82a0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6c86be3df4fb721e722da51bd227b3a07c7f82a0"
+      }
+    },
+    {
+      "id": "sym:k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a28e8888118ac0bdbb7c37396da36bb040148412"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a28e8888118ac0bdbb7c37396da36bb040148412"
+      }
+    },
+    {
+      "id": "sym:m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6ce71ec53a72adcba6a6454111ee5f34c7af4b7d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6ce71ec53a72adcba6a6454111ee5f34c7af4b7d"
+      }
+    },
+    {
+      "id": "sym:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8d0c684eff2b412b0c79e8165ffd9a60b1367dc4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8d0c684eff2b412b0c79e8165ffd9a60b1367dc4"
+      }
+    },
+    {
+      "id": "sym:p_a(\\mathcal P)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "33182dd3a8c9241f1f1a82212301f08853f13341"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "33182dd3a8c9241f1f1a82212301f08853f13341"
+      }
+    },
+    {
+      "id": "sym:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d52f80f0de9ea797c41715f5cb5df1b012285e5e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d52f80f0de9ea797c41715f5cb5df1b012285e5e"
+      }
+    },
+    {
+      "id": "sym:s",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5594cf22c196084251e44f44c53acb85bff9d7f2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5594cf22c196084251e44f44c53acb85bff9d7f2"
+      }
+    },
+    {
+      "id": "sym:u",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e6878d2116c0a627c03a7b381a14621088bcbbf3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e6878d2116c0a627c03a7b381a14621088bcbbf3"
+      }
+    },
+    {
+      "id": "sym:v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "eded4bc429c68cc268d420e867308e71a2788953"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "eded4bc429c68cc268d420e867308e71a2788953"
+      }
+    },
+    {
+      "id": "sym:x",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "551d0eef2264d0a95b0032bb1e4c4527af7bd720"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "551d0eef2264d0a95b0032bb1e4c4527af7bd720"
+      }
+    },
+    {
+      "id": "sym:x_{e\\leftarrow b}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9f43fc7cfd5628f3dd965ec9de129928ba02ae75"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9f43fc7cfd5628f3dd965ec9de129928ba02ae75"
+      }
+    },
+    {
+      "id": "sym:y",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "30f4f923afbc47b165f539170c4919253736b8de"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "30f4f923afbc47b165f539170c4919253736b8de"
+      }
+    },
+    {
+      "id": "thm:threshold",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "692f2c11ffae27d57ff70839377dffdbdfef279d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "692f2c11ffae27d57ff70839377dffdbdfef279d"
+      }
+    },
+    {
+      "id": "thm:variance",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "60c35d43c790244117769b72899fcc0c9b37ed9c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "60c35d43c790244117769b72899fcc0c9b37ed9c"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "ac72e96c1d87c5e52ff3b3cc12508f81be256b37697caef077057a7c255c5001",
+  "files": [
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "eb33dfa8cc938547a5c92ee6d3c5545a18fdaddec116939def5b6c8edddc4aff"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "74a1c9bfd4907f0459b4e8cc455fe529bcfa20cdf0751144d9453e1de73ddaee"
+    },
+    {
+      "path": "corrected_paper/figures/block-picture.pdf",
+      "sha256": "1c0b3fd20289f07453c5b3509904420d6deb2778d29b93566f0ae99a11d45c72"
+    },
+    {
+      "path": "corrected_paper/figures/block.tex",
+      "sha256": "d5b4e0c6f3081adc0de458b96a7cb2caf81a57a7f1392779c94042ff48ca52c2"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "5822bf1b7dc6a0778ca46fa96dfbdeb0e2a089bd89f64f5cdb75b8b034d247cf"
+    },
+    {
+      "path": "corrected_paper/references.tex",
+      "sha256": "a7f9e2ab0de8711e6563667755d75317e64c7e7c732cc4c535f48287ec6b92ec"
+    },
+    {
+      "path": "corrected_paper/sections/fourier.tex",
+      "sha256": "b085890565714e607ce3b25196e01cec8ed30665e0f19f15befbf8219bedff89"
+    },
+    {
+      "path": "corrected_paper/sections/graph.tex",
+      "sha256": "f9c27ac37160f9bc91d0dda192bedd39d0b1e03993bcb5484112a414236ebf4a"
+    },
+    {
+      "path": "corrected_paper/sections/introduction.tex",
+      "sha256": "6ad56c9387c155b17d3c5c451a7b5ae942e62b92cbee21ba83af9186663afd72"
+    },
+    {
+      "path": "corrected_paper/sections/threshold.tex",
+      "sha256": "05855d362be1b6b5c24331debd5e48b51394343e06f380d43e45a7cebc8ee1f9"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "bee07ffb2ed048a7c74af075e5fac5d05985d061d3c2e7e107b7e779d7c3683d"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "9bc8a8d9db8aaaa318b216c01d6dfac4907d6f4172a418b3bb12054742106680"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone.lean",
+      "sha256": "ccd8e278e30411d0d6c202a6e83e9ab12127d10918d378ac7ae549f9dbf0dcae"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Basic.lean",
+      "sha256": "4c4727d9d171014f1016f03c9dca2bddc46d1a16199ec1093bc8b3b85ee1b6fb"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers.lean",
+      "sha256": "e33f92d5cfd38e75464990dce55425ceb3a12181d33739a243a62189c8dffa6f"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/BlockAverage.lean",
+      "sha256": "76fed93c23461fb3c409c321f29e76d4854f133212be9e6b372f84f3c9b1129d"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/BlockCapture.lean",
+      "sha256": "e674c39179d6e2c5d0cd2ba27e65a2038ee25d7e764cf4fea5656914fbd9cda1"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/Capture.lean",
+      "sha256": "e14927ad243a5f3bc4d174d4ce677b2d6afd7219d42bcc6884a802cc509020ac"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/ConstantBounds.lean",
+      "sha256": "9926faf53af6b43a38ab433ac8a7ee64d7e0789aa807860b22f07ff608772883"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/Fourier.lean",
+      "sha256": "5d44bf2c763756dcae9f9dc849cc4bee5bd448c4a24693e66eb98a5355d2afed"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/LowDegree.lean",
+      "sha256": "bee699bf2348f366b5d0e9a99bd4d7d5323e4ba988485d1294e1fdf2d2d788d3"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/NoiseBasics.lean",
+      "sha256": "3249bc911459402d40ceeafbfb53199ef1ae20bc78e9f332e01f54fcd155e352"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/NoiseOperator.lean",
+      "sha256": "71c33da50c0018bc8eb583dbfcef633da89a3b6aca7306ab9489ce7a06c096f4"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/NoiseTensorization.lean",
+      "sha256": "768f4c2244b097ed6d6f07fe2ecb7d94b05577d5db0f1ecd6a290ec5880c2084"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/OrbitCounting.lean",
+      "sha256": "938faf7a03c8f0e09149abecb58eaeb3c74f6df71d5f0e1ee5b7ba0ba85b5a5c"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/Restriction.lean",
+      "sha256": "1e8571aca2fe6cbb2f90d3cbd49baa7f0b2d69b0c0330a2c38e21e973b74564f"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/RussoMargulis.lean",
+      "sha256": "f7fc5c804318a9435d8a6369d70735499c60a5077aff1cfbdfce2f851c2c8e1e"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Helpers/SupportDegree.lean",
+      "sha256": "21376afaede5f669ee60b2c485b01512c0b66e9ee2fe51525594f0ae4fa9a58e"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/Main.lean",
+      "sha256": "2f36cbee552fa7296164b64688e9f28fd5f7304b1939e33b16130886f3be9691"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/TThreshold.lean",
+      "sha256": "3c77e136af5100840d189a768a8c3aa2e3dca6dcde98708bf2384d116a564f1f"
+    },
+    {
+      "path": "lean/Papers/OaiSharpThresholdMonotone/TVariance.lean",
+      "sha256": "b77848a68a161c0a4f1abf931d26d6d58e9300ddbf4369ca2d534fb9e31b3246"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "c094bff37df9216682285a5de9b139e2f3011eae885339747eafbb951660c505"
+    },
+    {
+      "path": "lean/built-against.json",
+      "sha256": "c694e6a43036f1b918e371bb6512841b8dbcbf8299c8a8d77750eabcfa038ac6"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "bf987e0bd6931e45dd4ae9f55dcd81effb8c12266b8919cb27caccb1474a3a44"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "b5727ee1e9d4f222fd201de3751f58d7577c78ba2dc0e12677b9bb502d21c00d"
+    }
+  ],
+  "code": "2bf26ed94141d312bba8c1244c851c74d2015fbc4e4390be300882397e269314"
+}

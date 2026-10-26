@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Causalean",
+    "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+    "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+    "uncommitted": 1,
+    "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+    "files": {
+      "Causalean/Experimentation/DesignBased/Designs/Bernoulli.lean": "141f82fe373cabc4b7e642112a79ee2c1e5d3340",
+      "Causalean/Experimentation/DesignBased/Designs/BernoulliMoments.lean": "90a5e23a7b98c33a0712197adf7c60c9555db8f9",
+      "Causalean/Experimentation/DesignBased/Designs/Coin.lean": "09b5d7b0dce132f25ecbb8f4781df57a304f18e9",
+      "Causalean/Experimentation/DesignBased/Designs/CompleteRandomization.lean": "862a25aff3539f1a814c83cfddfb5e5af1a396fa",
+      "Causalean/Experimentation/DesignBased/ProductBlock.lean": "002ec316caeffd2303ac6d4786f023966ec226d3",
+      "Causalean/Experimentation/DesignBased/ProductVariance.lean": "6f1a9a0f52e475e5992a496c23c460dba707b4ea",
+      "Causalean/Mathlib/Analysis/WeightedCauchySchwarz.lean": "c7c0ee9d56a575cc2b4d1ba31dd90d06cae4fcc4",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Foundations.lean": "2000aa816f4d5177f69131ff7c4009a6da6b9249",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/L2Closure.lean": "8638851d3d824d13770a59fc743e25859017b7fe",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Scalar.lean": "dd0e25ff5d0a10ba46fc9a62b4daf243cf14ebb4",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Series.lean": "6728b5e0aa2bd6debc2a0e39f23172b33f8f351e",
+      "Causalean/Mathlib/Probability/Poisson/Poincare/Tensorization.lean": "7ba656b75ff81e29025902d151c467ba9c69e0e2",
+      "Causalean/Mathlib/Probability/VarianceProd.lean": "e8f3a44515db87ad8728a3f908ef2e3d2e0bb23d",
+      "Causalean/Stat/FiniteDesign/DesignCore.lean": "b486f7bf67f77e85c88cd9b4ae1c0ac53830d43a",
+      "Causalean/Stat/FiniteDesign/FiniteDesignMeasure.lean": "cfd2e1e1b63b1a51257c8db2499eb1802ada5b4f",
+      "Causalean/Stat/FiniteDesign/Product.lean": "55b688817ff1a27ad54a487684672ce9b66154d8",
+      "Causalean/Stat/FiniteDesign/ProductMeasure.lean": "a0013170dc648cd8f84a9efb395b76b997efac08",
+      "Causalean/Tactic/Attr.lean": "ea7f7d8d1320b7b0e491af41e84f3acc9d904099"
+    },
+    "status": "unverified"
+  }
+]
