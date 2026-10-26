@@ -1,0 +1,351 @@
+===== reviewer convergence/dual :: medium :: batch[ass:capture-k,ass:capture-condition,ass:threshold-epsilon,ass:main-r,ass:main-n] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:capture-k",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated positive real cutoff condition k > 0."
+    },
+    {
+      "obj_id": "ass:capture-condition",
+      "verdict": "faithful-refinement",
+      "note": "Substituting the core definitions L = (k/r)^α and α = r/(r−1) gives exactly the Lean inequality; subtraction and division take place in ℝ."
+    },
+    {
+      "obj_id": "ass:threshold-epsilon",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the conjunction 0 < ε and ε < 1/2."
+    },
+    {
+      "obj_id": "ass:main-r",
+      "verdict": "faithful-refinement",
+      "note": "Natural numbers satisfying 3 ≤ r represent exactly the stated integers r ≥ 3."
+    },
+    {
+      "obj_id": "ass:main-n",
+      "verdict": "faithful-refinement",
+      "note": "Under the stated r ≥ 3 domain, natural numbers satisfying r ≤ n represent exactly the stated integers n ≥ r."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts": [], "assumption_verdicts": [{"obj_id": "ass:capture-k", "verdict": "faithful-refinement", "note": "The NL says 'let k>0' with k a positive real cutoff (core: 'k>0 is arbitrary'). The Lean `0 < k` with k : ℝ is exactly equivalent."}, {"obj_id": "ass:capture-condition", "verdict": "faithful-refinement", "note": "The Lean `(r:ℝ) * supportCutoff r k * ((m-1)/(n-1)) ≤ 1/2`, where supportCutoff r k = (k/r)^captureExponent r and captureExponent r = r/(r-1), is literally rL(m-1)/(n-1) ≤ 1/2 with L=(k/r)^α and α=r/(r-1), as def:capture-cutoffs sets them. The integers are cast to ℝ, so the subtraction and division are real and do not truncate. The only Lean-specific behaviour is at n=1, where the paper's (m-1)/(n-1) is 0/0 and undefined and Lean's 0/0=0 makes the condition hold trivially. That case lies outside where the paper expression is defined, so the two are equivalent on the stated domain."}, {"obj_id": "ass:threshold-epsilon", "verdict": "faithful-refinement", "note": "The NL '0<ε<1/2' over the reals matches the Lean `0 < ε ∧ ε < 1/2` with ε : ℝ exactly."}, {"obj_id": "ass:main-r", "verdict": "faithful-refinement", "note": "The NL is 'every integer r≥3'. The Lean uses r : ℕ with `3 ≤ r`. Every integer r≥3 is a natural number, so the two describe the same set."}, {"obj_id": "ass:main-n", "verdict": "faithful-refinement", "note": "The NL is 'every integer n≥r'. The Lean uses n r : ℕ with `r ≤ n`. Since r≥3, every such integer n is a natural number, so the two are equivalent."}], "substrate_gates": [], "escalate": null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:main-p,ass:capture-support,def:vertex-edge-sets,def:hypergraph-property,def:coordinate-replacement] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:vertex-edge-sets",
+      "verdict": "matched",
+      "note": "Fin n faithfully reindexes [n]; the subtype consists exactly of its r-element subsets, hence represents E_{n,r}."
+    },
+    {
+      "obj_id": "def:hypergraph-property",
+      "verdict": "matched",
+      "note": "edgePerm maps each edge by the vertex permutation; the invariant field states exactly invariance of the Boolean function under every such permutation."
+    },
+    {
+      "obj_id": "def:coordinate-replacement",
+      "verdict": "matched",
+      "note": "Function.update sets coordinate e to b and preserves every other coordinate, exactly as specified."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:main-p",
+      "verdict": "faithful-refinement",
+      "note": "MainBias states exactly the two strict inequalities 0 < p and p < 1."
+    },
+    {
+      "obj_id": "ass:capture-support",
+      "verdict": "faithful-refinement",
+      "note": "Finset (Edge n r) represents a subset of the finite edge set; CaptureSupport states exactly nonemptiness and cardinality at most L."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:vertex-edge-sets","verdict":"matched","note":"Edge n r = {e : Finset (Fin n) // e.card = r} is exactly binom([n], r). The labels Fin n = {0,…,n-1} are a bijective relabelling of [n] = {1,…,n}, which no statement depends on. The integer ranges r≥3 and n≥r are their own core assumption nodes (ass:main-r/ass:main-n, realized by MainUniformity/MainVertexCount in Basic.lean:62,65) and are carried as hypotheses by the consumers (TMain, TCorThreshold, CaptureDomain). Defining the family for all n, r therefore does not change the object on the paper's domain."},{"obj_id":"def:hypergraph-property","verdict":"matched","note":"A Boolean function f on (Edge n r → Bool) with f(x ∘ edgePerm τ) = f x for every τ in Perm(Fin n). Here edgePerm τ is the image map e ↦ τ(e). Precomposing with τ is the coordinate action of τ⁻¹, and the condition quantifies over the whole group, so it is equivalent to invariance under every vertex permutation. Bool for {0,1} is a faithful encoding. The two extensions agree in both directions."},{"obj_id":"def:coordinate-replacement","verdict":"matched","note":"Function.update x e b is x with its e-coordinate set to b and every other coordinate unchanged. That is exactly x_{e←b}. The generic index type J specializes to Edge n r."}],"assumption_verdicts":[{"obj_id":"ass:main-p","verdict":"faithful-refinement","note":"MainBias p := 0 < p ∧ p < 1 on ℝ, which is exactly the paper's open interval 0<p<1."},{"obj_id":"ass:capture-support","verdict":"faithful-refinement","note":"S : Finset (Edge n r) is exactly a subset of E_{n,r} (E_{n,r} is finite). The conditions 1 ≤ S.card and (S.card : ℝ) ≤ L give 1≤|S|≤L with L real, which matches the core's L, a positive real cutoff (k/r)^α. The two directions are equivalent."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:bias,ass:low-m,ass:low-individual-influences,ass:block-domain,ass:capture-integer-domain] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:bias",
+      "verdict": "faithful-refinement",
+      "note": "Exactly 0<p<1; the standing independent Bernoulli(p) law is implemented by biasedLaw, whose product coin weights equal p and 1-p on this domain."
+    },
+    {
+      "obj_id": "ass:low-m",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated real parameter condition m≥2."
+    },
+    {
+      "obj_id": "ass:low-individual-influences",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the coordinatewise influence bound: replacement is Function.update, pivotal probabilities use the independent product law, and total influence is their sum; averaging the unused coordinate leaves the pivotal probability unchanged."
+    },
+    {
+      "obj_id": "ass:block-domain",
+      "verdict": "faithful-refinement",
+      "note": "Exactly r+1≤m≤n on the standing nonnegative integer size domain; natural-number encoding preserves both directions."
+    },
+    {
+      "obj_id": "ass:capture-integer-domain",
+      "verdict": "faithful-refinement",
+      "note": "Exactly n≥r≥3 and 1≤m≤n; these bounds make the integer domain equivalent to the natural-number encoding."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:bias","verdict":"faithful-refinement","note":"BiasInterior p := 0<p ∧ p<1 is exactly the condition 0<p<1. The other half of the clause (independent Bernoulli(p) coordinates) is the law itself, given by biasedLaw = bernoulliDesign (a product of coinDesign p), which clamps only outside [0,1] and so equals Bernoulli(p)^J on the stated domain. Equivalent in both directions."},{"obj_id":"ass:low-m","verdict":"faithful-refinement","note":"m : ℝ with 2 ≤ m is exactly 'let m ≥ 2 be real'. Same domain, both directions."},{"obj_id":"ass:low-individual-influences","verdict":"faithful-refinement","note":"The condition is ∀ i : J, coordInfluence p h i ≤ totalCoordInfluence p h / m. coordInfluence is Pr_p(h(x_{i←1}) ≠ h(x_{i←0})), taken under the product Bernoulli law on J with x_{i←b} = Function.update x i b, and totalCoordInfluence is its sum over J. These match the core definitions of I_i(h) and I(h) (pivotal and total influence under the product law), so the Lean is equivalent to 'I_i(h) ≤ I(h)/m for every i ∈ J' with real m and h : {0,1}^J → {0,1}."},{"obj_id":"ass:block-domain","verdict":"faithful-refinement","note":"r+1 ≤ m ∧ m ≤ n over ℕ. r is the hypergraph uniformity, which is a natural number throughout (Edge n r), and m ≥ r+1 ≥ 1 and n ≥ m are then nonnegative, so typing the integers as ℕ loses no case. Equivalent to 'r+1 ≤ m ≤ n integers'."},{"obj_id":"ass:capture-integer-domain","verdict":"faithful-refinement","note":"3 ≤ r ∧ r ≤ n ∧ 1 ≤ m ∧ m ≤ n over ℕ. All three integers are forced positive by the paper's own bounds, so typing them as ℕ is exact. Equivalent to 'n ≥ r ≥ 3 and 1 ≤ m ≤ n integers'."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:influences,def:logarithm-convention,def:increasing-nontrivial,def:threshold-quantiles,def:threshold-width] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:influences",
+      "verdict": "matched",
+      "note": "Unfolding gives the pivotal-event probability under independent Bernoulli(p) coordinates; totalEdgeInfluence sums these over all r-element vertex subsets, exactly as stated."
+    },
+    {
+      "obj_id": "def:logarithm-convention",
+      "verdict": "matched",
+      "note": "Real.log is the natural logarithm; Edge n r uses subsets of Fin n, so n counts vertices."
+    },
+    {
+      "obj_id": "def:increasing-nontrivial",
+      "verdict": "matched",
+      "note": "Monotone uses coordinatewise Boolean order, exactly expressing increase under 0-to-1 changes; the existential inequality is equivalent to nonconstancy."
+    },
+    {
+      "obj_id": "def:threshold-quantiles",
+      "verdict": "matched",
+      "note": "On the stated domain, probCurve is the Bernoulli(p) expectation of the Boolean indicator, and sInf is taken over exactly the specified subset of [0,1]."
+    },
+    {
+      "obj_id": "def:threshold-width",
+      "verdict": "matched",
+      "note": "The definition is exactly p_(1-ε) minus p_ε on the paper's stated domain 0<ε<1/2."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:influences","verdict":"matched","note":"edgeInfluence p f e unfolds to (biasedLaw (Edge n r) p).Pr {x | f (update x e true) ≠ f (update x e false)}. biasedLaw is Causalean's bernoulliDesign: every coordinate is independently true with probability max 0 (min p 1), which equals p on the paper's range p∈[0,1]. That is exactly Pr_p(f(x_{e←1})≠f(x_{e←0})). Edge n r is the r-subsets of Fin n (E_{n,r}). The total influence I_p(f)=Σ_{e∈E_{n,r}} I_{e,p}(f) is the companion totalEdgeInfluence p f := ∑ e, edgeInfluence p f e (Basic.lean:111), a sum over the Fintype of all r-edges. Both implications hold on p∈[0,1]; clamping p outside [0,1] only extends a total function past the paper's domain."},{"obj_id":"def:logarithm-convention","verdict":"matched","note":"natLog := Real.log is the natural logarithm. The clause 'n always counts vertices' is a notation convention, and it is realized by Edge n r := r-subsets of Fin n (n = number of vertices). Nothing more needs to be formalized."},{"obj_id":"def:increasing-nontrivial","verdict":"matched","note":"Monotone f on J → Bool uses the pointwise Pi order with Bool false<true. So x≤y means y is obtained from x by flipping some coordinates from 0 to 1, and f x ≤ f y means such changes cannot decrease f: exactly 'increasing'. nonconst : ∃ x y, f x ≠ f y is exactly 'not constant'. Same extension in both directions."},{"obj_id":"def:threshold-quantiles","verdict":"matched","note":"probCurve f p = (biasedLaw J p).E (boolValue f) = E_p f (boolValue is the 0/1 indicator), so it is q(p). thresholdQuantile f a = sInf {p ∈ Icc 0 1 | a ≤ q p}, which is the paper's inf{p∈[0,1]: q(p)≥a}. Because the set lies in [0,1], the clamp in biasedLaw never matters. For a nontrivial increasing f and 0<a<1 we have q(1)=1≥a, so the set is nonempty and bounded below by 0, and sInf on ℝ is the true infimum. The paper's scope 0<a<1 and nontrivial increasing f is a domain restriction; the Lean def is a total extension of it and agrees on that domain."},{"obj_id":"def:threshold-width","verdict":"matched","note":"thresholdWidth f ε = thresholdQuantile f (1-ε) - thresholdQuantile f ε, which is p_{1-ε} - p_ε. For 0<ε<1/2 both levels lie in (0,1), so each quantile is the paper's infimum by the threshold-quantiles verdict. The ε-range is the paper's domain and the Lean def is total over it."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:bias-scale,def:fourier-basis,def:fourier-coefficients,def:difference,def:parseval] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:bias-scale","verdict":"matched","note":"Exactly sqrt(p(1-p)) on the stated domain 0<p<1; totalization outside that domain does not alter the definition there."},{"obj_id":"def:fourier-basis","verdict":"matched","note":"Unfolding coordChar gives the normalized Boolean coordinate product; Finset represents subsets of finite J, and the empty product is one."},{"obj_id":"def:fourier-coefficients","verdict":"matched","note":"Unfolding gives E_p[h chi_A] with Boolean h represented by its 0/1 value; on 0<p<1 the clamped product law is exactly Bernoulli(p)."},{"obj_id":"def:difference","verdict":"matched","note":"Exactly the section at one minus the section at zero; the full-cube representation is independent of x_i and factors uniquely through the other coordinates."},{"obj_id":"def:parseval","verdict":"matched","note":"On the standing interior-bias domain, the implication is equivalent to both displayed identities; the unfolded sums, pivotal influences, and product-law variance match exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+Use hover instead.
+{"statement_verdicts":[{"obj_id":"def:bias-scale","verdict":"matched","note":"biasScale p = Real.sqrt (p*(1-p)), which is the paper's σ=√(p(1-p)). The paper fixes 0<p<1. Lean makes the function total, and it agrees with the paper everywhere on that domain. Consumers carry the BiasInterior side condition."},{"obj_id":"def:fourier-basis","verdict":"matched","note":"coordChar p i x = (1{x i} - p)/biasScale p, which is χ_i(x)=(x_i-p)/σ with Bool standing in for {0,1}. fourierChar p A x = ∏_{i∈A} coordChar p i x, which is χ_A. The empty Finset product is 1, so χ_∅=1. Both directions hold."},{"obj_id":"def:fourier-coefficients","verdict":"matched","note":"fourierCoeff p h A = (biasedLaw J p).E (boolValue h · fourierChar p A), which is ĥ(A)=E_p[hχ_A] with h read as its 0/1 real value. biasedLaw is the Causalean bernoulliDesign, the product of coin designs with parameter max 0 (min p 1). That parameter equals p on 0<p<1, so this is the paper's product law E_p."},{"obj_id":"def:difference","verdict":"matched","note":"coordDiff h i x = h(x_{i←1}) - h(x_{i←0}), as reals. This is Δ_i h, the section at x_i=1 minus the section at x_i=0. Lean takes the full configuration x, but the value does not depend on x_i (Function.update overwrites it), so it is the same function of the other coordinates. Both directions hold."},{"obj_id":"def:parseval","verdict":"matched","note":"FourierIdentities p h assumes BiasInterior p (the paper's global 0<p<1) and asserts two identities. The first: ∑_{S⊆J}|S|ĥ(S)² = biasScale p² · ∑_i coordInfluence p h i. Here coordInfluence is Pr_p(h(x_{i←1})≠h(x_{i←0})), matching the core def:influences pivotal influence and I(h) as its sum. The second: Var_p(boolValue h) = ∑_{S≠∅} ĥ(S)². Both identities match eq:parseval exactly. The Prop is proved, not assumed (Helpers/Fourier.lean:353 fourierIdentities_holds), so nothing is laundered."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:low,lem:block,lem:capture] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:low",
+      "verdict": "matched",
+      "note": "The product law, pivotal influences, Fourier coefficients, cutoff, and bound agree; the filtered sum is empty when k < 1."
+    },
+    {
+      "obj_id": "lem:block",
+      "verdict": "matched",
+      "note": "The uniform-block probability, free-edge event, cutoff, and bound agree; bias and permutation invariance are supplied by the standing setting."
+    },
+    {
+      "obj_id": "lem:capture",
+      "verdict": "matched",
+      "note": "The integer domain, positive cutoff, exponent, support restriction, capture condition, and uniform-block probability lower bound agree exactly."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:low","verdict":"matched","note":"Unfolded all defs. The Lean hypotheses are a finite J (variable S1); m≥2 (LowDegreeParam = ass:low-m); ∀i, I_i(h) ≤ I(h)/m (SmallIndividualInfluences, with coordInfluence equal to the pivotal probability under the Bernoulli(p) product law); and 0<p<1 (BiasInterior = ass:bias, the paper's standing product-law assumption). The Lean sum runs over S with 1≤|S| and |S|≤lowCutoff p m. lowCutoff p m = sqrt(p(1-p))·Real.log m/64, which is σ log m/64 with the natural log (def:logarithm-convention). The coefficient is E_p[1_h·χ_S] with χ_S the product of normalized centered coordinates. The bound is m^(-1/4)·I(h), stated with rpow. When k<1 the filter is empty, which matches the paper's remark. Both directions hold."},{"obj_id":"lem:block","verdict":"matched","note":"The Lean sums over every S ⊆ E_{n,r} (all Finsets of Edge n r) of blockCaptureProb·f̂(S)^2. blockCaptureProb is the probability under the uniform m-subset law (completeRandomization on Fin n) of 1≤|S∩F_B| and |S∩F_B|≤k. freeEdges B = {e : e∩B≠∅} matches def:free-edges. k = blockCutoff p m = σ log m/64 with m cast to ℝ. The bound m^(-1/4)·(rm/n)·I_p(f) uses the sum of edge pivotal influences, which matches def:influences. The hypotheses are BlockDomain (r+1≤m≤n, ass:block-domain), BiasInterior (ass:bias) and IsHypergraphProperty f (invariance under every vertex permutation). The last two are entailed by the standing setup def:restriction-setup ('Return to a hypergraph property f on E and fix the bias p') together with ass:bias, so they add nothing. Both directions hold."},{"obj_id":"lem:capture","verdict":"matched","note":"CaptureDomain gives 3≤r≤n and 1≤m≤n, and CapturePositiveCutoff gives k>0; these match the paper's integer domain and k>0. supportCutoff is (k/r)^(r/(r-1)), computed with real rpow, so L matches. CaptureCondition is r·L·((m-1)/(n-1)) ≤ 1/2 in ℝ, and n-1>0 because n≥3. CaptureSupport is 1≤|S|≤L for S a Finset of r-edges. The conclusion m/(2n) ≤ Pr_B(1≤|S∩F_B|≤k) uses B uniform over m-subsets of Fin n and F_B as the edges meeting B. Every quantifier and constant matches, so both directions hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:low-cutoff,def:restriction-setup,def:free-edges,def:block-cutoff,def:capture-cutoffs] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:low-cutoff",
+      "verdict": "matched",
+      "note": "Unfolding biasScale gives exactly k = sqrt(p(1-p)) log(m)/64, with real m as specified."
+    },
+    {
+      "obj_id": "def:restriction-setup",
+      "verdict": "matched",
+      "note": "Unfolding gives E_p[f χ_S] on the r-element edge subsets, with χ_i = (x_i-p)/sqrt(p(1-p)); the product-law clipping is inactive on the standing domain 0<p<1."
+    },
+    {
+      "obj_id": "def:free-edges",
+      "verdict": "matched",
+      "note": "Membership is exactly an r-element edge whose intersection with B is nonempty, equivalent to the displayed definition of F_B."
+    },
+    {
+      "obj_id": "def:block-cutoff",
+      "verdict": "matched",
+      "note": "Unfolding lowCutoff gives exactly sigma log(m)/64, with the integer block size coerced to a real."
+    },
+    {
+      "obj_id": "def:capture-cutoffs",
+      "verdict": "matched",
+      "note": "Unfolding captureExponent gives L = (k/r)^(r/(r-1)), with division and subtraction in the reals."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:low-cutoff","verdict":"matched","note":"lowCutoff p m = biasScale p * log m / 64, and biasScale p = sqrt(p(1-p)) = σ, so this is k = σ log m / 64 exactly. The inputs are p and m as in the core node. Taking m as a real number only widens the domain and gives the same value on the paper's m."},{"obj_id":"def:restriction-setup","verdict":"matched","note":"hyperFourierCoeff p f S = fourierCoeff p f S with J := Edge n r = E_{n,r} (r-element subsets of Fin n). Unfolded, fourierCoeff is E_p[1_{f} · χ_S] (fourierCoeffR over biasedLaw, χ_S = ∏ coordChar), which is the Section-fourier basis with J = E. The bias p and σ = biasScale p are threaded through the same way. f is typed as any Bool function on the edge cube, not only a vertex-invariant property. That is harmless: a coefficient definition gives the same value on every paper f, and consumers state their own restrictions."},{"obj_id":"def:free-edges","verdict":"matched","note":"freeEdges B = {e ∈ univ (Edge n r) | (e.val ∩ B).Nonempty}, with B : Finset (Fin n) ⊆ [n]. This is exactly F_B = {e ∈ E : e ∩ B ≠ ∅}, holding in both directions."},{"obj_id":"def:block-cutoff","verdict":"matched","note":"blockCutoff p m = lowCutoff p (m : ℝ) = σ log m / 64. That is the same k = σ log m/64 as the core node (inputs p, m). m : ℕ coerced to ℝ gives the same value."},{"obj_id":"def:capture-cutoffs","verdict":"matched","note":"supportCutoff r k = (k/r)^(captureExponent r), with captureExponent r = r/(r-1) in real arithmetic. This is α = r/(r-1) and L = (k/r)^α. Two Lean conventions (r = 1 gives α = 0 via division by zero; rpow of a negative base) only apply outside the paper's domain, where α and L are not defined. They do not change the value anywhere the paper's expression is defined."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\alpha,sym:C_r,sym:h,sym:\chi_i,sym:\chi_A] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\alpha","verdict":"matched","note":"captureExponent computes r/(r-1) using real subtraction, which lies in (1,3/2] for the standing integer domain r≥3."},{"obj_id":"sym:C_r","verdict":"matched","note":"The tagged declarations explicitly supply nonnegative constants depending only on r; thresholdWidth_le uses one constant for both bounds."},{"obj_id":"sym:h","verdict":"matched","note":"boolValue takes h : (J → Bool) → Bool, exactly the Boolean-function space on the finite coordinate set J."},{"obj_id":"sym:\\chi_i","verdict":"matched","note":"coordChar is a real-valued function on J → Bool computing (x_i-p)/sqrt(p(1-p))."},{"obj_id":"sym:\\chi_A","verdict":"matched","note":"fourierChar is a real-valued function on J → Bool computing the finite product of coordChar over A, with empty product one."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\alpha","verdict":"matched","note":"captureExponent r := (r:ℝ)/((r:ℝ)-1) (Basic.lean:204) computes α=r/(r-1) by construction. Every consumer restricts r to r≥3 (CaptureDomain 3≤r, MainUniformity), and on that domain the range is (1,3/2], the paper's space."},{"obj_id":"sym:C_r","verdict":"matched","note":"Each member (variance_bound_positive_constant TMain.lean:126, variance_le_div_log_pow_mul_totalInfluence TMain.lean:172, thresholdWidth_le TCorThreshold.lean:12) states ∀ r, MainUniformity r → ∃ C:ℝ, 0 ≤ C (or 0 < C) ∧ ∀ n p f …. So C depends only on r, is chosen before n, p and f, and is pinned to [0,∞). thresholdWidth_le reuses the same C for both bounds."},{"obj_id":"sym:h","verdict":"matched","note":"h : (J → Bool) → Bool in boolValue (Basic.lean:31), with J a Fintype. This is exactly {0,1}^J→{0,1}, and boolValue gives its 0/1 real indicator."},{"obj_id":"sym:\\chi_i","verdict":"matched","note":"coordChar p i x := ((if x i then 1 else 0) - p) / biasScale p, with biasScale p = √(p(1-p)) = σ (Basic.lean:140-143). This is exactly (x_i-p)/σ as a map {0,1}^J→ℝ."},{"obj_id":"sym:\\chi_A","verdict":"matched","note":"fourierChar p A x := ∏ i ∈ A, coordChar p i x for A : Finset J (Basic.lean:147). This is the product of the χ_i; the empty Finset product is 1, giving χ_∅=1. Its type is {0,1}^J→ℝ."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:captured-mass,def:finite-coordinate-influences] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:captured-mass","verdict":"matched","note":"The implication retains the combined block and capture hypotheses, with k=σ log m/64 and L=(k/r)^(r/(r−1)); unfolding the Fourier mass and total influence gives exactly the stated inequality."},{"obj_id":"def:finite-coordinate-influences","verdict":"matched","note":"On the standing domain 0<p<1, biasedLaw is exactly the independent Bernoulli(p) product law; the pivotal event is independent of coordinate i, so its full-cube probability equals averaging over the other coordinates. totalCoordInfluence sums these pivotal probabilities over J."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:captured-mass","verdict":"matched","note":"The Lean hypotheses are 0<p<1 (BiasInterior), r+1≤m≤n (BlockDomain), f a hypergraph property (IsHypergraphProperty), 3≤r≤n with 1≤m≤n (CaptureDomain), k>0 (CapturePositiveCutoff) and r·L·(m-1)/(n-1)≤1/2 (CaptureCondition). Together these are exactly the hypotheses of lem:block and lem:capture. The bias and hypergraph-property conditions come from the standing restriction setup: def:restriction-setup fixes the hypergraph property f, and the Fourier section's product law is stated for 0<p<1. The cutoff k is instantiated as blockCutoff p m = lowCutoff p m = sqrt(p(1-p))·log m/64, which is lem:block's k. L = supportCutoff r k = (k/r)^(r/(r-1)), which is lem:capture's L. capturedMass sums hyperFourierCoeff² over S ⊆ E_{n,r} with 1≤|S|≤L. The bound 2·r·m^(-1/4)·I_p(f) uses totalEdgeInfluence, the sum over all r-edges of the pivotal probabilities. This is literally eq:captured-mass under 'whenever their hypotheses hold', and the two directions agree."},{"obj_id":"def:finite-coordinate-influences","verdict":"matched","note":"coordInfluence p h i is the probability, under biasedLaw J p, that h(x_{i←true}) ≠ h(x_{i←false}). That is the pivotal influence I_i(h). biasedLaw is Causalean's bernoulliDesign, a product of independent coins, with the bias clamped to [0,1]. The clamp is the identity on the paper's domain 0<p<1 and only matters outside it, so the law is the Bernoulli(p) product law the NL refers to. The total influence I(h) is realized by the sibling totalCoordInfluence (tagged @realizes I(h)) as ∑_i coordInfluence p h i, the standard total influence on J. Both have the same extension as the paper's objects."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:p,sym:f,sym:x,sym:b,sym:x_{e\leftarrow b}] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p","verdict":"matched","note":"BiasDomain pins p to [0,1]; BiasInterior and MainBias express the stated interior restrictions in their respective contexts."},{"obj_id":"sym:f","verdict":"matched","note":"The structures take Boolean functions on Edge n r configurations; Edge is exactly the r-element vertex subsets, and the tagged fields express permutation invariance, monotonicity, and nonconstancy."},{"obj_id":"sym:x","verdict":"matched","note":"The tagged boolValue declaration binds x : J → Bool, exactly a Boolean configuration on the current coordinate set."},{"obj_id":"sym:b","verdict":"matched","note":"The three tagged declarations respectively bind b : Bool, b : ℝ, and b : ({j : J // j ≠ i} → Bool) → ℝ, matching all three stated roles."},{"obj_id":"sym:x_{e\\leftarrow b}","verdict":"matched","note":"replaceCoord computes Function.update x e b, preserving every other coordinate and returning a Boolean configuration on the same coordinate set."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:p","verdict":"matched","note":"BiasDomain (Basic.lean:51-52) is exactly `p ∈ Set.Icc 0 1`, which pins the declared space [0,1] with both endpoints. BiasInterior (55-56) and MainBias (68) are `0<p ∧ p<1`, the interior restrictions used by ass:bias and ass:main-p; both are subsets of [0,1] and consistent with the space. The clamping inside biasedLaw only changes the law outside [0,1], so it does not affect the realized parameter range."},{"obj_id":"sym:f","verdict":"matched","note":"IsHypergraphProperty (Basic.lean:85-87) types f as `(Edge n r → Bool) → Bool`. Edge n r is `{e : Finset (Fin n) // e.card = r}`, i.e. E_{n,r}, so the type is exactly {0,1}^{E_{n,r}}→{0,1}. Its field requires invariance of f under every vertex permutation (via edgePerm). IsIncreasingNontrivial (118-120) adds Monotone f (coordinatewise order on Bool) and ∃x y, f x ≠ f y (nonconstant); with J := Edge n r it applies to the same function type. All hints verified."},{"obj_id":"sym:x","verdict":"matched","note":"boolValue (Basic.lean:31) takes `x : J → Bool`, exactly {0,1}^J on the current finite coordinate type J. The carrier type is Bool-valued, so no extra range predicate is needed."},{"obj_id":"sym:b","verdict":"matched","note":"Each of the three declared roles is realized at its stated type, and all hints were verified against the decls. replaceCoord (Basic.lean:91) has `b : Bool` = {0,1}. oneCoordinate_fourthMoment_le (NoiseBasics.lean:154) has `b : ℝ`, a real scalar in the one-coordinate fourth-moment bound. coordinate_decomposition (NoiseBasics.lean:218-222) has `∃ a b : ({j : J // j ≠ i} → Bool) → ℝ`, which is ℝ^{{0,1}^{J∖{i}}}, used in g = a + b·χ_i."},{"obj_id":"sym:x_{e\\leftarrow b}","verdict":"matched","note":"replaceCoord (Basic.lean:91-92) is `Function.update x e b : J → Bool`. It sets coordinate e to b and leaves every other coordinate unchanged. Instantiated at J := Edge n r (as edgeInfluence does via coordInfluence), its value lies in {0,1}^{E_{n,r}}, so a def computes the symbol and its range follows by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\E_p,sym:\Var_p,sym:I_{e,p}(f),sym:I_p(f),sym:\sigma] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\E_p","verdict":"matched","note":"Basic.lean:42 computes the finite product-law expectation of every real-valued cube function; clamping is inactive on the paper's bias domain."},{"obj_id":"sym:\\Var_p","verdict":"matched","note":"Basic.lean:47 computes the product-law expectation of the squared centered function, hence is nonnegative by construction."},{"obj_id":"sym:I_{e,p}(f)","verdict":"matched","note":"Basic.lean:108 computes the probability that the two coordinate replacements differ, which lies in [0,1] and equals the pivotal probability over the remaining coordinates."},{"obj_id":"sym:I_p(f)","verdict":"matched","note":"Basic.lean:111 sums the pivotal probabilities over exactly the r-element subsets of Fin n, giving a value in [0,|E_{n,r}|] by construction."},{"obj_id":"sym:\\sigma","verdict":"matched","note":"Basic.lean:140 computes sqrt(p(1-p)); on the frozen bias-scale definition's domain 0<p<1, this lies in (0,1/2] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\E_p","verdict":"matched","note":"cubeExpectation (Basic.lean:42) is a computed def: (biasedLaw J p).E g = Σ_z D.p z · g z (DesignCore.lean:52). biasedLaw is bernoulliDesign = prodDesign of coin(p) (Bernoulli.lean:65), i.e. the product Bernoulli(p) law on {0,1}^J. So it is a real-valued functional on ℝ^{{0,1}^J}, as the space requires. The clamp max 0 (min p 1) only changes values for p outside [0,1], which the paper never uses."},{"obj_id":"sym:\\Var_p","verdict":"matched","note":"cubeVariance (Basic.lean:47) = (biasedLaw J p).Var g = E[(g − E g)^2] (DesignCore.lean:57). This is the product-design variance. Its range is [0,∞) by construction, since it is a nonnegative-weighted sum of squares."},{"obj_id":"sym:I_{e,p}(f)","verdict":"matched","note":"edgeInfluence (Basic.lean:108) = coordInfluence p f e = (biasedLaw).Pr(f(x_{e←1}) ≠ f(x_{e←0})) = E[indicator] (DesignCore.lean:71). This is the pivotal probability under the product law, so its range is [0,1] by construction."},{"obj_id":"sym:I_p(f)","verdict":"matched","note":"totalEdgeInfluence (Basic.lean:111) = Σ over all e : Edge n r (the r-subsets of Fin n) of edgeInfluence. Each term lies in [0,1], so by construction the sum lies in [0,|E_{n,r}|]."},{"obj_id":"sym:\\sigma","verdict":"matched","note":"biasScale (Basic.lean:140) is the computed def sqrt(p(1−p)). For the paper's bias p ∈ (0,1) (BiasInterior/MainBias), p(1−p) ∈ (0,1/4], so σ ∈ (0,1/2] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\rho,sym:T,sym:g,sym:P_{\le k},sym:y] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\rho","verdict":"matched","note":"noiseParameter computes √(p(1−p))/4; under the standing interior bias its range is (0,1/8]."},{"obj_id":"sym:T","verdict":"matched","note":"noiseOperator takes an arbitrary real function on the finite Boolean cube and returns a real function on that same cube."},{"obj_id":"sym:g","verdict":"matched","note":"The tagged fourierCoeffR declaration binds g as an arbitrary (J → Bool) → ℝ, exactly the specified function space."},{"obj_id":"sym:P_{\\le k}","verdict":"matched","note":"lowProjection computes a real function on the same Boolean cube from any real function there, retaining precisely Fourier terms with |A| ≤ k."},{"obj_id":"sym:y","verdict":"matched","note":"The tagged mergeAssignment declaration binds y : AssignedCoord B → Bool; AssignedCoord B unfolds to edges outside freeEdges B, exactly E\\F_B."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\rho","verdict":"matched","note":"noiseParameter p := biasScale p / 4 = sqrt(p(1-p))/4, which is the core definition ρ=σ/4. Because it is a computed def, its range follows from the formula. The lemma noiseParameter_bounds (Helpers/NoiseBasics.lean:48) proves 0 < ρ ≤ 1/8 under BiasInterior p, so the cluster pins exactly the space (0,1/8]."},{"obj_id":"sym:T","verdict":"matched","note":"noiseOperator p ρ g x := Σ_A ρ^|A| · fourierCoeffR p g A · χ_A(x) is a computed linear map from ((J→Bool)→ℝ) to ((J→Bool)→ℝ). With the biased Fourier basis χ_A (orthonormal for interior p), this is the operator fixed by Tχ_A = ρ^|A| χ_A on the current coordinate set, as the core def states. It is matched by construction. ρ is threaded as an argument, and the sym:\\rho cluster pins its value."},{"obj_id":"sym:g","verdict":"matched","note":"The tagged binder g : (J → Bool) → ℝ in fourierCoeffR (Basic.lean:151) is exactly a real-valued function on {0,1}^J, so the type alone pins the space."},{"obj_id":"sym:P_{\\le k}","verdict":"matched","note":"lowProjection p k g := Σ_{|A|≤k} ĝ(A) χ_A is a computed truncation of the Fourier expansion. Since {χ_A} is an orthonormal basis under the p-biased law for interior p, this is the orthogonal projection onto span{χ_A : |A| ≤ k}, matching lowDegreeSpace. It is an endomorphism of ℝ^{{0,1}^J}, matched by construction."},{"obj_id":"sym:y","verdict":"matched","note":"The tagged binder y : AssignedCoord B → Bool has type {e : Edge n r // e ∉ freeEdges B} → Bool. Here Edge n r is the set of r-subsets of [n], i.e. E, and freeEdges B = {e : e ∩ B ≠ ∅}, i.e. F_B (Basic.lean:186). So the type is exactly {0,1}^{E∖F_B}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:L,sym:q,sym:a,sym:p_a,sym:\varepsilon] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:L",
+      "verdict": "matched",
+      "note": "supportCutoff computes exactly (k/r)^(r/(r-1)), positive on the paper's stated domain r≥3 and k>0."
+    },
+    {
+      "obj_id": "sym:q",
+      "verdict": "matched",
+      "note": "probCurve computes the Bernoulli expectation of a Boolean indicator; on [0,1] its values lie in [0,1], with clamping inactive."
+    },
+    {
+      "obj_id": "sym:a",
+      "verdict": "matched",
+      "note": "The cluster realizes all three contextual spaces: quantile levels with 0<a<1, arbitrary real scalars, and real coefficient functions on the remaining coordinates."
+    },
+    {
+      "obj_id": "sym:p_a",
+      "verdict": "matched",
+      "note": "thresholdQuantile computes the specified infimum in [0,1]; for the paper's nontrivial increasing functions and 0<a<1, the defining set is nonempty and contained in [0,1]."
+    },
+    {
+      "obj_id": "sym:\\varepsilon",
+      "verdict": "matched",
+      "note": "ThresholdEpsilon is exactly 0<ε ∧ ε<1/2."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:L","verdict":"matched","note":"supportCutoff r k := (k/r)^captureExponent r (Basic.lean:207-208) is a def that computes L, so its range follows from the formula. When k>0 (CapturePositiveCutoff, ass:capture-k, Basic.lean:201) the real rpow of a positive base is positive, which gives L in (0,∞). For the degenerate r=0 and r=1 the value is 1, still positive. The paper defines L only for positive k, so the cluster is faithful as computed."},{"obj_id":"sym:q","verdict":"matched","note":"probCurve f p := (biasedLaw J p).E (boolValue f) (Basic.lean:122-123) is a def that computes q. biasedLaw clamps p to max 0 (min p 1), so it is a genuine product Bernoulli law. The expectation of a {0,1}-valued indicator lies in [0,1], so the range is [0,1] by construction. The ℝ domain agrees with the paper's map on [0,1], and every consumer (thresholdQuantile) restricts p to Icc 0 1."},{"obj_id":"sym:a","verdict":"matched","note":"Each context-dependent reading is realized by its own member, and I checked each hint against its declaration. (1) Quantile level in (0,1): thresholdQuantile_spec (RussoMargulis.lean:286-287) takes the hypothesis ha : 0<a ∧ a<1. The thresholdQuantile def takes a real a, which that helper scopes. (2) Real scalar: oneCoordinate_fourthMoment_le (NoiseBasics.lean:154) has a : ℝ, so ℝ is the intended space. (3) Coefficient function on the other coordinates: coordinate_decomposition (NoiseBasics.lean:218-222) has an existential a : ({j // j ≠ i} → Bool) → ℝ, which is exactly ℝ^{{0,1}^{J∖{i}}}."},{"obj_id":"sym:p_a","verdict":"matched","note":"thresholdQuantile f a := sInf {p | p ∈ Icc 0 1 ∧ a ≤ probCurve f p} (Basic.lean:127-128) is a def that computes p_a. The set is a subset of [0,1] and bounded below by 0, so a nonempty set has its infimum in [0,1]. Real.sInf of the empty set is 0, which is also in [0,1]. So the range is [0,1] by construction."},{"obj_id":"sym:\\varepsilon","verdict":"matched","note":"ThresholdEpsilon ε := 0 < ε ∧ ε < 1/2 (Basic.lean:136) pins ε to exactly the open interval (0,1/2): a real carrier plus a range predicate, which is the standard faithful idiom."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:I_i(h),sym:I(h),sym:\Delta_i h,sym:m,sym:k] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:I_i(h)","verdict":"matched","note":"Basic.lean:96–98 computes a pivotal-event probability; FiniteDesign has nonnegative masses summing to one, so its value lies in [0,1]."},{"obj_id":"sym:I(h)","verdict":"matched","note":"Basic.lean:100–101 sums one [0,1]-valued pivotal probability per coordinate, giving a value in [0,|J|]."},{"obj_id":"sym:\\Delta_i h","verdict":"matched","note":"Basic.lean:161–163 subtracts Boolean indicators, giving values in {-1,0,1}; coordinate replacement makes it independent of x_i, equivalently a function on the remaining coordinates."},{"obj_id":"sym:m","verdict":"matched","note":"The tagged predicates enforce the core's scoped domains: real m≥2, integer r+1≤m≤n, or integer 1≤m≤n; sqrtBlockSize computes the prescribed floor in the large-n scope."},{"obj_id":"sym:k","verdict":"matched","note":"Basic.lean:179 computes σ log m/64, nonnegative on the core's scoped m≥1 domain since σ is a square root; CapturePositiveCutoff enforces the capture scope's arbitrary k>0."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:I_i(h)","verdict":"matched","note":"coordInfluence (Basic.lean:96) is a computed def: (biasedLaw J p).Pr of the pivotal event {h(x_{i←1}) ≠ h(x_{i←0})}. biasedLaw is a FiniteDesign, namely a Bernoulli product with p clamped to [0,1] (Basic.lean:35-38), so the value lies in [0,1] by construction. This is the paper's pivotal probability."},{"obj_id":"sym:I(h)","verdict":"matched","note":"totalCoordInfluence (Basic.lean:100) is a computed def equal to the sum over i : J of coordInfluence p h i. Each term is in [0,1], so the sum lies in [0,|J|] by construction."},{"obj_id":"sym:\\Delta_i h","verdict":"matched","note":"coordDiff (Basic.lean:161) = boolValue h (x_{i←1}) − boolValue h (x_{i←0}), where boolValue takes values in {0,1} (Basic.lean:31). The values are therefore in {-1,0,1} by construction. It is defined on the full cube, but replaceCoord overwrites coordinate i, so it depends only on x restricted to J∖{i}. This is a conservative pullback of the paper's function on {0,1}^{J∖{i}}, and every paper function has exactly one such pullback."},{"obj_id":"sym:m","verdict":"matched","note":"The core gives space [1,∞) with four scoped readings, and each member pins its scope. LowDegreeParam: real 2 ≤ m (lem:low). BlockDomain: natural r+1 ≤ m ≤ n (lem:block). CaptureDomain: natural 1 ≤ m ≤ n (lem:capture). sqrtBlockSize: m = ⌊√n⌋₊ (thm:main large-n branch), and exists_largeN_threshold gives r+1 ≤ sqrtBlockSize n there. Every realization lies inside [1,∞) and matches its scoped text exactly."},{"obj_id":"sym:k","verdict":"matched","note":"lowCutoff (Basic.lean:179) is a computed def σ·log m/64 with σ = biasScale p = √(p(1−p)) ≥ 0. It is used with real m ≥ 2 (lem:low) or natural r+1 ≤ m ≤ n (lem:block via blockCutoff), so log m ≥ 0 and k ≥ 0 by construction. CapturePositiveCutoff pins 0 < k for lem:capture's arbitrary positive cutoff. Both match the core's scoped readings and the space [0,∞)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:f_y,sym:j,sym:u,sym:d_S(u)] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:f_y","verdict":"matched","note":"restrictedFunction computes a Boolean function on exactly the edges meeting B by merging free and outside assignments."},{"obj_id":"sym:j","verdict":"matched","note":"insideCount computes |e ∩ B|; on the paper's free-edge domain, nonempty intersection and |e| = r give 1 ≤ j ≤ r."},{"obj_id":"sym:u","verdict":"matched","note":"The cluster realizes real cube functions in the stated Fourier span, unit L2 vectors for duality, and a support vertex chosen before B with the stated degree bounds."},{"obj_id":"sym:d_S(u)","verdict":"matched","note":"supportDegree computes the incident-edge count; for the paper's chosen vertex in the union of S, this lies between 1 and s = |S| by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:f_y","verdict":"matched","note":"restrictedFunction (Restriction.lean:27) has type (FreeCoord B → Bool) → Bool, where FreeCoord B = {e // e ∈ freeEdges B}, and is defined as z ↦ f (mergeAssignment B z y). That is exactly the restriction of f to {0,1}^{F_B} with the outside assignment y fixed, as the core says. The permutation invariance in the core def is a separate proved lemma (restrictedFunction_invariant), not part of the symbol's space."},{"obj_id":"sym:j","verdict":"matched","note":"insideCount (Restriction.lean:113) is a computing def, (e.val ∩ B).card : ℕ, which is the paper's 'number of vertices of an edge lying in B'. Its range is ≤ r because edges have card r, and ≥ 1 on the free edges (edges meeting B) used in the orbit argument. By the computed-def rule the formula fixes the range, so {1,…,r} is realized by construction."},{"obj_id":"sym:u","verdict":"matched","note":"The core declares u as a locally bound object with two scoped uses, and the members pin both. (1) lem:low: u : (J → Bool) → ℝ with hu : u ∈ lowDegreeSpace p k, where lowDegreeSpace (NoiseBasics.lean:44) = Submodule.span ℝ {fourierChar p A : |A| ≤ k}, i.e. span{χ_A : A ⊆ J, |A| ≤ k}. The dual characterization in lowProjection_norm_dual quantifies ∀ u ∈ lowDegreeSpace p k with cubeNormTwo p u = 1, which is the unit L2 sphere for the biased law. (2) lem:capture: exists_support_vertex_degree_le gives ∃ u ∈ supportVertices S (= ⋃_{e∈S} e) with 1 ≤ d_S(u) ≤ |S| and d_S(u) ≤ k. The existential depends only on S and the cutoff, with no B in scope, so u is chosen before B is sampled, as the core requires."},{"obj_id":"sym:d_S(u)","verdict":"matched","note":"supportDegree (SupportDegree.lean:26) is a computing def, (S.filter (u ∈ e.val)).card = |{e ∈ S : u ∈ e}|. This is the paper formula; by construction its value is at most s = S.card. For the chosen vertex, exists_support_vertex_degree_le gives 1 ≤ d_S(u) ≤ S.card and d_S(u) ≤ k, which realizes the space {1,…,s} and the bound ≤ min{s,k}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:cor-threshold =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:cor-threshold","verdict":"matched","note":"The threshold bound has the stated domains, quantiles, exponent and factor 2, with one constant depending only on r witnessing both the main and threshold bounds; the additional main-bound conjunct strengthens the theorem, and BiasInterior merely repeats MainBias."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:cor-threshold",
+      "verdict": "derived",
+      "note": "The Lean conclusion is strictly weaker than the paper's. The paper's factor 2C_r refers to the constant C_r from thm:main. The Lean instead asserts ∃ C ≥ 0 such that (main variance bound with C) ∧ (threshold bound with 2C). Both conjuncts are upward-closed in C when C ≥ 0: I_p ≥ 0, log n > 0 because n ≥ r ≥ 3, captureExponent r > 0, and log((1-ε)/ε) > 0 because ε < 1/2. So ∃C(A(C) ∧ B(C)) is equivalent to (∃C A(C)) ∧ (∃C' B(C')): you can always take max(C, C'). The Lean therefore only says that the threshold width is ≤ K_r·log((1-ε)/ε)/(log n)^{r/(r-1)} for some unspecified K_r. It loses the paper's link between the corollary's constant and twice the thm:main constant. The paper's statement implies the Lean's, but the Lean's does not imply it, either for every valid C_r or for a fixed witness C_0 from thm:main. A C chosen together with the conclusion is not the chosen-witness form. Everything else matches: the hypotheses (r ≥ 3, n ≥ r, IsHypergraphProperty, Monotone plus nonconstant, 0 < ε < 1/2), thresholdWidth = p_{1-ε} - p_ε, and the parse (2*C/(log n)^α)*log((1-ε)/ε). FIX: replace the ∃-bundle with a universal link to the thm:main constant. State it as ∀ r, MainUniformity r → ∀ C : ℝ, 0 ≤ C → (∀ n, MainVertexCount n r → ∀ p, MainBias p → ∀ f, IsHypergraphProperty f → Var_p(boolValue f) ≤ C/(log n)^{captureExponent r}·I_p(f)) → ∀ n, MainVertexCount n r → ∀ f, IsHypergraphProperty f → IsIncreasingNontrivial f → ∀ ε, ThresholdEpsilon ε → thresholdWidth f ε ≤ 2*C/(log n)^{captureExponent r}·log((1-ε)/ε). This form implies the result for any witness thm:main supplies. The paper's proof uses only the main bound for C_r, so the stronger form is what it proves."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "thm:cor-threshold",
+    "reason": "The Lean bundles ∃ C, (main bound with C) ∧ (threshold bound with 2C). Since both bounds are monotone in C, this decouples into two independent existence claims and loses the paper's 2C_r tie to the thm:main constant. Restate as: ∀ C ≥ 0 satisfying the thm:main variance bound for all n ≥ r, 0 < p < 1 and hypergraph properties f, the threshold width is ≤ 2C/(log n)^{r/(r-1)}·log((1-ε)/ε).",
+    "unpinned": "",
+    "witness": null
+  }
+}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "Equivalent: the constant precedes n,p,f; the domains, permutation invariance, Bernoulli variance, pivotal total influence, natural logarithm, and exponent agree. BiasInterior duplicates MainBias. Requiring C≥0 preserves equivalence by replacing any paper constant with max(C,0), since total influence is nonnegative and n≥3."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the definition of FiniteDesign.Var in Causalean, then I'll write the verdict.
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement says the same thing as the paper. Quantifier order matches: for each r≥3 there is a constant C fixed before n, p and f, so C_r is uniform in them. The hypotheses r≤n, 0<p<1 and invariance of f under vertex permutations (f(x∘edgePerm τ)=f x for every τ in Perm(Fin n)) are the paper's. The two bias hypotheses (MainBias and BiasInterior) state the same thing; the duplicate is harmless. On (0,1), biasedLaw clamps nothing, so it is the product Bernoulli(p) law. Var is Causalean's FiniteDesign.Var, i.e. E[(X−EX)^2], applied to the 0/1 indicator of f. totalEdgeInfluence is the sum over all r-subsets of Pr_p(f(x_{e←1})≠f(x_{e←0})), which is def:influences. Real.log is the natural logarithm (def:logarithm-convention), and captureExponent r = r/(r−1) over ℝ. The extra conjunct 0≤C does not change the claim: for n≥r≥3, log n>0 and I_p(f)≥0, so any valid C_r can be replaced by max(C_r,0), and the Lean statement implies the paper's directly. The two statements are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:C_r =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:C_r","verdict":"matched","note":"Verified all three tagged declarations: thresholdWidth_le assumes C ≥ 0, the main theorem supplies C ≥ 0, and the auxiliary lemma supplies a positive witness. Each constant is real and chosen before n,p,f; the cluster faithfully realizes [0,∞)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:C_r","verdict":"matched","note":"All three members pin C_r to the core space [0,∞) as a finite real fixed after r and before n, p, f. variance_le_div_log_pow_mul_totalInfluence (TMain.lean:174) has ∃ C : ℝ, 0 ≤ C, under ∀ r, MainUniformity r and outside the ∀ n p f quantifiers, which matches 'depending only on r'. variance_bound_positive_constant (TMain.lean:128) has ∃ C, 0 < C, a witness inside [0,∞) that the theorem weakens with hC.le. thresholdWidth_le (TCorThreshold.lean:14) takes ∀ C : ℝ, 0 ≤ C together with the Theorem 1.1 variance bound as a premise, so C_r there is a nonnegative constant satisfying the main bound. Each member's clause hint agrees with its declaration, and no carrier is left unconstrained. This cluster review does not judge the separate p-hypotheses (MainBias, BiasInterior) of thm:main."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:cor-threshold =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:cor-threshold","verdict":"matched","note":"The explicit nonnegative C and uniform variance-bound premise describe the paper's C_r from thm:main, retaining dependence only on r; the unfolded Bernoulli law, pivotal influences, quantiles, domains, exponent, and threshold bound agree with the paper."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:cor-threshold","verdict":"matched","note":"Matched. C_r in the paper is the constant supplied by thm:main, which names it. The Lean statement takes any C ≥ 0 that satisfies exactly thm:main's bound, with the same binders: for all n with r ≤ n, all 0<p<1 and every hypergraph property f, Var_p(f) ≤ C/(log n)^{r/(r-1)}·I_p(f), with C fixed after r and before n, p, f. It then concludes the threshold bound for that C. This is the chosen-witness form generalised to every witness, so it is at least as strong as the paper's claim. thm:main's Lean (TMain.lean:174) gives ∃ C ≥ 0 with exactly this bound. Its extra premise BiasInterior p is defined as 0<p∧p<1 and so equals MainBias, which means the witness meets the hypothesis and instantiating C := C_r recovers the paper's corollary. The premise 0 ≤ C is harmless: any valid constant is nonnegative, because a nonconstant property has positive variance at p=1/2. Remaining checks after unfolding: r≥3 (MainUniformity), n≥r (MainVertexCount), 0<ε<1/2 (ThresholdEpsilon). 'Increasing' is Monotone in the pointwise Bool order and 'nontrivial' is ∃x y, f x ≠ f y, as in def:increasing-nontrivial. A hypergraph property is invariance under every vertex permutation acting through edgePerm. thresholdWidth = p_{1-ε} − p_ε, with p_a = sInf{p∈[0,1] : a ≤ E_p f}, as in def:threshold-quantiles; both levels lie in (0,1). Logs are natural (Real.log), per def:logarithm-convention. The expression parses as (2C/(log n)^{r/(r-1)})·log((1-ε)/ε). No added model restriction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
