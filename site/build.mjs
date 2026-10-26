@@ -58,6 +58,8 @@ import { SLUG } from "../checks/check_paper.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TOOL_URL = "https://github.com/Jiyuan-Tan/PaperFormalizer";
+/** The paper describing PaperFormalizer. */
+const PAPER_URL = "https://arxiv.org/abs/2610.31810";
 /** The site's address (its Pages custom domain): the canonical links, the sitemap and the robots file name it. */
 export const SITE = "https://paperformalizer.org/";
 const SITE_DESCRIPTION = "PaperFormalizer helps authors turn a mathematical paper into a Lean-verified version: it checks each theorem, lemma and assumption against the paper's own proof, proposes revisions the author decides on, and proves the statements in Lean 4. Browse papers formalized with it.";
@@ -413,6 +415,7 @@ export function indexHtml(papers) {
       <span class="here">Formalized papers</span>
       <a href="#how">How a paper is formalized</a>
       <a href="#share">Share a paper</a>
+      <a href="${PAPER_URL}">Paper ↗</a>
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
     <h1>Formalized papers</h1>
@@ -456,7 +459,7 @@ export function indexHtml(papers) {
 
   <section id="how" class="how">
     <h2>How a paper is formalized, and shared</h2>
-    <p>PaperFormalizer reads a paper's LaTeX source. Every result is audited against the paper's own proof; where a statement does not hold as written, a revision is proposed, the smallest change that keeps the claim, and the author decides; the statements are then stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>.</p>
+    <p>PaperFormalizer reads a paper's LaTeX source. Every result is audited against the paper's own proof; where a statement does not hold as written, a revision is proposed, the smallest change that keeps the claim, and the author decides; the statements are then stated and proved in Lean 4, and two reviewers must each pass every Lean statement as saying what the paper says. The tool and its manual are on <a href="${TOOL_URL}">GitHub</a>; the method is described in the <a href="${PAPER_URL}">paper</a> (arXiv:2610.31810).</p>
     <p>Pressing <em>Share</em> on a finished run sends its bundle and opens a GitHub sign-in that asks for your public name and nothing else. You confirm the share on the page that follows; an automatic check then confirms the bundle is complete and unchanged since the run wrote it, and the paper appears here, after the registry owner's review unless you are a trusted sharer.</p>
   </section>
 
