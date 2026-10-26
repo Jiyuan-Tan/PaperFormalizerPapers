@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Causalean",
+    "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+    "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+    "uncommitted": 1,
+    "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+    "files": {
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/API.lean": "5f4daef50e616c04a7f94bc69e4d8e7b83ca9d3d",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Basic.lean": "9e25852a36da683569e624ee9fed4c2dceeaf0b8",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/CertifiedReal.lean": "c1a350a9fe23b58b90fefefb160dd268114b1af4",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Contour/Basic.lean": "00d6d1c1f84d937ce4a5460a4a39bceee800f338",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Exponential.lean": "37b04f330edbde0d94294963ca6bbf68f6ae73cd",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/FiniteLinearAlgebra.lean": "2bb9a6904e7523d3c677ff93fd2ddf3761c2f482",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/FiniteSearch.lean": "284e464c3078818a1c9beb4491f905b63e6776d8",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Logarithm.lean": "56813e438582050f5835ca2aae37e5110b67f91e",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Mesh.lean": "939af4ac3d945c7ab2752c93e9a2f77124f38594",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Operations.lean": "fe931ac5545de4e926cdd912d2d977b56f87b8fa",
+      "Causalean/Mathlib/Analysis/IntervalArithmetic/Quadrature.lean": "8f6db933f895d9257d38b2faed3838a7ff74592b",
+      "Causalean/Mathlib/Analysis/WeightedCauchySchwarz.lean": "c7c0ee9d56a575cc2b4d1ba31dd90d06cae4fcc4",
+      "Causalean/Mathlib/Probability/Certified/FiniteKernel.lean": "23aecc48b75743043f7d3f652a09df70ddd08ab0",
+      "Causalean/Stat/Coupling/Basic.lean": "454bf74d83ec9e42c81488dddb410e52b37b5ee3",
+      "Causalean/Stat/Limit/Modes.lean": "49e9c06bac1dd7c6427912e6e46936028d2cc036"
+    },
+    "status": "unverified"
+  }
+]

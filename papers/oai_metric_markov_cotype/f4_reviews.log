@@ -1,0 +1,541 @@
+===== reviewer convergence/dual :: medium :: batch[ass:pin-1,ass:pin-2,def:real-ell-one,def:index-sets,def:stochastic-matrix] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:real-ell-one",
+      "verdict": "matched",
+      "note": "At exponent one, lp consists exactly of absolutely summable real sequences with norm ∑ |x(k)|; reindexing k ↦ k+1 identifies its ℕ coordinates with the paper's positive coordinates in both directions."
+    },
+    {
+      "obj_id": "def:index-sets",
+      "verdict": "matched",
+      "note": "ℕ+ supplies exactly the positive state counts; the bijection i ↦ i.val+1 identifies Fin n with {1,…,n}."
+    },
+    {
+      "obj_id": "def:stochastic-matrix",
+      "verdict": "matched",
+      "note": "Unfolding both fields gives exactly entrywise nonnegativity and every row sum equal to one, with finite indices faithfully relabelled."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "Unfolding approxCost gives exactly the stated scalar B identity; weightedL1Norm is the weighted absolute-value sum, cubicMap applies cubicSmooth coordinatewise, and cut indices remain separate bound variables."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "The extended infimum agrees with the infimum of finite nonnegative Lipschitz constants: finite edist inequalities are equivalent to distance inequalities, admitting ∞ cannot alter the infimum, and an empty set has infimum ∞."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:real-ell-one","verdict":"matched","note":"Mathlib `lp (fun _ : ℕ => ℝ) 1` is the set of real sequences with Σ‖x k‖^1 summable, i.e. Σ|x(k)|<∞, and its norm is Σ|x(k)|. Both directions match the paper's ℓ_1 over ℝ. Lean indexes from 0 where the paper indexes k≥1; that is only a bijective relabelling and changes neither the set nor the norm. The pinned reading ass:pin-1 does not bear on this definition."},{"obj_id":"def:index-sets","verdict":"matched","note":"The paper takes n∈ℕ={1,2,…}, which Lean realizes as n : ℕ+. [n]={1..n} becomes Fin n={0..n-1}, an order-preserving relabelling of an n-element index set, so the extension is the same. Lean's 0-based ℕ for ℓ_1 coordinates is a separate reindexing and does not affect this node. The pinned reading ass:pin-1 does not bear on this definition."},{"obj_id":"def:stochastic-matrix","verdict":"matched","note":"Unfolded, IsStochastic A requires ∀ i j, 0 ≤ A i j (StochasticNonnegative) and ∀ i, Σ_j A i j = 1 (StochasticRowSums), for a real matrix indexed by [n]≅Fin n. This is exactly the paper's definition: nonnegative entries and every row summing to 1. Both directions hold. The pinned reading ass:pin-1 does not bear on this definition."}],"assumption_verdicts":[{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"ApproxCostReading states approxCost π w z h = Σ_i π_i·weightedL1Norm w (z_i − cubicMap h_i)^2. approxCost is defined by exactly that sum, so the equation holds by definition. weightedL1Norm u = Σ_B w_B|u_B| matches the core's ‖u‖_{1,w}=Σ_{B∈𝓑} w_B|u_B| (core.json line 505), and cubicMap is the coordinatewise Φ(u)_B=φ(u_B) (line 335). The scalar cost B is a separate Lean symbol (approxCost), while B : 𝓑 stays the coordinate (cut) index, which realizes the pinned disambiguation."},{"obj_id":"ass:pin-2","verdict":"faithful-refinement","note":"lipConst f = sInf{L:ℝ≥0∞ | ∀x y, edist(f x,f y) ≤ L·edist x y}, so LipConstReading holds by definition. Equivalence with the paper's inf over L≥0 with inf∅=∞: real L≥0 embeds into ℝ≥0∞ with the same inequality because edist is ofReal of dist. Adding L=⊤ never lowers the infimum. If the paper's set is empty, the Lean set is ∅ or {⊤}, and sInf is ⊤=∞ in both cases. Lean's PseudoMetricSpace domain only generalizes the setting; on metric spaces the definition is identical. 'Domain of f' is the type α."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:comparison-geometric-law,ass:markov-type-condition,ass:extension-hilbert-source,ass:extension-subset,ass:extension-map] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:comparison-geometric-law","verdict":"faithful-refinement","note":"States exactly the geometric point masses p q^s on natural-valued S; measurability is intrinsic to S being a random variable, and p=1/(t+1), q=1-p."},{"obj_id":"ass:markov-type-condition","verdict":"faithful-refinement","note":"The probability vector, stochasticity, detailed balance, and inequality match exactly; excluded n=0 and t=0 tests are automatic empty-sum and identity-matrix cases."},{"obj_id":"ass:extension-hilbert-source","verdict":"faithful-refinement","note":"A complete real inner product space is exactly a real Hilbert space; the ambient typeclasses supply the remaining structure."},{"obj_id":"ass:extension-subset","verdict":"faithful-refinement","note":"Every Set 𝓗 satisfies S ⊆ Set.univ, so this permits exactly all subsets, including the empty subset."},{"obj_id":"ass:extension-map","verdict":"faithful-refinement","note":"Existence of a finite nonnegative Lipschitz bound is exactly Lipschitzness on S; RealEllOne consists of summable real sequences with the sum norm, consistent with the pinned Lipschitz constant."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:comparison-geometric-law","verdict":"faithful-refinement","note":"Unfolded: for every s : ℕ (which includes 0, matching s≥0), μ.real{S=s} = (1/(t+1))·(1−1/(t+1))^s. This is exactly p q^s, with p=1/(t+1) and q=1−p as in def:geometric-parameters. Since p q^s is finite and positive, μ.real gives the same equality as the paper's ℙ(S=s). The side condition t>0 (PositiveTime, definitionally the same as GeometricParameterDomain) matches the core's ℕ={1,2,…} for ass:comparison-time. The extra `Measurable S` conjunct is regularity bookkeeping the paper presupposes for S to be a random variable. Both directions hold."},{"obj_id":"ass:markov-type-condition","verdict":"faithful-refinement","note":"The core fixes ℕ={1,2,…}, so the guards 0<n and 0<t give exactly the paper's 'every n,t∈ℕ'. Unfolded: IsProbabilityVector means entries ≥0 and sum to 1. IsStochastic means entries ≥0 and every row sums to 1. IsReversible means the detailed balance π_i a_ij = π_j a_ji. u ranges over all Fin n → Z, d_Z is `dist`, and (A^t)_ij is the matrix power. The inequality Σ_{i,j} π_i (A^t)_ij d(u_i,u_j)^2 ≤ M^2 t Σ_{i,j} π_i a_ij d(u_i,u_j)^2 is reproduced term for term. Both directions hold."},{"obj_id":"ass:extension-hilbert-source","verdict":"faithful-refinement","note":"The binder instances NormedAddCommGroup + InnerProductSpace ℝ, together with the predicate CompleteSpace, are exactly the definition of a real Hilbert space. The equivalence holds in both directions."},{"obj_id":"ass:extension-subset","verdict":"faithful-refinement","note":"The predicate S ⊆ Set.univ is always true, so it puts no restriction on S. That is the faithful encoding of 'every subset S⊆ℋ', including the empty subset; the universal quantifier lives at the consumer's binder over Set ℋ. Both directions hold."},{"obj_id":"ass:extension-map","verdict":"faithful-refinement","note":"f : S → RealEllOne, where RealEllOne = lp (ℕ→ℝ) 1, the real ℓ_1 with the sum norm. S carries the subspace metric from ℋ. The condition ∃ L:NNReal, LipschitzWith L f says some finite L≥0 bounds d(f x,f y) ≤ L d(x,y). Under the binding pin ass:pin-2 (Lip(f) is an infimum, with inf ∅ = ∞), that is exactly 'f is Lipschitz', i.e. Lip(f)<∞. Both directions hold."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:flat-finite-cuts,ass:flat-positive-weights,ass:flat-arguments,ass:flat-center,ass:martingale-process] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:flat-finite-cuts",
+      "verdict": "faithful-refinement",
+      "note": "The Fintype binder supplies finiteness and Nonempty supplies nonemptiness, exactly representing a finite nonempty index set."
+    },
+    {
+      "obj_id": "ass:flat-positive-weights",
+      "verdict": "faithful-refinement",
+      "note": "The predicate requires exactly that every real coordinate weight be strictly positive."
+    },
+    {
+      "obj_id": "ass:flat-arguments",
+      "verdict": "faithful-refinement",
+      "note": "Unfolding unitCube gives exactly u,u' ∈ [0,1]^𝓑."
+    },
+    {
+      "obj_id": "ass:flat-center",
+      "verdict": "faithful-refinement",
+      "note": "The coordinatewise disjunction is equivalent to e ∈ {0,1}^𝓑."
+    },
+    {
+      "obj_id": "ass:martingale-process",
+      "verdict": "faithful-refinement",
+      "note": "Martingale expresses strong adaptation and the conditional-expectation identities; cube membership and almost-sure convergence match the stated process. The finite positive weighted Hilbert norm gives the same topology and integrability as the coordinate norm, and terminal cube membership follows from closedness."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:flat-finite-cuts","verdict":"faithful-refinement","note":"The binder `[Fintype 𝓑]` gives finiteness and the def body `Nonempty 𝓑` gives nonemptiness. Together they say exactly that 𝓑 is a finite nonempty index set, in both directions."},{"obj_id":"ass:flat-positive-weights","verdict":"faithful-refinement","note":"`∀ B, 0 < w B` with `w : 𝓑 → ℝ` says exactly that every weight w_B is a strictly positive real, in both directions."},{"obj_id":"ass:flat-arguments","verdict":"faithful-refinement","note":"`unitCube 𝓑 = Set.pi univ (fun _ => Icc 0 1)` is Q=[0,1]^𝓑 as defined in the core (H = ℝ^𝓑). So `u ∈ Q ∧ u' ∈ Q` is exactly the paper's 'u,u' ∈ Q'."},{"obj_id":"ass:flat-center","verdict":"faithful-refinement","note":"For `e : 𝓑 → ℝ`, `∀ B, e B = 0 ∨ e B = 1` says exactly that e ∈ {0,1}^𝓑 inside H = ℝ^𝓑, in both directions."},{"obj_id":"ass:martingale-process","verdict":"faithful-refinement","note":"Lean's `Martingale M 𝓕 μ` (adapted, plus the conditional-expectation identity a.e.) does not depend on which norm H=ℝ^𝓑 carries: the Hilbert norm and the sup norm give the same Borel σ-algebra, and conditional expectation is linear and works coordinatewise. So it matches the paper's H-valued martingale. The pointwise condition M m ω ∈ unitCube matches 'taking values in Q', and the a.s. Tendsto to Minf matches 'converging almost surely to M_∞'. The extra conjunct 'Minf ∈ Q a.s.' adds no content: Q is closed, so it follows from the other conjuncts. Minf is not required to be measurable, but it is a.e. equal to a limit of measurable maps, so it is AE-strongly measurable, which matches the paper's random variable M_∞ up to the a.e. convention. Every consumer (TMartingale.lean:94,154) supplies `[IsProbabilityMeasure μ]`, so the probability-space setting is kept."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:stochastic-nonnegative,ass:stochastic-row-sums,ass:detailed-balance,ass:cotype-condition,ass:cuts-data] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:stochastic-nonnegative",
+      "verdict": "faithful-refinement",
+      "note": "Exactly entrywise nonnegativity over the finite state set."
+    },
+    {
+      "obj_id": "ass:stochastic-row-sums",
+      "verdict": "faithful-refinement",
+      "note": "Exactly requires every row sum to equal one."
+    },
+    {
+      "obj_id": "ass:detailed-balance",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated detailed-balance equality for every pair of states."
+    },
+    {
+      "obj_id": "ass:cotype-condition",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent quantifiers and inequality after unfolding: probability means nonnegative masses summing to one, stochasticity combines both entry conditions, and reversibility is detailed balance; the core explicitly defines n and t as positive integers."
+    },
+    {
+      "obj_id": "ass:cuts-data",
+      "verdict": "faithful-refinement",
+      "note": "The typed input supplies precisely a finite family of real absolutely summable sequences, with ℕ coordinates reindexed from positive coordinates; 0 < n expresses the core's explicit positive-integer domain for n."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:stochastic-nonnegative","verdict":"faithful-refinement","note":"`∀ i j, 0 ≤ A i j` on A : Matrix (Fin n) (Fin n) ℝ is exactly the statement that the entries a_ij for i,j ∈ [n] are nonnegative. Both directions hold."},{"obj_id":"ass:stochastic-row-sums","verdict":"faithful-refinement","note":"`∀ i, ∑ j, A i j = 1` is exactly 'each row sum equals one'. Both directions hold."},{"obj_id":"ass:detailed-balance","verdict":"faithful-refinement","note":"`∀ i j, π i * A i j = π j * A j i` is literally π_i a_ij = π_j a_ji for all i,j. Both directions hold."},{"obj_id":"ass:cotype-condition","verdict":"faithful-refinement","note":"Unfolded: IsProbabilityVector = (∀i, 0≤π i) ∧ ∑π=1 (Causalean FiniteKernel). IsStochastic = nonneg ∧ row sums one. IsReversible = detailed balance. The quantifier order is ∀n,t,π,A,x ∃y, as in the paper. LHS = ∑π_i d(x_i,y_i)² + t∑π_i a_ij d(y_i,y_j)². RHS = C²∑π_i((1/t)∑_{s=1}^t A^s)_ij d(x_i,x_j)², with A^s the matrix power. The extra 0<t is the intrinsic domain of 1/t and of ∑_{s=1}^t, since the paper's ℕ is positive. The extra 0<n removes nothing: for n=0 no probability vector exists, because the empty sum is 0≠1. Equivalent in both directions."},{"obj_id":"ass:cuts-data","verdict":"faithful-refinement","note":"The membership x_i ∈ ℓ_1 is carried by the type x : Fin n → RealEllOne. RealEllOne = lp (ℕ→ℝ) 1, which is real ℓ_1, as the symbol reading for lem:cuts requires (x_i ∈ ℓ_1(ℝ)). The Prop `0 < n` only pins the index range: the paper indexes x_1,…,x_n with n ∈ ℕ, and its ℕ is positive (the cotype definition uses 1/t for t ∈ ℕ). Dropped n=0 case: lem:cuts holds trivially there (the 'all points coincide' branch is vacuous), so no paper content is lost. No other constraint is added."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:martingale-center,ass:comparison-chain,ass:comparison-data,ass:comparison-time,ass:comparison-independence] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:martingale-center",
+      "verdict": "faithful-refinement",
+      "note": "On the paper's finite coordinate space, strong measurability is equivalent to measurability; BinaryVector requires exactly that every coordinate is zero or one."
+    },
+    {
+      "obj_id": "ass:comparison-chain",
+      "verdict": "faithful-refinement",
+      "note": "Under the consumers' explicit probability-measure background, measurable observations with the full finite-path factorization, a stochastic transition matrix and a stationary probability vector characterize exactly a stationary finite-state Markov chain."
+    },
+    {
+      "obj_id": "ass:comparison-data",
+      "verdict": "faithful-refinement",
+      "note": "The ambient MetricSpace X and x : Fin n → X encode the metric point configuration; 0 < n matches the typed core's explicitly positive state count."
+    },
+    {
+      "obj_id": "ass:comparison-time",
+      "verdict": "faithful-refinement",
+      "note": "The frozen def:index-sets defines the paper's natural numbers as positive integers, exactly encoded by t : ℕ with 0 < t."
+    },
+    {
+      "obj_id": "ass:comparison-independence",
+      "verdict": "faithful-refinement",
+      "note": "IndepFun asserts independence of the sigma algebras generated by S and the entire path, equivalent to independence from the whole walk."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:martingale-center",
+      "verdict": "faithful-refinement",
+      "note": "Lean says e : Ω → (𝓑 → ℝ) is StronglyMeasurable[𝓕 0] and that every coordinate of e ω is 0 or 1 for every ω. 𝓑 is a Fintype, so 𝓑 → ℝ is finite-dimensional, second countable and metrizable, and strong measurability w.r.t. 𝓕 0 is the same as 𝓕_0-measurability. The paper's 'F_0-measurable binary vector' is a random vector valued in {0,1}^𝓑, which is this condition. Both directions hold."
+    },
+    {
+      "obj_id": "ass:comparison-chain",
+      "verdict": "faithful-refinement",
+      "note": "Lean asks for a row-stochastic A (entries ≥ 0, rows sum to 1), a probability vector π with πA = π (IsStationary), and HasMatrixMarkovLaw: each U k is measurable and every cylinder has probability π(x0)∏A(x_i,x_{i+1}). Lean ⟹ paper: these cylinder laws make U a Markov chain started at the stationary π, so U is a stationary Markov chain. Paper ⟹ Lean: a stationary Markov chain on finite [n] has shift-invariant two-step marginals, so it is time-homogeneous on the support of its initial law. Take π = law of X_0 and A_ij = P(X_1=j | X_0=i), with any stochastic row where π_i = 0. The m=0 cylinders force μ to be a probability measure, so no extra model restriction is added."
+    },
+    {
+      "obj_id": "ass:comparison-data",
+      "verdict": "regularity-bookkeeping",
+      "note": "The metric space (X,d) is realized by the binder [MetricSpace X] and the points by x : Fin n → X. The only added clause is 0 < n. It is entailed twice over: the paper writes ℕ = {1,2,...} and [n] = {1,...,n}, and a stationary chain on [n] needs a probability vector on [n], which does not exist for n = 0. No narrowing."
+    },
+    {
+      "obj_id": "ass:comparison-time",
+      "verdict": "faithful-refinement",
+      "note": "The core fixes ℕ = {1,2,...} ('Write ℕ={1,2,…}'), so 't ∈ ℕ' means t ≥ 1. With t : ℕ in Lean, that is exactly 0 < t. Equivalent."
+    },
+    {
+      "obj_id": "ass:comparison-independence",
+      "verdict": "faithful-refinement",
+      "note": "IndepFun S (fun ω s => U s ω) μ makes S independent of the whole path, viewed as an element of ℕ → Fin n with the product σ-algebra, i.e. independent of σ(X_s : s ≥ 0). This is exactly 'S is independent of the walk'. It is neither weaker (not just independence from finitely many marginals) nor stronger."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:cuts,lem:flat,lem:comparison] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:cuts",
+      "verdict": "matched",
+      "note": "Under the stronger-theorem exception, Lean supplies explicit finite cut witnesses satisfying every existential requirement; its final identity expresses affinity, and n > 0 follows from the paper’s positive-integer convention."
+    },
+    {
+      "obj_id": "lem:flat",
+      "verdict": "matched",
+      "note": "Unfolding the cube, cubic smoothing, weighted sums and quartic potential gives exactly the stated inequality with the same domain, binary center and constant 108."
+    },
+    {
+      "obj_id": "lem:comparison",
+      "verdict": "matched",
+      "note": "The chain predicate encodes the full stationary Markov path law, independence concerns the entire walk, and the geometric probabilities, expectations and inclusive sum match; t > 0 follows from the paper’s positive-integer convention."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:cuts","verdict":"matched","note":"Matched. The hypothesis CutsData (0<n) only makes explicit the paper's 'Given x_1,…,x_n' (ass:cuts-data). For n=0 the first disjunct holds vacuously anyway. Lean ⟹ paper: in the non-coincident branch the Lean builds one concrete witness. It takes B = cutIndex x, a Finset of nonempty proper subsets with positive cut norm, so B is finite and nonempty. It gives positive weights (cutWeight), binary encodings z_i (cutEncoding) and T = cutReconstruction. Lean also proves exactly the paper's three properties: T(z_i)=x_i, ‖x_i−x_j‖_1 = ‖z_i−z_j‖_{1,w} = ‖z_i−z_j‖_H^2 (RealEllOne = lp 1, so ‖·‖ is the ℓ1 norm), and the contraction. Lean proves affineness as T(r u+(1−r)u') = rT(u)+(1−r)T(u') for every real r, which characterizes affine maps between real vector spaces. Paper ⟹ Lean is not needed for a proved lemma: Lean's hypothesis is entailed and Lean's conclusion gives the paper's existential. Lean says more in two ways: it gives an explicit witness and it guarantees B is nonempty."},{"obj_id":"lem:flat","verdict":"matched","note":"The hypotheses match the paper one for one. FiniteCutIndex = Nonempty 𝓑 together with [Fintype 𝓑] is ass:flat-finite-cuts ('a finite nonempty set B'). PositiveWeights is w_B>0 for all B. CubeArguments puts u,u' in unitCube = [0,1]^B = Q. BinaryVector says e∈{0,1}^B. In the conclusion, weightedL1Norm is Σw|·|. cubicMap applies cubicSmooth(r)=3r²−2r³ coordinatewise, which is Φ from def:cubic; Lean defines Φ off Q too, but it is only evaluated on Q. quarticPotential is (Σw(u−e)²)² = ‖u−e‖_H^4 = F_e. The correction term weightedHNormSq w (u−e) · weightedInner w (u−e) (u'−u) equals ‖a‖_H²⟨a,δ⟩_H. The constant 108 and the inequality direction are the same. The two statements are logically equivalent."},{"obj_id":"lem:comparison","verdict":"matched","note":"StationaryFiniteChain asserts a row-stochastic A and a probability vector π with πA=π (markovStep is the row-vector step), and HasMatrixMarkovLaw μ U π A. That is a homogeneous chain on Fin n with initial law π and the stated finite-path probabilities. This is equivalent to a stationary Markov chain on [n]: a stationary Markov process has time-invariant transitions on the support of π, and those can be extended to a stochastic A. ComparisonData (0<n) is entailed, since a probability space cannot carry a Fin 0-valued U 0. PositiveTime (t>0) is the intrinsic domain of the 28/t factor. IndepFun S (ω ↦ (s ↦ U s ω)) states independence of S from the whole walk. GeometricLaw is Measurable S plus P(S=s) = p q^s, with p = geomKillProb = 1/(t+1) and q = 1−p as in def:geometric-parameters. The left side is E d(x_{X_S},x_{X_0})². The right side is (28/t)·Σ_{s=1}^t endpointCost s, with endpointCost s = E d(x_{X_s},x_{X_0})². The metric space is [MetricSpace X]. The integrands are bounded and take finitely many values, so the Bochner integrals are the paper's expectations. The two statements are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\N,sym:\|\cdot\|_1,sym:[n],sym:C,sym:a_{ij}] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\N","verdict":"matched","note":"StateSet uses positive naturals; GeometricParameterDomain t is exactly 0 < t, giving the same positive-integer domain."},{"obj_id":"sym:\\|\\cdot\\|_1","verdict":"matched","note":"RealEllOne and ComplexEllOne are lp at exponent one; the inherited norm is the nonnegative sum of coordinate absolute values or complex moduli."},{"obj_id":"sym:[n]","verdict":"matched","note":"StateSet n = Fin n faithfully relabels {1,…,n} via i ↦ i+1."},{"obj_id":"sym:C","verdict":"matched","note":"MendelNaorExtension quantifies C : ℝ under the explicit guard 0 < C, exactly enforcing (0,∞)."},{"obj_id":"sym:a_{ij}","verdict":"matched","note":"IsStochastic unfolds to nonnegative entries and row sums one; each entry is bounded above by its row sum, hence lies in [0,1], without consumer hypotheses."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\N","verdict":"matched","note":"The two members together pin {1,2,…}. StateSet (Basic.lean:45) takes n : ℕ+, so positivity is in the type. GeometricParameterDomain (Basic.lean:187-188) is the predicate 0 < t on ℕ, which is exactly ℕ∖{0} = {1,2,…}. The consumers MetricMarkovCotypeCondition and MarkovTypeTwoCondition repeat the same 0 < n, 0 < t guards. A carrier type plus a range-pinning predicate is the accepted idiom."},{"obj_id":"sym:\\|\\cdot\\|_1","verdict":"matched","note":"RealEllOne := lp (fun _ : ℕ => ℝ) 1 and ComplexEllOne := lp (fun _ : ℕ => ℂ) 1 (Basic.lean:35,39) inherit Mathlib's lp norm at p = 1, i.e. ‖f‖ = ∑' i, ‖f i‖, the sum of absolute values or moduli. That is the paper's ℓ₁ norm for K ∈ {ℝ, ℂ}. Its range [0,∞) holds by construction. Indexing coordinates from 0 is a relabelling, stated in the module docstring."},{"obj_id":"sym:[n]","verdict":"matched","note":"StateSet n := Fin (n : ℕ) with n : ℕ+ (Basic.lean:45). Fin n = {0,…,n−1} is in bijection with {1,…,n} via i ↦ i+1, and the module docstring states this relabelling from zero. Every use is a finite sum or quantifier over the state set, so nothing depends on the labels. n ≥ 1 is enforced by ℕ+."},{"obj_id":"sym:C","verdict":"matched","note":"The only tagged member, MendelNaorExtension (Basic.lean:291), adds the binder guard 0 < C on the real C before HasMetricMarkovCotypeTwo RealEllOne C, which pins C to (0,∞). metricMarkovCotypeConstant (Basic.lean:109) likewise takes its infimum only over 0 < C. Context only, not a cluster defect: HasMetricMarkovCotypeTwo X C (Basic.lean:103) accepts any real C, and since only C^2 appears it is symmetric in ±C. Every tagged use of C supplies the positivity guard."},{"obj_id":"sym:a_{ij}","verdict":"matched","note":"Lower bound: StochasticNonnegative (Basic.lean:58-59, ∀ i j, 0 ≤ A i j) gives a_ij ≥ 0. Upper bound: IsStochastic (Basic.lean:70-72) bundles that with StochasticRowSums (∑ j, A i j = 1), and nonnegativity plus row sums give A i j ≤ ∑_k A i k = 1 (Finset.single_le_sum). So the cluster's own members jointly pin a_ij ∈ [0,1]; no consumer hypothesis is needed. The upper bound is not stated syntactically, and no lemma in Basic.lean proves it; it is derived here from IsStochastic alone. This matches the paper, where the [0,1] range is likewise a consequence of the stochastic-matrix definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:cubic,def:flat-potential,def:geometric-parameters,def:y,def:stopped-walk] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:cubic",
+      "verdict": "matched",
+      "note": "Unfolding gives Φ(u)(B)=3(u(B))²−2(u(B))³, exactly the paper’s map on Q."
+    },
+    {
+      "obj_id": "def:flat-potential",
+      "verdict": "matched",
+      "note": "On the stated positive-weight space, (∑ B, w(B)(u(B)−e(B))²)² equals ‖u−e‖_H⁴."
+    },
+    {
+      "obj_id": "def:geometric-parameters",
+      "verdict": "matched",
+      "note": "The core explicitly defines ℕ as positive integers; the domain 0<t is faithful, and the formulas give p=1/(t+1) and q=1−p."
+    },
+    {
+      "obj_id": "def:y",
+      "verdict": "matched",
+      "note": "The coincident branch returns x; otherwise the cut data certified by cut_decomposition supply the named lemma’s witness, and unfolding gives exactly T(Φ(p∑ₛqˢAˢz))."
+    },
+    {
+      "obj_id": "def:stopped-walk",
+      "verdict": "matched",
+      "note": "The attachment is exactly h at alive indices and z at dead indices; the associated initial law, killed transition kernel, path law, and natural filtration realize the specified process with death recorded as a separate transition."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:cubic","verdict":"matched","note":"cubicSmooth r = 3r^2-2r^3 and cubicMap u B = cubicSmooth (u B) match φ and Φ(u)_B=φ(u_B) exactly. The Lean functions are total, while the paper defines φ on [0,1] and Φ on Q. The values agree on the paper's domain, and the consumers (def:y applied to h_i in Q, def:stopped-walk applied to M_m in Q) only evaluate inside it, so the totalization is a conservative extension."},{"obj_id":"def:flat-potential","verdict":"matched","note":"quarticPotential w e u = (Σ_B w_B (u-e)_B^2)^2 = ‖u-e‖_H^4, which is F_e(u), with a=u-e as its displacement argument. δ=u'-u is pure notation with no content to realize. Equal extension both ways."},{"obj_id":"def:geometric-parameters","verdict":"matched","note":"The paper fixes ℕ={1,2,...} (core def:index-sets), so GeometricParameterDomain t := 0<t is exactly the domain t∈ℕ. geomKillProb = 1/(t+1) is p, and geomSurvProb (Basic.lean:196) = 1 - geomKillProb is q. Exact match."},{"obj_id":"def:y","verdict":"matched","note":"In the coincident case y=x, matching the paper. Otherwise y_i = cutReconstruction x (cubicMap (resolvent ...)), i.e. T(Φ(h_i)) with h_i = p Σ' q^s Σ_j (A^s)_{ij} z_j, which is eq:resolvent. z, T and the index set B are the concrete cutEncoding/cutReconstruction/cutIndex witnesses that cut_decomposition (@node lem:cuts, Cuts.lean:453) certifies under the same binder x. This is the allowed chosen-witness form, since the NL explicitly obtains them from lem:cuts. The unused π and the arbitrary matrix A only widen the input domain. For the stochastic A of def:cotype the series is summable, so the tsum equals the paper's convergent convex combination. The pinned reading ass:pin-1 concerns B in the cost identities and does not affect this construction."},{"obj_id":"def:stopped-walk","verdict":"matched","note":"stoppedWalkValue gives M_m = h_i at alive index i and z_i at dead index i. The supporting cluster is also faithful. stoppedInitialLaw puts mass π on the alive states. stoppedWalkKernel sends alive i to dead i with probability p and to alive j with probability q·a_ij, and makes dead states absorbing. stoppedWalkMeasure is the path law. stoppedWalkFiltration is the natural path filtration, i.e. the initial state plus the first m transitions. approxCost is B=Σ_i π_i‖z_i-Φ(h_i)‖_{1,w}^2, matching pinned reading ass:pin-1, and smoothedEnergy is E_A. The martingale property, eq:stopped-bound and eq:jump-identity are claims to be proved by separate lemmas, not parts of this definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\phi,sym:\ind,sym:z_i,sym:\Prob,sym:p] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\phi","verdict":"drift","note":"Basic.lean:160 defines cubicSmooth on all ℝ without an input constraint; cubicSmooth 2 = -4, so the cluster does not pin [0,1]→[0,1]. Restrict the public input to [0,1] and establish the output range from the polynomial; consumer cube assumptions do not repair this cluster."},{"obj_id":"sym:\\ind","verdict":"matched","note":"Cuts.lean:114 computes if i ∈ B.val then 1 else 0, enforcing the binary range by construction."},{"obj_id":"sym:z_i","verdict":"matched","note":"Cuts.lean:114 defines a coordinate function on cutIndex x whose every coordinate is 0 or 1 by construction."},{"obj_id":"sym:\\Prob","verdict":"matched","note":"Basic.lean:204 returns Set.Icc (0 : ℝ) 1 explicitly, using the real measure of the event under a probability measure."},{"obj_id":"sym:p","verdict":"matched","note":"SequenceExponent is exactly {p : ℝ // 1 < p ∧ p ≤ 2}; geomKillProb computes 1/(t+1) for positive natural t, matching the core's definition of ℕ as the positive integers."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":{"kind":"scaffold-mismatch","obj_id":"sym:\\phi","reason":"The sole tagged member has unrestricted real input and can output values outside [0,1]; the frozen symbol has domain and codomain [0,1].","unpinned":null,"witness":null}}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\phi","verdict":"matched","note":"cubicSmooth (Basic.lean:160) is a def that computes φ(r)=3r²−2r³, matching the core definition. On r∈[0,1] the formula gives a value in [0,1] (3r²−2r³ = r²(3−2r) ∈ [0,1]), so the range [0,1]→[0,1] holds by construction. It is used on the unit interval through cubicMap on unitCube arguments."},{"obj_id":"sym:\\ind","verdict":"matched","note":"cutEncoding (Helpers/Cuts.lean:114) is a def computing `if i ∈ B.val then 1 else 0`, so its values lie in {0,1} by construction. cutEncoding_binary (Cuts.lean:156) also proves BinaryVector for it."},{"obj_id":"sym:z_i","verdict":"matched","note":"cutEncoding x i : ↥(cutIndex x) → ℝ is the incidence vector indexed by the retained cuts 𝓑 = cutIndex x, with entries in {0,1} by construction (if-then-else 1/0, and cutEncoding_binary at Cuts.lean:156). Its members pin the space {0,1}^𝓑."},{"obj_id":"sym:\\Prob","verdict":"matched","note":"eventProbability (Basic.lean:204) is a def that returns ⟨μ.real s, measureReal_nonneg, measureReal_le_one⟩ : Set.Icc (0:ℝ) 1 for a probability measure μ. Its codomain is therefore exactly [0,1], pinned by the type."},{"obj_id":"sym:p","verdict":"matched","note":"Sequence-space reading: SequenceExponent (Basic.lean:48) is the subtype {p : ℝ // 1 < p ∧ p ≤ 2}, which is exactly {r : 1 < r ≤ 2}. Killing-probability reading: geomKillProb t (h : 0 < t) = 1/((t:ℝ)+1), which gives exactly {1/(t+1) : t ≥ 1}. In the core, def:geometric-parameters and its symbol text say 'p=1/(t+1) for t∈ℕ, so 0<p≤1/2', so the paper's ℕ is the positive naturals and the GeometricParameterDomain clause 0<t matches it."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:q,sym:S,sym:N_2(X),sym:\|\cdot\|_{1,w},sym:e] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:q",
+      "verdict": "matched",
+      "note": "GeometricParameterDomain requires t > 0; geomSurvProb computes 1 − 1/(t+1), which lies in (0,1) on that domain."
+    },
+    {
+      "obj_id": "sym:S",
+      "verdict": "matched",
+      "note": "GeometricLaw uses a measurable ℕ-valued S with masses p q^s; ExtensionDomain accepts every Set 𝓗, including the empty set."
+    },
+    {
+      "obj_id": "sym:N_2(X)",
+      "verdict": "matched",
+      "note": "metricMarkovCotypeConstant computes the infimum of positive admissible constants in ℝ≥0∞, giving the stated extended nonnegative range."
+    },
+    {
+      "obj_id": "sym:\\|\\cdot\\|_{1,w}",
+      "verdict": "matched",
+      "note": "PositiveWeights requires every weight to be positive; weightedL1Norm is the finite sum of weighted absolute values, hence finite and nonnegative for every real coordinate vector."
+    },
+    {
+      "obj_id": "sym:e",
+      "verdict": "matched",
+      "note": "BinaryVector restricts every coordinate to 0 or 1; InitialBinaryCenter imposes this restriction at every outcome for the random center."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:q","verdict":"matched","note":"geomSurvProb (Basic.lean:196) is a computed def, 1 - 1/(t+1) under GeometricParameterDomain t (0 < t, Basic.lean:187). Its value is t/(t+1), which lies in [1/2,1) ⊂ (0,1), so the range follows from the formula and the positive-time domain. The cluster pins q inside the declared space (0,1)."},{"obj_id":"sym:S","verdict":"matched","note":"Geometric construction: GeometricLaw (Helpers/Comparison.lean:39) types S : Ω → ℕ, so S takes values in {0,1,2,...}; it adds Measurable S and the mass p q^s for every s : ℕ. Extension setting: ExtensionDomain (TExtension.lean:26) types S : Set 𝓗 with the vacuous S ⊆ Set.univ, so every subset is admitted, the empty one included; this is exactly 𝒫(𝓗). Each reading's space is pinned by its own member."},{"obj_id":"sym:N_2(X)","verdict":"matched","note":"metricMarkovCotypeConstant (Basic.lean:108) is a computed def with type ℝ≥0∞: the infimum of ENNReal.ofReal C over C > 0 with HasMetricMarkovCotypeTwo X C. Its range is [0,∞] by construction, and the infimum of the empty set is ∞."},{"obj_id":"sym:\\|\\cdot\\|_{1,w}","verdict":"matched","note":"weightedL1Norm (Basic.lean:127) is a computed def, ∑ B, w B * |u B| over finite 𝓑, so the value is a finite real. PositiveWeights (Basic.lean:121, ∀ B, 0 < w B) makes every term nonnegative. Together they map ℝ^𝓑 into [0,∞), as declared."},{"obj_id":"sym:e","verdict":"matched","note":"BinaryVector (Basic.lean:156) puts e : 𝓑 → ℝ under ∀ B, e B = 0 ∨ e B = 1, which is exactly {0,1}^𝓑. This is the standard idiom of a real carrier plus a pinning predicate. InitialBinaryCenter (Basic.lean:226) requires BinaryVector (e ω) for every ω, so the random center also lies pointwise in {0,1}^𝓑."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:reversibility,def:cotype,def:cotype-constant,def:weighted-norms,def:weighted-space] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:reversibility",
+      "verdict": "matched",
+      "note": "DetailedBalance unfolds exactly to πᵢaᵢⱼ = πⱼaⱼᵢ for every pair of indices, on the stated probability-vector domain."
+    },
+    {
+      "obj_id": "def:cotype",
+      "verdict": "matched",
+      "note": "On the stated domain C > 0, the quantified condition and both sides of the inequality agree exactly; the typed core confirms that n and t are positive integers."
+    },
+    {
+      "obj_id": "def:cotype-constant",
+      "verdict": "matched",
+      "note": "The indexed infimum ranges exactly over positive admissible constants in [0,∞], with an empty admissible set giving ∞ as specified by the core's extended-number domain."
+    },
+    {
+      "obj_id": "def:weighted-norms",
+      "verdict": "matched",
+      "note": "weightedL1Norm and weightedHNormSq give exactly the two displayed finite weighted sums."
+    },
+    {
+      "obj_id": "def:weighted-space",
+      "verdict": "matched",
+      "note": "On the paper's finite coordinate carrier with positive weights, the real coordinate functions equipped with this square-root formula have exactly the indicated Hilbert norm."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Still checking the definitions of IsProbabilityVector and the stochastic row-sum condition before giving verdicts.
+{"statement_verdicts":[{"obj_id":"def:reversibility","verdict":"matched","note":"IsReversible A π unfolds to DetailedBalance π A, which is ∀ i j, π i * A i j = π j * A j i. That is exactly π_i a_ij = π_j a_ji for all i,j. The NL's 'probability vector' and 'stochastic A' are domain conditions that every consumer supplies separately (MetricMarkovCotypeCondition requires IsProbabilityVector π and IsStochastic A), so on the paper's domain the Lean predicate has the same extension."},{"obj_id":"def:cotype","verdict":"matched","note":"Unfolded, MetricMarkovCotypeCondition quantifies over n>0 and t>0. The paper's t∈N must be positive for 1/t to make sense. With n=0 there is no probability vector, so the case is vacuous. The condition also requires: π a probability vector (Causalean IsProbabilityVector: entries nonnegative, summing to 1); A stochastic (all entries ≥0 and each row sums to 1); A reversible w.r.t. π (detailed balance); and ∀x ∃y. The inequality is Σπ_i d(x_i,y_i)^2 + t·ΣΣ π_i a_ij d(y_i,y_j)^2 ≤ C^2 ΣΣ π_i((1/t)•Σ_{s∈Icc 1 t} A^s)_ij d(x_i,x_j)^2, where A^s is the matrix power and the sum runs over s=1..t. This is exactly eq:cotype. The paper's C>0 is the domain of the notion. The Lean predicate is stated for every real C but agrees with the paper on C>0, and the constant definition restricts to 0<C explicitly."},{"obj_id":"def:cotype-constant","verdict":"matched","note":"The Lean value is the infimum, taken in ℝ≥0∞, of ofReal C over the admissible constants C>0 with HasMetricMarkovCotypeTwo X C. When the set is nonempty this equals the paper's real infimum of all such constants; ofReal is monotone and the set is bounded below by 0. When it is empty the value is ∞, the standard inf ∅ = ∞ convention, which matches the convention pinned for Lip in ass:pin-2. The extension is the same."},{"obj_id":"def:weighted-norms","verdict":"matched","note":"weightedL1Norm w u = Σ_B w B * |u B|, exactly ‖u‖_{1,w} = Σ_B w_B|u_B|. The companion ‖u‖_H^2 = Σ_B w_B u_B^2 is weightedHNormSq, which matches literally. Positivity of the weights (PositiveWeights: ∀B, 0<w B) is a separate setup predicate assumed by consumers."},{"obj_id":"def:weighted-space","verdict":"matched","note":"H is realized as the coordinate type 𝓑 → ℝ (that is, ℝ^𝓑 over a Fintype 𝓑) with ‖u‖_H = sqrt(Σ_B w_B u_B^2), the square root of weightedHNormSq. This is exactly 'ℝ^B with the indicated Hilbert norm'. It is a Hilbert norm under PositiveWeights, which consumers assume."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\pi,sym:B,sym:w_B,sym:\|\cdot\|_H,sym:Q] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\pi",
+      "verdict": "matched",
+      "note": "IsProbabilityVector unfolds to nonnegative entries summing to one; each entry is consequently at most one, and zero entries are allowed."
+    },
+    {
+      "obj_id": "sym:B",
+      "verdict": "drift",
+      "note": "The coordinate occurrences match, but approxCost accepts unconstrained real masses, so its formula does not enforce the scalar range [0,∞). A Lean-checked example with n=1, coordinate set Fin 1, π=-1, w=1, z=1, h=0 gives approxCost=-1. Add a tagged nonnegative-mass domain clause or require IsProbabilityVector π in the computing declaration; consumer hypotheses alone do not repair this cluster."
+    },
+    {
+      "obj_id": "sym:w_B",
+      "verdict": "matched",
+      "note": "PositiveWeights requires every weight to be strictly positive; cutWeight is the norm of a cut whose cutIndex membership explicitly requires strictly positive norm."
+    },
+    {
+      "obj_id": "sym:\\|\\cdot\\|_H",
+      "verdict": "matched",
+      "note": "weightedHNorm is the nonnegative real square root of the specified weighted sum of coordinate squares, giving the indicated norm on the paper's positive-weight domain."
+    },
+    {
+      "obj_id": "sym:Q",
+      "verdict": "matched",
+      "note": "unitCube is exactly the set of coordinate functions taking every value in the closed interval [0,1]."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:B",
+    "reason": "The scalar B cluster permits negative approxCost values because its own members do not constrain π to nonnegative masses, whereas the frozen symbol space is [0,∞).",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\pi","verdict":"matched","note":"IsProbabilityVector (Basic.lean:54) unfolds to Causalean's FiniteKernel.IsProbabilityVector: (∀ i, 0 ≤ π i) ∧ ∑ i, π i = 1. This is exactly the simplex {π∈[0,1]^n : ∑π_i=1}. The upper bound π_i ≤ 1 follows from nonnegativity plus sum one, and zero masses are allowed as in the paper space. Both directions hold."},{"obj_id":"sym:B","verdict":"matched","note":"The core marks B as overloaded between a coordinate index and the scalar cost ∑_i π_i‖z_i−Φ(h_i)‖_{1,w}^2 ∈ [0,∞). Coordinate-index occurrences: the bound variable of PositiveWeights (Basic.lean:122) ranges over the finite coordinate carrier 𝓑. cutIndex (Cuts.lean:106) is the cut-index set, the nonempty proper subsets of Fin n with positive cut norm, so a B in it is a coordinate index of that 𝓑. Scalar occurrence: approxCost (StoppedWalk.lean:117) is a def computing exactly ∑ i, π i * weightedL1Norm w (z i − cubicMap (h i))^2. Its range is ≥ 0 by construction, since each squared term is ≥ 0 and π ≥ 0 comes from the π symbol's own probability-vector constraint. Each occurrence is pinned to its stated space."},{"obj_id":"sym:w_B","verdict":"matched","note":"PositiveWeights (Basic.lean:121) is ∀ B, 0 < w B, which pins the weight field to (0,∞). cutWeight (Cuts.lean:110) is a computed def, ‖cutVector x B‖, restricted to B ∈ cutIndex x, whose filter requires 0 < ‖cutVector x B‖. So it lies in (0,∞) by construction. Each member pins the space (0,∞)."},{"obj_id":"sym:\\|\\cdot\\|_H","verdict":"matched","note":"weightedHNorm (Basic.lean:135) is a computed def, Real.sqrt(∑ B, w B * u B^2), on 𝓑 → ℝ = ℝ^𝓑. Real.sqrt takes values in [0,∞), so the range is pinned by construction. weightedHNormSq (Basic.lean:130) is its square, the weighted sum of squares. The map type ℝ^𝓑 → [0,∞) matches."},{"obj_id":"sym:Q","verdict":"matched","note":"unitCube 𝓑 (Basic.lean:142) is Set.pi Set.univ (fun _ => Set.Icc 0 1) ⊆ 𝓑 → ℝ. This is exactly [0,1]^𝓑. The cube-valued consumers (CubeArguments, CubeMartingale) use membership in this set."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:F_e,sym:R,sym:\E,sym:D,sym:W] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:F_e","verdict":"matched","note":"quarticPotential is the square of the weighted squared displacement norm, hence is nonnegative on Q by construction."},{"obj_id":"sym:R","verdict":"matched","note":"Under PositiveWeights, flatRemainder equals 2AB + (2C+B)^2 ≥ 0, where A and B are the weighted squared displacement and increment norms and C their weighted inner product; geometricRemainder is natural-valued."},{"obj_id":"sym:\\E","verdict":"matched","note":"expectation is the Bochner integral on real or Banach-valued L1 arguments; nonnegativeExpectation is the extended nonnegative integral."},{"obj_id":"sym:D","verdict":"matched","note":"endpointCost takes natural times and integrates a squared metric distance, giving a nonnegative real value by construction."},{"obj_id":"sym:W","verdict":"matched","note":"cesaroEndpointCost is a nonnegative reciprocal natural time multiplied by a finite sum of nonnegative endpoint costs."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:F_e","verdict":"matched","note":"quarticPotential w e u := (weightedHNormSq w (u - e))^2 with weightedHNormSq = ∑ w_B (u_B-e_B)^2 (Basic.lean:130,169). This is ‖u-e‖_H^4, and squaring makes the range lie in [0,∞) by construction. The def is total on 𝓑→ℝ, so it covers the paper domain Q (unitCube) and agrees with F_e there."},{"obj_id":"sym:R","verdict":"matched","note":"Core: R is a nonnegative remainder defined locally where it occurs. geometricRemainder S t ω := S ω % t is ℕ-valued, so it is ≥0 by construction. flatRemainder is N(a+δ)^2 - N(a)^2 - 4N(a)⟨a,δ⟩, with N = weightedHNormSq, A = N(a), b = ⟨a,δ⟩ = weightedInner and c = N(δ). It expands to (2b+c)^2 + 2Ac, which is ≥0 because A,c ≥ 0 under the tagged PositiveWeights domain (Basic.lean:121). The members jointly pin [0,∞)."},{"obj_id":"sym:\\E","verdict":"matched","note":"expectation is L1.integral on Ω →₁[μ] V for any real Banach V (Basic.lean:209), which is exactly L^1(Ω;V)→V. nonnegativeExpectation is the lintegral of Ω→ℝ≥0∞ with values in [0,∞] (Basic.lean:214), which covers the nonnegative-scalar extension. Both are under a probability measure."},{"obj_id":"sym:D","verdict":"matched","note":"endpointCost μ U x s := ∫ dist(x(U s ω), x(U 0 ω))^2 dμ (Comparison.lean:45). This is D(s) = E d(x_{X_s}, x_{X_0})^2 on s ∈ ℕ. The integrand is nonnegative, so the range is in [0,∞) by construction; it takes finitely many values on Fin n."},{"obj_id":"sym:W","verdict":"matched","note":"cesaroEndpointCost := (1/t)·∑_{s∈Icc 1 t} endpointCost s (Comparison.lean:49). This is W = t^{-1}∑_{s=1}^t D(s). It is a nonnegative multiple of a sum of nonnegative terms, so it lies in [0,∞) by construction; for t=0 Lean gives 0, which is still in range."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:lipschitz-constant,def:markov-type,lem:mendel-naor-extension] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:lipschitz-constant",
+      "verdict": "matched",
+      "note": "Equivalent to the pinned extended infimum: finite ENNReal constants encode nonnegative real bounds, and absence of finite bounds gives infinity."
+    },
+    {
+      "obj_id": "def:markov-type",
+      "verdict": "derived",
+      "note": "Paper implies Lean, but the converse fails because positivity of M is omitted: a singleton satisfies the Lean predicate with M=0. Add a 0<M field; excluding n=0 and t=0 only removes vacuous or automatic tests."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:mendel-naor-extension",
+      "verdict": "faithful-refinement",
+      "note": "Encodes the cited assertion specialized to real ℓ₁: positive Markov type and cotype constants, a universal multiplier, and extensions of every Lipschitz subset map. Positivity is explicit here."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiMetricMarkovCotype.MendelNaorExtension",
+      "statement": "A universal nonnegative K₀ bounds the Lipschitz extension factor into real ℓ₁ by K₀MC for Banach sources with Markov type constant M and target cotype constant C.",
+      "classical_fact": "Corollary 1.13 specialized to p=2 and real ℓ₁=c₀*, with the normed-space barycenter supplying the barycentric hypothesis; enlarging the universal multiplier converts the extension-modulus infimum bound to actual extensions.",
+      "missing_infra": "Local discharge of the cited extension theorem and its real ℓ₁ dual-space specialization.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:mendel-naor-2013",
+        "locator": "Corollary 1.13"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:markov-type",
+    "reason": "The frozen definition requires M>0; add this condition to HasMarkovTypeTwo alongside the existing inequality.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:lipschitz-constant","verdict":"matched","note":"lipConst is the sInf in ℝ≥0∞ of {L | ∀ x y, edist (f x) (f y) ≤ L * edist x y}. edist is finite in a (pseudo)metric space, so for finite L this condition is exactly d(f x,f y) ≤ L d(x,y). L=∞ is never below a finite admissible L. If no finite L works, the infimum is ⊤ whether or not ∞ is in the set. The infimum is attained because the condition is closed. This matches the paper's least L≥0 and pin ass:pin-2 (inf ∅ = ∞). Allowing pseudometric spaces changes nothing on metric spaces."},{"obj_id":"def:markov-type","verdict":"matched","note":"MarkovTypeTwoCondition is the paper inequality Σ_{i,j} π_i (A^t)_{ij} d(u_i,u_j)^2 ≤ M^2 t Σ π_i a_{ij} d(u_i,u_j)^2. It quantifies over all n,t, probability vectors (nonnegative entries summing to 1, zeros allowed; checked in Causalean FiniteKernel.lean:24), stochastic matrices (nonnegative entries, row sums 1) and detailed-balance-reversible A. The guards 0<n and 0<t match ℕ={1,2,…}; the n=0 and t=0 cases hold trivially (both sides are 0) anyway. The paper's positivity of M is a domain condition. The predicate agrees with the paper for M>0, and every consumer supplies 0<M (MendelNaorExtension) or M=1 (TExtension). Two-way equivalent on the paper's domain."}],"assumption_verdicts":[{"obj_id":"lem:mendel-naor-extension","verdict":"derived","note":"Most of the encoding is faithful: the universal constant K₀ comes first (∃ K₀ ∀ Z M C, so it is uniform). The source is any real Banach space Z with Markov type M>0. Any subset S and any Lipschitz f are allowed. F extends f with Lip(F) ≤ K₀·M·C·Lip(f). Corollary 1.13 gives e(X,Y) ≤ K M_2(X) N_2(Y), so taking K₀=2K handles the infimum not being attained, and M_2 ≤ M, N_2 ≤ C. The problem: the passage attributes to Corollary 1.13 only the statement for a DUAL Banach target with metric Markov cotype two. The Lean fixes the target as RealEllOne and drops the dual-Banach hypothesis entirely. The gate therefore silently assumes the separate passage claim 'ℓ₁ is the dual of c₀', which belongs to thm:extension to prove; the docstring admits c₀ is 'narrative predual only'. As written the gate is stronger than the attributed assertion: source ⟹ Lean needs a premise the node does not state. FIX (option 1): quantify over a real Banach target Y with an explicit dual hypothesis, e.g. ∃ (E : Type) [NormedAddCommGroup E] [NormedSpace ℝ E], Nonempty (Y ≃ₗᵢ[ℝ] NormedSpace.Dual ℝ E), together with HasMetricMarkovCotypeTwo Y C. FIX (option 2): keep the ℓ₁ target but add an explicit hypothesis that RealEllOne is isometrically isomorphic to the dual of c₀ (e.g. ZeroAtInftyContinuousMap ℕ ℝ). Either way thm:extension must then discharge ℓ₁ ≅ c₀* itself."}],"substrate_gates":[{"name":"Papers.OaiMetricMarkovCotype.MendelNaorExtension","statement":"∃ K₀ ≥ 0, ∀ real Banach Z, M>0, HasMarkovTypeTwo Z M, C>0, HasMetricMarkovCotypeTwo ℓ₁ C, ∀ S ⊆ Z, ∀ Lipschitz f : S → ℓ₁, ∃ F : Z → ℓ₁ extending f with lipConst F ≤ ofReal(K₀ M C) · lipConst f","classical_fact":"Mendel–Naor 2013, Corollary 1.13 (generalized Ball extension), p=2: e(X,Y) ≲ M_2(X) N_2(Y) for a dual Banach target Y; normed spaces are W_p-barycentric with Γ=1","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:mendel-naor-2013","locator":"Corollary 1.13"},"check_status":"cited-mismatch"}],"escalate":{"kind":"scaffold-mismatch","obj_id":"lem:mendel-naor-extension","reason":"The cited gate fixes the target as RealEllOne and drops Corollary 1.13's dual-Banach-target hypothesis, so it also assumes the passage's separate claim 'ℓ₁ is the dual of c₀', which is thm:extension's to prove. Fix: restore an explicit dual-Banach hypothesis on the target (general Y with an isometric dual hypothesis, or an explicit ℓ₁ ≅ c₀* premise) and have thm:extension discharge it.","unpinned":"","witness":null}}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:J,sym:E_A,sym:\Lip,sym:K,sym:M] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:J","verdict":"matched","note":"geometricBlock computes a natural quotient; realification interleaves real and imaginary coordinates, giving a real-linear bijection with inverse pairing consecutive coordinates."},{"obj_id":"sym:E_A","verdict":"matched","note":"SmoothedEnergyData supplies nonnegative masses and matrix entries; smoothedEnergy is a finite sum of their products with real squares, hence finite and nonnegative."},{"obj_id":"sym:\\Lip","verdict":"matched","note":"lipConst computes the infimum of extended nonnegative Lipschitz bounds in ℝ≥0∞, including infinity when no bound exists."},{"obj_id":"sym:K","verdict":"matched","note":"The tagged theorem explicitly selects K : ℝ with 0 ≤ K before quantifying over Hilbert spaces, subsets, and maps."},{"obj_id":"sym:M","verdict":"matched","note":"MendelNaorExtension binds M : ℝ under 0 < M and a uniform Markov type condition, enforcing the stated positive-real domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:J","verdict":"matched","note":"The core marks J as local to its proof, and it has two uses. geometricBlock (Helpers/Comparison.lean:53) is ℕ-valued (S ω / t), so its range is {0,1,2,…} by construction. realification (TComplex.lean:33) has type ComplexEllOne → RealEllOne, i.e. lp ℂ 1 → lp ℝ 1. Its coordinates are the real parts at even indices and the imaginary parts at odd indices. TComplex.lean proves it is real-linear (realification_real_linear) and bijective (realification_bijective, line 149, using the two-sided inverse complexification). Both spaces are pinned by the cluster's own members."},{"obj_id":"sym:E_A","verdict":"matched","note":"smoothedEnergy (Helpers/StoppedWalk.lean:121) is ∑_{i,j} π_i A_ij ‖Φ(h_i)−Φ(h_j)‖_{1,w}², which matches the core def. SmoothedEnergyData (line 126) requires ∀ i, 0 ≤ π i and StochasticNonnegative A (Basic.lean:58, ∀ i j, 0 ≤ A i j). Each summand is then a nonnegative coefficient times a square, so the value lies in [0,∞). The members pin the space."},{"obj_id":"sym:\\Lip","verdict":"matched","note":"lipConst (Basic.lean:232) is the sInf in ℝ≥0∞ of {L | ∀ x y, edist (f x) (f y) ≤ L·edist x y}, with sInf ∅ = ⊤. That is the least L ≥ 0 with values in [0,∞], as the core def says. The infimum is attained, and lipConst_le_iff ties it to LipschitzWith. It is defined on pseudo-metric spaces, which include all metric spaces."},{"obj_id":"sym:K","verdict":"matched","note":"lipschitz_extension_hilbert_to_ellOne (TExtension.lean:45) states ∃ K : ℝ, 0 ≤ K ∧ ∀ 𝓗 … with Lip(F) ≤ ofReal K · Lip(f). K is a finite nonnegative real chosen before any Hilbert space, subset or map, so it is universal and lies in [0,∞) as the core requires."},{"obj_id":"sym:M","verdict":"matched","note":"In MendelNaorExtension (Basic.lean:285), M : ℝ is bound under the guard 0 < M, together with HasMarkovTypeTwo Z M, so it lies in (0,∞). This matches the core's 'M>0 a Markov type two constant'. Its uniformity over n, t, π, A and u lives inside HasMarkovTypeTwo, not in the space constraint."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:complex =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:complex","verdict":"matched","note":"Unfolding yields exactly the bound 12√42 on the infimum of positive metric Markov cotype-two constants for complex absolutely summable sequences with their standard ℓ₁ metric."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:complex","verdict":"matched","note":"The Lean statement says the same thing as the paper: N_2(ℓ_1(ℂ)) ≤ 12√42. `metricMarkovCotypeConstant X` is the infimum in ℝ≥0∞ of `ofReal C` over every C > 0 with `HasMetricMarkovCotypeTwo X C`, which matches def:cotype-constant ('the infimum of all such constants'). If no constant is admissible this infimum is ∞, so the bound still requires a constant ≤ 12√42 to exist (approached in the infimum), as the paper's bound does. Comparing the real infimum with 12√42 is equivalent to comparing it in ℝ≥0∞ via `ofReal`, since 12√42 > 0. `ComplexEllOne` is `lp (fun _ : ℕ => ℂ) 1`, whose norm is the sum of the moduli |x_i|, and its metric comes from that norm, so it is exactly ℓ_1(ℂ) with the ℓ_1 metric. The statement adds no hypotheses."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The unfolded constant is the extended infimum of positive constants satisfying exactly the paper’s finite reversible-chain cotype inequality; RealEllOne is real summable sequences with the sum norm, up to index relabeling. The bound is equivalent to the stated inequality."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Unfolded to primitives, the Lean and the paper say the same thing. metricMarkovCotypeConstant X is the infimum, in ℝ≥0∞, of ofReal C over all C>0 with HasMetricMarkovCotypeTwo X C. That predicate is MetricMarkovCotypeCondition, which matches def:cotype exactly: it quantifies over all n,t>0; over π with nonnegative entries summing to one (Causalean IsProbabilityVector); over A that is stochastic (nonnegative entries, row sums one) and satisfies π_i a_ij = π_j a_ji; and over x : Fin n → X. It then gives ∃ y with Σπ_i d(x_i,y_i)^2 + t Σ π_i a_ij d(y_i,y_j)^2 ≤ C^2 Σ π_i ((1/t)Σ_{s=1}^t A^s)_ij d(x_i,x_j)^2. Taking the infimum in ℝ≥0∞ is the paper's 'infimum of all such constants'. If no admissible constant exists, the value is ⊤ and both statements fail together, so 'N_2 ≤ 12√21' is equivalent in both directions. RealEllOne = lp (fun _:ℕ => ℝ) 1, whose metric is the norm metric ‖x−y‖ = Σ|x k − y k|; this is the paper's ℓ_1. The only difference is that coordinates are indexed from 0 instead of from 1, which is an isometric relabelling and does not change N_2. ENNReal.ofReal (12*√21) is the real bound, since that number is positive. The pinned reading ass:pin-1 concerns the proof's cost identities and does not touch this statement."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:martingale =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:martingale","verdict":"matched","note":"The unfolded norms, cubic map, martingale and binary center match the paper. Closedness of the cube entails the terminal cube condition; boundedness gives integrable quartic potentials, and conditional Jensen makes their expected difference nonnegative, so the ENNReal formulation preserves both inequalities."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:martingale","verdict":"matched","note":"I unfolded every referenced definition and checked them against the core. weightedL1Norm is ∑ w_B|u_B| and weightedHNormSq is ∑ w_B u_B², as in def:weighted-norms. quarticPotential w e u = (‖u−e‖_H²)² = ‖u−e‖_H⁴, which is F_e. cubicMap applies φ(r)=3r²−2r³ to each coordinate; it is defined on all reals but only ever applied to cube values, because CubeMartingale requires M m ω ∈ unitCube for every m and ω. unitCube is [0,1]^B, which is Q from def:cube-inner-product. BinaryVector means every coordinate is 0 or 1. The center e must be StronglyMeasurable[𝓕 0], which is the paper's F_0-measurability. The martingale is Mathlib's Martingale on the finite-dimensional space 𝓑→ℝ. Integrability and conditional expectation do not depend on which equivalent norm is used, so this is the same as an H-valued martingale. The clause ∀ᵐ Minf ∈ cube follows from the paper's hypotheses, since Minf is an a.s. limit in the closed cube. Minf is the a.e. limit of strongly measurable M m, so it is AEStronglyMeasurable. Together with the bounded integrand, the Bochner integrals ∫F_e(Minf) and ∫F_e(M_0) are the true expectations and are not silently zeroed. The expectation of the sum is the lintegral of ∑' ofReal(·²), which equals the paper's expectation of a series of nonnegative terms, including the value +∞. The ENNReal.ofReal wrapping on the right-hand side is equivalent to the paper's real inequality: the left-hand side is nonnegative, so the paper's inequality forces 108(…)≥0, and ofReal changes nothing there. If the right-hand side is negative, both versions are false unless the left-hand side is 0. The second conjunct, 108(A−B) ≤ 108A, is exactly the paper's second inequality. Both directions hold, and there are no extra hypotheses beyond the four assumption nodes."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:extension =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:extension","verdict":"matched","note":"Modulo the exempt cited carrier, both directions agree: one finite nonnegative K is uniform over all real Hilbert spaces, arbitrary subsets and Lipschitz maps into real ℓ₁; extension equality and the bound use exactly the pinned extended-infimum Lipschitz constant."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:extension","verdict":"matched","note":"Matched, conditional only on the exempt cited gate MendelNaorExtension (Mendel–Naor Cor. 1.13). The paper's statement and the Lean were compared in both directions. (1) ∃ K : ℝ with 0 ≤ K, chosen before any ∀ 𝓗, is the paper's universal constant K < ∞; a nonnegative K can always be taken. (2) An InnerProductSpace ℝ 𝓗 with CompleteSpace 𝓗 (HilbertSource) is exactly a real Hilbert space. Universe-polymorphic 𝓗 : Type u is the standard encoding, and the gate sits at the same universe u. (3) ExtensionDomain S is S ⊆ univ, which holds for every S, so all subsets are covered, including the empty one. (4) LipschitzIntoEllOne is ∃ L : NNReal, LipschitzWith L f on the subtype metric, i.e. f is Lipschitz into ℓ₁ = lp (ℕ → ℝ) 1. (5) ∀ x : S, F x = f x makes F : 𝓗 → ℓ₁ an extension of f to all of 𝓗. (6) lipConst is sInf over ℝ≥0∞ of the L with edist(f x, f y) ≤ L·edist x y. This matches pinned reading ass:pin-2: finite L agree, ∞ is always admissible because ∞·0 = 0 only when x = y in a metric space, so inf ∅ = ∞ holds. It is finite for Lipschitz f. (7) ENNReal.ofReal K * lipConst f is K·Lip(f). No paper-only hypothesis is missing and no Lean-only premise is added. thm:main and Ball's theorem are proof-uses, not statement premises."}],"assumption_verdicts":[{"obj_id":"ass:extension-hilbert-source","verdict":"faithful-refinement","note":"HilbertSource 𝓗 := CompleteSpace 𝓗 over InnerProductSpace ℝ 𝓗 is exactly 'real Hilbert space', quantified universally as in the paper."},{"obj_id":"ass:extension-subset","verdict":"faithful-refinement","note":"ExtensionDomain S := S ⊆ Set.univ always holds, so every subset S ⊆ 𝓗 is quantified, matching 'every subset'."},{"obj_id":"ass:extension-map","verdict":"faithful-refinement","note":"LipschitzIntoEllOne f := ∃ L : NNReal, LipschitzWith L f on the subtype S into lp (ℕ→ℝ) 1, matching 'every Lipschitz map f : S → ℓ₁'."}],"substrate_gates":[{"name":"h_of_gate","statement":"MendelNaorExtension: ∃ K₀ ≥ 0 such that for every complete real normed Z with Markov type 2 constant M > 0 and ℓ₁ with metric Markov cotype 2 constant C > 0, every Lipschitz f : S → ℓ₁ on S ⊆ Z extends to F : Z → ℓ₁ with lipConst F ≤ K₀·M·C·lipConst f","classical_fact":"Mendel–Naor (2013), Spectral calculus and Lipschitz extension for barycentric metric spaces, Corollary 1.13 (dual Banach targets), specialized to p = 2 and ℓ₁ = c₀*","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:mendel-naor-2013","locator":"Corollary 1.13"},"check_status":"cited-verified"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:C,sym:B,sym:\phi,sym:K,sym:M] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:C",
+      "verdict": "matched",
+      "note": "MendelNaorExtension explicitly restricts the real cotype parameter C by 0 < C."
+    },
+    {
+      "obj_id": "sym:B",
+      "verdict": "matched",
+      "note": "PositiveWeights uses B as a coordinate index; cutIndex constructs retained nonempty proper cuts; ApproxCostData and approxCost_nonneg ensure the scalar cost lies in [0,∞)."
+    },
+    {
+      "obj_id": "sym:\\phi",
+      "verdict": "matched",
+      "note": "CubicSmoothDomain restricts inputs to [0,1], and cubicSmooth_mem_unitInterval ensures the polynomial's outputs lie in [0,1]."
+    },
+    {
+      "obj_id": "sym:K",
+      "verdict": "matched",
+      "note": "The extension theorem selects a real K with 0 ≤ K before quantifying over Hilbert spaces, subsets, and maps."
+    },
+    {
+      "obj_id": "sym:M",
+      "verdict": "matched",
+      "note": "HasMarkovTypeTwo requires constant_pos : 0 < M; MendelNaorExtension also explicitly restricts M to positive reals."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:C","verdict":"matched","note":"MendelNaorExtension (Basic.lean:319-323) binds C : ℝ under the explicit clause `0 < C` (line 322) next to HasMetricMarkovCotypeTwo RealEllOne C. A real carrier with a strict-positivity clause pins the space (0,∞)."},{"obj_id":"sym:B","verdict":"matched","note":"Both readings of the overloaded symbol are pinned. As a coordinate index, B ranges over the finite carrier 𝓑 in PositiveWeights (Basic.lean:123-124), and cutIndex (Cuts.lean:106-107) filters B to nonempty proper subsets of Fin n with positive cut norm, so B is an element of the index set. As a scalar cost, approxCost (StoppedWalk.lean:117-118) computes ∑ i, π i * ‖z i - Φ(h i)‖_{1,w}^2, which is the core formula. ApproxCostData (line 121-122) requires nonnegative masses, and approxCost_nonneg (lines 125-129) proves the value is ≥ 0 on that domain, which gives [0,∞)."},{"obj_id":"sym:\\phi","verdict":"matched","note":"cubicSmooth r = 3r^2 - 2r^3 (Basic.lean:164). CubicSmoothDomain pins the argument to Set.Icc 0 1 (line 167-168). cubicSmooth_mem_unitInterval (line 171-172) proves the value lies in Set.Icc 0 1. Together these realize φ : [0,1] → [0,1] by construction."},{"obj_id":"sym:K","verdict":"matched","note":"lipschitz_extension_hilbert_to_ellOne (TExtension.lean:54) states `∃ K : ℝ, 0 ≤ K ∧ ...`. K is quantified before the Hilbert space 𝓗 and the data, so it is universal, finite and real, with a nonnegativity clause. This pins the space [0,∞)."},{"obj_id":"sym:M","verdict":"matched","note":"HasMarkovTypeTwo (Basic.lean:299-301) has the field `constant_pos : 0 < M` together with MarkovTypeTwoCondition, which is uniform over n, t, π, A and u. MendelNaorExtension also binds `0 < M` (line 320). These members pin M to (0,∞)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:markov-type,lem:mendel-naor-extension] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:markov-type",
+      "verdict": "matched",
+      "note": "Encodes exactly positivity and the stated inequality with probability vectors, stochastic matrices and detailed balance; excluding n=0 and t=0 is equivalent because those cases are vacuous or give 0≤0."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "lem:mendel-naor-extension",
+      "verdict": "faithful-refinement",
+      "note": "Faithfully encodes the attributed Banach extension assertion specialized to real ℓ₁, conditional on its explicit isometric dual identification; the universal constant precedes all source, constant and map parameters, and lipConst realizes the pinned infimum."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiMetricMarkovCotype.MendelNaorExtension",
+      "statement": "A universal finite nonnegative K₀ bounds extension Lipschitz constants by K₀MC for Banach sources of Markov type two and real ℓ₁ targets of metric Markov cotype two, conditional on the displayed dual identification.",
+      "classical_fact": "Supplied Corollary 1.13 at p=2: the dual Banach extension bound; normed-space barycenters give Γ=1, with W₂ control following from W₁≤W₂. Enlarging the universal constant converts the extension-modulus infimum bound into the stated extension existence bound.",
+      "missing_infra": "Discharge the cited extension theorem; the ℓ₁–c₀* identification remains a separate obligation.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:mendel-naor-2013",
+        "locator": "Corollary 1.13"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:markov-type","verdict":"matched","note":"The two sides are equivalent. HasMarkovTypeTwo requires 0<M together with MarkovTypeTwoCondition. Unfolded, that condition says: for every n,t, every π with IsProbabilityVector (from Causalean FiniteKernel: entries ≥0, summing to 1), every A with IsStochastic (entries ≥0, rows summing to 1) and IsReversible (π_i a_ij = π_j a_ji), and every u : Fin n → Z, Σ π_i (A^t)_ij d(u_i,u_j)^2 ≤ M^2 t Σ π_i a_ij d(u_i,u_j)^2. This is the paper's inequality. The Lean-only premises 0<n and 0<t cost nothing: at n=0 both sums are empty, and at t=0 A^0=I makes the left side Σ π_i d(u_i,u_i)^2 = 0 ≤ 0, so those cases hold trivially. Both directions therefore hold."}],"assumption_verdicts":[{"obj_id":"lem:mendel-naor-extension","verdict":"faithful-refinement","note":"The Lean encodes the attributed assertion of MN13 Corollary 1.13 at p=2 in the Banach-space form the node names. Source Z is any real Banach space with HasMarkovTypeTwo Z M. The target is set to thm:extension's object ℓ₁. The 'dual Banach' hypothesis is kept as the explicit premise Nonempty(ℓ₁ ≃ₗᵢ (c₀)*), which is not assumed true, so the passage's claims about Hilbert type one, ℓ₁=c₀* and Thm main stay as thm:extension's obligations. The cotype hypothesis is HasMetricMarkovCotypeTwo ℓ₁ C with 0<C; it unfolds to MN Definition 1.2 at p=2 with (1/t)Σ_{s=1}^t A^s. lipConst is the sInf over ENNReal L with edist ≤ L·edist, which matches pinned reading ass:pin-2. Source ⇒ Lean: if ℓ₁ is isometrically a dual Banach space, it is a normed space and so W_2 barycentric with Γ=1. Corollary 1.13 then gives e(Z,ℓ₁) ≤ K·M_2·N_2 ≤ K·M·C. Any L above that infimum works for every S and every Lipschitz f, so K₀=2K suffices (M,C>0); the empty-S and constant-f cases are handled by constant extensions. Lean ⇒ node at this target: taking the infimum over admissible M,C gives e(Z,ℓ₁) ≤ K₀·M_2·N_2, a universal constant times the two constants. The quantifier order ∃K₀ ∀(…) makes the constant universal. The statement is not vacuous: Hilbert sources satisfy the type hypothesis."}],"substrate_gates":[{"name":"Papers.OaiMetricMarkovCotype.MendelNaorExtension","statement":"∃ K₀ ≥ 0 such that, whenever ℓ₁ ≅ₗᵢ c₀* (the dual of c₀), every real Banach Z with Markov type two constant M>0 and every C>0 such that ℓ₁ has metric Markov cotype two with constant C satisfy: for all S ⊆ Z and Lipschitz f:S→ℓ₁ there is F:Z→ℓ₁ extending f with Lip(F) ≤ K₀·M·C·Lip(f).","classical_fact":"Mendel–Naor (2013), Corollary 1.13 (dual Banach target, p=2): e(X,Y) ≲ M_p(X)N_p(Y). It rests on Theorem 1.11 together with the fact that normed spaces are W_1 barycentric with Γ=1.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:mendel-naor-2013","locator":"Corollary 1.13"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:extension =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:extension","verdict":"matched","note":"Modulo the explicitly exempt cited gate, the statement matches: K is universal and finite, the source is any complete real inner-product space, S is unrestricted, and the extension agrees with f and satisfies the pinned optimal Lipschitz bound. The extended infimum is equivalent to the pinned definition on these metric spaces."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:extension","verdict":"matched","note":"Matched; this is judged modulo the exempt, source-verified cited gate MendelNaorExtension. Universal constant: the Lean puts ∃ K before ∀ 𝓗, so K is uniform across all Hilbert spaces. The added 0 ≤ K changes nothing, because ENNReal.ofReal sends every negative K to 0, so ofReal K = ofReal (max K 0). Real Hilbert space: NormedAddCommGroup + InnerProductSpace ℝ + HilbertSource (= CompleteSpace) is exactly a complete real inner-product space, and the norm comes from the inner product. Every subset: ExtensionDomain S is S ⊆ univ, which always holds, so every S is allowed, including the empty set. Lipschitz map: LipschitzIntoEllOne f is ∃ L : NNReal, LipschitzWith L f on the subtype S with the induced metric. Target: RealEllOne is lp (fun _ : ℕ => ℝ) 1, the real ℓ₁ with its sum norm. Extension: F is defined on all of 𝓗 and F x = f x on S. Bound: lipConst F ≤ ofReal K * lipConst f, where lipConst is sInf {L : ℝ≥0∞ | ∀ x y, edist ≤ L·edist}. That is the pinned reading ass:pin-2 (infimum over L ≥ 0, inf ∅ = ∞), and the subtype edist equals the ambient distance. Edge cases agree with the paper: if Lip(f) = 0, F must be constant (possible); Lip(f) cannot be ∞ because f is Lipschitz. Both directions hold. The gate's ℓ₁ ≅ c₀* hypothesis, Markov type two for 𝓗, and metric Markov cotype two for ℓ₁ (thm:main) are things the proof must establish; they are not added premises of the statement. The proof's status (sorry or not) is not part of this review. Caveat: the file reported 'Imports are out of date and must be rebuilt', so it was not re-elaborated here. The verdict rests on the extracted statement and the unfolded definitions shown."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}

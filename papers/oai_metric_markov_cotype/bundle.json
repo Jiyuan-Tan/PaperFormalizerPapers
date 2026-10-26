@@ -1,0 +1,110 @@
+{
+  "slug": "oai_metric_markov_cotype",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 10,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 22,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Probability.Conditioning.MarkovTransitions",
+      "Toolkit.Foundations.Probability.LimitTheorems.BoundedMartingaleDifferences",
+      "Toolkit.Foundations.Probability.LimitTheorems.FiniteMarkovChain",
+      "Toolkit.Foundations.Probability.LongRunVariance",
+      "Toolkit.Foundations.Probability.PoissonEquation",
+      "Toolkit.Foundations.Probability.Processes.ConditionalExpectation",
+      "Toolkit.Foundations.Probability.Processes.DeterministicIteration",
+      "Toolkit.Foundations.Probability.Processes.NaturalFiltration",
+      "Toolkit.Foundations.Probability.Processes.PathLaw",
+      "Toolkit.Foundations.Probability.Processes.PathProjection",
+      "Toolkit.Foundations.Probability.Processes.RandomUpdate"
+    ],
+    "requires": [
+      {
+        "name": "Causalean",
+        "form": "git",
+        "git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "rev": "a7085d88d2e4b30003db7097ca374f4718da0f01"
+      },
+      {
+        "name": "StatLean",
+        "form": "vendored",
+        "path": "vendor/StatLean"
+      },
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [
+      {
+        "name": "Causalean",
+        "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+        "uncommitted": 1,
+        "changed": [],
+        "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+        "files": {
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/API.lean": "5f4daef50e616c04a7f94bc69e4d8e7b83ca9d3d",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Basic.lean": "9e25852a36da683569e624ee9fed4c2dceeaf0b8",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/CertifiedReal.lean": "c1a350a9fe23b58b90fefefb160dd268114b1af4",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Contour/Basic.lean": "00d6d1c1f84d937ce4a5460a4a39bceee800f338",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Exponential.lean": "37b04f330edbde0d94294963ca6bbf68f6ae73cd",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/FiniteLinearAlgebra.lean": "2bb9a6904e7523d3c677ff93fd2ddf3761c2f482",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/FiniteSearch.lean": "284e464c3078818a1c9beb4491f905b63e6776d8",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Logarithm.lean": "56813e438582050f5835ca2aae37e5110b67f91e",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Mesh.lean": "939af4ac3d945c7ab2752c93e9a2f77124f38594",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Operations.lean": "fe931ac5545de4e926cdd912d2d977b56f87b8fa",
+          "Causalean/Mathlib/Analysis/IntervalArithmetic/Quadrature.lean": "8f6db933f895d9257d38b2faed3838a7ff74592b",
+          "Causalean/Mathlib/Analysis/WeightedCauchySchwarz.lean": "c7c0ee9d56a575cc2b4d1ba31dd90d06cae4fcc4",
+          "Causalean/Mathlib/Probability/Certified/FiniteKernel.lean": "23aecc48b75743043f7d3f652a09df70ddd08ab0",
+          "Causalean/Stat/Coupling/Basic.lean": "454bf74d83ec9e42c81488dddb410e52b37b5ee3",
+          "Causalean/Stat/Limit/Modes.lean": "49e9c06bac1dd7c6427912e6e46936028d2cc036"
+        },
+        "status": "unverified",
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387, with 1 of the files reached changed since): 15 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_metric_markov_cotype --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      }
+    ],
+    "warnings": [],
+    "notes": [
+      "built against a local copy of Causalean (its commit 5ca94e0ac387, with 1 of the files reached changed since): 15 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_metric_markov_cotype --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+    ]
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "141a77b2b6ecca50853f88e37f33f9f893ef0a78803147859607a34cc2271b58",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.2",
+    "lem:cuts": "Lemma 2.1",
+    "lem:flat": "Lemma 3.1",
+    "thm:martingale": "Corollary 3.2",
+    "lem:comparison": "Lemma 4.1",
+    "thm:complex": "Corollary 6.1",
+    "thm:extension": "Corollary 6.2"
+  },
+  "todo_items": []
+}
