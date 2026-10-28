@@ -63,7 +63,7 @@ const PAPER_URL = "https://arxiv.org/abs/2610.31810";
 /** How to cite PaperFormalizer, as the tool's README gives it: shown in "Cite this work" on the index. */
 const CITATION_BIBTEX = `@misc{tan2026paperformalizer,
   title         = {{PaperFormalizer}: Author-in-the-Loop Autoformalization of Research Papers in {Lean}},
-  author        = {Tan, Jiyuan and Syrgkanis, Vasilis and Blanchet, Jose},
+  author        = {Tan, Jiyuan and Blanchet, Jose and Syrgkanis, Vasilis},
   year          = {2026},
   eprint        = {2610.31810},
   archivePrefix = {arXiv},
