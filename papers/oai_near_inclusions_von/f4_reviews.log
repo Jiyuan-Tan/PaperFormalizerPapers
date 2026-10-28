@@ -1,0 +1,310 @@
+===== reviewer convergence/dual :: medium :: batch[def:regular-space,def:tree-basis,def:identity-projection,def:left-regular,def:circle-parameters] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:regular-space",
+      "verdict": "matched",
+      "note": "At exponent 2, lp consists exactly of complex functions on F with summable squared norms, realizing ℓ²(F)."
+    },
+    {
+      "obj_id": "def:tree-basis",
+      "verdict": "matched",
+      "note": "lp.single 2 x 1 is exactly the function equal to 1 at x and 0 elsewhere, the standard orthonormal basis vector δ_x."
+    },
+    {
+      "obj_id": "def:identity-projection",
+      "verdict": "matched",
+      "note": "The singleton span ℂ ∙ treeBasis 1 is ℂδ_e, and starProjection is its orthogonal projection on K."
+    },
+    {
+      "obj_id": "def:left-regular",
+      "verdict": "matched",
+      "note": "lpReindex_exists fixes the map pointwise as (l(g)ξ)(y)=ξ(g⁻¹y), equivalently l(g)δ_x=δ_gx; continuity and density of the basis ensure uniqueness."
+    },
+    {
+      "obj_id": "def:circle-parameters",
+      "verdict": "matched",
+      "note": "The tuple records exactly t=1/2, r=√(1−t²), and the complex unit circle, since the complex norm equals modulus."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:regular-space","verdict":"matched","note":"TreeSpace = lp (fun _ : FreeGrp => ℂ) 2. This is exactly ℓ²(F) over ℂ, with F = FreeGroup ℕ, the countably generated free group."},{"obj_id":"def:tree-basis","verdict":"matched","note":"treeBasis x = lp.single 2 x 1 is the indicator vector of x in ℓ²(F), i.e. δ_x. The family (δ_x) is the standard orthonormal basis, so both directions hold."},{"obj_id":"def:identity-projection","verdict":"matched","note":"projE = (ℂ ∙ treeBasis 1).starProjection is the orthogonal projection onto ℂδ_e, since the identity e of the free group is 1. Same object as p_e."},{"obj_id":"def:left-regular","verdict":"matched","note":"leftReg g = lpReindex (Equiv.mulLeft g⁻¹). lpReindex is a Classical.choose, but the choice is pinned uniquely by its spec (T ξ i = ξ (e i), lpReindex_apply in Amplification.lean:160), so (l(g)ξ)(x) = ξ(g⁻¹x). Applied to δ_y this gives δ_y(g⁻¹x) = 1 iff x = gy, so l(g)δ_y = δ_{gy}. This bounded operator is the unique one with that action on the orthonormal basis, so the two definitions agree."},{"obj_id":"def:circle-parameters","verdict":"matched","note":"The tuple is (1/2, √(1-tParam²), {z : ℂ | ‖z‖ = 1}). The complex norm is the modulus |z|, so this is t = 1/2, r = (1-t²)^{1/2} and T = the unit circle exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:near-unitary-pair,ass:clock-index,ass:corner-projections,ass:corner-dimension,ass:corner-unitaries] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:near-unitary-pair","verdict":"faithful-refinement","note":"Nontriviality and finite dimensionality express exactly the stated domain; unitary membership means U*U = UU* = I for each operator, with star interpreted as adjoint."},{"obj_id":"ass:clock-index","verdict":"faithful-refinement","note":"For the natural-number index n, 3 ≤ n is exactly the stated condition."},{"obj_id":"ass:corner-projections","verdict":"faithful-refinement","note":"At every n, self-adjoint idempotence expresses orthogonal projection and Commute expresses E₁nE₂n = E₂nE₁n on the complex Hilbert space H n."},{"obj_id":"ass:corner-dimension","verdict":"faithful-refinement","note":"cornerRange is the range of E₁nE₂n, exactly D_n since the core defines E_n = E₁nE₂n; range ≠ ⊥ and finite dimensionality express precisely the stated conditions."},{"obj_id":"ass:corner-unitaries","verdict":"faithful-refinement","note":"For every n, both operators are unitary and each commutes with each projection; these are exactly the stated requirements."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:near-unitary-pair","verdict":"faithful-refinement","note":"The Lean matches the NL. Nontrivial D says D is nonzero, FiniteDimensional ℂ D says it is finite-dimensional, and membership in unitary (D →L[ℂ] D) says U and V are unitary. The pinned reading ass:pin-1 is about the absolute convergence of a(g) and b(g) in def:matrix-reps, so it adds no condition to this assumption."},{"obj_id":"ass:clock-index","verdict":"faithful-refinement","note":"The NL condition n ≥ 3 is stated directly as 3 ≤ n with n : ℕ, so the two are equivalent."},{"obj_id":"ass:corner-projections","verdict":"faithful-refinement","note":"For each n, IsStarProjection makes E₁ n and E₂ n self-adjoint idempotents, i.e. orthogonal projections (the standard meaning of 'projection' on a Hilbert space, as core.json line 562 confirms). Commute (E₁ n) (E₂ n) is the commuting condition. H n is an arbitrary complex Hilbert space via the InnerProductSpace ℂ and CompleteSpace variables. Both directions hold."},{"obj_id":"ass:corner-dimension","verdict":"faithful-refinement","note":"cornerRange is the range of cornerProj = E₁ n * E₂ n, which is D_n = E_n H_n with E_n = E_{1n}E_{2n} as fixed in core.json lines 562 and 1316. The NL's 'nonzero' is ≠ ⊥ and 'finite-dimensional' is FiniteDimensional ℂ, both required for every n. The two are equivalent."},{"obj_id":"ass:corner-unitaries","verdict":"faithful-refinement","note":"For each n, R₁ n and R₂ n are unitary, and each commutes with both E₁ n and E₂ n. These are exactly the NL's 'unitaries commuting with both projections'."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:corner-algebras,ass:corner-approximation,ass:pin-1,def:gamma,def:free-group] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:gamma",
+      "verdict": "matched",
+      "note": "On the stated von Neumann algebra domain, Metric.infDist is the infimum of operator-norm distances; zero belongs to N, so these distances are finite and bounded by 1 on the source unit ball, making the real supremum faithful."
+    },
+    {
+      "obj_id": "def:free-group",
+      "verdict": "matched",
+      "note": "FreeGroup ℕ is the free group on countably many generators; reindexing n by j=n+1 identifies its generators with the paper's positive-integer indexing and preserves the identity."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:corner-algebras",
+      "verdict": "faithful-refinement",
+      "note": "VonNeumannAlgebra bundles unital complex star-subalgebras equal to their double commutants, and the predicate requires every element of the first algebra to commute with every element of the second at each n."
+    },
+    {
+      "obj_id": "ass:corner-approximation",
+      "verdict": "faithful-refinement",
+      "note": "The supplied witness sequences retain membership in their respective algebras and both operator-norm limits; consumers quantify over these witnesses with conclusions independent of their choice, faithfully expressing the existential setup."
+    },
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "Summability of both term-norm sequences over ℤ is exactly absolute convergence in operator norm for every g; the amplifications realize the stated tensor factors, and adjoint powers equal negative powers under the standing unitary assumptions."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:gamma","verdict":"matched","note":"⨆ over {x ∈ M, ‖x‖ ≤ 1} of Metric.infDist x N is the paper's sup over the unit ball of M of inf over y ∈ N of ‖x−y‖. The Lean def accepts any set M, N, which is a wider domain than von Neumann algebras; on von Neumann algebras the values agree. There 0 ∈ M, so the index set is nonempty; 0 ∈ N gives infDist ≤ ‖x‖ ≤ 1, so the family is bounded above and the real iSup is the true supremum (no junk value of 0)."},{"obj_id":"def:free-group","verdict":"matched","note":"FreeGroup ℕ is the free group on countably many generators, with identity 1 = e. Indexing the generators s_j by ℕ instead of j ≥ 1 is a relabeling, so the group is isomorphic and the extension is unchanged."}],"assumption_verdicts":[{"obj_id":"ass:corner-algebras","verdict":"faithful-refinement","note":"Mathlib's VonNeumannAlgebra (H n) is a unital von Neumann algebra on B(H_n): a star-subalgebra equal to its double commutant, so it contains 1. The clause ∀ x ∈ A₁ n, ∀ y ∈ A₂ n, Commute x y says exactly that the two algebras commute. This is equivalent to the NL."},{"obj_id":"ass:corner-approximation","verdict":"faithful-refinement","note":"The predicate states T_{in} ∈ A_{in} for every n, and ‖T_{in} − E_{in} R̃_{in}‖ → 0 along atTop for i = 1, 2. This matches the NL and its core def (line 674). E and R̃ are explicit parameters that consumers must instantiate with the paper's E_{in} and R̃_{in}; the predicate itself is equivalent."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"aTerm A U k g = ampFst(A k g) * ampD(U^k) is A_k(g) ⊗ I_K ⊗ U^k, and bTerm is I_K ⊗ A_k(g) ⊗ V^k, matching eq:matrix-reps. U^k for negative k is defined as (U*)^|k|, which equals U^k because U is unitary. Summable over k : ℤ of the operator norms, for every g ∈ F, is exactly absolute norm convergence of both ℤ-indexed sums, as the pin states."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:clock,lem:corner] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:clock",
+      "verdict": "matched",
+      "note": "The operators implement the stated clock and forward shift; the norm identity, convergence over n ≥ 3, and exclusion of commuting approximants along any increasing infinite subsequence match."
+    },
+    {
+      "obj_id": "lem:corner",
+      "verdict": "matched",
+      "note": "All five hypotheses match; cornerProj is E₁E₂, and invariance makes cornerRestrict the stated restriction. Eventual commuting unitaries and both norm limits are equivalent to the paper conclusion; arbitrary values before the eventual tail impose no restriction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:clock","verdict":"matched","note":"I unfolded every referenced definition. clockU acts as (Ux)_j = ω^j x_j. shiftV sets (Vx)_j = x_{(finRotate n).symm j} = x_{j-1}, so V e_k = e_{k+1 mod n}, the forward shift. Both act on EuclideanSpace ℂ (Fin n), so the norms are the Hilbert operator norms. ClockIndex is n ≥ 3 (ass:clock-index). The first conjunct gives ν_n = |ω_n − 1|, since the norm on ℂ is the absolute value. Tendsto over atTop on the subtype {n // 3 ≤ n} expresses ν_n → 0. The negated existential, over a StrictMono φ with unitaries Uhat, Vhat that commute at each k and whose summed operator-norm distances to U_{φ k}, V_{φ k} tend to 0, is exactly 'no infinite subsequence along which commuting unitaries satisfy ‖Û−U‖+‖V̂−V‖ → 0'. The Lean and the paper are equivalent in both directions."}, {"obj_id":"lem:corner","verdict":"matched","note":"H n carries InnerProductSpace ℂ and CompleteSpace instances, so each H n is a complex Hilbert space with no extra restriction. E₁, E₂ are commuting IsStarProjections, the standard (orthogonal) reading of 'projections' here. cornerProj = E₁ n * E₂ n, and cornerRange is its range D_n, assumed ≠ ⊥ and finite-dimensional. R̃ is unitary and commutes with both projections. Mathlib's VonNeumannAlgebra is unital, and CornerAlgebras says elements of A₁ n and A₂ n commute pairwise. CornerApproximation gives T_in ∈ A_in and ‖T_in − E_in R̃_in‖ → 0, matching eq:corner-hypothesis. cornerRestrict is P∘R̃∘ι, which equals R̃|_{D_n} because R̃ commutes with E₁ and E₂ and so preserves D_n. In the conclusion, the Rhat sequences are eventually unitary and commuting, and their whole-sequence norm distance tends to 0. A tendsto statement depends only on the tail, so this is equivalent to 'for all sufficiently large n there are commuting unitaries with ‖R̂_in − R_in‖ → 0'. The let-bound FiniteDimensional instance only provides the Hilbert structure that unitary needs on D_n; it adds no content."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\gamma,sym:\varepsilon_0,sym:t,sym:r,sym:c_k] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\gamma",
+      "verdict": "matched",
+      "note": "nearInclusionGap computes the supremum of nonnegative Metric.infDist values on the source unit ball, hence lies in [0,∞)."
+    },
+    {
+      "obj_id": "sym:\\varepsilon_0",
+      "verdict": "matched",
+      "note": "The tagged theorem explicitly requires 0 < ε₀, with its existential binder outside all indices and unitaries."
+    },
+    {
+      "obj_id": "sym:t",
+      "verdict": "matched",
+      "note": "tParam computes exactly (1 / 2 : ℝ), enforcing the singleton {1/2}."
+    },
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "rParam computes sqrt(1 − (1/2)²) = sqrt(3/4), which lies strictly between 0 and 1."
+    },
+    {
+      "obj_id": "sym:c_k",
+      "verdict": "matched",
+      "note": "For every integer k, cWeight computes a nonnegative indicator plus 2(1/2)^|k|/(1/2), enforcing [0,∞)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\gamma","verdict":"matched","note":"nearInclusionGap is a computed def: the iSup over the source unit ball of Metric.infDist(x, N), Helpers/Gap.lean:19-20. Every infDist is ≥ 0, and a real iSup of an empty or unbounded family is 0, so the range is in [0,∞). nearInclusionGap_nonneg also proves this for von Neumann algebras. The range follows from the construction."},{"obj_id":"sym:\\varepsilon_0","verdict":"matched","note":"TMain.lean:37 binds ε₀ existentially with 0 < ε₀, before the representation data and before the eventually-in-n and ∀ u quantifiers. So ε₀ is pinned to (0,∞) and is an absolute constant, as the hint says."},{"obj_id":"sym:t","verdict":"matched","note":"tParam := 1/2 (FreeGroupSpace.lean:45), which is exactly the singleton {1/2}."},{"obj_id":"sym:r","verdict":"matched","note":"rParam := sqrt(1 - tParam^2) = sqrt(3/4) = √3/2 (FreeGroupSpace.lean:47), which lies in (0,1). The range follows from the construction."},{"obj_id":"sym:c_k","verdict":"matched","note":"cWeight k := 1_{k=0} + 2·tParam^{|k|}/(1 - tParam) over k ∈ ℤ (FreeGroupSpace.lean:55-56). This matches the core definition c_k = 1_{k=0} + 2t^{|k|}/(1-t) with t = 1/2. Every term is ≥ 0 because t = 1/2 and 1 - t = 1/2 > 0, so the range is [0,∞)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:S_0,sym:S_1,sym:C,sym:\nu_n] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:S_0","verdict":"matched","note":"FreeGroupSpace.lean:59 defines S0 as the real tsum of cWeight; with tParam = 1/2, every summand is nonnegative, so S0 lies in [0,∞) by construction."},{"obj_id":"sym:S_1","verdict":"matched","note":"FreeGroupSpace.lean:61 defines S1 as the real tsum of natAbs times cWeight; both factors are nonnegative, so S1 lies in [0,∞) by construction."},{"obj_id":"sym:C","verdict":"matched","note":"NearConstruction.lean:326 defines nearC as the real tsum of nearWeight, whose factors are nonnegative cWeight values and natural absolute values; hence C lies in [0,∞) by construction."},{"obj_id":"sym:\\nu_n","verdict":"matched","note":"Clock.lean:54–55 defines nuN as the real operator norm of the commutator, which is nonnegative for every ClockNat index."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:S_0","verdict":"matched","note":"S0 (FreeGroupSpace.lean:59) is a def computing ∑' k:ℤ, cWeight k, where cWeight k = [k=0] + 2·tParam^|k|/(1−tParam) with tParam = 1/2. That matches the core definition S_0 = Σ c_k. Every term is nonnegative, so the value lies in [0,∞) by construction. The sum converges geometrically, so tsum gives the actual sum."},{"obj_id":"sym:S_1","verdict":"matched","note":"S1 (FreeGroupSpace.lean:61) is a def computing ∑' k:ℤ, |k|·cWeight k, which matches the core definition S_1 = Σ |k| c_k. The terms are nonnegative and summable because the weights decay geometrically, so the value lies in [0,∞) by construction."},{"obj_id":"sym:C","verdict":"matched","note":"nearC (NearConstruction.lean:326) is a def computing ∑' over (k,m,p,h) ∈ ℤ⁴ of c_k·c_m·c_p·c_h·|m−p|·|h| (nearWeight). That matches the core definition C = Σ c_k c_m c_p c_h |m−p| |h|. Each term is nonnegative, so the value lies in [0,∞) by construction."},{"obj_id":"sym:\\nu_n","verdict":"matched","note":"nuN n (Clock.lean:54) is a def computing ‖clockU n * shiftV n − shiftV n * clockU n‖, the norm of the commutator. That matches the core definition ν_n = ‖U_nV_n − V_nU_n‖, indexed over ClockNat for the clock index. As a norm it is nonnegative, so the value lies in [0,∞) by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:matrix-reps,def:matrix-limits,def:product-spaces,def:product-regular,def:product-map] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:matrix-reps",
+      "verdict": "matched",
+      "note": "The amplified terms give the stated tensor factors and integer powers; on the paper's circle-family and unitary domain, coefficient domination proves absolute operator-norm convergence of both sums."
+    },
+    {
+      "obj_id": "def:matrix-limits",
+      "verdict": "derived",
+      "note": "The operator expression matches the first proposed limit, but defining it establishes neither asserted WOT convergence. Retain the limit operators and add public statements of both convergence claims under the paper's hypotheses."
+    },
+    {
+      "obj_id": "def:product-spaces",
+      "verdict": "matched",
+      "note": "ProdGrp, Ssp, and Hsp realize F × F, ℓ²(G), and the completed Hilbert tensor product S ⊗ L through the standard nested-ℓ² identification."
+    },
+    {
+      "obj_id": "def:product-regular",
+      "verdict": "matched",
+      "note": "lpReindex pulls back coordinates: lamReg acts by ξ(g⁻¹x) and rhoReg by ξ(xg), giving exactly the stated basis actions and commuting representations."
+    },
+    {
+      "obj_id": "def:product-map",
+      "verdict": "matched",
+      "note": "The definition is exactly the ordered operator product a(x₁)b(x₂), with the prescribed first-factor and second-factor substitutions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:matrix-limits",
+    "reason": "The frozen node asserts two WOT convergence claims; matrixLimitA merely defines one right-hand-side operator. Add public convergence statements for both substituted generator sequences.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+Let me read the NearConstruction file directly.
+{"statement_verdicts":[{"obj_id":"def:matrix-reps","verdict":"matched","note":"matrixRepA g = ∑' k, ampFst(A k g) * ampD(unitaryIntPow U k). Unfolded: amplify X is X⊗I on ℓ²(F,E) (amplify_spec: amplify X (single j v) i = X(δ_j)(i)•v), so ampFst X = X⊗I_K⊗I_D; ampSnd X = I_K⊗X⊗I_D; ampD Y = I⊗I⊗Y. unitaryIntPow uses U* for k<0, which equals U^k for unitary U (unitarity comes from NearUnitaryPair at consumers). Lsp = ℓ²(F,ℓ²(F,D)) ≅ K⊗K⊗D with K = TreeSpace = ℓ²(F). The sum runs over k∈ℤ as ass:pin-1 requires. Pin-1's absolute operator-norm convergence is MatrixRepsAbsConv, which matrixRepsAbsConv_of_circleFamily proves from IsCircleFamily, so the tsum is the paper's norm-convergent sum. matrixRepB is the symmetric b(g)."},{"obj_id":"def:matrix-limits","verdict":"matched","note":"matrixLimitA U = t•(ampFst projE * ampD U) = t·(p_e⊗I_K⊗U); matrixLimitB V = t·(I_K⊗p_e⊗V). projE is the orthogonal projection onto ℂ·δ_1 (δ_e), and tParam = 1/2 matches the paper's t. The WOT convergence a(s_j)→matrixLimitA is proved separately in MatrixLimits.lean (lines ~100-104) under IsCircleFamily, NearUnitaryPair and MatrixRepsAbsConv, so this def node only fixes the limit operators, as it should."},{"obj_id":"def:product-spaces","verdict":"matched","note":"ProdGrp = F×F (G); Ssp = ℓ²(G) (S); Hsp D = ℓ²(G, Lsp D), the standard realization of S⊗L for S = ℓ²(G). All three objects of the node are tagged under the @node block."},{"obj_id":"def:product-regular","verdict":"matched","note":"lamReg g = lpReindex(mulLeft g⁻¹), and lpReindex_apply gives (lamReg g ξ)(y) = ξ(g⁻¹y), so lamReg g δ_x = δ_{gx}. rhoReg g = lpReindex(mulRight g) gives ξ(yg), so rhoReg g δ_x = δ_{xg⁻¹}. Both match the paper's conventions exactly."},{"obj_id":"def:product-map","verdict":"matched","note":"prodMap x = matrixRepA A U x.1 * matrixRepB A V x.2, i.e. f(x) = a(x_1)b(x_2) in the stated order, with a and b as judged under def:matrix-reps."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:diagonal-unitary,def:algebras,def:commutant-notation,def:clock-pair,def:corner-range] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:diagonal-unitary",
+      "verdict": "matched",
+      "note": "The coordinatewise lp map gives exactly W(δ_x ⊗ v) = δ_x ⊗ f(x)v; the standing circle-family and unitary assumptions entail hb and unitarity."
+    },
+    {
+      "obj_id": "def:algebras",
+      "verdict": "matched",
+      "note": "Under the standing assumptions, sourceAlg_carrier identifies the generated bicommutant with W(λ(G)'' ⊗ I_L)W*; targetAlg is exactly (ρ(G) ⊗ I_L)' because the generating range is star-closed."
+    },
+    {
+      "obj_id": "def:commutant-notation",
+      "verdict": "matched",
+      "note": "Set.centralizer consists exactly of bounded operators commuting with every member of the given set."
+    },
+    {
+      "obj_id": "def:clock-pair",
+      "verdict": "matched",
+      "note": "ClockNat imposes n ≥ 3; clockU multiplies coordinate j by exp(2πi/n)^j, and companion shiftV sends e_j to e_(j+1 mod n)."
+    },
+    {
+      "obj_id": "def:corner-range",
+      "verdict": "matched",
+      "note": "The range of cornerProj is exactly E₁ₙE₂ₙHₙ; nonzeroness and finite dimension are the separate standing assumption ass:corner-dimension."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:diagonal-unitary","verdict":"matched","note":"lp.mapCLM 2 (prodMap A U V) acts on ℓ²(G, L) ≅ S⊗L by ξ ↦ (x ↦ f(x)ξ(x)), so W(δ_x⊗v)=δ_x⊗f(x)v. prodMap x = matrixRepA x.1 * matrixRepB x.2 = a(x1)b(x2), which matches def:product-map. The hb bound is only well-definedness (W must be bounded). It is proof-irrelevant and comes from the paper hypotheses through prodMap_norm_bound (NearConstruction.lean:215) for unitary U,V, so the operator is the paper's W wherever the paper defines it."},{"obj_id":"def:algebras","verdict":"matched","note":"M: sourceAlg is the double commutant of {W λ̃(g) W* : g∈G}, where lamAmp g = lpReindex(mulLeft g⁻¹), i.e. (λ̃_g ξ)(x)=ξ(g⁻¹x), which is λ(g)⊗I_L. The paper's W W* = W* W = I (diagUnitary_mem_unitary), so W(λ(G)''⊗I_L)W* = (W(λ(G)⊗I_L)W*)'' by the tensor commutation theorem (λ(G)⊗I)'' = λ(G)''⊗I. commutantVN takes the centralizer of the star-closure, and this generating set is already star-closed. sourceAlg_carrier (SourceCarrier.lean:56) records the identification. N: realized as targetAlg = commutantVN(range rhoAmp) with rhoAmp g = reindex by mulRight g, i.e. (ρ(G)⊗I_L)'. Both halves of the definition match."},{"obj_id":"def:commutant-notation","verdict":"matched","note":"commutant S := Set.centralizer S, i.e. {T | ∀ s∈S, T s = s T} in B(H). This is exactly the commutant S'."},{"obj_id":"def:clock-pair","verdict":"matched","note":"ClockNat = {n // 3 ≤ n} (ClockIndex, Clock.lean:33). ClockSpace n = EuclideanSpace ℂ (Fin n) = ℂ^n. omegaN n = exp(2πi/n). clockU sends x to (j ↦ ω^j x_j), so U_n e_j = ω_n^j e_j. The shift V_n (e_j ↦ e_{j+1 mod n}) is realized separately as shiftV, through the finRotate lemmas, and both are proved unitary (clockU_mem_unitary, shiftV_mem_unitary)."},{"obj_id":"def:corner-range","verdict":"matched","note":"cornerRange = range of cornerProj n = E₁ n * E₂ n, so D_n = E_nH_n with E_n=E_{1n}E_{2n}. The 'nonzero and finite-dimensional' clause is a property assumed or proved where D_n is used (e.g. MainCornerModel.lean:221-225), not part of the object's definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:corner-restrictions,def:main-sequence,def:vanishing-gap] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:corner-restrictions",
+      "verdict": "matched",
+      "note": "Under the stated commuting-projection and commuting-unitary setup, D_n is invariant under R and E₁E₂ acts identically there; the displayed compression therefore equals the paper's restriction."
+    },
+    {
+      "obj_id": "def:main-sequence",
+      "verdict": "matched",
+      "note": "Specializes the near-inclusion construction to ℂⁿ for n≥3 with exactly the stated clock and forward shift; the double commutant of the conjugated amplified generators equals M_n, and the companion aliases retain the other resulting objects."
+    },
+    {
+      "obj_id": "def:vanishing-gap",
+      "verdict": "matched",
+      "note": "Records the stated bound and convergence of Cν_n with the specified gap, constant, and commutator norm; the additional convergence of the gap follows equivalently by its nonnegativity and squeezing."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:corner-restrictions","verdict":"matched","note":"Lean defines R_in as the compression E_n·R̃_in·ι, restricted on its codomain to D_n = range(E_{1n}E_{2n}). The paper's restriction R̃_in|_{D_n} is only an operator on D_n where lem:corner's hypotheses hold: E_{1n}, E_{2n} are commuting projections and R̃_in commutes with both. There R̃_in maps D_n into itself, and E_n is the identity on D_n, so E_n R̃_in x = R̃_in x for every x in D_n. The compression is therefore the same operator as the restriction in both directions on that domain. Outside that domain the paper's expression is undefined, so the general compression is only a well-definedness extension and adds no content."},{"obj_id":"def:main-sequence","verdict":"matched","note":"mainSource builds the near-inclusion source algebra on Hsp(ClockSpace n) from the clock–shift pair. clockU sends e_j to ω_n^j e_j. shiftV acts as (Vx)_j = x_{finRotate⁻¹ j}, so V e_j = e_{j+1 mod n}. The index n ranges over ClockNat (ass:clock-index, n ≥ 3). sourceAlg is the bicommutant of {Wλ_amp(g)W* : g}. Conjugation by a unitary commutes with taking bicommutants, and the amplified λ(G) has bicommutant λ(G)''⊗I_L, so this equals M = W(λ(G)''⊗I_L)W* from eq:algebras. The circle family (π, A, hπ) is a universally quantified parameter threaded through unchanged rather than a chosen witness. mainBlockBound is only a proof-term argument. The other symbols (H_n via mainH, N_n via mainTarget) are realized by sibling declarations."},{"obj_id":"def:vanishing-gap","verdict":"matched","note":"The Lean conjunction states γ(M_n,N_n) ≤ C·ν_n for every n, C·ν_n → 0, and γ(M_n,N_n) → 0. That is exactly eq:vanishing-gap, γ(M_n,N_n) ≤ Cν_n → 0. mainGap is the one-sided near-inclusion gap of mainSource into mainTarget, nearC is the paper's universal constant C, and nuN is the commutator norm ‖U_nV_n − V_nU_n‖ from lem:clock. Nothing is weakened in either direction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:circle =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:circle",
+      "verdict": "matched",
+      "note": "Equivalent in both directions: the core fixes t=1/2 and K=ℓ²(F); the representation type enforces unitarity, cWeight is exactly c_k, pointwise coefficient bounds equal the stated supremum bounds, and testing all vector pairs expresses WOT convergence. HasSum, absolute summability, uniform norm tails, and the two summability conditions express exactly the Fourier convergence and finite moments; generator reindexing preserves the limit."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:circle","verdict":"matched","note":"I unfolded the definitions down to their primitives, and the Lean says the same thing as the proposition in both directions. Setting: FreeGrp is FreeGroup ℕ, the countably generated free group F, with generators gen j = FreeGroup.of j; the paper's s_j for j≥1 are just relabelled to start at 0, which does not change the limit as j→∞. TreeSpace is ℓ²(F) = K. projE is the starProjection onto ℂ·δ_e, which is p_e. tParam = 1/2, which is t as the core fixes it. cWeight k = 1_{k=0} + 2t^{|k|}/(1−t), which is c_k. Representations: CircleRep is a monoid hom F →* unitary(B(K)) for each z in Circle, i.e. a unitary representation; F is discrete, so no continuity condition is needed. Expansion: HasSum of z^k•A k g to π z g in operator norm, which is eq:fourier. Norm bound: ∀k g, ‖A k g‖ ≤ cWeight k, which is the same as sup_g ‖A_k(g)‖ ≤ c_k. Limit: for every z, ξ and η, ⟨ξ, π_z(s_j)η⟩ → ⟨ξ, (t z p_e)η⟩, which is WOT convergence (eq:circle-limit). Absolute convergence: the norm series is summable for each z and g, and the tails outside one finite set s are below ε for all z and g at once, which is absolute operator-norm convergence uniform in g and z. Moments: since c_k ≥ 0, Summable cWeight and Summable |k|c_k are the same as S_0 < ∞ and S_1 < ∞ (eq:moments). The Lean adds no hypotheses and weakens no conclusion."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "Lean proves the existential claim with the stronger conclusion that witnesses have the specified clock–shift construction. The spaces are complex Hilbert spaces with separability asserted; VonNeumannAlgebra includes the ambient identity; mainGap is exactly γ. Reindexing ClockNat by n ↦ n+3 preserves convergence and eventuality, and the unitary inclusion and uniform positive lower bound match."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Both sides are existential, and the Lean gives a specific witness, so it proves the paper's existential (the proved-result-says-more exception). Lean implies paper: ε₀>0. The spaces H_n = mainH n are Hsp(ClockSpace n), an ℓ² Hilbert space, and their separability is stated explicitly as a conjunct. M_n = mainSource and N_n = mainTarget are Mathlib VonNeumannAlgebra objects, so they contain 1 = I_{H_n} and have a common identity. mainGap is nearInclusionGap = ⨆ over x∈M with ‖x‖≤1 of infDist x N, which matches def:gamma (sup over the unit ball of inf over y of ‖x−y‖); the real iSup is bounded by 1 because 0∈N, so it does not degenerate. The tail clause is ∀ᶠ n, ∀ u ∈ unitary(B(H_n)), (∀x∈M_n, u x u* ∈ N_n) → ε₀ ≤ ‖u−1‖, which is literally the paper's clause. The index set ClockNat = {n:ℕ // 3≤n} is cofinal, so atTop is non-trivial and 'sufficiently large n' / convergence keep their meaning; dropping n<3 is only a reindexing. Where the Lean says more: it fixes a particular clock–shift/circle-family construction, with π, A and hπ : IsCircleFamily π A existentially quantified. That only strengthens an existential claim and adds no hypothesis."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:near =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:near",
+      "verdict": "matched",
+      "note": "Both bounds, the quantifier over every g, and independence of C from D,U,V agree. The nested ℓ² constructions realize the stated tensor operators and algebras; nonnegative nearWeight summability expresses the fourfold sum's finiteness. NearUnitaryPair matches the input condition, habs matches ass:pin-1, and hb is derived from the circle-family setup."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:near","verdict":"matched","note":"Matched; the Lean proves at least what the paper claims. (1) Lean quantifies over every (π, A) satisfying IsCircleFamily. That predicate states every property prop:circle gives: the Laurent HasSum, ‖A_k(g)‖ ≤ c_k with cWeight = 1_{k=0} + 2t^{|k|}/(1−t), the WOT limit, summability of S_0 and S_1, and uniform absolute convergence. So the paper's chosen family is one instance, and Lean ⟹ paper. (2) NearUnitaryPair matches ass:near-unitary-pair: D nontrivial and finite-dimensional, U and V unitary. (3) MatrixRepsAbsConv is exactly the pinned reading ass:pin-1: for each g, absolute norm-summability over k∈ℤ of the terms of a(g) and b(g). It also follows from ‖U^k‖ = 1 and ‖A_k(g)‖ ≤ c_k summable, so the paper's setting entails it. (4) sourceAlg is the double commutant of {W(λ(g)⊗I_L)W* : g∈G}, built with commutantVN = centralizer. This equals W(λ(G)''⊗I_L)W*, because conjugation by a unitary commutes with taking commutants and (λ(G)⊗I)'' = λ(G)''⊗I. targetAlg = (ρ(G)⊗I_L)', with lamAmp and rhoAmp the left and right reindexings on lp(G, L). (5) Summable nearWeight together with nearC = ∑' nearWeight is exactly C := ∑ c_k c_m c_p c_h |m−p||h| < ∞. nearC is a global constant, so C is independent of D, U, V. (6) nearInclusionGap is the supremum over the unit ball of M of the distance to N, matching γ. (7) In the group bound, lamAmp g * mapCLM(const f(g)) is λ(g)⊗f(g) and diagUnitary is W, built blockwise from f = prodMap = a(x_1)b(x_2). The hb argument comes from a proved lemma and adds no premise."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:matrix-limits =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:matrix-limits","verdict":"matched","note":"Testing against every pair of vectors is equivalent to WOT convergence; the unfolded amplifications give exactly the two stated tensor limits, with the paper’s Laurent substitutions and standing unitary assumptions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:matrix-limits","verdict":"matched","note":"Unfolded: amplify X is X⊗I_E (amplify_spec fixes its matrix entries on singles, and it is continuous). So ampFst projE = p_e⊗I_K⊗I_D, ampSnd projE = I_K⊗p_e⊗I_D and ampD U = I_K⊗I_K⊗U. Hence matrixLimitA U = t·(p_e⊗I_K⊗U) and matrixLimitB V = t·(I_K⊗p_e⊗V), with tParam = t = 1/2 and Lsp D the nested ℓ² space realizing K⊗K⊗D. The conclusion quantifies over all vector pairs ξ, η, which is exactly WOT convergence along j→∞ of a(s_j) and b(s_j), with gen j = FreeGroup.of j standing for the generators s_j. The hypotheses are the data and conditions of Prop. circle (IsCircleFamily) and the input pair: U and V unitary on a nonzero finite-dimensional D (NearUnitaryPair). The paper's context supplies both; neither restricts it further. matrixRepA and matrixRepB are the Laurent substitutions Σ_k A_k(g)⊗I⊗U^k and Σ_k I⊗A_k(g)⊗V^k, where negative powers use the adjoint. That is the def:matrix-reps object, which is graded separately. Lean and the paper are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}

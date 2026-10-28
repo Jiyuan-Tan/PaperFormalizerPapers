@@ -1,0 +1,60 @@
+{
+  "slug": "oai_near_inclusions_von",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 12,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 49,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Analysis.Normed.CStarNormBounds",
+      "Toolkit.Foundations.Analysis.Normed.FiniteDimensionalOperators",
+      "Toolkit.Foundations.Analysis.Normed.WeakOperatorLimits",
+      "Toolkit.Foundations.Analysis.SpecialFunctions.ComplexExpLevelSet"
+    ],
+    "requires": [
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [],
+    "warnings": [],
+    "notes": []
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "514ec76dab9eb12f4da10c7da919e43869d81fef8df9c9c088ed005ddb4681d8",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.1",
+    "prop:circle": "Proposition 2.1",
+    "prop:near": "Proposition 3.1",
+    "lem:clock": "Lemma 4.1",
+    "lem:corner": "Lemma 4.2"
+  },
+  "todo_items": []
+}

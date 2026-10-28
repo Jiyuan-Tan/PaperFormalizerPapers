@@ -1,0 +1,750 @@
+{
+  "version": 1,
+  "slug": "oai_near_inclusions_von",
+  "paper_sha256": "93ac1e2036d95f8c87223b62f00146728db4908c64504b4e1548f86642216e65",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:clock-index",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "540ee64802fde3c96853c0edf47b69b16dd38313"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "540ee64802fde3c96853c0edf47b69b16dd38313"
+      }
+    },
+    {
+      "id": "ass:corner-algebras",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d9364704ea07fa16cb825fcadb4c0477e3a8628f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d9364704ea07fa16cb825fcadb4c0477e3a8628f"
+      }
+    },
+    {
+      "id": "ass:corner-approximation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "966715acf2d3e9c7784ff48fb340338bd84c82f4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "966715acf2d3e9c7784ff48fb340338bd84c82f4"
+      }
+    },
+    {
+      "id": "ass:corner-dimension",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dd358201dbc7d2da717a777e6b0689b15541c039"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dd358201dbc7d2da717a777e6b0689b15541c039"
+      }
+    },
+    {
+      "id": "ass:corner-projections",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a535e9bec3af1d483a43456dd77de4c7198080eb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a535e9bec3af1d483a43456dd77de4c7198080eb"
+      }
+    },
+    {
+      "id": "ass:corner-unitaries",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "51292bc6906ec0d8d1ac76c3e8cfde935aeea652"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "51292bc6906ec0d8d1ac76c3e8cfde935aeea652"
+      }
+    },
+    {
+      "id": "ass:near-unitary-pair",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "12ed9a75a366f576ff445db91ad4655d904a6fb4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "12ed9a75a366f576ff445db91ad4655d904a6fb4"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f201507c5b13b7a5537bd0cefef0fc882076027d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f201507c5b13b7a5537bd0cefef0fc882076027d"
+      }
+    },
+    {
+      "id": "def:algebras",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "684faeb542eb6485cb4e8cdfb6edc5ca399361ce"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "684faeb542eb6485cb4e8cdfb6edc5ca399361ce"
+      }
+    },
+    {
+      "id": "def:circle-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e2c936cf6975e906724f3e68f961a2102fe967b6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e2c936cf6975e906724f3e68f961a2102fe967b6"
+      }
+    },
+    {
+      "id": "def:clock-pair",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a91f778782441177b50d3febfd07069bc59cb5db"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a91f778782441177b50d3febfd07069bc59cb5db"
+      }
+    },
+    {
+      "id": "def:commutant-notation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b3afedfc95a63d0f99c05658f82fc4e0f07c324c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b3afedfc95a63d0f99c05658f82fc4e0f07c324c"
+      }
+    },
+    {
+      "id": "def:corner-range",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "503326a137fb5c5230f4cb0743f9d4b8676d83ca"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "503326a137fb5c5230f4cb0743f9d4b8676d83ca"
+      }
+    },
+    {
+      "id": "def:corner-restrictions",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bbd642996c65d159c39cc26202475a3400dae356"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bbd642996c65d159c39cc26202475a3400dae356"
+      }
+    },
+    {
+      "id": "def:diagonal-unitary",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "42aa6bcaad76e7004bb570461435b99dd3c46845"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "42aa6bcaad76e7004bb570461435b99dd3c46845"
+      }
+    },
+    {
+      "id": "def:free-group",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a1e52484d06dc7f0b80e0df86afd163c754658e0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a1e52484d06dc7f0b80e0df86afd163c754658e0"
+      }
+    },
+    {
+      "id": "def:gamma",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e8b4c3eb4679c0495ac87f5a6c7e249aa483713f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e8b4c3eb4679c0495ac87f5a6c7e249aa483713f"
+      }
+    },
+    {
+      "id": "def:identity-projection",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a5f90c4d531988e3fba5c1fa0ae80df0dc16d4b0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a5f90c4d531988e3fba5c1fa0ae80df0dc16d4b0"
+      }
+    },
+    {
+      "id": "def:left-regular",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2881cfd5c81ba096173d30713f08c0a010324972"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2881cfd5c81ba096173d30713f08c0a010324972"
+      }
+    },
+    {
+      "id": "def:main-sequence",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c94d06c1fe67212a9f680dcd0d8c41d397285425"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c94d06c1fe67212a9f680dcd0d8c41d397285425"
+      }
+    },
+    {
+      "id": "def:matrix-limits",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "75247b871784ca9f2f4104f12195f63d9c928bc6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "75247b871784ca9f2f4104f12195f63d9c928bc6"
+      }
+    },
+    {
+      "id": "def:matrix-reps",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73ca66e4e6913ab8391be6978567ea7560ec8117"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73ca66e4e6913ab8391be6978567ea7560ec8117"
+      }
+    },
+    {
+      "id": "def:product-map",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f8417907fc40456c9654868ebf94faca012a76fc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f8417907fc40456c9654868ebf94faca012a76fc"
+      }
+    },
+    {
+      "id": "def:product-regular",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "de5ccb608a52c6a29b43ced3d7af14771fcf66df"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "de5ccb608a52c6a29b43ced3d7af14771fcf66df"
+      }
+    },
+    {
+      "id": "def:product-spaces",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4f396c2de8700c613b74a19ec02eb280ad0d9a82"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4f396c2de8700c613b74a19ec02eb280ad0d9a82"
+      }
+    },
+    {
+      "id": "def:regular-space",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c3d318a365a7c160bc570b71e44e01587fa51427"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c3d318a365a7c160bc570b71e44e01587fa51427"
+      }
+    },
+    {
+      "id": "def:tree-basis",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ccfbfed83bc322eeed0702d42dd19f15220ba297"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ccfbfed83bc322eeed0702d42dd19f15220ba297"
+      }
+    },
+    {
+      "id": "def:vanishing-gap",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "80f4355d9331c4d2195f91b190b1571b8075477a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "80f4355d9331c4d2195f91b190b1571b8075477a"
+      }
+    },
+    {
+      "id": "lem:clock",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f71bfeed2c26f7588cc6720776834a9c9a320ea4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f71bfeed2c26f7588cc6720776834a9c9a320ea4"
+      }
+    },
+    {
+      "id": "lem:corner",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0248f1f49f5b64af9b902fb0d49ef779d80e098b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0248f1f49f5b64af9b902fb0d49ef779d80e098b"
+      }
+    },
+    {
+      "id": "prop:circle",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "393ec0c5b7dee448a55abf3126d5d0fcd0033e1e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "393ec0c5b7dee448a55abf3126d5d0fcd0033e1e"
+      }
+    },
+    {
+      "id": "prop:near",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "79d5979435daeac6f9357d1e857c4e7ea06a1e72"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "79d5979435daeac6f9357d1e857c4e7ea06a1e72"
+      }
+    },
+    {
+      "id": "sym:C",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0a7871da82a41d0f1a26fa7cca3c2a0dd524ac39"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0a7871da82a41d0f1a26fa7cca3c2a0dd524ac39"
+      }
+    },
+    {
+      "id": "sym:S_0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4f1c77aeea4ee1ccd6be88de896b25d09713b350"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4f1c77aeea4ee1ccd6be88de896b25d09713b350"
+      }
+    },
+    {
+      "id": "sym:S_1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9b6e458400009f07e410a78c836a0aee4639da7b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9b6e458400009f07e410a78c836a0aee4639da7b"
+      }
+    },
+    {
+      "id": "sym:\\gamma",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dbcb11ba35dd7bcc0628b412b1937e4dd64e7a56"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dbcb11ba35dd7bcc0628b412b1937e4dd64e7a56"
+      }
+    },
+    {
+      "id": "sym:\\nu_n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "595e1e5113796a2e32a099c3d9fede9741037555"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "595e1e5113796a2e32a099c3d9fede9741037555"
+      }
+    },
+    {
+      "id": "sym:\\varepsilon_0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9ad2377fec5667270d2ba46679582702267a6669"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9ad2377fec5667270d2ba46679582702267a6669"
+      }
+    },
+    {
+      "id": "sym:c_k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8321a4ed7de7aaf64d626b8e0b8f44bb12d77ff9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8321a4ed7de7aaf64d626b8e0b8f44bb12d77ff9"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "25a3d391244da784e2cdb093054ee25d1ca54255"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "25a3d391244da784e2cdb093054ee25d1ca54255"
+      }
+    },
+    {
+      "id": "sym:t",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4f97d4ef7ab0f3b9451117962b1ee054cdccbbdf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4f97d4ef7ab0f3b9451117962b1ee054cdccbbdf"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2f6a7b9add3878720591077a2f4def95fe856c38"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2f6a7b9add3878720591077a2f4def95fe856c38"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "45484c69da80606216980c0c465e660f93e6429fa81e15b93c11de00f1f9e186",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "efe8f248b55a4bff0e95b99c89cc4d2a9523785b779d4f65a498bc3455eea9b9"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "a38429b4e08147910f73e71b7698ed5264f405f9ff583caa000f1a4554270eab"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "4a96717d35919b7eaeae9e6fdfe44aee35a2b105bf730bd240bd9b26e3679271"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "2c35da0c21a64a05426fa0c3c6dc8f1a17953035b190668186a41dba3771dfd5"
+    },
+    {
+      "path": "corrected_paper/sections/circle.tex",
+      "sha256": "644313d0a01c94530b865e26652acfb255f961f356ef3bac79466cb0b0aab795"
+    },
+    {
+      "path": "corrected_paper/sections/introduction.tex",
+      "sha256": "42959b7bb0673cd0f7622e95d52ae7288e6b5ce103d384b0bc9b88df829323af"
+    },
+    {
+      "path": "corrected_paper/sections/near.tex",
+      "sha256": "c145a262c14b1519d2dda11e54a0fbbf9fde7e1ee56c5e6d358e4a0c602a3fc1"
+    },
+    {
+      "path": "corrected_paper/sections/obstruction.tex",
+      "sha256": "f1c0323dc520bae58d4dc48d019d898cd6fcf36773a07073807936d5b0789af2"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "bcfa4a95262425500eb8ec3c3186f6a262692a9ef73ac1370bc3cb0487ead15d"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "4a0ce93d621fb38e79282e153fb98bb9bc7e312ad6c3d5ceb843f60d4db6bc26"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon.lean",
+      "sha256": "6bee2fa218c00739f6f8c81a1b7f01d5df8c6fd7836036893d2d3e0a593988f2"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Basic.lean",
+      "sha256": "7c882a2a084c3e73e1a9f10fc1cda92d560f58a6bc7fba2e1d1119d6e3cd046a"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers.lean",
+      "sha256": "3abbc932c5b90ee449d567732751ca27bc31691d57b438bd56a5309069074d72"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/Amplification.lean",
+      "sha256": "594dbe309996bba1d23b2bef1608fa121a58702faa078f00c174e42d050a2045"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/AmplificationAlgebra.lean",
+      "sha256": "245a515c3256f01e07102d718232d2496f90110de2634551ed236cc76125978a"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/AmplificationBicommutant.lean",
+      "sha256": "daa1de20733b01cc10bfffc765124e1c29d713f8ff1038992ff4e326cfbe209b"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CircleCoefficientSums.lean",
+      "sha256": "05771e215938587f36979010d97df81c064070fbfae7d0f87ab26e9f5a3cc78e"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CircleConstruction.lean",
+      "sha256": "f2c648213bfae7078fcc9359312033afa7ea26d8a84474dd1b619d7c16d87a5d"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CircleLaurent.lean",
+      "sha256": "e4a279c341173a5c6ccc07697cca38f721a8ad098ef9f864f41a663e4528d559"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CirclePathBounds.lean",
+      "sha256": "652e470ba7319dc9535a88bb8204ac451d99440e3661ac22edae59ae1455cb5c"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CircleSummability.lean",
+      "sha256": "9ac5f932d511432f43cdfa8e2841aa055c7e9beb53769c4232867c54c3f50225"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/Clock.lean",
+      "sha256": "8bcb67b5899e8fbd8123eeab11b3669f28f2752aece7f0d6b8b6f4d3c6560b11"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/Corner.lean",
+      "sha256": "a336567b9a6ddeb508fd30a170560630a10ae9dd258931ba52fa7598fd51d5ff"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CornerCommutation.lean",
+      "sha256": "1dff9ba0bbaf947d8cfb1c3da16cc2f533ada1fb9bea813fae4d4c55ea2de91e"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CornerFinalization.lean",
+      "sha256": "86c11e8e2c3734e273212707954441c4f158cedeb324860068e607dfadbbb969"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CornerPolar.lean",
+      "sha256": "f165045b3b2c926abd0b8536da25a26ecf9e9f4b6c0cec21aebeeeb3c5f45653"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CornerSpectral.lean",
+      "sha256": "515a534a25ef5269638370cea7dad8b0f75302d234016a1c25005d2fd3c0081a"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/CornerTransport.lean",
+      "sha256": "f85fbf0929e797171003264f5104ba481cf34b5a94d6c895e35e935791598229"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/FreeGroupSpace.lean",
+      "sha256": "313f8e7272dc3f62ea7baae4a9e156bd9a843f808724115bfe804f45b0976f77"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/Gap.lean",
+      "sha256": "d91973da4aa030545e44e0ec5f02ffb2120669423c4862a331ed021e0aafedf6"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/LaurentUnitary.lean",
+      "sha256": "354788035128f8891ae87cecee402f5bb8defdb8490bd27356b4e18a4fd437e0"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainCornerModel.lean",
+      "sha256": "2af9d1f20e4369d12f30c24d40ae6d62763c1e654ea49acd3ef01775291f8822"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainFactorAlgebras.lean",
+      "sha256": "a22f51309e248295c5462cac4373d25d705bd1dbf142fb7ca5110f3c76e08545"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainJointLimits.lean",
+      "sha256": "d3e57714164fb70467fd6a35fde40637ccca54174b52da422d56277ae8acdbdb"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainRepresentation.lean",
+      "sha256": "8e68555993096de89b41ffc876c11184cebc4dde1da38b4895a0beb70c629524"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainSeparation.lean",
+      "sha256": "d5ea21641e491c26a1c17794224ab46c232fd475b27397410fc7b898b00035b9"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainSequence.lean",
+      "sha256": "bf71fd981ed49bb98f312b5a6bfe7d57a4f313216ac8cae50b03d5047e59f670"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MainWeakCompact.lean",
+      "sha256": "da1d60935c24276ee9ed9300f225fc5b56fae31d7c094f7a48340828a3a81b36"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/MatrixLimits.lean",
+      "sha256": "8fe0a8edcf106b989268c9fefb0d3b35a2914683a1066939c84767b5e6890ac6"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/NearBlocks.lean",
+      "sha256": "7a3d255835d20e63f303b50aab86d2f0a4109171b32f4e1cde8628b66f394473"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/NearConstruction.lean",
+      "sha256": "8da0dbe8a37897057e021ec0418c8f2979c66c8b950b563eb7d6b9858fdbe4bc"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/NearExpansion.lean",
+      "sha256": "e6b5450bdd877adfffa82f299bad9733ded01e367320330b1e603afc94e168ee"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/NearReordering.lean",
+      "sha256": "26819654602f1093465d419ff68bfc4a65cfd89024b0fbd9e62091756ef11aa1"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/NearSummability.lean",
+      "sha256": "5c3777131689a2ccd5635c7a1af67605e6d5766f3b52d9ef91fe7ef847f685b1"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/SourceCarrier.lean",
+      "sha256": "77742fa57ae83c74a6b21df7e8cdc8ef620bfdae1840035d470d641a93566f14"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Helpers/UnitarySpectrum.lean",
+      "sha256": "f846aa9a41b9e082c0f505895af120da00714a29b9392dcb528cf7f34902348a"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Basic.lean",
+      "sha256": "dcc04705fb53185ae45b1f836c966c3db2f06144dd3bca1d4b94be02d1bb72a3"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/LpOperators.lean",
+      "sha256": "7fdfd720cb1358b1963baf1e3b8db62ff3f191a354b4e0315abb2ce1f774662e"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/OperatorMaps.lean",
+      "sha256": "c6da16e438db8b2d960ff5a1aa6a3264eb4d4607a369328f787a9d81b5bdcf5a"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreeGram.lean",
+      "sha256": "fd89c70c8c36a35c88650bae11440400981191bbc8c304bd5981485c9be4afe8"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreePathDiagonal.lean",
+      "sha256": "284ad81ce1e457ca6f16b9b47efb156e7daab7bc26f92a57cd7f02b995bd7437"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreePathOperators.lean",
+      "sha256": "f11e87694084c039b5cd335acdaf5a0d3f86c3e68962b57d50028420020df996"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreePerturbation.lean",
+      "sha256": "6fee39f9dc7c699783e53cd299e9a43566e280dda82f8681dd9b8d7839024e54"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreeUnitary.lean",
+      "sha256": "3cce3a9e314d9ee3504517759ca61ae057acd08b950f5e4fa16a6dd24faf70df"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/ReusedTree/Helpers/TreeVectors.lean",
+      "sha256": "6c82a1fc48ab09d78d2e9bbedd1aad2808dd78b281d0d4525e6a0aa45d8b6914"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/Run.lean",
+      "sha256": "731b7cc86bb5d300e0584c9a9250d43ea34f2afc1d438cbd4ed6204916454a7e"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/TCircle.lean",
+      "sha256": "df53f2fd0e82fdf2c2629ad451f2134bfc81210d44dffd30058640baa5c74232"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/TMain.lean",
+      "sha256": "c441ae759b7dfc5517e6518c527e739e251228aaca0016fe1c79290e98d0c471"
+    },
+    {
+      "path": "lean/Papers/OaiNearInclusionsVon/TNear.lean",
+      "sha256": "7f4f776ccee60b319542b6842196ec3a4408b7ff6cfd04dbcec9a0ecf679d462"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "39dca268453eb6e28f374fbfad1b12dba0a49bf723b287a2ac8ae430c659f1c8"
+    },
+    {
+      "path": "lean/Toolkit.lean",
+      "sha256": "f99270c15de3fa4ed2fa2a60244a6604b41896e65c70454593c0f40690172716"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Analysis/Normed/CStarNormBounds.lean",
+      "sha256": "146b88554451c86eaaf3918b144536e69e4d7a415f032d09da33e8ae810022c1"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Analysis/Normed/FiniteDimensionalOperators.lean",
+      "sha256": "763575f2703258a10e2f3fcfe0c4a2609967746d2d2148624db71bbc0961723c"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Analysis/Normed/WeakOperatorLimits.lean",
+      "sha256": "3e5625cfb8417305eeba268c6d59f4e4fb7785a7cc2e2fbc7fe194d475c9212a"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Analysis/SpecialFunctions/ComplexExpLevelSet.lean",
+      "sha256": "48282d8a5e524d8ff727c35f276a2be20cc40a95e9d6e98724c188afcd6c31d7"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "88c843fdc9ecdd378d75e4b97cac55e32086b9d8426e34e8dbc15c98400ed3ba"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "34ca83f691884ef920d77ad9a6af426e31dcc43381a9295da9ac860995ca678e"
+    }
+  ],
+  "code": "514ec76dab9eb12f4da10c7da919e43869d81fef8df9c9c088ed005ddb4681d8"
+}
