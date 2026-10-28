@@ -1,0 +1,9 @@
+import Papers
+
+-- The paper's results: each must list no axiom beyond propext, Classical.choice and Quot.sound.
+#print axioms OaiSmoothNonquadraticAffine.exists_nonquadratic_entire_affine_maximal
+#print axioms OaiSmoothNonquadraticAffine.reduction_affineMaximal
+#print axioms OaiSmoothNonquadraticAffine.exists_local_radial_solution
+#print axioms OaiSmoothNonquadraticAffine.autonomous_system_of_continuation
+#print axioms OaiSmoothNonquadraticAffine.box_forward_invariant
+#print axioms OaiSmoothNonquadraticAffine.local_radial_solution_extends_globally

@@ -1,0 +1,268 @@
+===== reviewer convergence/dual :: medium :: sym-batch[sym:w,sym:F,sym:P,sym:r,sym:\varepsilon] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:w",
+      "verdict": "matched",
+      "note": "HessianPositive supplies positive definiteness on the domain; affineWeight computes the determinant power, and affineWeight_pos establishes its strictly positive range there."
+    },
+    {
+      "obj_id": "sym:F",
+      "verdict": "matched",
+      "note": "ReductionFunctions requires smoothness and positivity on Ω; LocalSolutionData supplies smooth radial extension and positivity on the local radial interval, including F 0 = 1."
+    },
+    {
+      "obj_id": "sym:P",
+      "verdict": "matched",
+      "note": "ReductionFunctions requires smoothness and positivity on Ω; LocalSolutionData supplies smooth radial extension and positivity on the local radial interval, including P 0 = 1; ReducedSystem records the determinant relation."
+    },
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "radialExtension evaluates the profile at the Euclidean norm, which lies in [0,∞) by construction."
+    },
+    {
+      "obj_id": "sym:\\varepsilon",
+      "verdict": "matched",
+      "note": "LocalSolutionData explicitly requires 0 < ε, exactly enforcing the stated positive-radius space."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:w","verdict":"matched","note":"Basic.lean:76-78 defines affineWeight as det(D²u)^(-(n+1)/(n+2)), so the value is computed by the formula. affineWeight_pos (lines 81-86) proves 0 < affineWeight n u z for z in S whenever HessianPositive u S holds (lines 64-67, pointwise PosDef). Its proof uses PosDef.det_pos and rpow_pos_of_pos. So the cluster's own members confine w to (0,∞) on the positive-Hessian domain, which is the only place the paper defines w. Outside that domain the ambient rpow value is only an extension used for differentiation."},{"obj_id":"sym:F","verdict":"matched","note":"Spatial reading: ReductionFunctions (lines 110-115) requires ContDiffOn ℝ ∞ F Ω with Ω open and 0 < F x for all x ∈ Ω, which is exactly C^∞(Ω;(0,∞)). Radial reading: the carrier at line 137 is a free ℝ → ℝ. LocalSolutionData (lines 172-181) constrains it with ContDiffOn ∞ of radialExtension 9 F on the ball of radius ε, F 0 = 1, and 0 < F r on (0,ε), giving a positive smooth profile on [0,ε). Residual, outside this target: PositiveRadialSolution (line 188) asks only for C² through RadialSystem on the continuation interval. That is the classical-solution notion, and C^∞ follows there from the smooth right-hand side when F, P, y > 0. Check it under def:continuation, not this cluster."},{"obj_id":"sym:P","verdict":"matched","note":"Spatial reading: ReductionFunctions (lines 110-115) requires ContDiffOn ℝ ∞ P Ω and 0 < P x on the open set Ω, so P ∈ C^∞(Ω;(0,∞)). ReducedSystem (line 128) adds the determinant relation det D²F = F·P^(-γ). That relation is consistent with positive P and does not narrow the space. The radial auxiliary profile at line 137 is constrained by LocalSolutionData: smooth on the ball, P 0 = 1, and 0 < P r on (0,ε)."},{"obj_id":"sym:r","verdict":"matched","note":"radialExtension (lines 141-142) evaluates f at ‖x‖, a Euclidean norm. By construction r ranges over [0,∞), and every value in [0,∞) is attained, so the def's construction pins exactly [0,∞)."},{"obj_id":"sym:\\varepsilon","verdict":"matched","note":"The first conjunct of LocalSolutionData (line 173) is 0 < ε, so the tagged member pins ε to (0,∞). IsMaximalContinuation (line 196) restates 0 < ε as well."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:reduction-dimension,ass:reduction-functions,ass:reduction-hessian,ass:reduction-system,def:affine-equation] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:affine-equation",
+      "verdict": "matched",
+      "note": "On the core's smooth positive-Hessian domain, adjugate equals determinant times inverse; the weight exponent and double contraction reproduce the stated equation exactly."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:reduction-dimension",
+      "verdict": "faithful-refinement",
+      "note": "A natural-number dimension satisfying 1 ≤ m is exactly the stated positive integer dimension."
+    },
+    {
+      "obj_id": "ass:reduction-functions",
+      "verdict": "faithful-refinement",
+      "note": "Openness, smoothness on Ω, and strict positivity of both functions at every point of Ω are precisely the stated conditions."
+    },
+    {
+      "obj_id": "ass:reduction-hessian",
+      "verdict": "faithful-refinement",
+      "note": "HessianPositive unfolds to pointwise positive definiteness of the spatial Hessian throughout Ω."
+    },
+    {
+      "obj_id": "ass:reduction-system",
+      "verdict": "faithful-refinement",
+      "note": "Both equations hold pointwise on Ω, with γ=(m+3)/(m+2) and k=m+2 as fixed by the core; matrix inverse, trace, and real power match the paper."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:affine-equation","verdict":"matched","note":"Equivalent on the domain the paper assumes (smooth u with positive-definite Hessian). hessianMatrix u z i j = ∂_i∂_j u, i.e. the (i,j) second partial. When the Hessian is invertible, its adjugate equals det(D²u)·(D²u)^{-1}, so cofactorMatrix is the paper's U^{ij}. affineWeight = (det D²u)^{-(n+1)/(n+2)} is the paper's w. Because D²u is continuous and positive definite, det > 0 on a neighbourhood of each point, so the second fderiv of the ambient rpow formula equals w_{ij}. The parameter S generalizes the paper's ℝ^n; S = univ gives the paper's equation exactly. The smoothness and positive-Hessian presuppositions are carried by the consumers (HessianPositive), not by this equation predicate, and the predicate itself is the same."}],"assumption_verdicts":[{"obj_id":"ass:reduction-dimension","verdict":"faithful-refinement","note":"`1 ≤ m` over ℕ is exactly the paper's m ≥ 1."},{"obj_id":"ass:reduction-functions","verdict":"faithful-refinement","note":"IsOpen Ω, F and P C^∞ on Ω (ContDiffOn ℝ ∞), and F, P > 0 pointwise on Ω together are exactly 'F, P positive smooth functions on an open Ω ⊂ ℝ^m'."},{"obj_id":"ass:reduction-hessian","verdict":"faithful-refinement","note":"HessianPositive F Ω says that at every x ∈ Ω the matrix (∂_i∂_j F(x)) is PosDef. The paper's H = D_x²F is positive definite on Ω. On an open Ω with C^∞ F, fderiv is local and the Hessian is symmetric, so Mathlib's PosDef (symmetric with positive quadratic form) is the same condition."},{"obj_id":"ass:reduction-system","verdict":"faithful-refinement","note":"For every x ∈ Ω, Lean states det H = F·P^{-γ} and tr(H^{-1}·D²P) + kP/F = 0, with γ = (m+3)/(m+2) and k = m+2. These match core nodes 284/304/813. P > 0 makes the rpow well defined, and H is invertible under the positive-definite assumption, so Matrix ⁻¹ is the true inverse. This is the pointwise reading of the paper's identities (eq:reduced), which are identities between functions on Ω."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:h,sym:i,sym:\delta,sym:q,sym:j] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:h",
+      "verdict": "matched",
+      "note": "reductionH computes (1+ζ²)^((m+2)/2), which is strictly positive and smooth on ℝ."
+    },
+    {
+      "obj_id": "sym:i",
+      "verdict": "matched",
+      "note": "hessianMatrix uses Fin n and adaptedSpatialBasis uses Fin m, faithfully representing the respective finite coordinate index sets."
+    },
+    {
+      "obj_id": "sym:\\delta",
+      "verdict": "matched",
+      "note": "SmallLocalRadius explicitly requires 0 < δ together with the stated displacement and contraction smallness constraints."
+    },
+    {
+      "obj_id": "sym:q",
+      "verdict": "matched",
+      "note": "Trial-set membership bounds both continuous components between 1/2 and 3/2; endpoint extension and the integral formula therefore compute a continuous, strictly positive localQ on [-δ,δ]."
+    },
+    {
+      "obj_id": "sym:j",
+      "verdict": "matched",
+      "note": "hessianMatrix uses Fin n; localJ integrates v⁸ times a positive continuous trial-component power, giving a continuous, strictly positive function on [-δ,δ]."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:h","verdict":"matched","note":"reductionH m ζ = (1+ζ^2)^(reductionK m/2) with reductionK m = m+2, the core's h(ζ)=(1+ζ²)^{k/2}. The base is positive, so the real power is positive and smooth on all of ℝ; the (0,∞)-valued C^∞ range holds by construction of a computed def."},{"obj_id":"sym:i","verdict":"matched","note":"The core says i is a coordinate index whose range is set by the indexed expression. hessianMatrix indexes by Fin n (a 0-based copy of {1..n}). adaptedSpatialBasis indexes the spatial vectors X_i = e_i + ζF_i e_t by Fin m, the spatial coordinates of the (m+1)-dimensional graph space, which is the range that expression specifies. Both members are finite coordinate index sets, as the core intends."},{"obj_id":"sym:\\delta","verdict":"matched","note":"SmallLocalRadius M L δ := 0<δ ∧ M*δ ≤ 1/2 ∧ L*δ < 1. This states exactly the core's definition of δ: positive (space (0,∞)) and chosen small enough that Mδ≤1/2 and Lδ<1. The smallness clauses come from the core's own definition, not from a Lean-only narrowing."},{"obj_id":"sym:q","verdict":"matched","note":"localQ is the computed (9·∫_0^1 v^8 f(v²s) p(v²s)^{-γ} dv)^{1/9}, i.e. eq (q) with m=9 (radialK=11=m+2) and γ=12/11. For s∈[-δ,δ], v²s stays in [-δ,δ], so the projIcc extension does not change the integrand. fp∈localTrialSet gives f,p∈[1/2,3/2], so the integrand is continuous and positive on (0,1]. The q value is therefore positive and continuous in s by construction, which is C([-δ,δ];(0,∞)) after restriction to the interval."},{"obj_id":"sym:j","verdict":"matched","note":"Index reading: hessianMatrix uses Fin n, a copy of {1..n}. Flux reading: localJ is the computed ∫_0^1 v^8 p(v²s)^{1-γ} dv, eq (j). Because p∈[1/2,3/2] on the trial set and v²s stays in [-δ,δ], the value is positive and continuous on [-δ,δ] by construction. This matches the context-dependent space C([-δ,δ];(0,∞))."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:continuation,def:regular-system,def:ratios,def:logarithmic-time,def:normalized-ratio] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:continuation",
+      "verdict": "matched",
+      "note": "Agreement with the given local profiles, the positive radial equations on (0,R), and absence of any larger positive extension express maximal outward continuation."
+    },
+    {
+      "obj_id": "def:regular-system",
+      "verdict": "matched",
+      "note": "Unfolding regularG gives exactly the four displayed right-hand sides in state order (F,P,y,Z), on the positive domain."
+    },
+    {
+      "obj_id": "def:ratios",
+      "verdict": "matched",
+      "note": "With y=F', ratioA and the supplied ratioB and ratioC definitions give exactly A=ry/F, B=ry'/y, and C=-rP'/P."
+    },
+    {
+      "obj_id": "def:logarithmic-time",
+      "verdict": "matched",
+      "note": "For r>0, differentiating g(exp τ) at τ=log r is precisely differentiation with respect to logarithmic radius."
+    },
+    {
+      "obj_id": "def:normalized-ratio",
+      "verdict": "matched",
+      "note": "Unfolding ratioB and ratioC gives exactly D=C/B under the stated positivity of B and the intrinsic denominator conditions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:continuation","verdict":"matched","note":"Unfolded through PositiveRadialSolution and radialInterval. Lean requires agreement with the local profiles (F₀,P₀) on [0,ε) with ε≤R. It requires that (F,P) solves RadialSystem(m=9,k=11,γ=12/11) on (0,R) with F, P and y=F' all positive there. It also requires that no positive solution on a strictly larger (0,R') agrees with (F,P) on {0}∪(0,R). This is exactly the maximal outward interval of existence of the continuation on which F,P,y>0, and both directions hold. R=⊤ covers global existence, since nothing lies above ⊤. F₀,P₀ being a solution is supplied by consumers (LocalSolutionData), which is right for a definition that takes the local solution as input."},{"obj_id":"def:regular-system","verdict":"matched","note":"State v=(F,P,y,Z). The field is (y, Z, G, -8·G/y·Z - 11 r^8 P^(-1/11)/y^8) with G = r^8·F·P^(-12/11)/y^8. This is literally eq:regular. The positivity binders r,F,P,y>0 make explicit the domain the paper names, where the real powers and divisions are defined."},{"obj_id":"def:ratios","verdict":"matched","note":"Here y=F' (def:radial-derivative). A = r·F'/F, and B (ratioB) = r·F''/F' = r y'/y. C (ratioC) = -(r P'/P). These are the eq:ratios formulas exactly. The nonzero and positive-radius binders only record that the quotients are well defined."},{"obj_id":"def:logarithmic-time","verdict":"matched","note":"ġ(r) = d/dτ[g(e^τ)] at τ=log r, for r>0. This is exactly differentiation with respect to log r. Differentiability is presupposed by the paper's dot notation."},{"obj_id":"def:normalized-ratio","verdict":"matched","note":"D = ratioC/ratioB = C/B, under the hypothesis B>0 that the paper states ('Since B>0'). B and C unfold to the eq:ratios forms. The definitions agree exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:hessian-positivity,def:reduction-parameters,def:radial-profiles,def:radial-system,def:constants] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:hessian-positivity",
+      "verdict": "matched",
+      "note": "Requires a positive-definite Hessian at each point of S, with no uniform positive lower bound; Matrix.PosDef expresses the standard real positive-definiteness condition."
+    },
+    {
+      "obj_id": "def:reduction-parameters",
+      "verdict": "matched",
+      "note": "reductionGamma gives exactly (m+3)/(m+2), and the companion reductionK definition gives m+2."
+    },
+    {
+      "obj_id": "def:radial-profiles",
+      "verdict": "matched",
+      "note": "Evaluating a profile at the Euclidean norm realizes precisely the radial extension x ↦ f(|x|); negative profile arguments are unused."
+    },
+    {
+      "obj_id": "def:radial-system",
+      "verdict": "matched",
+      "note": "Substituting the core's definition y=F' gives exactly both displayed equations; the added C² clauses follow from the core's positive smooth radial-profile setting."
+    },
+    {
+      "obj_id": "def:constants",
+      "verdict": "matched",
+      "note": "radialGamma is exactly 12/11; companion definitions radialDim=9 and radialK=11 supply the other fixed constants."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:hessian-positivity","verdict":"matched","note":"HessianPositive u S requires that for every z in S, hessianMatrix u z (entry (i,j) is ∂_i∂_j u(z) in the standard basis) is Matrix.PosDef. That is pointwise positive definiteness on the domain, with no uniform lower-bound matrix, as the convention says. PosDef's symmetry requirement holds automatically for the C² or smooth u the paper considers. Where u is not twice differentiable the fderiv junk value makes PosDef fail, which matches the paper, since there is no Hessian there."},{"obj_id":"def:reduction-parameters","verdict":"matched","note":"reductionGamma m = ((m:ℝ)+3)/((m:ℝ)+2), which is γ=(m+3)/(m+2) exactly. The companion k=m+2 is realized as reductionK m = (m:ℝ)+2 (Basic.lean:95-96). The denominator m+2 is never zero for natural m."},{"obj_id":"def:radial-profiles","verdict":"matched","note":"radialExtension m f x = f ‖x‖ with the Euclidean norm on EuclideanSpace ℝ (Fin m). This is exactly the convention that F and P are radial and that the same letters denote their profiles in r=|x|."},{"obj_id":"def:radial-system","verdict":"matched","note":"With y substituted as deriv F (F'=y), the two equations are y^{m-1}y'=r^{m-1}FP^{-γ} and (y^{m-1}P')'=-k r^{m-1}P^{1-γ}, the same as eq:radial. The powers r^{m-1} and y^{m-1} are natural-number powers and P^{-γ}, P^{1-γ} are real powers, which presupposes P>0 as the paper does. The Lean adds ContDiffAt ℝ 2 for F and P, which states the classical-solution reading. Every paper use has F, P, y > 0 on open r-intervals (lem:local, prop:global, continuation), and there the equations already force F'' and (y^{m-1}P')' to be continuous, so F and P are C² anyway. The added clause also makes the deriv terms genuine derivatives, not junk values. So the two readings have the same extension on the paper's solution class."},{"obj_id":"def:constants","verdict":"matched","note":"radialGamma = 12/11 realizes γ=12/11. The companions m=9 and k=11 are realized as radialDim := 9 (Basic.lean:162) and radialK := 11 (Basic.lean:165). These agree with reductionGamma 9 = 12/11 and reductionK 9 = 11."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:G,sym:d,sym:R,sym:r_0] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:G",
+      "verdict": "matched",
+      "note": "Basic.lean:204–206 defines G on positive r,F,P,y; positive powers, real power of positive P, and positive denominator make G strictly positive."
+    },
+    {
+      "obj_id": "sym:d",
+      "verdict": "matched",
+      "note": "Helpers/BoxGeometry.lean:18–19 computes d as a Euclidean norm, hence nonnegative by construction."
+    },
+    {
+      "obj_id": "sym:R",
+      "verdict": "matched",
+      "note": "Helpers/ContinuationBounds.lean:15 explicitly binds R : ℝ with 0 < R, exactly enforcing a positive finite endpoint."
+    },
+    {
+      "obj_id": "sym:r_0",
+      "verdict": "matched",
+      "note": "Helpers/ContinuationBounds.lean:16 explicitly binds r₀ : ℝ with 0 < r₀ and r₀ < R, exactly enforcing membership in (0,R)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:G","verdict":"matched","note":"regularG (Basic.lean:204) is a def that computes r^8*F*P^(-12/11)/y^8. It requires proofs of 0<r, 0<F, 0<P and 0<y, which is exactly the core domain r,F,P,y>0. Every factor is positive on that domain (rpow of a positive base is positive), so the value lies in (0,∞) by construction."},{"obj_id":"sym:d","verdict":"matched","note":"boxDistance (BoxGeometry.lean:18) is the Euclidean (L2, via WithLp.toLp 2) norm of z - boxProjection z, which is the core's d = |z - Πz|. A norm is always nonnegative, so the range is [0,∞) by construction."},{"obj_id":"sym:R","verdict":"matched","note":"continuationWindow (ContinuationBounds.lean:15) takes R : ℝ together with a hypothesis _hR : 0 < R. Being real, R is finite, and the hypothesis pins it to the core space (0,∞) for the putative finite endpoint."},{"obj_id":"sym:r_0","verdict":"matched","note":"continuationWindow takes r₀ : ℝ with hypotheses _hr₀ : 0 < r₀ and _hr₀R : r₀ < R. Together these pin r₀ to the core space (0,R)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:local,lem:autonomous,lem:box] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:local",
+      "verdict": "matched",
+      "note": "LocalSolutionData gives exactly the radial equations, smooth nine-dimensional extensions, origin normalizations, Hessians, and stated strict inequalities, with y = F'."
+    },
+    {
+      "obj_id": "lem:autonomous",
+      "verdict": "matched",
+      "note": "The continuation and coordinate definitions match the paper; differentiation at log r gives the displayed autonomous equations, with the same positivity and limiting claims."
+    },
+    {
+      "obj_id": "lem:box",
+      "verdict": "matched",
+      "note": "boxB is exactly the stated product of closed intervals; the two conjuncts express forward invariance and containment throughout every maximal positive continuation."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:local","verdict":"matched","note":"LocalSolutionData, unfolded, matches the lemma clause by clause. It requires ε>0. RadialSystem 9 11 (12/11) on (0,ε) gives y^8 y' = r^8 F P^{-γ} and (y^8 P')' = -11 r^8 P^{1-γ}, with y = deriv F, so F' = y holds by definition; the C² regularity it adds is implied by the smooth extension. ContDiffOn ℝ ∞ of x ↦ F‖x‖ and x ↦ P‖x‖ on ball 0 ε in ℝ^9 is the smooth extension to |x|<ε, and F 0, P 0 are the extension's values at the origin. It also gives F(0)=P(0)=1, Hessian of F at 0 = I, Hessian of P at 0 = -(11/9)I, and F, P, y, y' > 0 and P' < 0 on (0,ε). Values of F and P outside [0,ε) are left free, which does not affect the claim. Logically equivalent."},{"obj_id":"lem:autonomous","verdict":"matched","note":"The Lean holds for every (ε,F₀,P₀) satisfying lem:local's data and every maximal continuation of it. The paper's solution from lem:local is one such case, so this is a proved result that says more than the paper. Its conclusions are as follows. On (0,R) = radialInterval R: the coordinate domain holds (it includes B>0), A>0, B>0, and τ ↦ (A,B,D)(e^τ) has derivative autonomousField(A,B,D) at log r. This is exactly the three ODEs in eq:autonomous with dot = d/dlog r. The dite-based ambient extension agrees with the real coordinates on the interval, since the domain holds at every point of it. As r↓0, (A,B,D) → (0,1,0) via Tendsto on 𝓝[>]0. All three coordinates are eventually positive (∀ᶠ on 𝓝[>]0). Both directions hold."},{"obj_id":"lem:box","verdict":"matched","note":"Part 1: a solution on [a,b], continuous there, with HasDerivAt equal to the polynomial field on [a,b) and z a ∈ boxB, stays in boxB = Icc 0 ![9/2,7/2,33/7], the stated product box. This is forward invariance. Requiring a two-sided derivative at a loses nothing: the field is locally Lipschitz, so a backward Picard extension of any solution gives one. Part 2: for every lem:local datum and every maximal continuation, at each r in (0,R) the coordinates lie in boxB. That is 'lies in B throughout its interval of continuation'. The extra RadialCoordinateDomain conjunct only adds to the conclusion. Quantifying over all local data instead of 'the' solution also makes it stronger. A face check confirms the claim is consistent: on A=9/2, Ȧ≤0; on B=7/2, Ḃ≤0; on D=33/7, Ḋ≤0; on the lower faces the derivative is ≥0. Matched."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:radial-derivative =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:radial-derivative","verdict":"matched","note":"With F : ℝ → ℝ the radial profile, radialY is exactly its ordinary scalar derivative, realizing y = F′."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:radial-derivative","verdict":"matched","note":"radialY := deriv F, where F : ℝ → ℝ is the radial profile (Basic.lean:137,147). This is exactly y = F', the derivative in the radius. Mathlib's `deriv` returns 0 where F is not differentiable, but this junk value never reaches a paper statement: every consumer (RadialSystem, LocalSolutionData, PositiveRadialSolution) requires F to be C² or smooth on the relevant interval, so there `deriv F` is the true F'. The two sides have the same extension."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:reduction =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:reduction","verdict":"matched","note":"Both directions agree: the hypotheses encode m≥1, smooth positive F,P on open Ω, positive definite D²F, and the reduced system with k=m+2 and γ=(m+3)/(m+2); the conclusions give pointwise Hessian positivity and the stated affine maximal equation on Ω×ℝ. The adjugate equals det(D²u)(D²u)⁻¹ on this positive-definite domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:reduction","verdict":"matched","note":"The Lean statement and the paper statement are equivalent. Hypotheses: ReductionDimension gives m≥1. ReductionFunctions gives an open Ω, F and P C^∞ on Ω (ContDiff scope is open, so ∞ means smooth, not analytic), and F,P>0. ReductionHessianPosDef says the fderiv-based Hessian of F is PosDef on Ω. ReducedSystem says det H = F·P^(-γ) with γ=(m+3)/(m+2) (def:reduction-parameters), and tr(H⁻¹ D²P) + kP/F = 0 with k=m+2, pointwise on Ω. These are exactly eq:reduced. Conclusion: reductionGraph F = sqrt(F(xPart z)^2 + tPart z^2), which is u(x,t). The set {z | xPart z ∈ Ω} is Ω×ℝ. HessianPositive there gives the positive definite Hessian. AffineMaximalEquation (m+1) is Σ adj(D²u)_ij · ∂_ij w = 0 with w = (det D²u)^(-(n+1)/(n+2)). Here adjugate = det·inverse, the paper's U^ij, because D²u is PosDef and hence invertible. Ω×ℝ is open and det>0 there, so the ambient rpow formula for w agrees with the paper's w near every point, and its second derivatives match. u is smooth on Ω×ℝ because F>0 and F is smooth, so the fderiv Hessians are the classical ones. The paper's implicit smoothness of u is therefore entailed and not lost."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:global =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:global","verdict":"matched","note":"With y = F′ and (m,k,γ) = (9,11,12/11), Lean preserves the local profiles, extends the radial equations to all positive radii, and asserts exactly the stated positivity, smooth radial extensions, and positive definite Hessian everywhere; it strengthens the result by covering every LocalSolutionData input."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:global","verdict":"matched","note":"I unfolded every referenced definition. The Lean statement takes any data satisfying LocalSolutionData, which encodes Lemma lem:local exactly: ε>0; eq:radial holds on (0,ε) together with C² regularity, which smoothness implies; F(|x|) and P(|x|) are smooth on the ε-ball; F(0)=P(0)=1; the Hessian of F at 0 is I and of P at 0 is -11/9 I; and F,P,F',F''>0 with P'<0 on (0,ε). Here y=F' (def:radial-profiles) and y'=F'' (def:ratios). It concludes there exist F,P that agree with the local solution on [0,ε), solve RadialSystem with m=9, k=11, γ=12/11 on (0,∞) (the same equations as eq:radial), satisfy F,P,y,y'>0 for every r>0, have smooth radial extensions on all of R^9 (ContDiff ℝ ∞), and have a positive definite Hessian of F(|x|) at every x. This is equivalent to the paper's statement. The only difference makes the Lean stronger: the paper speaks of 'the solution' of lem:local, while the Lean claims the extension for every local solution with those properties, and the lemma's solution is one of them. That is allowed for a proved theorem."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Equivalent in both directions: the definitions express smoothness, nonquadraticity, and pointwise positive Hessian on ℝ¹⁰; positive definiteness gives adj(D²u) = det(D²u)(D²u)⁻¹, and the nested derivatives and real exponent reproduce the displayed PDE."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement is equivalent to the paper's. Smoothness: `∞` elaborates to the C^∞ exponent (ℕ∞ω, 'infinitely differentiable', not analytic ω), so it is the paper's C^∞(ℝ^10). Nonquadratic: ¬IsQuadraticFunction means u is not equal to any z ↦ zᵀAz + ⟨b,z⟩ + c, i.e. not a polynomial of degree ≤ 2, which is the paper's reading. Positive definite Hessian: HessianPositive u univ means hessianMatrix u z is PosDef for every z. Hessian: hessianMatrix u z i j = ∂_i ∂_j u(z) in the standard basis. Equation: positive definiteness gives det D²u > 0, so adjugate(D²u) = det(D²u)·(D²u)⁻¹ = U, and the adjugate of a symmetric matrix is symmetric, so taking adj i j against ∂_ij of (det D²u)^(-11/12) gives the paper's sum Σ U^{ij} ∂_ij (det D²u)^{-11/12} = 0. The rpow is well-defined because det > 0. The existential binds the same objects as the paper on ℝ^10 = EuclideanSpace ℝ (Fin 10)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}

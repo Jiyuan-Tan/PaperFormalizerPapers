@@ -1,0 +1,568 @@
+{
+  "version": 1,
+  "slug": "oai_smooth_nonquadratic_affine",
+  "paper_sha256": "93180efa8c5c5f923d62ea9e995d33fb28627055d89ad9af2198beb2b9e3f73e",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:reduction-dimension",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "61a0c455badfe05a06de5a1a9af4e4ef07f18ba2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "61a0c455badfe05a06de5a1a9af4e4ef07f18ba2"
+      }
+    },
+    {
+      "id": "ass:reduction-functions",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9926e30f371889bdb8067eebd3c25aaffa201223"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9926e30f371889bdb8067eebd3c25aaffa201223"
+      }
+    },
+    {
+      "id": "ass:reduction-hessian",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "858c99b60ea001107f02cbb21edc1d85e50d453e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "858c99b60ea001107f02cbb21edc1d85e50d453e"
+      }
+    },
+    {
+      "id": "ass:reduction-system",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3393aab1625c40ab1594da010ccb14a4d4202931"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3393aab1625c40ab1594da010ccb14a4d4202931"
+      }
+    },
+    {
+      "id": "def:affine-equation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4c271c1d30954dd99dfd081ecd2d4a76f1216549"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4c271c1d30954dd99dfd081ecd2d4a76f1216549"
+      }
+    },
+    {
+      "id": "def:constants",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e4878fb15a74583a493119b87a831dae30e98cd6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e4878fb15a74583a493119b87a831dae30e98cd6"
+      }
+    },
+    {
+      "id": "def:continuation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5c0b88d82be3820fa8f20b40b58459fe32731b76"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5c0b88d82be3820fa8f20b40b58459fe32731b76"
+      }
+    },
+    {
+      "id": "def:hessian-positivity",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2bdaaf8d9d6682ed51499f9774593226d7464537"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2bdaaf8d9d6682ed51499f9774593226d7464537"
+      }
+    },
+    {
+      "id": "def:logarithmic-time",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2e5d3546297e280e05488db16a0bb0a8838292cb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2e5d3546297e280e05488db16a0bb0a8838292cb"
+      }
+    },
+    {
+      "id": "def:normalized-ratio",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "eb648b3e9f802b4d46fc6b1113ec3568bf351bd9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "eb648b3e9f802b4d46fc6b1113ec3568bf351bd9"
+      }
+    },
+    {
+      "id": "def:radial-derivative",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "809196e296e41051e15f6b47ba087d018b82ac7a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "809196e296e41051e15f6b47ba087d018b82ac7a"
+      }
+    },
+    {
+      "id": "def:radial-profiles",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be31643ad7c4aef2ecfa15792f7f9081e55cdd0c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be31643ad7c4aef2ecfa15792f7f9081e55cdd0c"
+      }
+    },
+    {
+      "id": "def:radial-system",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3206131c3a8db7ad6664b7feeb3d0a65999ec8c3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3206131c3a8db7ad6664b7feeb3d0a65999ec8c3"
+      }
+    },
+    {
+      "id": "def:ratios",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "96854ba51ffa2649dc36e10586a1012fa5c2d4ba"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "96854ba51ffa2649dc36e10586a1012fa5c2d4ba"
+      }
+    },
+    {
+      "id": "def:reduction-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9380442880d5767323b7bcbc6b9bbd886d3598ac"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9380442880d5767323b7bcbc6b9bbd886d3598ac"
+      }
+    },
+    {
+      "id": "def:regular-system",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "78382fbbc66d0f22eda4b0479f0b0ba94c9f806c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "78382fbbc66d0f22eda4b0479f0b0ba94c9f806c"
+      }
+    },
+    {
+      "id": "lem:autonomous",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e1be19647246f57df040b030bae7b292c410ce48"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e1be19647246f57df040b030bae7b292c410ce48"
+      }
+    },
+    {
+      "id": "lem:box",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c361290f12d57408bd6343815d6e8fc5b5dc1006"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c361290f12d57408bd6343815d6e8fc5b5dc1006"
+      }
+    },
+    {
+      "id": "lem:local",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "12a47aaa9228ebfec3189150e309ffebc7924938"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "12a47aaa9228ebfec3189150e309ffebc7924938"
+      }
+    },
+    {
+      "id": "prop:global",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a4e83b2ee6a459e6dbc003d9043c10d7386916be"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a4e83b2ee6a459e6dbc003d9043c10d7386916be"
+      }
+    },
+    {
+      "id": "prop:reduction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a79e901771e7cec9dd00e356e2ba0caa1a59e42a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a79e901771e7cec9dd00e356e2ba0caa1a59e42a"
+      }
+    },
+    {
+      "id": "sym:F",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "33b53f0c7514f13075e242661be38a1e93fd05cd"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "33b53f0c7514f13075e242661be38a1e93fd05cd"
+      }
+    },
+    {
+      "id": "sym:G",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3b8d18467d8e220cbdf2db73923782e8b5b47995"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3b8d18467d8e220cbdf2db73923782e8b5b47995"
+      }
+    },
+    {
+      "id": "sym:P",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5c393e86b5d3a66e4ac7c442d54b0fa2decfb036"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5c393e86b5d3a66e4ac7c442d54b0fa2decfb036"
+      }
+    },
+    {
+      "id": "sym:R",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "68306c2c4cd63bac9c37d3196ed45151db26010a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "68306c2c4cd63bac9c37d3196ed45151db26010a"
+      }
+    },
+    {
+      "id": "sym:\\delta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3869863805c2de059b0c90281bf841028dbbf8e3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3869863805c2de059b0c90281bf841028dbbf8e3"
+      }
+    },
+    {
+      "id": "sym:\\varepsilon",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4be477bd62e58d11335fbb332be9fd18bb588944"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4be477bd62e58d11335fbb332be9fd18bb588944"
+      }
+    },
+    {
+      "id": "sym:d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5c7231f7cef4e88be31f939cef12c91e5a848414"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5c7231f7cef4e88be31f939cef12c91e5a848414"
+      }
+    },
+    {
+      "id": "sym:h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b4e0b984da751cfda9cb13d9263407b914e3aed7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b4e0b984da751cfda9cb13d9263407b914e3aed7"
+      }
+    },
+    {
+      "id": "sym:i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "31075967fab8a57603282abc528185ee87b195bb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "31075967fab8a57603282abc528185ee87b195bb"
+      }
+    },
+    {
+      "id": "sym:j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2cf3b438bb9f10330ea15c502274623c0d33d5e7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2cf3b438bb9f10330ea15c502274623c0d33d5e7"
+      }
+    },
+    {
+      "id": "sym:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9ba5695bd62932a9396105b60a99b464a45f19b9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9ba5695bd62932a9396105b60a99b464a45f19b9"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "61665eb6fb6448de7ba823a113caa336842da422"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "61665eb6fb6448de7ba823a113caa336842da422"
+      }
+    },
+    {
+      "id": "sym:r_0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c79d35d10c5359fc4f254267cf417bf0b6497f8d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c79d35d10c5359fc4f254267cf417bf0b6497f8d"
+      }
+    },
+    {
+      "id": "sym:w",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e5f9818dddbf0fd550ba61a21c24b840dccb5c2e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e5f9818dddbf0fd550ba61a21c24b840dccb5c2e"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "78f68ea6e6a9791c0f18d861a19a781e056f9519"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "78f68ea6e6a9791c0f18d861a19a781e056f9519"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "7b6e996823d9497846d6c4da0b38cb13db14add3796f08ecfcab4f5cfa2883f2",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "318e4a37d6d0727d9d8689ebd6f76fb117392ae2a95178d82acfc61e91a695f5"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "d25430acafe2f99df8fb459f334cf6d130fbb54c2e3a74fa41700b35c4be5922"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "37dba5db4eebc487bee69b9aa9425c0085fd0f37dff3f7bbb66185d6dee98a5c"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "503149c2cb3ffd73c24cf255f74c885d53fcc117c7181d9d46496e30d7699407"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "81599ad5da23d5c8f79bdf9b8b2aab0bf10f19efae62ee0f83adec1567a8a2e1"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "857b8d70c511d5087f95ff1347828a78881c92fc0a6f555a13b8e9ca6f1ba889"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine.lean",
+      "sha256": "250a33eb17c15b6493a11c52c6512e950b375f0957eb3d045663035f9a3e1ba6"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Basic.lean",
+      "sha256": "a458d10770489d5eda8aedf010d8160b1eee8af093fa8861ddc2d7f10aba8d83"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers.lean",
+      "sha256": "f7a40aa73c20a9a866e936f822bc3a1ced3f19a4a7306b663a2168c11eaa3f59"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/Autonomous.lean",
+      "sha256": "42ebed0e38dba026a50286f7f59b1510290c080b204d80cb854a042a69d735f2"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/Box.lean",
+      "sha256": "5953db6ceb06852a27f82a9b0eb2589487d9505f990f246748710d19796ade7d"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/BoxFlow.lean",
+      "sha256": "ac5f632e8f80b18bde87ce243e9512b7a17d66c051ec6350e3c82ba3047a10a3"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/BoxGeometry.lean",
+      "sha256": "415df583321ef488791c62f99c1f726aebb38b5f3887e38b0fbf6e36d1706055"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationBounds.lean",
+      "sha256": "eadc37565536fa6a54655668e27e74c9207cfc05839654ffad263f343aaf0be4"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationExistence.lean",
+      "sha256": "e3c0e9212619a01ae217cdf59e76098c055bdb231bcc5f591ec40cf53e5dc140"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationGluing.lean",
+      "sha256": "e7ebcee3d90c81ebfa0b25d3089d85056458226c79028fe72006690b587dcd52"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationMaximal.lean",
+      "sha256": "0efd045e6708c9d29ff7317c02a20907fa2b53c9c4aefa2d79083c19fc7de8f7"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationODE.lean",
+      "sha256": "8c8ec0c9c3586364f9693ac2b303dda819071ebec8f138f2d8e60ca556f511ef"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ContinuationUniqueness.lean",
+      "sha256": "cdcf321416fff0f3ad5a216edd6242c641c005e0ea5a9dbf40f879429b894b7f"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/Local.lean",
+      "sha256": "dab41ed8d53c1c2ae5e628623c835c2e8af212a2d608138e353cdf5fa59b166d"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalConstructions.lean",
+      "sha256": "c3fc605ae89ecbf347be36f9a89694cc92ddfaec3627daaa97cbd22c189f5d7a"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalEstimates.lean",
+      "sha256": "d11fcad83b5a23b983264d2e3ffcd17db22e645dff45b9ffb270970fa4a1dd21"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalFixedPoint.lean",
+      "sha256": "1f842ef031a8d3255999245c3a5e0889a9e82752e49daa298edb73ccc6519b3b"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalOrigin.lean",
+      "sha256": "aba75aa934fdee94bac75841a54fdc2fb7f7de4bf72dd998da7196dd721e1b81"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalRadial.lean",
+      "sha256": "f7aed9b475aa199b67c442dd75150dcbb59b2c98f45a70993d69b601e852ca6c"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/LocalSmooth.lean",
+      "sha256": "ded8834465a551b4421ece06513c092a909d9300aab49270088336be14d27682"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/RadialHessian.lean",
+      "sha256": "0c00d807fd13e1dc4653ac4a8bf379bbf09b1a95e44ac16aeb8bf4c558974400"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/RadialSmooth.lean",
+      "sha256": "fbe38f2f661a2565689d3975d3d80c461443560182d9a7a31415bc601d2917d6"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ReductionFrame.lean",
+      "sha256": "9031f9bcfdc759f484d6f0dba33b0ca1c499bc7602e07d990c3847e2ebf1d063"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ReductionHessian.lean",
+      "sha256": "9d2ef72b22a39ca1add1b7eed40105933ab8803f95cef22c3178dc10c4a02611"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Helpers/ReductionMatrix.lean",
+      "sha256": "9703fec4d2f57bfe3b8e537ff11eae58c17ea1990a3e1caf7e9342c3eb0969d3"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/Run.lean",
+      "sha256": "4c178de10e0f951a04734a2492dbe44e39282152dfff2f804cdfe2bd2c1bc41d"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/TGlobal.lean",
+      "sha256": "b31bc86ddde27d97b54453b126cd608238611a1fb4519c817c0e3dbf292b10ae"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/TMain.lean",
+      "sha256": "0adfdb0c12164085f8209aa729e0782b0a097512972f8fea98569b6d09ae5f1d"
+    },
+    {
+      "path": "lean/Papers/OaiSmoothNonquadraticAffine/TReduction.lean",
+      "sha256": "b8adc813ad96f72e1d619b8c28d33d6b8a1efbafb9d91a9d9f68e3651a9775ec"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "bb5f1f7475f595d6ae85e89b5956d3e63fcdbaab4379104fa72f7a60bdb4fa64"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "085b70387b2c090fa71f22b47aaaf1ea61f369a903280c6cc6bfed2d3af2f9b8"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "9f9db57b275470d04f113e2ba400d6ca84a50779529b75a58f2fe384f8161497"
+    }
+  ],
+  "code": "792e96b14bb3faecf34c9c36b1b51807e5174559e6cbd192282de478e2cf89e1"
+}
