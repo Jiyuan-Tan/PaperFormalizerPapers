@@ -1,0 +1,1 @@
+2026-10-26T23:08:39.058190+00:00: sections/lift.tex:56,66: replaced the layout-only samepage opening and closing wrappers with equal-length spaces so the paper page renders prop:lift; all statement/proof text, line numbers, and byte offsets preserved. Original input untouched.

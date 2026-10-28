@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Causalean",
+    "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+    "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+    "uncommitted": 0,
+    "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+    "files": {
+      "Causalean/Mathlib/Analysis/Approximation/Chebyshev/BasicBernsteinSzegoTrig.lean": "4628d3de221f01af9ae75950d75e9e3b3ca2d32b",
+      "Causalean/Mathlib/Analysis/Approximation/Chebyshev/Interp.lean": "15ef397345d054cb810e30cc509631415d3e45f2",
+      "Causalean/Mathlib/Analysis/Approximation/Chebyshev/Szego.lean": "0beda2993b761e4f064dd767bcca8a3ca3264175",
+      "Causalean/Mathlib/Analysis/Approximation/Chebyshev/TrigPoly.lean": "bc4289f83717ce9f0f87472c917fbf60204525b8"
+    },
+    "status": "unverified"
+  }
+]

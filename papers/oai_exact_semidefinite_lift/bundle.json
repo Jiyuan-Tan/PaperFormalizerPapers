@@ -1,0 +1,83 @@
+{
+  "slug": "oai_exact_semidefinite_lift",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 12,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 16,
+    "toolkit_modules": [
+      "Toolkit.Foundations.Algebra.HyperbolicPolynomials",
+      "Toolkit.Foundations.Algebra.PolynomialCoeffSigns"
+    ],
+    "requires": [
+      {
+        "name": "Causalean",
+        "form": "git",
+        "git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "rev": "a7085d88d2e4b30003db7097ca374f4718da0f01"
+      },
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [
+      {
+        "name": "Causalean",
+        "public_git": "https://github.com/Jiyuan-Tan/CausalSmith",
+        "public_rev": "a7085d88d2e4b30003db7097ca374f4718da0f01",
+        "uncommitted": 0,
+        "changed": [],
+        "local_rev": "5ca94e0ac38754182d381fd21a4dd3df3b3fa0c1",
+        "files": {
+          "Causalean/Mathlib/Analysis/Approximation/Chebyshev/BasicBernsteinSzegoTrig.lean": "4628d3de221f01af9ae75950d75e9e3b3ca2d32b",
+          "Causalean/Mathlib/Analysis/Approximation/Chebyshev/Interp.lean": "15ef397345d054cb810e30cc509631415d3e45f2",
+          "Causalean/Mathlib/Analysis/Approximation/Chebyshev/Szego.lean": "0beda2993b761e4f064dd767bcca8a3ca3264175",
+          "Causalean/Mathlib/Analysis/Approximation/Chebyshev/TrigPoly.lean": "bc4289f83717ce9f0f87472c917fbf60204525b8"
+        },
+        "status": "unverified",
+        "detail": "built against a local copy of Causalean (its commit 5ca94e0ac387): 4 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_exact_semidefinite_lift --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+      }
+    ],
+    "warnings": [],
+    "notes": [
+      "built against a local copy of Causalean (its commit 5ca94e0ac387): 4 file(s) of it are reached, recorded by content hash in `built-against.json`. That they are the files of the public revision a7085d88d2e4 this bundle requires was NOT verified (not possible offline): `paperformalizer report oai_exact_semidefinite_lift --verify-public` compares them over the network; by hand: `git hash-object <file>` in the local checkout against the blob hashes of `https://github.com/Jiyuan-Tan/CausalSmith` at `a7085d88d2e4b30003db7097ca374f4718da0f01`"
+    ]
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "8674522eee671a5751b193c31403ef463eee015c5015565d80c5d33b4b3c239b",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.1",
+    "lem:gram": "Lemma 2.1",
+    "lem:slice": "Lemma 2.2",
+    "lem:matching": "Lemma 3.1",
+    "prop:lift": "Proposition 4.1"
+  },
+  "todo_items": []
+}

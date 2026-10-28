@@ -1,0 +1,644 @@
+{
+  "version": 1,
+  "slug": "oai_exact_semidefinite_lift",
+  "paper_sha256": "f2168c225106fb1bcf7d9516942b0ea9b6144538d31ad518a4dcf93941bde4a2",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:matching",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3e062ba72e824c2060019f736ebb0b3df508bbc6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3e062ba72e824c2060019f736ebb0b3df508bbc6"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2dc7c61a141576b554e65cf7ba287016a661dde1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2dc7c61a141576b554e65cf7ba287016a661dde1"
+      }
+    },
+    {
+      "id": "ass:pin-2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "813d671990c7b94df8341dce0f9fcd01fa22e521"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "813d671990c7b94df8341dce0f9fcd01fa22e521"
+      }
+    },
+    {
+      "id": "ass:slice-positive-definite",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c3fb6e2d3b5b08c62518b263803c44f0976abff6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c3fb6e2d3b5b08c62518b263803c44f0976abff6"
+      }
+    },
+    {
+      "id": "def:angular-coordinates",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "689865396531db6afaabdd70436a5db42625fc9a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "689865396531db6afaabdd70436a5db42625fc9a"
+      }
+    },
+    {
+      "id": "def:angular-plane",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "543bf087fcad842cf95681f7c64b1e3f15f754a1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "543bf087fcad842cf95681f7c64b1e3f15f754a1"
+      }
+    },
+    {
+      "id": "def:bj",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b99b3896f115952762d387c2c1787adca2ef1bbe"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b99b3896f115952762d387c2c1787adca2ef1bbe"
+      }
+    },
+    {
+      "id": "def:complex-trigonometric-polynomials",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bd99412af1f207aaac562ca2fdfe50835900a755"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bd99412af1f207aaac562ca2fdfe50835900a755"
+      }
+    },
+    {
+      "id": "def:cone",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "90b866f44edf33ec05168e04f6d1dc1f12ada528"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "90b866f44edf33ec05168e04f6d1dc1f12ada528"
+      }
+    },
+    {
+      "id": "def:coordinates",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "42cf7e9a0d2cab2d644fdb031d0f20f382b20c1f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "42cf7e9a0d2cab2d644fdb031d0f20f382b20c1f"
+      }
+    },
+    {
+      "id": "def:lifting-functional",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "543d98d93c792ea95592814c1efbd3e56ef9b4ee"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "543d98d93c792ea95592814c1efbd3e56ef9b4ee"
+      }
+    },
+    {
+      "id": "def:lifting-space",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "394b673e385ebe9563126dc6b677bb9aef419164"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "394b673e385ebe9563126dc6b677bb9aef419164"
+      }
+    },
+    {
+      "id": "def:moment",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6c449f050d58e3613bd100a19f1ef94bf64fa8df"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6c449f050d58e3613bd100a19f1ef94bf64fa8df"
+      }
+    },
+    {
+      "id": "def:moment-matrix",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "058ba22edd31798174bd3a7cfb168deac6eedc6b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "058ba22edd31798174bd3a7cfb168deac6eedc6b"
+      }
+    },
+    {
+      "id": "def:output",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8f1041abd0118cdf0c7e901b69470485931be697"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8f1041abd0118cdf0c7e901b69470485931be697"
+      }
+    },
+    {
+      "id": "def:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "098ebfb3440f6d15a96996146c32ca13eecb4bf1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "098ebfb3440f6d15a96996146c32ca13eecb4bf1"
+      }
+    },
+    {
+      "id": "def:phi",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9a7b3b35b86436ac062845b1859bb22f6a594756"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9a7b3b35b86436ac062845b1859bb22f6a594756"
+      }
+    },
+    {
+      "id": "def:phi-factor",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "865649588b51d8a07622d03aad23f319de532a5f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "865649588b51d8a07622d03aad23f319de532a5f"
+      }
+    },
+    {
+      "id": "def:phi-quadratic",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "61109ca5278534ff69fbb6195a8b86531ce36b1a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "61109ca5278534ff69fbb6195a8b86531ce36b1a"
+      }
+    },
+    {
+      "id": "def:polarization",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "929ed2e71840e0c6b53b66b2ff31f89a603b40ec"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "929ed2e71840e0c6b53b66b2ff31f89a603b40ec"
+      }
+    },
+    {
+      "id": "def:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ff33c43dd16f5fdef623249fb534a729dacfadb1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ff33c43dd16f5fdef623249fb534a729dacfadb1"
+      }
+    },
+    {
+      "id": "def:realification",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "984124c696ce2389adfc4cf008c0be0ededf4e27"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "984124c696ce2389adfc4cf008c0be0ededf4e27"
+      }
+    },
+    {
+      "id": "def:slice-pencil",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "31c4e24a2d1a42ed202334ebf9e74e4d61a0d1b3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "31c4e24a2d1a42ed202334ebf9e74e4d61a0d1b3"
+      }
+    },
+    {
+      "id": "def:u",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "09b864238540bb6de129471dc3d73a2834130907"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "09b864238540bb6de129471dc3d73a2834130907"
+      }
+    },
+    {
+      "id": "def:weighted-pairing",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f64184c7bcbe4fe62fefa4da104371ba3fbb98d4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f64184c7bcbe4fe62fefa4da104371ba3fbb98d4"
+      }
+    },
+    {
+      "id": "lem:gram",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3c0e0132941774ddd9072cd326a52fd0eec003e6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3c0e0132941774ddd9072cd326a52fd0eec003e6"
+      }
+    },
+    {
+      "id": "lem:matching",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "36240c985f670ee9270c58765f4c6f6dd0c0e100"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "36240c985f670ee9270c58765f4c6f6dd0c0e100"
+      }
+    },
+    {
+      "id": "lem:slice",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8754a75afca08a0245189cc2f56705bb13de55de"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8754a75afca08a0245189cc2f56705bb13de55de"
+      }
+    },
+    {
+      "id": "prop:lift",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1c797a1378d82e07b232ed372bf5f2626271fd62"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1c797a1378d82e07b232ed372bf5f2626271fd62"
+      }
+    },
+    {
+      "id": "sym:A_\\nu",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e01a91014dfac83389070cd932dcb93e69203427"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e01a91014dfac83389070cd932dcb93e69203427"
+      }
+    },
+    {
+      "id": "sym:B_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b1212aded58283e7f7c51ed451d1484d8a26b60f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b1212aded58283e7f7c51ed451d1484d8a26b60f"
+      }
+    },
+    {
+      "id": "sym:N_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cf44853647cfd993831f39d99cb52bfe350edd6b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cf44853647cfd993831f39d99cb52bfe350edd6b"
+      }
+    },
+    {
+      "id": "sym:\\delta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "83f46c85aabcc5d0ad43d6ec3387830d729dfe95"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "83f46c85aabcc5d0ad43d6ec3387830d729dfe95"
+      }
+    },
+    {
+      "id": "sym:\\mathcal T_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e06d41afb85901f64e83f32855e3acc544268bca"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e06d41afb85901f64e83f32855e3acc544268bca"
+      }
+    },
+    {
+      "id": "sym:\\tau",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "188ffc0afdb8405d6875945d93fe67e3165ae819"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "188ffc0afdb8405d6875945d93fe67e3165ae819"
+      }
+    },
+    {
+      "id": "sym:a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "78a4792860c5e8816f92e2514156843ebadea2e7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "78a4792860c5e8816f92e2514156843ebadea2e7"
+      }
+    },
+    {
+      "id": "sym:a_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fd39ff8d9b77fae9b38cf0670c6dec9a2c71459c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fd39ff8d9b77fae9b38cf0670c6dec9a2c71459c"
+      }
+    },
+    {
+      "id": "sym:b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06f6045a19902d53aa811ec900bcb0dfe3b9c984"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06f6045a19902d53aa811ec900bcb0dfe3b9c984"
+      }
+    },
+    {
+      "id": "sym:b_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9e77387f63c1858baf8beb797fb176cba919bd86"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9e77387f63c1858baf8beb797fb176cba919bd86"
+      }
+    },
+    {
+      "id": "sym:c",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "221083f79d795074c83972ad91c965438fbbfeec"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "221083f79d795074c83972ad91c965438fbbfeec"
+      }
+    },
+    {
+      "id": "sym:f_a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0b90daed377ca2a449e642900534542e85e90987"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0b90daed377ca2a449e642900534542e85e90987"
+      }
+    },
+    {
+      "id": "sym:r_j",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "37d82171c73b426e315d32bda721f2ecf1dcc13a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "37d82171c73b426e315d32bda721f2ecf1dcc13a"
+      }
+    },
+    {
+      "id": "sym:s",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dc475d09e57f8004d568f61ace5378aab96d0693"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dc475d09e57f8004d568f61ace5378aab96d0693"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e70c50fd95b531484672749d405b9b31b73653de"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e70c50fd95b531484672749d405b9b31b73653de"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "a4f3f16df2afd2e94fb6597b7ed880d3a0ce13ad907d39b5ff1bf9ed64bebe4f",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "c6fa0452642c71ed333d4167b26294604e6a1274e9693353811831a9883b24e5"
+    },
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "dfe2ef03d7d8c1b2dc01a69bb0a91b5a002b6512a0ecb2b986031c6dc2bc713c"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "8d6278acdaa635b7f4a6a999c6fe466f0178041ba13c2388bfc978b3f70ce6d3"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "f2da9ad0223d850007e105b5a03c633d4450855caa5a83b17533bf87f72a4956"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "69097dd44b5b5609d5625baefe2177f5543eff69f025a8ee10d11282b49e4733"
+    },
+    {
+      "path": "corrected_paper/sections/angular.tex",
+      "sha256": "a46474c3a0b3b189072504041714db91e02bfcaee2b5167ac27e4db911f7c466"
+    },
+    {
+      "path": "corrected_paper/sections/introduction.tex",
+      "sha256": "e1b28245e28ae1956cd17f72989659f2ef9ea55dbad4c9671a86f668bb0ea295"
+    },
+    {
+      "path": "corrected_paper/sections/lift.tex",
+      "sha256": "87035974423a0b84994aa38ccecb3204a409fbb54aa82366d2c72794e0e81ae4"
+    },
+    {
+      "path": "corrected_paper/sections/matching.tex",
+      "sha256": "db9096bd27639498dcf2bca3ded2d0e36a6e9f1be0ce4ac6ec61e753d2b49bdf"
+    },
+    {
+      "path": "corrected_paper/sections/slices.tex",
+      "sha256": "9ea549e78885793f7dbcdb57545cd6eeff29a4673f23a4405dfd2826b3ae2238"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "25ac97dfb02dc8c4f773d0a8b76aaffedf8673073db26eea85555d7aa2988150"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "5042ff35e9255f5b91ad72f3119f9898b7eac7912ff6e0a2f9020bd002e3feed"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift.lean",
+      "sha256": "9751e8181be7dd33b5f11df469e01245f68a7d4c4e228654855b6fd201dc992b"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Basic.lean",
+      "sha256": "2429c4c76b37c4ff28a1a8a5634bab5888e3c4e3ede6b1d5dc4d098b5cf1e3a7"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers.lean",
+      "sha256": "f24e0ba3f1a56c048ed3d8a4f2e28bb6bea2f6e5cd917609806608edce2e0ee9"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/CertificateAlgebra.lean",
+      "sha256": "6479c47e6de839755a023189be1349c258cc7cbe7cb29a1f83c3b96d20f2c45e"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Coordinates.lean",
+      "sha256": "ab53f53d9cbb2edcb0194c5652520fd58c946f45574931044e44e3249dba4f5d"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/FunctionSpace.lean",
+      "sha256": "956b58ffdc41c424eab4038caa8eeca0811b96bcdd8f0211888f725358bf6f9e"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Gram.lean",
+      "sha256": "24f5946cf0b3ef171de723faa8d8a505f595a29a860fc34f169cc2df4849a9a0"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Lift.lean",
+      "sha256": "caffa2d671f2921a39e196e375f725d7e44cdff1cd382762dc061fbcde219e54"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/LiftCertificate.lean",
+      "sha256": "c84b03500881eb7be2dc3c1a18c6951db83acb9d1f9e15c59f17a4a033bae11c"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Matching.lean",
+      "sha256": "49dc371b8f335eddc4c55681492506ec7ecb82150b58004f3e905e8b7b6b25a1"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/MatchingRotation.lean",
+      "sha256": "b66c22a61fef762fbbfcfee60d54763651f226ed70a8b18c750ef415adba2092"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Moment.lean",
+      "sha256": "64bf19c737d2388c50fb5b60ff548063393396504306ef9ef45a6076df05f0c1"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Polynomial.lean",
+      "sha256": "51df5d26fecd12c7d97eb66de929ede32182968cd902e74b606b23b24e4480de"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/Slice.lean",
+      "sha256": "db3c4167aa813d8fa8663d459fbf5800016c483f0dc6d37c2630ed51400e9eaf"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/Helpers/TrigCoefficients.lean",
+      "sha256": "c0c119d501d46cda7e6a9665fbb38be824303c6341754e14cf7f40849a64c1f2"
+    },
+    {
+      "path": "lean/Papers/OaiExactSemidefiniteLift/TMain.lean",
+      "sha256": "0639e15952d70ca8207b60c6b18718b68cf82761bc0d01216c045d0743993806"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "caf91ed1abe26ef726bb1bd9bfdc51f958ef11a6897259c8e346e78232cc9fac"
+    },
+    {
+      "path": "lean/Toolkit.lean",
+      "sha256": "b1aaacb2f92d6f0450ca86eeec526d45af0128e2d873d563fd3f59aedfa49aa9"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Algebra/HyperbolicPolynomials.lean",
+      "sha256": "21d8a02e329a59f7e6533f6f3810e0533f31221e367860ad7e3fdec49abb9d1c"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Algebra/PolynomialCoeffSigns.lean",
+      "sha256": "da68ed35b2c9cab0679c61a6025e1b72a8cd608d83abce2714ba1708f6273d0e"
+    },
+    {
+      "path": "lean/built-against.json",
+      "sha256": "faa6f8d479e4126dbe6b6d9ae950558527efbaadb75c4009a10e6fdc2293f7d2"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "cab0dadf5e90472e6f7bf8df3307cca09f5b32cff45d2eee9e67afd44cb01032"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "32dc9d911156efa35927b9c14bd870d0825fc7e2bfaf0694469b870b496706be"
+    }
+  ],
+  "code": "8674522eee671a5751b193c31403ef463eee015c5015565d80c5d33b4b3c239b"
+}

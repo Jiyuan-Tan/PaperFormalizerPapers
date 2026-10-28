@@ -1,0 +1,327 @@
+===== reviewer convergence/dual :: medium :: batch[def:angular-plane,def:realification,def:u,def:bj,def:phi-factor] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:angular-plane",
+      "verdict": "matched",
+      "note": "Unfolding dVec and kVec gives exactly η(cos θ, sin θ, 0) + ξ(0, 0, 1) for all real parameters."
+    },
+    {
+      "obj_id": "def:realification",
+      "verdict": "matched",
+      "note": "The four real columns are exactly Re f₁, Im f₁, Re f₂, Im f₂, in the specified order."
+    },
+    {
+      "obj_id": "def:u",
+      "verdict": "matched",
+      "note": "Umat has exactly the specified entries and normalization with w = exp(iθ); the companion V0 and Fθ definitions also realize the displayed formulas."
+    },
+    {
+      "obj_id": "def:bj",
+      "verdict": "matched",
+      "note": "Fin.cases gives exactly the displayed skew block matrix B(r); the companion Ju definition gives the column u′ followed by −u₀I₃."
+    },
+    {
+      "obj_id": "def:phi-factor",
+      "verdict": "matched",
+      "note": "Unfolding factorColumn, Fθ, realify, phiFactorSum, and PhiMap gives exactly the stated four-column sum identity for every real symmetric 4×4 matrix; Sym4 imposes precisely symmetry."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:angular-plane",
+      "verdict": "matched",
+      "note": "Yplane θ η ξ = η•dVec θ + ξ•kVec, with dVec θ = (cos θ, sin θ, 0) and kVec = (0,0,1) (def:angular-coordinates). This is Y_θ(η,ξ) = η d(θ) + ξ k for all real η, ξ. Same function."
+    },
+    {
+      "obj_id": "def:realification",
+      "verdict": "matched",
+      "note": "realify maps F ∈ ℂ^{3×2} to a real 3×4 matrix whose columns are (Re f_1, Im f_1, Re f_2, Im f_2) in that order, row by row. This is exactly the paper's realification."
+    },
+    {
+      "obj_id": "def:u",
+      "verdict": "matched",
+      "note": "Core fixes w = e^{iθ}, and wPhase θ = exp(θ·I) matches it. Umat = (1/√2)[[-w⁻¹, -w], [s·w⁻², s·w²], [c·w⁻², -c·w²]], entrywise equal to eq:U, since (w⁻¹)² = w⁻². The companion decls in the same node also match: V0 = (1/√2)[[0,0],[i,i],[1,1]] and Fθ = η·U(θ) + ξ·V0."
+    },
+    {
+      "obj_id": "def:bj",
+      "verdict": "matched",
+      "note": "Bskew r: entry (0,0) = 0, (0, j+1) = r_j, (i+1, 0) = -r_i, all others 0. This is B(r) = [[0, rᵀ], [-r, 0₃ₓ₃]]. The companion Ju u (Basic.lean:133) has column 0 = u' and columns 1..3 = -u₀·I₃, which is J_u = (u' | -u₀ I₃) with u = (u₀, u') ∈ ℝ⁴."
+    },
+    {
+      "obj_id": "def:phi-factor",
+      "verdict": "matched",
+      "note": "factorColumn θ η ξ j is column j of realify(Fθ θ η ξ), i.e. r_j of F̃_θ(η,ξ). phiFactorSum is Σ_{j=1..4} B(r_j)ᵀ W B(r_j), and it is set equal to PhiMap (Yplane θ η ξ) W for every W in Sym4 (the real self-adjoint 4×4 matrices). This is exactly eq:Phi-factor, quantified over all θ, η, ξ and W ∈ Sym⁴. The proof body is out of scope."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:matching,ass:slice-positive-definite,ass:pin-1,ass:pin-2,def:q] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:q",
+      "verdict": "matched",
+      "note": "All nine entries agree with the displayed matrix under the coordinate correspondence y₁=y 0, y₂=y 1, y₃=y 2."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:matching",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the nonzero planar-pair condition; S is an independent ambient symmetric-matrix parameter."
+    },
+    {
+      "obj_id": "ass:slice-positive-definite",
+      "verdict": "faithful-refinement",
+      "note": "Sym4 is the real self-adjoint matrix carrier, and Matrix.PosDef means strict positivity of the quadratic form on every nonzero vector."
+    },
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "The ordered real basis agrees exactly; the remaining indexing and symmetry clauses hold structurally: momentMatrixH has indices Fin 20 × Fin 5, and momentMatrixH_isSymm (Helpers/Moment.lean:364) establishes symmetry without extra hypotheses."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "Unfolding IsComplexTrigPolyLE gives exactly the stated finite integer-frequency expansion with complex coefficients chosen independently of θ."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:q","verdict":"matched","note":"I checked all nine entries of Qmat against eq:Q, mapping y_k to y (k-1). Row 1 is (y1²+y2², -y1y2, -y1y3), row 2 is (-y1y2, y2²+y3², -y2y3) and row 3 is (-y1y3, -y2y3, y3²+y1²). Every entry matches. The domain is ℝ³ = Fin 3 → ℝ and the codomain is a real 3×3 matrix."}],"assumption_verdicts":[{"obj_id":"ass:matching","verdict":"faithful-refinement","note":"`(z 0, z 1) ≠ (0, 0)` is exactly the paper's (z_1,z_2)≠(0,0) for z : Fin 3 → ℝ. The paper's S∈𝕊³ is a binder of the consuming lemma, not a restriction on z, so the condition is equivalent in both directions."},{"obj_id":"ass:slice-positive-definite","verdict":"faithful-refinement","note":"Sym4 is `selfAdjoint.submodule ℝ (Matrix (Fin 4) (Fin 4) ℝ)`, which is 𝕊⁴. SlicePosDef coerces to Mat 4 and applies Matrix.PosDef. For a real symmetric matrix that is the paper's 𝒳≻0, so the two are equivalent."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"MomentBasisPinned fixes momentBasis to the ordered list (1, cos, sin, cos 2θ, sin 2θ). These are functions ℝ→ℝ, so they are real functions. The H-indexing clause is realized by the type of momentMatrixH: Matrix (Fin 20 × Fin 5) (Fin 20 × Fin 5) ℝ (Helpers/Moment.lean:55), which is indexed by (i,a) with 1≤i≤20 and 1≤a≤5. momentMatrix100 transports it to Mat 100 through momentIndexEquiv (Helpers/Coordinates.lean:55). Both clauses of the pinned reading are met."},{"obj_id":"ass:pin-2","verdict":"faithful-refinement","note":"IsComplexTrigPolyLE j f says ∃ c : ℤ → ℂ with f θ = Σ_{ℓ∈Icc(-j,j)} c ℓ·exp(iℓθ) for all θ. The sum is finite, the coefficients are complex and do not depend on θ, and the index range is -j≤ℓ≤j over ℤ. That is exactly the pinned reading, and the pin Prop states the two are equivalent."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:gram,lem:slice,lem:matching] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:gram",
+      "verdict": "matched",
+      "note": "The unfolded factors, realification, and angular parametrization match; both the universal Gram identity and global positive semidefiniteness are retained."
+    },
+    {
+      "obj_id": "lem:slice",
+      "verdict": "matched",
+      "note": "The cone, pencil, polynomial, and direction match; all three conclusions are retained, with positive definiteness required only for the inverse-matrix equivalence."
+    },
+    {
+      "obj_id": "lem:matching",
+      "verdict": "matched",
+      "note": "The unrestricted symmetric weight, nondegeneracy condition, witness scope, and both identities match; the finite Fourier expansion exactly realizes the pinned degree-two convention."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:gram","verdict":"matched","note":"Both conjuncts match the paper. The first says realify(Fθ θ η ξ)·realify(Fθ θ η ξ)ᵀ = Qmat(Yplane θ η ξ) for all real θ,η,ξ. realify interleaves Re f1, Im f1, Re f2, Im f2 as def:realification does, Yplane is η·d(θ)+ξ·k, and Qmat is the explicit Q. The second says (Qmat y).PosSemidef for every y : Fin 3 → ℝ, which is Q(y) ⪰ 0; Mathlib's PosSemidef also requires symmetry, and Qmat is symmetric by construction. Both directions hold."},{"obj_id":"lem:slice","verdict":"matched","note":"Conjunct 1: for all θ,η,ξ and 𝒳,𝒵 : Sym4 (real self-adjoint 4×4), (𝒳,𝒵,Yθ) ∈ coneK ↔ L_θ PSD. coneK is closedCone pPoly eDir, which is the set where every characteristic root is nonnegative, i.e. K. Conjunct 2: IsHyperbolic pPoly eDir means 0 < p(e) and every line polynomial splits over ℝ. This is equivalent to the standard 'p(e) ≠ 0 and real-rooted' because p(e) = det(I − Φ_0(adj I)) = det I = 1 > 0. Conjunct 3: under 𝒳 ≻ 0 (SlicePosDef), membership in K ↔ (𝒵 − Φ_{Yθ}(𝒳⁻¹)) PSD, which is 𝒵 ⪰ Φ_{Yθ}(𝒳⁻¹); Φ maps symmetric matrices to symmetric ones because Qmat is symmetric. No extra hypotheses."},{"obj_id":"lem:matching","verdict":"matched","note":"Hypotheses match: S : Sym3 is an arbitrary symmetric matrix (no PSD restriction), and MatchingNondegenerate z is exactly (z1,z2) ≠ (0,0), i.e. ass:matching. The conclusion is ∃ C : ℝ → ℂ^{3×2} whose entries are complex trigonometric polynomials of degree ≤ 2. IsComplexTrigPolyLE 2 uses a finite sum over ℓ ∈ [−2,2] with θ-independent complex coefficients, exactly as pinned in ass:pin-2. For all θ,η,ξ, C must satisfy C̃C̃ᵀ = Q(z) and ⟨Fθ,C⟩_S = tr(S·Q(Yθ,z)). weightedPairing is tr(F̃ᵀSH̃), the form def:weighted-pairing gives. Qpol is ½·polar Qmat, i.e. ½(Q(y+z) − Q(y) − Q(z)), as in def:polarization. The order of quantifiers (one C for all θ,η,ξ) matches the paper."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:phi,def:p,def:cone,def:coordinates,def:angular-coordinates] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:phi",
+      "verdict": "matched",
+      "note": "On the stated symmetric block domain, the four blocks are exactly tr(Q(y)T), −rᵀQ(y), −Q(y)r, and aQ(y); extending evaluation to arbitrary matrices preserves this restriction."
+    },
+    {
+      "obj_id": "def:p",
+      "verdict": "matched",
+      "note": "V consists of two real symmetric 4×4 matrices and a real three-vector; scalar multiplication, adjugate, PhiMap, and determinant reproduce the formula, with eDir equal to (I₄,I₄,0)."
+    },
+    {
+      "obj_id": "def:cone",
+      "verdict": "matched",
+      "note": "Unfolding the cone and characteristic-polynomial definitions gives exactly the frozen closed-cone convention: every real root of t ↦ p(te−x) is nonnegative."
+    },
+    {
+      "obj_id": "def:coordinates",
+      "verdict": "matched",
+      "note": "upperIdx lists all ten upper-triangular positions in lexicographic order; Fin.append concatenates the X entries, Z entries, and three y coordinates, giving the stated identification."
+    },
+    {
+      "obj_id": "def:angular-coordinates",
+      "verdict": "matched",
+      "note": "dVec is exactly θ ↦ (cos θ, sin θ, 0), with the auxiliary c and s notation unfolded."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:phi","verdict":"matched","note":"Unfolded with W=[[a,r^T],[r,T]] (a=W00, r_i=W_{i+1,0}, T=W_{i+1,j+1}), PhiMap gives (0,0)=tr(Q(y)T), (0,j+1)=-(r^TQ)_j=-∑_l r_l Q_{lj}, (i+1,0)=-(Qr)_i, and (i+1,j+1)=a·Q_{ij}. That is eq:Phi entry by entry. Qmat is exactly eq:Q (core line 1159). Lean defines the map on all of Mat 4, and on a non-symmetric W it ignores row 0's off-diagonal entries. On the paper's domain Sym^4 it is the same map, and its only use (pPoly) feeds it adj X with X symmetric, which is symmetric."},{"obj_id":"def:p","verdict":"matched","note":"pPoly x = det((det X)•Z − Φ_y(adj X)) with x=(X,Z,y)∈V=Sym4×Sym4×ℝ³ is literally eq:p. The companion e=(I_4,I_4,0) is eDir=(identity4,identity4,0), with identity4=⟨1,_⟩ in the self-adjoint submodule."},{"obj_id":"def:cone","verdict":"matched","note":"coneK = hyperbolicityCone pPoly eDir = {x | every real root of polynomialOnLine pPoly e (−x) is ≥ 0}. polynomialOnLine is the unique polynomial q with q(t)=p(−x+t e); it exists because pPoly is polynomial along lines. So the set is the paper's closed-cone convention K(p,e) = {x : every root of t↦p(te−x) is nonnegative} (core line 1136). That polynomial is never the zero fallback: p(e)=det(I−Φ_0(I))=1 because Q(0)=0. Pin ass:pin-1 is about the moment matrix and has no bearing on this definition."},{"obj_id":"def:coordinates","verdict":"matched","note":"outputCoords = Fin.append (upper entries of X) (Fin.append (upper entries of Z) y): 10+10+3 = 23 entries. upperIdx lists (0,0),(0,1),(0,2),(0,3),(1,1),(1,2),(1,3),(2,2),(2,3),(3,3), which is lexicographic order of (i,j) with i≤j. This is exactly the paper's identification of V with ℝ²³."},{"obj_id":"def:angular-coordinates","verdict":"matched","note":"dVec θ = ![cos θ, sin θ, 0] = d(θ)=(c,s,0). The anchored declaration realizes d(θ). c, s, w=e^{iθ} and k=(0,0,1) are plain abbreviations with no further content, and nothing here mis-renders them. Pin ass:pin-2 (finite trig sums with |ℓ|≤j) concerns another node and is not contradicted."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:lifting-functional,def:output,def:moment,def:moment-matrix,def:complex-trigonometric-polynomials] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:lifting-functional",
+      "verdict": "matched",
+      "note": "Evaluation identifies LiftSpace linearly and bijectively with the paper’s homogeneous function space E, so its real linear dual represents exactly the stated lifting functionals."
+    },
+    {
+      "obj_id": "def:output",
+      "verdict": "matched",
+      "note": "Fourier extraction represents the coordinate and Yθ functions exactly; the componentwise equalities are equivalent to all three paper output equations."
+    },
+    {
+      "obj_id": "def:moment",
+      "verdict": "matched",
+      "note": "IsTrigPolyLE 2 describes exactly T₂; the quadratic expression has homogeneous coordinate dependence and trigonometric degree at most seven, so extraction preserves the stated inequality for every q."
+    },
+    {
+      "obj_id": "def:moment-matrix",
+      "verdict": "matched",
+      "note": "The real basis has exactly the pinned order, and extraction preserves each f_a f_b L_ij entry; pencil symmetry makes the resulting 100-by-100 matrix symmetric without an additional restriction."
+    },
+    {
+      "obj_id": "def:complex-trigonometric-polynomials",
+      "verdict": "matched",
+      "note": "Exactly the pinned finite complex linear combination over integer frequencies −j through j, with coefficients independent of θ."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:lifting-functional","verdict":"matched","note":"LiftFunctional is the space of ℝ-linear maps on LiftSpace = Fin 22 → Fin 15 → ℝ. LiftSpace holds coefficients in the basis 1, cos kθ, sin kθ (k ≤ 7) for each of the 22 slice coordinates. evalLift is ℝ-linear (evalLift_add, evalLift_smul) and injective (evalLift_injective). By evalLift_range its range is exactly IsLiftFunction, which is the paper's 𝓔: functions linear homogeneous in the 22 coordinates with coefficients in T_7. So LiftSpace ≅ 𝓔 linearly, and linear functionals on LiftSpace correspond one-to-one with real linear functionals Λ on 𝓔. Applying Λ entrywise to vectors and matrices is carried by the ∀ i j / ∀ l clauses of the consumers."},{"obj_id":"def:output","verdict":"matched","note":"coordXElem i j and coordZElem i j are coefficientsOf applied to the coordinate functions sliceRawX a i j and sliceRawZ a i j. These are constant in θ and linear in a, so by coefficientsOf_realizes they represent the elements 𝒳_ij and 𝒵_ij of 𝓔. YplaneElem l represents Y_θ(η,ξ)_l = η·dVec θ + ξ·kVec, which is linear in (η,ξ). The three conjuncts Λ(𝒳)=X, Λ(𝒵)=Z and Λ(Y_θ(η,ξ))=y, taken entrywise, are exactly eq:output, with X, Z ∈ Sym 4 and y ∈ ℝ^3."},{"obj_id":"def:moment","verdict":"matched","note":"The condition quantifies over all q : Fin 20 → ℝ → ℝ with each q i in T_2 (the Causalean IsTrigPolyLE 2 predicate, i.e. real trigonometric polynomials of degree at most 2). quadraticFunctionElem q represents the element q(θ)ᵀ L_θ q(θ) of 𝓔: it is linear in the slice coordinates (pencilFromCoords_linear) and has degree at most 2+3+2 = 7 (pencil_entry_trig, trig_product). The conclusion 0 ≤ Λ(...) is eq:moment, both directions."},{"obj_id":"def:moment-matrix","verdict":"matched","note":"momentBasis is (1, cos, sin, cos 2θ, sin 2θ), the real functions required by ass:pin-1. The matrix is indexed by Fin 20 × Fin 5, i.e. the pairs (i,a) with 1 ≤ i ≤ 20 and 1 ≤ a ≤ 5. Entry ((i,a),(j,b)) is Λ of the coefficient element of f_a f_b (L_θ)_ij, which has degree at most 7 and is linear in the coordinates, so it lies in 𝓔. This is exactly eq:moment-matrix. Symmetry, i.e. H ∈ 𝕊^100, follows from the symmetry of L_θ and is a property, not a constraint on the definition."},{"obj_id":"def:complex-trigonometric-polynomials","verdict":"matched","note":"The Lean asks for coefficients c : ℤ → ℂ, independent of θ, with f θ = Σ_{ℓ ∈ Icc (-j) j} c ℓ · exp(iℓθ) for all θ. This is a finite ℂ-linear combination of e^{iℓθ} for -j ≤ ℓ ≤ j, exactly the reading pinned by ass:pin-2. Both directions hold: values of c outside the index range are irrelevant."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:c,sym:s,sym:\tau,sym:N_j,sym:a] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:c","verdict":"matched","note":"Basic.lean:93 defines cosine as Real.cos; Helpers/Gram.lean:27–30 establishes both bounds for every real angle, realizing [-1,1]."},{"obj_id":"sym:s","verdict":"matched","note":"Basic.lean:94 defines sine as Real.sin; Helpers/Gram.lean:27–30 establishes both bounds for every real angle, realizing [-1,1]."},{"obj_id":"sym:\\tau","verdict":"matched","note":"Helpers/MatchingRotation.lean:71–76 supplies a real planar coefficient τ with the explicit constraint 0 < τ, exactly the stated positive-real space."},{"obj_id":"sym:N_j","verdict":"matched","note":"Helpers/MatchingRotation.lean:23–28 defines matchingRow as a row of the complex product S R₀, with j : Fin 3 and output Fin 2 → ℂ; these faithfully index three complex two-entry rows."},{"obj_id":"sym:a","verdict":"matched","note":"PhiMap uses a real matrix entry for the block scalar; rotationA returns ℂ; momentEntryElem binds a : Fin 5, faithfully reindexing the five moment basis elements."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:c","verdict":"matched","note":"`cosine θ := Real.cos θ` (Basic.lean:93) is a computed real-valued def, and `angular_bounds` (Helpers/Gram.lean:27-28) proves -1 ≤ cosine θ ≤ 1 for every θ, so the range is pinned to [-1,1]."},{"obj_id":"sym:s","verdict":"matched","note":"`sine θ := Real.sin θ` (Basic.lean:94) is a computed real-valued def, and `angular_bounds` (Gram.lean:29) proves -1 ≤ sine θ ≤ 1, so the range is pinned to [-1,1]."},{"obj_id":"sym:\\tau","verdict":"matched","note":"`matching_polar_decomposition` (MatchingRotation.lean:71-76) binds τ : ℝ existentially with the conjunct 0 < τ alongside z = Yplane α τ ρ. A real carrier with a strict-positivity clause pins τ to (0,∞)."},{"obj_id":"sym:N_j","verdict":"matched","note":"`matchingRow S α τ ρ (j : Fin 3) : Fin 2 → ℂ` (MatchingRotation.lean:27) is a computed def giving one complex 1×2 row for each of the three indices j, matching ℂ^{1×2} for 1 ≤ j ≤ 3. Fin 3 is the 0-based form of {1,2,3}."},{"obj_id":"sym:a","verdict":"matched","note":"All three uses are pinned by construction. Block scalar: `PhiMap` sets `a := W 0 0` with W : Mat 4 real, so a is in ℝ (Basic.lean:59). Rotation coefficient: `rotationA g h α θ : ℂ` is a computed complex def (MatchingRotation.lean:53). Moment index: `momentEntryElem` takes a : Fin 5 (Moment.lean:49), the 0-based form of {1,…,5}, indexing the five-element basis."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:b,sym:\delta,sym:b_j,sym:a_j] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b","verdict":"matched","note":"rotationB returns a complex coefficient; momentEntryElem binds b : Fin 5, faithfully indexing the five basis elements by zero-based coordinates."},{"obj_id":"sym:\\delta","verdict":"matched","note":"matchingDelta computes Complex.normSq g + Complex.normSq h, which is nonnegative by construction."},{"obj_id":"sym:b_j","verdict":"matched","note":"matchingColumn has j : Fin 4 and returns Fin 3 → ℝ, extracting the four realification columns as real three-vectors."},{"obj_id":"sym:a_j","verdict":"matched","note":"slice_quadratic_expansion universally binds a : Fin 4 → Fin 4 → ℝ without restrictions, representing arbitrary four real four-vectors."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b","verdict":"matched","note":"The paper uses b for two things, and each has its own tagged member. rotationB (MatchingRotation.lean:58) is a def returning ℂ, so the rotation coefficient lies in ℂ by construction. In momentEntryElem (Moment.lean:49) the moment index b is a binder of type Fin 5, which is exactly a five-element index set ({1,…,5} counted from 0). Both readings land in the stated spaces."},{"obj_id":"sym:\\delta","verdict":"matched","note":"matchingDelta (MatchingRotation.lean:50) is a def computing normSq g + normSq h : ℝ. A sum of two squared norms is nonnegative, so its range is [0,∞) by construction."},{"obj_id":"sym:b_j","verdict":"matched","note":"matchingColumn C j θ (LiftCertificate.lean:43) takes j : Fin 4 and returns Fin 3 → ℝ, defined as column j of realify (C θ). That gives four real vectors in ℝ^3, one for each j = 1..4, as the paper states."},{"obj_id":"sym:a_j","verdict":"matched","note":"In slice_quadratic_expansion (CertificateAlgebra.lean:19), a has type Fin 4 → Fin 4 → ℝ and is universally quantified. That is four arbitrary vectors in ℝ^4 indexed by j ∈ Fin 4, matching the paper's arbitrary top-block vectors a_j ∈ ℝ^4 for 1 ≤ j ≤ 4."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:phi-quadratic,def:slice-pencil,def:polarization,def:weighted-pairing,def:lifting-space] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:phi-quadratic",
+      "verdict": "matched",
+      "note": "For arbitrary y, u and symmetric W, unfolding phiQuadraticForm gives exactly the stated trace identity; Ju is [u′ | −u₀I₃]."
+    },
+    {
+      "obj_id": "def:slice-pencil",
+      "verdict": "matched",
+      "note": "Unfolding slicePencilRaw and sliceB gives precisely the displayed block matrix, with four vertically stacked B(r_j) blocks and symmetric matrix arguments."
+    },
+    {
+      "obj_id": "def:polarization",
+      "verdict": "matched",
+      "note": "QuadraticMap.polar unfolds to Q(y+z)−Q(y)−Q(z); multiplication by 1/2 gives the stated polarization, bilinear and symmetric with Qpol y y = Qmat y."
+    },
+    {
+      "obj_id": "def:weighted-pairing",
+      "verdict": "derived",
+      "note": "The formulas agree on symmetric S, but the Lean definition has a strictly larger domain: Mat 3 also admits nonsymmetric S, such as E₀₁. Restrict S to Sym3 and coerce it in the trace formula."
+    },
+    {
+      "obj_id": "def:lifting-space",
+      "verdict": "matched",
+      "note": "The coefficient model is equivalent to the specified function space: evalLift uses the 22 independent slice coordinates and the 15-element basis of T₇; evalLift_range and evalLift_injective establish both directions and uniqueness."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:phi-quadratic","verdict":"matched","note":"Unfolded Ju (Basic.lean:133) gives J_u=(u' | -u0 I_3), which matches eq:BJ. Qmat is Q(y) and PhiMap is def:phi. The Lean states u^T Φ_y(W) u = tr(J_u W J_u^T Q(y)) for every y∈R^3, u∈R^4 and W∈Sym^4 (selfAdjoint submodule), with no extra hypotheses. This is the displayed identity eq:Phi-quadratic exactly."},{"obj_id":"def:slice-pencil","verdict":"matched","note":"slicePencilRaw = fromBlocks (1_4 ⊗ 𝒳) 𝓑 𝓑^T 𝒵. The Kronecker product (1:Mat 4)⊗𝒳 indexed by Fin4×Fin4 is the block diagonal I_4⊗𝒳. sliceB stacks Bskew(r_j) vertically in block j (row index (j,i)), with r_j = factorColumn = the columns of the realified F_θ(η,ξ). Bskew is [[0, r^T], [-r, 0_3]], as in eq:BJ. 𝒳 and 𝒵 range over Sym4. The SliceIndex ordering (Fin4×Fin4)⊕Fin4 matches the displayed block layout, and slicePencil20 reindexes it to 20×20."},{"obj_id":"def:polarization","verdict":"matched","note":"QuadraticMap.polar f x y := f(x+y) - f x - f y holds for any function f. So Qpol y z = ½(Q(y+z) - Q(y) - Q(z)) with Q = Qmat, which is exactly the paper's definition. Q(y,y) = Q(y) follows by the quadratic homogeneity of Qmat, which is a consequence and not part of the definition."},{"obj_id":"def:weighted-pairing","verdict":"matched","note":"tr(F̃^T S H̃) = Σ_cols (Re f_j^T S Re h_j + Im f_j^T S Im h_j) = Re tr(F^* S H) for real S. The Lean defines the right-hand form with realify's interleaved Re/Im columns, which matches the paper's \\widetilde F. The domain S : Mat 3 is larger than S^3, but the formula agrees with the paper's on S^3, so the definition is a harmless extension."},{"obj_id":"def:lifting-space","verdict":"matched","note":"LiftSpace = Fin 22 → Fin 15 → ℝ is a coefficient model of 𝓔: 22 slice coordinates (sliceCoords: upper triangles of 𝒳 and 𝒵 plus η, ξ), each with a coefficient vector in the 15-dimensional basis of 𝒯_7 (trigBasis7). The development proves that evalLift has range exactly IsLiftFunction, which is the paper's function-space condition (evalLift_range). It also proves evalLift is injective (coefficientsOf_eval together with sliceCoords_surjective) and that the dimension is 330 (liftSpace_finrank). So the model is linearly isomorphic to the paper's 𝓔, and coordinate-form consumers see the same space."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:A_\nu,sym:B_j,sym:r_j,sym:\mathcal T_j,sym:f_a] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:A_\\nu",
+      "verdict": "matched",
+      "note": "outputMatrix defines 23 fixed real 100×100 matrices; exact_semidefinite_lift explicitly requires symmetry. The computed matrices are symmetric by Coordinates.lean:166 via momentMatrixH_isSymm and reindexing."
+    },
+    {
+      "obj_id": "sym:B_j",
+      "verdict": "matched",
+      "note": "auxiliaryMatrix defines 307 fixed real 100×100 matrices; exact_semidefinite_lift explicitly requires symmetry. The computed matrices are symmetric by Coordinates.lean:170 via momentMatrixH_isSymm and reindexing."
+    },
+    {
+      "obj_id": "sym:r_j",
+      "verdict": "matched",
+      "note": "factorColumn takes j : Fin 4 and returns Fin 3 → ℝ, computing exactly the four columns of the realified angular factor."
+    },
+    {
+      "obj_id": "sym:\\mathcal T_j",
+      "verdict": "matched",
+      "note": "IsTrigPolyLE unfolds to existence of real cosine and sine coefficients for frequencies 0 through j, exactly the stated real span; the zero-frequency cosine supplies the constant and the zero-frequency sine vanishes."
+    },
+    {
+      "obj_id": "sym:f_a",
+      "verdict": "matched",
+      "note": "momentBasis computes the five functions 1, cos θ, sin θ, cos(2θ), sin(2θ), each belonging to the stated T₂ space by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:A_\\nu","verdict":"matched","note":"The type of outputMatrix, Fin 23 → Mat 100 = Matrix (Fin 100)(Fin 100) ℝ, gives 1≤ν≤23 and size 100. Symmetry is shown by outputMatrix_isSymm (Coordinates.lean:166, via momentMatrixH_isSymm and submatrix) and is also stated as the conjunct (∀ ν, (A ν).IsSymm) in exact_semidefinite_lift (TMain.lean:25). Together these pin Sym^100 exactly."},{"obj_id":"sym:B_j","verdict":"matched","note":"The type of auxiliaryMatrix, Fin 307 → Mat 100, gives 1≤j≤307. Symmetry is shown by auxiliaryMatrix_isSymm (Coordinates.lean:170) and is also the conjunct (∀ j, (B j).IsSymm) in exact_semidefinite_lift (TMain.lean:26). Together these pin Sym^100 exactly."},{"obj_id":"sym:r_j","verdict":"matched","note":"factorColumn θ η ξ (j : Fin 4) : Fin 3 → ℝ is defined as the j-th column of realify (Fθ θ η ξ), a 3×4 real matrix whose columns are interleaved real and imaginary parts (Basic.lean:102,140). It is a computed def with range ℝ^3 and index range 1≤j≤4, as the space requires."},{"obj_id":"sym:\\mathcal T_j","verdict":"matched","note":"IsTrigPolyLE is an abbrev for Causalean IsTrigPolyLE n f := ∃ a b : ℕ → ℝ, ∀ t, f t = ∑_{k=0}^{n}(a k cos(k t) + b k sin(k t)). This is exactly the real span of {1, cos θ, sin θ, …, cos(nθ), sin(nθ)}: the k=0 sine term vanishes, and both inclusions are immediate."},{"obj_id":"sym:f_a","verdict":"matched","note":"momentBasis : Fin 5 → ℝ → ℝ is the def ![1, cos, sin, cos 2θ, sin 2θ], matching the ordered T_2 basis f_1..f_5 and the pinned reading ass:pin-1 (MomentBasisPinned). Each entry lies in T_2 by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Equivalent in both directions: fixed real symmetric 100×100 coefficient matrices precede quantification over all ambient triples; the lexicographic 23-coordinate map and closed cone match the frozen definitions, and 307 real auxiliaries give exactly the homogeneous positive-semidefinite pencil, with no exclusion of singular X."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean and the paper are logically equivalent. Unfolded definitions: A : Fin 23 → Mat 100 and B : Fin 307 → Mat 100 with IsSymm on each, which is exactly A_ν, B_j ∈ Sym^100. V = Sym4 × Sym4 × ℝ^3, with Sym 4 the real self-adjoint submodule, which is the paper's 𝒱. coneK = hyperbolicityCone pPoly eDir = {x | every real root of polynomialOnLine pPoly e (-x) is ≥ 0}. pPoly is det((det X)Z − Φ_y(adj X)), matching def:p, and eDir = (I4, I4, 0). pPoly is polynomial along every line, and pPoly(te) = t^20 ≠ 0 because Q(0) = 0. So polynomialOnLine is the nonzero polynomial t ↦ p(te − x), and its real roots are the roots of t ↦ p(te − x). That is K(p,e) as in def:closed-cone and def:cone. The quantifier runs over all of V, so singular X is included. outputCoords lists the upper-triangular entries of X in lexicographic order (upperIdx gives (0,0),(0,1),…,(3,3)), then those of Z, then y. That matches def:coordinates, with x_ν reindexed to Fin 23. Mathlib's PosSemidef bundles IsHermitian, i.e. symmetry over ℝ. The pencil is a sum of symmetric matrices, so this matches ⪰ 0 on Sym^100. The ∃A,B ∀x ∃v quantifier order matches the paper's: the matrices are fixed and v may depend on x. The pinned reading ass:pin-1 constrains only the proof (the H(Λ) indexing), not this statement."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:lift =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:lift",
+      "verdict": "matched",
+      "note": "Equivalent in both directions: the 22×15 coefficient model is linearly isomorphic to E, Fourier extraction represents the output and moment entries exactly, and PosSemidef expresses positivity of the prescribed real 100×100 matrix with the pinned five-function basis; coneK uses the stated polynomial, direction, and nonnegative-root convention."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:lift","verdict":"matched","note":"The Lean statement and the paper are logically equivalent. Lean says `(X,Z,y) ∈ coneK ↔ ∃ Λ : LiftSpace →ₗ[ℝ] ℝ, OutputEquations Λ X Z y ∧ (momentMatrixH Λ).PosSemidef`, for every (X,Z,y) in Sym4×Sym4×ℝ³. The ambient type V is exactly Sym4×Sym4×(Fin 3→ℝ), and coneK is closedCone pPoly eDir, the paper's K (def:cone). OutputEquations states eq:output entrywise: Λ(𝒳)=X, Λ(𝒵)=Z and Λ(Y_θ(η,ξ))=y. momentMatrixH is the real matrix indexed by Fin 20 × Fin 5 with entries Λ(f_a f_b · pencil_ij), which is the pinned reading ass:pin-1 (H(Λ) in 𝕊^100, indexed by (i,a) with i ≤ 20 and a ≤ 5). PosSemidef is ⪰0. The space 𝓔 is modelled by coefficients (Fin 22 → Fin 15 → ℝ), i.e. 22 linearly independent slice coordinates (10 X entries + 10 Z entries + η + ξ) times a 15-element T_7 trig basis. These products are linearly independent, so the coefficient map is injective and real linear functionals on the model are exactly those on 𝓔. That gives equivalence in both directions; whether the coefficient model is faithful is for the def:lifting-space and def:moment-matrix targets. No extra hypotheses, and the quantifier structure (∃Λ) matches."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:weighted-pairing =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:weighted-pairing","verdict":"matched","note":"Sym3 is exactly the real symmetric 3×3 matrices, without positivity restrictions; expanding the interleaved realification gives Σ_{a,i,j} Sᵢⱼ(Re Fᵢₐ Re Hⱼₐ + Im Fᵢₐ Im Hⱼₐ), exactly Re tr(F*SH), so both displayed formulas agree on the full stated domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:weighted-pairing","verdict":"matched","note":"The Lean definition equals tr(realify(F)ᵀ·S·realify(H)). Here realify F is the 3×4 real matrix (Re f1, Im f1, Re f2, Im f2), which is exactly the core's \\widetilde F. Sym3 is selfAdjoint.submodule ℝ (Mat 3), which is the set of real symmetric 3×3 matrices, so it is 𝕊^3 with no PSD restriction. Because S is real, tr(F̃ᵀSH̃) = Σ_c (Re f_cᵀ S Re h_c + Im f_cᵀ S Im h_c) = Re Σ_c f_c^* S h_c = Re tr(F^*SH). So the value matches both of the paper's expressions on the full domain 𝕊^3 × ℂ^{3×2} × ℂ^{3×2}. The pinned readings (pin-1 and pin-2) concern other nodes and do not affect this definition."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lem:matching =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"lem:matching","verdict":"matched","note":"Equivalent in both directions: arbitrary real symmetric S, precisely the stated nondegeneracy of z, one matrix function C chosen before θ,η,ξ, the pinned finite complex Fourier expansion with frequencies −2 through 2, and both identities with the specified realification, pairing, polarization, and angular factor."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:matching","verdict":"matched","note":"The Lean statement and the paper's lemma are logically equivalent. Hypotheses: S is a 3x3 real symmetric matrix (Sym3 is the self-adjoint submodule of Mat 3 over ℝ). The nondegeneracy condition MatchingNondegenerate z is (z 0, z 1) ≠ (0,0), which is (z_1,z_2) ≠ (0,0) with 0-based indices. Conclusion: there exists C : ℝ → ℂ^{3×2}. Each entry of C is a trigonometric polynomial of degree at most 2, with complex coefficients c ℓ that do not depend on θ, summed over a finite range ℓ ∈ [-2,2]; this matches the binding pin ass:pin-2. For all θ, η, ξ the conclusion gives two identities. First, realify(C θ)·realify(C θ)ᵀ = Qmat z. Here realify takes the columns as (Re f1, Im f1, Re f2, Im f2), as in def:realification, and Qmat matches def:q entrywise. Second, weightedPairing S (Fθ θ η ξ) (C θ) = tr(S·Qpol(Yplane θ η ξ, z)). weightedPairing is tr(F̃ᵀ S H̃), as in def:weighted-pairing. Fθ = η U(θ) + ξ V0, with Umat and V0 entrywise equal to eq:U (w = e^{iθ}). Yplane = η d(θ) + ξ k, with d = (cos, sin, 0) and k = e3. Qpol = ½·QuadraticMap.polar Qmat = ½(Q(y+z) − Q(y) − Q(z)), as in def:polarization. The quantifier order is ∃C ∀θ η ξ, as in the paper. No extra hypotheses."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
