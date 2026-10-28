@@ -1,0 +1,166 @@
+\section{Introduction}\label{sec:introduction}
+
+Milnor $K$-theory records multiplication in a field together with relations
+arising from addition. A reconstruction problem asks whether this
+information determines the field, and whether isomorphisms of the
+invariant come from field isomorphisms. We study this question in
+characteristic $p$ using only the first two Milnor $K$-groups modulo $p$.
+
+Fix a prime $p$ and write $\Lambda=\Fp$. For a field $F$ of
+characteristic $p$, set
+\[
+ V_F=F^\times/(F^\times)^p=\KM_1(F)/p.
+\]
+We write $[f]$ for the class of $f\in F^\times$ and use additive
+notation in $V_F$: thus $[f]+[g]=[fg]$, $r[f]=[f^r]$ for
+$r\in\Z$, and $[1]=0$. Define the Steinberg relation subspace
+\[
+ R_F=\Span_{\Lambda}
+       \{[f]\otimes[1-f]:f\in F\setminus\{0,1\}\}
+       \subset V_F\otimes_{\Lambda}V_F.
+\]
+The quotient $W_F=(V_F\otimes_{\Lambda}V_F)/R_F$ is
+$\KM_2(F)/p$ by the tensor presentation of Milnor $K$-theory
+\cite[Section~1]{Milnor1970}. We denote the image of
+$[f]\otimes[g]$ in $W_F$ by $\{f,g\}_F$.
+
+\noindent\textit{Remark (notation).} $F$ denotes the characteristic-$p$ field to which the local field-theoretic definitions or arguments are applied. In Lemma~\ref{lem:p-degree}, Lemma~\ref{lem:zero-symbol}, Lemma~\ref{lem:affine-symbol}, Lemma~\ref{lem:perfect-core}: $F/\kappa$ is finitely generated over an algebraically closed field $\kappa$ of characteristic $p$; no positive lower bound on $\trdeg(F/\kappa)$ is imposed. In Lemma~\ref{lem:p-basis}: $F$ is any field of characteristic $p$; finiteness of $[F:F^p]$ is assumed only for the assertions explicitly conditional on finite degree. In Proposition~\ref{prop:intersection}: $[F:F^p]<\infty$. In Lemma~\ref{lem:scalar-line}: $F\ne F^p$; finite power degree and an algebraically closed base are not assumed. $V_F=F^\times/(F^\times)^p$ has additive operations $[f]+[g]=[fg]$ and $r[f]=[f^r]$, with zero $[1]$, while its underlying set is $\PP_{F^p}(F)$ via $[f]\mapsto F^pf$, whose projective lines come from two-dimensional $F^p$-subspaces of $F$. $g$ is a local nonzero field element; in the class and Milnor-symbol notation it ranges independently over $F^\times$. In Lemma~\ref{lem:perfect-core}: For a given integer $m\ge1$, $g\in F$ is a hypothetical element satisfying $f=g^{p^m}$; it is nonzero because $f\notin\kappa$, and its choice may depend on $m$. For $f\in F^\times$, $[f]$ is its class modulo $(F^\times)^p$ and, under the identification of the underlying set of $V_F$ with $\PP_{F^p}(F)$, represents the one-dimensional $F^p$-subspace $F^p f$; $[1]$ is the zero of the additive group $V_F$. $f$ is a local nonzero element of the field whose multiplicative class is being used. In Lemma~\ref{lem:zero-symbol}: In the logarithmic-derivative pairing, $f$ ranges over $F^\times$; when checking a Steinberg pair $([f],[1-f])$, it ranges over $F\setminus\{0,1\}$. In Theorem~\ref{thm:main}: In the induced-map formula and the comparison of semilinear maps $w\mapsto S(fw)$ and $w\mapsto S(f)S(w)$, $f\in K^\times$. In Lemma~\ref{lem:perfect-core}: In the proof, $f\in F\setminus\kappa$ is chosen, hence is nonzero and transcendental over $\kappa$, and is completed to a transcendence basis. The letter $r$ is local notation; in the convention $r[f]=[f^r]$ it is an integer, whose action on $V_F$ depends only on its residue in $\Fp$. In Lemma~\ref{lem:p-basis}: In the definition of a $p$-independent list $s_1,\ldots,s_r$, $r$ is the finite length of the list and $[C(s_1,\ldots,s_r):C]=p^r$. In Proposition~\ref{prop:intersection}: In the uniqueness argument, $r$ is a candidate integer exponent with $1\le r<p$, satisfying $U^r=h+jX^r$ with $h,j\in C$; the analogous argument applies to $V$. In Lemma~\ref{lem:scalar-line}: $r\in\Fp^\times$ is the scalar multiplying $V_F$; its powers in the proof use its unique integer representative $1\le r<p$. In Proposition~\ref{prop:lines}: In the inverse-map argument, $r\in\Fp^\times$ is chosen so that $r\Psi^{-1}$ maps projective lines into projective lines. In Theorem~\ref{thm:main}: In the injectivity argument, $r\in\Fp^\times$ is the scalar in $\beta_*=r\alpha_*$. $V\in C(Y)^\times$ satisfies $[V]\notin\Fp[Y]$, equivalently $V\notin C^\times Y^i$ for every integer $0\le i<p$. In Proposition~\ref{prop:lines}: With $H=K^p$ and $C=L^p$, $V$ is a representative in $L^\times$ of $\Theta([y+b])$, where $b\in H^\times$ and $[x],[y]$ is the chosen edge. It is determined only up to multiplication by $C^\times$.
+
+
+Let $\Isom_{\mathrm M}(V_K,V_L)$ be the set of
+$\Lambda$-linear isomorphisms $\Theta:V_K\to V_L$ satisfying
+\[
+                 (\Theta\otimes\Theta)(R_K)=R_L.
+\]
+We call these isomorphisms \emph{compatible}.
+Equivalently, $\Theta$ extends to an isomorphism of the degree-one and
+degree-two groups respecting their product pairing. Scalar multiplication
+by $\Lambda^\times$ acts on this set. For specified subfields
+$k\subset K$ and $l\subset L$, write $\Isom(K,k;L,l)$ for the
+field isomorphisms $\alpha:K\to L$ with $\alpha(k)=l$.
+Such an isomorphism induces $\alpha_*([f])=[\alpha(f)]$ and
+carries $R_K$ onto $R_L$.
+
+\noindent\textit{Remark (notation).} $k$ denotes the specified source subfield $k\subset K$ in the base-field notation and a basis index in the notation $s_k$. In Theorem~\ref{thm:main}, Proposition~\ref{prop:lines}: $k$ is algebraically closed of characteristic $p$, and $K/k$ is finitely generated with $\trdeg(K/k)\ge2$. In Lemma~\ref{lem:p-basis}: $k$ in $s_k$ is an integer basis index with $1\le k\le e$; the intersection assertion is for $j\ne k$. $l\subset L$ is the specified target subfield in $\Isom(K,k;L,l)$. In Theorem~\ref{thm:main}, Proposition~\ref{prop:lines}: $l$ is algebraically closed of characteristic $p$, and $L/l$ is finitely generated with $\trdeg(L/l)\ge2$. $V_K=K^\times/(K^\times)^p$ has its additive $\Lambda$-vector-space structure $[f]+[g]=[fg]$, and its underlying set is $\PP_{K^p}(K)$ via $[f]\mapsto K^pf$, so its projective lines are the point sets of two-dimensional $K^p$-subspaces of $K$. $V_L=L^\times/(L^\times)^p$ has its additive $\Lambda$-vector-space structure $[f]+[g]=[fg]$, and its underlying set is $\PP_{L^p}(L)$ via $[f]\mapsto L^pf$, so its projective lines are the point sets of two-dimensional $L^p$-subspaces of $L$. $\alpha:K\to L$ is a field isomorphism. In Theorem~\ref{thm:main}: As an argument of the canonical map, $\alpha\in\Isom(K,k;L,l)$, so $\alpha(k)=l$.
+
+
+\begin{theorem}\label{thm:main}
+Let $K/k$ and $L/l$ be finitely generated extensions of algebraically
+closed fields of characteristic $p$, with
+\[
+              \trdeg(K/k)\ge2,\qquad \trdeg(L/l)\ge2.
+\]
+The canonical map
+\[
+ \Isom(K,k;L,l)\longrightarrow
+ \Isom_{\mathrm M}(V_K,V_L)/\Lambda^\times,
+ \qquad \alpha\longmapsto[\alpha_*],
+\]
+is bijective.
+\end{theorem}
+
+The invariant therefore determines the field and its isomorphisms, with
+exactly the scalar identification in the displayed target. The argument
+also recovers the named algebraically closed base from the field itself.
+
+\subsection{Context and method}
+
+Bogomolov and Tschinkel developed a reconstruction method that recovers
+projective lines from multiplication and algebraic dependence, and applied
+it to Milnor $K$-theory in characteristic zero
+\cite{BogomolovTschinkel2009}. Cadoret and Pirutka extended reconstruction
+from the multiplicative group modulo constants and algebraic dependence
+to finitely generated regular extensions of perfect fields
+\cite[Theorem~4]{CadoretPirutka2021}. For algebraically closed or finite
+base fields, they also obtained reconstruction from suitable quotients of
+the Milnor $K$-ring \cite[Corollary~10]{CadoretPirutka2021}.
+
+Reconstruction from other reduced forms of $K$-theory has also been studied.
+For a prime $\ell$ different from the characteristic, Topaz recovers
+perfect closures from mod-$\ell$ data together with rational subgroups
+for function fields over algebraically closed bases in transcendence
+degree at least five \cite[Theorem~B]{Topaz2016}.
+His work on rational Milnor $K$-theory reconstructs perfect closures for
+fields of absolute transcendence degree at least five
+\cite[Main Theorem]{Topaz2023}. Theorem~\ref{thm:main} concerns reduction
+modulo the characteristic and starts directly from $V_F$ and $R_F$;
+neither rational subgroups nor algebraic-dependence data are supplied.
+
+The geometric framework of our proof has close predecessors. A differential
+approach to line recovery appears in an argument of Rovinsky recorded by
+Bogomolov and Tschinkel
+\cite[Proposition~9]{BogomolovTschinkel2012}. In positive
+characteristic, Cadoret and Pirutka recover projective lines over the
+subfield of $p$th powers after a common power correction, using a
+differential intersection calculation
+\cite[Section~1.3, Lemma~23, and Proposition~27]{CadoretPirutka2021}.
+Here the intersection calculation involves only degree-$p$ extensions
+of the subfield of $p$th powers.
+The resulting intersection statement, Proposition~\ref{prop:intersection},
+and the passage from vanishing symbols to these subextensions are given
+complete elementary proofs below. These are the two structural ingredients
+that allow the degree-two mod-$p$ relations to supply the required
+projective geometry.
+
+\subsection{Outline of the proof}
+
+Put $C_F=F^p$. Since $(F^\times)^p=C_F^\times$, the underlying
+set of $V_F$ is the projective point set $\PP_{C_F}(F)$.
+Its point $[1]$ is the zero of the group $V_F$; its projective lines
+are the sets of one-dimensional subspaces in two-dimensional
+$C_F$-subspaces of $F$. The field degree is finite:
+\[
+                         [F:C_F]=p^{\trdeg(F/\kappa)}
+\]
+for $F/\kappa$ as in the theorem. This is a projective geometry over
+$C_F$, not over the original constant field $\kappa$.
+
+\noindent\textit{Remark (notation).} $C$ is the scalar field specified in the local field or vector-space setting. In Lemma~\ref{lem:p-degree}, Lemma~\ref{lem:p-basis}, Lemma~\ref{lem:zero-symbol}, Lemma~\ref{lem:affine-symbol}, Proposition~\ref{prop:intersection}, Lemma~\ref{lem:scalar-line}: $C=F^p$. In Theorem~\ref{thm:main}, Proposition~\ref{prop:lines}: $C=L^p$, the power subfield of the target field $L$. In Proposition~\ref{prop:projective-lift}: $C$ is an arbitrary field over which $E'$ is a finite-dimensional vector space of dimension at least three; no power-subfield interpretation is imposed.
+
+
+The first step constrains pairs with vanishing symbol.
+If $s\notin C_F$ and $\{s,t\}_F=0$, then $t\in C_F(s)$.
+To prove this implication, consider a $p$-independent pair $s,t$, meaning
+that $[C_F(s,t):C_F]=p^2$. Extend it to a monomial basis and take the
+determinant of two logarithmic derivatives. This
+pairing kills Steinberg relations and is nonzero on the independent
+pair. Section~\ref{sec:symbols} supplies the details.
+
+\noindent\textit{Remark (notation).} $s$ denotes a local field element, with its field and restrictions specified by the adjunction, pair, or projective point in which it occurs. In Lemma~\ref{lem:p-basis}: $s\in F\setminus M$, where $C\subseteq M\subseteq F$, is the element in the simple adjunction $M(s)/M$. In Lemma~\ref{lem:zero-symbol}: $s\in F^\times$, and the implication has antecedent $s\notin C$. In the contrapositive proof, $t\notin C(s)$, so $s,t$ is a $p$-independent pair used to choose $D_s,D_t$. In Proposition~\ref{prop:lines}: $s\in K^\times$ represents a source projective point; multiplication by $s^{-1}$ takes the line joining $[s],[t]$ to a line through $[1]$. $t$ denotes an element of the field specified by its local pair, affine expression, or coordinate chart. In Lemma~\ref{lem:zero-symbol}: $t\in F^\times$. In the contrapositive proof, $s\notin C$ and $t\notin C(s)$, so the pair $s,t$ is $p$-independent and is extended to the basis defining $D_s,D_t$. In Lemma~\ref{lem:affine-symbol}: $t\in F^\times$ and $c+dt\ne0$, where $c,d\in C^\times$; no $p$-independence premise is imposed. In Proposition~\ref{prop:lines}: In the line joining $[s],[t]$, $t\in K^\times$ is a representative of a source projective point, and multiplication by $s^{-1}$ translates this line to one through $[1]$. In Proposition~\ref{prop:projective-lift}: $t\in H$ is an arbitrary affine coordinate in the lines $(t,t+a)$ and $(t,at)$; it may be zero.
+
+
+The fields $C_F(s)$ need not themselves be two-dimensional over $C_F$,
+so this implication does not yet recover projective lines. The key
+calculation in Section~\ref{sec:intersection} uses intersections of
+two multiplicative translates of such subfields. For a $p$-independent
+pair $X,Y$, suppose $U\in C_F(X)^\times$ and
+$V\in C_F(Y)^\times$ are not scalar multiples of powers of $X,Y$,
+respectively. A nonzero element of
+\[
+             X\,C_F(Y/X)\ \cap\ U\,C_F(V/U)
+\]
+forces, for a unique $1\le n<p$,
+\[
+                    U^n\in C_F+C_FX^n,
+                    \qquad V^n\in C_F+C_FY^n.
+\]
+Euler derivations give this common exponent and show that either
+inclusion determines it.
+
+\noindent\textit{Remark (notation).} $X$ is a nonzero element of the locally specified ambient field, used through its projective class $[X]$. In Proposition~\ref{prop:intersection}: $X\in F^\times$ and $[C(X,Y):C]=p^2$. In Proposition~\ref{prop:lines}: $X\in L^\times$ represents $\Theta([x])$ for a nonzero vertex $[x]\in V_K$, with $C=L^p$. For an edge $[x],[y]$, $C(X)\ne C(Y)$ and $X,Y$ are $p$-independent over $C$. The representative is determined only up to $C^\times$. $Y$ is a nonzero element of the locally specified ambient field, used through its projective class $[Y]$. In Proposition~\ref{prop:intersection}: $Y\in F^\times$ and $[C(X,Y):C]=p^2$. In Proposition~\ref{prop:lines}: $Y\in L^\times$ represents $\Theta([y])$ for a nonzero vertex $[y]\in V_K$, with $C=L^p$. For an edge $[x],[y]$, $C(X)\ne C(Y)$ and $X,Y$ are $p$-independent over $C$. The representative is determined only up to $C^\times$. $U\in C(X)^\times$ satisfies $[U]\notin\Fp[X]$, equivalently $U\notin C^\times X^i$ for every integer $0\le i<p$. In Proposition~\ref{prop:lines}: With $H=K^p$ and $C=L^p$, $U$ is a representative in $L^\times$ of $\Theta([x+a])$, where $a\in H^\times$ and $[x],[y]$ is the chosen edge. It is determined only up to multiplication by $C^\times$.
+
+
+Section~\ref{sec:lines} produces the required intersections from
+Steinberg relations. Uniqueness propagates the exponent across a
+connected graph, giving one scalar $n$ for which $n\Theta$ preserves
+every projective line. Applying the argument to the inverse, and using
+the fact that no nontrivial scalar preserves projective lines, yields
+preservation in both directions. Section~\ref{sec:fields} then proves
+the needed projective lifting theorem and uses the multiplicative group
+law to turn the normalized semilinear lift into a field isomorphism.
+Finally, the identity
+$\bigcap_{m\ge1}F^{p^m}=\kappa$ recovers the original base and
+completes the theorem.
+
+\noindent\textit{Remark (notation).} $n$ denotes a nonzero power correction modulo $p$, represented by its unique integer in $\{1,\ldots,p-1\}$ when used as an exponent. In Proposition~\ref{prop:intersection}: $n$ is the unique integer $1\le n<p$ such that $U^n\in C+CX^n$ and $V^n\in C+CY^n$; either inclusion determines it uniquely, and both coefficients in each inclusion are nonzero. In Proposition~\ref{prop:lines}, Theorem~\ref{thm:main}: $n\in\Fp^\times$ is the unique scalar such that $\Psi=n\Theta$ sends every projective line over $K^p$ onto a projective line over $L^p$. In the local power calculations its integer representative is used; the scalar is common to all vertices and all affine coefficients.
+

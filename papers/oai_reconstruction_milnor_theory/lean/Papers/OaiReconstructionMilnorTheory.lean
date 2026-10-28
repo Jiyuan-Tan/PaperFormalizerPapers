@@ -1,0 +1,46 @@
+module
+public import Papers.OaiReconstructionMilnorTheory.Basic
+public import Papers.OaiReconstructionMilnorTheory.Helpers
+public import Papers.OaiReconstructionMilnorTheory.Helpers.CompatibleOperations
+public import Papers.OaiReconstructionMilnorTheory.Helpers.FieldGeometry
+public import Papers.OaiReconstructionMilnorTheory.Helpers.FieldReconstruction
+public import Papers.OaiReconstructionMilnorTheory.Helpers.InducedMaps
+public import Papers.OaiReconstructionMilnorTheory.Helpers.Intersection
+public import Papers.OaiReconstructionMilnorTheory.Helpers.IntersectionSetup
+public import Papers.OaiReconstructionMilnorTheory.Helpers.IntersectionSpectrum
+public import Papers.OaiReconstructionMilnorTheory.Helpers.Isomorphisms
+public import Papers.OaiReconstructionMilnorTheory.Helpers.LineRecoveryAffine
+public import Papers.OaiReconstructionMilnorTheory.Helpers.LineRecoveryAssembly
+public import Papers.OaiReconstructionMilnorTheory.Helpers.LineRecoveryContainment
+public import Papers.OaiReconstructionMilnorTheory.Helpers.LineRecoveryGeometry
+public import Papers.OaiReconstructionMilnorTheory.Helpers.LineRecoveryPropagation
+public import Papers.OaiReconstructionMilnorTheory.Helpers.Lines
+public import Papers.OaiReconstructionMilnorTheory.Helpers.MilnorProjective
+public import Papers.OaiReconstructionMilnorTheory.Helpers.NormalizedLift
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PBasis
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PDegree
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PDegreeFrobenius
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PDegreeMonomials
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PDegreeRational
+public import Papers.OaiReconstructionMilnorTheory.Helpers.PerfectCore
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveAffine
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveAssembly
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveCoordinates
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveField
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveFrame
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveIncidence
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveLift
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ProjectiveLiftBasic
+public import Papers.OaiReconstructionMilnorTheory.Helpers.ScalarLine
+public import Papers.OaiReconstructionMilnorTheory.Helpers.SymbolPairing
+public import Papers.OaiReconstructionMilnorTheory.Helpers.Symbols
+public import Papers.OaiReconstructionMilnorTheory.TMain
+
+/-! # Run barrel (auto-generated)
+
+Aggregates every module of this paper run so the whole run is ONE buildable target
+(`lake build <this module>`). Paper modules are not reachable from the library barrels, so
+the default lake target skips them and reports green on stale oleans. Rewritten from the
+run's module set on every F-stage entry — do not hand-edit. -/
+
+public section

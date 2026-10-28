@@ -1,0 +1,13 @@
+import Papers
+
+-- The paper's results: each must list no axiom beyond propext, Classical.choice and Quot.sound.
+#print axioms Papers.OaiReconstructionMilnorTheory.milnor_reconstruction_bijective
+#print axioms Papers.OaiReconstructionMilnorTheory.finrank_powSubfield_eq_pow_trdeg
+#print axioms Papers.OaiReconstructionMilnorTheory.pBasis_structure
+#print axioms Papers.OaiReconstructionMilnorTheory.mem_adjoin_of_milnorSymbol_eq_zero
+#print axioms Papers.OaiReconstructionMilnorTheory.milnorSymbol_affine_eq_zero
+#print axioms Papers.OaiReconstructionMilnorTheory.intersection_unique_power
+#print axioms Papers.OaiReconstructionMilnorTheory.scalar_eq_one_of_preserves_lines
+#print axioms Papers.OaiReconstructionMilnorTheory.exists_unique_line_correction
+#print axioms Papers.OaiReconstructionMilnorTheory.projective_lift
+#print axioms Papers.OaiReconstructionMilnorTheory.iInter_pow_eq_base

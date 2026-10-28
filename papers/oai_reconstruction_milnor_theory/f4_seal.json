@@ -1,0 +1,929 @@
+{
+  "version": 1,
+  "slug": "oai_reconstruction_milnor_theory",
+  "paper_sha256": "428b2f20a164b8a9b530414e116609e5d81a932bd6652df17c0ff6f67a891065",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:affine-symbol-inputs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5b2899cad0d8382cc995a254d3a6c34352b8a7dc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5b2899cad0d8382cc995a254d3a6c34352b8a7dc"
+      }
+    },
+    {
+      "id": "ass:base-preservation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1f00976e756122eb8ffbb121b273b9acbc86ac8b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1f00976e756122eb8ffbb121b273b9acbc86ac8b"
+      }
+    },
+    {
+      "id": "ass:compatible-linear",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0f91c722cd5e2bfeba7c6a9e1042673ad13a03ec"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0f91c722cd5e2bfeba7c6a9e1042673ad13a03ec"
+      }
+    },
+    {
+      "id": "ass:compatible-relations",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b72b79be8ced4c8f200ebc01c07ec58e04ca5391"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b72b79be8ced4c8f200ebc01c07ec58e04ca5391"
+      }
+    },
+    {
+      "id": "ass:field-characteristic",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "218fd7bf483eafd0e3542ea7089fa80dda6bb594"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "218fd7bf483eafd0e3542ea7089fa80dda6bb594"
+      }
+    },
+    {
+      "id": "ass:field-isomorphism",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cc02009e61bd19629f34935c6af07ff26f128bbc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cc02009e61bd19629f34935c6af07ff26f128bbc"
+      }
+    },
+    {
+      "id": "ass:geometric-field",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b9a722b5cd089fb79626813643e77f6c3b0e8fd2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b9a722b5cd089fb79626813643e77f6c3b0e8fd2"
+      }
+    },
+    {
+      "id": "ass:intersection-elements",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c8107d59ab7094af40da7cb1c55a2dee4a16197c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c8107d59ab7094af40da7cb1c55a2dee4a16197c"
+      }
+    },
+    {
+      "id": "ass:intersection-field",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8264affa6fa7d7f918877b8b8aed434a44f3c876"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8264affa6fa7d7f918877b8b8aed434a44f3c876"
+      }
+    },
+    {
+      "id": "ass:intersection-finite-degree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ac1aeae22261e960e10c1e2b2fae73837e98c23b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ac1aeae22261e960e10c1e2b2fae73837e98c23b"
+      }
+    },
+    {
+      "id": "ass:intersection-pair-inputs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ebe309765f77774f968818d0f214c1e962284c9f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ebe309765f77774f968818d0f214c1e962284c9f"
+      }
+    },
+    {
+      "id": "ass:intersection-witness",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0ae761077d9b985470ded064454d9e5edf6d2ee1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0ae761077d9b985470ded064454d9e5edf6d2ee1"
+      }
+    },
+    {
+      "id": "ass:line-recovery-fields",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "36b7f03d528f372b49c76f785c467d3f34dd8cb4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "36b7f03d528f372b49c76f785c467d3f34dd8cb4"
+      }
+    },
+    {
+      "id": "ass:main-dimension",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5ac5d777444b28aa6def2d78ea3de001c06803db"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5ac5d777444b28aa6def2d78ea3de001c06803db"
+      }
+    },
+    {
+      "id": "ass:main-fields",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d1a778cdb36c46b67bdbb9101b367d02aefd3b16"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d1a778cdb36c46b67bdbb9101b367d02aefd3b16"
+      }
+    },
+    {
+      "id": "ass:p-basis-adjunction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4995f64eee1d90fd449d0d7eff29f770fb4ce6aa"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4995f64eee1d90fd449d0d7eff29f770fb4ce6aa"
+      }
+    },
+    {
+      "id": "ass:p-basis-field",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "454b0a19bd3dfaa3e801f8df887d5d5b13df1506"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "454b0a19bd3dfaa3e801f8df887d5d5b13df1506"
+      }
+    },
+    {
+      "id": "ass:p-basis-finite-degree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06e6af05bff95e7c01d9bacfc760809b4139e825"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06e6af05bff95e7c01d9bacfc760809b4139e825"
+      }
+    },
+    {
+      "id": "ass:p-basis-generation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7bcf648e981d9578c2d17114acf5029275c50083"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7bcf648e981d9578c2d17114acf5029275c50083"
+      }
+    },
+    {
+      "id": "ass:p-independent-degree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "391bf3f1465ea2f4ee535677d09b35672e418b99"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "391bf3f1465ea2f4ee535677d09b35672e418b99"
+      }
+    },
+    {
+      "id": "ass:perfect-core-field",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4eb9feb934ce558f2dbfcd11685db01ab308482f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4eb9feb934ce558f2dbfcd11685db01ab308482f"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c76a2a051d1c625e70a498f14e4183e396970d97"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c76a2a051d1c625e70a498f14e4183e396970d97"
+      }
+    },
+    {
+      "id": "ass:pin-2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "289bcc205770c7677b881a95552dd383f8aae8c7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "289bcc205770c7677b881a95552dd383f8aae8c7"
+      }
+    },
+    {
+      "id": "ass:pin-3",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ad335042efab59e3cb609bccecd9fddaeb340a26"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ad335042efab59e3cb609bccecd9fddaeb340a26"
+      }
+    },
+    {
+      "id": "ass:prime",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "26c905ee9ef34c362f2b3a8dbc906de795d89052"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "26c905ee9ef34c362f2b3a8dbc906de795d89052"
+      }
+    },
+    {
+      "id": "ass:projective-lift-bijection",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "825925dd47cb0c50e508424f0fa29ec92818fa12"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "825925dd47cb0c50e508424f0fa29ec92818fa12"
+      }
+    },
+    {
+      "id": "ass:projective-lift-spaces",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d23050a621a7e598cc74810c30e41475faa86b02"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d23050a621a7e598cc74810c30e41475faa86b02"
+      }
+    },
+    {
+      "id": "ass:scalar-line-field",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "49ec6c2154fc433b895fe4bcc6480a290910b82a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "49ec6c2154fc433b895fe4bcc6480a290910b82a"
+      }
+    },
+    {
+      "id": "ass:scalar-line-imperfect",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "679c0b6900183e358965c2ff1b6f83cd4915ebf7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "679c0b6900183e358965c2ff1b6f83cd4915ebf7"
+      }
+    },
+    {
+      "id": "ass:scalar-line-preservation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "555e65caa01a96d102311b0cef782bbce0954d87"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "555e65caa01a96d102311b0cef782bbce0954d87"
+      }
+    },
+    {
+      "id": "ass:zero-symbol-antecedent",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "922709d6cf371f8336334d0711ce50bd625073ac"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "922709d6cf371f8336334d0711ce50bd625073ac"
+      }
+    },
+    {
+      "id": "ass:zero-symbol-inputs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d1c3b33d7270f1126560f0c4d280b8ef99a702a0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d1c3b33d7270f1126560f0c4d280b8ef99a702a0"
+      }
+    },
+    {
+      "id": "def:base-isomorphisms",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "680ecbf667c16c0d0f909bab7fb67db22f3baa4f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "680ecbf667c16c0d0f909bab7fb67db22f3baa4f"
+      }
+    },
+    {
+      "id": "def:class-notation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3b0ac8aa2fd70d116abea90608dd5a3e9583021c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3b0ac8aa2fd70d116abea90608dd5a3e9583021c"
+      }
+    },
+    {
+      "id": "def:coefficients",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1fef1908a70874a409d59fe602c6e8e3de4dd970"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1fef1908a70874a409d59fe602c6e8e3de4dd970"
+      }
+    },
+    {
+      "id": "def:compatible-isomorphisms",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "35ba2763ddf68c7f6e645489727f30da5901687b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "35ba2763ddf68c7f6e645489727f30da5901687b"
+      }
+    },
+    {
+      "id": "def:induced-map",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9a6edda15fa42c8669e074fea395a8d0d8267ba3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9a6edda15fa42c8669e074fea395a8d0d8267ba3"
+      }
+    },
+    {
+      "id": "def:intersection-power-subfield",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a9ef297e76c59768ad6a409c8cb25fa25fab9d2f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a9ef297e76c59768ad6a409c8cb25fa25fab9d2f"
+      }
+    },
+    {
+      "id": "def:lines-power-fields",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "013c79be7f63fd19628846ea971496eb2cdf722f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "013c79be7f63fd19628846ea971496eb2cdf722f"
+      }
+    },
+    {
+      "id": "def:milnor-one",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f99921e7da7d75f96a6d8a8a94606b33ca5b4dde"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f99921e7da7d75f96a6d8a8a94606b33ca5b4dde"
+      }
+    },
+    {
+      "id": "def:milnor-symbol",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d722259345c5e9d045a499bcad0cbdd5c05abf75"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d722259345c5e9d045a499bcad0cbdd5c05abf75"
+      }
+    },
+    {
+      "id": "def:milnor-two",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "625c91382f1d198a85f8e912c36b5cc26ca22b9a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "625c91382f1d198a85f8e912c36b5cc26ca22b9a"
+      }
+    },
+    {
+      "id": "def:outline-power-subfield",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "681b51fe65523a1430e85f4ffdb1dc462e74edd7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "681b51fe65523a1430e85f4ffdb1dc462e74edd7"
+      }
+    },
+    {
+      "id": "def:p-basis",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "968f82ff99c64457932362883907281acd21bdc0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "968f82ff99c64457932362883907281acd21bdc0"
+      }
+    },
+    {
+      "id": "def:p-basis-power-subfield",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "10b89a6495d84c37e3e5d186df9a2edee60ddbb1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "10b89a6495d84c37e3e5d186df9a2edee60ddbb1"
+      }
+    },
+    {
+      "id": "def:p-independent",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6ce85336c1d8dabbc51c52dc3a8371e896b5ba4b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6ce85336c1d8dabbc51c52dc3a8371e896b5ba4b"
+      }
+    },
+    {
+      "id": "def:pair-derivations",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "07d2ccf8cefcdf7f3845c43a06e0c37dbc99f7b2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "07d2ccf8cefcdf7f3845c43a06e0c37dbc99f7b2"
+      }
+    },
+    {
+      "id": "def:power-degree-setup",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b44a562e113110f69eaec3bf675bb2a91db04ab4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b44a562e113110f69eaec3bf675bb2a91db04ab4"
+      }
+    },
+    {
+      "id": "def:projective-lines",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "80e632862e0d2c4f71aac44f31d5873d7e9f8bd8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "80e632862e0d2c4f71aac44f31d5873d7e9f8bd8"
+      }
+    },
+    {
+      "id": "def:projective-points",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "738331d61b28a322847003e53b82b0a9f32eecc3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "738331d61b28a322847003e53b82b0a9f32eecc3"
+      }
+    },
+    {
+      "id": "def:scalar-action",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b69274e8650f4f506c485bbb2d89e040724e87b6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b69274e8650f4f506c485bbb2d89e040724e87b6"
+      }
+    },
+    {
+      "id": "def:steinberg-relations",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d94ab1ce6fa033a524decf3fd72ff11dac054b3c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d94ab1ce6fa033a524decf3fd72ff11dac054b3c"
+      }
+    },
+    {
+      "id": "lem:affine-symbol",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "22c46f33e4b3904469da4cf7d07a8a8e89d8e0c2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "22c46f33e4b3904469da4cf7d07a8a8e89d8e0c2"
+      }
+    },
+    {
+      "id": "lem:p-basis",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4cd72bb757323d968c1735f5bf3da1fe750b0255"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4cd72bb757323d968c1735f5bf3da1fe750b0255"
+      }
+    },
+    {
+      "id": "lem:p-degree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e6f475fc60ec3eaa2aa7f3e5e3a365a0bb2c5af3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e6f475fc60ec3eaa2aa7f3e5e3a365a0bb2c5af3"
+      }
+    },
+    {
+      "id": "lem:perfect-core",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f85d5588ed7adedde285e7df87029db3f0b1dec0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f85d5588ed7adedde285e7df87029db3f0b1dec0"
+      }
+    },
+    {
+      "id": "lem:scalar-line",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "32457323371996ab7ee9a9c7b5ed2ded2175e4a3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "32457323371996ab7ee9a9c7b5ed2ded2175e4a3"
+      }
+    },
+    {
+      "id": "lem:zero-symbol",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "76371b3df804a593cd20c2bafd01141fdcfcba1b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "76371b3df804a593cd20c2bafd01141fdcfcba1b"
+      }
+    },
+    {
+      "id": "prop:intersection",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9e58487dcd6af1f324f052fff7c0123c0774534a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9e58487dcd6af1f324f052fff7c0123c0774534a"
+      }
+    },
+    {
+      "id": "prop:lines",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3a09726bf34d92ad94073a9aa9f6dccd6cf7be6b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3a09726bf34d92ad94073a9aa9f6dccd6cf7be6b"
+      }
+    },
+    {
+      "id": "prop:projective-lift",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2b5eaed6d6c5db0f69391e6c9405f778d0ee5f8d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2b5eaed6d6c5db0f69391e6c9405f778d0ee5f8d"
+      }
+    },
+    {
+      "id": "sym:k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "76ef0d0883bae487ed6d7b80fc805056b8737bea"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "76ef0d0883bae487ed6d7b80fc805056b8737bea"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "28372aa62af53a0e56b038751d7cc6ea0164befb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "28372aa62af53a0e56b038751d7cc6ea0164befb"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "f34352d77739446f839ce802b46bce9f3d13f69646e437c78150c92fc2296ee3",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "2e25bb2c7c0c8e638c91ef3a313223c5131df35514d949fc649361d762a1183a"
+    },
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "853198349e5ce69f3f1ba4ddb6a834c0f72a46280dade8e7467c143131c59c39"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "4ef2bda45e5be05e38a6e9836be046ddd5e77dccc3787494f721aa9abc5fc3e6"
+    },
+    {
+      "path": "corrected_paper/_tikz/d1d23079084e9bfe.pdf",
+      "sha256": "53ef88f2e49b0be70370b343f30e4e84908264ff9d0f6a356750a925c6084fc2"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "b6c20f8e7d64c4aef1037d9a7cf52750faccd10476d765e9e9fe8706c7fad306"
+    },
+    {
+      "path": "corrected_paper/preamble.tex",
+      "sha256": "dd662d1b860589fc27115611c24aac01b2d3422eadff823bfdda7ad32216d134"
+    },
+    {
+      "path": "corrected_paper/references/references.bib",
+      "sha256": "64f6a2348dda520ee9b4180ea39a56c62890de1f339c7a0423832b42d03dc9db"
+    },
+    {
+      "path": "corrected_paper/sections/01-introduction.tex",
+      "sha256": "63d9490a9d54a53d497b6df677bb4e03dbe9cbb0a37f5c9fe36a451aa8b90ddd"
+    },
+    {
+      "path": "corrected_paper/sections/02-symbols.tex",
+      "sha256": "9f55d608ffd74e682e609110c070586d689f9c581e86af87e94004a2e7f338a9"
+    },
+    {
+      "path": "corrected_paper/sections/03-intersection.tex",
+      "sha256": "df9d3630d561eba7572ce9d7e708ef450ae184ec0836530dc2bd3b7ed750de5d"
+    },
+    {
+      "path": "corrected_paper/sections/04-lines.tex",
+      "sha256": "8d0578bb95a6277fcc76786a5875bc7e9e0d2a3b0ed1180bae5b7607e4013a12"
+    },
+    {
+      "path": "corrected_paper/sections/05-fields.tex",
+      "sha256": "8e8b33d6b229cdfd0b421f25b7fd57da539f3db1c6f10319eedd18e37ea72c2e"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "b65e253b8e73ff849d8562081c00be1f90847cf93cbc93593eb0afe9195ab654"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "48bfb24354f227659af8ab3ac799df8de28fb16d82081c905f7c0cb0c888792e"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory.lean",
+      "sha256": "97c842eb47489352af7b6c91fd685ae8260d4050f0b8bf6cdb3f1a6cca0137f5"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Basic.lean",
+      "sha256": "236d71fbad7a9d90e74231b11dd4c55137f6e09f7a43b3254e4d7900ebd785a0"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers.lean",
+      "sha256": "fe2c8a083f47d673fc356e1d36533d036b092e6a12aa9485714328e43dd11426"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/CompatibleOperations.lean",
+      "sha256": "731e928f871a74c2548ce69a76b2bc4b76b5c3f690e630f3f07c56675402129b"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/FieldGeometry.lean",
+      "sha256": "e1d732bbcaa5333e3171baf01db499c799c4fc5aaca2656113bd823eac7ef27a"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/FieldReconstruction.lean",
+      "sha256": "265ac313326f6388642ef056c75ae7d95a8d9023e77aeb107ab04a78dce73953"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/InducedMaps.lean",
+      "sha256": "be3599261c8bb9c5c12a0ea518be159de66740ff8aed7ab2784fbc2d181a9a4e"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/Intersection.lean",
+      "sha256": "a12484ff1113541b7c374277267f0ff9c44ccf66f3e2b61ff0af039fbde1a9ac"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/IntersectionSetup.lean",
+      "sha256": "443bd1fd7175c9d94ec9f31598a79b6d9ae17cb2e82bf4749a872c0dddd244fb"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/IntersectionSpectrum.lean",
+      "sha256": "e4bb47c56c72426eca496baa56efee12e0e4dfc407349410eb833b13b02991b3"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/Isomorphisms.lean",
+      "sha256": "4931133a41716dbd411a006c3cf3056d05ce474faf304153822d43f6ba765148"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/LineRecoveryAffine.lean",
+      "sha256": "8ae3b9a20b9044c11f59e3d6400880d42a2c3932329f71b6d8867fd755c4fbb8"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/LineRecoveryAssembly.lean",
+      "sha256": "452297d7c25f9ca951d6028c44495da25e9e2e0e1fe86832a8f5c6f245ea54c8"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/LineRecoveryContainment.lean",
+      "sha256": "d0e2841dbf064657eb75dfd6423080d6a9a34896ecff162add6b55e18a94c484"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/LineRecoveryGeometry.lean",
+      "sha256": "6a6196f97ec038d0b067430ce44ef386dbebddfe29eaf5ef27790a564ae0cb64"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/LineRecoveryPropagation.lean",
+      "sha256": "5cd10898d97244e7c9335fea53daa43cb4ef049388411ae9a76773cf25a297a6"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/Lines.lean",
+      "sha256": "149b1e3db18d899414ad8b6a2fbfd6318a241ce5bc30f77ca1f4de52bb4e7342"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/MilnorProjective.lean",
+      "sha256": "df6959fb8ac931e10ad638f6e90ddc6ec430fe14f1c656ecd6f3c4a05e401053"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/NormalizedLift.lean",
+      "sha256": "d96a1f933f1e02934aa5e72311fcb078ee9cc141444d19f14e5b9908afb2f10f"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PBasis.lean",
+      "sha256": "8b006038284721a234d4d5cbadb05f74e906b0041df00c60cfdad3547b5eff9b"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PDegree.lean",
+      "sha256": "554b90b2207bd8528e874db90ad53c70302c3551f01cfdfcdd5889d44c47a70e"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PDegreeFrobenius.lean",
+      "sha256": "d3f30f933c2e280dcf6ecdfbaaeff6a508a089f04334c4d46af6edad418f2089"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PDegreeMonomials.lean",
+      "sha256": "45656855480cb6bcee7f2bd6d44778912278cf5310aa3e6e06568088abcf0eb7"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PDegreeRational.lean",
+      "sha256": "b468d873f03c2617f07ac2466fe7bd02f2eb27fefd9d9ca52da14a3267585855"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/PerfectCore.lean",
+      "sha256": "f83f5da6bb549c0b1459f5cd9b81f3c87d0b2153d5482aacfa1c160f233f7efb"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveAffine.lean",
+      "sha256": "797f3814df6cca99fda7b96d99903e9ee9d4f7287901e8547d5aa4019ebc1849"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveAssembly.lean",
+      "sha256": "92fb16beab8290a3d622e3d9c3a455ae7761c066a9d8d14af8db585200ce2417"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveCoordinates.lean",
+      "sha256": "afb8b79d39ca1b6535d88288f55bb1dff292abd67ddfc0a1aba851e5d8292886"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveField.lean",
+      "sha256": "daa1d951d234373765cb3acfeae00ac6808a2d1a4d2071e8df32cdbffce07eb4"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveFrame.lean",
+      "sha256": "1cd1bd03a2437e824dc3e1589a70bd1239540b8a6b9e7ba997b7cbe21a938631"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveIncidence.lean",
+      "sha256": "8ff7d500c5d6019ee6c158b0b4d82ff6d5fe7388c50f28cd8e0d83e5048a566a"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveLift.lean",
+      "sha256": "02da5e78a689c9ea7a8e3795928c4c20e7909428d01563e521bfa52099df4060"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ProjectiveLiftBasic.lean",
+      "sha256": "9c352ca8d6484f16a64f016ebf850ef3439fc5e48b88d2caf8cd3b7f25aa728d"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/ScalarLine.lean",
+      "sha256": "c32cacfdc934368de6e2832329df8a6f9b98fb72a177b666bbce4adad09506e8"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/SymbolPairing.lean",
+      "sha256": "f939a728764d9b48215185401015de5dd4cb7aa75a843b87c30ea0765041bafe"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/Helpers/Symbols.lean",
+      "sha256": "61e1a3c955923288996669f509dbb7f92d3ed6809e5979eabcb412eb93b24425"
+    },
+    {
+      "path": "lean/Papers/OaiReconstructionMilnorTheory/TMain.lean",
+      "sha256": "87c47c6711fec1fdfa2e5d8561b28b3e965afec91537cadd35175ace99cac4d8"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "e643238feccebe673e1a8549f7d2964bf6d53f48fa4e5c4b78368161ea418e3d"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "3693c934aeb83aada3a510b0e2cddcb6adbdb5f2c672f08c55a08f6c64ff2948"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "8f87801ac584fd5c803eb6402ff7aa23fc350ea2c6f7bcffba5868b6010a8e36"
+    }
+  ],
+  "code": "bfab8f64615e0781bcea16b9abf12766968212c2291361bc809fe16180fa2696"
+}

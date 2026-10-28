@@ -1,0 +1,1 @@
+2026-10-26: main.tex:23–25: replaced the bibliography's explicit begingroup/endgroup with brace grouping and omitted its interlinepenalty=10000 layout setting so the paper page can render it. Bibliography contents, statements, proofs, and source line numbers are unchanged.
