@@ -1,0 +1,340 @@
+===== reviewer convergence/dual :: medium :: batch[ass:sequences-center,ass:sequences-subalgebras,ass:sequences-conjugacy,ass:invariant-unital,ass:invariant-approximation] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:sequences-center",
+      "verdict": "faithful-refinement",
+      "note": "Every central element is scalar; conversely, StarSubalgebra contains every scalar identity, which commutes with every element. Thus this is exactly Z(D)=ℂ id_L."
+    },
+    {
+      "obj_id": "ass:sequences-subalgebras",
+      "verdict": "faithful-refinement",
+      "note": "StarSubalgebra supplies the common identity and complex star-algebra operations; closedness supplies the C*-subalgebra condition, and the inclusions are exactly P,Q⊆D."
+    },
+    {
+      "obj_id": "ass:sequences-conjugacy",
+      "verdict": "faithful-refinement",
+      "note": "seqAlg consists exactly of diagonal D-valued sequences converging in norm to an element of the indicated limit algebra; the existential unitary and conjugation-image equality express spatial conjugacy onto the other algebra."
+    },
+    {
+      "obj_id": "ass:invariant-unital",
+      "verdict": "faithful-refinement",
+      "note": "The three closed unital complex star-subalgebras of B(L), with P≤D and Q≤D, are exactly the stated unital C*-algebras and inclusions."
+    },
+    {
+      "obj_id": "ass:invariant-approximation",
+      "verdict": "faithful-refinement",
+      "note": "The unitary-valued sequence is common to every b; each b∈Q has a fixed p∈P with ‖b−U_n p U_n*‖→0, and every U_n normalizes D, exactly as the referenced equation requires."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:sequences-center","verdict":"faithful-refinement","note":"Z(D)=C·id_L ⟺ every x∈D that commutes with all of D is a scalar multiple of 1. The reverse inclusion is automatic: StarSubalgebra contains algebraMap ℂ, and scalars commute with everything. So the two are equivalent."},{"obj_id":"ass:sequences-subalgebras","verdict":"faithful-refinement","note":"P and Q are StarSubalgebras of B(L), so they contain id_L (as the convention ass:unital-identities requires) and are closed under * and the algebra operations. Norm-closedness makes them C*-algebras, and P≤D, Q≤D gives containment. D's own C*-structure comes from ass:sequences-d. The two are equivalent."},{"obj_id":"ass:sequences-conjugacy","verdict":"faithful-refinement","note":"H=⊕L is realized as lp(ℕ→L,2). seqAlg is the set of diagonal bounded operators whose entries x_n lie in D and converge in norm to some p∈P; boundedness is automatic because the sequence converges. This is exactly eq:sequence-definition. The condition ∃ unitary S on H with S·E_D(P)·S* = E_D(Q) (as sets) is the paper's 'a unitary conjugates E_D(P) onto E_D(Q)'."},{"obj_id":"ass:invariant-unital","verdict":"faithful-refinement","note":"D, P and Q are norm-closed StarSubalgebras of B(L), each containing id_L per the unital-identities convention, with P≤D and Q≤D. This is equivalent to 'P,Q⊆D⊆B(L) unital C*-algebras'."},{"obj_id":"ass:invariant-approximation","verdict":"faithful-refinement","note":"U:ℕ→unitary(B(L)) is one common sequence, and conjSet(U n) D = D is U_n D U_n* = D. Each b∈Q gets a fixed p∈P, independent of n, with ‖b−U_n p U_n*‖→0. This matches eq:pointwise-normalizers and the core symbols U_n and p_b."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:obstruction-tensor-distinction,ass:obstruction-unitary,ass:absorption-representation,ass:deformation-range,def:unit-balls] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:unit-balls",
+      "verdict": "matched",
+      "note": "Membership in A together with operator norm at most one defines exactly its closed unit ball; the same construction applies to B."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:obstruction-tensor-distinction",
+      "verdict": "faithful-refinement",
+      "note": "Unfolding gives exactly the spatial tensor-norm identity for P and its negation for Q; the supremum on the algebraic Hilbert tensor unit ball equals the spatial operator norm."
+    },
+    {
+      "obj_id": "ass:obstruction-unitary",
+      "verdict": "faithful-refinement",
+      "note": "Unitary membership states both adjoint inverse identities, and conjSet equality states exactly WPW*=Q."
+    },
+    {
+      "obj_id": "ass:absorption-representation",
+      "verdict": "faithful-refinement",
+      "note": "Nontrivial J states nonzeroness; the Hilbert-space instances and the consumer's parameter σ : FG →* unitary (Op J) supply the remaining representation setup."
+    },
+    {
+      "obj_id": "ass:deformation-range",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated real parameter restriction 0<t<1."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:unit-balls","verdict":"matched","note":"unitBall A = {a ∈ A | ‖a‖ ≤ 1}, with the operator norm on Op L = L →L[ℂ] L. That is exactly the paper's A_1, and B_1 is the same construction applied to B. The paper's assumption that A and B are norm-closed C*-algebras is a separate condition (InvariantUnital closedness) and does not change what the ball is. Same extension both ways."}],"assumption_verdicts":[{"obj_id":"ass:obstruction-tensor-distinction","verdict":"faithful-refinement","note":"HasSpatialTensorIdentity D P ∧ ¬HasSpatialTensorIdentity D Q matches the paper's 'P has the spatial tensor-norm identity relative to D, whereas Q does not' word for word, as a conjunction. Whether HasSpatialTensorIdentity itself is faithful (finite sums p_i ∈ P, z_i ∈ D', ‖Σ p_i z_i‖ = spatial norm via tensorSumNorm) belongs to node def:tensor. That node is not a target here and was read only as context."},{"obj_id":"ass:obstruction-unitary","verdict":"faithful-refinement","note":"W ∈ unitary (Op L) ∧ conjSet W P = Q, where conjSet W P = (x ↦ W x W*) '' P. This is exactly 'W ∈ B(L) is unitary and WPW* = Q' read as an equality of sets. It adds no condition on D, and the paper states none."},{"obj_id":"ass:absorption-representation","verdict":"faithful-refinement","note":"The predicate is Nontrivial J, which is the paper's 'J nonzero'. Completeness is a [CompleteSpace J] instance, and the representation σ is a separate binder σ : FG →* unitary (Op J) in the consumer lemma absorption (Helpers/LpOperators.lean:47). So 'unitary representation of G on J' sits in the signature, and this predicate needs to carry only the nonzero condition. Both directions hold."},{"obj_id":"ass:deformation-range","verdict":"faithful-refinement","note":"0 < t ∧ t < 1 on t : ℝ is exactly 'Fix 0 < t < 1'."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:kk,def:commutant,def:sequences,def:pointwise-normalizers,def:tensor] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:kk",
+      "verdict": "matched",
+      "note": "Both unit balls contain zero and are bounded, so hausdorffDist equals exactly the displayed maximum of the two supremum–infimum distances."
+    },
+    {
+      "obj_id": "def:commutant",
+      "verdict": "matched",
+      "note": "Set.centralizer D consists exactly of bounded operators c satisfying d * c = c * d for every d in D."
+    },
+    {
+      "obj_id": "def:sequences",
+      "verdict": "matched",
+      "note": "The carrier is exactly the diagonal realization of D-valued sequences converging in operator norm to an element of P; convergence supplies boundedness for the diagonal operator, and indexing by ℕ faithfully reindexes n ≥ 1."
+    },
+    {
+      "obj_id": "def:pointwise-normalizers",
+      "verdict": "matched",
+      "note": "The predicate states precisely convergence to zero of the displayed norms, with one fixed approximant p and the supplied unitary sequence U."
+    },
+    {
+      "obj_id": "def:tensor",
+      "verdict": "matched",
+      "note": "On the stated unital-inclusion domain, the quantifiers and product sum agree exactly; tensorSumNorm uses the Hilbert tensor norm, and the bounded finite tensor sum extends to the Hilbert completion with the same operator norm."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:kk","verdict":"matched","note":"kkDist is Metric.hausdorffDist(unitBall A, unitBall B), where unitBall A = {a ∈ A | ‖a‖ ≤ 1}. Both balls contain 0 and are bounded, so the extended Hausdorff distance is finite. Mathlib's hausdorffDist is then the real number max{sup_{a∈A_1} inf_{b∈B_1}‖a−b‖, sup_{b∈B_1} inf_{a∈A_1}‖b−a‖}, which is exactly eq:kk."},{"obj_id":"def:commutant","verdict":"matched","note":"Set.centralizer D = {c ∈ B(L) | ∀ d ∈ D, d*c = c*d}. This is exactly the set of bounded operators on L that commute with every element of D."},{"obj_id":"def:sequences","verdict":"matched","note":"The carrier is the set of operators T on ℓ²(ℕ, L) (the Hilbert direct sum H) that act diagonally as (Tv)_n = x_n(v_n), with each x_n ∈ D and x_n → p for some p ∈ P in operator norm. A norm-convergent sequence is bounded, so every such sequence gives a unique bounded diagonal operator, and every diagonal T comes from such a sequence. The extension is therefore exactly E_D(P) acting on H. E_D(Q) is the same definition applied to Q."},{"obj_id":"def:pointwise-normalizers","verdict":"matched","note":"The Prop is Tendsto (n ↦ ‖b − U_n p U_n^*‖) atTop (𝓝 0), with U_n unitary, which is exactly eq:pointwise-normalizers. The requirements b ∈ Q, p_b ∈ P and U_n D U_n^* = D are imposed by the consumer InvariantApproximation, matching how lem:invariant uses the display."},{"obj_id":"def:tensor","verdict":"matched","note":"For every m > 0, every p_i ∈ P and every z_i ∈ commutant D (= D'), the definition requires ‖Σ p_i z_i‖ = tensorSumNorm p z. tensorSumNorm is the supremum of ‖(Σ p_i⊗z_i)x‖ over the unit ball of the algebraic tensor product L⊗L, using its canonical inner-product norm (Mathlib.Analysis.InnerProductSpace.TensorProduct). Σ p_i⊗z_i is bounded, so this set of values is nonempty and bounded above, and sSup is a genuine supremum. Because the algebraic tensor product is dense in the Hilbert tensor product, this supremum equals the spatial norm in B(L⊗L). The inclusion P ⊆ D is left to callers and does not change the property for given P and D."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:complex-hilbert-spaces,ass:spatial-tensor-products,ass:unital-identities,ass:sequences-l,ass:sequences-d] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:complex-hilbert-spaces",
+      "verdict": "faithful-refinement",
+      "note": "Complex scalars are fixed by InnerProductSpace ℂ V; CompleteSpace V supplies exactly the remaining Hilbert-space condition."
+    },
+    {
+      "obj_id": "ass:spatial-tensor-products",
+      "verdict": "faithful-refinement",
+      "note": "The algebraic tensor product carries the Hilbert tensor norm; the specified continuous action extends uniquely to its Hilbert completion, and restriction preserves the operator norm, giving both directions."
+    },
+    {
+      "obj_id": "ass:unital-identities",
+      "verdict": "faithful-refinement",
+      "note": "Membership of the ambient operator identity states precisely the convention; StarSubalgebra already enforces this membership through its Subalgebra structure."
+    },
+    {
+      "obj_id": "ass:sequences-l",
+      "verdict": "faithful-refinement",
+      "note": "Nontriviality and separability give exactly the stated conditions on L in the standing complex Hilbert-space domain; both consuming theorems explicitly retain CompleteSpace L."
+    },
+    {
+      "obj_id": "ass:sequences-d",
+      "verdict": "faithful-refinement",
+      "note": "StarSubalgebra supplies complex algebra operations, adjoint closure, and the ambient identity; norm closedness in B(L) gives precisely a concrete C*-algebra, and IsSeparable gives norm separability."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:complex-hilbert-spaces","verdict":"faithful-refinement","note":"The scalars are fixed to ℂ by the `[InnerProductSpace ℂ V]` binder, and the Prop asks for `CompleteSpace V`, so the two together say exactly 'V is a complex Hilbert space'. The paper-wide section variable (Basic.lean:29, TObstruction.lean:12) carries the same `[InnerProductSpace ℂ L] [CompleteSpace L]` background. Equivalent in both directions."},{"obj_id":"ass:spatial-tensor-products","verdict":"faithful-refinement","note":"The convention picks the spatial norm: operators act on the Hilbert tensor product, computed on its dense algebraic part using Mathlib's inner-product norm on `TensorProduct ℂ L L` (import Mathlib.Analysis.InnerProductSpace.TensorProduct). A bounded operator's norm on a dense subspace equals the norm of its extension to the completion, so working on the algebraic tensor product picks the same operator norm. As a Prop it is true and discharged in-library: T = ∑ mapL (p i) (z i), with ‖T‖ = tensorSumNorm by Helpers/Invariant.lean:20 via sSup_unitClosedBall_eq_norm. It therefore restricts no paper model and makes no truth-valued claim beyond the convention."},{"obj_id":"ass:unital-identities","verdict":"faithful-refinement","note":"`(1 : Op L) ∈ A` for `A : StarSubalgebra ℂ (Op L)` says the ambient identity of B(L) belongs to A, which is exactly the NL. Mathlib's StarSubalgebra already enforces this (one_mem), so every unital subalgebra in the paper's sense is such an A and conversely."},{"obj_id":"ass:sequences-l","verdict":"faithful-refinement","note":"`Nontrivial L ∧ SeparableSpace L` gives 'nonzero' and 'separable'. Being a complex Hilbert space comes from the explicit global background `[InnerProductSpace ℂ L] [CompleteSpace L]` that every consumer has (e.g. seqAlg_obstruction at TObstruction.lean:12, :59). Under that background the Prop is equivalent to 'L is a nonzero separable Hilbert space'."},{"obj_id":"ass:sequences-d","verdict":"faithful-refinement","note":"D is typed as `StarSubalgebra ℂ (Op L)`, so it is a unital *-subalgebra of B(L) containing the ambient 1. `IsClosed` makes it norm-closed, i.e. a C*-algebra, since Op L carries the operator-norm topology, and `IsSeparable` gives norm separability. Together this is exactly 'a unital norm-separable C*-algebra D ⊆ B(L)', both directions."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:t,sym:a,sym:\varepsilon,sym:r,sym:c(t)] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:t",
+      "verdict": "matched",
+      "note": "Basic.lean:242–243 defines DeformationRange t exactly as 0 < t ∧ t < 1 for t : ℝ."
+    },
+    {
+      "obj_id": "sym:a",
+      "verdict": "matched",
+      "note": "Basic.lean:347–350 types the index as {a : ℝ // a = 0 ∨ a = t}, exactly enforcing membership in {0,t}."
+    },
+    {
+      "obj_id": "sym:\\varepsilon",
+      "verdict": "matched",
+      "note": "TMain.lean:43–44 universally quantifies ε : ℝ with precisely the restriction 0 < ε."
+    },
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "Basic.lean:292 computes √(1−t²) under DeformationRange t; 0 < t < 1 implies 0 < 1−t² < 1, hence 0 < r < 1."
+    },
+    {
+      "obj_id": "sym:c(t)",
+      "verdict": "matched",
+      "note": "Basic.lean:295–296 computes 2(1−r)+t/(1−t)+t under DeformationRange t; r < 1, t > 0 and 1−t > 0 ensure strict positivity."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:t","verdict":"matched","note":"DeformationRange t := 0 < t ∧ t < 1 (Basic.lean:242-243) pins the free real carrier t to the open interval (0,1) exactly; the predicate is carried as the standing hypothesis ht wherever t is used (rValue, cBound, IsTreeRep)."},{"obj_id":"sym:a","verdict":"matched","note":"indexedRep (Basic.lean:347-350) types a as the subtype {a : ℝ // a = 0 ∨ a = t}, which is exactly the set {0,t}; Qindexed and Pindexed use the same subtype, and indexedRep sends a = 0 to piZero and a = t to π, as the paper does."},{"obj_id":"sym:\\varepsilon","verdict":"matched","note":"exists_close_not_conjugate (TMain.lean:43-44) quantifies over every real ε with the hypothesis hε : 0 < ε, which is exactly ε in (0,∞), matching thm:main's 'For every ε>0'."},{"obj_id":"sym:r","verdict":"matched","note":"rValue t ht := Real.sqrt (1 - t^2) (Basic.lean:292) is a def that computes r. With 0<t<1 we have 0 < 1-t^2 < 1, so r lies in (0,1) by construction, and the formula matches core's r=√(1-t²)."},{"obj_id":"sym:c(t)","verdict":"matched","note":"cBound t ht := 2*(1 - rValue t ht) + t/(1-t) + t (Basic.lean:295-296) is a def that computes c(t), exactly the core's c(t)=2(1-r)+t/(1-t)+t. For 0<t<1 each summand is positive (r<1, t/(1-t)>0, t>0), so c(t) lies in (0,∞) by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:ambient,lem:good-inclusion,lem:free-norm] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:ambient",
+      "verdict": "matched",
+      "note": "Under LSp ≅ K⊗K, flipOp * constantDiagOp Y * flipOp is Y⊗id; unitality makes SequencesCenter exactly scalar center, and conjSet and cBound give the stated conjugacy and bound. Quantification over all tree-admissible representations strengthens the result."
+    },
+    {
+      "obj_id": "lem:good-inclusion",
+      "verdict": "matched",
+      "note": "HasSpatialTensorIdentity gives exactly the finite-family norm identity: tensorSumNorm uses the Hilbert tensor norm and equals the norm on its completion. P₀⊆D follows from their generators and norm closures."
+    },
+    {
+      "obj_id": "lem:free-norm",
+      "verdict": "matched",
+      "note": "The positive-natural quantifier, left regular operators, and bound agree exactly; range m reindexes s₁,…,sₘ from zero."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:ambient","verdict":"matched","note":"LSp = ℓ²(G;K) ≅ K⊗K with δ_x⊗w ↔ the function equal to w at x. Under that identification shiftOp g = λ(g)⊗id, constantDiagOp T = id⊗T and flipOp∘(id⊗Y)∘flipOp = Y⊗id. So Dalg is the norm-closed *-algebra generated by the four families of eq:D, with matUnit x y = δ_x⟨δ_y,·⟩ = E_xy. SequencesCenter says every element of D commuting with all of D is a scalar multiple of the identity, which is 'scalar center'. commutant = Set.centralizer, so the set equality realizes D' = {Y⊗id_K : Y ∈ λ(G)'} exactly. conjSet W P0 = {W x W*}, W is unitary on L, and cBound = 2(1−√(1−t²)) + t/(1−t) + t = c(t). Lean proves this for every π satisfying IsTreeRep (the coefficient condition and the uniform bound from lem:tree). That covers the π_t supplied by lem:tree, so the theorem is at least as strong as the paper's lemma."},{"obj_id":"lem:good-inclusion","verdict":"matched","note":"HasSpatialTensorIdentity D P says: for all m>0, all p_i ∈ P and all z_i ∈ commutant D, ‖Σ p_i z_i‖ = tensorSumNorm p z. tensorSumNorm is the supremum of ‖(Σ p_i⊗z_i)x‖ over the unit ball of the algebraic tensor product L⊗L with Mathlib's inner-product (Hilbert) norm. Each p_i⊗z_i is bounded and the algebraic tensor product is dense, so this supremum equals the B(L⊗L) operator norm of Σ p_i⊗z_i, which is def:tensor relative to D. P = Palg piZero = P_0. The statement is universally quantified over every π satisfying IsTreeRep, so it is at least as strong as the paper's claim for the π_t supplied by lem:tree."},{"obj_id":"lem:free-norm","verdict":"matched","note":"Lean states ‖Σ_{i∈range m} λ(FreeGroup.of i)‖ ≤ 2√m for every m>0. The generators s_1..s_m are reindexed as of 0..of (m−1), which are m distinct free generators, so the sum is the same up to relabelling. leftReg is the left regular representation on ℓ²(G) (f ↦ f(g⁻¹·)). Same quantifier, same bound."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:invariant,lem:tree,lem:absorption] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:invariant",
+      "verdict": "matched",
+      "note": "Closed unital star-subalgebras encode the stated C*-inclusions; conjugation and the common normalizing sequence match, with one fixed p∈P per b and sequence. tensorSumNorm computes the spatial norm on the dense algebraic Hilbert tensor product."
+    },
+    {
+      "obj_id": "lem:tree",
+      "verdict": "matched",
+      "note": "The range, generator coefficients, and c(t) formula agree; the pointwise uniform bound is equivalent to the supremum bound, and the subtype filter expresses t approaching zero from above within (0,1)."
+    },
+    {
+      "obj_id": "lem:absorption",
+      "verdict": "matched",
+      "note": "Under the canonical unitary identification K⊗J≃ℓ²(G,J), absorptionOp has the stated basis action, shiftOp realizes λ(g)⊗id, and its product with the constant diagonal action realizes λ(g)⊗σ(g); nonzero J is retained."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:invariant","verdict":"matched","note":"InvariantUnital makes P, Q and D closed unital star-subalgebras of B(L) with P,Q ≤ D, which is the paper's 'unital C*-algebras P,Q ⊆ D'. Conjunct 1 says that for every unitary U with U D U* = D, the identity for P implies the identity for conjAlg U P = U P U*. Conjunct 2 says that for every unitary sequence with U_n D U_n* = D, where each b ∈ Q has p_b ∈ P with ‖b − U_n p_b U_n*‖ → 0 (PointwiseNormalizerApprox, matching eq:pointwise-normalizers), the identity for P implies the identity for Q. Both directions agree. The tensor identity itself (def:tensor) was taken as context and not re-graded here."},{"obj_id":"lem:tree","verdict":"matched","note":"For each t in (0,1) there is a homomorphism π : FreeGroup ℕ →* unitary(B(ℓ²(G))) with ⟪π(gen i)δ_e, δ_e⟫ = t for every i, and sup_g ‖π(g) − λ(g)‖ ≤ c(t) with c(t) = 2(1 − √(1−t²)) + t/(1−t) + t. Here leftReg g is the shift (v ↦ v(g⁻¹·)), which is λ(g). Generators indexed from 0 are a relabeling of s_1, s_2, …. Mathlib's inner product is conjugate-linear in the first slot, but the value t is real, so the coefficient condition is equivalent. 'c(t) → 0 as t ↓ 0' is stated as Tendsto along comap val of 𝓝[>]0 on the subtype (0,1), which is equivalent."},{"obj_id":"lem:absorption","verdict":"matched","note":"K⊗J is realized as ℓ²(G, J). W_σ = diag(x ↦ σ(x)) sends δ_x⊗v to δ_x⊗σ(x)v. shiftOp g (v ↦ v(g⁻¹·)) is λ(g)⊗id_J, and shiftOp g ∘ diag(σ g) is λ(g)⊗σ(g). The conclusion has two parts: W_σ is unitary, and W_σ(λ(g)⊗1)W_σ* = λ(g)⊗σ(g) for all g. 'J nonzero' is encoded as Nontrivial J. σ is a hom into the unitary group, which suffices for a discrete group. Equivalent in both directions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:group,def:regular,def:deformation-setup,def:p,def:matrix-units] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:group",
+      "verdict": "matched",
+      "note": "FreeGroup ℕ realizes the free group on the enumerated generators via n ↔ s_(n+1); KSp is ℓ²(G)."
+    },
+    {
+      "obj_id": "def:regular",
+      "verdict": "matched",
+      "note": "leftReg acts by f(x) ↦ f(g⁻¹x), giving λ(g)δ_x = δ_(gx); companion rightReg (Basic.lean:270) acts by f(x) ↦ f(xg), giving ρ(g)δ_x = δ_(xg⁻¹). These basis actions uniquely determine the bounded operators."
+    },
+    {
+      "obj_id": "def:deformation-setup",
+      "verdict": "matched",
+      "note": "piZero is definitionally leftReg, exactly π₀ = λ."
+    },
+    {
+      "obj_id": "def:p",
+      "verdict": "matched",
+      "note": "Under K⊗K ≅ ℓ²(G;K), Qop acts by v(x) ↦ π(g)v(g⁻¹x), exactly λ(g)⊗π(g); Palg is precisely its generated norm-closed star algebra. Unitality adds no restriction since Qop π 1 = 1."
+    },
+    {
+      "obj_id": "def:matrix-units",
+      "verdict": "matched",
+      "note": "evalCLM and smulRight give matUnit x y f = f(y)δ_x, equivalent to the specified basis action because the coordinate basis has dense linear span."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:group","verdict":"matched","note":"FG := FreeGroup ℕ is the free group on a countably infinite generating set {s_1,s_2,…} (indexing by ℕ instead of ℕ≥1 is only a relabelling). The identity e is the group's 1. K = ℓ²(G) is realized separately as KSp = lp (fun _ : FG => ℂ) 2, which is exactly the complex square-summable functions on G."},{"obj_id":"def:regular","verdict":"matched","note":"shiftOp g = reindexOp (x ↦ g⁻¹x), and Helpers/OperatorMaps.lean:20 gives (reindexOp e v) x = v (e x). So (λ(g)v)(x) = v(g⁻¹x), which means λ(g)δ_x = δ_{gx}. leftReg is a unitary group homomorphism with exactly this action. The ρ half of the definition is realized by rightReg (Basic.lean:270, tagged @realizes \\rho): v ↦ v(xg), so ρ(g)δ_x = δ_{xg⁻¹}, matching the paper. Both halves of the definition are faithful."},{"obj_id":"def:deformation-setup","verdict":"matched","note":"piZero := leftReg, which is exactly π_0 = λ."},{"obj_id":"def:p","verdict":"matched","note":"L = K⊗K is realized as ℓ²(G;K), the standard identification ℓ²(G)⊗K ≅ ℓ²(G;K). Qop π g = shiftOp g ∘ diagUnitaryOp(const π g) sends ξ to x ↦ π(g)ξ(g⁻¹x), which is λ(g)⊗π(g) under that identification. Palg is the norm closure of the unital *-algebra generated by the Q(g). This equals C*(Q(g) : g ∈ G), because Q(e) = 1 already lies in the generating set, so unital and non-unital generation agree. P_0 and P_t are Palg applied to π_0 and π_t."},{"obj_id":"def:matrix-units","verdict":"matched","note":"matUnit x y = (evaluation at y).smulRight δ_x is the map f ↦ f(y)δ_x. Applied to δ_z it gives 1{z=y}δ_x, which is exactly E_{xy}δ_z = 1_{z=y}δ_x."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Equivalent in both directions: complete complex inner-product spaces encode Hilbert spaces; closed StarSubalgebras encode C*-algebras containing the ambient identity; separability is in norm. The unit balls are nonempty and bounded, so kkDist is their ordinary Hausdorff distance; double centralizers and adjoint conjugation give exactly the stated remaining clauses."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement matches the paper in both directions. H : Type is given a NormedAddCommGroup, an InnerProductSpace ℂ structure and CompleteSpace, which makes it a complex Hilbert space, and SeparableSpace H makes it separable. A and B are StarSubalgebra ℂ (H →L[ℂ] H), so each contains 1 = id_H; that is the paper's 'unital with common identity id_H'. Requiring them to be IsClosed in norm makes them C*-subalgebras of B(H), and IsSeparable gives norm-separability. kkDist is the Hausdorff distance between unitBall A = {a ∈ A | ‖a‖ ≤ 1} and unitBall B (Basic.lean:50-55), which is the Kadison–Kastler distance. Both balls are nonempty (they contain 0) and bounded, so Metric.hausdorffDist does not fall back to its default value of 0 and the bound < ε is the genuine one. commutant is Set.centralizer, the set of all bounded operators commuting with the given set, so the double centralizer equality is A''=B''. The final clause, ¬∃ u ∈ unitary (Op H) with conjSet u A = B, uses the image {u x u* | x ∈ A}, which is exactly 'no unitary u satisfies uAu* = B'. The quantifier order (∀ε>0, ∃H, A, B) matches the paper."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:obstruction =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:obstruction","verdict":"matched","note":"The unfolded hypotheses and conclusions agree in both directions: the tensor identity uses the Hilbert tensor norm, spatial conjugacy uses unitary conjugation on the direct sum, and the bound quantifies over every unitary W with WPW*=Q without requiring W to normalize D."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:obstruction","verdict":"matched","note":"The hypotheses match those of prop:sequences: L is nontrivial and separable, with completeness supplied by the instance. D is a closed separable StarSubalgebra, so it is unital. Its relative centre is the scalars. P and Q are closed star subalgebras of D containing 1 (StarSubalgebra contains 1). ObstructionTensorDistinction is HasSpatialTensorIdentity D P ∧ ¬HasSpatialTensorIdentity D Q. Conclusion part 1: ¬∃ unitary S on SumSpace L = ℓ²(ℕ, L) with S·E_D(P)·S* = E_D(Q), which is 'not spatially conjugate'. Conclusion part 2: for every unitary W with W P W* = Q, kkDist(E_D(P), E_D(Q)) ≤ 2‖W − 1‖. seqAlg's carrier is exactly the diagonal operators of norm-convergent sequences in D whose limit lies in P. Such sequences are bounded, so every one gives a bounded diagonal operator and the sets coincide. kkDist is the Hausdorff distance of the closed unit balls. Those balls are nonempty and bounded, so the distance is finite and equals the paper's KK. Both directions hold. HasSpatialTensorIdentity (def:tensor) is context only and was not graded here."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:d =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:d","verdict":"matched","note":"The operators act as the four stated tensor-product generator families; StarAlgebra.adjoin followed by topologicalClosure gives exactly their generated norm-closed unital star algebra, with π representing the input π_t."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:d","verdict":"matched","note":"The typed core gives D as the ambient unital C*-subalgebra of B(L). Lean's `Dalg` is the norm closure of `StarAlgebra.adjoin ℂ`, which is exactly the C*-algebra generated by the given set. Being unital costs nothing, since λ(1)⊗id equals the identity. Each of the four generating families matches when L is read as ℓ²(G;K), first tensor factor being the index. (1) shiftOp g = reindexOp(x ↦ g⁻¹x), which sends f to x ↦ f(g⁻¹x); this is λ(g)⊗id_K. (2) constantDiagOp(piZero g) applies λ(g) in every coordinate, giving id_K⊗π_0(g), with π_0 = leftReg = λ. (3) constantDiagOp(π g) gives id_K⊗π_t(g). Here π_t is a parameter of `Dalg`, which matches its role as an input of def:d. (4) constantDiagOp(matUnit x y) gives id_K⊗E_xy, where matUnit x y sends f to f(y)δ_x. Each object the paper's definition produces is the Lean object, and the converse holds as well."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lem:bad-inclusion =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:bad-inclusion",
+      "verdict": "matched",
+      "note": "The unfolded algebras and tensor norm give precisely the stated failure for 0<t<1, using the canonical identification ℓ²(G;K) ≅ K⊗K. Lean strengthens the lemma to every representation satisfying the tree lemma’s coefficient and uniform bound."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:bad-inclusion","verdict":"matched","note":"For every t with DeformationRange t (0<t<1), and for every π satisfying IsTreeRep (the generator coefficient ⟨π(s_i)δ_e,δ_e⟩=t and the bound sup_g‖π(g)−λ(g)‖≤c(t) with c(t)=2(1−r)+t/(1−t)+t, matching lem:tree and the core's π_t, 'the representation supplied by lem:tree with the stated coefficient and uniform bound'), the Lean concludes ¬HasSpatialTensorIdentity (Dalg π) (Palg π). HasSpatialTensorIdentity is quantified over every m>0, p_i∈P and z_i in the commutant (Set.centralizer) of D, with ‖Σp_i z_i‖ equal to the spatial tensor norm. This is exactly the negation of def:tensor for P_t⊆D. Quantifying over every such π is at least as strong as the claim for the π the tree lemma supplies, so as a proved lemma it gives the paper's statement. The tensor-norm encoding (tensorSumNorm, an sSup over the algebraic tensor product's unit ball) belongs to the def:tensor / ass:spatial-tensor-products realization and is not judged here."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:sequences =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:sequences",
+      "verdict": "matched",
+      "note": "Equivalent hypotheses and all three conclusions: the StarSubalgebra types supply the common identity; norm closure and separability, KK equality, and one normalizing sequence with a fixed p_b for each b match exactly; bicommutants represent von Neumann closures by the bicommutant theorem."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:sequences","verdict":"matched","note":"The Lean statement and the paper are equivalent in both directions. Hypotheses: L is a complex Hilbert space (InnerProductSpace ℂ plus CompleteSpace, from the variable block at TSequences.lean:11), Nontrivial and SeparableSpace. D, P and Q are StarSubalgebras, so each contains id_L. D is norm-closed and separable. Every central element of D is a scalar multiple of 1, which is exactly Z(D)=ℂ·id because scalars are always central. P ≤ D and Q ≤ D, both closed. seqAlg is exactly the set of diagonal operators on lp 2 given by sequences x_n in D converging in norm to some p in P. Part 1: being StarSubalgebras of Op(SumSpace L) makes them unital with common identity; IsClosed and IsSeparable say they are norm-separable C*-algebras; the conclusion kkDist(E_D(P),E_D(Q)) = kkDist(P,Q) is eq:distance-equality. Part 2: SequencesConjugacy says a unitary S has S·E_D(P)·S* = E_D(Q). The conclusion gives a single sequence of unitaries U_n with U_n D U_n* = D for every n, then for each b in Q some p in P with ‖b − U_n p U_n*‖ → 0, so the same sequence serves every b, as stated. Part 3: equal commutants, and equal double commutants. For unital *-algebras the double commutant is the von Neumann closure (bicommutant theorem), so this matches 'same von Neumann closure'."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:P_a =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:P_a","verdict":"drift","note":"Basic.lean:361 defines Palg for arbitrary representations, producing a single algebra rather than the declared {0,t}-indexed family; its closure formula is correct but does not pin the index domain. Add Pindexed (Basic.lean:364) to the P_a realization cluster, retaining Palg as its component construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":{"kind":"scaffold-mismatch","obj_id":"sym:P_a","reason":"The sole tagged member Palg has representation domain, whereas the core symbol P_a is a family indexed by a∈{0,t}; the indexing wrapper Pindexed is outside the cluster.","unpinned":null,"witness":null}}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:P_a","verdict":"matched","note":"Palg (Basic.lean:361) is a def that computes P_a as (StarAlgebra.adjoin ℂ (Set.range (Qop π))).topologicalClosure, a StarSubalgebra of Op LSp = B(L), so it lies in 𝒫(B(L)) by construction. This is C*(Q_a(g) : g∈G): the norm closure of the *-algebra generated by the unitaries Q_a(g). It is unital, and that matches the paper because Q_a(e)=1. Qop π g = shiftOp g ∘ diag(π g) is λ(g)⊗π(g) on L (Basic.lean:319). The index over {0,t} comes from Pindexed t π a := Palg (indexedRep t π a) with a : {a : ℝ // a = 0 ∨ a = t}, where indexedRep returns piZero at a=0 and π otherwise (Basic.lean:347,365). Taken together these give exactly a family in 𝒫(B(L))^{0,t}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:P_a =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:P_a","verdict":"matched","note":"Basic.lean:365 defines Pindexed on exactly {a : ℝ // a = 0 ∨ a = t}, returning subsets of bounded operators on LSp through StarSubalgebra. Unfolding Palg gives precisely the norm-closed unital star algebra generated by Qindexed, with indexedRep selecting π₀ = λ at zero; closure and generated-algebra minimality establish both directions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:P_a","verdict":"matched","note":"Pindexed (Basic.lean:365) is a computed def and realizes the space by construction. Its type is a ↦ StarSubalgebra ℂ (Op LSp), with a ranging over the subtype {a : ℝ // a = 0 ∨ a = t}, so it is exactly a map {0,t} → subalgebras of B(L). Here LSp = ℓ²(G;K), a faithful model of K⊗K. Its value is Palg (indexedRep t π a). indexedRep gives piZero = leftReg = λ when a = 0 and gives π otherwise. Palg ρ is the topological closure of StarAlgebra.adjoin ℂ (range (Qop ρ)), which is the norm-closed unital C*-algebra generated by the Q_a(g). Qop ρ g = shiftOp g ∘ diag(ρ g) is λ(g)⊗ρ(g) on ℓ²(G;K), and Qindexed/tensorRep uses the same Qop. So P_a = C*(Q_a(g) : g ∈ G) for a ∈ {0,t}, as in def:p. The representation π is a parameter. It equals π_t when it is supplied by the tree lemma (IsTreeRep), and π_t is constrained by its own symbol cluster, so this is not a gap in P_a. The case t = 0, where the two indices would merge, is ruled out by DeformationRange (0 < t < 1)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}

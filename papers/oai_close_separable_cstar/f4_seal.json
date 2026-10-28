@@ -1,0 +1,626 @@
+{
+  "version": 1,
+  "slug": "oai_close_separable_cstar",
+  "paper_sha256": "e97075df8760d4987bddeb38e43f55b1314b4a2c75b8fa45ab98553ef009715f",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:absorption-representation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0070beeca900be545b36e894d0122bb2b7ef01d7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0070beeca900be545b36e894d0122bb2b7ef01d7"
+      }
+    },
+    {
+      "id": "ass:complex-hilbert-spaces",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a7e8a16c1c80aea91940c3c4fa962cdde829d301"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a7e8a16c1c80aea91940c3c4fa962cdde829d301"
+      }
+    },
+    {
+      "id": "ass:deformation-range",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d5c04f0551dc4ab525e98e256bd3b1ea033332cc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d5c04f0551dc4ab525e98e256bd3b1ea033332cc"
+      }
+    },
+    {
+      "id": "ass:invariant-approximation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ffaa2a9c0d3a3be75971a322eb607bd89c80188d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ffaa2a9c0d3a3be75971a322eb607bd89c80188d"
+      }
+    },
+    {
+      "id": "ass:invariant-unital",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7cb38d952be709bc93b99d54dcf537d5b80cedc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7cb38d952be709bc93b99d54dcf537d5b80cedc"
+      }
+    },
+    {
+      "id": "ass:obstruction-tensor-distinction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "87be5a5b8e2daf27521786c4d9ea649983d786df"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "87be5a5b8e2daf27521786c4d9ea649983d786df"
+      }
+    },
+    {
+      "id": "ass:obstruction-unitary",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ef77fbd950478f83b9c9ce3588fad95c098a0db7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ef77fbd950478f83b9c9ce3588fad95c098a0db7"
+      }
+    },
+    {
+      "id": "ass:sequences-center",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4197484eb2bbf9cec5e07713cd8dfb925002bce8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4197484eb2bbf9cec5e07713cd8dfb925002bce8"
+      }
+    },
+    {
+      "id": "ass:sequences-conjugacy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "20f9ff70d40af326978d6aed2a81561701882343"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "20f9ff70d40af326978d6aed2a81561701882343"
+      }
+    },
+    {
+      "id": "ass:sequences-d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6a3c33fa1b11e9dcac9881e2628f1b3d0b154140"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6a3c33fa1b11e9dcac9881e2628f1b3d0b154140"
+      }
+    },
+    {
+      "id": "ass:sequences-l",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "af7d29916f4be97707a2b99876b56c55a158359d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "af7d29916f4be97707a2b99876b56c55a158359d"
+      }
+    },
+    {
+      "id": "ass:sequences-subalgebras",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bb40523a375b8e04ae94b52a36e47f96aa6aa231"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bb40523a375b8e04ae94b52a36e47f96aa6aa231"
+      }
+    },
+    {
+      "id": "ass:spatial-tensor-products",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "84f36a68fa47c98d381a5d0612775aedbbb5b97d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "84f36a68fa47c98d381a5d0612775aedbbb5b97d"
+      }
+    },
+    {
+      "id": "ass:unital-identities",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5a4a70d156636f1985bef53966c19f434c5c176b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5a4a70d156636f1985bef53966c19f434c5c176b"
+      }
+    },
+    {
+      "id": "def:commutant",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0dc1843b99d5af083af06d116c949eec65ead49f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0dc1843b99d5af083af06d116c949eec65ead49f"
+      }
+    },
+    {
+      "id": "def:d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "59ff54b482e72a9e5022a613d389d919e5ffaa9e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "59ff54b482e72a9e5022a613d389d919e5ffaa9e"
+      }
+    },
+    {
+      "id": "def:deformation-setup",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "02bffb5bfb7873a53d20d547272717cec1e47df6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "02bffb5bfb7873a53d20d547272717cec1e47df6"
+      }
+    },
+    {
+      "id": "def:group",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "eb336fa7887fefe6e9524b27032f95afd31bc7c2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "eb336fa7887fefe6e9524b27032f95afd31bc7c2"
+      }
+    },
+    {
+      "id": "def:kk",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d543020fab921e35efbb925f89ff685452ce9a35"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d543020fab921e35efbb925f89ff685452ce9a35"
+      }
+    },
+    {
+      "id": "def:matrix-units",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "adf5d9d70eb2bfc54e3ce6b0255782eaa1e1a2a8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "adf5d9d70eb2bfc54e3ce6b0255782eaa1e1a2a8"
+      }
+    },
+    {
+      "id": "def:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bbb68aa361a0d62850b6bf30b91daba35a6dc602"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bbb68aa361a0d62850b6bf30b91daba35a6dc602"
+      }
+    },
+    {
+      "id": "def:pointwise-normalizers",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2c08ff9f2ea4a703788a16d3a934118f7f0ab17d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2c08ff9f2ea4a703788a16d3a934118f7f0ab17d"
+      }
+    },
+    {
+      "id": "def:regular",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "271b8ef5fb18ee8ea4d779528adcb318167e57a5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "271b8ef5fb18ee8ea4d779528adcb318167e57a5"
+      }
+    },
+    {
+      "id": "def:sequences",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e7bd8fa25a1b958f789ec3eead2f00a3d5a900d7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e7bd8fa25a1b958f789ec3eead2f00a3d5a900d7"
+      }
+    },
+    {
+      "id": "def:tensor",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "80e70e166efb3e4dc9c42260835db50737d8d24b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "80e70e166efb3e4dc9c42260835db50737d8d24b"
+      }
+    },
+    {
+      "id": "def:unit-balls",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8e6889aef6adc0aea2aabf5a7e5b1bcb8a5dede2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8e6889aef6adc0aea2aabf5a7e5b1bcb8a5dede2"
+      }
+    },
+    {
+      "id": "lem:absorption",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9f188e1265472de5aa03975131bd0e0acb3addb2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9f188e1265472de5aa03975131bd0e0acb3addb2"
+      }
+    },
+    {
+      "id": "lem:ambient",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6b7ed8393fe2c9d4a9f94f3318b03be9331accb8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6b7ed8393fe2c9d4a9f94f3318b03be9331accb8"
+      }
+    },
+    {
+      "id": "lem:bad-inclusion",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "305f6c2641507366df9b66400917fe70ec6a2731"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "305f6c2641507366df9b66400917fe70ec6a2731"
+      }
+    },
+    {
+      "id": "lem:free-norm",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "20e51f0afc3a23bb3db483449ffa12e74f7eff33"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "20e51f0afc3a23bb3db483449ffa12e74f7eff33"
+      }
+    },
+    {
+      "id": "lem:good-inclusion",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1bf4151b9ec40d7c686579bcdaf4ba47a55cdc32"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1bf4151b9ec40d7c686579bcdaf4ba47a55cdc32"
+      }
+    },
+    {
+      "id": "lem:invariant",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b3c2b711af44610dd7d616ccf01f90a5c5696b8e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b3c2b711af44610dd7d616ccf01f90a5c5696b8e"
+      }
+    },
+    {
+      "id": "lem:tree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1fa92eb54c347504f959b7091d4a4b03fdaca452"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1fa92eb54c347504f959b7091d4a4b03fdaca452"
+      }
+    },
+    {
+      "id": "prop:sequences",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d690bd07cb7b2240bf4a58e664a0dda0a7f9d683"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d690bd07cb7b2240bf4a58e664a0dda0a7f9d683"
+      }
+    },
+    {
+      "id": "sym:P_a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b8e1b674448b27c4fca5e6c64a9d5903f854bf6d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b8e1b674448b27c4fca5e6c64a9d5903f854bf6d"
+      }
+    },
+    {
+      "id": "sym:\\varepsilon",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e15cc1c2c40964157a476755e4f54d4644a1125a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e15cc1c2c40964157a476755e4f54d4644a1125a"
+      }
+    },
+    {
+      "id": "sym:a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3d5e387e4771b91ec6e21c3ddc820caad705d26e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3d5e387e4771b91ec6e21c3ddc820caad705d26e"
+      }
+    },
+    {
+      "id": "sym:c(t)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c64597c230977b4c0407987d3033ce49a99a96e9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c64597c230977b4c0407987d3033ce49a99a96e9"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8326c398d207a766c446aa1943406acbd468bba5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8326c398d207a766c446aa1943406acbd468bba5"
+      }
+    },
+    {
+      "id": "sym:t",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "63f10db35eaf1404b65d1c7a9fa032c2e9984684"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "63f10db35eaf1404b65d1c7a9fa032c2e9984684"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fb154f7ba2402e7e510099c61b30897ccd38e16d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fb154f7ba2402e7e510099c61b30897ccd38e16d"
+      }
+    },
+    {
+      "id": "thm:obstruction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0a3f0db0a4860b6057b3477e2bdfd648a98b6774"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0a3f0db0a4860b6057b3477e2bdfd648a98b6774"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "f200fc57b5c2ef60a2355ca569d7580a719390b263023879d3193674c20f771b",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "a0d44933384a16f313766259bb67c64d1a4da8efe34cbaa262a7713544fef40d"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "25f6a667a125bf79f8875f6725a3560e164ce07a756b34c339e989b52c90ddbf"
+    },
+    {
+      "path": "corrected_paper/_tikz/7f11c5c5e46d32ff.pdf",
+      "sha256": "2694ec10ebaa704f2a34156fd2357c4a605656d16ec09127689454548859e254"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "78c58d948ddb5b5e7eea0d454cc32f190dcc418695ea3fdb40c69fae8c8331fd"
+    },
+    {
+      "path": "corrected_paper/references.tex",
+      "sha256": "dd64f3b7c07c91dde1cbd4a498f0f573332afb923a515b23aac4b356898161d8"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "c2acc0a8c2825d84dce3e90d32b0ee75e4602e2e04cef1e27e4e7ff61f28dc0c"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "4276c041ffe9762c24df66d7ca157b542368359197209d09b747dc5d7635926e"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar.lean",
+      "sha256": "1de87cc939c89fc583cb11c7c11b9f10cd928fd7f07798d7e1aad44a39b7a5c5"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Basic.lean",
+      "sha256": "73f7c6bf4345b2afccf478b31c0c6f0daf82720841fe894fa365c2e3605efa5c"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers.lean",
+      "sha256": "0805a9fd670ace7a664ab222551e07dc6d3e6c2563cb540b4e516d37c8c72f4a"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/Ambient.lean",
+      "sha256": "e6470316d05b49f41482462adca94c4b717a944105412f63b238834e71b41a8b"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/AmbientCenter.lean",
+      "sha256": "40c5d372ef840eaae714ac4f6a00b6ff2d372f26eff44fed22470a05fb4f8fa1"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/AmbientCommutant.lean",
+      "sha256": "a05974658c9162493fb60bee34f11dcb20202953af09f88ca105945ce245398b"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/BadInclusion.lean",
+      "sha256": "ded9bb52ff2c6a4506015174d052d1e5ae652162872091ba03a5ddb63ba82001"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/FreeNorm.lean",
+      "sha256": "08b9e8ca491b2a1598609c8bdc19c3b854229f66f09aa2981238405bfacf2194"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/GoodInclusion.lean",
+      "sha256": "de9fd6a60e7f3eebb330cec0d81f49e99883ce8ae8a1ba08e7cfba88e82db8ad"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/Invariant.lean",
+      "sha256": "c96a75d00f228cb2de05fc412accf0263d96e8b539f8f37ef8b6527a904e2c5d"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/LpOperators.lean",
+      "sha256": "2b0d31d7a64cc80c6020a444ab5878c8a730f408b90ddf7aec42d4152e122b22"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/OperatorMaps.lean",
+      "sha256": "90ecb70d5d3f8b3033fa7b0f2901945e18b1e26cddd41d44dceb5c930cb6512f"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/SequenceAlgebra.lean",
+      "sha256": "7b6dbdb8710f6201c2636d29f8ca95cb32af935dac12bb9e8e9a19e119b78e8d"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/SequenceConjugacy.lean",
+      "sha256": "5689f4d8ee5cdaa934cf3ce856cb368607715a767103e5e079768d454bfef695"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TensorLp.lean",
+      "sha256": "96f1b0dbb99fab8a0627a55f1f991f026c9a7c81cb4cdeac376db4d3a439982c"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/Tree.lean",
+      "sha256": "584f35b1302bd183bb826a7617be438ba29025121073299ae529a98bcf825c37"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreeGram.lean",
+      "sha256": "860ee0f5589fce9a91428fe6f0dea96c12f4fe55e735c14f911ab07537bf3fed"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreeNorm.lean",
+      "sha256": "5ff31de73d1b2069b6a593d375d1e722d1bc8ef8c420b479d83342bfdefde0a3"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreePathDiagonal.lean",
+      "sha256": "5e5e56c444091a297af1bd59a2e81330f0435e0cdd09a6809220e048aa0147c0"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreePathOperators.lean",
+      "sha256": "8b31a8bac8701a1aceaee6b2ad24b45259dcb8e33ef71220804400f5c3ece8b2"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreePerturbation.lean",
+      "sha256": "d832c5c16c0a77dfffa21a71699621c1fc922dda4960df19f7dd3421db5ebdb8"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreeUnitary.lean",
+      "sha256": "fe4bba00efd21396314245aa6d1717331f370fa10d63610f50e94ff8dc7be4a9"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/Helpers/TreeVectors.lean",
+      "sha256": "b6ecbe3e8c5b647162f35dec14c6c9d051105bc57008e07b7ef8af775fc08a85"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/TMain.lean",
+      "sha256": "154ecabdb664e633eca2bd08667dba8d4b474ea7f81558d8109a831655ad5854"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/TObstruction.lean",
+      "sha256": "cbecf0fd38934bb60e54aa9c76dad08ed46a511f65ee00b3eb549aca9587ffe7"
+    },
+    {
+      "path": "lean/Papers/OaiCloseSeparableCstar/TSequences.lean",
+      "sha256": "5ffc7beb961292c6d98e1d680e632ce9d01f46eebeb4e6a5da1babcd59bffb51"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "f339ab74d3d3152a79ff126ba71536193ed29964dc2c37ed33443a9936503bae"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "1a0541e57ee6107ea0c673e460ec107fb09d17e1a59845470f62b1f6adcf8c12"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "d2fb4d30a4d319c95be44a21af795de1978feb7f152938bbf69da8141ed1efeb"
+    }
+  ],
+  "code": "b07d8665a77b8f3f1e915d707ce5c0de2aa55ff7de0ad7bdba5856ca800c05d4"
+}

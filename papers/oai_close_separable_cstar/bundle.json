@@ -1,0 +1,60 @@
+{
+  "slug": "oai_close_separable_cstar",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 10,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 26,
+    "toolkit_modules": [],
+    "requires": [
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [],
+    "warnings": [],
+    "notes": []
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "b07d8665a77b8f3f1e915d707ce5c0de2aa55ff7de0ad7bdba5856ca800c05d4",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.1",
+    "prop:sequences": "Proposition 2.1",
+    "lem:invariant": "Lemma 2.3",
+    "thm:obstruction": "Corollary 2.4",
+    "lem:tree": "Lemma 3.1",
+    "lem:absorption": "Lemma 4.1",
+    "lem:ambient": "Lemma 4.2",
+    "lem:good-inclusion": "Lemma 4.3",
+    "lem:free-norm": "Lemma 4.4",
+    "lem:bad-inclusion": "Lemma 4.5"
+  },
+  "todo_items": []
+}
