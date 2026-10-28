@@ -1,0 +1,1071 @@
+{
+  "version": 1,
+  "slug": "oai_geometric_erdos_similarity",
+  "paper_sha256": "53b39e3044690d96ced06638f4208a69a1565795c54908fea299e71143c6511f",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:base-length-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4c928beaf747683ad9f5bf5b24fde7e296c6a941"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4c928beaf747683ad9f5bf5b24fde7e296c6a941"
+      }
+    },
+    {
+      "id": "ass:branching-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e063f4f5839890121d221821b233e150f0520078"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e063f4f5839890121d221821b233e150f0520078"
+      }
+    },
+    {
+      "id": "ass:conditional-scales-default-atom",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bb95670bfa1cdbb2bdf7fce497b0d8caab0b181d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bb95670bfa1cdbb2bdf7fce497b0d8caab0b181d"
+      }
+    },
+    {
+      "id": "ass:conditional-scales-height",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2d5cf604fe9df034a26aaa21296bafbf8e22eb7d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2d5cf604fe9df034a26aaa21296bafbf8e22eb7d"
+      }
+    },
+    {
+      "id": "ass:conditional-scales-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e9be887e2a7e46f65fee472695163642619130d2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e9be887e2a7e46f65fee472695163642619130d2"
+      }
+    },
+    {
+      "id": "ass:depth-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "679034e904e5792f78a82912742f4b01d5fafffb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "679034e904e5792f78a82912742f4b01d5fafffb"
+      }
+    },
+    {
+      "id": "ass:gap-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "86a3778786fbf5d4dd1639410a0c776afced6593"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "86a3778786fbf5d4dd1639410a0c776afced6593"
+      }
+    },
+    {
+      "id": "ass:independent-tests-default-atom",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3583cb5b01676ea0b74a7caad9fff46e0b757201"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3583cb5b01676ea0b74a7caad9fff46e0b757201"
+      }
+    },
+    {
+      "id": "ass:q-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b43b152c87f3dcaca36870c61a906ee308eae845"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b43b152c87f3dcaca36870c61a906ee308eae845"
+      }
+    },
+    {
+      "id": "ass:routing-default-atom",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a15a9c4be5f86d56db1ea22c75b576f50f722a90"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a15a9c4be5f86d56db1ea22c75b576f50f722a90"
+      }
+    },
+    {
+      "id": "ass:separation-parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "904579947315fffae71bdffa93644bfc25e47586"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "904579947315fffae71bdffa93644bfc25e47586"
+      }
+    },
+    {
+      "id": "ass:stable-center-condition",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "12ac241928e659b8aeb49e2f69457478935adef5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "12ac241928e659b8aeb49e2f69457478935adef5"
+      }
+    },
+    {
+      "id": "ass:terminal-probability-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ded93f3ca8cca15d998d2a01abcfa2ddc830d1ce"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ded93f3ca8cca15d998d2a01abcfa2ddc830d1ce"
+      }
+    },
+    {
+      "id": "ass:window-span-height",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "49355db04452d818c39b4a997726ed245ca5e56a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "49355db04452d818c39b4a997726ed245ca5e56a"
+      }
+    },
+    {
+      "id": "def:block-endpoint",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "97929c2b94622181758c7eaee49c3de09871a87c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "97929c2b94622181758c7eaee49c3de09871a87c"
+      }
+    },
+    {
+      "id": "def:center-exposure",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a8d9942f650ac5c697eb13f2b85ae737dd943daf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a8d9942f650ac5c697eb13f2b85ae737dd943daf"
+      }
+    },
+    {
+      "id": "def:first-default",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c8e07215c063b62d3734120cd7c3c8367d1eb493"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c8e07215c063b62d3734120cd7c3c8367d1eb493"
+      }
+    },
+    {
+      "id": "def:geometric-progression",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d904af963828a454052a94db220ae242f9eb6707"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d904af963828a454052a94db220ae242f9eb6707"
+      }
+    },
+    {
+      "id": "def:global-open",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "01bfe9ee42367d5f5366b3dd11dfdbf81f2351e6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "01bfe9ee42367d5f5366b3dd11dfdbf81f2351e6"
+      }
+    },
+    {
+      "id": "def:grid-key",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "65f4f5c03c8327ec3cc98e6e8e6888ec05d1aa69"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "65f4f5c03c8327ec3cc98e6e8e6888ec05d1aa69"
+      }
+    },
+    {
+      "id": "def:grid-nesting",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "83c662c1bc0eadbd945e7a345d53fa0fe431f220"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "83c662c1bc0eadbd945e7a345d53fa0fe431f220"
+      }
+    },
+    {
+      "id": "def:grid-resolution",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "01bd24c1cd3984f96df23b68ab3a2e73d544f3d9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "01bd24c1cd3984f96df23b68ab3a2e73d544f3d9"
+      }
+    },
+    {
+      "id": "def:grid-size",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fd169e4fcaf79abb5c4c749ff9590affe05fc89b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fd169e4fcaf79abb5c4c749ff9590affe05fc89b"
+      }
+    },
+    {
+      "id": "def:local-indices",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e0954fbf972a135438fbe93515a3677fd7a677f6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e0954fbf972a135438fbe93515a3677fd7a677f6"
+      }
+    },
+    {
+      "id": "def:local-test",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "74c023d0d535b9bb824fe48fbc2c236ed7031dcf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "74c023d0d535b9bb824fe48fbc2c236ed7031dcf"
+      }
+    },
+    {
+      "id": "def:no-default",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1b8865533de964ffed395105274814ce36955d33"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1b8865533de964ffed395105274814ce36955d33"
+      }
+    },
+    {
+      "id": "def:ordered-tree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8eec8cede6b77cbb61d86e134a765dc68ec25fb0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8eec8cede6b77cbb61d86e134a765dc68ec25fb0"
+      }
+    },
+    {
+      "id": "def:periodic-density",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d497d51892de6bd0f1a9b506f465b81df4d0a847"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d497d51892de6bd0f1a9b506f465b81df4d0a847"
+      }
+    },
+    {
+      "id": "def:random-set",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1c9b0523ddd4942bb08bbdaac655f39519dadccb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1c9b0523ddd4942bb08bbdaac655f39519dadccb"
+      }
+    },
+    {
+      "id": "def:random-tables",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "279739a0b392789a516405b3d2c1ce69b1060c62"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "279739a0b392789a516405b3d2c1ce69b1060c62"
+      }
+    },
+    {
+      "id": "def:scale-count",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7133370574d30c76b4b33fc18620b2db203d4e3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7133370574d30c76b4b33fc18620b2db203d4e3"
+      }
+    },
+    {
+      "id": "def:stable-centers",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2b00352565ebe6d052b31ed0f655facd2f7fdbc9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2b00352565ebe6d052b31ed0f655facd2f7fdbc9"
+      }
+    },
+    {
+      "id": "def:windows",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "45a8b7948a06c95f378aa1f083640a702c9011f6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "45a8b7948a06c95f378aa1f083640a702c9011f6"
+      }
+    },
+    {
+      "id": "lem:conditional-scales",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "de132393427d24f4ee84d45bf64abd9f18557ffa"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "de132393427d24f4ee84d45bf64abd9f18557ffa"
+      }
+    },
+    {
+      "id": "lem:density",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5c779b46230561f90a630f99a24c326cde5f6851"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5c779b46230561f90a630f99a24c326cde5f6851"
+      }
+    },
+    {
+      "id": "lem:independent-tests",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cede8496015103267b6f80f1dd2c3959f5b2cf7f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cede8496015103267b6f80f1dd2c3959f5b2cf7f"
+      }
+    },
+    {
+      "id": "lem:routing",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1dc82a1060420490e736eb1a2859992acd62622d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1dc82a1060420490e736eb1a2859992acd62622d"
+      }
+    },
+    {
+      "id": "lem:separation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8e18e417c667a8ca70b2f0a051a412e1e322198c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8e18e417c667a8ca70b2f0a051a412e1e322198c"
+      }
+    },
+    {
+      "id": "lem:stability",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f2ae18a5f46a6c02fa2b4d698692e028cf7ef6d0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f2ae18a5f46a6c02fa2b4d698692e028cf7ef6d0"
+      }
+    },
+    {
+      "id": "lem:window-span",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a866aee60ef5c6e1f0b65174ca4d8e1a789d849d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a866aee60ef5c6e1f0b65174ca4d8e1a789d849d"
+      }
+    },
+    {
+      "id": "prop:periodic",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2235f3c76d69372e600d22ce38172fa8ebf7949c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2235f3c76d69372e600d22ce38172fa8ebf7949c"
+      }
+    },
+    {
+      "id": "sym:A_{i,n}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "55da3e0dd18899f0777397a5085ecbc95aa89348"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "55da3e0dd18899f0777397a5085ecbc95aa89348"
+      }
+    },
+    {
+      "id": "sym:D_{M,q}(r)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e106ecb6244e4732395d39097e15b71feca0f17c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e106ecb6244e4732395d39097e15b71feca0f17c"
+      }
+    },
+    {
+      "id": "sym:E_{q,\\eta}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a75e354981cf194a79c27550b2b022bc18295d28"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a75e354981cf194a79c27550b2b022bc18295d28"
+      }
+    },
+    {
+      "id": "sym:J_b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5a2590109c95f74fc7ba68d70c63195bb2f565e9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5a2590109c95f74fc7ba68d70c63195bb2f565e9"
+      }
+    },
+    {
+      "id": "sym:M",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0df96e99139c38078d0e06a16b8725a7ca09421c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0df96e99139c38078d0e06a16b8725a7ca09421c"
+      }
+    },
+    {
+      "id": "sym:N_b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "370663e06e75d46b1d594467a9d983acba35b457"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "370663e06e75d46b1d594467a9d983acba35b457"
+      }
+    },
+    {
+      "id": "sym:Q_i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2c5e9a1fb8b7969340bb0a8f72ba25fc5a7511e0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2c5e9a1fb8b7969340bb0a8f72ba25fc5a7511e0"
+      }
+    },
+    {
+      "id": "sym:S_e",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "91ea53e8bd6174ed6e6d06f16d07c150b8e78361"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "91ea53e8bd6174ed6e6d06f16d07c150b8e78361"
+      }
+    },
+    {
+      "id": "sym:T_L",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4baa247fc78a31a3636b0a70300dc91c1ce05d14"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4baa247fc78a31a3636b0a70300dc91c1ce05d14"
+      }
+    },
+    {
+      "id": "sym:\\Omega",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "502b3f2b0783b6528596c1004e443853bdec5407"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "502b3f2b0783b6528596c1004e443853bdec5407"
+      }
+    },
+    {
+      "id": "sym:\\Prob",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ff52ae3da27564c2f19d5d63bfadf5d8c9575c99"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ff52ae3da27564c2f19d5d63bfadf5d8c9575c99"
+      }
+    },
+    {
+      "id": "sym:\\alpha",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b1c2b81ab138efbb166d9a3e66ea6a356485c83a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b1c2b81ab138efbb166d9a3e66ea6a356485c83a"
+      }
+    },
+    {
+      "id": "sym:\\eta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b11b5c5c1389134a93c94d715f1a9fac2410682d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b11b5c5c1389134a93c94d715f1a9fac2410682d"
+      }
+    },
+    {
+      "id": "sym:\\mathcal T_{x,\\xi}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7494829a9f6e025cb740b64ceafd6b78a2b7d1f5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7494829a9f6e025cb740b64ceafd6b78a2b7d1f5"
+      }
+    },
+    {
+      "id": "sym:\\rho",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3a66ab465732b87d4e1635c5f02e22b7ed84bc4d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3a66ab465732b87d4e1635c5f02e22b7ed84bc4d"
+      }
+    },
+    {
+      "id": "sym:\\{z\\}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c19cbb9244d22c0118ab77ee3ea440a113a2c5c1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c19cbb9244d22c0118ab77ee3ea440a113a2c5c1"
+      }
+    },
+    {
+      "id": "sym:a_e",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "24040217409bc0df3e8d2430f4a7adffac4f889b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "24040217409bc0df3e8d2430f4a7adffac4f889b"
+      }
+    },
+    {
+      "id": "sym:b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d0a09130e9752f3e2446f04e28a1ab2e814e88ba"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d0a09130e9752f3e2446f04e28a1ab2e814e88ba"
+      }
+    },
+    {
+      "id": "sym:b'",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3da09657cefe4cd33522e8647f803cef28bbcdc6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3da09657cefe4cd33522e8647f803cef28bbcdc6"
+      }
+    },
+    {
+      "id": "sym:b(L)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1b7d51726ea6293cbbffeee75a69a93cc0e4893d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1b7d51726ea6293cbbffeee75a69a93cc0e4893d"
+      }
+    },
+    {
+      "id": "sym:b_e",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f9235f9767655822037db29802f20a096d8b1d87"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f9235f9767655822037db29802f20a096d8b1d87"
+      }
+    },
+    {
+      "id": "sym:b_e^*",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8d4d22bddbac3dd1ccca1ccecffd3147832182af"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8d4d22bddbac3dd1ccca1ccecffd3147832182af"
+      }
+    },
+    {
+      "id": "sym:b_f",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1935a8209c87b296bf11f4a2fe71ad9e3794787f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1935a8209c87b296bf11f4a2fe71ad9e3794787f"
+      }
+    },
+    {
+      "id": "sym:c",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f39fbd557d7e8e0def5e603f4cd77edc0b639bd0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f39fbd557d7e8e0def5e603f4cd77edc0b639bd0"
+      }
+    },
+    {
+      "id": "sym:d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dc65a95e3471c76547206adf6531473e60628bbe"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dc65a95e3471c76547206adf6531473e60628bbe"
+      }
+    },
+    {
+      "id": "sym:g",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e51faaae22ecf166aff792880eb7b8a85ed00ff3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e51faaae22ecf166aff792880eb7b8a85ed00ff3"
+      }
+    },
+    {
+      "id": "sym:h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1aa11f9d5d5691523e59d49bece13b1b13bf72fa"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1aa11f9d5d5691523e59d49bece13b1b13bf72fa"
+      }
+    },
+    {
+      "id": "sym:i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "72615d579879f4a216b984ba137625824c749a42"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "72615d579879f4a216b984ba137625824c749a42"
+      }
+    },
+    {
+      "id": "sym:m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "046616d82a65f22ae7563b57ec1c3a17a214bbcf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "046616d82a65f22ae7563b57ec1c3a17a214bbcf"
+      }
+    },
+    {
+      "id": "sym:n_0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "652da54ec1c886d4cac0ad7c29dbae9d4b9d891f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "652da54ec1c886d4cac0ad7c29dbae9d4b9d891f"
+      }
+    },
+    {
+      "id": "sym:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "692b0da3d648df6682eef4ce75d9d2a95fe39654"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "692b0da3d648df6682eef4ce75d9d2a95fe39654"
+      }
+    },
+    {
+      "id": "sym:p_k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "33b6f40afc4b472665547eaa075722420b2f9ec6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "33b6f40afc4b472665547eaa075722420b2f9ec6"
+      }
+    },
+    {
+      "id": "sym:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cabb416b3252d0e500c662c921dd68e27b652593"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cabb416b3252d0e500c662c921dd68e27b652593"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "eff5f9b3b0f17b324a78797a893caf872be2cfde"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "eff5f9b3b0f17b324a78797a893caf872be2cfde"
+      }
+    },
+    {
+      "id": "sym:r_*",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8ea2b5bb5c5bb2769ef1115be2eb0e50a7772ee3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8ea2b5bb5c5bb2769ef1115be2eb0e50a7772ee3"
+      }
+    },
+    {
+      "id": "sym:r_0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e83362c884fa8317beee7c9a7cc4d85e6dccb5ea"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e83362c884fa8317beee7c9a7cc4d85e6dccb5ea"
+      }
+    },
+    {
+      "id": "sym:r_h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c39d2b8ce05d61d758cccd48095a1ca86822fd6d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c39d2b8ce05d61d758cccd48095a1ca86822fd6d"
+      }
+    },
+    {
+      "id": "sym:s",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "01618484a95b6882445af5c98630b3f5c1279bc5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "01618484a95b6882445af5c98630b3f5c1279bc5"
+      }
+    },
+    {
+      "id": "sym:t",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "50335e6850c296853c587c5db5bc14815dff5860"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "50335e6850c296853c587c5db5bc14815dff5860"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c4471605bbfca8aa737bfd09e4b6f74dd5d0039b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c4471605bbfca8aa737bfd09e4b6f74dd5d0039b"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "b77c1b24c27a4e8fe4e8adbfe08019d7d91e17e5ed4923006ff38762815006fa",
+  "files": [
+    {
+      "path": "corrected_paper/TC_EDITS.txt",
+      "sha256": "017ee63818a337e08020a37b2727426c895dc4eb8b18b815485a728a642d3203"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "80cfa5bb016fc31f308fab5595c279c249f39beb5f45287c6a81e3072a8d61a9"
+    },
+    {
+      "path": "corrected_paper/_tikz/5493435ab0d88450.pdf",
+      "sha256": "89a3dd2841f4764e9a3de0f7227f4bc8dd346028dd9d338d9538b04e550cd858"
+    },
+    {
+      "path": "corrected_paper/figures/window-block.tex",
+      "sha256": "93483bc5f4748f0ae60813eb45a879d6e9ca0b2e1f08466118b44dfe8a60b5df"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "442f32daa025427e603af42b5e175e4c928f7bb52b7c73c5ca15c5298d51dc41"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "ba499b3ff788c00124a9404868069b86dc0f97a63f76be3429d7579fff6db092"
+    },
+    {
+      "path": "corrected_paper/sections/01-history.tex",
+      "sha256": "ae700b6891849b550f26bfaabecfb3528e399488691b3142d2f976a7ea1db46f"
+    },
+    {
+      "path": "corrected_paper/sections/01-introduction.tex",
+      "sha256": "e6ff5ea0842fcf028f9b615815e35831620696e3ca6a830740e9d8d9c15e977b"
+    },
+    {
+      "path": "corrected_paper/sections/02-periodic.tex",
+      "sha256": "495a0aad88677e2e61904cf5fe029b709033d0830f7c98d386661632abc8bdb8"
+    },
+    {
+      "path": "corrected_paper/sections/03-windows.tex",
+      "sha256": "97eb8f01ca689596b6612186a2bf293858ff80f9ab05bb61026877b62a369c88"
+    },
+    {
+      "path": "corrected_paper/sections/04-routing.tex",
+      "sha256": "dd4ea78ef8104c3d1c72166f74639dba824c9eb8b0e4d2af4c1aa14a3831e85a"
+    },
+    {
+      "path": "corrected_paper/sections/05-scales.tex",
+      "sha256": "7ebabd8c4c14d056b9d89e2d04f8a05764e52bd5afff4b4a0cb8750ccbca4d4a"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "9f508721609b2becc3aba2849ee0e933b54a3ff9d91a77102b19ffe91704f1e3"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "408ad8014e289214f2e0a69d2d3bbf71358a56468f3138811676d40bb4e2dea0"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity.lean",
+      "sha256": "7d560453c4513c06537f1500a535a87868d30dae849b40682e3aa5179e020cc2"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Basic.lean",
+      "sha256": "9ea343dcc6cdd178989d570423061539badbe6ada6b35d9a89b5afebf0d03f62"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers.lean",
+      "sha256": "54938cf70a0dbbc4c5765edc62d24d78d6643332bf69bff8578ae02e8fe2a3da"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/BoundaryDensity.lean",
+      "sha256": "b6f74d099a54d649eefd1a05550a334802c9f418a705a06d59dfb6bc8d905aac"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/DefaultProbability.lean",
+      "sha256": "5ef120d3fbdef555fefb7e369837486e752be83660ffada74378b82384312300"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/LocalRouting.lean",
+      "sha256": "976596eeccaae6a7822bb3a7594843fca7913d42c969ff6438d0cdf454238c66"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/Routing.lean",
+      "sha256": "00d3b4938bd7defb7acaf21d97b7d0761855ab001c0ffdf38b368b9876b0e0ae"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/ScaleBounds.lean",
+      "sha256": "205073dcb0c3763a650498d61a0332063418575a78af8002c8a33ceb54b6690c"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/ScaleConstancy.lean",
+      "sha256": "80027f4cc259751d2b4fa92108fe2e0ef2dc1dbe131138e8664b0bdceb29b689"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/ScaleDefinitions.lean",
+      "sha256": "7024a7d2e6013c728968808965549751637412203f2936220017635ec6d7f54c"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/ScalePartition.lean",
+      "sha256": "3b321ade37122324c534819d73b80c86be2f608eaaf7cf41cbefdd8e42e15420"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/Scales.lean",
+      "sha256": "30665145f62fe280ef0d0a4fe499870f1bfd93bc000f6d6d8f9e51d310b19d31"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/Stability.lean",
+      "sha256": "1996a7661fb92d072422adaebb80b6a0ab347b1f8bdfe9f5d51850a78201bc5c"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/TableDefinitions.lean",
+      "sha256": "a27acff71ae9101927c74da10d4ebfb64ada1304555bef5234c7c7209fb4466d"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/Tables.lean",
+      "sha256": "87f9d6ae4bee38d3abcef2bddc7ac6509cbe11754bcc680c9659cc48f947db50"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/TreeRouting.lean",
+      "sha256": "412e36176315434d8250a2f0732cdeebfc53eae4a8980e059c7f340e4f9c5b4b"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/WindowCombinatorics.lean",
+      "sha256": "0aca818493d65d4770cb769e3865a99f984c1f68e6a3b158a82ab0e36ad10cdf"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/WindowDefinitions.lean",
+      "sha256": "2b07fc8bf859d03687da3aff559e1b2e4663710944929e672969b817c8e8d832"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Helpers/Windows.lean",
+      "sha256": "a0970b855927b7f3d97a88777418a027fce09d828ade1834a872bdbdfc6885cc"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/Main.lean",
+      "sha256": "2ff4796388aa10ccb88e6b06028fabd5dd49309289aab1f2bb4d79727880ae6e"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/TMain.lean",
+      "sha256": "da5208ac1c3debaf426969f95622003b55047630c66a23b07ac60a823845a51b"
+    },
+    {
+      "path": "lean/Papers/OaiGeometricErdosSimilarity/TPeriodic.lean",
+      "sha256": "73cc2a30760aeb6c38d0288950d08d1c15b61654bcaa71e6e3acb65662b8d9e3"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "bba2fbfe81e7ae50a8f28f204cc323c01e960d2c23e66aa832169c477e8cf303"
+    },
+    {
+      "path": "lean/built-against.json",
+      "sha256": "ffd904cdb0ec51ffdf264eebe50d5016bf639bf06a5debaac4a273f3466432f3"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "29fb2216c8a9d15b7ded794b970bc8ed7c3a5baaca7975a4d0debd5b40393d9a"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "b38fdfb600247e4e848101de4f0e87a90bdbd4717053e55f3e1d5d3b73f27c52"
+    }
+  ],
+  "code": "cc61aa0c7307d73ec826756c19781c42708e85d284cdf297f0093f09b504b7c4"
+}

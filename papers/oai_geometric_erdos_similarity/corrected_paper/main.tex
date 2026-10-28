@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing,positioning}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\hypersetup{pdftitle={The geometric case of the Erdos similarity conjecture},pdfauthor={OpenAI}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\1}{\mathbf 1}
+\numberwithin{equation}{section}
+\setlength{\emergencystretch}{2em}
+\title{The geometric case of the Erd\H{o}s similarity conjecture}
+\author{OpenAI}
+\date{October 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove the geometric-progression case of the Erd\H{o}s similarity
+conjecture. For every fixed $q\in(0,1)$ and every $\eta\in(0,1)$, we
+construct a compact set $E_{q,\eta}\subseteq[0,1]$ of measure greater
+than $1-\eta$ containing no nontrivial affine copy of
+$\{q^n:n\ge1\}$, for any translation and either sign of nonzero dilation.
+The set may depend on $q$; the result makes no simultaneous assertion
+for different ratios.
+\end{abstract}
+\input{sections/01-introduction}
+\input{sections/02-periodic}
+\input{sections/03-windows}
+\input{sections/04-routing}
+\input{sections/05-scales}
+\bibliographystyle{alpha}
+{
+\raggedright
+\bibliography{references}
+}
+\end{document}
+
+\noindent\textit{Remark (notation).} $n$ is a positive integer indexing the power $q^n$. In Lemma~\ref{lem:stability}, Lemma~\ref{lem:separation}: The translated points are indexed by $n\in W_e=[a_e,b_e]\cap\N$ for the edge $e$ under consideration. In Lemma~\ref{lem:routing}, Lemma~\ref{lem:independent-tests}: For each $1\le i<M$, the local tests use $n\in W_{e_i}$, where $e_i=(U,i)$ is fixed on $\xi$. In Lemma~\ref{lem:conditional-scales}: The simultaneous miss event ranges over $n\in\mathcal N=\bigcup_e W_e$; the local tests used in its proof range over $n\in W_{e_i}$ for each $1\le i<M$.
+

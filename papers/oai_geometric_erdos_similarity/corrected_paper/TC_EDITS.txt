@@ -1,0 +1,1 @@
+2026-10-25: main.tex:49,52: Replaced bibliography-only \begingroup / \endgroup with equivalent brace grouping so the page renderer reads it. Line count, bibliography, statements and proofs are unchanged.

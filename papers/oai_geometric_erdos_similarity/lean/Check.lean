@@ -1,0 +1,12 @@
+import Papers
+
+-- The paper's results: each must list no axiom beyond propext, Classical.choice and Quot.sound.
+#print axioms Papers.OaiGeometricErdosSimilarity.exists_compact_avoiding_geometric_affine_copies
+#print axioms Papers.OaiGeometricErdosSimilarity.exists_open_periodic_hitting_set
+#print axioms Papers.OaiGeometricErdosSimilarity.blockEndpoint_sub_windowStart_le
+#print axioms Papers.OaiGeometricErdosSimilarity.stableSet_measurable_density_and_keys
+#print axioms Papers.OaiGeometricErdosSimilarity.gridKey_injective_on_translated_window
+#print axioms Papers.OaiGeometricErdosSimilarity.expected_periodicDensity_randomSet_eq
+#print axioms Papers.OaiGeometricErdosSimilarity.localTest_imp_mem_randomSet
+#print axioms Papers.OaiGeometricErdosSimilarity.condPr_forall_localTest_false_eq
+#print axioms Papers.OaiGeometricErdosSimilarity.condPr_exists_scale_miss_le

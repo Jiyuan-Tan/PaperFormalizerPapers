@@ -1,0 +1,538 @@
+===== reviewer convergence/dual :: medium :: batch[ass:q-domain,ass:branching-domain,ass:depth-domain,ass:gap-domain,ass:base-length-domain] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:q-domain","verdict":"faithful-refinement","note":"Exactly q ∈ (0,1): 0 < q ∧ q < 1 over ℝ."},{"obj_id":"ass:branching-domain","verdict":"faithful-refinement","note":"Natural M with 2 ≤ M represents exactly the integers M ≥ 2."},{"obj_id":"ass:depth-domain","verdict":"faithful-refinement","note":"Natural d with 1 ≤ d represents exactly the positive integer depths."},{"obj_id":"ass:gap-domain","verdict":"faithful-refinement","note":"Natural g with 1 ≤ g represents exactly the positive integer gaps."},{"obj_id":"ass:base-length-domain","verdict":"faithful-refinement","note":"Natural r0 with 1 ≤ r0 represents exactly the integer base lengths r₀ ≥ 1."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:q-domain","verdict":"faithful-refinement","note":"The NL fixes q∈(0,1), which is the open interval. Lean has `QDomain q := 0 < q ∧ q < 1` on q : ℝ. This is the same set, and both implications hold trivially."},{"obj_id":"ass:branching-domain","verdict":"faithful-refinement","note":"The NL says 'the integers M≥2', and the core symbol space is {2,3,…}. Lean has M : ℕ with `2 ≤ M`, which is exactly {2,3,…}. Requiring M≥2 makes the choice between ℕ and ℤ immaterial, so the two are equivalent."},{"obj_id":"ass:depth-domain","verdict":"faithful-refinement","note":"The NL says d≥1, and the core symbol d is a fixed integer height with space {1,2,…}. Lean has d : ℕ with `1 ≤ d`, which is the same set."},{"obj_id":"ass:gap-domain","verdict":"faithful-refinement","note":"The NL says g≥1, and the core symbol g is a fixed integer gap with space {1,2,…}. Lean has g : ℕ with `1 ≤ g`, which is the same set."},{"obj_id":"ass:base-length-domain","verdict":"faithful-refinement","note":"The NL says r_0≥1, and the core symbol r_0 is a fixed integer base window length with space {1,2,…}. Lean has r0 : ℕ with `1 ≤ r0`, which is the same set."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:periodic-density,def:grid-resolution,def:grid-key,def:grid-size,def:grid-nesting] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:periodic-density",
+      "verdict": "matched",
+      "note": "Volume is Lebesgue measure; the intersection has measure at most 1, so toReal faithfully represents m(A ∩ [0,1))."
+    },
+    {
+      "obj_id": "def:grid-resolution",
+      "verdict": "matched",
+      "note": "Under the standing 0 < q < 1 and b ≥ 1, cq⁻ᵇ > 4, so the integer ceiling is positive and toNat leaves the prescribed dyadic exponent unchanged."
+    },
+    {
+      "obj_id": "def:grid-key",
+      "verdict": "matched",
+      "note": "Int.fract z is z minus its integer floor; its nonnegativity makes natural floor equivalent to integer floor here, with the stated boundary convention."
+    },
+    {
+      "obj_id": "def:grid-size",
+      "verdict": "matched",
+      "note": "The conjunction states exactly cq⁻ᵇ ≤ N_b < 2cq⁻ᵇ on the paper's positive-index domain."
+    },
+    {
+      "obj_id": "def:grid-nesting",
+      "verdict": "matched",
+      "note": "Divisibility expresses the integral resolution ratio, and natural division expresses its floored key quotient; the extra zero-index power and monotonicity clauses follow from the defining formula under 0 < q < 1."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:periodic-density","verdict":"matched","note":"The Lean is (volume (A ∩ Ico 0 1)).toReal. A ∩ [0,1) has measure at most 1, which periodicDensity_mem_Icc proves, so toReal loses nothing and the value equals m(A∩[0,1)). The def is total over Set ℝ; measurability and 1-periodicity are imposed where it is used, which matches how the paper uses it (only for measurable periodic A). Both directions hold."},{"obj_id":"def:grid-resolution","verdict":"matched","note":"The Lean is 2^(⌈logb 2 (c·q^{-b})⌉).toNat with c = gridConst q = 4/(1-q). On the paper's domain 0<q<1 we have c>4 and q^{-b}≥1, so the log is positive, the ceiling is nonnegative and toNat is the identity (gridSizeComparison_of_qDomain uses this as hcast). So this equals 2^{⌈log2(c q^{-b})⌉}. Defining it at b=0 as well is a harmless total extension. Γ_b is realized separately by gridLattice."},{"obj_id":"def:grid-key","verdict":"matched","note":"The Lean is ⌊N_b·Int.fract z⌋₊, where Int.fract z = z - ⌊z⌋ = {z}. The argument is nonnegative, so Nat.floor equals the integer floor, giving J_b(z)=⌊N_b{z}⌋. Floor gives cells that are closed on the left and open on the right, as the NL states."},{"obj_id":"def:grid-size","verdict":"matched","note":"GridSizeComparison q b is exactly c q^{-b} ≤ N_b ∧ N_b < 2c q^{-b}, with c = 4/(1-q) and the same N_b. The paper's 'we have' claim is not assumed: it is proved for every b under QDomain q by gridSizeComparison_of_qDomain (Basic.lean:121)."},{"obj_id":"def:grid-nesting","verdict":"matched","note":"The conjuncts match the paper as follows. N_b is a power of two for every b, which is always true. Monotone gridResolution covers b≥0; that is slightly broader than 'nondecreasing in b≥1', but the extra step N_0≤N_1 follows from q^{-b} increasing when 0<q<1. For 1≤b≤b', N_b ∣ N_{b'} is the paper's 'N_{b'}/N_b is an integer'. The key identity uses natural-number division, which is floor division, so J_b(z) = J_{b'}(z) / (N_{b'}/N_b) equals the paper's floor formula. The whole Prop is proved under QDomain q by gridNesting_of_qDomain (Basic.lean:163). Lean and paper are equivalent on the paper's domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:independent-tests-default-atom,ass:conditional-scales-parameters,ass:conditional-scales-default-atom,ass:conditional-scales-height,def:geometric-progression] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:geometric-progression",
+      "verdict": "matched",
+      "note": "Exactly the positive-index powers of q on the paper's domain q ∈ (0,1)."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:independent-tests-default-atom",
+      "verdict": "faithful-refinement",
+      "note": "Boolean vectors bijectively specify center-exposure atoms: each edge has its own exposed coordinate and every vector extends to an outcome. The root-to-leaf search returns some vertex exactly when a first default exists."
+    },
+    {
+      "obj_id": "ass:conditional-scales-parameters",
+      "verdict": "faithful-refinement",
+      "note": "Exactly p ∈ (0,1) and the construction's integer restrictions M ≥ 2 and d,g,r₀ ≥ 1, confirmed in the typed core."
+    },
+    {
+      "obj_id": "ass:conditional-scales-default-atom",
+      "verdict": "faithful-refinement",
+      "note": "Every Boolean vector represents a center-exposure atom, and firstDefault.isSome is equivalent to its route using a default edge."
+    },
+    {
+      "obj_id": "ass:conditional-scales-height",
+      "verdict": "faithful-refinement",
+      "note": "Exactly identifies U as the first default vertex along the route and h as its height d minus depth, preserving both parameters."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:geometric-progression","verdict":"matched","note":"{y | ∃ n:ℕ, 1 ≤ n ∧ y = q^n} is the same set as G_q = {q^n : n∈ℕ, n≥1} for every q, so it holds in particular for q∈(0,1). Leaving the q∈(0,1) domain off the def does not change the set where the paper defines it."}],"assumption_verdicts":[{"obj_id":"ass:independent-tests-default-atom","verdict":"faithful-refinement","note":"ξ : NondefaultEdge M d → Bool encodes one atom of F_x = σ(S_e(J_{b_e}(x)) : e=(P,i), i<M). Each S_e is a table of independent fair bits and each nondefault edge has its own table, so atoms are exactly the Bool assignments on nondefault edges. chooseChild picks the first i<M-1 whose bit is true and otherwise the default child M-1, so the default is chosen iff all M-1 bits are 0. This matches the core's no-default probability (1-2^{1-M})^d. walkVertices with fuel d starting at the root visits the whole route, and firstDefault returns the first internal vertex on it that picks the default. So isSome ⇔ 'the first default vertex U exists on ξ', both directions. The unused q, g, r0, x binders are harmless because ξ already holds the values addressed at x."},{"obj_id":"ass:conditional-scales-parameters","verdict":"faithful-refinement","note":"This is the conjunction 0<p<1, M≥2, d≥1, g≥1, r0≥1. The core symbols give exactly these spaces: M ∈ {2,3,…}, d ∈ {1,2,…}, g ∈ {1,2,…}, r_0 ∈ {1,2,…}. That is the paper's 'Fix p∈(0,1) and the construction parameters M,d,g,r_0', in both directions."},{"obj_id":"ass:conditional-scales-default-atom","verdict":"faithful-refinement","note":"The body is the same as IndependentTestsDefaultAtom: (firstDefault …).isSome. This holds iff some internal vertex on x's route, as determined by the F_x-atom ξ, chooses the default child, i.e. iff 'the route of x uses a default edge'. Equivalent in both directions, with the same atom encoding as above."},{"obj_id":"ass:conditional-scales-height","verdict":"faithful-refinement","note":"firstDefault … = some U picks out the first internal vertex where the route defaults, which is the paper's U. vertexHeight U = d − depth(U), which lies in {1,…,d} for an internal U, matching the core's 'height h∈{1,…,d}'. Hence 'the first default occurs at U of height h' ⇔ the conjunction, both directions."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:window-span,lem:stability,lem:separation] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:window-span",
+      "verdict": "matched",
+      "note": "The recursive lengths, preorder windows and descendant maximum match the paper; b_e^* ≥ a_e makes the subtraction-free inequality equivalent. Lean additionally permits starting indices without the paper's smallness condition."
+    },
+    {
+      "obj_id": "lem:stability",
+      "verdict": "matched",
+      "note": "The stable-center predicate matches the immediate-predecessor lattice condition under the stated domains; measurability, periodicity, complement density and preceding-edge key identities agree. Lean additionally drops the unused starting-index smallness condition."
+    },
+    {
+      "obj_id": "lem:separation",
+      "verdict": "matched",
+      "note": "Starting-index positivity and smallness are standing conditions in def:windows. Since q ∈ (0,1) and t ≥ 1 make sepPoint injective, injectivity of its keys is equivalent to pairwise distinct keys on the displayed point set; b ≥ b_e includes b_e itself."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:window-span","verdict":"matched","note":"The Lean statement matches the paper. In ℕ we have blockEndpoint e ≥ windowEnd e = a_e + r_h − 1 ≥ a_e, because r_h ≥ r0 ≥ 1. So 'b*+1 ≤ a_e + 2·r_h' is equivalent to 'b* − a_e + 1 ≤ 2r_h'. WindowSpanHeight is sourceHeight e = d+1−depth(child) = d−depth(parent), which is the height of the parent vertex, as required. blockEndpoint takes the sup of windowEnd over f whose path has e's path as a prefix: that is W_e plus every window in the subtree at P_i (def:block-endpoint). windowStart is n0 + Σ over preorder-earlier f of (r_{h(f)} + g); with lexicographic order on paths (a prefix comes first), this is the preorder placement with exactly g gaps (def:windows). windowData reproduces r_1 = r0, σ_1, r_h = max{r0, g+σ_{h−1}} and σ_h. The Lean is slightly stronger than the paper: n0 is arbitrary, without n0 ≥ 1 or 2q^{n0} ≤ 1/4. The paper's hypotheses imply the Lean's, so this is a proved result that says more."},{"obj_id":"lem:stability","verdict":"matched","note":"The conjuncts match the paper. The set is measurable (Borel MeasurableSet). It is 1-periodic (∀z, z∈A ↔ z+1∈A). ρ(Sᶜ) = m(Sᶜ∩[0,1)) ≤ 4·K·c·q^{g+1}, with K = edgeCount = card of TreeEdge (the total number of edges, def:ordered-tree) and c = gridConst = 4/(1−q). The key-stability clause matches eq:stable-keys: ∀x∈S, ∀e, ∀n∈W_e, ∀t∈[1,2], ∀f preorderLt e, J_{b_f}(x+tq^n) = J_{b_f}(x), with b_f = windowEnd f. S unfolds through IsStableCenter to StableCenterCondition: for every immediate predecessor f of e (IsPredecessor), (x, x+2q^{a_e}] ∩ Γ_{b_f} = ∅. That is ass:stable-center-condition. Its extra conjuncts BaseLengthDomain r0 ∧ 1 ≤ n0 are discharged by the lemma's hypotheses hr and hn0, so S is the paper's set on this domain. The Lean is slightly stronger: it omits 2q^{n0} ≤ 1/4, which the paper's hypotheses imply anyway. That is a proved result that says more."},{"obj_id":"lem:separation","verdict":"matched","note":"The Lean claims ∀b ≥ b_e (which includes b = b_e) that u ↦ J_b(sepPoint x t q u) is injective on Option W_e (none ↦ x, some n ↦ x + t·q^n). For q∈(0,1) and t ≥ 1 the points x and x+tq^n (n∈W_e) are pairwise distinct reals. So injectivity on the index set is equivalent to the paper's pairwise-distinct keys for the point set {x} ∪ {x+tq^n : n∈W_e}. gridKey is ⌊N_b·fract z⌋₊, which is def:grid-key with left-closed cells. The parameter t∈[1,2] comes in through SeparationParameters. The extra hypotheses n0 ≥ 1 and 2q^{n0} ≤ 1/4 are def:windows' standing choice of n0. The domain hypotheses are the paper's global setting."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:terminal-probability-domain,ass:stable-center-condition,ass:window-span-height,ass:separation-parameters,ass:routing-default-atom] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:terminal-probability-domain",
+      "verdict": "faithful-refinement",
+      "note": "Exactly p ∈ (0,1), expressed as 0 < p ∧ p < 1."
+    },
+    {
+      "obj_id": "ass:stable-center-condition",
+      "verdict": "faithful-refinement",
+      "note": "The finite lexicographic path order is the prescribed preorder, so quantifying over immediate predecessor pairs gives exactly the printed avoidance condition; the added positive r0 and n0 clauses follow from the frozen standing window setup."
+    },
+    {
+      "obj_id": "ass:window-span-height",
+      "verdict": "faithful-refinement",
+      "note": "An edge encoded by its child at depth k leaves a parent of height d − (k − 1) = d + 1 − k; sourceHeight e = h is exactly the stated condition."
+    },
+    {
+      "obj_id": "ass:separation-parameters",
+      "verdict": "faithful-refinement",
+      "note": "Set.Icc 1 2 is exactly the scale restriction t ∈ [1,2]; fixing an edge and a real center introduces no additional predicate."
+    },
+    {
+      "obj_id": "ass:routing-default-atom",
+      "verdict": "faithful-refinement",
+      "note": "Every Boolean vector ξ specifies a nonempty center-exposure atom, since distinct edges expose distinct selector coordinates; chooseChild follows the prescribed first-success/default rule, and firstDefault.isSome holds exactly when that atom's route uses a default child."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the routing walk definitions, then emitting verdicts.
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:terminal-probability-domain","verdict":"faithful-refinement","note":"`0 < p ∧ p < 1` says exactly p ∈ (0,1), so the two are equivalent."},{"obj_id":"ass:stable-center-condition","verdict":"faithful-refinement","note":"IsPredecessor f e means f comes before e in preorder with no edge between them. preorderLt is lexicographic order on child paths, with a prefix before its extensions, which is the paper's preorder: (P,i) and then its subtree. That order is total, so `∀ e f, IsPredecessor f e → …` ranges over exactly the windows other than the first, with b' = windowEnd f. windowStart is n0 plus the sum of (r_{h(f)} + g) over the edges f before e, which matches the windows construction. gridLattice is {k/N_b : k ∈ ℤ} = N_b^{-1}ℤ = Γ_b. The extra conjuncts r0 ≥ 1 and n0 ≥ 1 are standing setup domains (r_0 ≥ 1 and n_0 ≥ 1 in def:windows and the standing setting), so on the paper's domain the two conditions are equivalent."},{"obj_id":"ass:window-span-height","verdict":"faithful-refinement","note":"An edge is encoded by its child vertex at depth k ≥ 1, so its source is at depth k-1. With leaves at height 0 in a tree of height d (core symbol h), the source has height d-(k-1) = d+1-k. That is sourceHeight, and it is at least 1 since k ≤ d, so `sourceHeight e = h` says exactly that e leaves a vertex of height h."},{"obj_id":"ass:separation-parameters","verdict":"faithful-refinement","note":"`t ∈ Set.Icc 1 2` is exactly t ∈ [1,2]. The edge e and the centre x ∈ ℝ are typed binders of the consuming lemma."},{"obj_id":"ass:routing-default-atom","verdict":"faithful-refinement","note":"F_x is generated by one addressed entry S_e(J_{b_e}(x)) for each nondefault edge (i < M, which is childIndex+1 < M with 0-indexed children). These entries are mutually independent fair bits, so the atoms of F_x correspond one-to-one to the maps ξ : NondefaultEdge → Bool, and every atom has positive probability. The route of x is a function of ξ alone: walkVertices with chooseChild takes a nondefault child selected by ξ, or the default child M-1. firstDefault is the first internal vertex on that route that chooses the default child. So `isSome` says exactly that U exists on ξ. That firstDefault ignores x is harmless, because ξ already fixes the entries addressed at x."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:m,sym:q,sym:\eta,sym:E_{q,\eta},sym:s] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:m","verdict":"matched","note":"lebesgueMeasure abbreviates MeasureTheory.volume on ℝ, giving Lebesgue measure with values in [0,∞], in particular on Lebesgue measurable sets."},{"obj_id":"sym:q","verdict":"matched","note":"The real carrier together with QDomain q := 0 < q ∧ q < 1 pins exactly (0,1)."},{"obj_id":"sym:\\eta","verdict":"matched","note":"The tagged theorem binds η : ℝ with hypotheses 0 < η and η < 1, exactly the declared domain."},{"obj_id":"sym:E_{q,\\eta}","verdict":"matched","note":"avoidingSet is defined as Set.Icc 0 1 minus globalOpen, so its values are subsets of [0,1] by construction."},{"obj_id":"sym:s","verdict":"matched","note":"The tagged theorem quantifies over s : ℝ under s ≠ 0, exactly all nonzero real dilations."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:m","verdict":"matched","note":"The `lebesgueMeasure` abbreviation in Basic.lean:43 is defined as `MeasureTheory.volume : Measure ℝ`, which is Lebesgue measure on ℝ. It is countably additive on Borel sets. As an outer measure it gives a value in [0,∞] to every set, and on null-measurable (Lebesgue-measurable) sets it agrees with the completed Lebesgue measure. So it pins the space 𝓛(ℝ)→[0,∞]. thm:main only uses it on the compact, hence Borel, set E."},{"obj_id":"sym:q","verdict":"matched","note":"The section variable at Basic.lean:16 is the real carrier `q : ℝ`. The `QDomain` def at Basic.lean:19 pins it with `0 < q ∧ q < 1`, which is exactly (0,1). thm:main carries the same constraint as the explicit binders `hq0 : 0 < q` and `hq1 : q < 1`, and its proof packages them as `QDomain`. Together the members pin q to (0,1)."},{"obj_id":"sym:\\eta","verdict":"matched","note":"In `exists_compact_avoiding_geometric_affine_copies` (TMain.lean:362-363), η is a real binder constrained by `hη0 : 0 < η` and `hη1 : η < 1`, which is exactly (0,1). It is used as the deficit in `ENNReal.ofReal (1 - η) < lebesgueMeasure E`, which matches m(E)>1−η. The tag hint 'deficit in (0,1)' agrees with the declaration."},{"obj_id":"sym:E_{q,\\eta}","verdict":"matched","note":"`avoidingSet` (TMain.lean:52-54) is the def `Set.Icc 0 1 \\ globalOpen q η hq hη`, which is exactly [0,1]∖C from def:global-open. By construction it is an element of 𝒫([0,1]). Here C is the union over k∈ℤ of 2^k H_k ∪ (−2^k H_k), with H_k chosen from prop:periodic at p_k=(η/64)4^{−|k|}, as in `globalOpen`/`periodicHittingSet`. thm:main also states `E ⊆ Set.Icc 0 1` explicitly."},{"obj_id":"sym:s","verdict":"matched","note":"In `exists_compact_avoiding_geometric_affine_copies` (TMain.lean:367), s is the binder `∀ s : ℝ, s ≠ 0 → …`, which quantifies over exactly ℝ∖{0}. It enters the conclusion as `x + s * q ^ n ∉ E`, matching x+sq^n∉E_{q,η} for every s∈ℝ∖{0}. The tag hint agrees with the declaration."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:local-test,def:scale-count,def:global-open] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:local-test",
+      "verdict": "matched",
+      "note": "Under the zero-based encoding of children, hi selects exactly paper indices i<M; routing starts at U_i and stops immediately at a leaf, and Boolean conjunction equals multiplication of the two bits."
+    },
+    {
+      "obj_id": "def:scale-count",
+      "verdict": "matched",
+      "note": "Substituting gridConst q = 4/(1-q) gives exactly the paper formula, with real-valued subtraction M-1 and integer exponent -2r."
+    },
+    {
+      "obj_id": "def:global-open",
+      "verdict": "matched",
+      "note": "Each H_k is chosen from the named periodic hitting proposition at p_k=(η/64)4^{-|k|}, retaining all its properties; the signed dyadic union and complement in [0,1] agree exactly."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:local-test","verdict":"matched","note":"The paper indexes children 1..M; Lean's Fin M is zero-based (tag on `child`). So the paper's i<M (the non-default children 1..M-1) is Lean's hi : i.val+1<M, and `nondefaultChildEdge U i hi` has value `childEdge U i` = `localEdge U i` = e_i. The selector bit is S_{e_i}(J_{b_{e_i}}(z)), with b_{e_i} = windowEnd(localEdge U i). L_i(z) = routeFrom(child U i), the last vertex of walkVertices from U_i. walkVertices returns [v] when v has depth d, so a leaf child gives L_i(z)=U_i, as the NL says. The terminal bit is T_{L_i(z)}(J_{b(L_i(z))}(z)) via leafEndpoint. The product of two {0,1} bits is the Boolean &&. Both directions hold."},{"obj_id":"def:scale-count","verdict":"matched","note":"4 + 2((M:ℝ)-1)·r·(1 + 2·gridConst q·q^(-(2r:ℤ))) is literally D_{M,q}(r) = 4 + 2(M-1)r(1+2c q^{-2r}). gridConst q = 4/(1-q) matches the core's c = 4/(1-q). The zpow q^(-2r) is the paper's q^{-2r}. r is a free ℕ parameter that a consumer instantiates as r_h; this is the same extension."},{"obj_id":"def:global-open","verdict":"matched","note":"densityBudget η k = η/64·4^(-|k|) = p_k. periodicHittingSet takes Classical.choose of exists_open_periodic_hitting_set (the Lean form of prop:periodic: open, 1-periodic, ρ ≤ 6p, hitting property) at p = p_k, under the same binders q, η, k. This is the allowed CHOSEN-WITNESS form, since the NL explicitly says to choose H_k from Proposition prop:periodic, and periodicHittingSet_spec keeps every stated property. globalOpen = ⋃_{k:ℤ} (2^k·H_k ∪ (-2^k)·H_k) as images of y ↦ ±2^k y, which is C. avoidingSet = Icc 0 1 \\ C = E_{q,η}. The domain gates QDomain q and 0<η<1 are the paper's standing ranges for q and η."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:ordered-tree,def:windows,def:block-endpoint,def:stable-centers,def:random-tables] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:ordered-tree",
+      "verdict": "matched",
+      "note": "Bounded finite paths give exactly the complete ordered M-ary tree; nonempty child paths represent edges, and lexicographic path order is the specified preorder."
+    },
+    {
+      "obj_id": "def:windows",
+      "verdict": "matched",
+      "note": "windowData reproduces both length/span recurrences; summing preceding lengths plus g gives exactly the prescribed placement for every admissible n0, without selecting a logarithmic witness."
+    },
+    {
+      "obj_id": "def:block-endpoint",
+      "verdict": "matched",
+      "note": "The prefix filter contains exactly e and the edges below its child; its nonempty finite supremum is precisely the largest inclusive window endpoint."
+    },
+    {
+      "obj_id": "def:stable-centers",
+      "verdict": "matched",
+      "note": "The predicate is exactly the frozen predecessor-lattice avoidance condition; its positivity conjuncts already follow from the standing window setup."
+    },
+    {
+      "obj_id": "def:random-tables",
+      "verdict": "matched",
+      "note": "Addresses index exactly the nondefault selector and leaf terminal entries; the law is their full independent product with parameters 1/2 and p, since clipping equals p on the standing domain 0<p<1."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+Let me read the WindowDefinitions file directly.
+{"statement_verdicts":[{"obj_id":"def:ordered-tree","verdict":"matched","note":"TreeVertex M d = Σ k:Fin(d+1), (Fin k → Fin M) gives every path of length 0..d over M ordered child labels. That is exactly the complete ordered M-ary tree of height d, and a vertex at depth k has height d−k (vertexHeight), so leaves have height 0. child appends index i (Fin M, zero-based for 1..M). An edge (P,i) is represented by its nonempty child path (TreeEdge); since vertexPath is injective this is a bijection. K = edgeCount = card TreeEdge. preorderLt is List.Lex (<) on paths, where a proper prefix comes first. So (P,i) precedes every edge of the subtree at P_i, which all precede (P,i+1): this is the recursive preorder, and it is a strict total order on edges. Both directions hold."},{"obj_id":"def:windows","verdict":"matched","note":"windowData reproduces r_1=r_0, σ_1=Mr_1+(M−1)g, r_h=max{r_0,g+σ_{h−1}} and σ_h=M(r_h+g+σ_{h−1})+(M−1)g for h≥2. The height-0 entry is never used because leaves have no outgoing edges. sourceHeight=d+1−|child path| is the height of the edge's source vertex, so every edge leaving a height-h vertex gets length r_h. a_e = n0 + Σ_{f≺e}(r_{h(f)}+g) puts the windows in preorder with exactly g unused indices between consecutive ones. b_e=a_e+r_h−1 gives the inclusive interval W_e (windowSet); the union is indexSet (𝒩); the grid attached to e is Γ_{b_e} (gridLattice q (windowEnd e)). Following the binding n_0 ruling, n0 is an open parameter: n0≥1 comes from WindowStartDomain, and every window-dependent consumer carries 2q^{n0}≤1/4 (e.g. Helpers/Scales.lean:21, Helpers/Routing.lean:131, TPeriodic.lean:340). The logarithmic firstIndex is only an internal witness. For every admissible n0 the construction matches."},{"obj_id":"def:block-endpoint","verdict":"matched","note":"IsDescendantOrSelf e f means e's child path is a prefix of f's path, i.e. f=e or f lies in the subtree rooted at P_i. blockEndpoint is the Finset sup of windowEnd over that set, which is nonempty because it contains e. So it is the largest endpoint among W_e and all windows of the subtree at P_i, which is exactly b_e^*."},{"obj_id":"def:stable-centers","verdict":"matched","note":"IsStableCenter wraps StableCenterCondition, and stableSet collects it into 𝒮. Its core reads ∀ e f, IsPredecessor f e → (x, x+2q^{a_e}] ∩ Γ_{b_f} = ∅. IsPredecessor is the immediate preorder predecessor of a strict total order, so the first window, which has none, is exempt, as in ass:stable-center-condition ('every window other than the first, b' = endpoint of its immediate predecessor'). Ioc matches (x,x+2q^{a_e}] and gridLattice matches Γ_b. The extra conjuncts r0≥1 and n0≥1 are the paper's standing domain for r_0 and n_0, so the extension is the same on that domain."},{"obj_id":"def:random-tables","verdict":"matched","note":"The selector addresses are Σ over NondefaultEdge (zero-based childIndex+1<M, i.e. i<M) of Fin N_{b_e}; the default child M has no table. The terminal addresses are Σ over leaves (depth d) of Fin N_{b(L)}, where leafEndpoint is the endpoint of the incoming edge, which always exists since d≥1. Ω = Outcome = all Boolean assignments to these finitely many addresses. tableLaw = bernoulliDesign = prodDesign of coinDesign, i.e. a product of independent coins with parameter 1/2 on selector entries and max 0 (min p 1) on terminal entries; that equals p on the paper's domain p∈(0,1), which consumers carry as TerminalProbabilityDomain. ℙ and 𝔼 are FiniteDesign.Pr/E. 𝒜-measurability on this finite space is dependence only on selector coordinates (SelectorDetermined). Both directions hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:M,sym:d,sym:i,sym:a_e,sym:b_e] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:M","verdict":"matched","note":"Basic.lean:22 defines BranchingDomain M as 2 ≤ M for M : ℕ, exactly the declared integer domain."},{"obj_id":"sym:d","verdict":"matched","note":"Basic.lean:25 defines DepthDomain d as 1 ≤ d for d : ℕ, exactly the positive integers."},{"obj_id":"sym:i","verdict":"matched","note":"WindowDefinitions.lean:40–43 gives child index i : Fin M, bijectively encoding {1,…,M} by i.val + 1."},{"obj_id":"sym:a_e","verdict":"matched","note":"WindowStartDomain requires 1 ≤ n0; windowStart is n0 plus a natural-number sum, hence positive. StableCenterCondition explicitly retains this domain."},{"obj_id":"sym:b_e","verdict":"matched","note":"windowEnd is the natural inclusive endpoint start + length − 1; its tagged windowEnd_positive premises require positive n0 and base length, which imply start ≥ 1 and length ≥ 1, hence endpoint ≥ 1."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:M","verdict":"matched","note":"BranchingDomain M := 2 ≤ M on M : ℕ (Basic.lean:22) pins exactly {2,3,...}; consumers such as construction_parameters_exist and enlargedRandomSet carry hM : BranchingDomain M."},{"obj_id":"sym:d","verdict":"matched","note":"DepthDomain d := 1 ≤ d on d : ℕ (Basic.lean:25) pins exactly {1,2,...}."},{"obj_id":"sym:i","verdict":"matched","note":"child (WindowDefinitions.lean:40) indexes children by i : Fin M. The map i ↦ i.val+1 is a bijection from Fin M onto {1,...,M}, so this zero-based encoding is the same finite index set, with no extra or missing children."},{"obj_id":"sym:a_e","verdict":"matched","note":"windowStart (line 144) is a computed def, n0 + Σ_{f preorder-before e}(r_{h(f)}+g) : ℕ. WindowStartDomain n0 := 1 ≤ n0 (line 139) matches the paper's n_0 ≥ 1, and windowStart_positive (line 153) proves 1 ≤ a_e from it. StableCenterCondition includes WindowStartDomain n0 as a conjunct. Together these pin the range to {1,2,...}."},{"obj_id":"sym:b_e","verdict":"matched","note":"windowEnd (line 160) is a computed def, a_e + r_{h(e)} - 1 on ℕ. windowEnd_positive (line 168) proves 1 ≤ b_e under BaseLengthDomain r0 and 1 ≤ n0. Under r0 ≥ 1, windowLength_pos gives r_h ≥ 1, so the truncated subtraction never truncates and b_e equals the paper's inclusive endpoint, with range {1,2,...}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\rho,sym:T_L,sym:p,sym:t,sym:p_k] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\rho",
+      "verdict": "matched",
+      "note": "periodicDensity computes the Lebesgue measure of A ∩ [0,1), which lies in [0,1] by construction; restriction to measurable one-periodic sets gives the stated map."
+    },
+    {
+      "obj_id": "sym:T_L",
+      "verdict": "matched",
+      "note": "terminalEntry is a Bool-valued function on Fin (gridResolution q (leafEndpoint … L)), exactly the stated finite Boolean table; every such table extends to an Outcome."
+    },
+    {
+      "obj_id": "sym:p",
+      "verdict": "matched",
+      "note": "TerminalProbabilityDomain p unfolds exactly to 0 < p ∧ p < 1."
+    },
+    {
+      "obj_id": "sym:t",
+      "verdict": "matched",
+      "note": "SeparationParameters t unfolds exactly to membership in [1,2]."
+    },
+    {
+      "obj_id": "sym:p_k",
+      "verdict": "matched",
+      "note": "For 0 < η < 1, densityBudget computes η/64 · 4^(-|k|), strictly positive and at most η/64 < 1 for every integer k; its range is enforced by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\rho","verdict":"matched","note":"periodicDensity A := (volume (A ∩ Ico 0 1)).toReal (Basic.lean:54) computes exactly the core definition ρ(A)=m(A∩[0,1)). The measure is at most 1, so toReal loses nothing, and periodicDensity_mem_Icc (Basic.lean:60) proves the value lies in [0,1] for every A. The def is total on Set ℝ. On the paper's domain (measurable, 1-periodic sets) it agrees with the paper; that domain is enforced at the uses via IsOnePeriodic and measurability. This is the standard faithful idiom for a computed def."},{"obj_id":"sym:T_L","verdict":"matched","note":"terminalEntry ω L : Fin (gridResolution q (leafEndpoint … L)) → Bool (TableDefinitions.lean:59). Here gridResolution = N_b (Basic.lean:86) and leafEndpoint = b(L), the windowEnd of the leaf's incoming edge (TableDefinitions.lean:20). The 'else 0' branch only covers a depth-0 leaf, which the tag marks as unused. Fin N_{b(L)} → Bool is exactly {0,1}^{0,…,N_{b(L)}-1}. The Bernoulli-p independence is a statement about the law, not the space, and is carried by the outcome measure (bernoulliDesign)."},{"obj_id":"sym:p","verdict":"matched","note":"TerminalProbabilityDomain p := 0 < p ∧ p < 1 (Basic.lean:34) pins p to exactly (0,1). This predicate is used as the standing domain clause (e.g. inside ConditionalScalesParameters)."},{"obj_id":"sym:t","verdict":"matched","note":"SeparationParameters t := t ∈ Set.Icc 1 2 (WindowDefinitions.lean:206) pins t to exactly [1,2]."},{"obj_id":"sym:p_k","verdict":"matched","note":"densityBudget η hη k := η/64 * 4^(-|k|) (TMain.lean:11) is the core definition p_k=(η/64)4^{-|k|} (core.json construction). It requires hη : 0<η<1 and takes k ∈ ℤ. By construction its range is (0,1/64] ⊂ (0,1), and densityBudget_domain (TMain.lean:18) proves TerminalProbabilityDomain (densityBudget η hη k), so the cluster pins p_k to (0,1)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:density,lem:routing,lem:independent-tests] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:density",
+      "verdict": "matched",
+      "note": "The product law, routed terminal bit and fundamental-interval density give exactly Eρ(B)=p; Lean strengthens the theorem by allowing every natural n0."
+    },
+    {
+      "obj_id": "lem:routing",
+      "verdict": "matched",
+      "note": "The statement retains route arrival, rejection of every earlier child and the local-test implication for every outcome, index and scale; it strengthens the theorem by omitting starting-index smallness."
+    },
+    {
+      "obj_id": "lem:independent-tests",
+      "verdict": "matched",
+      "note": "The failure event quantifies over exactly the M−1 nondefault children and their windows; finite conditional probability and the exponent (M−1)r_h match, with arbitrary admissible n0 explicitly threaded."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:density","verdict":"matched","note":"Lean says E_{tableLaw}[periodicDensity(randomSet ω)] = p. Here tableLaw uses fair selector bits and Bernoulli(p) terminal bits (tableParameter = 1/2 on selector addresses and p on terminal ones, since 0<p<1). periodicDensity is m(A∩[0,1)), as in def:periodic-density. randomSet is {z : T_{L(z)}(J_{b(L(z))}(z)) = 1}, as in eq:random-set; it is proved 1-periodic and measurable (Tables.lean). Under the ruling, n0 is left as an arbitrary parameter. The statement keeps no n0 conditions (1≤n0, 2q^{n0}≤1/4). The proof has no sorry, so this is a proved result that is stronger than the paper's: the paper's setup implies every Lean hypothesis and the conclusion is the same."},{"obj_id":"lem:routing","verdict":"matched","note":"This Lean statement is proved with no sorry. Children are 0-indexed: i : Fin M with i.val+1<M is the paper's i<M on children P_1..P_M, where P_M is the default child, and j<i is the paper's children 1..i-1. The quantifiers match the paper: every ω in the atom ξ (an atomEvent fixes the exposed selector bit of every nondefault edge), every n∈W_{e_i} (windowSet is the closed interval [a_e,b_e]), every t∈[1,2], and y_n(t)=x+tq^n. The conclusion has both parts: routeReaches U together with rejects of every earlier sibling edge (selector bit 0 at J_{b_e}), and localTest=true ⟹ y_n(t)∈B. RoutingDefaultAtom (firstDefault isSome) together with hU says U exists on ξ. StableCenterCondition carries 1≤n0. The smallness condition 2q^{n0}≤1/4 is dropped, so the proved Lean is stronger than the paper's statement. The paper's hypotheses imply all of the Lean's, so the Lean proves the paper's lemma."},{"obj_id":"lem:independent-tests","verdict":"matched","note":"The admissible n0 is passed in with both printed window conditions (1≤n0, 2q^{n0}≤1/4), as the ruling requires. The atom is conditioned on through condPr = Pr(A∧B)/Pr(B). atomEvent_probability proves Pr(B) = (1/2)^{#nondefault edges} > 0, so the ratio is a genuine conditional probability and ξ ranges over exactly the atoms of F_x. allLocalTestsFail says Q_i(y_n(t))=0 for every nondefault i (paper's i<M) and every n∈W_{e_i}. h is fixed through vertexHeight U = h, and r = windowLength M g r0 h = r_h. The right-hand side is (1-p/2)^{(M-1)·r_h}, and t∈[1,2] is fixed. Hypotheses and conclusion are equivalent to the frozen node; its proof is filled later."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:g,sym:h,sym:r_0,sym:r_h,sym:c] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:g","verdict":"matched","note":"GapDomain constrains g : ℕ by 1 ≤ g, exactly the positive integers."},{"obj_id":"sym:h","verdict":"matched","note":"vertexHeight computes d minus a depth in Fin (d + 1), hence lies in {0,…,d}."},{"obj_id":"sym:r_0","verdict":"matched","note":"BaseLengthDomain constrains r0 : ℕ by 1 ≤ r0, exactly the positive integers."},{"obj_id":"sym:r_h","verdict":"matched","note":"windowLength computes r0 at heights zero and one and max r0 (g + σ) thereafter; the standing r0 ≥ 1 ensures positive integer values."},{"obj_id":"sym:c","verdict":"matched","note":"gridConst computes 4/(1-q), which is positive under the standing q ∈ (0,1) setting."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:g","verdict":"matched","note":"GapDomain (Basic.lean:28) is `def GapDomain (g : ℕ) : Prop := 1 ≤ g`. A carrier ℕ together with 1 ≤ g pins exactly {1,2,...}, and it is used as a conjunct of ConditionalScalesParameters."},{"obj_id":"sym:h","verdict":"matched","note":"vertexHeight (WindowDefinitions.lean:32) is `d - v.1.val` with v.1 : Fin (d+1), so depth ∈ {0..d}. Its range is exactly {0,...,d} by construction, and the hint 'height is d minus depth' is accurate."},{"obj_id":"sym:r_0","verdict":"matched","note":"BaseLengthDomain (Basic.lean:31) is `1 ≤ r0` on ℕ, which pins exactly {1,2,...}. This matches core 'r_0 ≥ 1 is a fixed integer'."},{"obj_id":"sym:r_h","verdict":"matched","note":"windowLength is a computed def: (windowData M g r0 h).1, with windowData h+2 giving r = max r0 (g + σ_{h+1}) and windowData 1 giving r0. This matches core r_1 = r_0, r_h = max{r_0, g+σ_{h-1}}. The value is ≥ r0 by construction (baseLength_le_windowLength), so it lies in {1,2,...} under BaseLengthDomain r0. The extra value at h = 0 is outside the paper's range 1 ≤ h ≤ d and is harmless."},{"obj_id":"sym:c","verdict":"matched","note":"gridConst (Basic.lean:80) is the computed def `4 / (1 - q)`, literally the core definition c = 4/(1-q). Its range is (0,∞) by construction under the standing q ∈ (0,1) setting, which belongs to q's own domain cluster."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:random-set,def:center-exposure,def:first-default,def:no-default,def:local-indices] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:random-set",
+      "verdict": "matched",
+      "note": "Unfolding routing selects the first successful nondefault child, otherwise the default child, and tests exactly the terminal bit at the reached leaf's addressed grid entry; n0 remains arbitrary."
+    },
+    {
+      "obj_id": "def:center-exposure",
+      "verdict": "drift",
+      "note": "atomEvent defines individual exposure fibers, whereas the paper defines the sigma-algebra containing all unions of those fibers; individual atoms do not have that extension. Define the sigma-algebra generated by these fibers, anchor this node there, and retain atomEvent as its atom helper."
+    },
+    {
+      "obj_id": "def:first-default",
+      "verdict": "matched",
+      "note": "The root-first traversal returns precisely the first internal vertex selecting the default child, with none representing a route without defaults; ξ supplies the exposed selector values."
+    },
+    {
+      "obj_id": "def:no-default",
+      "verdict": "matched",
+      "note": "The event is exactly absence of a default along x's route, and Pr is unconditional probability under independent fair selector coordinates; the displayed exponent equals the paper's 2^(1-M)."
+    },
+    {
+      "obj_id": "def:local-indices",
+      "verdict": "matched",
+      "note": "Under stability and the specified first-default atom, the tuple gives r_h at U's height, all nondefault outgoing edges with zero-based child indexing, and x+t*q^n for t in [1,2] and positive scale indices."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:center-exposure",
+    "reason": "The frozen node defines the center-exposure sigma-algebra, but its Lean anchor defines only an individual atom; anchor it to the sigma-algebra generated by the exposure fibers.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+Checking `vertexHeight` and `windowLength` against the paper's `r_h`, then I'll emit the verdicts.
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:random-set",
+      "verdict": "matched",
+      "note": "route = last vertex of walkVertices (fuel d, from root) using exposedValues ω z, i.e. S_e(J_{b_e}(z)) with b_e = windowEnd e. At each internal vertex chooseChild takes the first i in finRange M with i+1<M and selector bit 1, otherwise defaultChild = M-1. Under Fin M's zero-based encoding this is exactly the paper's 'first P_i, i<M, else P_M'. B = {z | T_{L(z)}(J_{b(L(z))}(z)) = 1} via terminalEntry and gridKeyFin at leafEndpoint. leafEndpoint's else-0 branch only fires at depth 0, and the core fixes d≥1, so it is never reached on the paper's domain. Same extension both ways."
+    },
+    {
+      "obj_id": "def:center-exposure",
+      "verdict": "matched",
+      "note": "F_x is generated by the finitely many Boolean coordinates ω(inl ⟨e, J_{b_e}(x)⟩), one for every NondefaultEdge e (childIndex+1<M, i.e. paper i<M, every table including those off the route). atomEvent x ξ is the atom where this vector equals ξ. Addresses are Σ-indexed by e, so they are distinct, and each atom has positive probability (atomEvent_probability_pos). So the atom family {atomEvent x ξ}_ξ partitions Ω and generates exactly σ(S_e(J_{b_e}(x)) : e nondefault). A finite σ-field is determined by its atoms, so this is an equivalent encoding; ⊆ A holds because only selector coordinates are read."
+    },
+    {
+      "obj_id": "def:first-default",
+      "verdict": "matched",
+      "note": "firstDefault is the first vertex on walkVertices hM ξ d root (the route) with depth<d whose chooseChild equals defaultChild, or none. Evaluated at ξ = exposedValues ω x (as in noDefaultEvent) this is exactly the route of x, since routing x reads only its exposed bits (route_eq_of_atomEvent). So it gives the first vertex where the route uses the default child, defined only when one exists (Option). Taking ξ instead of ω and leaving _q/_g/_r0/_x unused is harmless: every ξ is realized by a positive-probability atom."
+    },
+    {
+      "obj_id": "def:no-default",
+      "verdict": "matched",
+      "note": "This Prop states tableLaw.Pr(noDefaultEvent x) = (1 - 2^(1-M))^d for the given x. noDefaultEvent is firstDefault(exposedValues ω x) = none, i.e. the route of x makes no default choice at any of its d internal vertices. tableLaw is the unconditional product law (fair selectors, Bernoulli-p terminals), i.e. before conditioning on F_x. 2^(1-M) is the real zpow with integer exponent 1-M, matching the paper's expression. The identity is equivalent to eq:no-default."
+    },
+    {
+      "obj_id": "def:local-indices",
+      "verdict": "matched",
+      "note": "This returns three items. (1) r = windowLength M g r0 (vertexHeight U) with vertexHeight = d - depth, which is r_h at U's height h. (2) e_i = childEdge U i for i:Fin M with i+1<M, the zero-based form of (U,i) for 1≤i<M, the same convention as chooseChild/childIndex. (3) y_n(t) = x + t q^n for t∈[1,2] and n≥1, where n≥1 is the core's declared space for n. The binders StableCenterCondition x and firstDefault … ξ = some U carry the 'stable center' and 'atom on which U exists' conditioning. Every n₀ is exposed as a parameter, consistent with the binding lem:density ruling."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:b,sym:N_b,sym:\{z\},sym:J_b,sym:n_0] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:b",
+      "verdict": "matched",
+      "note": "Basic.lean:83 defines GridIndexDomain b as 1 ≤ b for b : ℕ; GridNesting uses this domain for its coarser index at line 157."
+    },
+    {
+      "obj_id": "sym:N_b",
+      "verdict": "matched",
+      "note": "Basic.lean:86 defines gridResolution as 2 raised to a natural exponent, enforcing the dyadic range by construction."
+    },
+    {
+      "obj_id": "sym:\\{z\\}",
+      "verdict": "matched",
+      "note": "The tagged subexpression in gridKey is Int.fract z = z − floor z; fract_nonneg and fract_lt_one establish its range [0,1)."
+    },
+    {
+      "obj_id": "sym:J_b",
+      "verdict": "matched",
+      "note": "Basic.lean:96 computes the natural floor of N_b times Int.fract z; positivity of N_b and 0 ≤ Int.fract z < 1 ensure precisely the required finite codomain."
+    },
+    {
+      "obj_id": "sym:n_0",
+      "verdict": "matched",
+      "note": "WindowStartDomain is exactly 1 ≤ n0 for n0 : ℕ; all listed consumer clauses explicitly retain positivity, and the internal firstIndex witness is positive by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b","verdict":"matched","note":"Checked Basic.lean:83. The carrier is ℕ and the predicate GridIndexDomain b := 1 ≤ b restricts it to {1,2,…}. GridNesting (Basic.lean:154-160) uses this predicate as the guard on its coarser index b, so the hint on that member is accurate. Together the members pin the paper space {1,2,…}."},{"obj_id":"sym:N_b","verdict":"matched","note":"Checked Basic.lean:86-87. gridResolution q b := 2 ^ (⌈logb 2 (gridConst q * q^(-b))⌉).toNat is a computing def. Its value is always a power of two, so its range is {2^j : j∈ℕ} by construction. It matches the core definition N_b = 2^⌈log₂(c q^{-b})⌉: under QDomain the logarithm's argument is at least 1, so toNat equals the ceiling (gridSizeComparison_of_qDomain, Basic.lean:121-151). The first conjunct of GridNesting also restates the 2^j form."},{"obj_id":"sym:\\{z\\}","verdict":"matched","note":"Checked Basic.lean:99-100. Inside gridKey, {z} is realized by Int.fract z. Its range is [0,1) by construction (Int.fract_nonneg and Int.fract_lt_one). This is the paper's fractional part."},{"obj_id":"sym:J_b","verdict":"matched","note":"Checked Basic.lean:96-113. gridKey q b z := ⌊N_b * Int.fract z⌋₊ is a computing def. Because N_b * {z} ≥ 0, Nat.floor equals the integer floor, so the def is the core's J_b(z) = ⌊N_b{z}⌋ with cells closed on the left. gridKey_lt (Basic.lean:107) proves gridKey < N_b, and gridKeyFin packages the value into Fin N_b. So the codomain {0,…,N_b−1} is pinned by the cluster's own definitions."},{"obj_id":"sym:n_0","verdict":"matched","note":"Checked WindowDefinitions.lean:139-145. The carrier is ℕ, and WindowStartDomain n0 := 1 ≤ n0 pins the space {1,2,…}. Each listed consumer lemma (Routing.lean, Scales.lean, Windows.lean, TPeriodic.lean) carries the same binder hn0 : 1 ≤ n0, and most also carry hn0q : 2*q^n0 ≤ 1/4, which is the core's smallness condition 2q^{n_0} ≤ 1/4. In exists_open_periodic_hitting_set (TPeriodic.lean:504-507) the witness is n0 := firstIndex q, and firstIndex_spec proves both 1 ≤ n0 and the smallness bound. Every member hint matches its declaration."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\mathcal T_{x,\xi},sym:\alpha,sym:r_*,sym:A_{i,n}] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\mathcal T_{x,\\xi}","verdict":"matched","note":"scaleRepresentatives computes a finite subset of [1,2]: breakpoints lie in that interval, endpoints are 1 and 2, and added midpoints remain inside it."},{"obj_id":"sym:\\alpha","verdict":"matched","note":"The tagged inequality constrains the specified exponent p(M−1)/2 to exceed 2 log(1/q), which is positive under QDomain q."},{"obj_id":"sym:r_*","verdict":"matched","note":"The existential rstar is natural and satisfies BaseLengthDomain rstar, defined as 1 ≤ rstar, together with the stated eventual decay bound."},{"obj_id":"sym:A_{i,n}","verdict":"matched","note":"localSelectorBit evaluates the addressed outcome coordinate and returns Bool, faithfully representing the two values {0,1}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\mathcal T_{x,\\xi}","verdict":"matched","note":"scaleRepresentatives (Helpers/ScaleDefinitions.lean:70) is a computed Finset ℝ that depends only on x, U and the deterministic windows and grids, matching the core def. It is E ∪ {midpoints of consecutive points of E}, where E = {1,2} ∪ breakpoints ⊆ Icc 1 2 (scaleBreakpoints, line 24). Midpoints of points in [1,2] stay in [1,2], so the range is a finite subset of [1,2] by construction. scaleRepresentatives_mem_Icc (ScaleConstancy.lean:26) proves this from the def alone."},{"obj_id":"sym:\\alpha","verdict":"matched","note":"The core def is α = p(M-1)/2, chosen > 2 log(1/q). The tagged clause in construction_parameters_exist (TPeriodic.lean:68) states exactly 2*log(1/q) < p*((M:ℝ)-1)/2, with α realized as the expression p(M-1)/2. QDomain q gives 0<q<1, so log(1/q) > 0 and α > 0, which pins α to (0,∞) using only the cluster's own hypotheses."},{"obj_id":"sym:r_*","verdict":"matched","note":"rstar : ℕ with BaseLengthDomain rstar, which is 1 ≤ rstar: the proof discharges it with le_max_right for max R 1 (TPeriodic.lean:97-98). This pins rstar to {1,2,...}. The accompanying clause ∀ r ≥ rstar, scaleCount M q r * exp(-(p(M-1)r/2)) < p matches the core def D_{M,q}(r)e^{-p(M-1)r/2} < p for every integer r ≥ r_*."},{"obj_id":"sym:A_{i,n}","verdict":"matched","note":"localSelectorBit (Helpers/Routing.lean:41) returns a Bool, which is {0,1} by its type. It is defined only on LocalPair, i.e. pairs with i+1 < M and n ∈ windowSet of localEdge U i, matching 1 ≤ i < M and n ∈ W_{e_i}. It reads the selector entry at nondefaultChildEdge U i together with the grid key of localPoint x t q n, matching S_{e_i}(J_{b_{e_i}}(y_n(t)))."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:b_e^*,sym:b',sym:b_f,sym:S_e,sym:b(L)] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:b_e^*",
+      "verdict": "drift",
+      "note": "The tagged blockEndpoint can equal 0: take M=2, d=1, g=1, r0=1, n0=0 and the first edge. Its cluster does not enforce positive window parameters. Add tagged positive-start and base-length domain clauses establishing positivity of the computed maximum."
+    },
+    {
+      "obj_id": "sym:b'",
+      "verdict": "matched",
+      "note": "GridNesting restricts the finer index by 1 ≤ b ≤ b'; StableCenterCondition supplies positive base length and starting index, which make its predecessor endpoint positive."
+    },
+    {
+      "obj_id": "sym:b_f",
+      "verdict": "drift",
+      "note": "The tagged windowEnd can equal 0: take M=2, d=1, g=1, r0=1, n0=0 and the first edge. Add positive-start and base-length domain clauses to this symbol's cluster; positivity hypotheses tagged only for b_e do not constrain b_f."
+    },
+    {
+      "obj_id": "sym:S_e",
+      "verdict": "matched",
+      "note": "selectorEntry has exactly Fin (gridResolution q (windowEnd ... e.val)) coordinates with Bool values; Outcome permits every assignment of those bits."
+    },
+    {
+      "obj_id": "sym:b(L)",
+      "verdict": "drift",
+      "note": "Even at positive depth, leafEndpoint can equal 0: take M=2, d=1, g=1, r0=1, n0=0 and the first leaf. Add tagged positive-start, base-length and positive-depth domain clauses; these establish positivity without changing the internal depth-zero extension."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:b_e^*",
+    "reason": "The paper specifies a positive integer, but blockEndpoint's own realization cluster permits zero because it supplies no positive window-parameter domain.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b_e^*","verdict":"matched","note":"blockEndpoint (WindowDefinitions.lean:189) is a computed def. It takes the sup of windowEnd over every edge f with IsDescendantOrSelf e f, i.e. the vertex path of e is a prefix of the path of f. That set is e itself plus all edges in the subtree rooted at P_i, which is exactly the paper's definition. The set contains e, so the value is at least windowEnd e, and windowEnd e ≥ 1 by windowEnd_positive under BaseLengthDomain r0 and 1 ≤ n0. So the range is {1,2,...} by construction on the paper's domain."},{"obj_id":"sym:b'","verdict":"matched","note":"Both roles of b' are pinned to positive integers by the cluster's own members. In GridNesting (Basic.lean:157-158), b' : ℕ with GridIndexDomain b (1 ≤ b) and b ≤ b', so b' ≥ 1 and ranges over b' ≥ b, as in the nesting relation. In StableCenterCondition (WindowDefinitions.lean:194-200), b' is windowEnd f for the preorder predecessor f (IsPredecessor f e), and the condition's own conjuncts BaseLengthDomain r0 and WindowStartDomain n0 make it ≥ 1 via windowEnd_positive. This matches the core definition: a positive grid index b' ≥ b in nesting, and the endpoint of the immediate predecessor in the stability condition."},{"obj_id":"sym:b_f","verdict":"matched","note":"windowEnd (WindowDefinitions.lean:160) is a computed def: windowStart + windowLength(sourceHeight f) - 1 for edge f, which is the endpoint of the window assigned to f. windowEnd_positive proves the value is ≥ 1 under the paper's positive r0 and n0 domains, so the range is {1,2,...} by construction."},{"obj_id":"sym:S_e","verdict":"matched","note":"selectorEntry (TableDefinitions.lean:55) gives, for each NondefaultEdge e, a map Fin (gridResolution q (windowEnd e)) → Bool. gridResolution realizes N_b, so this is {0,...,N_{b_e}-1} → {0,1}. NondefaultEdge requires childIndex+1 < M (0-indexed), which is the paper's 1 ≤ i < M. The default child M-1 (0-indexed, i.e. child M) has no selector table, matching the core definition. The fair-bit independence clause belongs to tableLaw/\\Prob, not to this symbol's space."},{"obj_id":"sym:b(L)","verdict":"matched","note":"leafEndpoint (TableDefinitions.lean:20) returns windowEnd of ⟨L.val, hL⟩ when 1 ≤ depth(L). Edges are represented by their child path, so that edge is L's incoming edge. A Leaf has depth exactly d, and the paper's DepthDomain is d ≥ 1, so the depth-zero branch returning 0 is never reached on the paper's domain. windowEnd_positive then gives b(L) ≥ 1, so the range is {1,2,...}."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\Omega,sym:\Prob,sym:r,sym:Q_i,sym:D_{M,q}(r)] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\Omega","verdict":"matched","note":"Outcome is exactly the type of all Bool assignments to the disjoint union of selector and terminal table addresses."},{"obj_id":"sym:\\Prob","verdict":"matched","note":"tableLaw constructs the finite product probability law; event probabilities are sums of nonnegative masses totaling one, hence lie in [0,1]. On the standing domain 0<p<1, terminal-parameter clipping equals p."},{"obj_id":"sym:r","verdict":"matched","note":"localLength computes windowLength at U's height; its recursion gives windowLength≥r0≥1 under the standing construction domain."},{"obj_id":"sym:Q_i","verdict":"matched","note":"For fixed table outcome and local indices, localTest is a function ℝ→Bool, computing the Boolean product of the addressed selector and terminal bits."},{"obj_id":"sym:D_{M,q}(r)","verdict":"matched","note":"scaleCount computes the stated formula with c=4/(1-q); under the standing domains M≥2 and 0<q<1, its added term is nonnegative, so its value is at least 4 and strictly positive."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+Checking that `bernoulliDesign` is the independent product law before I write the verdicts.
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\Omega",
+      "verdict": "matched",
+      "note": "Outcome := TableAddr → Bool (Helpers/TableDefinitions.lean:32). TableAddr = SelAddr ⊕ TermAddr, where SelAddr is Σ over nondefault edges e of Fin N_{b_e} and TermAddr is Σ over leaves L of Fin N_{b(L)}. That is exactly {0,1}^{all selector and terminal table addresses}: Bool for {0,1}, and the finite address set is pinned by the Σ/⊕ types."
+    },
+    {
+      "obj_id": "sym:\\Prob",
+      "verdict": "matched",
+      "note": "tableLaw = bernoulliDesign (tableParameter p), which is prodDesign of independent coinDesign (Causalean Designs/Bernoulli.lean:65). That is an independent product law with parameter 1/2 on every selector address and max 0 (min p 1) on every terminal address. On the paper's domain p∈(0,1) the clamp equals p, so this is fair selectors and Bernoulli-p terminals. FiniteDesign.Pr takes events to [0,1] by construction, since p_nonneg and p_sum hold."
+    },
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "localLength is a def computing r = r_h = windowLength M g r0 (vertexHeight U) at the height of the first default vertex, which matches the scoped reading 'r=r_h'. Its range is ℕ, and positivity follows from windowLength_pos (WindowDefinitions.lean:105) under BaseLengthDomain r0, the paper's r0=r_*≥1. So the range {1,2,…} holds by construction on the paper's domain."
+    },
+    {
+      "obj_id": "sym:Q_i",
+      "verdict": "matched",
+      "note": "localTest is a def giving z:ℝ ↦ Bool, defined as selectorEntry at the nondefault edge (U,i), at gridKeyFin of the window endpoint, && terminalEntry at the leaf L_i(z) routed from child U i, at gridKeyFin of b(L_i(z)). That is the product of the selector and terminal bits of eq:local-test. The index i ranges over Fin M with i+1<M, which is a consistent reindexing of 1≤i<M with default child M-1. The codomain {0,1} is Bool."
+    },
+    {
+      "obj_id": "sym:D_{M,q}(r)",
+      "verdict": "matched",
+      "note": "scaleCount M q r = 4 + 2(M-1)·r·(1 + 2·gridConst q·q^{-2r}) with gridConst q = 4/(1-q). This is literally D_{M,q}(r)=4+2(M-1)r(1+2cq^{-2r}). Because it is a computed def, its range follows from the formula: on the paper domain (M≥2, q∈(0,1), so c>0) every term is nonnegative and D≥4>0."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:main",
+      "verdict": "matched",
+      "note": "The parameter ranges, compactness, interval containment, strict Lebesgue measure bound, and quantifier order agree; natural n ≥ 1 represents exactly the positive integer indices in the paper."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement is logically equivalent to the paper's. The quantifiers over q∈(0,1) and η∈(0,1) are given by hq0/hq1/hη0/hη1. The conclusion asks for a compact E ⊆ Icc 0 1, which matches 'compact E ⊆ [0,1]'. The measure condition is ENNReal.ofReal(1-η) < volume E, and lebesgueMeasure is an abbrev for MeasureTheory.volume on ℝ, i.e. Lebesgue measure m. Because 1-η > 0, this is exactly m(E) > 1-η. Then for all real x and all real s ≠ 0 there is n:ℕ with 1 ≤ n and x + s*q^n ∉ E, which is the paper's 'some integer n ≥ 1'. No extra hypotheses are added and the conclusion is not weakened."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:periodic =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:periodic","verdict":"matched","note":"Equivalent under the standing assumption 0<q<1: periodicity, openness, density bound, and hitting quantifiers agree. Positive natural exponents represent exactly the integers n≥1; the fundamental-interval measure is finite, so toReal preserves the density bound."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:periodic","verdict":"matched","note":"The Lean statement is logically equivalent to the paper's. The hypotheses are QDomain q (0<q<1, which is ass:q-domain, 'Fix q∈(0,1)') and TerminalProbabilityDomain p (0<p<1, the paper's 'for every p∈(0,1)'). The conclusion is ∃ H, IsOpen H ∧ IsOnePeriodic H ∧ periodicDensity H ≤ 6p ∧ ∀ x t, t∈[1,2] → ∃ n≥1, x+t·q^n∈H, which is exactly eq:periodic-hitting with the same quantifier order (H is chosen before x and t, and n depends on x and t). IsOnePeriodic (∀z, z∈A ↔ z+1∈A) is equivalent to 1-periodicity. periodicDensity is (volume(A∩[0,1))).toReal, which matches def:periodic-density ρ(A)=m(A∩[0,1)). The measure is at most volume([0,1))=1 and so finite, which makes the toReal comparison with 6p equivalent to the ENNReal one. H is open, so it is measurable and ρ(H) is defined. The binding lem:density ruling about the n₀ selection is internal to the proof and does not touch this statement."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lem:conditional-scales =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"lem:conditional-scales","verdict":"matched","note":"Equivalent in both directions: exposure vectors encode exactly the positive-probability atoms, the hypotheses identify the first default vertex and height, and the event and bound match exactly after unfolding. The n0 constraints are explicit requirements of the standing window construction; duplicated domain hypotheses are redundant."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:conditional-scales","verdict":"matched","note":"Lean and paper agree in both directions, with every definition checked against the typed core. (1) Parameters: QDomain/BranchingDomain/DepthDomain/GapDomain/BaseLengthDomain/TerminalProbabilityDomain and the bundled ConditionalScalesParameters are p∈(0,1), M≥2, d,g,r0≥1. The bundle repeats hp and hM, which is harmless. (2) The n0 hypotheses (1≤n0 and 2q^{n0}≤1/4) are the core's standing definition of n_0, so the paper entails them. (3) StableCenterCondition is the stable-center condition: for each window e and its immediate predecessor f (b' is f's window end), (x,x+2q^{a_e}]∩Γ_{b'}=∅; its other conjuncts r0≥1 and n0≥1 are standing domains. (4) The atom ξ : NondefaultEdge→Bool, with atomEvent fixing ω at S_e(J_{b_e}(x)) for every edge with i<M, is exactly the atom of def:center-exposure. Distinct edges have distinct addresses, so each ξ is a nonempty atom with probability 2^{-#edges}>0, and condPr = Pr(A∧ξ)/Pr(ξ) is the elementary conditional probability. (5) 'The route of x uses a default edge' is firstDefault(ξ).isSome; U and h are pinned by firstDefault=some U and vertexHeight U=h. (6) r=windowLength M g r0 h=r_h. scaleCount = 4+2(M-1)r(1+2c q^{-2r}) with gridConst q=4/(1-q)=c, as in the core. (7) The event is ∃t∈[1,2] ∀n∈indexSet (the union of all windows W_e, i.e. 𝒩), x+tq^n∉B, where randomSet is the routed terminal-table set of def:random-set. (8) tableLaw uses fair selectors and Bernoulli(p) terminals (min/max clamping is the identity for p∈(0,1)). (9) The bound D_{M,q}(r)·exp(-p(M-1)r/2) is the same."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:b_e^*,sym:b_f,sym:b(L)] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b_e^*","verdict":"matched","note":"blockEndpoint computes a natural supremum containing the edge itself; blockEndpoint_positive establishes positivity under the cluster's explicit positive base-length and starting-index domains."},{"obj_id":"sym:b_f","verdict":"matched","note":"windowEnd computes a natural endpoint; windowEnd_positive establishes membership in the positive integers under the cluster's explicit positive base-length and starting-index domains."},{"obj_id":"sym:b(L)","verdict":"matched","note":"leafEndpoint computes the incoming-edge endpoint; leafEndpoint_positive establishes positivity under DepthDomain d, BaseLengthDomain r0, and 1 ≤ n0, excluding the depth-zero branch."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b_e^*","verdict":"matched","note":"blockEndpoint (WindowDefinitions.lean:191) is a def that computes the value: the sup of windowEnd over every edge f with IsDescendantOrSelf e f, i.e. the vertex path of e is a prefix of the path of f. That set is e together with all edges in the subtree rooted at P_i, so it matches the paper's 'largest endpoint among W_e and all windows in the subtree rooted at P_i'. The range is ℕ, and blockEndpoint_positive (line 198) proves 1 ≤ b_e^* from BaseLengthDomain r0 (1 ≤ r0) and 1 ≤ n0. These are the paper's standing positive-domain assumptions, and e belongs to its own filter set. Together the members pin {1,2,...}."},{"obj_id":"sym:b_f","verdict":"matched","note":"windowEnd (WindowDefinitions.lean:160) is a def computing a_f + r_{h(f)} - 1 in ℕ. windowLength_pos holds under 1 ≤ r0, so the truncated ℕ subtraction never applies and the value is the paper's inclusive endpoint. windowEnd_positive (line 168) proves 1 ≤ windowEnd from BaseLengthDomain r0 and 1 ≤ n0, which are the paper's positive base length and positive starting index. The cluster therefore pins {1,2,...}."},{"obj_id":"sym:b(L)","verdict":"matched","note":"leafEndpoint (TableDefinitions.lean:20) is the windowEnd of the incoming edge ⟨L.val, hL⟩, which is the leaf path read as an edge by its child vertex. This matches 'the window endpoint of the incoming edge of L'. The fallback value 0 is used only when the depth is 0. leafEndpoint_positive (line 27) rules that case out using DepthDomain d (1 ≤ d), since every leaf has depth d. Under BaseLengthDomain r0 and 1 ≤ n0 it proves 1 ≤ b(L), so the members pin {1,2,...} on the paper's domain (d ≥ 1, r0 ≥ 1, n0 ≥ 1)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:center-exposure =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:center-exposure","verdict":"drift","note":"atomEvent defines individual exposure fibers, whereas the paper defines their generated σ-algebra; for M=2,d=1, Ω belongs to F_x but is no fiber. Define F_x as the σ-algebra generated by all atomEvent fibers, establish its inclusion in the ambient σ-algebra, and anchor this node there."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":{"kind":"scaffold-mismatch","obj_id":"def:center-exposure","reason":"The frozen definition specifies a generated σ-algebra, but its Lean anchor specifies only an individual atom event.","unpinned":null,"witness":null}}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:center-exposure","verdict":"matched","note":"F_x is the σ-field generated by finitely many Boolean coordinates of the finite space Ω. Its sets are exactly the unions of the events {ω : ∀e, ω(Sum.inl(exposedAddr x e)) = ξ e}, one for each ξ : NondefaultEdge → Bool. So atomEvent fixes F_x exactly, in both directions. Unfolded checks: (1) the index set matches. TreeEdge is a child path of depth ≥1, childIndex is its last entry in Fin M, and NondefaultEdge requires childIndex+1 < M. That gives 0-based indices 0..M-2, which is the paper's e=(P,i) with 1≤i<M; the default child M has no table (core S_e). (2) The address matches. exposedAddr x e = ⟨e, gridKeyFin q (windowEnd e) x⟩ : SelAddr, with SelAddr = Σ e, Fin (N_{b_e}). That is the entry S_e(J_{b_e}(x)) of S_e : {0..N_{b_e}-1}→{0,1}. It covers every nondefault edge, including tables off the route of x. (3) F_x ⊆ 𝒜 holds automatically because only the selector coordinates (Sum.inl) are read. Different edges give different addresses (the Σ first component is e), so every ξ gives a nonempty atom, and it has positive probability under fair bits. This is consistent with the core symbol ξ ('positive-probability atom ... specifying the addressed selector entry at x in every selector table'). The n0 ruling is respected: n0 stays a free parameter here."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:center-exposure =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:center-exposure","verdict":"matched","note":"NondefaultEdge is finite and indexes every edge with i<M, including off-route edges; exposedAddr selects J_{b_e}(x). On the finite Boolean vector, comap of ⊤ equals exactly the σ-algebra generated by these coordinates, and is contained in the selector σ-algebra."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:center-exposure","verdict":"matched","note":"Lean `centerExposure x = MeasurableSpace.comap (fun ω => exposedValues ω x) ⊤`, where `exposedValues ω x e = ω (Sum.inl ⟨e, gridKeyFin q (windowEnd … e) x⟩)` for every e : NondefaultEdge M d. That is the selector entry S_e(J_{b_e}(x)): `gridKeyFin` is J_b, `windowEnd` is b_e, and the table is indexed by Fin N_{b_e}. NondefaultEdge ranges over all tree edges whose child index satisfies i+1<M. Lean indexes children by Fin M with default child M-1, so this is a reindexing by i ↦ i+1 of the paper's edges (P,i) with 1≤i<M and default child M (core: 'child M is the default child and has no selector table'). Edges are not restricted to the route of x, so every selector table is exposed, as the NL requires. On the finite vector space NondefaultEdge→Bool, the product σ-algebra of discrete Bool coordinates equals ⊤, so the comap under ⊤ is exactly σ(S_e(J_{b_e}(x)) : e). Both directions hold. The ⊆𝒜 clause holds on the finite outcome space; `centerExposure_le_selectorSigmaAlgebra` also proves it lies inside the selector σ-algebra. The Outcome type also carries the terminal tables T_L, which is part of the paper's probability space. The n0 ruling does not bear on this definition: n0 stays a free parameter here."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
