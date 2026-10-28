@@ -60,6 +60,15 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TOOL_URL = "https://github.com/Jiyuan-Tan/PaperFormalizer";
 /** The paper describing PaperFormalizer. */
 const PAPER_URL = "https://arxiv.org/abs/2610.31810";
+/** How to cite PaperFormalizer, as the tool's README gives it: shown in "Cite this work" on the index. */
+const CITATION_BIBTEX = `@misc{tan2026paperformalizer,
+  title         = {{PaperFormalizer}: Author-in-the-Loop Autoformalization of Research Papers in {Lean}},
+  author        = {Tan, Jiyuan and Syrgkanis, Vasilis and Blanchet, Jose},
+  year          = {2026},
+  eprint        = {2610.31810},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2610.31810}
+}`;
 /** The site's address (its Pages custom domain): the canonical links, the sitemap and the robots file name it. */
 export const SITE = "https://paperformalizer.org/";
 const SITE_DESCRIPTION = "PaperFormalizer helps authors turn a mathematical paper into a Lean-verified version: it checks each theorem, lemma and assumption against the paper's own proof, proposes revisions the author decides on, and proves the statements in Lean 4. Browse papers formalized with it.";
@@ -244,6 +253,14 @@ h1{margin:26px 0 14px;font-size:2.4rem;line-height:1.15;font-weight:600;letter-s
 .share .t{font-weight:600;font-size:1.05rem}
 .share .d{margin-top:4px;font-size:.95rem;line-height:1.5;color:#5c5853}
 .share .btn{flex:0 0 auto;display:inline-block;padding:11px 18px;background:#8c1515;color:#fdfcfa;text-decoration:none;border-radius:6px;font-size:.95rem;font-weight:600}
+.cite{margin:28px 0 0;padding:18px 22px 20px;background:#fdfcfa;border:1px solid #e0dad0;border-top:3px solid #b1040e;border-radius:8px}
+.cite .top{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.cite h2{margin:0;font-size:1.25rem;font-weight:600}
+.cite p{margin:6px 0 0;font-size:.95rem;line-height:1.5;color:#5c5853}
+.cite pre{margin:12px 0 0;padding:14px 16px;background:#f3f0e9;border-radius:6px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.78rem;line-height:1.6;color:#3d3a36;white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{display:none;font:inherit;font-size:.85rem;padding:7px 13px;border:1px solid #cfc7b9;border-radius:999px;background:#fdfcfa;color:#1a1a1a;cursor:pointer}
+.js .copy{display:inline-block}
+.copy:hover{border-color:#8c1515;color:#8c1515}
 .controls{display:none}
 .js .controls{display:block}
 .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.85rem}
@@ -295,12 +312,20 @@ footer{margin-top:44px;padding-top:18px;border-top:1px solid #e0dad0;font-size:.
 code,.mono{font-family:'IBM Plex Mono',monospace}
 .links{margin:18px 0 0;padding-left:20px;line-height:1.9}
 .files{margin:18px 0 0;padding:0;list-style:none;font-family:'IBM Plex Mono',monospace;font-size:.85rem;line-height:1.8;overflow-wrap:anywhere}
-@media (max-width:560px){header{padding-top:36px}h1{font-size:1.9rem}.paper.featured{padding:18px 16px 16px}.share{padding:16px}}
+@media (max-width:560px){header{padding-top:36px}h1{font-size:1.9rem}.paper.featured{padding:18px 16px 16px}.share,.cite{padding:16px}.cite pre{padding:12px}}
 `;
 
 // Search, sort, filter and paging over the entries' data attributes. Without it the page is the
 // plain list, newest first.
 const SCRIPT = `document.documentElement.className = 'js';
+document.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('.copy'); if (!b) return;
+  var src = document.getElementById(b.dataset.copy), label = b.textContent;
+  if (!src || !navigator.clipboard) return;
+  navigator.clipboard.writeText(src.textContent).then(function () {
+    b.textContent = 'Copied'; setTimeout(function () { b.textContent = label; }, 1600);
+  }, function () {});
+});
 document.addEventListener('DOMContentLoaded', function () {
   var list = document.getElementById('papers'); if (!list) return;
   var items = [].slice.call(list.querySelectorAll('.paper'));
@@ -415,6 +440,7 @@ export function indexHtml(papers) {
       <span class="here">Formalized papers</span>
       <a href="#how">How a paper is formalized</a>
       <a href="#share">Share a paper</a>
+      <a href="#cite">Cite this work</a>
       <a href="${PAPER_URL}">Paper ↗</a>
       <a href="${TOOL_URL}">GitHub ↗</a>
     </nav>
@@ -422,6 +448,15 @@ export function indexHtml(papers) {
     <p class="lede">PaperFormalizer helps authors turn a paper into a Lean-verified version. It reads each theorem, lemma and assumption alongside the paper's own proof, proposes a revision wherever a statement needs one, with the author deciding each, and proves the statements in Lean 4.</p>
     <p class="lede">The papers below were formalized with PaperFormalizer and shared by the people who ran it. On a paper's page, the notes sit next to the text they refer to, and each result links to its Lean statement.</p>
   </header>
+
+  <section id="cite" class="cite" aria-labelledby="cite-h">
+    <div class="top">
+      <h2 id="cite-h">Cite this work</h2>
+      <button type="button" class="copy" data-copy="cite-bib">Copy BibTeX</button>
+    </div>
+    <p>If you use PaperFormalizer, or a paper formalized with it, please cite <a href="${PAPER_URL}">the paper</a>:</p>
+    <pre id="cite-bib">${esc(CITATION_BIBTEX)}</pre>
+  </section>
 
   <section id="share" class="share">
     <div>

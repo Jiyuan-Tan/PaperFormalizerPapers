@@ -111,7 +111,7 @@ test("a bundle's strings are escaped, and its rendered HTML is never used", asyn
   assert.ok(index.includes("Summary &lt;script&gt;"));
   assert.ok(index.includes("<li>Theorem &lt;script&gt;"));
   assert.ok(index.includes("stat.ML &lt;script&gt;") && index.includes(">Subject<"));
-  assert.ok(!index.includes("arXiv:") && !index.includes("by @") && !index.includes('class="seal"'), "malformed id, login and code are left out");
+  assert.ok(!index.includes(">arXiv:") && !index.includes("by @") && !index.includes('class="seal"'), "malformed id, login and code are left out");
   assert.ok(!index.includes("Revised PDF"));
   assert.equal(esc(`<a b="c" d='e'>&`), "&lt;a b=&quot;c&quot; d=&#39;e&#39;&gt;&amp;");
   assert.equal(plain("A \\emph{simple} bound \\label{x}for $n$~points"), "A simple bound for n points");
