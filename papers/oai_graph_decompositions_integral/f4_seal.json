@@ -1,0 +1,1125 @@
+{
+  "version": 1,
+  "slug": "oai_graph_decompositions_integral",
+  "paper_sha256": "1a04312c8cd45d357e4b955277ff03cad68c768cc8b7e0f462c4985cf54583ac",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:compression-density",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "897e7642241c3feceb16695d8ca27d52182ed7d6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "897e7642241c3feceb16695d8ca27d52182ed7d6"
+      }
+    },
+    {
+      "id": "ass:compression-family",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a9eb7514e82ffaa76a2ff1f66588aaea5d027fc9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a9eb7514e82ffaa76a2ff1f66588aaea5d027fc9"
+      }
+    },
+    {
+      "id": "ass:compression-ground",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "151d1a184e2a88f1c871b3f972d2199f4cbd7112"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "151d1a184e2a88f1c871b3f972d2199f4cbd7112"
+      }
+    },
+    {
+      "id": "ass:compression-size",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c39dabc5397135278e3406ddd7a25b5da85babc5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c39dabc5397135278e3406ddd7a25b5da85babc5"
+      }
+    },
+    {
+      "id": "ass:degree-embedding-bounds",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bf61148b513a6da09ad7d658454f7e3528930f05"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bf61148b513a6da09ad7d658454f7e3528930f05"
+      }
+    },
+    {
+      "id": "ass:degree-embedding-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1cfdd47fc4b2c977c830ddaa3a99cf4aa95cca2b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1cfdd47fc4b2c977c830ddaa3a99cf4aa95cca2b"
+      }
+    },
+    {
+      "id": "ass:degree-embedding-size",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "306b25c36d704fc8624682f3bf58d56d419fe86b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "306b25c36d704fc8624682f3bf58d56d419fe86b"
+      }
+    },
+    {
+      "id": "ass:discrete-density",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1e276028a9542b8f0ad606028a832a340f137e21"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1e276028a9542b8f0ad606028a832a340f137e21"
+      }
+    },
+    {
+      "id": "ass:discrete-ground",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4cd998328ad36a08ea64028b22e22d48fa0306e3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4cd998328ad36a08ea64028b22e22d48fa0306e3"
+      }
+    },
+    {
+      "id": "ass:discrete-mass",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "def96f97bd6daaa4219671845a361f6650384b3f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "def96f97bd6daaa4219671845a361f6650384b3f"
+      }
+    },
+    {
+      "id": "ass:finite-simple",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7c38b9a59f3cc58cfbfa31b674c8c2457743f791"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7c38b9a59f3cc58cfbfa31b674c8c2457743f791"
+      }
+    },
+    {
+      "id": "ass:main-graph",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "36c3fef99e715c18e2e783335ee7ecf1866eb6cd"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "36c3fef99e715c18e2e783335ee7ecf1866eb6cd"
+      }
+    },
+    {
+      "id": "ass:main-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a69920b8d7c2555924790d56c35c22e9a506c6aa"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a69920b8d7c2555924790d56c35c22e9a506c6aa"
+      }
+    },
+    {
+      "id": "ass:parameters",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b37eb907d5d239c1b51599d745613d71714c9b8a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b37eb907d5d239c1b51599d745613d71714c9b8a"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "42b1ed1e4c7458c788a5d54feeec20be58d650f6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "42b1ed1e4c7458c788a5d54feeec20be58d650f6"
+      }
+    },
+    {
+      "id": "ass:q-lower-edge",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "56c2b5b9d8118d1dab9898545bf804cb8b454fb3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "56c2b5b9d8118d1dab9898545bf804cb8b454fb3"
+      }
+    },
+    {
+      "id": "ass:q-lower-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9712970f9d559c4589f0cc15e5af2074f9066b9f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9712970f9d559c4589f0cc15e5af2074f9066b9f"
+      }
+    },
+    {
+      "id": "ass:split-count",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b98efd9288f75d686c5725e596bc1926bcb16ec8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b98efd9288f75d686c5725e596bc1926bcb16ec8"
+      }
+    },
+    {
+      "id": "ass:split-degeneracy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "27857aab1031f15a394439c7d0e9a26b6d9cfdb7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "27857aab1031f15a394439c7d0e9a26b6d9cfdb7"
+      }
+    },
+    {
+      "id": "ass:star-forest-components",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9018660813f465ea0af50793a4cda32b31fdfaf8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9018660813f465ea0af50793a4cda32b31fdfaf8"
+      }
+    },
+    {
+      "id": "ass:stars-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7336f7040657315a799980463134da9160e59c45"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7336f7040657315a799980463134da9160e59c45"
+      }
+    },
+    {
+      "id": "ass:stars-size",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "46196a3732d9eefbf41f26088a476c4aa7e760e5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "46196a3732d9eefbf41f26088a476c4aa7e760e5"
+      }
+    },
+    {
+      "id": "ass:stars-small-q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ff0ac77c7a18d3aec413f023e425073d054fa6dc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ff0ac77c7a18d3aec413f023e425073d054fa6dc"
+      }
+    },
+    {
+      "id": "ass:stars-support",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "06d32078dad9bd6c4a5a57cc4f24f581268f4d96"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "06d32078dad9bd6c4a5a57cc4f24f581268f4d96"
+      }
+    },
+    {
+      "id": "ass:transfer-configuration",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "62753d551ff00bfa238c3f2d7678d26e9a3fa2f4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "62753d551ff00bfa238c3f2d7678d26e9a3fa2f4"
+      }
+    },
+    {
+      "id": "ass:transfer-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cb3746e43cdf2da2dbbe92e599f0dca5b05ef932"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cb3746e43cdf2da2dbbe92e599f0dca5b05ef932"
+      }
+    },
+    {
+      "id": "ass:typical-cover-density",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6bca013e1e6caedd95825af6390ea61c87aaecc3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6bca013e1e6caedd95825af6390ea61c87aaecc3"
+      }
+    },
+    {
+      "id": "ass:typical-cover-graph",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "57114730a6508f4d69e635062eddca283e2cf4a3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "57114730a6508f4d69e635062eddca283e2cf4a3"
+      }
+    },
+    {
+      "id": "ass:typical-cover-mass",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5941337be9aeea42c043e654e05c8b5d1f057b63"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5941337be9aeea42c043e654e05c8b5d1f057b63"
+      }
+    },
+    {
+      "id": "ass:typical-cover-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73b6dc7cf5f2b0ddf9c0311befc736bc035e36ef"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73b6dc7cf5f2b0ddf9c0311befc736bc035e36ef"
+      }
+    },
+    {
+      "id": "def:containment-edgeless",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "748944d02190f66ba787c1b1019382b7dc767a11"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "748944d02190f66ba787c1b1019382b7dc767a11"
+      }
+    },
+    {
+      "id": "def:containment-family",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2ee9ba3a32ce4a88d3c11a7babace4e179a5bd70"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2ee9ba3a32ce4a88d3c11a7babace4e179a5bd70"
+      }
+    },
+    {
+      "id": "def:containment-threshold",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "41574a0d6ae8c5f77a02fff8c43cec5d2456f759"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "41574a0d6ae8c5f77a02fff8c43cec5d2456f759"
+      }
+    },
+    {
+      "id": "def:copy-convention",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5241a80c91ba8ce96ead39010b66d2ce48ba3e7e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5241a80c91ba8ce96ead39010b66d2ce48ba3e7e"
+      }
+    },
+    {
+      "id": "def:cover",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8461a19fec963230f5499c5b3cb619300f35c2f1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8461a19fec963230f5499c5b3cb619300f35c2f1"
+      }
+    },
+    {
+      "id": "def:cover-cost",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "edc1f3d2c46a15540b88b366cc56005995bfb28f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "edc1f3d2c46a15540b88b366cc56005995bfb28f"
+      }
+    },
+    {
+      "id": "def:degeneracy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "656c8ce971f82851ee7f6b9cb52254f12ae58d6a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "656c8ce971f82851ee7f6b9cb52254f12ae58d6a"
+      }
+    },
+    {
+      "id": "def:discrete-k0",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "425b694f36c2b78d9b876ed4626bd81852f61b40"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "425b694f36c2b78d9b876ed4626bd81852f61b40"
+      }
+    },
+    {
+      "id": "def:general-cover-cost",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f7c1a6ce2841e4fed7955bc4deec771fd5d563d2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f7c1a6ce2841e4fed7955bc4deec771fd5d563d2"
+      }
+    },
+    {
+      "id": "def:nonisolated",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7b584b19a9ea5c567cc902570a1a9b2257d65c97"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7b584b19a9ea5c567cc902570a1a9b2257d65c97"
+      }
+    },
+    {
+      "id": "def:q-definition",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e27cdc187e2fb2271039056793962de6b5ce4d6f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e27cdc187e2fb2271039056793962de6b5ce4d6f"
+      }
+    },
+    {
+      "id": "def:q-edgeless",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "36d0fb7d13622c1abf64025fa9ef491f31fbf2a6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "36d0fb7d13622c1abf64025fa9ef491f31fbf2a6"
+      }
+    },
+    {
+      "id": "def:q-lower-d",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "41409fe1972c5175344b77468fef303c142afb32"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "41409fe1972c5175344b77468fef303c142afb32"
+      }
+    },
+    {
+      "id": "def:random-host",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e5f8ad7dcca9d533dfb94710f6d48479797d2901"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e5f8ad7dcca9d533dfb94710f6d48479797d2901"
+      }
+    },
+    {
+      "id": "def:satisfaction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c119de140e18c9a5be633c902a8dd59f1fe8fdb7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c119de140e18c9a5be633c902a8dd59f1fe8fdb7"
+      }
+    },
+    {
+      "id": "def:smoothed-test",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "452fe3671a6d0a5fa0fd2cce33e39193cee3bdb1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "452fe3671a6d0a5fa0fd2cce33e39193cee3bdb1"
+      }
+    },
+    {
+      "id": "def:star-forest",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "744da261262bf45b301a0f841c1dc256f62fc8b5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "744da261262bf45b301a0f841c1dc256f62fc8b5"
+      }
+    },
+    {
+      "id": "def:stars-a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "81a1b722a760c74525c3d05cd22f571e09970f9f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "81a1b722a760c74525c3d05cd22f571e09970f9f"
+      }
+    },
+    {
+      "id": "lem:compression",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "10be4d7f120f613ffa2cd92792dee16debb1331f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "10be4d7f120f613ffa2cd92792dee16debb1331f"
+      }
+    },
+    {
+      "id": "lem:q-lower",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4085e38c0691ed0996be9e9d978399f3664504c1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4085e38c0691ed0996be9e9d978399f3664504c1"
+      }
+    },
+    {
+      "id": "lem:split",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6d6fb19961928dd12884c37f7d052b52ac827ca1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6d6fb19961928dd12884c37f7d052b52ac827ca1"
+      }
+    },
+    {
+      "id": "lem:transfer-hall",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "39d1543b2fa9aa7f5bdfe9be66f796f53ae471e3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "39d1543b2fa9aa7f5bdfe9be66f796f53ae471e3"
+      }
+    },
+    {
+      "id": "lem:transfer-hoeffding",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bfd6a37290db3233d6eeb63eefb8c5a490d79656"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bfd6a37290db3233d6eeb63eefb8c5a490d79656"
+      }
+    },
+    {
+      "id": "prop:degree-embedding",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cba2dabd5ead780ab2a6dd7d0292a9ea9563ee8b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cba2dabd5ead780ab2a6dd7d0292a9ea9563ee8b"
+      }
+    },
+    {
+      "id": "prop:stars",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c52965d31be20a408478a0e5c523155a16bea993"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c52965d31be20a408478a0e5c523155a16bea993"
+      }
+    },
+    {
+      "id": "prop:transfer",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1235ae2979057dec4824cbad7e431a70d85e7a14"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1235ae2979057dec4824cbad7e431a70d85e7a14"
+      }
+    },
+    {
+      "id": "sym:L",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6433fc0667fa7d2609d30b6db76c98c2a7d84e8e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6433fc0667fa7d2609d30b6db76c98c2a7d84e8e"
+      }
+    },
+    {
+      "id": "sym:\\Prob",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fdb9945047422f15b10bd8476036551d3788ca66"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fdb9945047422f15b10bd8476036551d3788ca66"
+      }
+    },
+    {
+      "id": "sym:\\tau",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0730b9a42fbe1e36cc09c50617a69e81b4dea2ed"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0730b9a42fbe1e36cc09c50617a69e81b4dea2ed"
+      }
+    },
+    {
+      "id": "sym:c_p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d3884340451439df19eafd90e54c8ac479d75095"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d3884340451439df19eafd90e54c8ac479d75095"
+      }
+    },
+    {
+      "id": "sym:f_{\\calQ}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ee2d517aa399d79a4dce4e42a5af326e0e549744"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ee2d517aa399d79a4dce4e42a5af326e0e549744"
+      }
+    },
+    {
+      "id": "sym:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ef0ec41378f4877f423170326fdfdb0ce9c57abf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ef0ec41378f4877f423170326fdfdb0ce9c57abf"
+      }
+    },
+    {
+      "id": "sym:p_c",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9ac06e595771ee0345013fdc26f2c7496ebb3c4d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9ac06e595771ee0345013fdc26f2c7496ebb3c4d"
+      }
+    },
+    {
+      "id": "sym:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8fef66f9205b3b0bc57c8baf1720ba3d97afb554"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8fef66f9205b3b0bc57c8baf1720ba3d97afb554"
+      }
+    },
+    {
+      "id": "sym:q_J",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "744c2120637780ef5fc0a20331eef2a54d99c594"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "744c2120637780ef5fc0a20331eef2a54d99c594"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d86314463c1c252ae6b6370c1aa2f88ef7869f4c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d86314463c1c252ae6b6370c1aa2f88ef7869f4c"
+      }
+    },
+    {
+      "id": "sym:r_*",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1fe25f44765c1abf3a1159b64915abeaaec5c0b8"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1fe25f44765c1abf3a1159b64915abeaaec5c0b8"
+      }
+    },
+    {
+      "id": "sym:u_\\ell",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5b038babac77e5f671df02e8fe940b1b1e9d4cb0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5b038babac77e5f671df02e8fe940b1b1e9d4cb0"
+      }
+    },
+    {
+      "id": "sym:x(\\calQ)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2a7aca6950a9a3396db538c8ce1d78c38abf3727"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2a7aca6950a9a3396db538c8ce1d78c38abf3727"
+      }
+    },
+    {
+      "id": "sym:x_*(\\calQ)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d1fcf98fbb448c4e4dd8708b343cd43c15a98ca1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d1fcf98fbb448c4e4dd8708b343cd43c15a98ca1"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "caf39afa27c0fd135f219851de894e89d65db242"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "caf39afa27c0fd135f219851de894e89d65db242"
+      }
+    },
+    {
+      "id": "thm:typical-cover",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "05909f0221da883325086b7471b42e74bbca849a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "05909f0221da883325086b7471b42e74bbca849a"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [
+    {
+      "node_id": "lem:transfer-hall",
+      "reviewer": "claude",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:hall35",
+      "locator": "Hall's theorem",
+      "evidence_hash": "2c5e8a7fd068c59446c6a7c79946a120ddad7b44"
+    },
+    {
+      "node_id": "lem:transfer-hall",
+      "reviewer": "codex",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:hall35",
+      "locator": "Hall's theorem",
+      "evidence_hash": "2c5e8a7fd068c59446c6a7c79946a120ddad7b44"
+    },
+    {
+      "node_id": "lem:transfer-hoeffding",
+      "reviewer": "claude",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:hoeffding63",
+      "locator": "Hoeffding's inequality",
+      "evidence_hash": "da17371362add35c9dd64fe61f2fa4b8cf20e8c2"
+    },
+    {
+      "node_id": "lem:transfer-hoeffding",
+      "reviewer": "codex",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:hoeffding63",
+      "locator": "Hoeffding's inequality",
+      "evidence_hash": "da17371362add35c9dd64fe61f2fa4b8cf20e8c2"
+    },
+    {
+      "node_id": "thm:discrete",
+      "reviewer": "claude",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:openai26dc",
+      "locator": "Theorem 1.1",
+      "evidence_hash": "71ab8444cebaf99eaacb72ed8632113abd580a0d"
+    },
+    {
+      "node_id": "thm:discrete",
+      "reviewer": "codex",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:openai26dc",
+      "locator": "Theorem 1.1",
+      "evidence_hash": "71ab8444cebaf99eaacb72ed8632113abd580a0d"
+    }
+  ],
+  "reviews_sha256": "30b0989c1fed6e548588348063ecd525acbc43352242274b539b0b239035750c",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "bcaa8f937083ed9e5be4ff1cffce363c79339806adcd0906f0b44cece4df5ea9"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "4da611476be7a86b8db07b8e63b7a56ecf4d8d077ef8bdc827cb13a80301e287"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "340175406db34f1ea3138528eb61fa826375731623768e0114b45a701e573b3a"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "ea309513777822a2aab13df9dd42d341a75a0186a2b7994a42ed554826f80871"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "57568587556071749ec88c0ac5793d94281d7e5dcf6b552de1a8d5983b4782f3"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "fc791f228a62712bba7c43668f58c674fb9f5e6e5c10ef6c6e8e2198ea421416"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral.lean",
+      "sha256": "30d90349bed37d6325290cfe3c7e937294c3914801694ea41235696d7d08c25c"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/All.lean",
+      "sha256": "87e1825c1405e9d891b139483bfb34424ba8eeafc0f2f1a34e494eb586ac29a8"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Basic.lean",
+      "sha256": "600235d964ae3bc16fef50ec31f46aeef6a5608cb8c9f97955943a9795a85622"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers.lean",
+      "sha256": "1509eb5f79d0897ff5b91e693bbf65617c98856b597322f31c2e1ae1768b5364"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyCover.lean",
+      "sha256": "2c36afe6a656a879a3af7d5adc12690cb43bca278112c2ecb934d0eeae910c06"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyCut.lean",
+      "sha256": "19f7b086c2a63da95170b06488d756b1c4eb93f548ffc9b9cc655f6c44b27823"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyInside.lean",
+      "sha256": "a6cbaae115393d24057f82b1a765596d389fd501ff235cbc95c62916d40d1f64"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyOutside.lean",
+      "sha256": "5b55e6ba7aea97924455366168787c8ec217f2acff344721024c7a14b9e62bc8"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyParameters.lean",
+      "sha256": "6b74efcaaeb49dc9eda3a5fefb24bef4f415063768c352e739931130d754aba2"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyPartitions.lean",
+      "sha256": "d3a4a156a8b2d200d702992e2d1ffea4009df0fbcd687109051890ac2ece40d7"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyQuantities.lean",
+      "sha256": "7cf9e3b78abcc82c1953ddfe66618278b688c15ba58334f870e933d7fbf68bef"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyRefine.lean",
+      "sha256": "8ba9dc4e1c548dad042277be711cd419ac7968cbbd149bcb6b782739011f8146"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/AssemblyTransfer.lean",
+      "sha256": "9317162accf9d2ca8fd1ee3ff5049bc710716fb4db3d5f8cd4398856baf57f4e"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/BernoulliTests.lean",
+      "sha256": "2c30d4751b2209e20f3cc223db13e5069c32d1090519fef6bb08717af1a3e9e7"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/BlockPartition.lean",
+      "sha256": "a2cb55ad52ea3b50b12dabbd6cfc095e8702a9e61d7c617f7acc37da5d3ce038"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/BoundedDegeneracy.lean",
+      "sha256": "8511ce840d20b7520bca1d4ab6ce52cdab94a6c1e53a3c935317ab88aa9ec6fe"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Compression.lean",
+      "sha256": "60666921c9bb4f1aa0b4f300afc982b58ffc639c87b7082a9a89228041391dc6"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Degeneracy.lean",
+      "sha256": "6da695e906e0427157d22301f1b16b9ca42ac81a4ca2a5e3a2c82c488c2263b6"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeAdaptiveLayers.lean",
+      "sha256": "b958d22ee95ce0ff362b11415098d0489b117d9713eb94d32417464c3f3d43c7"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeEmbeddingAssembly.lean",
+      "sha256": "20483a455197f1bd22f13446254a83785ad4fd61fcffb94f5faf60837d6b815e"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeHallLayer.lean",
+      "sha256": "b2a64b490a9a1c749c4c65fd5d1997a0ae005350755b16eb373022dce2fd929f"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeHallProbability.lean",
+      "sha256": "edef787e599e990dca9b91c8bc6c18e8d05cac3478bd93fb36059a9f74364f56"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeLayerSequence.lean",
+      "sha256": "28d56594ef112ed624dba450698961f50430ec89db7871a152ca91081f5b9cf4"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeLayerSetup.lean",
+      "sha256": "8c41223de9897ff2167f81a6e176542eb5b781dad0642d27ba7789f473868184"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeLayers.lean",
+      "sha256": "48cdd2324259d6a85a5c3b2293f93fb58352c7ac442a24a38b4cabafa3168f93"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/DegreeNumerics.lean",
+      "sha256": "0c26ac2825de47226427de058399cf92283c9c431f87b74b3af3546cf94840e2"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/FiniteHoeffding.lean",
+      "sha256": "fb02fb96847a576d0066688864bfe906d31f3ea0c3bebafc032eb9aa4bd74272"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/ForestSplitting.lean",
+      "sha256": "ab513c33c53d4548fe0c44c83326cd50e79365efabac35ba4aced46eadaaf468"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Hall.lean",
+      "sha256": "d82dfb6097d8c0db0699d426f1516ec73a28cc2ca3b390cb8879336e7d6c4c48"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/HighDegreeClosure.lean",
+      "sha256": "2a4da57e2ac7376e3bcb2837c5123b18781f752a7f7a3a37075d91dc8059f300"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Hoeffding.lean",
+      "sha256": "5ae52f076b7c31effe19fd8d06ae42333d3a9bd8e450fc381516fb0370420c30"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/QLower.lean",
+      "sha256": "d1dcf4d82565a50deae99e942b0b7691b7ff7c02b5d5323bb5ee6acc535ecdb1"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsBinomial.lean",
+      "sha256": "771acd367dec772570f35eb405aa5a6b813a3dfef713248ab3c59051ea08119d"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsComponents.lean",
+      "sha256": "b4f9ba696d69c5dde91cd4cfc294f815db62a05d1abe404fb950a8542d6c0070"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsCopyCover.lean",
+      "sha256": "c3d7ced47a87d670af8af7900276a707baf32e9a64704f22289eb0b9e72498e0"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsCounting.lean",
+      "sha256": "1bedd96b6414b2174a5f0d5bc44e68b91b9471e1859abbb5efa043b7a8fb7a9b"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsEmbedding.lean",
+      "sha256": "362b21db5f549b60fc4673c84c4f466a84d29110f3244ce4e6bcc444c97b6a9d"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsExtraction.lean",
+      "sha256": "b116f11d6e71785a9cf49a5118ffae1d0028f42fc7c28748090e00b19315f267"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsFreshRows.lean",
+      "sha256": "d4ee124b03adfeccb39670afcc9b1a677f9f9ba14237f5ad492133f5caedb055"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsHostRows.lean",
+      "sha256": "13edaaf1c2cb62c0aad4a757971116a09eb212b4c93587956869e23c98058622"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsQuantities.lean",
+      "sha256": "f6e4787d50f969b57fcdb67b7aca42e640121a1ef9436337933d7f9b6bfa61d7"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsSetup.lean",
+      "sha256": "c91752ea0b0c36395c8b09496425a3e280a8a5b5f64c06f0c28b8061788cc230"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/StarsTrialBudget.lean",
+      "sha256": "be86f69f9e261921a52babae905300ab1702c50390d9fcb675095695bfc64af3"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Tests.lean",
+      "sha256": "e4c9cc07a49d5a7164d9cbdadd4707da4a8ed9bdccd0ebdc8ccd52fa3e923816"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/ThresholdMonotonicity.lean",
+      "sha256": "fcd1dbfb75243175d8f9e8cba645400b2c7a5c2efd6e6a24e50293564d3598b1"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/Thresholds.lean",
+      "sha256": "30c69edc5791cc22960449fdb0d8745e8359a1ad624fa522ca5bbd668997258c"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/TransferAmplification.lean",
+      "sha256": "883c5d1da88700d1348b2cd30a4106ba7d81b4bf0938d5d4417ecbd6a906b253"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/TransferConcentration.lean",
+      "sha256": "2379d6a9c2f7a4970989d84e79509a5c819a5fff1cb4c2daa76efa318199150c"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/Helpers/TransferEmbedding.lean",
+      "sha256": "2e41babc38a1e50883927bea9b47dcab41b3d6ab8ed88f86c534ceff9c7816ff"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/TDegreeEmbedding.lean",
+      "sha256": "acd90b8d608a2ec64224fe8f660dc270b876cf73c8133f6a93416e372645de04"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/TMain.lean",
+      "sha256": "0c29d29871ef081657543ea4780e2c1e61e4c2a2e7dd0c0befbf91fb284c658b"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/TStars.lean",
+      "sha256": "d7997f7612c14746cbe3d32c3d0274ca8c1a0852418142c25a6af99827a0dd85"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/TTransfer.lean",
+      "sha256": "917683dce666a588073eca7c7bb6e2bd1d30a700db95e7899ddbde54e96facf7"
+    },
+    {
+      "path": "lean/Papers/OaiGraphDecompositionsIntegral/TTypicalCover.lean",
+      "sha256": "a4d05482964e44f70b7eccabc857574f9d6cc742040bb7515765f4467badafb7"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "edfab643cf1ee4308b0fc889068b5abd8438a50d7807adcd74a5fa816bbbb7df"
+    },
+    {
+      "path": "lean/Toolkit.lean",
+      "sha256": "78e62b959382ae9993b60c1de20f4ee9c670a290817533fc047a2af31d745bec"
+    },
+    {
+      "path": "lean/Toolkit/Foundations/Probability/BiasedCube.lean",
+      "sha256": "5a5f4099f7fce0692bac5dada6a84db9609427dc01b39bfb30f1ce3f0f438210"
+    },
+    {
+      "path": "lean/built-against.json",
+      "sha256": "4dfd630c4158aa210e684cdabb8c5baa21f9079f0682a02dbd3e6c9ef71ca282"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "3550b3a36cbe31a5cc72d93217da3c42c5a5d6148e73edc548ea8a02315a5ca1"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "190a1afc5e1528071561e2633476f1d786172deaf0749503cad25475b2a95a7a"
+    }
+  ],
+  "code": "edfa613ad3856ca976b2e587698592c3decf74f94ae2cc5171f2de9e17aae3ee"
+}

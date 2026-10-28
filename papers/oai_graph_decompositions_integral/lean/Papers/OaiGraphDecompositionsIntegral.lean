@@ -1,0 +1,63 @@
+module
+public import Papers.OaiGraphDecompositionsIntegral.All
+public import Papers.OaiGraphDecompositionsIntegral.Basic
+public import Papers.OaiGraphDecompositionsIntegral.Helpers
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyCover
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyCut
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyInside
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyOutside
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyParameters
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyPartitions
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyQuantities
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyRefine
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.AssemblyTransfer
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.BernoulliTests
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.BlockPartition
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.BoundedDegeneracy
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Compression
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Degeneracy
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeAdaptiveLayers
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeEmbeddingAssembly
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeHallLayer
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeHallProbability
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeLayerSequence
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeLayerSetup
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeLayers
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.DegreeNumerics
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.FiniteHoeffding
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.ForestSplitting
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Hall
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.HighDegreeClosure
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Hoeffding
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.QLower
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsBinomial
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsComponents
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsCopyCover
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsCounting
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsEmbedding
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsExtraction
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsFreshRows
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsHostRows
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsQuantities
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsSetup
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.StarsTrialBudget
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Tests
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.ThresholdMonotonicity
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.Thresholds
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.TransferAmplification
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.TransferConcentration
+public import Papers.OaiGraphDecompositionsIntegral.Helpers.TransferEmbedding
+public import Papers.OaiGraphDecompositionsIntegral.TDegreeEmbedding
+public import Papers.OaiGraphDecompositionsIntegral.TMain
+public import Papers.OaiGraphDecompositionsIntegral.TStars
+public import Papers.OaiGraphDecompositionsIntegral.TTransfer
+public import Papers.OaiGraphDecompositionsIntegral.TTypicalCover
+
+/-! # Run barrel (auto-generated)
+
+Aggregates every module of this paper run so the whole run is ONE buildable target
+(`lake build <this module>`). Paper modules are not reachable from the library barrels, so
+the default lake target skips them and reports green on stale oleans. Rewritten from the
+run's module set on every F-stage entry — do not hand-edit. -/
+
+public section

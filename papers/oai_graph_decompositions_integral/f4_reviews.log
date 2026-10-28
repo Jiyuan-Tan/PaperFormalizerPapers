@@ -1,0 +1,719 @@
+===== reviewer convergence/dual :: medium :: batch[ass:finite-simple,ass:main-order,ass:main-graph,ass:discrete-ground,ass:discrete-density] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:finite-simple",
+      "verdict": "faithful-refinement",
+      "note": "Finite V supplies vertex finiteness; ambient SimpleGraph V enforces symmetric, irreflexive adjacency, so simplicity is intrinsic to the graph type."
+    },
+    {
+      "obj_id": "ass:main-order",
+      "verdict": "faithful-refinement",
+      "note": "For n : ℕ, 2 ≤ n is exactly the stated order restriction; consumers universally quantify n."
+    },
+    {
+      "obj_id": "ass:main-graph",
+      "verdict": "faithful-refinement",
+      "note": "With H : SimpleGraph V and [Fintype V], Fintype.card V ≤ n is exactly the requirement that H have at most n vertices."
+    },
+    {
+      "obj_id": "ass:discrete-ground",
+      "verdict": "faithful-refinement",
+      "note": "The [Fintype X] binder supplies finiteness and Nonempty X supplies nonemptiness, representing exactly nonempty finite ground sets."
+    },
+    {
+      "obj_id": "ass:discrete-density",
+      "verdict": "faithful-refinement",
+      "note": "For r : ℝ, 0 < r ∧ r < 1 is exactly membership in (0,1)."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:finite-simple","verdict":"faithful-refinement","note":"The graphs are simple because every consumer types them as Mathlib `SimpleGraph V` (loopless, no multi-edges; see TMain.lean:32, TTypicalCover.lean:14, TTransfer.lean:23). `Finite V` gives a finite vertex type, which for a simple graph also bounds the edges. Together they are equivalent to 'all graphs are finite and simple'. The pinned reading ass:pin-1 (the D_i may repeat) concerns the union in thm:typical-cover and places no constraint on this predicate."},{"obj_id":"ass:main-order","verdict":"faithful-refinement","note":"`2 ≤ n` with n : ℕ is exactly the paper's 'for every n ≥ 2'."},{"obj_id":"ass:main-graph","verdict":"faithful-refinement","note":"H is a simple graph on the finite type V, and `Fintype.card V ≤ n` is exactly 'H has at most n vertices'. The `Fintype` instance only states the finiteness that ass:finite-simple already gives."},{"obj_id":"ass:discrete-ground","verdict":"faithful-refinement","note":"The `Fintype X` instance gives a finite X and `Nonempty X` gives a nonempty one, so the pair is equivalent to 'nonempty finite set X'."},{"obj_id":"ass:discrete-density","verdict":"faithful-refinement","note":"`0 < r ∧ r < 1` for r : ℝ is exactly r ∈ (0,1)."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:compression-density,ass:compression-size,ass:compression-family,ass:parameters,ass:transfer-order] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:compression-density",
+      "verdict": "faithful-refinement",
+      "note": "Exactly expresses membership in the open interval (0,1)."
+    },
+    {
+      "obj_id": "ass:compression-size",
+      "verdict": "faithful-refinement",
+      "note": "Natural s with 1 ≤ s represents exactly the integers s ≥ 1."
+    },
+    {
+      "obj_id": "ass:compression-family",
+      "verdict": "faithful-refinement",
+      "note": "Exactly expresses nonemptiness and the stated size bounds; the core's finite ground set Y makes finite-set representation equivalent in both directions."
+    },
+    {
+      "obj_id": "ass:parameters",
+      "verdict": "faithful-refinement",
+      "note": "Exactly expresses all parameter constraints, with natural s, naturalLog = Real.log, and the final inequality reversed syntactically but unchanged mathematically."
+    },
+    {
+      "obj_id": "ass:transfer-order",
+      "verdict": "faithful-refinement",
+      "note": "N₁ ≤ n is exactly n ≥ N₁."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:compression-density","verdict":"faithful-refinement","note":"`0 < r ∧ r < 1` on r : ℝ is exactly r ∈ (0,1); equivalent in both directions."},{"obj_id":"ass:compression-size","verdict":"faithful-refinement","note":"s : ℕ with `1 ≤ s` is exactly 'an integer s ≥ 1'. A negative integer cannot satisfy s ≥ 1, so typing s over ℕ loses nothing; equivalent."},{"obj_id":"ass:compression-family","verdict":"faithful-refinement","note":"`R.Nonempty ∧ ∀ T ∈ R, 1 ≤ T.card ∧ T.card ≤ s` over R : Finset (Finset Y) is exactly a nonempty family R ⊆ {T ⊆ Y : 1 ≤ |T| ≤ s}. Y is the paper's finite vertex set, so every subset is finite and every subfamily is finite; Finset encoding loses nothing. 'For every' quantification is left to the consuming lemma."},{"obj_id":"ass:parameters","verdict":"faithful-refinement","note":"All four conjuncts match. 0<r<1 is direct. s ∈ ℕ comes from the type. s ≤ 10 log n is `(s:ℝ) ≤ 10 * Real.log n` (naturalLog = Real.log). r^s ≥ n^{-1/100} is `n^(-1/100 : ℝ) ≤ r^s`: real rpow on the left, natural power on the right, both standard for n ≥ 1, the paper's domain. Lean's ℕ includes 0, which is the core's own symbol space for s ($\\mathbb N$). The size bound s ≥ 1 is imposed separately in lem:compression, so no conjunct is added or dropped."},{"obj_id":"ass:transfer-order","verdict":"faithful-refinement","note":"`N₁ ≤ n` on ℕ is exactly the condition 'n ≥ N_1'. The universal 'for every n' is realized by the consumer binding n; equivalent."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:q-lower-edge,ass:q-lower-order,ass:split-count,ass:split-degeneracy,ass:compression-ground] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:q-lower-edge",
+      "verdict": "faithful-refinement",
+      "note": "Nonemptiness of H.edgeSet is equivalent to existence of adjacent vertices, exactly saying H has an edge."
+    },
+    {
+      "obj_id": "ass:q-lower-order",
+      "verdict": "faithful-refinement",
+      "note": "Fintype.card V ≤ n states exactly that H's vertex set has cardinality at most n."
+    },
+    {
+      "obj_id": "ass:split-count",
+      "verdict": "faithful-refinement",
+      "note": "The predicate 0 < m on natural numbers specifies exactly the positive integers used as piece counts."
+    },
+    {
+      "obj_id": "ass:split-degeneracy",
+      "verdict": "faithful-refinement",
+      "note": "The supremum of minimum degrees over nonempty induced vertex subsets is at most d exactly when every such subset has a vertex of degree at most d; this is equivalent to d-degeneracy, including the empty graph."
+    },
+    {
+      "obj_id": "ass:compression-ground",
+      "verdict": "faithful-refinement",
+      "note": "Finite Y states precisely that the ground set Y is finite, without choosing an enumeration."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:q-lower-edge","verdict":"faithful-refinement","note":"'H has an edge' is exactly H.edgeSet.Nonempty; the two are equivalent in both directions."},{"obj_id":"ass:q-lower-order","verdict":"faithful-refinement","note":"|V(H)| ≤ n is rendered as Fintype.card V ≤ n, with H's vertex type V finite as in the paper's finite-graph setting; equivalent."},{"obj_id":"ass:split-count","verdict":"faithful-refinement","note":"'m a positive integer' is rendered as m : ℕ with 0 < m; equivalent."},{"obj_id":"ass:split-degeneracy","verdict":"faithful-refinement","note":"degeneracy H is the sup over nonempty S ⊆ V of minDegree(H[S]). H is d-degenerate (every nonempty subgraph has a vertex of degree ≤ d) iff every nonempty induced subgraph has min degree ≤ d, because a subgraph on S has min degree ≤ that of H[S]. That condition is iff sup ≤ d. Empty V gives sup = 0 ≤ d, which is also vacuously true in the paper. Equivalent."},{"obj_id":"ass:compression-ground","verdict":"faithful-refinement","note":"'Y finite' is rendered as Finite Y; equivalent."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:discrete-mass,ass:typical-cover-order,ass:typical-cover-graph,ass:typical-cover-density,ass:typical-cover-mass] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:discrete-mass",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated mass inequality: Boolean assignments correspond bijectively to subsets, and the product law is Bernoulli-r on the paper's domain r∈(0,1), with K0=2^75."
+    },
+    {
+      "obj_id": "ass:typical-cover-order",
+      "verdict": "faithful-refinement",
+      "note": "The natural-number inequality 2 ≤ n is exactly n≥2."
+    },
+    {
+      "obj_id": "ass:typical-cover-graph",
+      "verdict": "faithful-refinement",
+      "note": "Nonempty edgeSet and Fintype.card V ≤ n exactly express having an edge and at most n vertices."
+    },
+    {
+      "obj_id": "ass:typical-cover-density",
+      "verdict": "faithful-refinement",
+      "note": "Exactly q(H;n)<r<1: the unfolded threshold is the supremum of the stated cover-cost feasible set, whose maximum exists on the finite graph domain."
+    },
+    {
+      "obj_id": "ass:typical-cover-mass",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated mass inequality for arbitrary graph families: finite sets of unordered distinct pairs of Fin n encode graphs on [n], with independent Bernoulli-r edges."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:discrete-mass","verdict":"faithful-refinement","note":"Means the same as μ_r(𝒟) ≥ 1 − 1/K₀ for a family 𝒟 ⊆ 2^X: D : Set (Finset X) is an arbitrary family of subsets of the finite set X. muMass is the Bernoulli-cube product law of the event {z | toFinset' z ∈ D}, i.e. μ_r(𝒟), and K0 = 2^75 is cast to ℝ. The inequality has the same direction and constant. The setting quantifies X and r outside this predicate; it adds no restriction of its own."},{"obj_id":"ass:typical-cover-order","verdict":"faithful-refinement","note":"`2 ≤ n` over ℕ is literally 'n ≥ 2'. Pin ass:pin-1 (members of the union may repeat) concerns the theorem's conclusion and has no bearing on this hypothesis."},{"obj_id":"ass:typical-cover-graph","verdict":"faithful-refinement","note":"`H.edgeSet.Nonempty` is 'H has an edge', and `Fintype.card V ≤ n` is 'at most n vertices', counted over H's vertex type V. Both directions hold. No extra conditions. The pin does not apply."},{"obj_id":"ass:typical-cover-density","verdict":"faithful-refinement","note":"`expectationThreshold H n < r ∧ r < 1` is exactly q(H;n) < r < 1. expectationThreshold is the paper's q (sSup of p ∈ [0,1] with a 1/2-cost cover of the containment family, set to 0 on edgeless H). Whether that definition is faithful is the business of the def:q nodes, not this assumption. The pin does not apply."},{"obj_id":"ass:typical-cover-mass","verdict":"faithful-refinement","note":"'A family of graphs on [n]' is D : Set (Finset (KEdge n)), with KEdge n the unordered non-diagonal pairs of Fin n. Edge subsets of K_n match simple graphs on [n] one-to-one. The condition 1 − 1/K₀ ≤ muMass (KEdge n) r D is exactly μ_r(𝒟) ≥ 1 − 1/K₀ on that edge set. The statement-uses edge to KEdge is just the encoding of the edge set. The pin does not apply."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:transfer-configuration,ass:degree-embedding-order,ass:degree-embedding-bounds,ass:degree-embedding-size,ass:stars-order] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:transfer-configuration","verdict":"faithful-refinement","note":"Equivalent: crossing adjacency pins bipartiteness, graphOfEdges gives exactly containment in a member of D, and bounding all outside degrees is equivalent to bounding positive outside degrees since zero ≤ s."},{"obj_id":"ass:degree-embedding-order","verdict":"faithful-refinement","note":"N₂ ≤ n is exactly the stated order condition n ≥ N₂."},{"obj_id":"ass:degree-embedding-bounds","verdict":"faithful-refinement","note":"Equivalent: nonisolated counts precisely positive-degree vertices, degeneracy is the maximum minimum degree over nonempty induced subsets, and the three numerical bounds agree."},{"obj_id":"ass:degree-embedding-size","verdict":"faithful-refinement","note":"Fintype.card V ≤ n states exactly that J's vertex carrier has at most n vertices, including isolated vertices."},{"obj_id":"ass:stars-order","verdict":"faithful-refinement","note":"N₃ ≤ n is exactly the stated order condition n ≥ N₃."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:transfer-configuration","verdict":"faithful-refinement","note":"The four conjuncts match the bullets. |Y| ≤ n^{2/3} is stated over ℝ. 'All edges between Y and [n]∖Y' is the crossing-adjacency clause. E(J) ⊆ E(G) for some G ∈ D is ∃ G ∈ D, J ≤ graphOfEdges G, where graphOfEdges is the fromEdgeSet of G's non-diagonal pairs. At most n/8 vertices outside Y have positive degree is the filter-card bound. The NL bounds the degree only of those vertices; the Lean bounds every w ∉ Y by s, which is equivalent because zero-degree vertices satisfy it trivially. J is on Fin n, i.e. labelled on [n]."},{"obj_id":"ass:degree-embedding-order","verdict":"faithful-refinement","note":"'n ≥ N_2' is exactly N₂ ≤ n."},{"obj_id":"ass:degree-embedding-bounds","verdict":"faithful-refinement","note":"|V_+(J)| ≤ n/4 uses nonisolated, the vertices of positive degree. Δ(J) ≤ n^{2/3} uses maxDegree. degen(J) ≤ s uses degeneracy, the maximum min-degree over nonempty induced subgraphs. The core defines it as the maximum over nonempty subgraphs. The two agree: on a given vertex set the induced subgraph has the most edges, so it gives the largest min-degree."},{"obj_id":"ass:degree-embedding-size","verdict":"faithful-refinement","note":"'At most n vertices' is Fintype.card V ≤ n."},{"obj_id":"ass:stars-order","verdict":"faithful-refinement","note":"'n ≥ N_3' is exactly N₃ ≤ n."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:q-lower,lem:split,lem:compression] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:q-lower",
+      "verdict": "matched",
+      "note": "Both lower bounds and hypotheses agree; induced-subset degeneracy equals subgraph degeneracy, and the threshold supremum equals the paper's maximum because the feasible set is nonempty and compact on this finite domain."
+    },
+    {
+      "obj_id": "lem:split",
+      "verdict": "matched",
+      "note": "The subgraph and unique-edge-membership clauses encode exactly an m-piece edge partition; for m > 0, natural division (d + m - 1) / m equals ceil(d/m), and the degeneracy definitions agree."
+    },
+    {
+      "obj_id": "lem:compression",
+      "verdict": "matched",
+      "note": "The domains, nonempty subfamily, cardinality bound, and universal satisfaction implication agree; integer negative powers express r^{-s}, and the unfolded smoothing law is precisely an independent Bernoulli-r extension."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:q-lower","verdict":"matched","note":"The hypotheses match the paper. QLowerEdge means H has an edge, QLowerOrder means |V(H)| ≤ n, V is finite, and d is the degeneracy of H via qLowerDegeneracy. The conclusion is the same two lower bounds: 1/(2·C(n,2)) ≤ q and (1/2)·n^(−2/d) ≤ q, the second using real rpow. q is expectationThreshold, which is zero on edgeless graphs. Otherwise it is the sSup of p ∈ [0,1] for which F_H has a cover of cost at most 1/2, which is the paper's q. An edge plus card V ≤ n gives n ≥ 2 and d ≥ 1, so both expressions are well defined. The two directions are equivalent."},{"obj_id":"lem:split","verdict":"matched","note":"Being d-degenerate is degeneracy H ≤ d, using the standard max-over-subsets-of-min-degree definition, and m > 0. The pieces P i ≤ H, with each edge of H in exactly one piece (∃!), form a partition of E(H) into m graphs; the paper allows empty pieces. For m > 0, the natural-number division (d+m−1)/m equals ⌈d/m⌉. Isolated vertices in V do not change a piece's degeneracy, because the sup also ranges over the subsets spanned by its edges. The two statements are equivalent."},{"obj_id":"lem:compression","verdict":"matched","note":"The hypotheses match the paper: Y is finite, r ∈ (0,1), s ≥ 1, and R is nonempty with every member of size between 1 and s. The conclusion is the same: some nonempty Q ⊆ R has |Q| ≤ ⌈2r^(−s)⌉, with the integer ceiling cast to ℝ, and every S satisfying R (some T ∈ R with T ⊆ S) has f_Q(S) ≥ 1/2. Here f_Q(S) is the probability under the Bernoulli-r product law that S ∪ Z satisfies Q, which is the paper's smoothed test. The two statements are equivalent."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:stars-size,ass:stars-support,ass:stars-small-q,ass:star-forest-components,ass:pin-1] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:stars-size","verdict":"faithful-refinement","note":"Fintype.card V ≤ n is exactly the stated bound on the number of vertices."},{"obj_id":"ass:stars-support","verdict":"faithful-refinement","note":"nonisolated selects precisely the positive-degree vertices; the real-valued cardinality inequality is exactly |V_+(J)| ≤ n/100."},{"obj_id":"ass:stars-small-q","verdict":"faithful-refinement","note":"Uses exactly q(J;n) < 1/(2A), with A = 400e^4 and the specified edgeless convention; the supremum equals the printed maximum because the finite cover choices give a nonempty closed feasible subset of [0,1]."},{"obj_id":"ass:star-forest-components","verdict":"faithful-refinement","note":"Each component with at least two vertices has a center adjacent to every other vertex and no edges between leaves, exactly characterizing its being a star."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"An arbitrary Fin K-indexed tuple of members of D permits repetition, and S ⊆ its union expresses the pinned coverage relation without a distinctness restriction."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:stars-size","verdict":"faithful-refinement","note":"'on at most n vertices' is the same statement as Fintype.card V ≤ n, where V is the graph's vertex type."},{"obj_id":"ass:stars-support","verdict":"faithful-refinement","note":"nonisolated J is the set of vertices with positive degree, which is V_+(J). The condition (card : ℝ) ≤ n/100 is the paper's |V_+(J)| ≤ n/100, read over the reals, so non-integer n/100 is handled correctly."},{"obj_id":"ass:stars-small-q","verdict":"faithful-refinement","note":"The Lean states expectationThreshold J n < 1/(2*starConstA). expectationThreshold realizes q(J;n), set to 0 on edgeless graphs, and starConstA = 400 e^4 realizes A. This is exactly q(J;n) < 1/(2A). Whether q itself is faithful is judged on its own symbol, not here."},{"obj_id":"ass:star-forest-components","verdict":"faithful-refinement","note":"Each connected component with at least 2 vertices has a centre c, and adjacency inside the component is exactly 'u≠w and one endpoint is c'. That is the star K_{1,m} with m ≥ 1 on the component's vertices. Conversely, a star component satisfies this condition with its centre (for K_2, either endpoint works). Single-vertex components are left unconstrained, matching 'nontrivial'. The two directions are equivalent."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"CoveredByMembers uses an arbitrary tuple t : Fin K → Finset X with every entry in D and S ⊆ the union of the t i. Entries of a function may repeat, which is exactly the pinned reading. It matches the core's E_{K_0}(D) definition, which takes the complement over every tuple in D^{K_0} with repetition allowed. No premise is added."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:copy-convention,def:random-host,def:containment-threshold,def:containment-edgeless,def:containment-family] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:copy-convention","verdict":"matched","note":"IsContained means existence of an injective adjacency-preserving homomorphism; nonedges need not be preserved, exactly allowing non-induced copies."},{"obj_id":"def:random-host","verdict":"matched","note":"The product law assigns independent Bernoulli-p bits to unordered distinct vertex pairs for p∈[0,1]; Fin n faithfully relabels [n]. Clamping only extends the definition outside the paper's probability domain."},{"obj_id":"def:containment-threshold","verdict":"matched","note":"On graphs with at most n vertices, the containment probability is a continuous finite polynomial and equals one at p=1; hence the qualifying set is nonempty compact and its infimum is exactly the stated attained minimum."},{"obj_id":"def:containment-edgeless","verdict":"matched","note":"The edgeSet=∅ branch sets precisely edgeless graphs' thresholds to zero and otherwise retains the containment threshold."},{"obj_id":"def:containment-family","verdict":"matched","note":"Finite edge subsets represent all subsets of E(K_n); graphOfEdges has exactly the selected edges, and ContainsCopy gives precisely the stated increasing family."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:copy-convention","verdict":"matched","note":"ContainsCopy J G := J.IsContained G, i.e. there is an injective homomorphism (a Mathlib SimpleGraph.Copy) from J into G. That is exactly a not-necessarily-induced copy, as the paper's convention says, and the extensions agree in both directions."},{"obj_id":"def:random-host","verdict":"matched","note":"randomHost n p = bernoulliCube (KEdge n) p. KEdge n is the set of unordered, non-diagonal pairs of Fin n, i.e. E(K_n); Fin n is the label set [n] shifted by one. bernoulliCube is the product of independent Bernoulli(max 0 (min p 1)) coordinates, and bernoulliCube_eq shows it equals the independent Bernoulli(p) design for p in [0,1]. Outside [0,1] the clamp only gives an off-domain junk value, which the paper does not define anyway."},{"obj_id":"def:containment-threshold","verdict":"matched","note":"The Lean takes sInf of {p in [0,1] : 1/2 <= Pr(G(n,p) contains a copy of J)}, and hostGraph z is the graph whose edges are the true pairs. On the paper's domain (|V(J)| <= n), p=1 gives K_n, which contains J, so the set is nonempty. Pr is a monotone polynomial in p, so the set is closed and the infimum is attained, so sInf equals the printed min. Graphs with more than n vertices get a junk value of 0, a domain the paper leaves undefined."},{"obj_id":"def:containment-edgeless","verdict":"matched","note":"containmentThreshold is 0 when J.edgeSet is empty and the raw threshold otherwise, exactly as the paper sets it. On the stated domain the two definitions agree in any case: an edgeless J on at most n vertices is contained with probability 1 at p=0, so the raw value is also 0."},{"obj_id":"def:containment-family","verdict":"matched","note":"containmentFamily H n = {G ⊆ E(K_n), as a Finset of KEdge n, such that graphOfEdges G contains a non-induced copy of H}. graphOfEdges G is the graph on [n] with edge set G, so this is exactly F_H. Increasingness is a consequence of the definition, not an extra constraint."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:transfer-hoeffding,lem:transfer-hall] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:transfer-hoeffding",
+      "verdict": "matched",
+      "note": "Encodes the fixed-test source failure bound with a uniform positive constant. The explicit condition 2|Y|≤n holds in the paper's large-n context; Lean additionally covers every eligible smaller n satisfying it."
+    },
+    {
+      "obj_id": "lem:transfer-hall",
+      "verdict": "matched",
+      "note": "States precisely the matching step conditional on Hall's inequalities, leaving their derivation to transfer. The universally quantified candidate family specializes to the paper's usable neighborhoods and preserves repeated neighborhoods as distinct indices."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.transfer_hoeffding",
+      "statement": "A fixed admissible source test fails with probability at most exp(-c n^(98/100)), for an absolute c>0.",
+      "classical_fact": "Supplied Hoeffding Theorem 2: the m=n-|Y| summands are independent [0,1]-valued variables with mean x. Taking t=x gives exp(-2mx²)≤exp(-n^(98/100)), so c=1 suffices.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:hoeffding63",
+        "locator": "Hoeffding's inequality"
+      },
+      "check_status": "cited-verified-attested"
+    },
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.transfer_hall",
+      "statement": "Hall's inequalities for the finite indexed family cand on U imply an injective selection f with f(w)∈cand(w) for every w∈U.",
+      "classical_fact": "Supplied Hall Theorem 1 applies with index set U and candidate sets cand(w). Its distinct representatives extend to a total function on Fin n by assigning f(w)=w outside U.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:hall35",
+        "locator": "Hall's theorem"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:transfer-hoeffding","verdict":"matched","note":"The Lean states an absolute c>0, uniform over n, r, s, Y and Q. It quantifies every test of the passage: Y with |Y|<=n^{2/3}, and Q nonempty with 1<=|T|<=s and |Q|<=ceil(2r^{-s}) (CompressionFamily plus the card bound). The hypothesis 2|Y|<=n is the passage's standing 'for large n, m>=n/2'. The hypothesis x(Q)>=n^{-1/100} is the passage's own premise. SourceTest unfolds exactly to eq:source-test: (1/m)·sum over w outside Y of f_Q(N_G(w)∩Y) <= 2x(Q). Here f_Q is the Bernoulli-r extension (smoothedTest) and x(Q) is the Bernoulli-tau satisfaction probability, with tau=1-(1-r)^2. Under G~G(n,r) (randomHost/hostGraph) the Lean bounds Pr(not SourceTest) by exp(-c n^{98/100}), which is the attributed claim. The Lean is slightly stronger: it holds for every n with 2|Y|<=n, not only for large n. It assumes nothing else the proof of prop:transfer must establish."},{"obj_id":"lem:transfer-hall","verdict":"matched","note":"The passage attributes only the matching step to Hall: given the Hall inequalities for the usable-candidate sets, the positive-degree J-vertices outside Y match to distinct candidates in [n]\\Y. The Lean has an abstract cand with cand w ⊆ [n]\\Y and U ⊆ the positive-degree J-vertices outside Y. It assumes the Hall condition for every U' ⊆ U and concludes an f that is injective on U with f w ∈ cand w, which is a system of distinct representatives. It does not assume the Hall inequalities that prop:transfer derives; they stay as the explicit premise hHall. TransferConfiguration is only context and adds no restriction to the matching claim."}],"assumption_verdicts":[],"substrate_gates":[{"name":"Papers.OaiGraphDecompositionsIntegral.transfer_hoeffding","statement":"∃ c>0, ∀ n r s, TransferParameters n r s → ∀ Y, |Y|≤n^{2/3} → 2|Y|≤n → ∀ Q admissible, n^{-1/100}≤xQ r Q → Pr_{G(n,r)}(¬SourceTest Y r Q G) ≤ exp(-c n^{98/100})","classical_fact":"Hoeffding (1963) Thm 2, eq. (2.6), applied to m≥n/2 independent [0,1]-valued summands f_Q(N_G(w)∩Y) with mean x(Q) and deviation t=x(Q)≥n^{-1/100}, which gives exp(-2m t^2)≤exp(-n^{98/100})","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:hoeffding63","locator":"Hoeffding's inequality"},"check_status":"cited-verified-attested"},{"name":"Papers.OaiGraphDecompositionsIntegral.transfer_hall","statement":"For U ⊆ the positive-degree J-vertices outside Y and cand w ⊆ [n]\\Y: (∀ U'⊆U, |U'|≤|⋃_{w∈U'} cand w|) → ∃ f injective on U with f w ∈ cand w","classical_fact":"Hall (1935) Thm 1: for a finite indexed family, the Hall condition is sufficient for a C.D.R. (distinct representatives)","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:hall35","locator":"Hall's theorem"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:discrete-k0,def:nonisolated,def:degeneracy,def:q-lower-d,def:satisfaction] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:discrete-k0",
+      "verdict": "matched",
+      "note": "Defines exactly the absolute natural-number constant 2^75; the repetition pin imposes no additional condition on this definition."
+    },
+    {
+      "obj_id": "def:nonisolated",
+      "verdict": "matched",
+      "note": "Membership is exactly positive degree: the filter ranges over every vertex, and library degree counts adjacent vertices."
+    },
+    {
+      "obj_id": "def:degeneracy",
+      "verdict": "matched",
+      "note": "The maxima agree: every nonempty induced subgraph is a subgraph, and every nonempty subgraph has minimum degree at most that of the induced graph on its vertex set."
+    },
+    {
+      "obj_id": "def:q-lower-d",
+      "verdict": "matched",
+      "note": "Unfolding gives exactly the degeneracy of H."
+    },
+    {
+      "obj_id": "def:satisfaction",
+      "verdict": "matched",
+      "note": "The existential states exactly that S contains some member of the requirement family; finsets represent all subsets of the finite ground set."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:discrete-k0","verdict":"matched","note":"K0 : ℕ := 2^75 is exactly the paper's K_0 = 2^75. The pinned reading (the D_i may repeat) concerns how thm:typical-cover uses K_0, not the value of the constant, so nothing here needs to change."},{"obj_id":"def:nonisolated","verdict":"matched","note":"Finset.univ.filter (0 < J.degree v) is exactly {v ∈ V(J) : deg_J(v) > 0}, with V the finite vertex type. Both inclusions hold trivially."},{"obj_id":"def:degeneracy","verdict":"matched","note":"The Lean takes the sup, over nonempty S ⊆ V, of the minimum degree of H induced on S. The paper takes the max over all nonempty subgraphs. Every subgraph on vertex set S has minimum degree at most that of the induced subgraph H[S], and H[S] is itself a nonempty subgraph, so the two maxima are equal. The sup is over a finite nonempty family when V is nonempty. It is 0 for empty V, which the paper leaves unspecified."},{"obj_id":"def:q-lower-d","verdict":"matched","note":"qLowerDegeneracy H := degeneracy H is exactly d = degen(H). It inherits the matched degeneracy definition."},{"obj_id":"def:satisfaction","verdict":"matched","note":"Satisfies Q S := ∃ T ∈ Q, T ⊆ S is the paper's 'S contains some member of Q'. A family of subsets of a finite set Y is finite, so typing Q as a Finset (Finset Y) loses nothing."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:cover,def:cover-cost,def:q-definition,def:q-edgeless,def:general-cover-cost] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:cover",
+      "verdict": "matched",
+      "note": "Exactly the stated covering relation; on finite X, Finset families represent all subfamilies of 2^X."
+    },
+    {
+      "obj_id": "def:cover-cost",
+      "verdict": "matched",
+      "note": "Exactly the sum of p raised to each cover member's cardinality."
+    },
+    {
+      "obj_id": "def:q-definition",
+      "verdict": "matched",
+      "note": "On the stated nonedgeless domain, the feasible set is nonempty and compact: finitely many covers give a finite union of closed polynomial sublevel sets in [0,1]. Thus sSup equals the printed maximum; containment means an injective, adjacency-preserving copy."
+    },
+    {
+      "obj_id": "def:q-edgeless",
+      "verdict": "matched",
+      "note": "Returns zero exactly for edgeless graphs and otherwise retains the stated expectation threshold."
+    },
+    {
+      "obj_id": "def:general-cover-cost",
+      "verdict": "matched",
+      "note": "Exactly existence of a covering family whose stated cost at r is at most c, on the finite ground set X."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:cover","verdict":"matched","note":"Covers C F := ∀ A ∈ F, ∃ S ∈ C, S ⊆ A is exactly 'every A ∈ F contains some S ∈ C'. X is a Fintype, so every C ⊆ 2^X is finite, and representing C as a Finset (Finset X) loses nothing. The pin on repeated D_i does not bear on this definition."},{"obj_id":"def:cover-cost","verdict":"matched","note":"coverCost C p = ∑_{S∈C} p^|S|, the same as c_p(C) in the paper; C is a set, so there are no multiplicities. Same extension."},{"obj_id":"def:q-definition","verdict":"matched","note":"The paper's max is replaced by sSup over {p ∈ [0,1] : some cover C of F_H has c_p(C) ≤ 1/2}. KEdge n (non-diagonal Sym2 over HostVertex n) is finite, so there are finitely many C. Each C gives a closed set of p (cost is a polynomial in p), and the finite union is closed and bounded. The set is nonempty: when H has an edge, every A ∈ F_H is nonempty, so the singleton-edge cover has cost 0 at p=0; when F_H is empty, C=∅ works for every p. So the max is attained and equals the sSup on the paper's domain. The edge condition is handled by def:q-edgeless."},{"obj_id":"def:q-edgeless","verdict":"matched","note":"expectationThreshold = 0 if H.edgeSet = ∅, else expectationThresholdRaw. This is exactly the paper's convention q = 0 for edgeless H, with the eq:q-definition value otherwise."},{"obj_id":"def:general-cover-cost","verdict":"matched","note":"HasCoverOfCostLe F r c := ∃ finite C, Covers C F ∧ c_r(C) ≤ c. This uses the same Covers/coverCost as the introduction with a general finite X (Fintype X) in place of E(K_n). A Finset family is the same as any family over finite X."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:smoothed-test,def:stars-a,def:star-forest,thm:discrete] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:smoothed-test",
+      "verdict": "matched",
+      "note": "On 0 < r < 1, clamping is inactive: Pr sums independent Bernoulli-r weights over precisely the assignments whose union with S contains a member of Q; finite families and Boolean assignments faithfully represent subsets."
+    },
+    {
+      "obj_id": "def:stars-a",
+      "verdict": "matched",
+      "note": "400 * Real.exp 4 is exactly 400e^4."
+    },
+    {
+      "obj_id": "def:star-forest",
+      "verdict": "matched",
+      "note": "For each component with at least two vertices, the adjacency equivalence specifies exactly a star centered at a vertex of that component; isolated vertices are unrestricted."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "thm:discrete",
+      "verdict": "faithful-refinement",
+      "note": "The carrier encodes exactly the nonempty finite ground set, open-unit parameter, mass threshold with K0 = 2^75, exceptional family excluding every K0-tuple union, and cover cost at most 1/2 at r; tuples permit repetition and D has no monotonicity restriction."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.DiscreteConvexityCover",
+      "statement": "Every family of mass at least 1 - 1/2^75 on a nonempty finite Bernoulli-r cube has its exceptional family for unions of 2^75 possibly repeated members covered at cost at most 1/2 at r.",
+      "classical_fact": "OpenAI (2026), Talagrand's discrete-convexity conjecture, Theorem 1.1, as attested in the supplied carrier contract.",
+      "missing_infra": "Deferred cited logical assumption.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:openai26dc",
+        "locator": "Theorem 1.1"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:smoothed-test","verdict":"matched","note":"smoothedTest is the μ_r-probability (productMeasure = bernoulliCube on Y) that S ∪ toFinset'(z) contains some member of Q, i.e. P(S∪Z satisfies Q) with Z~μ_r on Y. The paper's condition r∈(0,1) is the setting where it is used, and the def agrees with the paper on that domain. The Lean def is total in r, which only extends it outside that domain."},{"obj_id":"def:stars-a","verdict":"matched","note":"starConstA = 400 * Real.exp 4, exactly A = 400e^4."},{"obj_id":"def:star-forest","verdict":"matched","note":"NontrivialComponentsAreStars says each connected component with at least two vertices has a centre c whose within-component adjacency is exactly the edges between c and the other vertices. That is a star K_{1,m} with m≥1, and every star has this property. Trivial components are unconstrained, as the NL requires. Both directions hold."},{"obj_id":"thm:discrete","verdict":"matched","note":"Matches both ways. Quantification is over finite types X, with X nonempty (DiscreteGround) and r∈(0,1) (DiscreteDensity). DiscreteMass is 1−1/K0 ≤ μ_r(D) with K0 = 2^75. exceptionalFamily K0 D is the sets S not contained in any union of K0 members of D indexed by Fin K0 → D, so repeats are allowed and D need not be monotone. HasCoverOfCostLe asks for a finite family C in which every member of the exceptional family contains some member of C, with Σ_{S∈C} r^|S| ≤ 1/2 at the same r. Quantifying over Type-valued finite X is equivalent to quantifying over finite sets, by transport along a bijection."}],"assumption_verdicts":[{"obj_id":"thm:discrete","verdict":"faithful-refinement","note":"Cited logical carrier (OpenAI 2026, Theorem 1.1). The Prop is self-contained: every predicate is defined (ground, density, mass, exceptional family, cover, cost) and it is equivalent to the frozen node. Constants, quantifier order and the same-r cover-cost conclusion are preserved, and there is no Lean-only premise."}],"substrate_gates":[{"name":"Papers.OaiGraphDecompositionsIntegral.DiscreteConvexityCover","statement":"∀ finite nonempty X, r∈(0,1), D ⊆ 2^X with μ_r(D) ≥ 1−2^{-75}: E_{2^75}(D) has a cover of r-cost ≤ 1/2","classical_fact":"Talagrand's discrete-convexity conjecture, OpenAI (2026) Theorem 1.1","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26dc","locator":"Theorem 1.1"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:q,sym:L,sym:f_{\calQ},sym:r_*,sym:\tau] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:q","verdict":"matched","note":"Basic.lean:129 computes zero for edgeless graphs and otherwise the supremum of a subset of [0,1], which lies in [0,1] (including the empty-set supremum convention)."},{"obj_id":"sym:L","verdict":"matched","note":"TMain.lean:30 explicitly quantifies an absolute real L with 1 ≤ L before all graph and order parameters."},{"obj_id":"sym:f_{\\calQ}","verdict":"matched","note":"Basic.lean:198 computes a function on finite subsets as a finite-design event probability; nonnegative normalized weights ensure every value lies in [0,1]."},{"obj_id":"sym:r_*","verdict":"matched","note":"Helpers/Tests.lean:25 computes 1-(1-r)^32; on the core's stated domain 0<r<1, its value lies strictly between zero and one."},{"obj_id":"sym:\\tau","verdict":"matched","note":"Helpers/Tests.lean:22 computes 1-(1-r)^2; on the core's stated domain 0<r<1, its value lies strictly between zero and one."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:q","verdict":"matched","note":"expectationThreshold (Basic.lean:129) is a computed def: it is 0 when H has no edges, and otherwise expectationThresholdRaw (Basic.lean:124). The raw value is the sSup of a set contained in Set.Icc 0 1. That set is bounded above by 1, and sSup of the empty set is 0, so the value always lies in [0,1]. The range is pinned by construction."},{"obj_id":"sym:L","verdict":"matched","note":"thm:main (TMain.lean:30) binds the constant as `∃ L : ℝ, 1 ≤ L`, chosen before n, V and H. That pins an absolute constant in [1,∞), as the paper requires."},{"obj_id":"sym:f_{\\calQ}","verdict":"matched","note":"smoothedTest (Basic.lean:198) is a computed def: the probability (productMeasure Y r).Pr of the event Satisfies Q (S ∪ Z). productMeasure is Toolkit's bernoulliCube, which clamps r into [0,1], so it is a probability law and the value lies in [0,1]. As a function of S it is a map from 2^Y to [0,1]. The range is pinned by construction."},{"obj_id":"sym:r_*","verdict":"matched","note":"targetDensity (Helpers/Tests.lean:25) is the computed def 1-(1-r)^32. When r is in (0,1), (1-r)^32 is in (0,1), so r_* is in (0,1). The range follows from the formula under the paper's standing condition r ∈ (0,1); Basic.lean:152 states that condition as DiscreteDensity."},{"obj_id":"sym:\\tau","verdict":"matched","note":"unionDensity (Helpers/Tests.lean:22) is the computed def 1-(1-r)^2, the density of the union of two independent Bernoulli-r subsets. When r is in (0,1) it lies in (0,1). The range is pinned by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:x(\calQ),sym:x_*(\calQ),sym:q_J,sym:u_\ell] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:x(\\calQ)",
+      "verdict": "matched",
+      "note": "Tests.lean:28 defines xQ as an event probability under a FiniteDesign; nonnegative normalized weights and a zero-one indicator ensure its value lies in [0,1]."
+    },
+    {
+      "obj_id": "sym:x_*(\\calQ)",
+      "verdict": "matched",
+      "note": "Tests.lean:33 defines xStarQ as an event probability under a FiniteDesign, ensuring its value lies in [0,1] by construction."
+    },
+    {
+      "obj_id": "sym:q_J",
+      "verdict": "matched",
+      "note": "StarsQuantities.lean:21 unfolds to zero for edgeless graphs and otherwise the real supremum of a subset of [0,1]; both branches lie in [0,1], including the empty-set supremum convention."
+    },
+    {
+      "obj_id": "sym:u_\\ell",
+      "verdict": "matched",
+      "note": "StarsQuantities.lean:45 defines starTrialSuccess as the probability of the binomial-count tail event under a FiniteDesign, ensuring its value lies in [0,1] by construction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:x(\\calQ)","verdict":"matched","note":"xQ (Helpers/Tests.lean:28) is a computed def: the probability, under productMeasure Y (unionDensity r), that the configuration satisfies Q. productMeasure is Toolkit's bernoulliCube, which clamps the bias to [0,1] (BiasedCube.lean:121-125), so the design is a genuine probability law and Pr lies in [0,1] by construction. When r is in [0,1], the law is Bernoulli(1-(1-r)^2) as the paper intends (bernoulliCube_eq)."},{"obj_id":"sym:x_*(\\calQ)","verdict":"matched","note":"xStarQ (Helpers/Tests.lean:33) is the same construction with targetDensity r = 1-(1-r)^32. It is the probability of an event under a law with clamped bias (a genuine probability law), so its value lies in [0,1] by construction."},{"obj_id":"sym:q_J","verdict":"matched","note":"starQ (Helpers/StarsQuantities.lean:21) = expectationThreshold J n (Basic.lean:129): it is 0 when J has no edges, and otherwise the sSup of a subset of Icc 0 1. That subset is bounded; if it is empty, sSup gives 0 in ℝ, and if it is nonempty the sSup lies in [0,1]. So the value is in [0,1] by construction."},{"obj_id":"sym:u_\\ell","verdict":"matched","note":"starTrialSuccess (Helpers/StarsQuantities.lean:45) is the probability of the event {ell ≤ number of successes} under binomialDesign (n/3) p = bernoulliCube (Fin (n/3)) p, i.e. P(Bin(floor(n/3),p) ≥ ell). Because the bias is clamped, the law is a genuine probability law and the value lies in [0,1] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:r,sym:p,sym:\Prob,sym:p_c,sym:c_p] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "DiscreteDensity and TransferParameters explicitly require 0<r<1; TypicalCoverDensity implies this because expectationThreshold is nonnegative by its bounded-supremum construction."
+    },
+    {
+      "obj_id": "sym:p",
+      "verdict": "drift",
+      "note": "Basic.lean:76 accepts unrestricted p:ℝ and clamps it internally; the Icc constraint at line 94 binds a different, local p. Add a same-scope 0≤p≤1 domain constraint to randomHost and synchronize dependents."
+    },
+    {
+      "obj_id": "sym:\\Prob",
+      "verdict": "matched",
+      "note": "muMass computes a finite-design event probability: a sum of nonnegative masses over an event, bounded above by the total mass one."
+    },
+    {
+      "obj_id": "sym:p_c",
+      "verdict": "matched",
+      "note": "containmentThreshold is zero or the infimum of a subset of [0,1]; nonempty subsets have infimum in [0,1], and the real empty-set infimum is zero."
+    },
+    {
+      "obj_id": "sym:c_p",
+      "verdict": "drift",
+      "note": "Basic.lean:116 permits negative costs because p is unrestricted: Lean-checked coverCost ({({()}:Finset Unit)}:Finset (Finset Unit)) (-1)=-1. Constrain the definition's density parameter to [0,1], making every summand nonnegative."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:p",
+    "reason": "The paper requires p∈[0,1], but randomHost accepts arbitrary real p; containmentThresholdRaw's local interval constraint does not constrain that parameter.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:r","verdict":"matched","note":"Every member that constrains r places it in (0,1). DiscreteDensity (Basic.lean:152) and TransferParameters (Basic.lean:274) both state 0<r∧r<1 directly. TypicalCoverDensity (Basic.lean:237) states expectationThreshold H n<r<1. expectationThreshold is either 0 (edgeless H) or the sSup of a subset of [0,1], and an empty sSup is 0 in ℝ, so it is ≥0 and r>0 follows from the member itself."},{"obj_id":"sym:p","verdict":"matched","note":"randomHost passes the real p to bernoulliCube (Toolkit/Foundations/Probability/BiasedCube.lean:121), which uses max 0 (min p 1) as the edge probability. On [0,1] this is exactly G(n,p), and any real input still gives a genuine Bernoulli law. containmentThresholdRaw (Basic.lean:93) explicitly restricts p ∈ Set.Icc 0 1. Together the members pin p to [0,1]."},{"obj_id":"sym:\\Prob","verdict":"matched","note":"muMass (Basic.lean:61) is a computed def: the Pr of the FiniteDesign bernoulliCube X r, whose parameter is clamped to [0,1]. It is a genuine probability, so its value lies in [0,1] by construction."},{"obj_id":"sym:p_c","verdict":"matched","note":"containmentThreshold (Basic.lean:99) is a computed def. It equals 0 when J.edgeSet=∅, and otherwise the sInf of a subset of Set.Icc 0 1, where sInf ∅=0 in ℝ. Either way the value lies in [0,1] by construction, and the edgeless convention is realized."},{"obj_id":"sym:c_p","verdict":"matched","note":"coverCost (Basic.lean:116) is the computed def ∑_{S∈C} p^|S|, so it is nonnegative by construction for p≥0. In its paper use, expectationThresholdRaw (Basic.lean:124) applies HasCoverOfCostLe only for p ∈ Icc 0 1, where the cost is in [0,∞)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:stars =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:stars",
+      "verdict": "matched",
+      "note": "Both directions agree: one absolute cutoff precedes all graphs and orders; the star-forest, vertex-count, support and small-q conditions preserve both stated bounds with A = 400 exp(4). The threshold infimum/supremum definitions equal the paper’s attained extrema on this finite domain."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:stars","verdict":"matched","note":"The Lean statement and the paper statement say the same thing, in both directions. N₃ is an existential natural number with n ≥ N₃ (StarsOrder). J ranges over finite simple graphs on a vertex type V with card V ≤ n, which is 'J on at most n vertices'. IsStarForest unfolds to 'every nontrivial connected component is a star with centre c', where adjacency inside the component holds exactly for pairs that are distinct and contain c; isolated vertices are allowed. StarsSupport is |nonisolated J| ≤ n/100, where nonisolated means degree > 0, which is V_+(J). The first conclusion is p_c ≤ 2·A·q with A = 400·exp 4 (starConstA). The second is the implication q < 1/(2A) → p_c ≤ A·q (StarsSmallQ). For edgeless J, the edgeless conventions set p_c = q = 0 and both bounds become 0 ≤ 0, which is consistent with def:containment-edgeless and def:q-edgeless. The raw threshold definitions are context and are judged under their own def nodes."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Modulo the exempt cited gate, both directions hold: k and L are uniform, the graph domain agrees, and subgraph inclusion plus unique edge ownership gives exactly the stated partition. Threshold definitions agree, with attained finite-domain extrema and zero for edgeless graphs; pieces are chosen independently of the random host."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"I unfolded the Lean down to its primitives: containmentThreshold → containmentThresholdRaw, the sInf over p∈[0,1] with P[G(n,p) ⊇ copy of J] ≥ 1/2, set to 0 when J has no edges; expectationThreshold → expectationThresholdRaw, the sSup over p∈[0,1] such that the containment family on KEdge n has a cover of cost ≤ 1/2, set to 0 when H has no edges. The order of quantifiers matches the paper: ∃k≥2 and ∃L≥1 come first and are absolute; then ∀n and every finite V, H with 2≤n and |V|≤n. The vertex type V is quantified at the same position, so it is not a restriction. The partition P : Fin k → SimpleGraph V has P i ≤ H and each edge of H in exactly one piece. This is exactly a partition of E(H) into k possibly empty pieces that may share vertices. Each piece satisfies p_c(P i;n) ≤ L·q(H;n). The partition is existential after H and n and does not depend on any host sample, which matches 'fixed before the random host is sampled'. The FiniteSimpleGraphs V premise (Finite V) is implied by [Fintype V], so it is harmless. The only extra hypothesis is DiscreteConvexityCover, the exempt cited carrier for thm:discrete. Its unfolded body matches the cited statement: K0=2^75, nonempty finite X, r∈(0,1), μ_r(D) ≥ 1−1/K0, and the exceptional family allows repeated tuple members and needs no monotonicity. Its conclusion is a cover of cost ≤ 1/2 at r. Both directions hold modulo that cited proposition."}],"assumption_verdicts":[],"substrate_gates":[{"name":"hDC_of_gate","statement":"DiscreteConvexityCover: for every nonempty finite X, r∈(0,1) and D ⊆ 2^X with μ_r(D) ≥ 1−1/2^75, the exceptional family E_{K0}(D) has a cover of cost ≤ 1/2 at r","classical_fact":"OpenAI (2026), Talagrand's discrete-convexity conjecture, Theorem 1.1","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26dc","locator":"Theorem 1.1 / eq. (1.1)"},"check_status":"cited-verified"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:degree-embedding =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:degree-embedding",
+      "verdict": "matched",
+      "note": "Equivalent in both directions: the cutoff is uniform in n,r,s,J; the parameter regime, graph bounds and vertex bound agree. Maximizing minimum degree over induced subgraphs equals degeneracy over all subgraphs. The finite Bernoulli containment probability is continuous, so its threshold infimum equals the paper's minimum on |V(J)|≤n; the edgeless convention agrees. Finiteness and decidability add no model restrictions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:degree-embedding","verdict":"matched","note":"The Lean statement is equivalent to the paper's proposition. The order is ∃ N₂ ∀ n r s, which keeps N₂ absolute, and n ≥ N₂ appears as DegreeEmbeddingOrder. TransferParameters matches eq:parameters exactly: 0<r<1, s : ℕ, s ≤ 10·Real.log n, and n^(-1/100) ≤ r^s. DegreeEmbeddingBounds gives |V_+| ≤ n/4, where V_+ is the set of vertices with degree > 0. It also gives degen ≤ s, where degen is the largest minimum degree of an induced subgraph on a nonempty vertex set (the standard degeneracy), and Δ ≤ n^(2/3). DegreeEmbeddingSize gives |V| ≤ n. The conclusion bounds p_c, which is 0 for an edgeless J and otherwise sInf{p ∈ [0,1] : P(J ⊆ G(n,p)) ≥ 1/2}, by r. The vertex type ranges over Fintype V : Type. Every finite graph is isomorphic to one of these, and p_c is invariant under isomorphism, so this does not narrow the class of graphs."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:transfer =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:transfer","verdict":"matched","note":"Lean strengthens the existential family conclusion by specifying sourceTestFamily, exactly the deterministic family constructed in the paper's proof; the theorem-strengthening exception applies. The absolute cutoff, parameter regime, probability bound, cut configurations, and both threshold inequalities agree; Finite (Fin n) is automatic."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:transfer","verdict":"matched","note":"The Lean statement is equivalent to the paper's, and stronger in two harmless ways. (1) Quantifier order matches: ∃N₁ (TransferOrder is N₁≤n), then ∀n r s, then eq:parameters. TransferParameters gives 0<r<1, s≤10·Real.log n and n^{-1/100}≤r^s, and s:ℕ gives s∈ℕ. (2) The paper only asserts that some 𝒟 exists. The Lean fixes the explicit witness sourceTestFamily n r s and proves μ_r(𝒟)≥1-1/K0 for it, with K0=2^75 and μ_r the Bernoulli product law on KEdge n, the non-diagonal Sym2 pairs, i.e. E(K_n). It also proves the conclusion for every configuration over that 𝒟. A specific witness implies the existential, so this is a proved result that says more. (3) TransferConfiguration matches the paper's three bullets. It requires |Y|≤n^{2/3}; every J-edge goes between Y and its complement; J≤graphOfEdges G for some G∈𝒟; and at most n/8 vertices outside Y have positive degree. The Lean bound ∀w∉Y, deg≤s matches the paper's bound on positive-degree vertices, because a degree-0 vertex satisfies it trivially. (4) The conclusion is containmentThreshold J n ≤ 1-(1-r)^32 ∧ 1-(1-r)^32 ≤ 32r, which is p_c(J;n) ≤ r_* ≤ 32r. Here p_c is sInf{p∈[0,1] : P(G(n,p) contains a copy of J)≥1/2}, set to 0 for edgeless J, as def:containment-edgeless says. (5) FiniteSimpleGraphs (Fin n) is a trivially true standing hypothesis. (6) If the paper's ℕ excludes 0, the Lean also covers s=0. That case only widens what the theorem proves: with s=0 the degree condition forces J to be edgeless, so p_c=0 and the claim stays true."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:typical-cover =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:typical-cover","verdict":"matched","note":"Modulo the exempt cited proposition, the hypotheses and conclusion match: finite H with an edge and at most n vertices, q(H;n)<r<1, the stated Bernoulli mass bound, and a non-induced copy covered by exactly K0 members allowing repetitions. The supremum defining q equals the paper’s attained maximum on this finite domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:typical-cover","verdict":"matched","note":"The Lean statement is equivalent to the paper's corollary once the cited thm:discrete carrier (DiscreteConvexityCover, an exempt source-verified gate) is allowed as a hypothesis. Each assumption matches the paper. TypicalCoverOrder is 2≤n. TypicalCoverGraph says H has an edge and card V ≤ n, with V a finite type carrying Fintype. TypicalCoverDensity is expectationThreshold H n < r ∧ r < 1, which is q(H;n)<r<1; q is 0 when H is edgeless and is otherwise the sSup over [0,1] of the p for which the containment family has a cover of cost ≤ 1/2, so 0<r follows. TypicalCoverMass is 1-1/K0 ≤ μ_r(D), with D a family of edge sets of K_n (KEdge n = non-diagonal Sym2 (Fin n)). The conclusion is ∃ f : V ↪ Fin n with CoveredByMembers K0 D (copyEdges H f). That gives a labelled copy of H whose edge set lies inside the union of K0 members of D, written as an arbitrary tuple Fin K0 → D, so members may repeat as ass:pin-1 requires. K0 = 2^75 as in def:discrete-k0. FiniteSimpleGraphs V only states that V is finite, which the Fintype instance already gives, so it adds nothing. No direction fails."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:L,sym:q_J] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:L",
+      "verdict": "matched",
+      "note": "TMain.lean:30 explicitly quantifies L : ℝ with 1 ≤ L before all graph parameters, enforcing the absolute constant's declared range."
+    },
+    {
+      "obj_id": "sym:q_J",
+      "verdict": "matched",
+      "note": "starQ unfolds to expectationThreshold: zero for edgeless graphs, otherwise the real supremum of a subset of [0,1]. This lies in [0,1], including the empty-set case whose real supremum is zero."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:L",
+      "verdict": "matched",
+      "note": "TMain.lean:30 binds `∃ L : ℝ, 1 ≤ L ∧ …` at the start of thm:main, after k and before n, V, H. The real carrier together with the clause `1 ≤ L` pins exactly [1,∞). L is an existential and does not depend on n or H, so it is absolute as the symbol requires."
+    },
+    {
+      "obj_id": "sym:q_J",
+      "verdict": "matched",
+      "note": "starQ (Helpers/StarsQuantities.lean:21) is a def that computes the value as expectationThreshold J n (Basic.lean:143). That gives 0 when J has no edges and otherwise expectationThresholdRaw, the sSup of a set of p ∈ Icc 0 1 (Basic.lean:138-139). The real sSup of that set lies in [0,1]: it is 0 if the set is empty, and inside [0,1] if the set is nonempty and bounded. So the range [0,1] holds by construction, and the def matches the core's $q_J=q(J;n)$."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:r,sym:p,sym:p_c,sym:c_p,sym:q] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:r","verdict":"matched","note":"DiscreteDensity explicitly enforces 0 < r < 1; TypicalCoverDensity does likewise using expectationThreshold ≥ 0, which follows from its supremum construction; TransferParameters explicitly retains both strict bounds."},{"obj_id":"sym:p","verdict":"matched","note":"randomHost and coverCost require p ∈ Set.Icc 0 1; containmentThresholdRaw restricts its defining set to that same interval."},{"obj_id":"sym:p_c","verdict":"matched","note":"containmentThreshold is zero for edgeless graphs and otherwise the infimum of a subset of [0,1]; nonempty bounded infima remain in that interval, and Real.sInf_empty = 0."},{"obj_id":"sym:c_p","verdict":"matched","note":"coverCost sums natural powers of a nonnegative density; coverCost_nonneg explicitly certifies nonnegativity on precisely its declared domain."},{"obj_id":"sym:q","verdict":"matched","note":"expectationThreshold is zero for edgeless graphs and otherwise the supremum of a subset of [0,1]; nonempty bounded suprema remain in that interval, and Real.sSup_empty = 0."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:r","verdict":"matched","note":"Every tagged member puts r in (0,1). DiscreteDensity (Basic.lean:166) is 0<r∧r<1. TransferParameters (Basic.lean:288-289) states 0<r∧r<1. TypicalCoverDensity (Basic.lean:251-253) gives expectationThreshold H n < r ∧ r < 1. Since expectationThreshold is either 0 or the sSup of a subset of [0,1] (and sSup ∅ = 0 in ℝ), it is ≥0, so r>0. Each use therefore pins exactly (0,1)."},{"obj_id":"sym:p","verdict":"matched","note":"p is a real carrier constrained by the explicit (_hp : p ∈ Set.Icc 0 1) argument of randomHost (Basic.lean:76-77) and coverCost (Basic.lean:123). It is also constrained by the conjunct p ∈ Set.Icc 0 1 in the set defining containmentThresholdRaw (Basic.lean:97). Together these pin exactly [0,1]."},{"obj_id":"sym:p_c","verdict":"matched","note":"containmentThreshold (Basic.lean:102-104) is a computing def: it returns 0 when J has no edges, and otherwise the sInf of {p ∈ Icc 0 1 ∧ 1/2 ≤ containmentProb J n p}. That set is bounded below by 0 and contained in [0,1], so its sInf lies in [0,1] when the set is nonempty, and sInf ∅ = 0 otherwise. The range is [0,1] by construction."},{"obj_id":"sym:c_p","verdict":"matched","note":"coverCost (Basic.lean:123-124) computes the sum over C of p^|S| with p ∈ [0,1] required by hypothesis. coverCost_nonneg (Basic.lean:127-129) proves 0 ≤ coverCost C p hp. Together these pin exactly [0,∞)."},{"obj_id":"sym:q","verdict":"matched","note":"expectationThreshold (Basic.lean:143-145) is a computing def: it returns 0 when H has no edges, and otherwise expectationThresholdRaw, the sSup of {p ∈ Icc 0 1 ∧ HasCoverOfCostLe …}. That set is bounded above by 1 and contained in [0,1], so its sSup lies in [0,1] when the set is nonempty, and sSup ∅ = 0 otherwise. The range is [0,1] by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:typical-cover-density,ass:stars-small-q,def:random-host,def:containment-threshold,def:containment-edgeless] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:random-host",
+      "verdict": "matched",
+      "note": "On the certified unit interval, the law is exactly the product of Bernoulli-p edge laws; Fin n faithfully relabels [n]."
+    },
+    {
+      "obj_id": "def:containment-threshold",
+      "verdict": "matched",
+      "note": "For finite J with at most n vertices, containment probability is continuous and equals one at p=1, so the defining closed subset of [0,1] attains its infimum; sInf equals the printed minimum."
+    },
+    {
+      "obj_id": "def:containment-edgeless",
+      "verdict": "matched",
+      "note": "An empty edge set is exactly edgelessness; the definition assigns zero in that case and retains the raw threshold otherwise."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:typical-cover-density",
+      "verdict": "faithful-refinement",
+      "note": "Exactly q(H;n)<r and r<1, with q realized by the finite-cover expectation threshold and its edgeless convention."
+    },
+    {
+      "obj_id": "ass:stars-small-q",
+      "verdict": "faithful-refinement",
+      "note": "Exactly q(J;n)<1/(2A), with starConstA=400 exp(4) matching the frozen definition A=400e^4."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:random-host","verdict":"matched","note":"bernoulliCube (KEdge n) p is the product of independent Bernoulli(max 0 (min p 1)) bits, one for each unordered non-diagonal pair of Fin n. Since p ∈ [0,1] by _hp, the clamp is the identity (bernoulliCube_eq), so this is exactly G(n,p) on vertex set [n] with independent edges of probability p. The repeat pin is irrelevant here."},{"obj_id":"def:containment-threshold","verdict":"matched","note":"The Lean takes sInf over {p ∈ [0,1] : 1/2 ≤ containmentProb J n p}. containmentProb equals the G(n,p) probability on [0,1] (productMeasure = bernoulliCube), and ContainsCopy is SimpleGraph.IsContained into hostGraph z. On the paper's domain (J on at most n vertices) the containment probability is a polynomial in p, so the set is closed. The set is nonempty because at p=1 the host is K_n, which contains J. So the sInf is attained and equals the printed min. Outside that domain (an empty set, where sInf = 0) the paper does not define p_c."},{"obj_id":"def:containment-edgeless","verdict":"matched","note":"The Lean is `if J.edgeSet = ∅ then 0 else containmentThresholdRaw J n`. This sets p_c = 0 exactly for edgeless J and otherwise uses the printed minimum, as the NL says."}],"assumption_verdicts":[{"obj_id":"ass:typical-cover-density","verdict":"faithful-refinement","note":"The Lean is `expectationThreshold H n < r ∧ r < 1`. expectationThreshold is the paper's q(H;n), including its zero-on-edgeless convention (def:q-edgeless). This is exactly q(H;n) < r < 1."},{"obj_id":"ass:stars-small-q","verdict":"faithful-refinement","note":"The Lean is `expectationThreshold J n < 1/(2*starConstA)` with starConstA = 400*exp 4. This matches the paper's A = 400e^4 (prop:stars), so it is exactly q(J;n) < 1/(2A)."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:cover-cost,def:q-definition,def:q-edgeless,def:general-cover-cost,thm:discrete] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:cover-cost",
+      "verdict": "matched",
+      "note": "Unfolding coverPolynomial gives exactly the stated sum; the density binder matches the core's declared domain p ∈ [0,1]."
+    },
+    {
+      "obj_id": "def:q-definition",
+      "verdict": "matched",
+      "note": "The feasible set is exactly the printed set. For an edged H it contains 0 and is compact: finitely many covers give a finite union of closed polynomial sublevel sets in [0,1]. Thus its supremum is its maximum."
+    },
+    {
+      "obj_id": "def:q-edgeless",
+      "verdict": "matched",
+      "note": "The conditional assigns exactly 0 to edgeless graphs and retains the specified threshold otherwise."
+    },
+    {
+      "obj_id": "def:general-cover-cost",
+      "verdict": "matched",
+      "note": "On the stated finite ground set and density domain, this says exactly that a covering family exists whose sum of r-powers of member cardinalities is at most c."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "thm:discrete",
+      "verdict": "faithful-refinement",
+      "note": "The logical carrier encodes the nonempty finite ground set, open-unit density, Bernoulli product mass threshold, K0 = 2^75, and cost bound for the exceptional family; Fin K0-indexed tuples allow repetitions and impose no monotonicity."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.DiscreteConvexityCover",
+      "statement": "Every nonempty finite X, r ∈ (0,1), and family D of Bernoulli-r mass at least 1 − 1/2^75 has exceptional family E_{2^75}(D) coverable at density r with cost at most 1/2.",
+      "classical_fact": "OpenAI (2026), Talagrand's discrete-convexity conjecture, Theorem 1.1, under the supplied source attestation.",
+      "missing_infra": "Deferred logical cited assumption.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:openai26dc",
+        "locator": "Theorem 1.1"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:cover-cost","verdict":"matched","note":"coverCost C p hp = coverPolynomial C p = ∑_{S∈C} p^{|S|}, which is exactly c_p(C). The proof argument p∈[0,1] only records the paper's parameter range."},{"obj_id":"def:q-definition","verdict":"matched","note":"sSup of {p∈[0,1] : ∃ C, Covers C F_H ∧ c_p(C)≤1/2} equals the printed max on the paper's domain (H has an edge). The set contains 0: take C = F_H, whose members are nonempty, so the cost at 0 is 0; if F_H is empty, C=∅ works. The set is closed because it is a finite union over the finitely many C of closed sublevel sets of continuous polynomials, so the maximum is attained and equals the sSup. Covers is ∀A∈F ∃S∈C, S⊆A, and containmentFamily is the edge sets of K_n containing a copy of H, matching the paper's definitions. On edgeless H the raw value is irrelevant because def:q-edgeless overrides it."},{"obj_id":"def:q-edgeless","verdict":"matched","note":"For H.edgeSet=∅ the value is 0; otherwise it is expectationThresholdRaw (=q(H;n)). This is exactly the paper's convention."},{"obj_id":"def:general-cover-cost","verdict":"matched","note":"∃ C: Finset (Finset X) with Covers C F and r∈[0,1] and c_r(C)≤c. This is covering and cost on the ground set X as in the introduction. The r∈[0,1] clause is the intrinsic domain of c_r."}],"assumption_verdicts":[{"obj_id":"thm:discrete","verdict":"faithful-refinement","note":"Logically equivalent to the frozen node. It quantifies over every finite X: Fintype gives a finite set and DiscreteGround=Nonempty X. It requires r with 0<r<1 and an arbitrary family D⊆2^X with μ_r(D)≥1-1/K0, K0=2^75, where muMass is the Bernoulli(r) product law of the random subset. The conclusion is HasCoverOfCostLe(exceptionalFamily K0 D) r (1/2). exceptionalFamily = {S | ¬∃ t: Fin K0 → D, S ⊆ ⋃ t i}, so tuple members may repeat (pinned reading) and D need not be monotone. Every hypothesis is a defined predicate, so the declaration is self-contained."}],"substrate_gates":[{"name":"Papers.OaiGraphDecompositionsIntegral.DiscreteConvexityCover","statement":"∀ finite nonempty X, r∈(0,1), D⊆2^X with μ_r(D)≥1-2^{-75}: E_{2^75}(D) has a cover C with ∑_{S∈C} r^{|S|} ≤ 1/2","classical_fact":"Talagrand's discrete-convexity conjecture, OpenAI (2026) Theorem 1.1","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26dc","locator":"Theorem 1.1"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:q-lower,lem:transfer-hoeffding,lem:transfer-hall] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:q-lower",
+      "verdict": "matched",
+      "note": "Both lower bounds and hypotheses agree; the cover supremum realizes the paper's attained maximum, and maximizing minimum degree over induced vertex subsets gives the same degeneracy as over all subgraphs."
+    },
+    {
+      "obj_id": "lem:transfer-hoeffding",
+      "verdict": "matched",
+      "note": "Encodes the fixed source-test failure bound with one uniform positive constant; strengthens the large-n formulation to every admissible n satisfying the explicit outside-size condition m ≥ n/2."
+    },
+    {
+      "obj_id": "lem:transfer-hall",
+      "verdict": "matched",
+      "note": "Encodes precisely the cited matching step under Hall's inequalities, retaining distinct vertex indices despite repeated candidate sets; strengthens the application to arbitrary candidate families."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.transfer_hoeffding",
+      "statement": "A uniform positive c bounds each admissible source-test failure probability by exp(-c n^(98/100)).",
+      "classical_fact": "The attested Hoeffding Theorem 2 applies to m independent [0,1]-valued summands of mean x; its bound exp(-2mx²) is at most exp(-n^(98/100)) when m ≥ n/2 and x ≥ n^(-1/100). The defined Bernoulli edge product supplies independence.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:hoeffding63",
+        "locator": "Hoeffding's inequality"
+      },
+      "check_status": "cited-verified-attested"
+    },
+    {
+      "name": "Papers.OaiGraphDecompositionsIntegral.transfer_hall",
+      "statement": "Hall's subset-cardinality inequalities for the family indexed by U imply an injective choice of representatives from cand w.",
+      "classical_fact": "The attested Hall Theorem 1 specializes to the finite indexed family (cand w) for w ∈ U; its distinct representatives extend to a total function by using the identity outside U.",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:hall35",
+        "locator": "Hall's theorem"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+Checking the paper's proof of prop:transfer to see the source-test and Hall-matching context.
+{"statement_verdicts":[{"obj_id":"lem:q-lower","verdict":"matched","note":"The hypotheses match the paper's. FiniteSimpleGraphs is Finite V. QLowerEdge says H.edgeSet is nonempty (H has an edge). QLowerOrder says card V ≤ n (|V(H)| ≤ n). d is qLowerDegeneracy, which is degeneracy H: the sup over nonempty S of the minimum degree of H.induce S. That equals the paper's max over nonempty subgraphs, because minimum degree only grows as edges are added. The conclusion is the conjunction of the two bounds in eq:q-lower on expectationThreshold. On graphs with an edge that is expectationThresholdRaw, the sSup of the paper's feasible-p set from def:q-definition. Edge cases are harmless: having an edge forces n ≥ 2, so the binomial (n choose 2) is positive, and d ≥ 1, so the real power n^(-2/d) is well defined. The two sides are equivalent."},{"obj_id":"lem:transfer-hoeffding","verdict":"matched","note":"States only what the passage credits to Hoeffding, in the context of prop:transfer. The context is fixed (n, r, s) satisfying ass:parameters, Y with |Y| ≤ n^(2/3), and an admissible test Q: nonempty, members of size 1..s, |Q| ≤ ⌈2r^(-s)⌉, matching the paper's test family. Given x(Q) ≥ n^(-1/100), the source test eq:source-test (mean over w ∉ Y of f_Q(N_G(w) ∩ Y) ≤ 2x(Q)) fails under G(n,r) with probability ≤ exp(-c n^(98/100)), with c absolute and placed before every other binder. The Lean definitions match the paper's: unionDensity is τ = 1-(1-r)^2, smoothedTest is f_Q with an independent Bernoulli(r) extension, and xQ is the Bernoulli(τ) satisfaction probability. The explicit hypothesis 2|Y| ≤ n is the paper's own 'for large n, m ≥ n/2', so the paper's hypotheses entail it. The Lean says more than the paper because it holds for every n with 2|Y| ≤ n, not only large n. This stronger form is still true: Hoeffding with deviation t = x(Q), m ≥ n/2 and x(Q) ≥ n^(-1/100) gives exp(-2m x(Q)^2) ≤ exp(-n^(98/100)). At n = 0 the source test holds trivially. Nothing else from the passage, such as the union bound or the target test, is assumed."},{"obj_id":"lem:transfer-hall","verdict":"matched","note":"Encodes Hall's matching step in the Hall-criterion context of prop:transfer. The objects are: J, Y and a witness G from TransferConfiguration (all of ass:transfer-configuration); U, the positive-degree J-vertices outside Y; and candidate sets cand w ⊆ [n] \\ Y. The Hall inequality |U'| ≤ |⋃ cand| for every U' ⊆ U is taken as a hypothesis, since proving it is prop:transfer's job, as the passage says. The conclusion is a map f injective on U with f w ∈ cand w for every w, i.e. the matching to distinct vertices of [n] \\ Y. The paper's candidate sets are its usable sets, and the Lean allows any candidate sets inside the outside vertices. That only makes the lemma more general, so it still gives the paper's claim. The extra configuration and subset hypotheses are the paper's standing context. Nothing beyond the matching is assumed."}],"assumption_verdicts":[],"substrate_gates":[{"name":"Papers.OaiGraphDecompositionsIntegral.transfer_hoeffding","statement":"∃ c > 0, for all n, r, s satisfying TransferParameters, every Y with |Y| ≤ n^(2/3) and 2|Y| ≤ n, and every admissible Q with xQ r Q ≥ n^(-1/100): Pr over G(n,r) of ¬SourceTest ≤ exp(-c n^(98/100)).","classical_fact":"Hoeffding (1963) Theorem 2, eq. (2.6), sum form. The summands f_Q(N_G(w) ∩ Y) for w ∉ Y are independent, lie in [0,1] and have mean x(Q). Taking deviation t = x(Q) over m ≥ n/2 summands gives exp(-2m x(Q)^2) ≤ exp(-n^(98/100)).","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:hoeffding63","locator":"Hoeffding's inequality"},"check_status":"cited-verified-attested"},{"name":"Papers.OaiGraphDecompositionsIntegral.transfer_hall","statement":"For U a subset of the positive-degree J-vertices outside Y and candidate sets cand w ⊆ [n] \\ Y: if every U' ⊆ U has |U'| ≤ |⋃_{w ∈ U'} cand w|, then there is an f injective on U with f w ∈ cand w.","classical_fact":"Hall (1935) Theorem 1. For a finite indexed family T_1, …, T_m, if every k of the sets together contain at least k elements, then the family has a complete system of distinct representatives.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:hall35","locator":"Hall's theorem"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:stars =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:stars","verdict":"matched","note":"Both directions agree: one absolute cutoff precedes all n and J, with exactly the star-forest, vertex-count and support restrictions and both stated bounds for A=400 exp(4). Unfolded thresholds implement the paper’s definitions; finite-domain continuity and compactness make infimum/supremum equivalent to minimum/maximum, and both edgeless conventions agree. Finite and decidability binders impose no additional restriction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:stars","verdict":"matched","note":"Equivalent to the paper statement. N₃ is existentially quantified before n, V and J, so it is uniform (absolute) as the paper requires. StarsOrder gives n ≥ N₃. StarsSize gives card V ≤ n, matching 'at most n vertices'. StarsSupport gives |nonisolated J| ≤ n/100 over ℝ, where nonisolated J is the set of vertices of positive degree, i.e. V_+(J). IsStarForest says every component with more than one vertex is a star: it has a centre c, and u~w iff u≠w and one of them is c. Isolated vertices are allowed, which is the usual meaning of a star forest. The first conclusion is p_c ≤ 2Aq with A = 400·exp 4. The second is the conditional p_c ≤ Aq whenever q < 1/(2A), matching the paper's strengthened bound. p_c and q are defined to be 0 on edgeless graphs (def:containment-edgeless, def:q-edgeless), the spec's own convention, so the edgeless case holds trivially on both sides. Requiring V : Type with Fintype is only how a finite vertex set is encoded."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:degree-embedding =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "prop:degree-embedding",
+      "verdict": "matched",
+      "note": "The cutoff is absolute and precedes all parameters and graphs; the parameter regime, three graph bounds, vertex limit, and threshold conclusion agree. Maximum minimum degree over induced subgraphs equals degeneracy over all subgraphs; the threshold infimum attains the paper’s minimum on this finite domain. Finiteness and decidability add no model restrictions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:degree-embedding","verdict":"matched","note":"The two statements are logically equivalent once every definition is unfolded. ∃ N₂:ℕ ∀ n r s, with N₂ ≤ n and TransferParameters (0<r<1, s ≤ 10·log n, n^(-1/100) ≤ r^s, s:ℕ), matches the absolute integer cutoff and eq:parameters. Every finite simple graph J on a vertex type V with card V ≤ n and DegreeEmbeddingBounds (|V_+(J)| ≤ n/4, degen(J) ≤ s, Δ(J) ≤ n^(2/3)) gets containmentThreshold J n ≤ r. That is p_c(J;n) ≤ r under the paper's convention that an edgeless graph has p_c = 0. If the paper's ℕ excludes 0, the Lean also covers s = 0. In that case degen ≤ 0 forces J to be edgeless, so p_c = 0 < r and the Lean claim is at least as strong as the paper's. Graphs with at most n vertices are quantified over every Fintype V with card ≤ n, which is the same domain up to isomorphism. N₂ is a natural number, which is a harmless way to state an integer cutoff for n ≥ N₂."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:typical-cover =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:typical-cover","verdict":"matched","note":"Equivalent modulo the exempt cited DiscreteConvexityCover: finite edge subsets encode graphs bijectively, copyEdges encodes non-induced copies, and Fin K0 tuples allow repetition as pinned. The threshold supremum equals the paper’s attained maximum on this finite domain; all bounds and quantifiers agree."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:typical-cover","verdict":"matched","note":"I compared the hypotheses and the conclusion against the paper in both directions and they are equivalent. Hypotheses: n≥2 is TypicalCoverOrder. 'H has an edge and at most n vertices' is H.edgeSet.Nonempty ∧ Fintype.card V ≤ n. q(H;n)<r<1 is expectationThreshold H n < r ∧ r < 1. μ_r(D) ≥ 1−1/K0 is muMass over KEdge n, the unordered non-diagonal pairs of HostVertex n = Fin n, so the ground set is exactly the edge set of K_n. K0 = 2^75. FiniteSimpleGraphs V (Finite V) is already implied by the ambient [Fintype V], so it adds no restriction. Conclusion: a copy of H is an injective map f : V ↪ Fin n, and copyEdges takes the edges of H.map f inside KEdge n, so it is the copy's edge set. CoveredByMembers K0 D asks for a tuple Fin K0 → D with no distinctness required, so members may repeat, as ass:pin-1 requires. The union is biUnion over the tuple. DiscreteConvexityCover is the source-verified cited thm:discrete carrier, so I judged the statement modulo it; its form matches the cited block: every finite X, the DiscreteGround/Density/Mass premises, and a cover of the exceptional K0-family with cost ≤ 1/2. I did not re-grade expectationThreshold, muMass, exceptionalFamily or HasCoverOfCostLe, which are separate def nodes; here they only serve as context."}],"assumption_verdicts":[],"substrate_gates":[{"name":"hDC_of_gate","statement":"DiscreteConvexityCover: for every finite X, every r in (0,1) and every D ⊆ 2^X with μ_r(D) ≥ 1−1/K0, the family E_{K0}(D) has a cover of cost ≤ 1/2 at parameter r (members of a tuple may repeat)","classical_fact":"OpenAI (2026), Talagrand's discrete-convexity conjecture, Theorem 1.1","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26dc","locator":"Theorem 1.1 / eq. (1.1)"},"check_status":"cited-verified"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:transfer =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:transfer","verdict":"matched","note":"The parameter range, absolute cutoff, configuration conditions, Bernoulli mass, non-induced containment threshold, and both bounds agree. Lean strengthens the existential conclusion by explicitly supplying sourceTestFamily n r s, as permitted for theorem targets; FiniteSimpleGraphs (Fin n) is automatic."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:transfer","verdict":"matched","note":"The Lean theorem is logically equivalent to prop:transfer or stronger than it. (1) Quantifiers: it has ∃N₁ ∀n≥N₁ ∀r,s, as in the paper. (2) Parameters: TransferParameters gives 0<r<1, s≤10·Real.log n and n^(-1/100)≤r^s with s:ℕ. This is exactly eq:parameters (core line 1444). If the paper's ℕ starts at 1, the Lean also covers s=0, which only strengthens a proved result. FiniteSimpleGraphs (Fin n) is trivially true. (3) The family 𝒟: the paper only says some 𝒟(n,r,s) exists. The Lean fixes the explicit witness sourceTestFamily n r s, which depends only on (n,r,s), and proves μ_r(𝒟)≥1-1/K0 (K0=2^75) together with the transfer clause for that same 𝒟. A specific witness implies the existential, so this is a proved result that says more: matched. (4) TransferConfiguration has five clauses: |Y|≤n^(2/3); every J-edge joins Y and its complement; ∃G∈𝒟 with J≤graphOfEdges G; at most n/8 vertices outside Y have positive degree; and every w∉Y has deg≤s. The last clause is equivalent to the paper's bound on positive-degree vertices, since degree-0 vertices trivially satisfy it. J is a labelled graph on Fin n=[n], and 𝒟⊆2^{E(K_n)} matches Set (Finset (KEdge n)). (5) Conclusion: it states p_c(J;n)≤r_* and r_*≤32r with targetDensity r = 1-(1-r)^32. Here p_c is containmentThreshold: 0 for edgeless J, otherwise sInf{p∈[0,1] | P(G(n,p) contains a copy of J)≥1/2}, per def:containment-threshold and def:containment-edgeless. muMass is the probability under the product measure at r, i.e. μ_r. No hypothesis was added beyond the paper's assumptions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Modulo the exempt cited DiscreteConvexityCover, Lean retains uniform k≥2 and L≥1, every finite simple H with |V|≤n and n≥2, and a deterministic edge partition with the stated bound. Subgraph inclusion plus unique edge membership gives exactly the partition; empty pieces and shared vertices are allowed. The unfolded thresholds match the paper: finite-domain continuity and compactness identify the infimum/supremum with its minimum/maximum, with both edgeless conventions preserved. Finite V is entailed by Fintype V."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Lean and paper are equivalent, conditional on the source-verified cited carrier DiscreteConvexityCover (thm:discrete). That carrier matches the frozen node: X is nonempty and finite, r is in (0,1), mu_r(D) >= 1-1/K0 with K0=2^75, the exceptional family allows repeated tuple members via CoveredByMembers with Fin K0 -> D, and there is a cover of cost <= 1/2 at r. Quantifier order matches: there exist k>=2 (natural number) and L>=1 (real), uniform over every n>=2 and every finite simple H : SimpleGraph V with card V <= n. The FiniteSimpleGraphs hypothesis (Finite V) is redundant given Fintype V. The pieces P : Fin k -> SimpleGraph V with P i <= H and a unique piece for each edge of H give exactly an edge partition of E(H). Pieces may be empty and share the vertex set V. Their existence depends only on (H, n) and involves no host randomness. The bound p_c(P i; n) <= L*q(H; n) is checked against the unfolded definitions. containmentThreshold is 0 on edgeless graphs, otherwise sInf{p in [0,1] : P(G(n,p) contains a non-induced copy) >= 1/2}. This equals the paper's min, because the set is closed (the probability is a polynomial in p) and contains p=1 since |V| <= n. expectationThreshold is 0 on edgeless graphs, otherwise sSup{p in [0,1] : F_H has a cover C with sum_{S in C} p^|S| <= 1/2}. This equals the paper's max: there are finitely many covers over the finite X=E(K_n), each cost is continuous, and p=0 is feasible using the cover by copies of H. Isolated vertices of the pieces on V do not change p_c because |V| <= n. Restricting V to Type loses no finite graph up to isomorphism.","decisions":"Gave the cited dependency one substrate_gates entry (gate_class cited) because the page says it was independently source-verified; it is not itself a target in this round."}],"assumption_verdicts":[],"substrate_gates":[{"name":"hDC_of_gate","statement":"DiscreteConvexityCover: for every nonempty finite X, r in (0,1), and D ⊆ 2^X with mu_r(D) >= 1-1/2^75, the family exceptionalFamily K0 D has a cover of cost <= 1/2 at r","classical_fact":"Talagrand's discrete-convexity conjecture, OpenAI (2026), Theorem 1.1 / eq. (1.1)","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26dc","locator":"Theorem 1.1"},"check_status":"cited-verified-attested"}],"escalate":null}

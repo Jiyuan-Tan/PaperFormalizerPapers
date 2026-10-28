@@ -1,0 +1,8 @@
+module
+public import Papers.OaiGraphDecompositionsIntegral.Basic
+public import Papers.OaiGraphDecompositionsIntegral.Helpers
+public import Papers.OaiGraphDecompositionsIntegral.TTypicalCover
+public import Papers.OaiGraphDecompositionsIntegral.TTransfer
+public import Papers.OaiGraphDecompositionsIntegral.TDegreeEmbedding
+public import Papers.OaiGraphDecompositionsIntegral.TStars
+public import Papers.OaiGraphDecompositionsIntegral.TMain
