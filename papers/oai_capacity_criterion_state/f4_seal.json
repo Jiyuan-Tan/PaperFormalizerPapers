@@ -1,0 +1,844 @@
+{
+  "version": 1,
+  "slug": "oai_capacity_criterion_state",
+  "paper_sha256": "35f70e08ed507fead58dc16d02fe36ebc9fa5b0d79a345cd04c1b7291a7532e0",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:flow-label-recursion",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "65c7c49a49d35ac27c3a4f6bc29aca973c038dd6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "65c7c49a49d35ac27c3a4f6bc29aca973c038dd6"
+      }
+    },
+    {
+      "id": "ass:local-moments-channel",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bb33c4e9f63c356d8dfcb128c763c1b4dbc809f3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bb33c4e9f63c356d8dfcb128c763c1b4dbc809f3"
+      }
+    },
+    {
+      "id": "ass:local-moments-lambda",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f4ff58b426649e62d46681a0604bff6c11474051"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f4ff58b426649e62d46681a0604bff6c11474051"
+      }
+    },
+    {
+      "id": "ass:local-moments-symmetry",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2da398927f5e3a1ae5bca0669ccbd13eb6320e75"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2da398927f5e3a1ae5bca0669ccbd13eb6320e75"
+      }
+    },
+    {
+      "id": "ass:main-lambda",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "beceb314aab4ed1e49da5513e9396a7c0e9593a4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "beceb314aab4ed1e49da5513e9396a7c0e9593a4"
+      }
+    },
+    {
+      "id": "ass:main-tree",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3fd250a69030e680d0202a773a0cce3bb6e6d0b4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3fd250a69030e680d0202a773a0cce3bb6e6d0b4"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cab90f4d134450641eb154628e53420576651cc0"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cab90f4d134450641eb154628e53420576651cc0"
+      }
+    },
+    {
+      "id": "ass:pin-2",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "999de29e24bac1857b439e3287d2e163ca0444bf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "999de29e24bac1857b439e3287d2e163ca0444bf"
+      }
+    },
+    {
+      "id": "def:capacity",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d685e53cfe903381359417f9c9fc06c3c84c4a77"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d685e53cfe903381359417f9c9fc06c3c84c4a77"
+      }
+    },
+    {
+      "id": "def:channel",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "57144d71e1ac6c47fd4716aa0e6de3d5e405cfd5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "57144d71e1ac6c47fd4716aa0e6de3d5e405cfd5"
+      }
+    },
+    {
+      "id": "def:channel-scaling",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7f41da7a6906bbf85d62126545404b36174dd59f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7f41da7a6906bbf85d62126545404b36174dd59f"
+      }
+    },
+    {
+      "id": "def:channel-step",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "dce06f02df1ab2bfd13c7054a670c9c554f8719e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "dce06f02df1ab2bfd13c7054a670c9c554f8719e"
+      }
+    },
+    {
+      "id": "def:edge-boundary",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d2a6c076487655483ada61f9f7391c1799debb99"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d2a6c076487655483ada61f9f7391c1799debb99"
+      }
+    },
+    {
+      "id": "def:extreme-experiments",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "07f64b644b27b7c2c5f85b4f45cae7ae8c2d9a27"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "07f64b644b27b7c2c5f85b4f45cae7ae8c2d9a27"
+      }
+    },
+    {
+      "id": "def:flow",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1aded38c0bb66c4927f0241ed377cec637fee0c6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1aded38c0bb66c4927f0241ed377cec637fee0c6"
+      }
+    },
+    {
+      "id": "def:level-information",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9cd4da42af15d04b75560898f0f7197b3c675f5b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9cd4da42af15d04b75560898f0f7197b3c675f5b"
+      }
+    },
+    {
+      "id": "def:posterior-coordinates",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9908baca8ca28d13b06c3471b80417e9aadc9c61"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9908baca8ca28d13b06c3471b80417e9aadc9c61"
+      }
+    },
+    {
+      "id": "def:posterior-law",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9047145d2c499c000b28e9a5c493a5048818bcff"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9047145d2c499c000b28e9a5c493a5048818bcff"
+      }
+    },
+    {
+      "id": "def:product-rule",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3f1a6121bf37e4800d9b827089433938bbeb2c53"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3f1a6121bf37e4800d9b827089433938bbeb2c53"
+      }
+    },
+    {
+      "id": "def:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "df680d672635e1649ac0bf33eb91b9fe53c4898e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "df680d672635e1649ac0bf33eb91b9fe53c4898e"
+      }
+    },
+    {
+      "id": "def:reconstruction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "42a8348d33bc33e966945b558ac304d0fb489f74"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "42a8348d33bc33e966945b558ac304d0fb489f74"
+      }
+    },
+    {
+      "id": "def:statistics",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3657b5a1d4003a63261352375223dea7c7b04c0c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3657b5a1d4003a63261352375223dea7c7b04c0c"
+      }
+    },
+    {
+      "id": "def:tree-notation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3234d7fdd4a2c53ba95abc5b6454c0efab76f6e1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3234d7fdd4a2c53ba95abc5b6454c0efab76f6e1"
+      }
+    },
+    {
+      "id": "lem:flow",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7bcd73be6f02d987383be4a208cc338c9887316"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7bcd73be6f02d987383be4a208cc338c9887316"
+      }
+    },
+    {
+      "id": "lem:local-moments",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6a190bd0de036c70659c00e765682887ca5f21bc"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6a190bd0de036c70659c00e765682887ca5f21bc"
+      }
+    },
+    {
+      "id": "sym:A",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c4cf728906c96a6ac546de9b212b9568b4434b25"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c4cf728906c96a6ac546de9b212b9568b4434b25"
+      }
+    },
+    {
+      "id": "sym:I",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c7f999ad675a5096ecb79d7cc1e791e92cdbdb13"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c7f999ad675a5096ecb79d7cc1e791e92cdbdb13"
+      }
+    },
+    {
+      "id": "sym:J",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4984d025ec32dbd00ad4d7030084a91e6efb1c93"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4984d025ec32dbd00ad4d7030084a91e6efb1c93"
+      }
+    },
+    {
+      "id": "sym:P",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "87dfa5f4f9dfc7407e76edbc8b16816051f96ba1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "87dfa5f4f9dfc7407e76edbc8b16816051f96ba1"
+      }
+    },
+    {
+      "id": "sym:P_\\lambda",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "73231fa7411ec3f156e5e5e94e7c1697461c7ba2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "73231fa7411ec3f156e5e5e94e7c1697461c7ba2"
+      }
+    },
+    {
+      "id": "sym:Z",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "efa2991e2875be4995e94045fd8b512b5d0e8d3a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "efa2991e2875be4995e94045fd8b512b5d0e8d3a"
+      }
+    },
+    {
+      "id": "sym:\\Capacity_{3,\\lambda}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0208b823bffb5529970de5d97d0d0dc1c87acf17"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0208b823bffb5529970de5d97d0d0dc1c87acf17"
+      }
+    },
+    {
+      "id": "sym:\\calC",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "28e68a9c1c186815c1ce8bee07ce6babd66371ce"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "28e68a9c1c186815c1ce8bee07ce6babd66371ce"
+      }
+    },
+    {
+      "id": "sym:\\ell_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0d4dc68e22174783007d4363302fa0cdac813117"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0d4dc68e22174783007d4363302fa0cdac813117"
+      }
+    },
+    {
+      "id": "sym:\\lambda",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d93a4ccaca30e65b5d7753aa92811cf8e142e2c6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d93a4ccaca30e65b5d7753aa92811cf8e142e2c6"
+      }
+    },
+    {
+      "id": "sym:\\mu",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ebd0ee62c85302d2a4f74be28c79f87c5660085d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ebd0ee62c85302d2a4f74be28c79f87c5660085d"
+      }
+    },
+    {
+      "id": "sym:\\nu",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "da0b9116b20d64f7261d0681a242f156d4edf6e7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "da0b9116b20d64f7261d0681a242f156d4edf6e7"
+      }
+    },
+    {
+      "id": "sym:\\sigma_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "71c20c22332cac148d0cbdc14b9222d705e488a9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "71c20c22332cac148d0cbdc14b9222d705e488a9"
+      }
+    },
+    {
+      "id": "sym:\\sigma_{L_n}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "df2c48249fb4623eedd652216cce6294c9c526de"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "df2c48249fb4623eedd652216cce6294c9c526de"
+      }
+    },
+    {
+      "id": "sym:\\tau",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9a891b64a79781d414077748c9325919551a76de"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9a891b64a79781d414077748c9325919551a76de"
+      }
+    },
+    {
+      "id": "sym:\\theta",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2e3ca3e9bdb1ac52f743221b0af6a3c51c9740b4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2e3ca3e9bdb1ac52f743221b0af6a3c51c9740b4"
+      }
+    },
+    {
+      "id": "sym:\\unif",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8e9f502f761c09b6fab3d7c544c90f1a44453871"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8e9f502f761c09b6fab3d7c544c90f1a44453871"
+      }
+    },
+    {
+      "id": "sym:a",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "88ad885089fef078f407726743ff443bd2a045fe"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "88ad885089fef078f407726743ff443bd2a045fe"
+      }
+    },
+    {
+      "id": "sym:a_\\infty",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fe8b539ebddc2a170ebedb39d820174d87a3b9c1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fe8b539ebddc2a170ebedb39d820174d87a3b9c1"
+      }
+    },
+    {
+      "id": "sym:a_n",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8a9c80bfa3faa27d4a076a7a461d4c508d40cab5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8a9c80bfa3faa27d4a076a7a461d4c508d40cab5"
+      }
+    },
+    {
+      "id": "sym:b",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bc8ea8f02755992eaff2875bb0c50edbcca6af9d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bc8ea8f02755992eaff2875bb0c50edbcca6af9d"
+      }
+    },
+    {
+      "id": "sym:d_{vw}",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "aeb804347318b8c4cdce14c58790aabcc4a59335"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "aeb804347318b8c4cdce14c58790aabcc4a59335"
+      }
+    },
+    {
+      "id": "sym:g_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e4c885b36fbed9e8f54c3a30b93ecb78337a6166"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e4c885b36fbed9e8f54c3a30b93ecb78337a6166"
+      }
+    },
+    {
+      "id": "sym:h",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ee5a8552bf1b5290876e952ff390e48925f4986c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ee5a8552bf1b5290876e952ff390e48925f4986c"
+      }
+    },
+    {
+      "id": "sym:m",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cbd1475af84476da03637e09755326cff0e3bee5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cbd1475af84476da03637e09755326cff0e3bee5"
+      }
+    },
+    {
+      "id": "sym:p",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "42847c74ce2f609a63c32cd540f2ad6a9d584921"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "42847c74ce2f609a63c32cd540f2ad6a9d584921"
+      }
+    },
+    {
+      "id": "sym:q",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2c0f4f22a7ea9906f909097bd3b7ee7021a3b275"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2c0f4f22a7ea9906f909097bd3b7ee7021a3b275"
+      }
+    },
+    {
+      "id": "sym:r",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c9542c83686c1dc9e8e9088b41c2e00d892a638d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c9542c83686c1dc9e8e9088b41c2e00d892a638d"
+      }
+    },
+    {
+      "id": "sym:t",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3b4d2f73a1d305936c39cda21e9a5d52249ca556"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3b4d2f73a1d305936c39cda21e9a5d52249ca556"
+      }
+    },
+    {
+      "id": "sym:z_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0bc220543def7708bacc4d7592d1fe8f2e2ac5ce"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0bc220543def7708bacc4d7592d1fe8f2e2ac5ce"
+      }
+    },
+    {
+      "id": "sym:|\\theta|",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "024b60948cb4f7df6563a66892879afec4cddbf1"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "024b60948cb4f7df6563a66892879afec4cddbf1"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4277d1b36c832a177d21cdaf78c2dd0cd386f410"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4277d1b36c832a177d21cdaf78c2dd0cd386f410"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [
+    {
+      "node_id": "prop:companion",
+      "reviewer": "claude",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:openai26-potts",
+      "locator": "Proposition 3.2 and Equations (3.8)--(3.9)",
+      "evidence_hash": "593092fad1a8bf1b30b8ef5e7a96be8675b89bb3"
+    },
+    {
+      "node_id": "prop:companion",
+      "reviewer": "codex",
+      "check_status": "cited-verified-attested",
+      "cite_id": "cite:openai26-potts",
+      "locator": "Proposition 3.2 and Equations (3.8)--(3.9)",
+      "evidence_hash": "593092fad1a8bf1b30b8ef5e7a96be8675b89bb3"
+    }
+  ],
+  "reviews_sha256": "e88edb742024e325e875b6d183b6b56e049ea47f750945c2e9394dd7a7b62b8d",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "4508d25d64debce5697317415eb19277ec2e52e7843395d1e64047274b364d20"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "674039f7a5288757c0428cece556bc232ddad1b83846fbc7b601224adf0a8a1c"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "42d08f263c92da78b86c31826829ef2f12b57b4d03223e99cafc9722412cd3b6"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "c6e6599bd75fe90bbb9f2fde2142efa56ffaf3e1406b13b4536713a3d7f748d3"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "0dc41bc2a4bea0c613120f0f0ce9e8e13afb789f2a50a23b3c10bc16071efe21"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "aa5ebcfeb6b358d7ebd70d4be73b888f8c2aa45f1d0b102ad4ef5846a0083c65"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState.lean",
+      "sha256": "31e2e8294d4b5c6da78f807d9b7f84dcbd58fdd76e1378af693dc25c7fbce98f"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Basic.lean",
+      "sha256": "34c982e6f17b559be1811554c41a0afefee893630da8c5dc9b4e1d72bce9458c"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers.lean",
+      "sha256": "0cac62108b28e31eff5b85b65dd52f5e1d89767c7dbd4c360c2fef786d259ef3"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Attenuation.lean",
+      "sha256": "7786284c512660ee2251a3f99efe1e082c970ffeb922e62954d0841d6b30c3f5"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Broadcast.lean",
+      "sha256": "a4738d0edb2e5c60c3091846d4c5be4af2510bbf1fa1b3d19a833a50f97a1d7c"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/BroadcastCompanion.lean",
+      "sha256": "4790a248bbe8aa231bb79f8a0045d6e88dda5d2d9ac14e082fe5708940f9d51f"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/BroadcastIdentification.lean",
+      "sha256": "123c4f4eb4d3873663dc999263fb4d973107b65c61340ec6bd82a06b41f89d73"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/BroadcastPosterior.lean",
+      "sha256": "96b3051d158c7469f95a413057a61f8c3e2cd34bc9e862007a7f045f8e1c7d52"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/CapacityLabels.lean",
+      "sha256": "3391e282f1ee3a6129e77f456192f57d93699d6d1ab0b6a5ae9c95dcc539e11d"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/CitedGates.lean",
+      "sha256": "af54ce71770236ef0b9200778e25c1af5d788b57915c320d46ed3741572e8ec6"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/CompanionBounds.lean",
+      "sha256": "3fe4d492d7d66866fbb410a3c55b4067769f807f926fea98c52b7acd30223def"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/DependentProducts.lean",
+      "sha256": "b754e7a7bdb1875926a560ab9a5e38286bca874a7fa4f782446e63e10f1169bd"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/ExperimentGarbling.lean",
+      "sha256": "e9c0d9d808654d412883610f3c2a6b0346161f5462126c578a19e0c808359110"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/FiniteExperiments.lean",
+      "sha256": "440c9a69a935c83b6f9ee18f3e7aa47d4e2e4dc2ff823b190882b15846a23ae7"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Flow.lean",
+      "sha256": "311470d8d55e4d16f60330fecb6f43327bc5a20d5b9d54bb9b2c1ebd88b62c1b"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/FlowBounds.lean",
+      "sha256": "d1ee26b60ef4a29d2446de4dd6778d9f84a4a6784f4db372c90fac33363011e1"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/FlowPathAverages.lean",
+      "sha256": "c2b6c765c6152f4765bac970f4923b160eca58e797d3b947ea96db2374d61cf4"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/FlowPathLoss.lean",
+      "sha256": "7c93ffbb6f9598ec3c3e18e0d27c12b5b6027312e9490a69830b4e4bb4783ce7"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/FlowProfileExperiments.lean",
+      "sha256": "ea69b2ed6eb0060d119ddeb0cfa29f84e2edf116e23a5e1dbf49e87682363b3b"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/GarblingClosure.lean",
+      "sha256": "52ebc350ad2947f9296155d4dfb554f6753e26614c98e85c853a5e48247fe673"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Information.lean",
+      "sha256": "530b77a85f168df0a19e7541756ddd54c66a8397d5c418f91d6778ee0b0d407a"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/InformationFlow.lean",
+      "sha256": "6cdb4ae4842ddff7d2ddecf6d79210796fc764d10351fb5023081b7a5afa55f1"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/LocalCoordinates.lean",
+      "sha256": "4cd4e8ecc53405c5752a6e66150574a41596841955f689c57e32079c6179082a"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/LocalMoments.lean",
+      "sha256": "77f02e05014347448fc39afaab7b256494dc8101722fa93893d7193ec56cc793"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/PathLoss.lean",
+      "sha256": "0939bf14c2cfc0816129edd0d93b7b6e10dbba5e233d883ac1011469de4b3fa2"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/PosteriorLaws.lean",
+      "sha256": "6366afec92585ec3f87c957b1620767d27693087d34802466864bd888ddda107"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/ProductMoments.lean",
+      "sha256": "6937c0cf1d821fff0afd458e6edf162e91a4f8d657a9bc60303d932e600a2cd1"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/ProfileSurvival.lean",
+      "sha256": "50df2e2b9892040ef1361ef2a88d3471ba962b4aab498b14372cf0df095022c5"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/QuadraticSymmetry.lean",
+      "sha256": "17d12613fdd70cf539ba7d0b3ea1054a4283c2f43eda0ee906ee6375390becb8"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/RecursiveTuning.lean",
+      "sha256": "7db28f2a640667d27bf0318d972ff8c6c9f7d7e928c615461e42b843df255e4d"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/SmallLabels.lean",
+      "sha256": "9bc053d382a97fad03b01f98c46119bdbcadfd78fb76dace81ad2449c79e52ec"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Subtrees.lean",
+      "sha256": "ccea680827ec96ff9475778a5a049e8831a621ea6c036eb5f059949dcb4a90a8"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/ThirdSymmetry.lean",
+      "sha256": "44a65b8050771d744723d98fc8a780171f51a460814ceab11a6b79616a289078"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/Trees.lean",
+      "sha256": "480ff07271f39fed743f90d204465b4c40600eee388af6fd15550de28872da85"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/Helpers/TunedProducts.lean",
+      "sha256": "6248ccb05d898d69f0b205b301e03db300661ecd966f5ee2a240aa91b6e600e3"
+    },
+    {
+      "path": "lean/Papers/OaiCapacityCriterionState/TMain.lean",
+      "sha256": "f46624a46472123f4ac79774f867a1ab8ce162c355f0d9414c1a88c06da04e7d"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "7664fd95503592209c5cc8e30733a3c906022e56b624cd36f28e1b7b2b87b203"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "0866fbd3c25b0c8a1d93688bb62c90f29f1bb06e82eb72b3ca765aaac481d202"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "43164733c8978fda471358593863e74cd2510d4cc0510186dd21ab450c92546d"
+    }
+  ],
+  "code": "2ae909fb5dc2e9fe45ac5a4668fe2ceee6498b74b5e7e9f283cc6d3b44c1b7d1"
+}

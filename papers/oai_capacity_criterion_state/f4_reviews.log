@@ -1,0 +1,497 @@
+===== reviewer convergence/dual :: medium :: batch[def:r,def:posterior-law,def:posterior-coordinates,def:statistics,def:channel-step] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:r",
+      "verdict": "matched",
+      "note": "sqParam is exactly λ²; on the stated domain 0<λ<1 its value lies in (0,1)."
+    },
+    {
+      "obj_id": "def:posterior-law",
+      "verdict": "matched",
+      "note": "Probability laws supported on the simplex with uniform barycenter are exactly posterior laws of uniform four-state inputs: conversely construct the joint law with components p_i dμ."
+    },
+    {
+      "obj_id": "def:posterior-coordinates",
+      "verdict": "matched",
+      "note": "coordMatrix has exactly the displayed rows, postCoords is Lp, and quadStat sums its three squared coordinates as pinned."
+    },
+    {
+      "obj_id": "def:statistics",
+      "verdict": "matched",
+      "note": "quadInfo defines Eμ A; companion definitions thirdMoment and absThird in Helpers/PosteriorLaws.lean define exactly Eμ[x₁x₂x₃] and its absolute value."
+    },
+    {
+      "obj_id": "def:channel-step",
+      "verdict": "matched",
+      "note": "With unifVec_i=1/4, channelPosterior is exactly unif+t(p−unif); its measurable pushforward gives precisely the resulting posterior law on the stated domain t∈[0,1]."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:r","verdict":"matched","note":"`sqParam lam = lam^2` is the paper's r = λ². The range (0,1) follows from the standing λ ∈ (0,1) assumption (MainLambda), which consumers carry. The definition adds no restriction and leaves nothing out."},{"obj_id":"def:posterior-law","verdict":"matched","note":"IsPosteriorLaw means: a probability measure on Fin 4 → ℝ, giving zero mass outside the standard simplex, with every coordinate mean equal to 1/4. Paper ⟹ Lean: a posterior vector lies in the simplex, and its mean is the uniform prior (martingale property). Lean ⟹ paper: given such a μ, take the observation p ~ μ and set P(I=i | p) = p_i. The input's marginal is then ∫ p_i dμ = 1/4, so it is uniform, and the posterior given the observation is p, so μ is a posterior law (Blackwell splitting). The two classes have the same extension."},{"obj_id":"def:posterior-coordinates","verdict":"matched","note":"coordMatrix is exactly !![1,1,-1,-1; 1,-1,1,-1; 1,-1,-1,1] = L. postCoords p = L.mulVec p = x. quadStat p = ∑_{i<3} x_i², which matches pinned reading ass:pin-1 (|x|² = x₁²+x₂²+x₃²)."},{"obj_id":"def:statistics","verdict":"matched","note":"quadInfo mu = ∫ A dμ = m(μ). The other symbols are tagged in the same file: thirdMoment mu = ∫ x₀x₁x₂ dμ = τ(μ) and absThird mu = |thirdMoment mu| = h(μ). On posterior laws the integrands are bounded, because the measure lives on the simplex, so the Bochner integral is the paper's expectation."},{"obj_id":"def:channel-step","verdict":"matched","note":"channelStep t mu = pushforward of mu under p ↦ unif + t(p − unif). This matches the paper: J is uniform because the uniform law is stationary, so the observation's marginal law is unchanged, and the posterior about I is unif + t(p − unif). The admissible range t ∈ [0,1] is the separate predicate IsChannelParameter (Icc 0 1), applied at consumers. On that domain the map is exactly the paper's step."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:main-tree,ass:main-lambda,ass:flow-label-recursion,ass:local-moments-lambda,ass:local-moments-symmetry] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:main-tree",
+      "verdict": "faithful-refinement",
+      "note": "Prefix-closed words encode exactly rooted trees with at most B children, up to vertex relabeling; infinitude implies B > 0, so the explicit positivity conjunct adds no restriction."
+    },
+    {
+      "obj_id": "ass:main-lambda",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated real parameter restriction 0 < λ < 1."
+    },
+    {
+      "obj_id": "ass:flow-label-recursion",
+      "verdict": "faithful-refinement",
+      "note": "Exactly nonnegative finite real labels satisfying the stated inequality at every vertex, with r = λ² as defined in def:r; labels outside the vertex set are unconstrained and every vertex labeling extends."
+    },
+    {
+      "obj_id": "ass:local-moments-lambda",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated restriction 0 < λ < 1."
+    },
+    {
+      "obj_id": "ass:local-moments-symmetry",
+      "verdict": "faithful-refinement",
+      "note": "Both laws are invariant under every coordinate permutation. The carrier is exactly probability laws supported on the simplex with uniform barycenter: every such law is realized by the joint experiment P(I=i, p∈dp)=p_i μ(dp)."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:main-tree","verdict":"faithful-refinement","note":"Matches the paper. BoundedTree B is a prefix-closed set of words over Fin B with root [], and a vertex's children are the words a::v that lie in the set. Paper ⟹ Lean: any rooted tree with at most B children per vertex embeds this way by labelling each vertex's children injectively with Fin B. Lean ⟹ paper: every such set is a rooted tree with at most B children per vertex. T.verts.Infinite is 'infinite'. 0<B adds nothing new: B=0 would force verts={[]}, which is finite, so infinitude already entails it."},{"obj_id":"ass:main-lambda","verdict":"faithful-refinement","note":"0<lam ∧ lam<1 is exactly 0<λ<1."},{"obj_id":"ass:flow-label-recursion","verdict":"faithful-refinement","note":"Matches the paper. For every vertex v of T: 0≤z v (finite nonnegative labels, since they are reals) and z v ≤ Σ_{w∈children v} r·z w/√(1+z w²), with sqParam lam = lam² = r as the core defines it (r=λ²). The values of z off T.verts are unconstrained and never used."},{"obj_id":"ass:local-moments-lambda","verdict":"faithful-refinement","note":"0<lam ∧ lam<1 is exactly 'Fix 0<λ<1'."},{"obj_id":"ass:local-moments-symmetry","verdict":"faithful-refinement","note":"Matches the paper. mu and nu are typed as PosteriorLaw, the def:posterior-law domain, and IsSymmetricLaw says the law is invariant under every permutation of the 4 coordinates. That is the core's definition of symmetric: 'invariant under all permutations of its four posterior entries'."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:local-moments-channel,ass:pin-1,ass:pin-2,def:tree-notation,def:channel] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:tree-notation",
+      "verdict": "matched",
+      "note": "Induction identifies level n exactly with vertices in T.verts of word length n; prepending letters gives precisely the children."
+    },
+    {
+      "obj_id": "def:channel",
+      "verdict": "matched",
+      "note": "On the paper's parameter domain, the finite joint mass is exactly the uniform root factor times one transition factor per edge, equivalently the stated conditionally independent broadcast law."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:local-moments-channel",
+      "verdict": "faithful-refinement",
+      "note": "Existence of a posterior law whose image under p ↦ unif + λ(p − unif) is ν expresses exactly a channel step in the stated setting."
+    },
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "EuclideanSpace uses the Euclidean norm; its squared norm is exactly the sum of the three squared coordinates."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "The weighted product measure is supported on simplex pairs and assigns zero mass to Z = 0, so every permitted extension gives exactly the pinned combined posterior law."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:tree-notation","verdict":"matched","note":"level 0 = {root []}, level (n+1) = union of children of level-n vertices. children v = {a :: v ∈ T.verts}. Because the tree is prefix-closed and contains the root, this is exactly {v ∈ T.verts : length v = n}, i.e. L_n with |v| = depth = word length. children(v) is the set of words one letter longer that are tree vertices, so it matches the paper's \\children(v) in both directions."},{"obj_id":"def:channel","verdict":"matched","note":"broadcastJoint = (1/4)·∏ over non-root w in ball n of channel λ(spin(parent w.tail), spin w). This is a uniform root spin on Fin 4 times independent edge transitions given the parent spin. channel λ i j = λ·1{i=j} + (1−λ)/4 is exactly eq:channel. w.tail is the parent because a child is a :: v, and the parent of a non-root ball vertex is in the ball, so configSpin never falls back to its off-ball default. The finite-ball joint laws are the paper's broadcast process."}],"assumption_verdicts":[{"obj_id":"ass:local-moments-channel","verdict":"faithful-refinement","note":"∃ nu0 : PosteriorLaw with ν = channelStep λ nu0, i.e. ν is the pushforward of a posterior law under p ↦ unif + λ(p − unif). This is exactly the core construction of a channel step: the posterior about the uniform input is unif + t(p − unif), where p is the posterior about J. The core node does not restrict λ itself. The range 0<λ<1 / IsChannelParameter is supplied by the enclosing lemma, so no direction fails."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"∀ x ∈ EuclideanSpace ℝ (Fin 3), ‖x‖² = Σ x_i² is exactly the pinned Euclidean squared norm on ℝ³."},{"obj_id":"ass:pin-2","verdict":"faithful-refinement","note":"The pin says the combined law is the law of P under Z d(μ⊗ν), with P_i = 4p_iq_i/Z on {Z>0} and any measurable simplex-valued extension on {Z=0}. The Lean says the same: starLaw μ ν is the image of (μ⊗ν).withDensity(Z) under every measurable extension that is simplex-valued and equals productP (= 4p_iq_i/Z) on {Z>0}, over simplex pairs. Since μ and ν are supported on the simplex and Z vanishes on {Z=0}, the image law does not depend on the extension. So starLaw's uniform choice is one admissible representative, and the Prop is equivalent to the pinned reading."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:channel-scaling,def:extreme-experiments,def:product-rule,prop:companion] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:channel-scaling",
+      "verdict": "matched",
+      "note": "Unfolding gives coordinate multiplication by t and moment multiplication by t², t³, t³, exactly as displayed."
+    },
+    {
+      "obj_id": "def:extreme-experiments",
+      "verdict": "matched",
+      "note": "The uniform mixture of simplex vertices has m=3; the uniform posterior has zero coordinates and hence m=h=0."
+    },
+    {
+      "obj_id": "def:product-rule",
+      "verdict": "matched",
+      "note": "On posterior laws Z is nonnegative, so withDensity followed by map gives exactly the pinned weighted pushforward; the uniform extension at Z=0 is measurable and simplex-valued."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "prop:companion",
+      "verdict": "faithful-refinement",
+      "note": "The existential class explicitly consists of symmetric posterior laws, contains both extremes, has both required closures, and satisfies the exact moment-saving inequality with c=1/1000."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiCapacityCriterionState.CompanionMomentSaving",
+      "statement": "Existence of a class of symmetric posterior laws containing both extremes, closed under channel parameters in [0,1] and posterior products, satisfying the stated moment-saving inequality with c=1/1000.",
+      "classical_fact": "Attested Proposition 3.2 and Equations (3.8)–(3.9) of OpenAI (2026).",
+      "missing_infra": "",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:openai26-potts",
+        "locator": "Proposition 3.2 and Equations (3.8)--(3.9)"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:channel-scaling","verdict":"matched","note":"channelScaledMoments t x (m,τ,h) = (t•x, (t^2 m, t^3 τ, t^3 h)). This is the displayed map x↦tx, m↦t²m, τ↦t³τ, h↦t³h, component by component. Neither the NL nor the Lean restricts t."},{"obj_id":"def:extreme-experiments","verdict":"matched","note":"revealingLaw puts mass 1/4 on each Pi.single i 1 (the vertex e_i) and uninformativeLaw = dirac unifVec, as in the source (§2, end). With coordMatrix = L, quadStat = |Lp|² by pin-1, and |L e_i|² = 3, quadInfo revealingLaw = 3. At u we have L u = 0, so quadInfo uninformativeLaw = 0 and absThird = |E x1x2x3| = 0. The Prop states exactly m=3 for the revealing law and m=h=0 for the uninformative law."},{"obj_id":"def:product-rule","verdict":"matched","note":"starLaw μ ν is the pushforward by productP of (μ⊗ν).withDensity(ofReal Z), with Z = 4Σp_i q_i. This is the law of P under Z d(μ⊗ν), as pin-2 requires, and it matches the source's eq:product-law. productP is 4p_i q_i/Z on {Z>0} and unifVec (a measurable simplex point) elsewhere. That is one admissible extension under pin-2, and the law does not depend on it because the density is 0 on {Z=0}. On the posterior-law domain (simplex-supported) Z ≥ 0, so ofReal does not clip anything."}],"assumption_verdicts":[{"obj_id":"prop:companion","verdict":"faithful-refinement","note":"Encodes the frozen node exactly. ∃C: every member satisfies IsPosteriorLaw (probability measure, simplex support, barycenter 1/4, which per the source characterizes posterior laws) and IsSymmetricLaw (invariant under all coordinate permutations). C contains revealingLaw and uninformativeLaw, is closed under channelStep t for t∈[0,1] (the pushforward by C_λ(p) = u + λ(p−u), the source's Lemma 2.3) and under starLaw, and satisfies E_{μ⋆ν}A ≤ E_μA + E_νA − (1/1000)(E_μA²·E_νA + E_μA·E_νA²) with A = quadStat. The source implies it: the source's C (symmetric posterior laws with E H ≥ 0) is a witness. It contains e_i and u by eq:initial-H (H = 13/100 and 0), and Prop 3.2 gives the closures and eq:moment-saving with the same constant and direction. The source's mixture-closure conjunct is not used by the frozen node, so dropping it is correct. All referenced objects are defined, so the declaration is self-contained."}],"substrate_gates":[{"name":"OaiCapacityCriterionState.CompanionMomentSaving","statement":"∃ C ⊆ symmetric posterior laws on Fin 4 → ℝ, containing revealingLaw and uninformativeLaw, closed under channelStep t (t∈[0,1]) and starLaw, with quadInfo(μ⋆ν) ≤ quadInfo μ + quadInfo ν − (1/1000)(E_μA²·quadInfo ν + quadInfo μ·E_νA²)","classical_fact":"OpenAI (2026), Four-State Potts reconstruction threshold, Prop 3.2 (Closure and moment saving) with eq. (3.8) initial-H and eq. (3.9) moment-saving; C = symmetric posterior laws with E H ≥ 0","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26-potts","locator":"Proposition 3.2 and Equations (3.8)--(3.9)"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:level-information,def:reconstruction,def:flow,def:edge-boundary,def:capacity] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:level-information","verdict":"matched","note":"The finite broadcast joint law gives exactly the observation-weighted expected posterior TV; the uniform choice at null observations contributes zero."},{"obj_id":"def:reconstruction","verdict":"matched","note":"On the stated channel domain, limUnder equals the limit of the bounded decreasing information sequence; the adjacent public Reconstructs definition specifies exactly 0 < limitInfo."},{"obj_id":"def:flow","verdict":"matched","note":"Child endpoints index edges, with precisely nonnegativity and nonroot conservation; zero extension outside the tree and the unused root coordinate preserve the paper's flows."},{"obj_id":"def:edge-boundary","verdict":"matched","note":"Requiring every successive finite prefix to be a vertex describes exactly the infinite rays from the root."},{"obj_id":"def:capacity","verdict":"matched","note":"The extended nonnegative sum uses child depth n+1 and exactly the squared rescaling; the indexed supremum ranges over precisely the flows whose potential is at most one on every ray."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:level-information","verdict":"matched","note":"levelInfo = Σ_obs levelMarginal(obs)·tvToUnif(rootPosterior(obs)). This is the expectation over the finite observation space L_n→Fin 4 of the TV distance from uniform of the exact root posterior. levelJoint sums broadcastJoint over configurations on ball n, with the root spin fixed to i and the level-n spins fixed to obs. broadcastJoint is (1/4)·∏_{w≠root} P_λ(σ_parent(w), σ_w), the def:channel broadcast law. rootPosterior is joint/marginal wherever the marginal is >0. A null observation gets weight 0, so the unifVec fallback does not affect the value. tvToUnif is literally ½Σ|p_i−1/4|. The two definitions agree in both directions."},{"obj_id":"def:reconstruction","verdict":"matched","note":"limitInfo is limUnder atTop of levelInfo, i.e. a_∞ = lim a_n. levelInfo_tendsto proves the limit exists under MainLambda (0<λ<1), so limUnder equals the paper's limit on the paper's domain. The predicate 'reconstruction occurs' is Reconstructs T lam := 0 < limitInfo T lam (Broadcast.lean:469), exactly 'a_∞ > 0'."},{"obj_id":"def:flow","verdict":"matched","note":"The edge (parent(v), v) is indexed by its child endpoint v ≠ []. IsFlow requires nonnegativity and, at every nonroot vertex v, θ(v) = Σ_{w∈children v} θ(w): incoming flow equals outgoing flow. Lean-only fields are a conservative extension: θ = 0 off T.verts, and θ([]) ≥ 0 is unused because flowMass reads only children of the root. Every paper flow extends by θ([]) = 0 and 0 off the tree, and every Lean flow forgets to a paper flow. flowMass = Σ_{w∈children []} θ(w) = |θ|."},{"obj_id":"def:edge-boundary","verdict":"matched","note":"rays = {ξ : ℕ→Fin B | every prefix rayPrefix ξ n ∈ T.verts}. rayPrefix builds the word by prepending, consistent with children and prefix_closed, so these are exactly the infinite root-started paths ∂T. Edge depth |e| = length of the child endpoint, i.e. n+1 for rayPrefix ξ (n+1), which pathPotential uses consistently."},{"obj_id":"def:capacity","verdict":"matched","note":"capacity3 = ⨆ over θ with IsFlow and ∀ξ∈rays, pathPotential ≤ 1 of ofReal|θ|. ∀ξ, V ≤ 1 is equivalent to sup_ξ V ≤ 1, including when there are no rays. pathPotential = Σ_{n} (λ^{-2(n+1)} θ(ξ|_{n+1}))², taken in ℝ≥0∞; the terms are squares, so the ofReal coercion is harmless and a divergent series correctly gives ∞. λ^{-2|e|} is well defined since 0<λ<1. θ = 0 is always admissible, so the sup is nonempty. Its value in ℝ≥0∞ allows +∞, matching the paper's sup."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:flow,lem:local-moments] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:flow",
+      "verdict": "matched",
+      "note": "Equivalent: r = λ², the label recursion, nonnegative conserved flow, root mass, raywise potential bound, and extended-real capacity inequality match the frozen statement."
+    },
+    {
+      "obj_id": "lem:local-moments",
+      "verdict": "matched",
+      "note": "Equivalent: posterior-law domain, permutation symmetry, channel step, weighted product law, and statistics match; C is uniform over both laws and the separate constant-seven bound is retained. Positivity of C follows by increasing the paper's constant; both pin hypotheses hold for the defined objects."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:flow","verdict":"matched","note":"I unfolded every definition the statement uses, and the Lean is equivalent to the paper. FlowLabelRecursion requires 0 ≤ z_v and z_v ≤ Σ_{w∈children v} r·z_w/√(1+z_w²) at every vertex, with sqParam lam = lam² = r (def:r). IsFlow matches def:flow: values are nonnegative, sit on child endpoints and vanish off the tree, with conservation at every nonroot vertex. flowMass is the sum over the root's children. pathPotential is Σ_n (λ^{-2(n+1)}·θ(prefix_{n+1}))², which is eq:potential because |e| is the depth of the child endpoint. T.rays is the set of infinite rays from the root. The condition '∀ xi ∈ rays, V ≤ 1' is equivalent to 'sup_ξ V ≤ 1'. capacity3 is the supremum of the masses of admissible flows. Masses are nonnegative, so ENNReal.ofReal(z ρ) ≤ capacity3 says the same thing as Cap ≥ z_ρ. The hypotheses MainTree and MainLambda (0<B, infinite tree, 0<λ<1) are the stated ass:main-tree and ass:main-lambda. The conclusion gives both the flow-existence claim and the capacity bound."},{"obj_id":"lem:local-moments","verdict":"matched","note":"The Lean is equivalent to the paper. The constant C>0 is chosen after lam and before mu and nu, so it is uniform and depends only on λ, and the Lean states both eq:local-m-lower and eq:local-h-upper with it. It also states the first inequality separately with the literal constant 7. quadInfo is E_μ Σ_i x_i² with x = Lp, which is m(μ) = E_μ A under pin-1. absThird is |E_μ x1x2x3| = h(μ) (def:statistics). PosteriorLaw means a probability law supported on the simplex with uniform barycenter. LocalMomentsSymmetry requires both laws to be invariant under coordinate permutations. LocalMomentsChannel says ν = channelStep λ ν0 for some posterior law ν0, i.e. the push-forward of ν0 under unif + λ(p − unif) (def:channel-step). starLaw is the push-forward under P of Z·d(μ⊗ν), with the uniform vector on {Z=0}. The hypothesis EuclideanNormPin is a true identity that encodes pin-1. The hypothesis ProductRulePin encodes pin-2, which says the choice of extension on {Z=0} does not change the law. It should also be provable: the density Z vanishes on {Z≤0}, and μ⊗ν is concentrated on pairs of simplex points, so any admissible extension agrees with productP almost everywhere. Neither pin hypothesis narrows the models or empties the statement."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\lambda,sym:r,sym:P_\lambda,sym:\sigma_v,sym:\sigma_{L_n}] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\lambda",
+      "verdict": "matched",
+      "note": "MainLambda explicitly imposes exactly 0 < lam ∧ lam < 1."
+    },
+    {
+      "obj_id": "sym:r",
+      "verdict": "matched",
+      "note": "sqParam computes lam², which lies in (0,1) for the stated channel parameter lam ∈ (0,1)."
+    },
+    {
+      "obj_id": "sym:P_\\lambda",
+      "verdict": "matched",
+      "note": "channel computes the specified four-state matrix; its diagonal and off-diagonal entries lie in [0,1] for the stated channel parameter."
+    },
+    {
+      "obj_id": "sym:\\sigma_v",
+      "verdict": "matched",
+      "note": "configSpin returns Fin 4 and agrees with the arbitrary finite spin configuration on its ball."
+    },
+    {
+      "obj_id": "sym:\\sigma_{L_n}",
+      "verdict": "drift",
+      "note": "levelJoint returns a real joint probability mass, whereas the symbol is a level spin vector; its correctly typed obs argument does not make its output that vector. Tag a definition mapping config to fun v : T.level n => configSpin T n config v, and remove this realization tag from levelJoint."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:\\sigma_{L_n}",
+    "reason": "The tagged levelJoint declaration computes a scalar probability mass rather than the specified restriction of a spin assignment to L_n.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\lambda","verdict":"matched","note":"MainLambda (Helpers/Trees.lean:112) is `0 < lam ∧ lam < 1`, which pins λ to exactly (0,1). This is the standard carrier ℝ plus a constraining predicate."},{"obj_id":"sym:r","verdict":"matched","note":"sqParam (Trees.lean:116) computes lam^2, which is exactly the core's 'r=λ^2'. Its range (0,1) under MainLambda is proved from the cluster's own members by sqParam_mem_Ioo (Trees.lean:119)."},{"obj_id":"sym:P_\\lambda","verdict":"matched","note":"channel (Basic.lean:19) is `lam*(if i=j then 1 else 0)+(1-lam)/4` on Fin 4 × Fin 4, which is exactly the core's P_λ(j|i)=λ1{i=j}+(1-λ)/4. As a computing def its entries lie in [0,1] by construction for λ∈(0,1) (min (1-λ)/4>0, max (1+3λ)/4<1)."},{"obj_id":"sym:\\sigma_v","verdict":"matched","note":"configSpin (Broadcast.lean:31) returns Fin 4 for every vertex. Inside the ball it is config v; outside the ball it is a dummy 0 that never enters broadcastJoint. So each spin is typed exactly in [4]."},{"obj_id":"sym:\\sigma_{L_n}","verdict":"matched","note":"levelJoint (Broadcast.lean:188) indexes the level configuration as `obs : T.level n → Fin 4`, i.e. [4]^{L_n}. It matches obs with configSpin restricted to T.level n, which is the restriction of the spin assignment to L_n, so the space is pinned by type."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:m,sym:\tau,sym:h,sym:t,sym:I] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:m",
+      "verdict": "matched",
+      "note": "PosteriorLaws.lean:181 computes the expectation of the sum of three squared coordinates of Lp; each coordinate lies in [-1,1] on the simplex, so every simplex probability law gives a value in [0,3] by construction."
+    },
+    {
+      "obj_id": "sym:\\tau",
+      "verdict": "matched",
+      "note": "PosteriorLaws.lean:197 computes the real integral of the product of all three coordinates of Lp, defining the stated real-valued function on every simplex probability law."
+    },
+    {
+      "obj_id": "sym:h",
+      "verdict": "matched",
+      "note": "PosteriorLaws.lean:201 computes |thirdMoment mu|, which is nonnegative by construction and defines the stated function on every simplex probability law."
+    },
+    {
+      "obj_id": "sym:t",
+      "verdict": "matched",
+      "note": "PosteriorLaws.lean:208 defines IsChannelParameter t exactly as t ∈ Set.Icc 0 1, imposing precisely the declared space."
+    },
+    {
+      "obj_id": "sym:I",
+      "verdict": "matched",
+      "note": "Basic.lean:24 types the input spin as Fin 4, realizing exactly the four-element space; channelStepJoint includes the stated uniform factor 1/4."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:m","verdict":"matched","note":"quadInfo mu = ∫ quadStat ∂mu, where quadStat p = Σ_{i<3} (L p)_i² = A (Euclidean, as ass:pin-1 requires) and postCoords = coordMatrix.mulVec, so this is m(μ)=E_μ A. The def takes any Measure on Fin 4 → ℝ. On the paper domain (PosteriorLaw: a probability measure on the simplex with uniform barycenter) its range is [0,3]; quadInfo_mem_Icc proves this from the cluster's own definitions."},{"obj_id":"sym:\\tau","verdict":"matched","note":"thirdMoment mu = ∫ x₀·x₁·x₂ ∂mu, with x = postCoords p = L p. This is the core definition τ(μ)=E_μ[x₁x₂x₃] (0-indexed in Lean) as a real value, by construction."},{"obj_id":"sym:h","verdict":"matched","note":"absThird mu = |thirdMoment mu|, matching h(μ)=|τ(μ)|. Its range is [0,∞) by construction of the absolute value."},{"obj_id":"sym:t","verdict":"matched","note":"IsChannelParameter t := t ∈ Set.Icc 0 1 pins the real carrier to [0,1]. channelStep_isPosteriorLaw takes it as a hypothesis, which is the standard carrier-plus-predicate idiom."},{"obj_id":"sym:I","verdict":"matched","note":"In channelStepJoint, I has type Fin 4 (= [4]) and the joint mass is (1/4)·channel t I J, so I carries the uniform 1/4 mass of the input spin, as the core definition says."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\unif,sym:p,sym:a_n,sym:a_\infty,sym:\theta] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\unif",
+      "verdict": "matched",
+      "note": "Basic.lean:16 defines all four coordinates as 1/4, ensuring nonnegativity, upper bounds, and sum one by construction."
+    },
+    {
+      "obj_id": "sym:p",
+      "verdict": "matched",
+      "note": "PosteriorLaws.lean:34 explicitly enforces simplex support; stdSimplex means nonnegative coordinates summing to one, equivalently the declared space. The finite-experiment formula gives this posterior for nonnegative likelihoods."
+    },
+    {
+      "obj_id": "sym:a_n",
+      "verdict": "matched",
+      "note": "Broadcast.lean:281 computes expected posterior total variation under the finite broadcast law; on the core's declared channel domain 0<λ<1, its nonnegative marginal weights sum to one and posterior total variation lies in [0,1]."
+    },
+    {
+      "obj_id": "sym:a_\\infty",
+      "verdict": "matched",
+      "note": "Broadcast.lean:466 computes the limit of levelInfo; on the declared channel domain its sequence is decreasing and bounded in [0,1], so limUnder selects its unique limit in that interval."
+    },
+    {
+      "obj_id": "sym:\\theta",
+      "verdict": "matched",
+      "note": "Trees.lean:136 enforces nonnegative flow and conservation at every nonroot vertex. Edge values are indexed by child endpoints; zero extension outside the tree and an unused nonnegative root value conservatively represent precisely the stated edge flows."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\unif","verdict":"matched","note":"unifVec : Fin 4 → ℝ := fun _ => 1/4 (Basic.lean:16) is a computed def. Its value has four coordinates of 1/4, so every coordinate lies in [0,1] and they sum to 1: it is the uniform point of the simplex by construction."},{"obj_id":"sym:p","verdict":"matched","note":"IsPosteriorLaw (PosteriorLaws.lean:34-37) pins the posterior vector p to stdSimplex ℝ (Fin 4) almost surely through the clause mu (stdSimplex)ᶜ = 0. experimentPosterior (PosteriorLaws.lean:53) is a computed def whose value lies in stdSimplex whenever the likelihoods are nonnegative; this is proved in experimentPosterior_mem_simplex (PosteriorLaws.lean:65). At zero-mass observations it falls back to unifVec, which is also in the simplex. Together the members pin p to {p∈[0,1]^4 : Σ p_i = 1}."},{"obj_id":"sym:a_n","verdict":"matched","note":"levelInfo (Broadcast.lean:281) is a computed def: the levelMarginal-weighted sum of tvToUnif(rootPosterior), i.e. the expected total-variation distance of the root posterior. Its range is [0,1] by construction, and levelInfo_mem_Icc (Broadcast.lean:286) proves this under MainLambda."},{"obj_id":"sym:a_\\infty","verdict":"matched","note":"limitInfo (Broadcast.lean:466) is a computed def, limUnder atTop of levelInfo. levelInfo_tendsto (Broadcast.lean:472) proves the limit exists from antitonicity and the lower bound 0. Since every term lies in [0,1], the limit lies in [0,1] by construction."},{"obj_id":"sym:\\theta","verdict":"matched","note":"IsFlow (Trees.lean:136-140) represents edges by their child endpoints, as the Trees.lean:135 docstring says. It requires theta ≥ 0 at every index, theta = 0 off T.verts, and conservation theta v = Σ_{children} theta w at every nonroot vertex. The root value only stands for the unused non-edge index and is pinned in the same way. The cluster therefore realizes [0,∞)^{E(T)} under the flow constraint, matching both member hints."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:z_v,sym:d_{vw},sym:\ell_v,sym:g_v,sym:a] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:z_v",
+      "verdict": "matched",
+      "note": "Trees.lean:128–132 explicitly requires real, nonnegative labels at every tree vertex; values outside the vertex set are immaterial."
+    },
+    {
+      "obj_id": "sym:d_{vw}",
+      "verdict": "matched",
+      "note": "Flow.lean:21–35 defines real coefficients and establishes their nonnegativity on every parent-child edge under the stated label recursion."
+    },
+    {
+      "obj_id": "sym:\\ell_v",
+      "verdict": "matched",
+      "note": "Flow.lean:71–74 defines finite real path products with root value one; the tagged clause at line 85 establishes nonnegativity on every vertex."
+    },
+    {
+      "obj_id": "sym:g_v",
+      "verdict": "matched",
+      "note": "Flow.lean:77–79 defines real rescaled path weights; the tagged clause at line 86 establishes nonnegativity on every vertex."
+    },
+    {
+      "obj_id": "sym:a",
+      "verdict": "matched",
+      "note": "LocalMoments.lean:140 fixes a as quadInfo mu; its PosteriorLaw binder ensures a lies in [0,3], since it integrates three squared coordinates bounded by one under a probability law."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:z_v","verdict":"matched","note":"Helpers/Trees.lean:128-132: FlowLabelRecursion requires 0 ≤ z v for every v ∈ T.verts, and z takes values in ℝ, so every label is finite. Together these pin z to [0,∞)^{V(T)}. Values off T.verts are not vertex labels and play no role."},{"obj_id":"sym:d_{vw}","verdict":"matched","note":"labelCoefficient (Helpers/Flow.lean:21-26) is a computed real-valued def: (z v / supply)·(r/√(1+z_w²)) when supply > 0, else 0. labelCoefficient_spec (Flow.lean:29-35) proves 0 ≤ d_{vw} ≤ r/√(1+z_w²) for every edge (v, w ∈ children v) under MainTree/MainLambda/FlowLabelRecursion. So d lies in [0,∞)^{E(T)}, and the def gives this range by construction."},{"obj_id":"sym:\\ell_v","verdict":"matched","note":"labelWeight (Flow.lean:71-74) is a computed real-valued path product with root weight 1. label_weights_nonneg (Flow.lean:82-86) proves 0 ≤ ℓ_v for every v ∈ T.verts, by induction using the coefficient range. Real-valued means finite, so ℓ lies in [0,∞)^{V(T)}."},{"obj_id":"sym:g_v","verdict":"matched","note":"scaledLabelWeight (Flow.lean:77-79) is computed as r^{-|v|}·ℓ_v; r = λ² > 0 under MainLambda, so the zpow is finite. label_weights_nonneg proves 0 ≤ g_v on T.verts, so g lies in [0,∞)^{V(T)}."},{"obj_id":"sym:a","verdict":"matched","note":"In quadratic_cancellation (LocalMoments.lean:140), a is the let-abbreviation quadInfo mu with mu : PosteriorLaw. quadInfo is the computed expectation of quadStat (PosteriorLaws.lean:181). quadInfo_mem_Icc (PosteriorLaws.lean:184-194) proves quadInfo mu ∈ [0,3] for every PosteriorLaw, using simplex support and quadStat_mem_Icc. So the range [0,3] is established by the development, not supplied by a consumer."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:J,sym:q,sym:Z,sym:P,sym:\calC] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:J",
+      "verdict": "matched",
+      "note": "Basic.lean:23–26 binds J : Fin 4, exactly realizing the four-state space."
+    },
+    {
+      "obj_id": "sym:q",
+      "verdict": "matched",
+      "note": "IsPosteriorLaw requires simplex support; stdSimplex means nonnegative coordinates summing to one, which also implies each coordinate is at most one."
+    },
+    {
+      "obj_id": "sym:Z",
+      "verdict": "matched",
+      "note": "productZ defines the density, and product_rule_bounds explicitly establishes its a.e. range [0,4]; smoothed_product_bounds supplies the stated identity and positivity under channel smoothing."
+    },
+    {
+      "obj_id": "sym:P",
+      "verdict": "matched",
+      "note": "productP computes the normalized product with a uniform zero-density extension, and product_rule_bounds establishes its a.e. simplex membership."
+    },
+    {
+      "obj_id": "sym:\\calC",
+      "verdict": "matched",
+      "note": "CompanionMomentSaving binds C as a set of measures and explicitly requires every member to be a probability measure supported on the simplex, realizing a class of probability laws on that simplex."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:J","verdict":"matched","note":"channelStepJoint (Basic.lean:23-26) gives the output spin J the type Fin 4, which is exactly [4], so the carrier pins the space. The joint mass is (1/4)·channel t I J, matching the uniform input with transition P_t."},{"obj_id":"sym:q","verdict":"matched","note":"q is the second posterior vector pq.2 drawn from nu : PosteriorLaw. IsPosteriorLaw (PosteriorLaws.lean:34-37) requires mu (stdSimplex ℝ (Fin 4))ᶜ = 0, so q lies in the simplex {q∈[0,1]^4 : Σq_i=1} a.e. This is the standard ℝ-carrier plus range-predicate idiom; productP only consumes pq.2 and adds no constraint of its own."},{"obj_id":"sym:Z","verdict":"matched","note":"productZ (PosteriorLaws.lean:417) is defined as 4·Σ p_i q_i, so it computes Z by construction. product_rule_bounds (lines 433-438) proves Z ∈ [0,4] a.e. under mu.prod nu from the simplex support of both posterior laws. The smoothed_product_bounds clauses (Z = 1+s, Z ≥ 1-λ, Z > 0) are hypothesis-conditional facts under the channel assumption and do not narrow the range."},{"obj_id":"sym:P","verdict":"matched","note":"productP (PosteriorLaws.lean:423-425) computes the normalized product 4 p_i q_i / Z when Z > 0. Otherwise it returns unifVec, which is in the simplex (the same fallback is shown to be in the simplex in experimentPosterior_mem_simplex). product_rule_bounds proves productP ∈ stdSimplex a.e., which is exactly the space {P∈[0,1]^4 : ΣP_i=1}."},{"obj_id":"sym:\\calC","verdict":"matched","note":"CompanionMomentSaving (CitedGates.lean:23-33) quantifies C : Set (Measure (Fin 4 → ℝ)) with ∀ mu ∈ C, IsPosteriorLaw mu ∧ IsSymmetricLaw mu. IsPosteriorLaw means a probability measure with simplex support, so C is a subset of P(simplex), as the space 2^{P(simplex)} requires. The extra constraints (uniform barycenter, symmetry, closure under channel steps and products, containing the revealing and uninformative laws) are the core definition of the class (core.json symbol \\calC: 'class of symmetric posterior laws … preserved by channel steps … and conditionally independent products'), not a narrowing of the space."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:|\theta|,sym:\Capacity_{3,\lambda},sym:\mu,sym:\nu,sym:A] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:|\\theta|",
+      "verdict": "drift",
+      "note": "flowMass accepts unrestricted real labels: a Lean-checked full unary tree with every label −1 has mass −1. Its sole cluster member therefore does not enforce [0,∞). Restrict the paper-facing input to IsFlow or add a tagged admissibility clause at the same scope."
+    },
+    {
+      "obj_id": "sym:\\Capacity_{3,\\lambda}",
+      "verdict": "matched",
+      "note": "capacity3 computes the supremum of admissible flow masses in ℝ≥0∞, enforcing the stated range by construction."
+    },
+    {
+      "obj_id": "sym:\\mu",
+      "verdict": "matched",
+      "note": "The cluster enforces probability, simplex support, and uniform barycenter, exactly characterizing posterior laws for the frozen uniform-input setting."
+    },
+    {
+      "obj_id": "sym:\\nu",
+      "verdict": "matched",
+      "note": "PosteriorLaw enforces the same probability, simplex-support, and uniform-barycenter conditions required of the second posterior law."
+    },
+    {
+      "obj_id": "sym:A",
+      "verdict": "matched",
+      "note": "quadStat computes the sum of three squared coordinates of Lp; simplex inputs give coordinates in [−1,1], hence values in [0,3]."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "sym:|\\theta|",
+    "reason": "Trees.lean:143 defines flowMass on arbitrary real labels without a cluster-owned flow condition, permitting negative values outside the frozen nonnegative range.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:|\\theta|","verdict":"matched","note":"flowMass (Helpers/Trees.lean:143) is a def that computes the sum of θ over the root's children T.children [], which is the outgoing flow at ρ. IsFlow (line 137) requires ∀ v, 0 ≤ θ v, so on every flow the value lies in [0,∞). This is the def-by-construction case."},{"obj_id":"sym:\\Capacity_{3,\\lambda}","verdict":"matched","note":"capacity3 (Trees.lean:213) is the ENNReal supremum of ofReal(flowMass) over IsFlow θ with ∀ξ∈T.rays, pathPotential ≤ 1. That condition is equivalent to the core's sup_ξ V_λ ≤ 1, and the root mass is nonnegative, so ofReal loses nothing. pathPotential sums (λ^{-2|e|}θ(e))² along the ray, with |e| the length of the child endpoint, matching eq:potential. Its range [0,∞] follows from ℝ≥0∞. The zero flow is admissible, so the supremum is never over an empty set."},{"obj_id":"sym:\\mu","verdict":"matched","note":"IsPosteriorLaw (PosteriorLaws.lean:34) requires a probability measure on Fin 4→ℝ, a null complement of stdSimplex, and ∫p_i dμ = 1/4. A null complement is the same as a probability law on the simplex. The uniform barycenter matches the core definition of μ as the law of the posterior about a uniform input spin, in both directions: such a law always has barycenter (1/4,…,1/4), and every simplex law with that barycenter arises from the experiment that observes p itself, with likelihood 4p_i dμ. PosteriorLaw (line 42) is the subtype of exactly these laws."},{"obj_id":"sym:\\nu","verdict":"matched","note":"ν is realized by the same PosteriorLaw subtype (PosteriorLaws.lean:42), with the same domain and the same argument as for μ: a probability law on the simplex with uniform barycenter, which is exactly the class of posterior laws of a uniform four-state input."},{"obj_id":"sym:A","verdict":"matched","note":"quadStat (PosteriorLaws.lean:145) computes the sum of (Lp)_i² over three coordinates. coordMatrix (line 136) is the core's L, rows (1,1,-1,-1), (1,-1,1,-1) and (1,-1,-1,1), so quadStat is |Lp|². quadStat_mem_Icc (line 161) proves the value lies in [0,3] on stdSimplex. This is the def-by-construction case, with the range certified by that lemma."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:b =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b","verdict":"matched","note":"Helpers/LocalMoments.lean:141 defines b := quadInfo nu. The cluster's own binder nu : PosteriorLaw ensures b ∈ [0,3]: PosteriorLaws.lean:184 (quadInfo_mem_Icc) derives this from probability mass, simplex support, and quadStat_mem_Icc. No consumer hypothesis supplies the range constraint."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:b","verdict":"matched","note":"Matched. The cluster's member is `let b := quadInfo nu` in quadratic_cancellation (Helpers/LocalMoments.lean:141), with nu : PosteriorLaw. So b is a value computed by a def (quadInfo, the integral of quadStat over the posterior law, Helpers/PosteriorLaws.lean:181), not a free real. Its range [0,3] is proved for every PosteriorLaw by quadInfo_mem_Icc (PosteriorLaws.lean:184-185: quadInfo mu ∈ Set.Icc 0 3). That lemma uses only nu's subtype property (probability measure on the simplex) and nothing a consumer supplies. This agrees with the core symbol b = m(nu) over $[0,3]$."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"Modulo the explicitly exempt CompanionMomentSaving dependency, both directions match: limitInfo is the broadcast posterior-TV limit, and capacity3 is the supremum of admissible flow masses with the stated path potential. The tree encoding preserves the bounded infinite-tree domain; both pin hypotheses express the binding readings and add no model restriction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement is equivalent to the paper's, read modulo the source-attested cited carrier CompanionMomentSaving (prop:companion). Tree: BoundedTree B is a prefix-closed set of words over Fin B, which caps branching at B. MainTree requires infinitude and 0<B, and 0<B already follows from infinitude. Every rooted tree with at most B<∞ children per vertex is isomorphic to such a set of words, so the paper's class of trees is captured. lambda: MainLambda is 0<lam<1, as ass:main-lambda states. a_infinity: limitInfo is limUnder of levelInfo, and levelInfo n = Σ_obs P(obs)·TV(posterior of the root given the level-n spins, uniform). The TV is ½Σ|p_i−1/4| and comes from broadcastJoint, i.e. a uniform root and independent edge channels as in eq:channel. Because the sequence decreases and is bounded, limUnder is the actual limit. The uniform fallback posterior on null observations carries zero weight. Capacity: capacity3 is the ENNReal supremum of ofReal|θ| over nonnegative flows. Each flow is indexed by the child endpoint of its edge, vanishes off T, and conserves mass at every nonroot vertex (so it is zero at leaves). Admissible flows satisfy V_λ ≤ 1 on every ray of ∂T, where V_λ = Σ_e (λ^{-2|e|}θ(e))^2 and |e| is the depth of the child endpoint (n+1). This matches def:flow, def:edge-boundary and def:capacity. The supremum is never empty, because the zero flow is admissible, and 0<sup in [0,∞] matches the paper. Extra hypotheses: EuclideanNormPin and ProductRulePin restate the pinned readings ass:pin-1 and ass:pin-2. Both are provable, so they add no restriction and do not make the statement vacuous. EuclideanNormPin is the standard Euclidean norm identity. ProductRulePin holds because withDensity Z of mu⊗nu puts full mass on simplex×simplex∩{Z>0}, where every admissible extension equals productP, so the image measures coincide. Optional cleanup: discharge both pins as lemmas instead of keeping them as hypotheses."}],"assumption_verdicts":[],"substrate_gates":[{"name":"hCompanion_of_gate","statement":"CompanionMomentSaving: there is a class C of symmetric posterior laws on Fin 4 → ℝ. C contains revealingLaw and uninformativeLaw, and it is closed under channelStep t for t∈[0,1] and under starLaw. For all mu, nu in C: quadInfo(mu⋆nu) ≤ quadInfo mu + quadInfo nu − (1/1000)(E_mu[A^2]·quadInfo nu + quadInfo mu·E_nu[A^2]).","classical_fact":"OpenAI (2026), The Reconstruction Threshold for the Ferromagnetic Four-State Potts Model: Proposition 3.2 (closure of the class) and Eqs. (3.8)–(3.9) (the moment-saving inequality with c=1/1000).","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:OpenAI26Potts","locator":"Prop. 3.2, Eqs. (3.8)-(3.9)"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\sigma_{L_n},sym:|\theta|] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\sigma_{L_n}","verdict":"matched","note":"levelJoint quantifies obs over exactly (T.level n) → Fin 4 and identifies it with the configuration restricted to that level; this realizes [4]^{L_n}."},{"obj_id":"sym:|\\theta|","verdict":"matched","note":"flowMass is the finite sum of outgoing root flows; IsFlow requires every summand to be nonnegative, so the cluster constrains the mass to [0,∞) exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\sigma_{L_n}","verdict":"matched","note":"The level configuration is typed `obs : (T.level n) → Fin 4` in levelJoint (Helpers/Broadcast.lean:188-193), so it is exactly an element of [4]^{L_n}. T.level n is the finite set of level-n vertices (Trees.lean:45-47; mem_level_iff: v ∈ T.verts ∧ length = n). levelJoint is defined as the joint law of the root spin and that level restriction: it sums broadcastJoint over ball configurations whose restriction to the level equals obs. The space is pinned by the type itself."},{"obj_id":"sym:|\\theta|","verdict":"matched","note":"flowMass (Trees.lean:143-144) computes |θ| = Σ_{w ∈ children(root)} θ w, the total outgoing flow at the root. IsFlow (Trees.lean:136-140) requires ∀ v, 0 ≤ θ v, so every term of that sum is nonnegative and flowMass ∈ [0,∞) for any flow. Taken together, the computing def and the nonnegativity clause pin the space [0,∞); the sum is finite (Finset), so the value is never infinite."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:companion =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "prop:companion",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent existential class, posterior-law and permutation-symmetry conditions, endpoint laws, closures, and moment-saving inequality with c = 1/1000; the uniform extension on Z = 0 preserves the pinned weighted product law."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiCapacityCriterionState.CompanionMomentSaving",
+      "statement": "A class of symmetric posterior laws contains the revealing and uninformative laws, is closed under all channel parameters in [0,1] and conditionally independent products, and satisfies the stated moment-saving inequality with c = 1/1000.",
+      "classical_fact": "Attested OpenAI (2026), Proposition 3.2 and Equations (3.8)–(3.9).",
+      "missing_infra": "Deferred cited proposition.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:openai26-potts",
+        "locator": "Proposition 3.2 and Equations (3.8)--(3.9)"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"prop:companion","verdict":"faithful-refinement","note":"The Lean statement is logically equivalent to the frozen node. ∃C: every member satisfies IsPosteriorLaw ∧ IsSymmetricLaw. IsPosteriorLaw is a probability measure on Δ4 with barycenter u, which is the standard characterization of posterior laws about a uniform spin. IsSymmetricLaw is invariance under all Perm(Fin 4). revealingLaw = (1/4)Σδ_{e_i} and uninformativeLaw = δ_u. Closure under channelStep t (map of p ↦ u+t(p−u)) is required for every t∈[0,1]. Closure under starLaw (law of P under Z·d(μ⊗ν), Z=4Σp_iq_i, P_i=4p_iq_i/Z) matches ass:pin-2. The uniform extension on {Z=0} does not matter, because that set has zero mass under density Z. quadInfo is E_μ A, quadStat is |Lp|² with L the 3×4 sign matrix of def:posterior-coordinates (ass:pin-1), and ∫quadStat²∂μ is E_μ[A²]. The constant 1/1000 and the inequality direction match eq:moment-saving. The integrals are well defined because A is bounded on the simplex support. The statement is self-contained: every object it names is defined, and no free class appears."}],"substrate_gates":[{"name":"OaiCapacityCriterionState.CompanionMomentSaving","statement":"∃ class C of symmetric posterior laws (Fin 4 → ℝ) containing revealingLaw and uninformativeLaw, closed under channelStep t for t∈[0,1] and under starLaw, such that for μ,ν∈C: quadInfo(μ⋆ν) ≤ quadInfo μ + quadInfo ν − (1/1000)(E_μ[A²]·quadInfo ν + quadInfo μ·E_ν[A²])","classical_fact":"OpenAI (2026), Four-State Potts reconstruction, Prop 3.2 (Closure and moment saving) with C = {symmetric posterior laws with E_μ H ≥ 0} and eq. (3.8) H(e_i)=13/100, H(u)=0. Witnessing the existential with this C gives the frozen node. The source's extra mixture closure is not used.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26-potts","locator":"Proposition 3.2 and Equations (3.8)--(3.9)"},"check_status":"cited-verified-attested"}],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:companion =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "prop:companion",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent in both directions: the existential class contains symmetric posterior laws and both extreme laws, has the stated channel/product closures, and satisfies the exact inequality with c = 1/1000; the unfolded coordinates and weighted product respect both pinned readings."
+    }
+  ],
+  "substrate_gates": [
+    {
+      "name": "OaiCapacityCriterionState.CompanionMomentSaving",
+      "statement": "Existence of a class of symmetric posterior laws containing the revealing and uninformative laws, closed under channel steps and conditionally independent products, satisfying the displayed moment-saving inequality with c = 1/1000.",
+      "classical_fact": "The attested Proposition 3.2 and Equations (3.8)–(3.9), encoded self-containedly with matching quantifiers, operations, constant, and inequality direction.",
+      "missing_infra": "Local proof of the cited proposition is deferred.",
+      "gate_class": "cited",
+      "source": {
+        "cite_id": "cite:openai26-potts",
+        "locator": "Proposition 3.2 and Equations (3.8)--(3.9)"
+      },
+      "check_status": "cited-verified-attested"
+    }
+  ],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"prop:companion","verdict":"faithful-refinement","note":"The Lean is equivalent to the frozen node, checked in both directions. It asserts that some C : Set (Measure (Fin 4→ℝ)) exists. Every member of C is a posterior law (probability measure, carried by stdSimplex, barycenter 1/4) and is permutation-invariant via map (p∘perm)=mu. C contains revealingLaw (mass 1/4 on each e_i) and uninformativeLaw (dirac unifVec). C is closed under channelStep t for every t∈[0,1], where channelStep is the pushforward by C_t(p)=unif+t(p−unif), as in the source's Lemma lem:channel. C is closed under starLaw, the law of P under Z·d(mu⊗nu) with P_i=4p_iq_i/Z on {Z>0} and unifVec on {Z=0}. This is exactly pinned reading ass:pin-2: the extension is measurable and simplex-valued, and it only acts on a set of Z-density zero. The inequality m(mu⋆nu) ≤ m(mu)+m(nu) − (1/1000)(E_mu[A²]m(nu)+m(mu)E_nu[A²]) is stated with m=∫A and A=|Lp|²=Σ_{i<3}(coordMatrix·p)_i², which matches pinned reading ass:pin-1. coordMatrix is entry for entry the source's L. The constant 1/1000, the direction of the inequality and the quantifier order (∃C, ∀mu,nu∈C) all match. Integrability is not an issue: A ≤ 3 on the simplex and the laws are carried by the simplex. The paper's 'there is a class' is realized by the existential, and the class is self-contained because every constraint is a defined predicate. Adding mixture closure would have been optional; it is correctly not required."}],"substrate_gates":[{"name":"OaiCapacityCriterionState.CompanionMomentSaving","statement":"∃ C, (∀ mu∈C, IsPosteriorLaw mu ∧ IsSymmetricLaw mu) ∧ revealingLaw∈C ∧ uninformativeLaw∈C ∧ (∀ t∈[0,1], ∀ mu∈C, channelStep t mu∈C) ∧ (∀ mu nu∈C, starLaw mu nu∈C) ∧ ∀ mu nu∈C, quadInfo(mu⋆nu) ≤ quadInfo mu + quadInfo nu − (1/1000)(E_mu[A²]·quadInfo nu + quadInfo mu·E_nu[A²])","classical_fact":"OpenAI (2026), Reconstruction Threshold for the Ferromagnetic Four-State Potts Model, Prop. prop:cone-closure (Closure and moment saving), eq. (moment-saving). The source's C is the class of symmetric posterior laws with E_mu H ≥ 0. It contains the revealing and uninformative laws by eq. (initial-H). It is closed under channel steps with λ∈[0,1] and under conditionally independent products. Its A matches the attested source text: A=|Lp|² with the same L.","missing_infra":"","gate_class":"cited","source":{"cite_id":"cite:openai26-potts","locator":"Proposition 3.2 and Equations (3.8)--(3.9)"},"check_status":"cited-verified-attested"}],"escalate":null}
