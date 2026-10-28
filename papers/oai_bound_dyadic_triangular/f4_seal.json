@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "slug": "oai_bound_dyadic_triangular",
+  "paper_sha256": "5c9302a7870a5779b689dc5b5031fd57d652d421fee7ed6656b7cf040a227568",
+  "arxiv": null,
+  "review_standard": "16865e36da9271bbf0e9906def5868e43c1ec0d8",
+  "targets": [
+    {
+      "id": "ass:annihilates-kernel",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fc3163c5e27ad215b3b317a36fffd4d24ed2216e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fc3163c5e27ad215b3b317a36fffd4d24ed2216e"
+      }
+    },
+    {
+      "id": "ass:continuity-inputs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "19aeba725f000bfb869f65e299031f28265e357d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "19aeba725f000bfb869f65e299031f28265e357d"
+      }
+    },
+    {
+      "id": "ass:continuity-scale",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "97a93080564283f4f86e1c8bdd240333023ad415"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "97a93080564283f4f86e1c8bdd240333023ad415"
+      }
+    },
+    {
+      "id": "ass:gap-order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "546d43e2bbf620dbe87d6fd69980f01f75435cb2"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "546d43e2bbf620dbe87d6fd69980f01f75435cb2"
+      }
+    },
+    {
+      "id": "ass:gap-positive",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2ccc1c9f2b83236a07d7fbc91d202842e80ec154"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2ccc1c9f2b83236a07d7fbc91d202842e80ec154"
+      }
+    },
+    {
+      "id": "ass:gap-symmetry",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a479879bc0ab90f728e68742fec5d026c1fb4583"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a479879bc0ab90f728e68742fec5d026c1fb4583"
+      }
+    },
+    {
+      "id": "ass:hessian-direction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5af76644e3e29bdf5a951ca3efe87314ac30e4e5"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5af76644e3e29bdf5a951ca3efe87314ac30e4e5"
+      }
+    },
+    {
+      "id": "ass:hessian-positive-support",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6575d77491ff37e1a51137a9c07de2ed11392e5a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6575d77491ff37e1a51137a9c07de2ed11392e5a"
+      }
+    },
+    {
+      "id": "ass:increase-scale",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1d949025be1b31c02da8f7e2d4c556bcee979f97"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1d949025be1b31c02da8f7e2d4c556bcee979f97"
+      }
+    },
+    {
+      "id": "ass:increase-triple",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1f7e26b590056d5b845f6cf8512b86d7a3a26ba6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1f7e26b590056d5b845f6cf8512b86d7a3a26ba6"
+      }
+    },
+    {
+      "id": "ass:main-inputs",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a1717cba3cbc62cfff2c362cc76c4133797679a9"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a1717cba3cbc62cfff2c362cc76c4133797679a9"
+      }
+    },
+    {
+      "id": "ass:main-scales",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "3620870e5070a3d4a160235c6d7bd9daff90b4ac"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "3620870e5070a3d4a160235c6d7bd9daff90b4ac"
+      }
+    },
+    {
+      "id": "ass:order-comparison",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7bfb9f4f759e0a7f3ede0a5507f9df3428787bcb"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7bfb9f4f759e0a7f3ede0a5507f9df3428787bcb"
+      }
+    },
+    {
+      "id": "ass:order-direction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "48331c1ad2f6712a183557d79fb861c8901b4e64"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "48331c1ad2f6712a183557d79fb861c8901b4e64"
+      }
+    },
+    {
+      "id": "ass:order-factor",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c7580fe4efe2acbe195924772dd5d5b149ee4e2f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c7580fe4efe2acbe195924772dd5d5b149ee4e2f"
+      }
+    },
+    {
+      "id": "ass:order-matrices",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "fc4f3f44ecbf9a38482e7c19675459073d1020f4"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "fc4f3f44ecbf9a38482e7c19675459073d1020f4"
+      }
+    },
+    {
+      "id": "ass:pin-1",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "957cddc9739a385487a9791c62ef7c02c94451bf"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "957cddc9739a385487a9791c62ef7c02c94451bf"
+      }
+    },
+    {
+      "id": "ass:real-matrices",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a3d0d30c3e52aac5907770daff000fc722401645"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a3d0d30c3e52aac5907770daff000fc722401645"
+      }
+    },
+    {
+      "id": "ass:step-atoms",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "091a8a445399c2db834dbd72059610c67e2fdff7"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "091a8a445399c2db834dbd72059610c67e2fdff7"
+      }
+    },
+    {
+      "id": "ass:step-bounded",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b366b87425091aa948ee5efebceda24d34684226"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b366b87425091aa948ee5efebceda24d34684226"
+      }
+    },
+    {
+      "id": "ass:step-compact",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7108a028d8e4ec58c05a266f77fa88f61cc62839"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7108a028d8e4ec58c05a266f77fa88f61cc62839"
+      }
+    },
+    {
+      "id": "ass:total-scale",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "f07ea05ba3f8218e32439ab34d1d327e65ac4690"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "f07ea05ba3f8218e32439ab34d1d327e65ac4690"
+      }
+    },
+    {
+      "id": "ass:total-telescope-scale",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "5bab972d965f8381cf4d31bbe18349717c27868a"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "5bab972d965f8381cf4d31bbe18349717c27868a"
+      }
+    },
+    {
+      "id": "ass:trace-contraction",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "88d08fe7220ec29f0748da6df633da4d525bccda"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "88d08fe7220ec29f0748da6df633da4d525bccda"
+      }
+    },
+    {
+      "id": "ass:trace-symmetry",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ac375d7302a4340bbfb80662c320c0553aea6011"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ac375d7302a4340bbfb80662c320c0553aea6011"
+      }
+    },
+    {
+      "id": "def:admissible-triples",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2deb2f2691317846a85baf8ecdc79595be8a0195"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2deb2f2691317846a85baf8ecdc79595be8a0195"
+      }
+    },
+    {
+      "id": "def:atom-spaces",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6a643951e579954110a9d3db37f3642f3652b69f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6a643951e579954110a9d3db37f3642f3652b69f"
+      }
+    },
+    {
+      "id": "def:atom-weights",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b7b550efc4d5045f67ad986291b6c1a58b40f825"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b7b550efc4d5045f67ad986291b6c1a58b40f825"
+      }
+    },
+    {
+      "id": "def:children",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "8baca3ff4cb586ca5a5b8a13f3ce8811bfb82502"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "8baca3ff4cb586ca5a5b8a13f3ce8811bfb82502"
+      }
+    },
+    {
+      "id": "def:dyadic-intervals",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ee7fb06b2645ed5048c377f21c9d30941dee5400"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ee7fb06b2645ed5048c377f21c9d30941dee5400"
+      }
+    },
+    {
+      "id": "def:energy-increment",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "0313a776c3c2f79b3c5ad838c1e318a0362fc76c"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "0313a776c3c2f79b3c5ad838c1e318a0362fc76c"
+      }
+    },
+    {
+      "id": "def:haar-sign",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "4e74e934d9aa0e98f121edd03236385304f55be3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "4e74e934d9aa0e98f121edd03236385304f55be3"
+      }
+    },
+    {
+      "id": "def:hessian",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "51917cbd275a1d2538289e52edbda196e1b99c46"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "51917cbd275a1d2538289e52edbda196e1b99c46"
+      }
+    },
+    {
+      "id": "def:local-energy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "032aa968d0ad9cd92f148d0d29c80e3994d41195"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "032aa968d0ad9cd92f148d0d29c80e3994d41195"
+      }
+    },
+    {
+      "id": "def:local-form",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e4a6c3c1f50c6d3d03939b5a4f0f185c4ea8c094"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e4a6c3c1f50c6d3d03939b5a4f0f185c4ea8c094"
+      }
+    },
+    {
+      "id": "def:local-trace",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ecc21ac248812e23fcb65a89ee6702e2b7a2cda3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ecc21ac248812e23fcb65a89ee6702e2b7a2cda3"
+      }
+    },
+    {
+      "id": "def:matrix-energy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bc3035f81b30845d0e732bcd6aa2d732e0e63dc6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bc3035f81b30845d0e732bcd6aa2d732e0e63dc6"
+      }
+    },
+    {
+      "id": "def:nonnegative-domain",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "7c7e0ecb7bcde640f833e1a376884cd7c07a415f"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "7c7e0ecb7bcde640f833e1a376884cd7c07a415f"
+      }
+    },
+    {
+      "id": "def:row-star",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "a04f7a9cd500be9877fd9eb6a4329b6ae48d9f4d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "a04f7a9cd500be9877fd9eb6a4329b6ae48d9f4d"
+      }
+    },
+    {
+      "id": "def:supported-directions",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "1c29d565fee230dd9823a83a84fe6661e59a0a44"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "1c29d565fee230dd9823a83a84fe6661e59a0a44"
+      }
+    },
+    {
+      "id": "def:total-energy",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "6ba12ebf48b9a439033b1810a28c4b78ed24bd75"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "6ba12ebf48b9a439033b1810a28c4b78ed24bd75"
+      }
+    },
+    {
+      "id": "def:trace-integral",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "56826bb04a527b17ac02fe8c2b6f28bf7d9068be"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "56826bb04a527b17ac02fe8c2b6f28bf7d9068be"
+      }
+    },
+    {
+      "id": "def:trace-perturbation",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "38ef839ab49d1b53073580f6cfcbcfd68937d43d"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "38ef839ab49d1b53073580f6cfcbcfd68937d43d"
+      }
+    },
+    {
+      "id": "def:transpose",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "991a6abb7aafcf6658ae63a2975c55d194643436"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "991a6abb7aafcf6658ae63a2975c55d194643436"
+      }
+    },
+    {
+      "id": "def:weighted-edge",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ac58b5891b5c25c6973f3522f17e896ace038afd"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ac58b5891b5c25c6973f3522f17e896ace038afd"
+      }
+    },
+    {
+      "id": "def:xor",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "bcef647e1664bb92fc2d8ce3bb9400dfd242b2c6"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "bcef647e1664bb92fc2d8ce3bb9400dfd242b2c6"
+      }
+    },
+    {
+      "id": "lem:continuity",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cac3b7ed943aff4841c2ee38f5db34ea38d806ab"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cac3b7ed943aff4841c2ee38f5db34ea38d806ab"
+      }
+    },
+    {
+      "id": "lem:hessian",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "805ec07aef5c80699b38e94b4a1bc406aa3ca15b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "805ec07aef5c80699b38e94b4a1bc406aa3ca15b"
+      }
+    },
+    {
+      "id": "lem:order",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "74c109be9c6eefb126b146c9462989773446be01"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "74c109be9c6eefb126b146c9462989773446be01"
+      }
+    },
+    {
+      "id": "lem:total",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c50e055c19b05846ccb78e17ee760219f0a47645"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c50e055c19b05846ccb78e17ee760219f0a47645"
+      }
+    },
+    {
+      "id": "prop:increase",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "be8c76f8e6b60d29285d739b35bef9916ea7df58"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "be8c76f8e6b60d29285d739b35bef9916ea7df58"
+      }
+    },
+    {
+      "id": "prop:trace",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9ba8f0f06498bc9c3174e3b2bc793f770e3fddb3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9ba8f0f06498bc9c3174e3b2bc793f770e3fddb3"
+      }
+    },
+    {
+      "id": "sym:J_k",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "cc33bdc2c9a2407808ac55f51b77e9c0e2797d11"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "cc33bdc2c9a2407808ac55f51b77e9c0e2797d11"
+      }
+    },
+    {
+      "id": "sym:\\Phi",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "528d9dc4fa71e599972804514a3a750ac4109368"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "528d9dc4fa71e599972804514a3a750ac4109368"
+      }
+    },
+    {
+      "id": "sym:\\R_+",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b05731b7e97c2af6f82c86564ee7cd07eb279f05"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b05731b7e97c2af6f82c86564ee7cd07eb279f05"
+      }
+    },
+    {
+      "id": "sym:b_P(K)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "93f3bed1909dbc223085541e80533a130e6d6c92"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "93f3bed1909dbc223085541e80533a130e6d6c92"
+      }
+    },
+    {
+      "id": "sym:b_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "c999ff7cb8d0380cd3380c2614fc75e90750d05e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "c999ff7cb8d0380cd3380c2614fc75e90750d05e"
+      }
+    },
+    {
+      "id": "sym:e(\\mathbf I)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "acba63c49b0d12b55978cda41cdafa78b9481d42"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "acba63c49b0d12b55978cda41cdafa78b9481d42"
+      }
+    },
+    {
+      "id": "sym:e_v(\\mathbf I)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "d127780fbde94a389b1371dad8eb0df53ab46727"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "d127780fbde94a389b1371dad8eb0df53ab46727"
+      }
+    },
+    {
+      "id": "sym:h_I",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "e3c777283d66e8e55600df11224a2b6060b9f34e"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "e3c777283d66e8e55600df11224a2b6060b9f34e"
+      }
+    },
+    {
+      "id": "sym:p_i",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "9b8c3d48580f17cc7fb4217a315720d508b8ef15"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "9b8c3d48580f17cc7fb4217a315720d508b8ef15"
+      }
+    },
+    {
+      "id": "sym:s_v",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "b8e203d1173ce6a7119e61561740b08bf4a78f17"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "b8e203d1173ce6a7119e61561740b08bf4a78f17"
+      }
+    },
+    {
+      "id": "sym:w_v(i)",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "095944459e3bfc3dd1876fa61c6793cb83df2ae3"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "095944459e3bfc3dd1876fa61c6793cb83df2ae3"
+      }
+    },
+    {
+      "id": "thm:gap",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "2d4373f82e136bad7a32c826ddd03ec072342c06"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "2d4373f82e136bad7a32c826ddd03ec072342c06"
+      }
+    },
+    {
+      "id": "thm:main",
+      "codex": {
+        "verdict": "matched",
+        "evidence_hash": "ca98bf668c5a30981e09b51ff8efa9fd50ca008b"
+      },
+      "claude": {
+        "verdict": "matched",
+        "evidence_hash": "ca98bf668c5a30981e09b51ff8efa9fd50ca008b"
+      }
+    }
+  ],
+  "unreviewed": [],
+  "delivery": [],
+  "cited": [],
+  "reviews_sha256": "17c6c7231efbcd4e5eb15682d1242f26dc0c4e14e1909189a9bbcb46164ea645",
+  "files": [
+    {
+      "path": "corrected_paper/OPENAI_README.md",
+      "sha256": "e9ff7a854dd30c4d1a2e4fe08a0edd3bc7bfe8032c5856c477a92c036218c2d9"
+    },
+    {
+      "path": "corrected_paper/TODO.md",
+      "sha256": "2ee500a86aa186c9ec3f65a80415eb5183e4f8e6af560a517148879aeed013fd"
+    },
+    {
+      "path": "corrected_paper/_tikz/2a69032c54a5fef9.pdf",
+      "sha256": "c588bd46b4979e3d9076e3f676819b30b6f81856c28a8a80ea608bcb95d9ce3f"
+    },
+    {
+      "path": "corrected_paper/figures/children.tex",
+      "sha256": "d274084bbc66b207edd407b4b31995cb462c536cd67a0dcd557457797ef57bd0"
+    },
+    {
+      "path": "corrected_paper/main.tex",
+      "sha256": "38fbb8f13477816fbe661ce6e3b3dc4af42993001f35a67b55747c4890d6334e"
+    },
+    {
+      "path": "corrected_paper/preamble.tex",
+      "sha256": "84ced3abc926cee56c73482f1112ab90171fd9657077820d22245e145220f9ce"
+    },
+    {
+      "path": "corrected_paper/references.bib",
+      "sha256": "1734f6244379f11aa379f2f0ef738f81b39df56aac1038326bcced454d23b234"
+    },
+    {
+      "path": "corrected_paper/sections/01-introduction.tex",
+      "sha256": "7c0a7bd8e5a45ecab8e0ff48bbc223cc37ef6fb72440442216475f13efc9fcb7"
+    },
+    {
+      "path": "corrected_paper/sections/02-matrix.tex",
+      "sha256": "80a9af1d51d9e7466487dfe5706588022915c70534931b10c65cef7590915937"
+    },
+    {
+      "path": "corrected_paper/sections/03-trace.tex",
+      "sha256": "d6c5eb682dd671eb1fd9f2053f9c3bd1ddb8e2ce51837b18337a6deb2d10c414"
+    },
+    {
+      "path": "corrected_paper/sections/04-dyadic.tex",
+      "sha256": "fbd8b3536ceb4cde8d4ec75f4eb39b20020597af6d6a3dd726fe1534df00976c"
+    },
+    {
+      "path": "corrected_paper/sections/05-summation.tex",
+      "sha256": "67cb4015d7de10169b6d8c778dee88c448599b2ce9d5c7d4de70b9056188cd4f"
+    },
+    {
+      "path": "corrected_paper/sections/history.tex",
+      "sha256": "54e0fefa8350a528fe624ca99314e20d85797bf37e6acbafdf39f1a5299f9885"
+    },
+    {
+      "path": "lean/Check.lean",
+      "sha256": "36a2c8f0ed10b56eb20ae54cb6227612d36822626b54890bf10efbeeb87193f1"
+    },
+    {
+      "path": "lean/Papers.lean",
+      "sha256": "14c5aa704ede8f42f698c8d9e73b49d9162e0ae01b0db72a31f1612fa44cf736"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular.lean",
+      "sha256": "93cba42c56891aa422ac56a7ab7b6af5804160b5a79fa94e080b329c29bc9556"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/All.lean",
+      "sha256": "24bbc60a000c56bdc15af0eb72f7d2647b5a93aebf10239bf1368bdd33b046ff"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Basic.lean",
+      "sha256": "a584af62a4041f02df7b685d300a276e1c43e7e1144c2aa967b1aeadce834784"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers.lean",
+      "sha256": "6e6c9dd9bffa4b5003461fcc33ad4c909dc9916301d25f2405b792d0fe608755"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomCompact.lean",
+      "sha256": "613bd68b6f02438898f2a65f95ad65437e16f957818a69f25b73d01c74872d81"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomEnergy.lean",
+      "sha256": "5316fbc6a5bf0c46d13e7bc823302600f6461fc4e7a475fee68b3827836feb10"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomIntegral.lean",
+      "sha256": "9e10dfab08f2401876f701c600df12180a1740eb27365ea518e5513c4949feaf"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomMass.lean",
+      "sha256": "bbd05bbf9f2386cff1c054bfac68a2e65e51a8af640a399beb0a9e5331c08f5f"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomReindex.lean",
+      "sha256": "649463f6eba0d8e3da5089ea14d177a762ad257c462dbd2615a9a12fcfcf079e"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/AtomTrace.lean",
+      "sha256": "dcf78b2711b0dd8cbf88bcf1637a16d088b99d2c1c71a283f391dc2bddb0a8e8"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/ChildMatrices.lean",
+      "sha256": "e1ef60405067f3f9ffb01ee746fb1af7a37a12f50b06835be20fdbcb798506a9"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/Continuity.lean",
+      "sha256": "46621922a96070b741d9cf26d1aaa550d1f8f3b8e0ad6b630a42f3cba378f222"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/DyadicApproximation.lean",
+      "sha256": "f8c75df5aeb3e413831557a997a695fc989a003c8297e519395ad33276d097cb"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/DyadicChildren.lean",
+      "sha256": "67112ca1342025e8462cc559e0f868a6d1731f08b89eda474ab3317e56f0221e"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/GapPath.lean",
+      "sha256": "ea2eb3b74d63bddb4e5026b624a2f1c27ff2f3f1c02e2c1767834a821bd090b4"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/HessianTransport.lean",
+      "sha256": "863b435ac833e6c3872bdd6db0c728b25063f7ed74a905810db2013e2c309a01"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/LocalHolder.lean",
+      "sha256": "972aa5a076507463e5a0e933662cba3597c79d6a519af6ae48c0541b61bf932e"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/LocalProduct.lean",
+      "sha256": "a28ec46f964db3f6dec1b2fac4520aa881ff15907100c13f057c09acac561d2a"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/MatrixHessian.lean",
+      "sha256": "fde518103806d66e23aace4c1cf2c1fb684fc5cd291c7c7a9ce652c0c8ff634a"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/MatrixSylvester.lean",
+      "sha256": "9602def6787817d3ec79af3eb0820a6fb2f08324058ec2965c6eca9e023358f6"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/ScaleHolder.lean",
+      "sha256": "3f6b06de5d1936953d030affb40fba6b1909266edeade5269a0d9721484669e7"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/StepSummation.lean",
+      "sha256": "9cbcd06cd73eb26eb167796927108b667d6a3057f1df69de9c8e561bcf37232d"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/Summation.lean",
+      "sha256": "1b2809268dfec31261d23ed367b3680e9de050c63e74d520384489bad9567bf7"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/SupportedCalculus.lean",
+      "sha256": "f22e575d15b407db4a5b20fe4e59c8ea286454359bd18eb37d5d6296cb5693b0"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/SupportedDerivatives.lean",
+      "sha256": "93490ecd1302b997b837d55793f7264bba838d366e6e64495d3f9abc8d2c77bd"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/SylvesterOrder.lean",
+      "sha256": "d56edd1101f7bc69703068767ffa9144c137fc43266b4292251c8768a57c1bc4"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/TraceBlocks.lean",
+      "sha256": "1ffd144dd7377571ae3bac9404682cc52671359d74c22250db80952de8d36192"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/TraceCoordinates.lean",
+      "sha256": "050aff90dfecd72e79f565f10e0b3bab966029300b4c8d2bb23f6fca59a652d6"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/TraceEmbeddings.lean",
+      "sha256": "0380835f22e6d32b9c6bd64f47d6474c5beb4d7512f1a2dc4dd09d85296e095a"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/Helpers/TraceSpectral.lean",
+      "sha256": "689f21df54685bbfe919939959dce08ceb67331790a5287f06f7f350c463e457"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/TGap.lean",
+      "sha256": "35c1a875dfcbb56ce178f21cfedf477891fb8311f02a4bdc9b1fef9b08256855"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/TIncrease.lean",
+      "sha256": "ca28b7cc241f3bdbac5236f363ac1384c3bd576697c3879f79613fc7737f95b2"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/TMain.lean",
+      "sha256": "f35e02db66c7729c4f3a5e912c2b6cd4b6491f6ea37ed519874ab34987a0351d"
+    },
+    {
+      "path": "lean/Papers/OaiBoundDyadicTriangular/TTrace.lean",
+      "sha256": "d186b742de6a9dd5d236b22995d29f82d76d4185589c70701d1d0499ec6408a3"
+    },
+    {
+      "path": "lean/README.md",
+      "sha256": "51a569a49f3fe6c7a219435fedf0fb946a401fc07a8451d7be1ca9cf3e872451"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "b68dd8e8ba36ab8a242eebf82a0db9b4e9b83d0c83d215d0814f3ce91f177969"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+    },
+    {
+      "path": "page/page.json",
+      "sha256": "d8028da731772456ceddfaf874bea882f908a2d8701f34cf42c9c110c8ed03f3"
+    }
+  ],
+  "code": "678f0ec6b6cbd26edbb6f977fe875e87d9da2578999bd5c787a24a7871585303"
+}

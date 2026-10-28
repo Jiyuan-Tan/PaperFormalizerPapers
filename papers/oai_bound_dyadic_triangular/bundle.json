@@ -1,0 +1,58 @@
+{
+  "slug": "oai_bound_dyadic_triangular",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 12,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 34,
+    "toolkit_modules": [],
+    "requires": [
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [],
+    "warnings": [],
+    "notes": []
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "678f0ec6b6cbd26edbb6f977fe875e87d9da2578999bd5c787a24a7871585303",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:main": "Theorem 1.1",
+    "lem:hessian": "Lemma 2.1",
+    "lem:order": "Lemma 2.2",
+    "thm:gap": "Corollary 2.3",
+    "prop:trace": "Proposition 3.1",
+    "prop:increase": "Proposition 4.1",
+    "lem:total": "Lemma 5.1",
+    "lem:continuity": "Lemma 5.2"
+  },
+  "todo_items": []
+}

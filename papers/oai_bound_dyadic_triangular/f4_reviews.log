@@ -1,0 +1,413 @@
+===== reviewer convergence/dual :: medium :: batch[ass:order-factor,ass:order-comparison,ass:order-direction,ass:gap-positive,ass:gap-symmetry] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:order-factor",
+      "verdict": "faithful-refinement",
+      "note": "Exactly a ≥ 1 over ℝ."
+    },
+    {
+      "obj_id": "ass:order-comparison",
+      "verdict": "faithful-refinement",
+      "note": "Positive semidefiniteness of aQ − P is exactly the paper's Loewner comparison P ≤ aQ."
+    },
+    {
+      "obj_id": "ass:order-direction",
+      "verdict": "faithful-refinement",
+      "note": "Exactly symmetry and annihilation of ker P, the explicit definition of support in def:supported-directions."
+    },
+    {
+      "obj_id": "ass:gap-positive",
+      "verdict": "faithful-refinement",
+      "note": "PosSemidef states symmetry and nonnegativity of the quadratic form, exactly T ≥ 0 in the finite real matrix setting."
+    },
+    {
+      "obj_id": "ass:gap-symmetry",
+      "verdict": "faithful-refinement",
+      "note": "IsSymm means Uᵀ = U; over ℝ this is equivalent to U = U*."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:order-factor","verdict":"faithful-refinement","note":"The Lean `1 ≤ a` with `a : ℝ` is literally the paper's a ≥ 1 for a real comparison factor."},{"obj_id":"ass:order-comparison","verdict":"faithful-refinement","note":"In the Loewner order, P ≤ aQ means aQ − P is positive semidefinite. Mathlib's `PosSemidef` on real matrices (symmetric and xᵀMx ≥ 0) says exactly that, so the two directions agree. The core setting is real symmetric matrices (core def of 'supported on')."},{"obj_id":"ass:order-direction","verdict":"faithful-refinement","note":"The core defines 'K is supported on P' as 'symmetric K annihilates ker P'. `OrderDirection P K := K.IsSymm ∧ ∀ x, P *ᵥ x = 0 → K *ᵥ x = 0` is exactly that conjunction. The 'every K' quantifier sits in lem:order, which universally quantifies K under this hypothesis."},{"obj_id":"ass:gap-positive","verdict":"faithful-refinement","note":"T ≥ 0 means T is positive semidefinite. Mathlib's `Matrix.PosSemidef` on real square matrices (Hermitian = symmetric, nonnegative quadratic form) is equivalent to that."},{"obj_id":"ass:gap-symmetry","verdict":"faithful-refinement","note":"Over ℝ, U = U* (the adjoint is the transpose) is equivalent to `U.IsSymm` (Uᵀ = U). The paper's setting is real symmetric matrices."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:total-scale,ass:total-telescope-scale,ass:continuity-scale,ass:continuity-inputs,ass:pin-1] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:total-scale","verdict":"faithful-refinement","note":"With integer scales k and m, m ≤ k is exactly the stated restriction k ≥ m."},{"obj_id":"ass:total-telescope-scale","verdict":"faithful-refinement","note":"With integer scales k and m, m + 1 ≤ k is exactly k ≥ m + 1."},{"obj_id":"ass:continuity-scale","verdict":"faithful-refinement","note":"The integer binder and membership in Set.univ impose exactly the unrestricted integer-scale domain."},{"obj_id":"ass:continuity-inputs","verdict":"faithful-refinement","note":"MemLp at exponent 3 means a.e. measurability and finite cubic integral on the nonnegative quadrant; Fin 3 indexes the paper's three real inputs, with arbitrary extensions outside the quadrant."},{"obj_id":"ass:pin-1","verdict":"faithful-refinement","note":"Unfolding dyadicInterval identifies the two children with exactly the pinned half-open halves; their indicator difference equals +1 and −1 respectively, so the convention holds without additional restrictions."}],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:total-scale",
+      "verdict": "faithful-refinement",
+      "note": "`m ≤ k` over the section variables `k m : ℤ` (Basic.lean:143) says exactly the paper's `k ≥ m`. Both directions hold trivially."
+    },
+    {
+      "obj_id": "ass:total-telescope-scale",
+      "verdict": "faithful-refinement",
+      "note": "`m + 1 ≤ k` over `k m : ℤ` is literally the paper's `k ≥ m+1`."
+    },
+    {
+      "obj_id": "ass:continuity-scale",
+      "verdict": "faithful-refinement",
+      "note": "`k ∈ (Set.univ : Set ℤ)` is always true for `k : ℤ`, so it matches 'for every k ∈ ℤ' with no restriction. The pinned reading ass:pin-1 (Haar halves) does not touch this scale condition."
+    },
+    {
+      "obj_id": "ass:continuity-inputs",
+      "verdict": "faithful-refinement",
+      "note": "Each `F v : ℝ×ℝ → ℝ` is real-valued and in `MemLp _ 3 (volume.restrict (Rplus ×ˢ Rplus))`, with `Rplus = Set.Ici 0` (the closed half-line of def:nonnegative-domain). This is the standard L³(ℝ₊²) membership: a.e.-strongly measurable with finite third moment. Both directions hold. The pin ass:pin-1 does not touch this condition."
+    },
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "`haarSign j n x` is the indicator of `dyadicInterval (j-1) (2n)` = [2^(j-1)·2n, 2^(j-1)(2n+1)) = [2^j n, 2^j n + 2^(j-1)) minus the indicator of `dyadicInterval (j-1) (2n+1)` = [2^j n + 2^(j-1), 2^j(n+1)). These are exactly the pinned I_left and I_right, and the two halves are disjoint. So the Prop says 'h_I = +1 on I_left and −1 on I_right', which is the pinned reading, quantified over every scale j and index n. It is the convention itself, not a weaker consequence."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:main-scales,ass:main-inputs,ass:hessian-positive-support,ass:hessian-direction,ass:order-matrices] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:main-scales",
+      "verdict": "faithful-refinement",
+      "note": "S : Set ℤ with S.Finite expresses exactly a finite subset of the integers."
+    },
+    {
+      "obj_id": "ass:main-inputs",
+      "verdict": "faithful-refinement",
+      "note": "On the closed nonnegative quadrant, measurable zero extension is equivalent to measurability of the restriction; boundedness and vanishing outside some bounded square are equivalent to bounded compactly supported inputs. Values outside the quadrant are unrestricted representatives."
+    },
+    {
+      "obj_id": "ass:hessian-positive-support",
+      "verdict": "faithful-refinement",
+      "note": "The core defines support as (ker P)⊥: in finite dimensions, a real symmetric PSD matrix is exactly its positive-definite restriction to that support extended by zero on the kernel; the core explicitly includes P = 0."
+    },
+    {
+      "obj_id": "ass:hessian-direction",
+      "verdict": "faithful-refinement",
+      "note": "K.IsSymm and annihilation of ker P express exactly the core's definition of a symmetric direction supported on P."
+    },
+    {
+      "obj_id": "ass:order-matrices",
+      "verdict": "faithful-refinement",
+      "note": "Both matrices share the same real index space, and each PosSemidef predicate requires symmetry and a nonnegative quadratic form, exactly as stated."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:main-scales","verdict":"faithful-refinement","note":"The paper says 'for every finite S ⊂ ℤ' and the Lean says S : Set ℤ with S.Finite. These are the same condition. Pin ass:pin-1, about Haar halves, does not bear on this node."},{"obj_id":"ass:main-inputs","verdict":"faithful-refinement","note":"Each condition matches the paper, checked in both directions. Real-valued F_v: same. Measurable on ℝ₊² ⟺ (Rplus×Rplus).indicator (F v) is measurable, because the quadrant is a measurable set. Bounded on ℝ₊² ⟺ ∃C, |F v x| ≤ C on the quadrant. For a measurable function, compact support in the closed quadrant ⟺ ∃R such that F vanishes on quadrant points with x₁ > R or x₂ > R, i.e. it vanishes outside [0,R]², a compact set. Values off the quadrant are a Lean-only extension that no condition constrains, so every paper F extends and every Lean F restricts back to a paper F."},{"obj_id":"ass:hessian-positive-support","verdict":"faithful-refinement","note":"The core symbol for P is 'symmetric positive semidefinite, with supp P = (ker P)^⊥'. Such a P is exactly a matrix that is positive definite on its own support, which is Mathlib's Matrix.PosSemidef (Hermitian means symmetric over ℝ). The words 'fixed support' describe the domain over which the lemma lets P vary (ruling at core line 195). That belongs to lem:hessian's statement, not to this predicate on a single P."},{"obj_id":"ass:hessian-direction","verdict":"faithful-refinement","note":"def:supported-directions says a symmetric K is 'supported on P' if it annihilates ker P. The Lean is K.IsSymm ∧ (∀ x, P x = 0 → K x = 0). That is the same condition, word for word."},{"obj_id":"ass:order-matrices","verdict":"faithful-refinement","note":"The paper says P and Q are positive semidefinite on the same space. The Lean puts P and Q in the same Matrix ι ι ℝ with P.PosSemidef ∧ Q.PosSemidef, so the conditions match. The real-matrix convention follows the core's 'symmetric positive semidefinite' setting."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:gap-order,ass:trace-symmetry,ass:trace-contraction,ass:increase-triple,ass:increase-scale] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:gap-order",
+      "verdict": "faithful-refinement",
+      "note": "Loewner order gives -T ≤ U iff T + U is positive semidefinite, and U ≤ T iff T - U is positive semidefinite."
+    },
+    {
+      "obj_id": "ass:trace-symmetry",
+      "verdict": "faithful-refinement",
+      "note": "Each IsSymm predicate states transpose equality, exactly symmetry of the three real vertex maps in orthonormal coordinates."
+    },
+    {
+      "obj_id": "ass:trace-contraction",
+      "verdict": "faithful-refinement",
+      "note": "Under the stated symmetry assumption, positivity of Id ± D_v is equivalent to eigenvalues in [-1,1], hence to operator norm at most one, in both directions."
+    },
+    {
+      "obj_id": "ass:increase-triple",
+      "verdict": "faithful-refinement",
+      "note": "At fixed k, natural-number indices bijectively parameterize the dyadic intervals; xor3 unfolds to bitwise XOR, so its vanishing is exactly membership in A_k."
+    },
+    {
+      "obj_id": "ass:increase-scale",
+      "verdict": "faithful-refinement",
+      "note": "For integer scales k and m, m + 1 ≤ k is exactly k ≥ m + 1."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:gap-order","verdict":"faithful-refinement","note":"-T≤U≤T in Loewner order means T+U⪰0 and T−U⪰0, and Lean's GapOrder states exactly that. Mathlib's PosSemidef also requires the matrices to be Hermitian, so T±U must be symmetric. The paper's Loewner order already presupposes symmetric matrices, and thm:gap separately assumes T PSD (GapPositive) and U symmetric (GapSymmetry). So the implied symmetry adds no restriction, and the two statements are equivalent in both directions."},{"obj_id":"ass:trace-symmetry","verdict":"faithful-refinement","note":"H_v has an orthonormal atom basis (indexed by ι, κ, η in Lean). In an orthonormal basis, a linear map is symmetric exactly when its matrix is symmetric, so D₀, D₁, D₂ IsSymm is equivalent to 'D_v symmetric' for each v∈Z/3Z."},{"obj_id":"ass:trace-contraction","verdict":"faithful-refinement","note":"Lean requires (1−D_v)⪰0 and (1+D_v)⪰0, i.e. −1⪯D_v⪯1. For a symmetric matrix in an orthonormal basis this holds exactly when ‖D_v‖_op≤1, with eigenvalues in [−1,1]. On its own the Lean form is stronger, because PosSemidef forces 1±D_v to be Hermitian and hence D_v symmetric. That symmetry is the co-stated assumption ass:trace-symmetry of the same proposition (prop:trace), and every consumer (TTrace, TraceCoordinates) carries both hypotheses. So TraceSymmetry ∧ TraceContraction is equivalent to the paper's 'symmetric with ‖D_v‖_op≤1'."},{"obj_id":"ass:increase-triple","verdict":"faithful-refinement","note":"The paper defines D_k={[2^k n,2^k(n+1)) : n∈Z≥0}, so for a fixed integer k a triple in D_k^3 corresponds one-to-one to n : Fin 3→ℕ. IsAdmissible n is xor3 (n 0) (n 1) (n 2)=0, where xor3 uses Nat's bitwise xor (^^^). This is exactly the A_k condition n_{I0}⊕n_{I1}⊕n_{I2}=0. The pinned Haar-halves reading (ass:pin-1) does not bear on membership in A_k; it is carried separately by HaarHalvesConvention."},{"obj_id":"ass:increase-scale","verdict":"faithful-refinement","note":"k and m are integers (ℤ variables tagged as the dyadic scale and the atom scale), and IncreaseScale is m+1≤k, which is the same as k≥m+1. The pinned halves reading does not affect this condition."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[ass:real-matrices,ass:annihilates-kernel,ass:step-bounded,ass:step-compact,ass:step-atoms] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:real-matrices",
+      "verdict": "faithful-refinement",
+      "note": "A field isomorphism with ℝ expresses real scalars up to transport; conversely the real scalar field supplies the identity isomorphism."
+    },
+    {
+      "obj_id": "ass:annihilates-kernel",
+      "verdict": "faithful-refinement",
+      "note": "Exactly ker P ⊆ ker K: every vector killed by P is killed by K."
+    },
+    {
+      "obj_id": "ass:step-bounded",
+      "verdict": "faithful-refinement",
+      "note": "Exactly boundedness of each real input on the closed nonnegative quadrant; finitely many inputs also admit a common bound."
+    },
+    {
+      "obj_id": "ass:step-compact",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent to compact support relative to the quadrant: the support closure lies in a compact square, and every compact support admits such a square."
+    },
+    {
+      "obj_id": "ass:step-atoms",
+      "verdict": "faithful-refinement",
+      "note": "Exactly constancy on every product of scale-m dyadic intervals; the common integer m remains an explicit parameter in consumers, preserving arbitrary admissible scale choices."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:real-matrices","verdict":"faithful-refinement","note":"The paper's condition only declares that the scalar field is real. Every matrix in Basic.lean is already typed over ℝ. The Prop `Nonempty (𝕜 ≃+* ℝ)` says the field is ring-isomorphic to ℝ; ℝ has only the identity automorphism, so this picks out exactly the real field. The two directions agree."},{"obj_id":"ass:annihilates-kernel","verdict":"faithful-refinement","note":"K annihilates ker P exactly when every x with P x = 0 also has K x = 0. That is the Lean body `∀ x, P *ᵥ x = 0 → K *ᵥ x = 0`, where P and K are square real matrices on the same coordinate space ι. The two are equivalent."},{"obj_id":"ass:step-bounded","verdict":"faithful-refinement","note":"Each input F_v is a real function on the quadrant R_+^2. The Lean asks, for each v, for a constant C with |F v x| ≤ C on Rplus ×ˢ Rplus = [0,∞)². That is exactly 'bounded on the domain'. Values off the quadrant are not constrained, which matches the paper's domain."},{"obj_id":"ass:step-compact","verdict":"faithful-refinement","note":"The quadrant [0,∞)² is closed. So a function on it has compact support exactly when its support is bounded, i.e. there is an R with F = 0 at every quadrant point with x₁ > R or x₂ > R. The existential over R, quantified per v, matches the paper in both directions."},{"obj_id":"ass:step-atoms","verdict":"faithful-refinement","note":"With dyadicInterval m n = [2^m·n, 2^m·(n+1)) for n ∈ ℕ, the dyadic family D_m tiles R_+. 'Constant on products of intervals in D_m' becomes: for every v and every a, b ∈ ℕ, F v takes the same value at any two points of D_m(a) × D_m(b). That is the Lean body. 'For some m ∈ Z' is the scale the core picks for symbol m (core.json line 48: chosen common atom scale, not necessarily the coarsest). Lean takes it as a parameter shared with the consumers' StepAtoms F m hypotheses, which keeps the chosen-scale reading."}],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:hessian,lem:order,lem:total] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:hessian",
+      "verdict": "matched",
+      "note": "The supported tangent and positive-support locus express calculus on the fixed support, including zero support; smoothness, both derivative formulas, and convexity match."
+    },
+    {
+      "obj_id": "lem:order",
+      "verdict": "matched",
+      "note": "The hypotheses encode PSD matrices, a ≥ 1, Loewner comparison, and a symmetric kernel-annihilating direction; support inclusion and the Hessian inequality match."
+    },
+    {
+      "obj_id": "lem:total",
+      "verdict": "matched",
+      "note": "Unfolded atom energies, admissible indices, and four-child increments match the paper; compact support makes the sums finite and the L3 norms finite, with both scale conditions and constants preserved."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:hessian","verdict":"matched","note":"P PSD (HessianPositiveSupport) is exactly a matrix that is positive definite on its own support. Φ is restricted to supportedTangent P, the symmetric matrices that annihilate ker P, and smoothness is asserted on the open locus that is positive definite on supportSubspace P = (ker P)ᗮ. That is the paper's 'matrices positive definite on a fixed support' domain. dΦ_Q(L) = 3/2 tr(√Q L) and d²Φ_Q(L,L) = hessForm Q L are stated there and specialized at P and K. K is symmetric and annihilates ker P, i.e. it lies in the tangent space. hessForm takes the eigenbasis of P and keeps only pairs with p_i, p_j > 0, which is the def:hessian formula. Convexity is stated as ConvexOn ℝ {A | A.PosSemidef} matrixEnergy. Both directions hold."},{"obj_id":"lem:order","verdict":"matched","note":"Hypotheses: P and Q PSD, 1 ≤ a, aQ − P PSD (P ≤ aQ), and K symmetric and annihilating ker P. Each matches its paper assumption exactly. Conclusion: SupportedOn Q K (K annihilates ker Q; symmetry is already given) and a^{-1/2} b_Q(K) ≤ b_P(K), which is eq:order. Equivalent."},{"obj_id":"lem:total","verdict":"matched","note":"StepBounded, StepCompact and StepAtoms realize the Section dyadic standing conditions on the quadrant: bounded, compactly supported, and constant on scale-m atom rectangles. J_k is the tsum over XOR-admissible triples of 2^{2k}·localEnergy. Compact support plus k ≥ m leaves only finitely many nonzero terms, so the tsum is the paper's sum and is not a vacuous 0. eq:total is guarded by m ≤ k and uses the L³(quadrant) norms cubed. eq:telescope is guarded by m+1 ≤ k, with δ = (1/4)·Σ_children e_{k−1} − e_k, summed with weight 2^{2k} to give J_{k−1} − J_k. Matches the pinned scale ranges (k ≥ m for J_k, k ≥ m+1 for telescoping)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:transpose,def:nonnegative-domain,def:dyadic-intervals,def:haar-sign,def:xor] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:transpose",
+      "verdict": "matched",
+      "note": "Matrix.transpose exchanges the two indices of the real matrix, exactly its transpose."
+    },
+    {
+      "obj_id": "def:nonnegative-domain",
+      "verdict": "matched",
+      "note": "Set.Ici 0 consists exactly of real numbers x satisfying 0 ≤ x."
+    },
+    {
+      "obj_id": "def:dyadic-intervals",
+      "verdict": "matched",
+      "note": "With k : ℤ and n : ℕ, Set.Ico gives exactly [2^k n, 2^k(n+1)); varying n gives the stated family."
+    },
+    {
+      "obj_id": "def:haar-sign",
+      "verdict": "matched",
+      "note": "The intervals at scale k−1 with indices 2n and 2n+1 are exactly the pinned left and right halves; their indicators have the stated signs."
+    },
+    {
+      "obj_id": "def:xor",
+      "verdict": "matched",
+      "note": "On ℕ, ^^^ uses Nat.xor = bitwise bne; xor3 is the associative three-input application of the stated bitwise XOR."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:transpose","verdict":"matched","note":"`realAdjoint R := R.transpose` maps a real `Matrix ι κ ℝ` to `Matrix κ ι ℝ` and is exactly the transpose R^*. In orthonormal coordinates the real adjoint is the transpose, so the two sides agree in both directions."},{"obj_id":"def:nonnegative-domain","verdict":"matched","note":"`Rplus := Set.Ici (0:ℝ)`, which is {x : ℝ | 0 ≤ x} = [0,∞). This is the same set as ℝ_+."},{"obj_id":"def:dyadic-intervals","verdict":"matched","note":"`k : ℤ` is a section variable (Basic.lean:143), and `dyadicInterval k n = Set.Ico (2^k*n) (2^k*(n+1))` for `n : ℕ`, which is the same as n ∈ ℤ_{≥0}. The range over n is exactly D_k = {[2^k n, 2^k(n+1)) : n ≥ 0}. The map n ↦ interval is injective because 2^k > 0, so the index n_I is well defined."},{"obj_id":"def:haar-sign","verdict":"matched","note":"Unfolding the definition, `dyadicInterval (k-1) (2n)` is [2^{k-1}·2n, 2^{k-1}(2n+1)) = [2^k n, 2^k n + 2^{k-1}), which is I_left in pin ass:pin-1. `dyadicInterval (k-1) (2n+1)` is [2^k n + 2^{k-1}, 2^k(n+1)), which is I_right. So `haarSign k n x = 1_{I_left}(x) − 1_{I_right}(x)` with n = n_I, which is h_I as defined."},{"obj_id":"def:xor","verdict":"matched","note":"`^^^` on ℕ elaborates to `Nat.xor`, Mathlib's bitwise XOR of natural numbers, so it is the paper's binary ⊕. `xor3 a b c = (a ^^^ b) ^^^ c` is the paper's a⊕b⊕c, consistent because XOR is associative. The binary operation can be recovered as `xor3 a b 0 = a ⊕ b`, so no reading is narrowed. The anchor is a ternary helper around the library ⊕, not a different object."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:row-star,def:atom-spaces,def:atom-weights,def:weighted-edge,def:local-energy] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:row-star",
+      "verdict": "matched",
+      "note": "In orthonormal coordinates, fromCols W V.transpose is exactly the row operator [W_v, W_{v-1}*] on the orthogonal direct sum."
+    },
+    {
+      "obj_id": "def:atom-spaces",
+      "verdict": "matched",
+      "note": "For k ≥ m, Atom indexes exactly the 2^(k-m) atoms; atomIndex enumerates their scale-m indices inside I_v, giving the stated orthonormal coordinates."
+    },
+    {
+      "obj_id": "def:atom-weights",
+      "verdict": "matched",
+      "note": "The integer power 2^(m-k) is exactly the normalized mass of every scale-m atom inside a scale-k interval."
+    },
+    {
+      "obj_id": "def:weighted-edge",
+      "verdict": "matched",
+      "note": "Under the standing scale-m dyadic step-function setting, atomValue evaluates the constant atom-pair value, and the square-root factor is exactly the prescribed product of atom weights."
+    },
+    {
+      "obj_id": "def:local-energy",
+      "verdict": "matched",
+      "note": "Unfolding gives the sum over three cyclic vertices of tr((R_v*R_v)^(3/2)); this also equals tr((R_vR_v*)^(3/2)) by equality of their nonzero spectra."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:row-star","verdict":"matched","note":"The Lean `rowStar W V = fromCols W Vᵀ` has type `Matrix ι (κ⊕η) ℝ`. With W = W_v : H_{v+1}→H_v and V = W_{v-1} : H_v→H_{v-1}, this is R_v = [W_v  W_{v-1}^*] : H_{v+1}⊕H_{v-1}→H_v. Finite coordinate types with the standard inner product stand in for the finite-dimensional real inner product spaces, and the Sum index stands in for the orthogonal direct sum. T_v = R_v^*R_v is realized by `rowGram R = Rᵀ * R` (Basic.lean:116). Both directions hold."},{"obj_id":"def:atom-spaces","verdict":"matched","note":"`Atom k m = Fin (2^(k-m).toNat)`, and `atomIndex` sends atom i to the dyadic index 2^(k-m)·n_v + i. So atom i is the D_m interval [2^m(2^(k-m)n_v+i), 2^m(2^(k-m)n_v+i+1)), which lies in I_v = [2^k n_v, 2^k(n_v+1)) when k ≥ m. This lists exactly the 2^(k-m) atoms of I_v, and the standard basis of the Fin coordinates is orthonormal. `n : Fin 3 → ℕ` matches D_k (n ∈ ℤ_{≥0}, core line 77). Junk values off the k ≥ m, admissible-triple domain do not change the extension on the paper's domain."},{"obj_id":"def:atom-weights","verdict":"matched","note":"`atomWeight k m = 2^(m-k)`, which is the uniform weight w_v(i) = 2^{m-k} the paper gives every atom under |I_v|^{-1}dx_v. It does not depend on v or i, as in the paper. Both directions hold."},{"obj_id":"def:weighted-edge","verdict":"matched","note":"The entry is `sqrt(w·w) · F_v` evaluated at the left corner (2^m·atomIndex v i, 2^m·atomIndex (v+1) j) of the atom pair. Because w_v(i) = w_{v+1}(j) = 2^{m-k}, the factor equals sqrt(w_v(i)w_{v+1}(j)). The core takes the F_v to be step functions at scale m on half-open dyadic products (core line 155), so the corner value is their constant value on the pair. The map runs from H_{v+1} (column index j, next vertex) to H_v (row index i). Both directions hold on the paper's domain."},{"obj_id":"def:local-energy","verdict":"matched","note":"`localEnergy` is the sum over v of `vertexEnergy`. `vertexEnergy` is `matrixEnergy(rowGram(atomRowStar v))`, `atomRowStar v = rowStar(W_v, W_{v+2})`, and v+2 = v-1 in Fin 3, so this is R_v = [W_v  W_{v-1}^*]. `rowGram` gives T_v = R_vᵀR_v, and `matrixEnergy P = tr(cfc(x^{3/2}) P)`, which is Φ(P) = tr(P^{3/2}) (core line 218). The paper's Φ(T_v) = Φ(R_vR_v^*) agrees because the two have the same nonzero spectrum and 0^{3/2} = 0, so e = Σ_v e_v. Both directions hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\R_+,sym:h_I,sym:\Phi,sym:p_i,sym:b_P(K)] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\R_+","verdict":"matched","note":"Rplus is Set.Ici 0, exactly the closed nonnegative half-line."},{"obj_id":"sym:h_I","verdict":"matched","note":"haarSign subtracts the indicators of the two disjoint half-intervals partitioning I, so its restriction to I takes exactly the prescribed signs."},{"obj_id":"sym:\\Phi","verdict":"matched","note":"matrixEnergy computes the trace of P^(3/2); on positive semidefinite matrices its eigenvalue powers and hence its trace are nonnegative."},{"obj_id":"sym:p_i","verdict":"matched","note":"The full eigenvalue array is filtered by the explicit conditions 0 < p i and 0 < p j; the participating eigenvalues are exactly the positive support eigenvalues."},{"obj_id":"sym:b_P(K)","verdict":"matched","note":"hessForm computes the supported spectral sum; each retained term has a squared numerator and positive denominator, and excluded terms are zero, ensuring nonnegativity."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\R_+","verdict":"matched","note":"Rplus := Set.Ici (0:ℝ) (Basic.lean:147). This is exactly [0,∞)."},{"obj_id":"sym:h_I","verdict":"matched","note":"haarSign k n (Basic.lean:162) is a computed def. It is the indicator of dyadicInterval (k-1) (2n) = [2^k n, 2^k n + 2^{k-1}) minus the indicator of dyadicInterval (k-1) (2n+1) = [2^k n + 2^{k-1}, 2^k(n+1)). These two halves partition I = [2^k n, 2^k(n+1)), so on I the value is in {-1,1} by construction. The value 0 off I is the usual extension outside the paper's domain I."},{"obj_id":"sym:\\Phi","verdict":"matched","note":"matrixEnergy P := trace(cfc (x ↦ x^(3/2)) P) (Basic.lean:50) is a computed def for tr(P^{3/2}), the core's Φ. For PSD P the value is Σ p_i^{3/2} ≥ 0, so the range [0,∞) holds by construction. Inputs that are not PSD lie outside the paper's domain {P≥0} and are junk values."},{"obj_id":"sym:p_i","verdict":"matched","note":"In hessForm (Basic.lean:63-66), p := hP.eigenvalues, and every term is guarded by `if 0 < p i ∧ 0 < p j`. So only eigenvalues in (0,∞) enter, which matches the core's 'p_i>0 are the eigenvalues of P on its support'. Both tagged members say what the code does."},{"obj_id":"sym:b_P(K)","verdict":"matched","note":"hessForm (Basic.lean:60) is a computed def: (3/2)·Σ_{i,j} [p_i,p_j>0] (VᵀKV)_{ij}²/(√p_i+√p_j), with V the orthonormal eigenvector matrix. This matches the core formula. Each term is ≥ 0, so the range is [0,∞) by construction. When P=0 every term is guarded out, giving b_0(0)=0 as the core says."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:w_v(i),sym:e_v(\mathbf I),sym:e(\mathbf I),sym:b_v,sym:s_v] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:w_v(i)","verdict":"matched","note":"atomWeight computes exactly (2 : ℝ)^(m-k), so its value lies in the specified singleton by construction."},{"obj_id":"sym:e_v(\\mathbf I)","verdict":"matched","note":"vertexEnergy is the trace of the three-halves spectral power of R.transpose * R; this Gram matrix is positive semidefinite, so the computed energy is nonnegative."},{"obj_id":"sym:e(\\mathbf I)","verdict":"matched","note":"localEnergy computes the finite sum of three nonnegative vertexEnergy values, hence lies in [0,∞)."},{"obj_id":"sym:b_v","verdict":"matched","note":"childBits consists of functions Fin 3 → Fin 2, so every coordinate is 0 or 1; its XOR filter retains both possible coordinate values."},{"obj_id":"sym:s_v","verdict":"matched","note":"childSign computes (-1 : ℝ)^b.val for b : Fin 2, giving exactly the possible signs 1 and -1."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:w_v(i)","verdict":"matched","note":"atomWeight k m := (2:ℝ)^(m-k) (Helpers/AtomEnergy.lean:108). The def computes the symbol directly, so its value is exactly the singleton space {2^{m-k}}, the same for every atom i, as the paper states."},{"obj_id":"sym:e_v(\\mathbf I)","verdict":"matched","note":"vertexEnergy = matrixEnergy (rowGram (atomRowStar …)) (AtomEnergy.lean:129-130), where matrixEnergy P = trace of cfc(x^{3/2}) P (Basic.lean:50-52) and rowGram R = Rᵀ R (Basic.lean:116). RᵀR is symmetric positive semidefinite, so the cfc has eigenvalues λ^{3/2} ≥ 0 and the trace lies in [0,∞). This holds by construction from the computing def."},{"obj_id":"sym:e(\\mathbf I)","verdict":"matched","note":"localEnergy is the sum over v : Fin 3 of vertexEnergy (AtomEnergy.lean:134-135). A sum of three nonnegative energies lies in [0,∞), so the range holds by construction."},{"obj_id":"sym:b_v","verdict":"matched","note":"childBits : Finset (Fin 3 → Fin 2) (Basic.lean:245) gives each bit b v the type Fin 2 ≅ {0,1}, which pins the space. The XOR filter restricts only the admissible triples (children), not the space of a single bit."},{"obj_id":"sym:s_v","verdict":"matched","note":"childSign b := (-1:ℝ)^b.val with b : Fin 2 (Basic.lean:249). It takes the values 1 and -1 and nothing else, so its range is exactly {-1,1} by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:admissible-triples,def:local-form,def:matrix-energy,def:supported-directions,def:hessian] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:admissible-triples",
+      "verdict": "matched",
+      "note": "Natural-number indices bijectively parameterize the scale-k dyadic intervals; xor3 imposes exactly the stated three-index XOR condition."
+    },
+    {
+      "obj_id": "def:local-form",
+      "verdict": "matched",
+      "note": "On admissible triples, the normalization, product-volume integral, cyclic arguments and Haar factors agree exactly; the integer-scale halves satisfy the pinned reading, and values of F outside the quadrant never enter."
+    },
+    {
+      "obj_id": "def:matrix-energy",
+      "verdict": "matched",
+      "note": "On symmetric positive semidefinite matrices, cfc computes the spectral three-halves power and trace gives Φ; the accompanying supportSubspace definition is exactly the orthogonal complement of the Euclidean kernel."
+    },
+    {
+      "obj_id": "def:supported-directions",
+      "verdict": "matched",
+      "note": "On the stated symmetric-direction domain, SupportedOn is equivalent to annihilating every vector in ker P, with no additional condition."
+    },
+    {
+      "obj_id": "def:hessian",
+      "verdict": "matched",
+      "note": "For PSD P and supported symmetric K, V has orthonormal eigenvector columns, so VᵀKV gives the required entries; filtering positive eigenvalues gives exactly the support sum, real squares equal absolute-value squares, and P=0 yields zero."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:admissible-triples","verdict":"matched","note":"The core defines D_k = {[2^k n, 2^k(n+1)) : n ∈ ℤ≥0}, and dyadicInterval k gives an injective map from ℕ onto D_k. So triples in D_k^3 match index vectors n : Fin 3 → ℕ one to one. IsAdmissible n unfolds to n0 ^^^ n1 ^^^ n2 = 0, which is the XOR condition on n_{I_v}. admissibleSet (Basic.lean:178) is exactly this set. Both directions hold."},{"obj_id":"def:local-form","verdict":"matched","note":"k : ℤ (Basic.lean:143), so (2:ℝ)^(-k) is the paper's 2^{-k}. The domain is dyadicInterval for n0, n1, n2 (I0×I1×I2) under Lebesgue product measure. The integrand is F0(x0,x1) F1(x1,x2) F2(x2,x0) times h_{I0}(x0) h_{I1}(x1) h_{I2}(x2). For haarSign, dyadicInterval (k-1)(2n) = [2^k n, 2^k n + 2^{k-1}) is I_left and dyadicInterval (k-1)(2n+1) is I_right. That matches pinned reading ass:pin-1 with the sign 1_left − 1_right. Over admissible n the two sides are the same expression."},{"obj_id":"def:matrix-energy","verdict":"matched","note":"Φ(P) = tr(P^{3/2}) is realized as the trace of cfc(x ↦ x^(3/2)) applied to P. For a symmetric PSD P this is the spectral power, so the values agree on the paper's domain. The Lean def is total over all real matrices, which only extends the domain and does not change values on it. supp P = (ker P)^⊥ is realized separately by supportSubspace (Basic.lean:55)."},{"obj_id":"def:supported-directions","verdict":"matched","note":"SupportedOn P K unfolds to ∀x, P x = 0 → K x = 0, which is exactly 'K annihilates ker P'. The paper's 'symmetric' is the domain the predicate is defined on, not part of the predicate. On symmetric K the extensions are identical. Consumers impose symmetry separately: HessianDirection and OrderDirection both carry K.IsSymm ∧ AnnihilatesKernel P K (Basic.lean:75, 92). The statement-uses edge to ass:annihilates-kernel is consistent with this."},{"obj_id":"def:hessian","verdict":"matched","note":"Lean conjugates K by a full orthonormal eigenbasis V of P (K' = Vᵀ K V) and sums over pairs (i,j) with p_i > 0 and p_j > 0. For PSD P, the indices with p_i > 0 form an orthonormal eigenbasis of supp P, and K' restricted to them is K in that basis. So the Lean sum equals (3/2) Σ |K_ij|²/(√p_i+√p_j) over the support eigenbasis. For symmetric supported K the dropped entries are zero anyway. When P = 0 the sum is empty and gives 0, matching b_0(0) = 0. The value does not depend on which eigenbasis is chosen (the paper's convention). Defining the form for every Hermitian P and every K only widens the domain."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: medium :: batch[def:local-trace,def:trace-integral,def:children,def:trace-perturbation,def:energy-increment] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:local-trace",
+      "verdict": "matched",
+      "note": "On k ≥ m+1, atom coordinates give the pinned left/right Haar values, and the trace has exactly the stated alternating diagonal and weighted-edge factors."
+    },
+    {
+      "obj_id": "def:trace-integral",
+      "verdict": "matched",
+      "note": "Defines exactly 2^(2k)τ; localForm_eq_traceNormalizedForm identifies it with the existing local integral under the stated step-atom, admissibility, scale and pinned-halves conditions."
+    },
+    {
+      "obj_id": "def:children",
+      "verdict": "matched",
+      "note": "Enumerates exactly the four bit triples of even XOR parity and maps them injectively to child indices 2n_v+b_v, agreeing with the pinned halves."
+    },
+    {
+      "obj_id": "def:trace-perturbation",
+      "verdict": "matched",
+      "note": "For the standing finite real matrix setting, transpose is the adjoint, so the definition is exactly R_v*D_vR_v."
+    },
+    {
+      "obj_id": "def:energy-increment",
+      "verdict": "matched",
+      "note": "Exactly the uniform four-child energy average minus parent energy; child scale k−1 and the unfolded row-Gram energies agree with the paper."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:local-trace","verdict":"matched","note":"localTrace is the trace of D0*W0*D1*W1*D2*W2, the same product as the NL. haarDiag is diagonal with entries haarSign k (n v), which is 1 on the left half and -1 on the right half (ass:pin-1), taken at each atom's left endpoint 2^m*(2^(k-m)n_v+i). For k>=m+1 every atom lies inside one half, so this is the constant h_{I_v}-value on the atom. weightedEdge(i,j)=sqrt(w*w)*F_v(atom_v i, atom_{v+1} j) with w=2^(m-k), which is the core's sqrt(w_v(i)w_{v+1}(j))F_v(i,j) because all atom weights are equal. Atom k m has 2^(k-m) elements. The paper's domain k>=m+1 is not built into the total function; consumers carry it (IncreaseScale)."},{"obj_id":"def:trace-integral","verdict":"matched","note":"traceNormalizedForm is defined as 2^(2k)*localTrace, the right-hand side of eq:trace-integral. The identity with the left-hand side L_I is proved as localForm_eq_traceNormalizedForm (Helpers/AtomTrace.lean:305): localForm k n F = traceNormalizedForm F k m n. It assumes StepAtoms F m, an admissible triple, m+1<=k and HaarHalvesConvention. These are the paper's standing step-scale setting, k>=m+1 and the binding pin (provable from haarSign), so the paper's identity is certified on its stated domain."},{"obj_id":"def:children","verdict":"matched","note":"childBits is the set of bit triples b : Fin 3 -> Fin 2 with b0 xor b1 xor b2 = 0, and children is its image under b |-> (v |-> 2n_v+b_v). These are exactly the NL's child indices 2n_{I_v}+b_v with the XOR-admissibility condition. The map is injective, so ch(I) has four elements, as stated. Children are used at scale k-1 in energyIncrement, consistent with the halves in ass:pin-1."},{"obj_id":"def:trace-perturbation","verdict":"matched","note":"rowPerturbation R D = R^T*D*R. Here R : Matrix iota kappa realizes R_v : H_{v+1}+H_{v-1} -> H_v and D acts on H_v. Over the reals the adjoint is the transpose, so this is U_v=R_v^*D_vR_v on the right space."},{"obj_id":"def:energy-increment","verdict":"matched","note":"energyIncrement = (1/4)*(sum over children n of localEnergy at scale k-1) - localEnergy at scale k. This is the NL's delta(I)=(1/4)sum_{I' in ch(I)} e(I') - e(I), with children at the child scale k-1, the common atom scale m, and localEnergy = sum_v e_v. The paper's domain k>=m+1 is carried by consumers, not by the total function."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:main =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The unfolded intervals, XOR admissibility, Haar signs, local integral, and quadrant L³ norms match the paper. MainInputs exactly expresses the stated input class; compact support makes only finitely many terms nonzero at each scale, so the bound for every finite T is equivalent to the full nonnegative sum bound. HaarHalvesConvention follows from the defined Haar signs and realizes the binding pin without restricting inputs."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:main","verdict":"matched","note":"The Lean statement is equivalent to the paper's theorem. Hypotheses: S.Finite is the finite scale set. MainInputs requires measurability on the quadrant, boundedness on the quadrant, and that F vanishes once x.1 > R or x.2 > R. Since R_+ = [0,∞) (core def:nonnegative-domain, matched by Rplus = Ici 0), that is the same as compact support in R_+^2. The extra hypothesis HaarHalvesConvention can be proved from the definition of haarSign: dyadicInterval (k-1) (2n) = [2^k n, 2^k n + 2^{k-1}) and dyadicInterval (k-1) (2n+1) = [2^k n + 2^{k-1}, 2^k (n+1)). So it adds no assumption, and it is exactly the pinned ass:pin-1 halves reading. Admissible triples: admissibleSet = {n | n0 xor n1 xor n2 = 0} over natural-number indices, with the scale k passed separately, which matches A_k as a subset of D_k^3. localForm is 2^{-k} times the integral over I_{n0}×I_{n1}×I_{n2} of F0(x0,x1)F1(x1,x2)F2(x2,x0) times the three Haar signs, as in eq:local-form. The integrand is bounded and measurable on a bounded box, so the Bochner integral equals the Lebesgue integral. The sum over all of A_k is infinite with nonnegative terms. Bounding it by 40∏‖F_v‖_{L^3} is equivalent to Lean's bound over every family of finite subsets T k ⊆ admissibleSet. On the right-hand side, eLpNorm(F v, 3) on volume restricted to [0,∞)^2 is finite for bounded, compactly supported inputs, so toReal is the paper's L^3(R_+^2) norm. Both implications hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: def:total-energy =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:total-energy","verdict":"matched","note":"On the paper’s compactly supported dyadic-step domain with m ≤ k, admissible natural-index triples biject with A_k, localEnergy equals e(I), and the finitely supported tsum is exactly the stated sum weighted by 2^(2k)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"def:total-energy","verdict":"matched","note":"J_k = Σ_{I∈A_k} 2^{2k} e(I). admissibleSet is the set of index triples with n0⊕n1⊕n2=0. D_k is indexed by n∈ℕ, as in core D_k={[2^k n,2^k(n+1)) : n∈Z≥0}, so this set is in bijection with A_k at each scale k, and the scale is passed separately. localEnergy is Σ_v vertexEnergy, matching e(I)=Σ_v e_v(I). The weight is 2^(2k) with k : ℤ (zpow), as in the paper. The paper only uses J_k for k≥m with bounded, compactly supported step inputs (ass:step-compact). There only finitely many triples meet the support, the remaining terms vanish, and tsum equals the paper's finite sum. When F is not compactly supported or k<m, the Lean value (tsum may be 0) lies outside the paper's domain and does not change the extension where the paper defines J_k. vertexEnergy was not unfolded here; it is a separate def node."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: thm:gap =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:gap","verdict":"matched","note":"Equivalent in both directions: GapOrder expresses −T ≤ U ≤ T; SupportedOn expresses kernel annihilation, with symmetry supplied by hSymmetry; hessForm is the positive-support spectral sum defining b_T(U), and matrixEnergy is tr(P^(3/2)). The coefficient and inequality direction agree exactly."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"thm:gap","verdict":"matched","note":"The Lean and the paper say the same thing in both directions. Hypotheses: GapPositive = T.PosSemidef matches T≥0. GapSymmetry = U.IsSymm matches U=U*, since the matrices are real (ass:real-matrices). GapOrder = (T+U).PosSemidef ∧ (T−U).PosSemidef is exactly the Loewner order −T≤U≤T. PosSemidef's Hermitian clause is implied by T and U being symmetric, so nothing extra is assumed. Conclusion: SupportedOn T U unfolds to AnnihilatesKernel (∀x, T x=0 → U x=0). Together with the hypothesis that U is symmetric, this is def:supported-directions ('a symmetric K that annihilates ker P'). hessForm T U = (3/2)∑_{i,j} [p_i>0 ∧ p_j>0]·(VᵀUV)_{ij}²/(√p_i+√p_j), computed in the eigenbasis of T. This equals def:hessian's sum over the support eigenbasis: the eigenvalues of a PSD matrix are ≥0, so the indicator selects exactly the support. If T=0 the sum is empty and gives 0, matching b_0(0)=0. matrixEnergy = trace of cfc(x^{3/2}). It is evaluated only at T and T±U, which are symmetric PSD by the hypotheses, so it is tr(P^{3/2}) as in def:matrix-energy. The behaviour of real rpow on negative numbers never matters because the spectra are ≥0. The inequality has the paper's direction and constant 1/(2√2)."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: lem:continuity =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"lem:continuity","verdict":"matched","note":"Uniform bounds over all finite subsets are equivalent to the absolute-sum bound and imply ℓ¹ membership; the stronger telescoping difference estimate ensures descent to L³ equivalence classes and joint continuity. The unfolded local form, XOR indexing, quadrant measure and Haar halves match the paper; hScale is tautological and hHalves follows from the definitions."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"lem:continuity","verdict":"matched","note":"Equivalent to the paper's lemma; on continuity the Lean says more than the paper. (1) Bound eq:one-scale: every term is nonnegative, so 'for every finite T ⊆ admissibleSet, the sum over T of |localForm k n F| is at most the product of the ‖F v‖_3 values' is equivalent to the paper's full sum over 𝒜_k being at most that product. 𝒜_k is realized by natural index triples with XOR equal to 0, at a fixed scale k. eLpNorm toReal is finite under MemLp, which is quadrantMeasure = volume restricted to ℝ₊². (2) localForm unfolds to 2^{-k} times the integral over I_0×I_1×I_2 of F_0(x_0,x_1)F_1(x_1,x_2)F_2(x_2,x_0)∏h_{I_v}(x_v), exactly as eq:local-form. haarSign k n is the indicator of dyadicInterval (k-1)(2n), which is [2^k n, 2^k n+2^{k-1}), minus the indicator of [2^k n+2^{k-1}, 2^k(n+1)). This matches def:haar-sign and pin ass:pin-1. (3) Hypotheses: ContinuityScale is k ∈ univ, which is trivially true and matches 'for every k'. ContinuityInputs, i.e. MemLp (F v) 3 quadrantMeasure for every v, is exactly 'real F_v ∈ L^3(ℝ₊²)'. Values of F outside the quadrant never enter, because the dyadic intervals lie in ℝ₊. HaarHalvesConvention follows directly from the haarSign definition through dyadicInterval (k-1)(2n) and (2n+1), so this extra hypothesis is true and does not narrow the claim. (4) Continuity: the second conjunct is an explicit telescoped trilinear Lipschitz bound in ℓ^1. Together with the first conjunct, which puts the sequence in ℓ^1, it implies continuity of the map L^3×L^3×L^3 → ℓ^1(𝒜_k). It is strictly stronger than continuity, which is allowed for a proved lemma."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:increase =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:increase","verdict":"matched","note":"Unfolding the atom matrices, energies, trace, and four admissible children gives exactly the stated nonnegativity and bound with constant 10√2/3. Input hypotheses match the standing step-function setting; HaarHalvesConvention follows from the defined Haar signs and pinned halves, so adds no restriction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:increase","verdict":"matched","note":"The hypotheses are the paper's standing step-function assumptions (bounded and compactly supported on the quadrant, constant on scale-m dyadic atom rectangles), plus I∈A_k (IsAdmissible, XOR=0) and k≥m+1. HaarHalvesConvention restates the pinned reading ass:pin-1. It is a true consequence of the haarSign definition, since dyadicInterval (k-1) (2n) = [2^k n, 2^k n+2^{k-1}) and dyadicInterval (k-1) (2n+1) is the right half, so it is not vacuous and does not narrow the claim. energyIncrement is (1/4)·Σ over children of localEnergy at scale k-1, minus localEnergy at scale k. children are the 4 XOR-admissible bit patterns 2n_v+b_v, which matches δ(I). The conclusion is 0≤δ ∧ |τ|≤(10√2/3)δ, the same as the paper. localTrace and localEnergy are graded as their own def targets."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: prop:trace =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"prop:trace","verdict":"matched","note":"Under symmetry, positivity of I±D is equivalent to operator norm ≤1; the compressions are automatically symmetric, kernel support and the positive-support Hessian formula agree with the paper, and the bound retains the dimension-independent constant 5/3."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"prop:trace","verdict":"matched","note":"The Lean statement is logically equivalent to the paper's. (1) The row stars match eq:row-star. R₀ = rowStar W₀ W₂ = [W₀ W₂ᵀ] is a matrix H₀×(H₁⊕H₂). R₁ = [W₁ W₀ᵀ] and R₂ = [W₂ W₁ᵀ] follow the same R_v=[W_v W_{v-1}^*] pattern with indices mod 3. (2) T_v = R_vᵀR_v and U_v = R_vᵀD_vR_v. (3) The traced product D₀W₀D₁W₁D₂W₂ has type-correct shapes. (4) hessForm takes the entries of K in the eigenbasis of P (Vᵀ K V) and sums 3/2·K'_ij²/(√p_i+√p_j) over pairs with both eigenvalues positive. Since T_v=RᵀR is positive semidefinite, its support is exactly the positive eigenvalues, so this matches def:hessian, including b_0(0)=0. (5) SupportedOn means K annihilates ker P, which is def:supported-directions. The def's 'symmetric K' requirement is not stated in Lean, but U_v=R_vᵀD_vR_v is symmetric whenever D_v is, which the hypotheses give. So under the shared hypotheses the Lean conclusion implies the paper's 'U_v is supported on T_v'. (6) In TraceContraction, (1−D) and (1+D) positive semidefinite together with symmetry is equivalent to symmetry with ‖D‖_op≤1, for real symmetric D. So the hypothesis set TraceSymmetry ∧ TraceContraction equals the paper's. Neither assumption node is a target in this round. (7) The H_v are arbitrary Fintype types (with DecidableEq) and 5/3 is a literal, so the constant does not depend on the dimensions. Empty index types are allowed, so zero-dimensional spaces are covered too."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+
+===== reviewer convergence/dual :: high :: sym:J_k =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:J_k","verdict":"matched","note":"The tagged totalEnergy definition computes nonnegative values: each vertex energy is the trace of a positive semidefinite Gram matrix's three-halves power, localEnergy sums these, and totalEnergy takes their tsum with positive weights 2^(2*k). Thus its range lies in [0,∞) by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- claude stdout ---
+{"statement_verdicts":[{"obj_id":"sym:J_k","verdict":"matched","note":"totalEnergy (Helpers/AtomEnergy.lean:171) computes J_k = ∑' over admissibleSet of 2^(2k)·localEnergy. Its range lies in [0,∞) by construction. localEnergy is a sum of three vertexEnergy terms. Each vertexEnergy is matrixEnergy (trace of cfc x^(3/2)) applied to rowGram R = Rᵀ R, which is PSD. So each eigenvalue x is ≥0, x^(3/2) ≥0, and the trace is ≥0. 2^(2k) > 0, and tsum_nonneg holds whether or not the sum converges. The rule 'defined for k ≥ m' (with TotalScale on consumers) is a domain condition on consumers, not on the space of this symbol."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
