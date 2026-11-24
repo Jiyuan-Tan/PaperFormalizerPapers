@@ -1,0 +1,772 @@
+\newcommand{\hmmax}{0}
+\newcommand{\bmmax}{0}
+\documentclass[stsy,dblanonrev]{amers/INFORMS-STSY-Template-26-02-2026/informs4}
+\usepackage{amers/INFORMS-STSY-Template-26-02-2026/eqndefns-left}
+\RequirePackage{tgtermes}
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
+\RequirePackage{bm}
+\RequirePackage{endnotes}
+\OneAndAHalfSpacedXI
+% Explicitly enforce the current journal's one-inch body margins.
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{placeins}
+\allowdisplaybreaks[1]
+\raggedbottom
+\usepackage{natbib}
+\bibpunct[, ]{(}{)}{,}{a}{}{,}
+% Keep reference text at the same size as the manuscript body.
+\def\bibfont{\normalsize}
+\def\bibsep{\smallskipamount}
+\def\bibhang{24pt}
+\def\newblock{\ }
+\def\BIBand{and}
+\usepackage[hidelinks,pdfstartview=FitH]{hyperref}
+\hypersetup{pdfauthor={}}
+\newcommand{\E}[1]{{\mathrm{E}\left[#1\right]}}
+\newcommand{\PP}[1]{\mathrm{P}\left(#1\right)}
+\newcommand{\tr}[1]{\textcolor{red}{#1}}
+\newcommand{\tb}[1]{\textcolor{blue}{#1}}
+\newcommand{\placeholder}[1]{\par\noindent\textcolor{blue}{[Placeholder: #1]}\par}
+\TheoremsNumberedThrough
+\ECRepeatTheorems
+\EquationsNumberedThrough
+\MANUSCRIPTNO{}
+\makeatletter
+\let\AppendixFontSize\normalsize
+% The template's abstract defaults to a smaller face; use the body size.
+\def\ABSfont{\normalsize}
+\makeatother
+
+% Layout-only compact spacing: retain 11pt, template 1.5 spacing, and 1in margins.
+\usepackage{etoolbox}
+\makeatletter
+\renewcommand{\Dskips}[4]{%
+  \abovedisplayskip=6pt plus 2pt minus 1pt
+  \belowdisplayskip=6pt plus 2pt minus 1pt
+  \abovedisplayshortskip=2pt plus 1pt
+  \belowdisplayshortskip=4pt plus 1pt minus 1pt}
+\patchcmd{\section}{-15pt plus -5pt minus -4pt}{-10pt plus -2pt minus -2pt}{}{}
+\patchcmd{\subsection}{-12pt plus -4pt minus -2pt}{-8pt plus -2pt minus -1pt}{}{}
+\makeatother
+\AtBeginDocument{%
+  \Dskips{0}{0}{0}{0}%
+  \setlength{\jot}{2pt}%
+  \setlength{\theorempreskipamount}{4pt plus 1pt minus 1pt}%
+  \setlength{\theorempostskipamount}{4pt plus 1pt minus 1pt}%
+  \setlength{\intextsep}{8pt plus 2pt minus 2pt}%
+  \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}%
+  \setlength{\floatsep}{8pt plus 2pt minus 2pt}}
+\def\bibsep{2pt}
+
+\begin{document}
+
+\RUNAUTHOR{}
+\RUNTITLE{The Duration of Markovian Hawkes Clusters}
+% Original title retained as unfinished; no new title has been invented.
+\TITLE{The Cluster Duration Distribution of the Markovian Hawkes Process Is \tr{X}}
+% Author information omitted for double-anonymous submission.
+\ARTICLEAUTHORS{%
+\AUTHOR{Andrew Daw}
+\AFF{University of Southern California}
+\AUTHOR{Amer Goel}
+\AFF{University of Southern California}
+}\ABSTRACT{\textcolor{blue}{[Placeholder: Abstract.]}}
+\KEYWORDS{X}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+the Hawkes process has been studied for over half a century \citep{hawkes1971spectra}
+
+no particular form of the model has been more widely used nor more well studied than the ``Markovian Hawkes process'' that arises from an exponential self-excitation kernel
+\citep{oakes1975markovian}. simple and tractable yet expressive and versatile, the parsimonious model has been essentially the go-to self-exciting point process, particularly so in applications (we can add citations lots of fun examples here)
+
+in both this Markovian variant and the general model, the so-called ``cluster decomposition'' from \citet{hawkes1974cluster} has been the cornerstone of analysis for the Hawkes process (and we should add lots of citations and explanation here)
+
+despite the centrality of these clusters to the self-exciting process, they remain largely enigmatic as temporal objects
+
+(we can include a laundry list of papers that bound the duration in some way)
+
+as said by \citet{moller2005perfect}, the distribution of the cluster duration is ``unknown even for the simplest examples of Hawkes processes''
+
+some recent partial progress:  by connecting general Hawkes clusters to uniformly random parking functions via an extension of the random time change theorem, \citet{daw2023conditional} obtained a conditional distribution  for the Markovian Hawkes cluster duration. Specifically, \citet{daw2023conditional} found that the duration of the Markovian Hawkes cluster is equivalent to a sum of independent but non-identical exponential random variables when conditioned on the size of the cluster and on an underlying random parking function of the same length, where the rate parameters of the exponential random variables are determined by the components of the parking function
+
+however, despite these conditional distribution results, \textbf{there remains no closed form expression for the distribution of the cluster duration}, nor are there any results for the duration without such conditioning
+
+in fact, there is \textbf{not even an expression available for the mean duration}, either conditionally or non-conditionally
+
+the main idea relative to \citet{daw2023conditional} and \citet{daw2024asymmetries}: work directly with the tree / response counts for the cluster, rather than the underlying random parking function. Both of those prior works identify and analyze the occurrence of a uniformly random parking function, $\pi$, within the cluster. However, if one scrutinizes the resulting distributions, the quantities that actually directly relate to the cluster are the number of occurrences of each possible value within the parking function, which forms its own  vector $\kappa(\pi)$. Here we will work to understand $\kappa$ on its own and use this random vector to analyze the cluster.
+
+\section{Background}\label{sec:background}
+\subsection{The Markovian Hawkes Cluster}
+We are chasing the distribution, or even simply just the mean, of the natural duration of a univariate Hawkes cluster. Specifically, we seek to analyze the final point $\tau = \tau_{N-1}$ of a Hawkes cluster with epochs $0 = \tau_0 < \tau_1 < \dots < \tau_{N-1}$ that are given by the intensity
+\begin{align*}
+\lambda_t
+&=
+\int_0^t g(t-u)\mathrm{d}N_u
+=
+\sum_{i=0}^{N_t-1}
+g(t-\tau_i)
+,
+\end{align*}
+with $g(t) = \alpha e^{-\beta t}$ for some $\beta > \alpha > 0$. and $N_t = |\{i \in \mathbb{N} : \tau_i \leq t\}|$ for all $t \geq 0$. If $\rho = \int_0^\infty g(t) \mathrm{d}t < 1$, then we know that $N \sim \mathsf{Borel}(\rho)$ and $\tau$ is thus well defined. If we further assume that $\int_0^\infty t g(t) \mathrm{d}t < \infty$, then we also have that $\E{\tau} < \infty$. In this exponential kernel setting, $\lambda_t$ is a continuous time Markov process \citep{oakes1975markovian}.
+
+
+
+By Theorem 6 of~\citet{daw2024asymmetries}, which itself both clarifies and generalizes Theorem 2 from~\citet{daw2023conditional}, we have that, when conditioned on $N=n+1$ for some $n \in \mathbb{N}$,  each inter-epoch gap is 
+\begin{align}
+\tau_{i+1} - \tau_{i}
+&\stackrel{\mathsf{D}}{=}
+\frac{1}{\beta} Z_i
+,
+\label{expId}
+\end{align}
+for each $i \in \{0, \dots, n-1\}$, where $Z_i \sim \mathsf{Exp}\left(\kappa_{i+1}^+(\pi) - i\right)$ are conditionally mutually independent given the uniformly random parking function of length $n$, $\pi$, with $\kappa_{i+1}^+(\pi)$ being the number of values in $\pi$ that are less than or equal to $i+1$: $\kappa_{i+1}^+(\pi) = |\{\ell : \pi_\ell \leq i+1\}|$.
+
+
+
+intuition for the $\tau_{i+1} - \tau_{i}$ distributional identity in \eqref{expId}: the recent paper \citet{daw2024asymmetries} actually uncovers that, given that the cluster size is $N=n+1$, the cluster's offspring tree is equivalent in distribution to a uniformly random parking function. That is, the number of direct responses to point $i$ in the cluster is given by $\kappa_{i+1}(\pi) = |\{\ell : \pi_\ell = i+1\}|$, where the shift from index $i$ to value $i+1$ arises from the fact that the non-ultimate cluster points are at indices 0 to $n-1$ but the parking function runs over values $1$ to $n$. (Even though we are focusing on the exponential setting, this equivalence holds for any kernel $g(\cdot)$.) Then, by the memorylessness of the exponential distribution, the gap between point $i+1$ and point $i$ is the first of the $\sum_{j=1}^{i+1} \kappa_j(\pi)$ direct responses to the first $i+1$ points but excluding the $i$ responses that have already occurred (and thus are the cluster points at indices 1 to $i$). By the closure of the exponential distribution under minimums, we find the stated distribution.
+
+quick notation shorthand: $\kappa_{i}^+ = \sum_{j=1}^i \kappa_j$ and likewise $k_{i}^+ = \sum_{j=1}^i k_j$. Also, let us note that because the parking function is of length $n$, $\PP{\kappa_{n}^+ = n} = 1$ by definition.
+
+
+
+
+\subsection{The Conditional Phase-Type Distribution}
+For fixed cluster size, the conditional representation above already implies a phase-type distribution: the duration is a finite mixture of sums of independent exponential random variables. To make this structure explicit, fix $N=n+1$, with $n\geq1$. Following the discussion in Section~2.1 of the offspring-tree interpretation in \citet{daw2024asymmetries}, we now denote the pending-response count appearing in \eqref{expId} by
+\begin{equation}
+d_k=\kappa_k^+-k+1,\qquad 1\leq k\leq n.
+\end{equation}
+In particular, $d_1=\kappa_1$ is the number of direct responses to the initial point, all of which are still pending at time zero. By \eqref{expId}, the next waiting time has rate $\beta d_k$.
+
+Conditional on $N=n+1$, $(d_k,k)$ is a Markov chain: the conditional count law in Lemma~\ref{kappaCPMF} shows that the next value depends on the history only through the current value and stage. Giving each state $(d_k,k)$ an exponential holding time of rate $\beta d_k$ produces a finite continuous-time Markov chain whose absorption time has the law of $\tau\mid N=n+1$. Since $d_n=1$, every path reaches the same final transient state $(1,n)$ before absorption.
+
+Let $T_n$ be the transient generator, $p_n$ the initial row distribution of $(d_1,1)$, and $\mathbf{1}_n$ the one-hot vector with a one in the coordinate corresponding to $(1,n)$ and zeros elsewhere. Absorption occurs only from this state, at rate $\beta$, so the standard phase-type density formula \citep{latouche1999introduction} reduces to
+\begin{equation}
+f_{\tau\mid N=n+1}(t)=\beta p_n e^{T_nt}\mathbf{1}_n,\qquad t\geq0.
+\end{equation}
+Averaging over the Borel cluster size gives the unconditional law, including the atom $\PP{\tau=0}=\PP{N=1}$. The finite phase-type representation is conditional on cluster size; the results below concern the mean and exact sampling.
+
+\section{Combinatorial Methodology}\label{sec:combinatorics}
+Overall, a lot of the groundwork for this present paper is coming from appendices C and D of \citet{daw2024asymmetries}, but the main methodological difference here is that we are going to circumvent the parking function, $\pi$, and instead we will work directly with the tree or response counts, $\kappa(\pi)$.
+
+It will be useful for us to employ a well-known generalization of parking functions \citep[see, e.g.,][]{stanley2002polytope,yan2015parking,kenyon2023parking}. 
+
+\begin{definition}[Generalized Parking Function]\label{gpfDef}
+For $m, n \in \mathbb{Z}_+$ with $m \leq n$, $\pi \in \mathbb{Z}_+^m$ is a \emph{generalized parking function} of length $m$ over $n$ preferences if and only if it is such that, when sorted $\pi_{(1)} \leq \dots \leq \pi_{(m)}$, $\pi_{(i)} \leq n - m + i$ for each $i \in \{1, \dots, m\}$.\hfill \Halmos 
+\end{definition}
+
+The traditional notion of a parking function is obtained when $m = n$. Here, we will use the generalized form to enumerate the possible parking functions that would produce certain values for the counts, which helps us obtain the distribution of $\kappa$. The core idea we leverage is that, when given a subset of values of a parking function, the remainder of values must be a generalized parking function on the remainder of spaces.
+
+
+\subsection{Conditional Response Counts}
+\begin{lemma}\label{kappaCPMF}
+Suppose $N=n+1$. Then, the conditional distribution of $\kappa_{m+1}$ given $\kappa_1$ through $\kappa_m$ has probability mass function (PMF) given by
+\begin{align}
+\PP{\kappa_{m+1} = k_{m+1} \mid \kappa_1 = k_1, \dots, \kappa_m = k_m}
+&=
+\frac{k_{m+1}^+ - m}{k_m^+ - m + 1}
+{n - k_m^+ \choose k_{m+1}}
+\frac{\left(n-m\right)^{n-k_{m+1}^+-1}}{(n-m+1)^{n-k_m^+-1}}
+,
+\end{align}
+for each $m < n - 1$, meaning that $\kappa_{m+1} | (\kappa_1, \dots, \kappa_m) \stackrel{\mathsf{D}}{=} X_m + Z_m$, where, given $\kappa_m^+$,
+\begin{align}
+X_m | Z_m
+\sim 
+\mathsf{Bin}\left(
+n - \kappa_m^+ - Z_m
+,
+\frac{1}{n-m+1}
+\right)
+\qquad
+\text{ and }
+\qquad
+Z_m \sim 
+\mathsf{Bern}\left(\frac{n-\kappa_m^+}{(n-m)(\kappa_m^+ - m + 1)} \right)
+,
+\end{align}
+with $(\kappa_1 - 1) \sim \mathsf{Bin}\left(n-1, 1/(n+1)\right)$.
+\end{lemma}
+\proof{Proof.}
+To start, let us first find the probability of the event that $\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m$. Thinking first of $\kappa_1 = k_1$, there are ${n \choose k_1}$ ways to arrange these $k_1$ occurrences of the value $1$ within the length $n$ parking function. Moving on, this leaves ${n - k_1 \choose k_2}$ ways to have $\kappa_2 = k_2$, ${n - k_1 - k_2 \choose k_3}$ ways to have $\kappa_3 = k_3$, and so on, for $\prod_{i=1}^m {n - k_{i-1}^+ \choose k_i}$ ways to place the corresponding amounts of the values 1 through $m$ in the vector of length $n$, where we take $k_0^+ = 0$. Then, there remain $n - k_m^+$ unassigned coordinates within the length-$n$ parking function on which the $n-m$ remaining values must be placed. Hence, this remainder constitutes a generalized parking function of length $n - k_m^+$ over $n-m$ preferences. By, e.g., Theorem 2.3 of \citet{kenyon2023parking}, there are $(k_m^+-m+1)(n-m+1)^{n - k_m^+-1}$ such generalized parking functions. Hence, because the underlying parking function is uniformly random and because there are $(n+1)^{n-1}$ parking functions of length $n$, we thus have
+\begin{align}
+\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m}
+&=
+(k_m^+-m+1)
+\frac{(n-m+1)^{n - k_m^+-1}}{(n+1)^{n-1}}
+\prod_{i=1}^m {n - k_{i-1}^+ \choose k_i}
+.
+\end{align}
+Then, by conditioning and simplifying, we now find
+\begin{align}
+\PP{\kappa_{m+1} = k_{m+1} \mid \kappa_1 = k_1, \dots, \kappa_m = k_m}
+&=
+\frac{\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m, \kappa_{m+1} = k_{m+1}}}{\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m}}
+\\
+&=
+\frac{
+(k_{m+1}^+-m)
+(n-m)^{n - k_{m+1}^+-1}
+}
+{
+(k_m^+-m+1)
+(n-m+1)^{n - k_m^+-1}
+}
+{n - k_{m}^+ \choose k_{m+1}}
+,
+\end{align}
+which achieves the stated conditional PMF of $\kappa_{m+1}$ given $\kappa_1$ through $\kappa_m$.
+
+To complete the proof, let us now show that the sum of $X_m$ and $Z_m$ has the same PMF. From the definitions of $X_m$ and $Z_m$, we have that, given $\kappa_m^+ = k_m^+$, we can further condition across the two possibilities for $Z_m$ and find through simplifying that
+\begin{align}
+\PP{X_m + Z_m = k \mid \kappa_m^+ = k_m^+}
+&=
+\PP{X_m = k - 1 \mid \kappa_m^+ = k_m^+, Z_m = 1}\PP{Z_m = 1 \mid \kappa_m^+ = k_m^+}
+\nonumber
+\\
+&
+\quad
++
+\PP{X_m = k \mid \kappa_m^+ = k_m^+, Z_m = 0}\PP{Z_m = 0 \mid \kappa_m^+ = k_m^+}
+\\
+&=
+{n - k_m^+ - 1 \choose k-1}\frac{(n-m)^{n-k_m^+-k}}{(n-m+1)^{n-k_m^+-1}}
+\left(\frac{n-k_m^+}{(n-m)(k_m^+ - m + 1)} \right)
+\nonumber
+\\
+&
+\quad
++
+{n - k_m^+ \choose k}\frac{(n-m)^{n-k_m^+-k}}{(n-m+1)^{n-k_m^+}}
+\left(1- \frac{n-k_m^+}{(n-m)(k_m^+ - m + 1)} \right)
+\\
+%%%%%%%%%%%%%%%%%%%%
+&=
+{n - k_m^+ \choose k}\frac{(n-m)^{n-k_m^+-k-1}}{(n-m+1)^{n-k_m^+-1}}
+\left(
+\frac{k
++
+k_m^+
+- 
+m }{k_m^+-m+1}
+\right)
+,
+\end{align}
+and, at $k = k_{m+1}$, this expression matches the stated conditional PMF for $\kappa_{m+1}^+$.
+\hfill\Halmos\endproof
+
+\subsection{Response Counts and Dyck Paths}
+\placeholder{Dyck-path interpretation and its role in reducing the parking-function representation.}
+($\kappa$ is the random vector of response counts) distribution of $\kappa$ given $N=n+1$:
+\begin{align}\label{eq:kappaPMF}
+\PP{\kappa = \mathbf{k} \mid N = n+1}
+&=
+\frac{n!}{(n+1)^{n-1}\prod_{i=1}^n k_i !}
+\end{align}
+where $\mathbf{k} \in \mathbb{N}^n$ with $\sum_{i=1}^n k_i = n$ and $\kappa_j^+ := \sum_{i=1}^j k_i \geq j$ for every $j \in \{1, \dots, n\}$.
+
+($\Delta$ is the random vector for the descendant schedule, and it is bijective with $\kappa$) Defining $\Delta \in \mathbb{Z}_+^n$ as $\Delta_i = \kappa_i^+ - i + 1$, the distribution of $\Delta$ given $N+n+1$ is
+\begin{align}\label{eq:schedulePMF}
+\PP{\Delta = \mathbf{d} \mid N = n+1}
+&=
+\frac{n!}{(n+1)^{n-1}\prod_{i=1}^n \left(d_{i} - d_{i-1} + 1\right) !}
+\end{align}
+where $\mathbf{d} \in \mathbb{N}^n$ with $1 \leq d_i \leq n - i + 1$ for every $i \in \{1, \dots, n\}$ and $d_i \geq d_{i-1} - 1$ for $i \geq 2$.
+
+Algebra for connection a specific $\Delta = \mathbf{d}$ to the corresponding $\kappa = \mathbf{k}$:
+$$
+d_{i} - d_{i-1} = k_i^+ - i + 1 - (k_{i-1}^+ - (i - 1) + 1) = k_i - 1 \longrightarrow k_i = d_{i} - d_{i-1} + 1
+$$
+
+Note: the descendant schedule is the only thing needed for the rates of the exponential RV's!
+
+\section{Results for the Mean}
+
+
+
+% Result statements and original proofs below are restored verbatim from main.tex.
+To simplify notation, without loss of generality, let us set $\beta = 1$, in which case $\alpha = \rho$. Given $N = n+1$, \eqref{expId}  implies that
+\begin{align*}
+\E{\tau \mid N = n + 1}
+&=
+\sum_{i=0}^{n-1}\E{Z_i}
+=
+\sum_{i=0}^{n-1}\E{\frac{1}{\kappa_{i+1}^+ - i}}
+,
+\end{align*}
+where we here have suppressed the dependence of $\kappa$ on $\pi$. 
+
+
+
+\begin{lemma}\label{meanRecur}
+Suppose that $N = n +1$ is given. Then, for each $m \in \{0, 1, \dots, n - 1\}$,
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+&=
+\left(1 + \frac{1}{n-m}\right)\E{\frac{1}{\kappa_m^+ - m + 1}}
+-
+{n \choose m}\frac{(m+1)^{m-1}}{(n+1)^{n-1}}(n-m)^{n-m-1}
+,
+\end{align}
+where $\PP{\kappa_0^+ = 0} = 1$.
+\end{lemma}
+\proof{Proof.} Let us start by first proving the following expressing for the conditional mean of $\kappa_{m+1}$ given $\kappa_1$ through $\kappa_m$:
+\begin{align}
+\E{\frac{1}{\kappa_{m+1} + \kappa_m^+ - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}
+&=
+\frac{1}{\kappa_m^+ - m + 1}\left(1 + \frac{1}{n-m}\right)
+-
+\left(\frac{n-m}{n-m+1}\right)^{n-m-1}\mathbf{1}\left\{ \kappa_m^+ = m\right\}
+\label{condMeanEq}
+.
+\end{align}
+From the expressions for conditional distribution of $\kappa_{m+1}$ in Lemma~\ref{kappaCPMF}, we can recognize that $\kappa_{m+1}$ only has a positive probability of being equal to 0 if $\kappa_m^+ > m$; otherwise, if $\kappa_m^+ = m$, then $\kappa_{m+1}$ must be at least 1. Furthermore, by definition, we have that $\kappa_{m+1} \leq n - \kappa_m^+$. Hence, we can write the conditional expected value of $1/(\kappa_m^+ - m + 1)$ as the shifted sum
+\begin{align}
+\E{\frac{1}{\kappa_{m+1} + \kappa_m^+ - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}
+&=
+\sum_{k=0}^{n-\kappa_m^+}
+\frac{1}{\kappa_m^+ - m + 1}
+{n - \kappa_m^+ \choose k}
+\frac{\left(n-m\right)^{n-k-\kappa_{m}^+-1}}{(n-m+1)^{n-k_m^+-1}}
+\nonumber
+\\
+&
+\quad
+-
+\frac{\left(n-m\right)^{n-m-1}}{(n-m+1)^{n-m-1}}
+\mathsf{1}\{\kappa_m^+ = m\}
+.
+\end{align}
+Seeing as the shift term is precisely the lattermost quantity in the stated result, let us now focus on evaluating the sum. Moving forward terms which do not depend on $k$, we can apply the binomial theorem and find
+\begin{align}
+\frac{1}{(n-m)(\kappa_m^+ - m + 1)(n-m+1)^{n-\kappa_m^+-1}}
+\sum_{k=0}^{n-\kappa_m^+}
+{n - \kappa_m^+ \choose k}
+\left(n-m\right)^{n-\kappa_{m}^+-k}
+&=
+\frac{n-m+1}{(n-m)(\kappa_m^+ - m + 1)}
+,
+\end{align}
+and, together with the shift term, this now simplifies to the stated expression in \eqref{condMeanEq}.
+
+We can now apply total probability to complete the proof of the original statement. Naturally, \eqref{condMeanEq} yields
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+&=
+\E{\E{\frac{1}{\kappa_{m+1} + \kappa_m^+ - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}}
+\\
+&=
+\left(1 + \frac{1}{n-m}\right)\E{\frac{1}{\kappa_m^+ - m + 1}}
+-
+\left(\frac{n-m}{n-m+1}\right)^{n-m-1}\PP{\kappa_m^+ = m}
+,
+\end{align}
+and thus all that is left to evaluate is $\PP{\kappa_m^+ = m}$. For this, we can simply observe the following: for $\kappa_m^+$ to be equal to $m$, then the underlying parking function can actually be split into two different smaller parking functions: one of length $m$, which contains the values 1 through $m$, and one of length $n - m$, which contains the values $m+1$ through $n$. Because there are $(m+1)^{m-1}$ parking functions of length $m$, $(n-m+1)^{n-m-1}$ parking functions of length $n-m$, and ${n \choose m}$ ways to arrange the two  smaller parking functions into one parking function of length $m$, we have that
+\begin{align}
+\PP{\kappa_m^+ = m}
+&=
+{n \choose m}\frac{(m+1)^{m-1}}{(n+1)^{n-1}}(n-m+1)^{n-m-1}
+,
+\end{align}
+and, with this expression, now we can simplify to the stated result.
+\hfill\Halmos\endproof
+
+\begin{corollary}\label{meanRecurSolve}
+Suppose $N = n + 1$.
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+&=
+\frac{n+1}{n-m}
+-
+\frac{1}{n-m}
+\sum_{i=0}^m
+{n \choose i}
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}
+\end{align}
+\end{corollary}
+\proof{Proof.}
+\begingroup\color{blue}
+Conditional on $N=n+1$, let $a_m=\E{1/(\kappa_{m+1}^+-m)}$, with $a_{-1}=1$. Multiplying the recurrence in Lemma~\ref{meanRecur} by $n-m$ yields
+\begin{equation*}
+(n-m)a_m=(n-m+1)a_{m-1}
+-\binom{n}{m}
+\left(\frac{m+1}{n+1}\right)^{m-1}
+\left(\frac{n-m}{n+1}\right)^{n-m}.
+\end{equation*}
+Summing the differences over $i=0,\ldots,m$ telescopes: for $0\leq i<m$, the term $(n-i)a_i$ cancels the negative term at index $i+1$, leaving
+\begin{align*}
+(n-m)a_m-(n+1)a_{-1}
+&=\sum_{i=0}^{m}\bigl[(n-i)a_i-(n-i+1)a_{i-1}\bigr]\\
+&=-\sum_{i=0}^{m}\binom{n}{i}
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}.
+\end{align*}
+Substituting $a_{-1}=1$ and dividing by $n-m$ gives the stated formula.
+\endgroup
+\hfill\Halmos\endproof
+
+
+
+
+\begin{theorem}\label{meanIdThm}
+Let $B \sim \mathsf{Borel}(\rho)$. Then,
+\begin{align}
+\E{\tau}
+&=
+\left(1-\rho\right)
+\E{B \cdot \mathsf{H}_B}
+-
+1
+,
+\end{align}
+where $\mathsf{H}_j = \sum_{i=1}^j 1/i$ is the $j$th Harmonic number for each $j \in \mathbb{Z}_+$.
+\end{theorem}
+\proof{Proof.}
+To make notation both more condensed and more specific across the conditioning on the cluster size, let us define $\sigma(m,n)$ for $m \in \{0, \dots, n - 1\}$ and $n \in \mathbb{Z}_+$ as
+\begin{align}
+\sigma(m,n)
+=
+\E{\frac{1}{\kappa_{m+1}^+-m}}
+,
+\end{align}
+where we are implicitly conditioning on $N=n+1$ in this expectation. With this notation, let us start the analysis of the mean of $\tau$ through end-state conditioning on the cluster's size:
+\begin{align}
+\E{\tau}
+=
+\sum_{n=0}^\infty \E{\tau \mid N = n+1}\PP{N=n+1}
+=
+\sum_{n=1}^\infty \sum_{m=0}^{n-1} \sigma(m,n)  (n+1)^{n-1} \frac{\rho^n e^{-\rho(n+1)}}{n!} 
+,
+\end{align}
+where one should notice that we have dropped the $n=0$ index from the summation as $\E{\tau \mid N = 1} = 0$ by definition. By applying Corollary~\ref{meanRecurSolve} and canceling like terms, we can now split this expression into two separate sums,
+\begin{align}
+\E{\tau}
+&=
+\sum_{n=1}^\infty 
+\sum_{m=0}^{n-1}
+\left(
+\frac{n+1}{n-m}
+-
+\frac{1}{n-m}
+\sum_{i=0}^m
+{n \choose i}
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}
+\right)
+(n+1)^{n-1} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+%%%%%%%%%%%%%%
+\\
+&=
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+-
+\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ .
+ \label{twoSumEq}
+\end{align}
+Let us analyze each sum separately. 
+
+Starting with the latter, we can first quickly recognize that by exchanging the order of the summation indexed by $m$ and the summation index $i$, we obtain another Harmonic number, $\mathsf{H}_{n-i}$. Then, we next exchange the order of summation over $i$ and summation over $n$, and, after doing so, we can extract terms that depend on $i$ alone so that the innermost summation is universally a function of the difference between $n$ and $i$. Together, this yields
+\begin{align}
+&\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ \nonumber\\
+ &=
+ \sum_{n=1}^\infty
+\sum_{i=0}^{n-1}
+\mathsf{H}_{n-i}
+\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ \\
+  &=
+ \sum_{i=0}^\infty
+ \frac{\left(\rho({i+1})\right)^{i} }{(i+1)!}
+ \rho e^{-\rho(i+1)}
+\sum_{n=i+1}^{\infty}
+\mathsf{H}_{n-i}
+ \frac{\left(\rho(n-i)\right)^{n-i} e^{-\rho(n-i)}}{\rho(n-i)!}
+ ,
+\end{align}
+and at this point we can recognize that we have two autonomous sums. By re-indexing the right summation to be in terms of $\ell = n - i$, we find that it is equivalent to
+\begin{align}
+\sum_{\ell=1}^{\infty}
+\mathsf{H}_{\ell}
+ \frac{\left(\rho\ell\right)^{\ell} e^{-\rho\ell}}{\rho \ell!}
+ &=
+ \sum_{\ell=1}^{\infty}
+\ell \mathsf{H}_{\ell}
+ \frac{\left(\rho\ell\right)^{\ell-1} e^{-\rho\ell}}{ \ell!}
+ =
+ \E{B \mathsf{H}_B}
+ ,
+\end{align}
+for $B \sim \mathsf{Borel}(\rho)$. Then, the left summation can similarly be observed to be 
+\begin{align}
+ \sum_{i=0}^\infty
+ \frac{\left(\rho({i+1})\right)^{i} }{(i+1)!}
+ \rho e^{-\rho(i+1)}
+ &=
+ \rho
+  \sum_{j=1}^\infty
+ \frac{\left(\rho j\right)^{j-1} }{j!}
+ e^{-\rho j}
+ =
+ \rho
+ .
+\end{align}
+Hence, the latter sum in \eqref{twoSumEq} simplifies to $\rho \E{B \mathsf{H}_B}$.
+
+Now, for the former sum in \eqref{twoSumEq}, we can again identify an expectation of a function of $B$ after some quick manipulation. By multiplying and dividing by $n+1$, we can recognize that this is the truncated expectation of $B \mathsf{H}_{B-1}$ when $B$ is restricted to being at least 2:
+\begin{align}
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+&=
+\sum_{n=1}^\infty 
+(n+1)\mathsf{H}_n  \frac{\left(\rho(n+1)\right)^n e^{-\rho(n+1)}}{(n+1)!}
+=
+\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}}
+.
+\end{align}
+Hence, \eqref{twoSumEq} now simplifies to
+\begin{align}
+\E{\tau}
+&=
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+-
+\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+\\
+&=
+\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}}
+-
+\rho \E{B \mathsf{H}_{B}}
+.
+\end{align}
+
+Finally, let us now recognize that, at $B = 1$, then
+$
+B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}
+=
+-
+\rho
+$,
+whereas for any $B \geq 2$, we instead find that
+$
+B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}
+=
+B (\mathsf{H}_{B-1} - \mathsf{H}_B)
++
+(1-\rho) B \mathsf{H}_{B}
+=
+-1
++
+(1-\rho) B \mathsf{H}_{B}
+$,
+and thus we have by the linearity of expectation that
+\begin{align}
+\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}}
+&=
+(1-\rho)\E{B \mathsf{H}_\mathsf{B}}
+-
+1
+,
+\end{align}
+and this completes the proof.
+\hfill\Halmos\endproof
+
+% Original computational observation retained as an author note; no new claim added.
+% \tb{something to point out about Theorem~\ref{meanIdThm} (especially if we can't make it more explicit): $\tau$ has an unknown and continuous distribution, whereas $B$ has a known and discrete distribution, making the RHS of the mean identity Theorem~\ref{meanIdThm} far more easily (and deterministically) computable }
+
+
+
+\begin{corollary}
+\begin{align}
+\E{\tau}
+&=
+\int_0^\rho
+\frac{e^{-u} - e^{-\rho}}{\rho e^{-\rho} - u e^{-u}}\mathrm{d}u
+\end{align}
+\end{corollary}
+\proof{Proof.}
+First, by the Eulerian representation of the $j$th Harmonic number as $\mathsf{H}_j = \int_0^1 (1-x^j)/(1-x) \mathrm{d}x$, Theorem~\ref{meanIdThm} can be re-expressed as
+\begin{align}
+\E{\tau}
+&=
+(1-\rho)\E{B \mathsf{H}_B} - 1
+=
+(1-\rho)\int_0^1\frac{\E{B} - \E{B x^B}}{1-x}\mathrm{d}x
+-
+1
+%=
+%(1-\rho)\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} - \E{B x^B} \right)\mathrm{d}x
+.
+\end{align}
+Now, $\E{B} = 1/(1-\rho)$, and $\E{B x^B}$ is equal to the first derivative of the probability generating function (PGF) of $B$ multiplied by $x$. By leveraging the fact that the PGF of the Borel distribution can be expressed through the principal branch of the Lambert-W function ($\mathsf{W}_0(\cdot)$), we can write
+\begin{align}
+\E{B x^B}
+&=
+x \frac{\partial}{\partial x}
+\left(
+\E{x^B}
+\right)
+=
+x \frac{\partial}{\partial x}
+\left(
+-\frac{1}{\rho}\mathsf{W}_0\left(-x \rho e^{-\rho}\right)
+\right)
+=
+-
+\frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)
+;
+\end{align}
+hence the integral may be equivalently written as
+\begin{align}
+\int_0^1\frac{\E{B} - \E{B x^B}}{1-x}\mathrm{d}x
+&=
+\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} +  \frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)\right)\mathrm{d}x
+.
+\end{align}
+
+To further simplify this integral, let us apply a change of variable. Let $u = - \mathsf{W}_0(-x\rho e^{-\rho})$. Then, at $x=0$, $u = -\mathsf{W}_0(0) = 0$, and at $x=1$, $u = -\mathsf{W}_0(-\rho e^{-\rho}) = \rho$. Moreover, by the defining property of the Lambert-W, $\mathsf{W}_0(z) e^{\mathsf{W}_0(z)} = z$, we can relate $x$ in terms of $u$ via
+\begin{align}
+-u e^{-u} = \mathsf{W}_0(-x\rho e^{-\rho}) e^{\mathsf{W}_0(-x\rho e^{-\rho})} = - x \rho e^{-\rho}
+,
+\end{align}
+implying that $x = u e^{-u} / (\rho e^{-\rho})$. By consequence, we also have that $\mathrm{d}x = \mathrm{d}u (e^{-u} - u e^{-u})/(\rho e^{-\rho})$. Thus, the integral over $x$ is equivalent to
+\begin{align}
+\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} +  \frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)\right)\mathrm{d}x
+&=
+\int_0^\rho
+\frac{e^{-u} - u e^{-u}}{\rho e^{-\rho} - u e^{-u}}
+\left(
+\frac{1}{1-\rho}
+-
+\frac{u}{\rho(1-u)}
+\right)
+\mathrm{d}u
+\\
+&=
+\frac{1}{\rho(1-\rho)}
+\int_0^\rho
+\frac{\rho e^{-u} - u e^{-u}}{\rho e^{-\rho} - u^{-u}} \mathrm{d}u
+.
+\end{align}
+Returning to the expression for the mean duration, we now have
+\begin{align}
+\E{\tau}
+&=
+\frac{1}{\rho}
+\int_0^\rho
+\frac{\rho e^{-u} - u e^{-u}}{\rho e^{-\rho} - u^{-u}} 
+\mathrm{d}u
+-
+1
+=
+\frac{1}{\rho}
+\int_0^\rho
+\frac{\rho e^{-u} - \rho e^{-\rho}}{\rho e^{-\rho} - u^{-u}} 
+\mathrm{d}u
+,
+\end{align}
+and this immediately simplifies to the stated result.
+\hfill\Halmos\endproof
+
+
+\section{Exact Sampling}\label{sec:sampling}
+The same pending-response counts $d_k=\kappa_k^+-k+1$ that define the Markov chain in Section~2.2 also determine the conditional exponential waiting times. The representation of \citet{daw2023conditional}, clarified by \citet{daw2024asymmetries}, depends on the parking function only through these counts. Thus, for the duration, it suffices to sample the response-count vector $\boldsymbol\kappa$ and its associated Dyck path $\mathbf d$; the individual parking function need not be generated.
+
+The multinomial form of \eqref{eq:kappaPMF} makes this reduction constructive. As in Algorithm~1 of \citet{daw2023conditional}, we first sample the total cluster size. We then rotate a multinomial draw to obtain valid response counts, form $d_k$ by taking cumulative counts and subtracting the responses already completed, and sample independent exponential waiting times with rates $\beta d_k$. Their sum gives the cluster duration.
+
+\begin{algorithm}[H]
+\caption{Exact Simulation of Markovian Hawkes Cluster Duration}\label{alg:duration}
+\begin{algorithmic}[1]
+\Require Integrated excitation kernel $G(x)=\rho(1-e^{-\beta x})$, with
+$\rho=\alpha/\beta<1$ and $\beta>\alpha>0$.
+\Ensure Duration $\tau$ of a Markovian Hawkes cluster.
+\State Draw $N\sim\mathsf{Borel}(\rho)$; if $N=1$, \Return $0$; otherwise set $n\gets N-1$.
+\State Draw $(X_1,\ldots,X_N)\sim\operatorname{Multinomial}(n;1/N,\ldots,1/N)$.
+\State Set $S_0\gets0$ and $S_j\gets\sum_{i=1}^j(X_i-1)$ for $1\leq j\leq n$.
+\State Set $r\gets\min\{j:S_j=\min_{0\leq\ell\leq n}S_\ell\}$.
+\State Rotate to $(Y_1,\ldots,Y_N)\gets(X_{r+1},\ldots,X_N,X_1,\ldots,X_r)$.
+\State Discard $Y_N=0$ and set $\kappa_i\gets Y_i$, $1\leq i\leq n$.
+\State Set $d_i\gets\sum_{j=1}^i\kappa_j-i+1$, $1\leq i\leq n$.
+\State Given $\mathbf d$, draw independent $E_i\sim\mathsf{Exp}(\beta d_i)$, $1\leq i\leq n$. 
+\Statex \hspace*{-\algorithmicindent} \textbf{Return:} $\tau = \sum_{i=1}^n E_i$.\end{algorithmic}
+\end{algorithm}
+
+\proof{Exactness of Algorithm~\ref{alg:duration}.}
+The Borel draw gives the cluster-size law \citep{hawkes1974cluster}. Conditional on $N=n+1$, the cycle lemma \citep[Corollary~14.4]{janson2012simply} gives a unique rotation of $(X_i-1)_{i=1}^{n+1}$ with nonnegative proper partial sums, obtained after the first minimum. Its last count is zero. Each feasible $(\mathbf k,0)$ has $n+1$ distinct rotations, each of multinomial probability $n!/[(n+1)^n\prod_i k_i!]$; summing gives exactly \eqref{eq:kappaPMF}. Finally, the independent waiting times with rates $\beta d_i$ have the required conditional law by Theorem~2 of \citet{daw2023conditional}, as clarified by Theorem~6 of \citet{daw2024asymmetries}. Their sum therefore has the cluster-duration law.
+\hfill\Halmos\endproof
+
+\FloatBarrier
+\section{Conclusion}\label{sec:conclusion}
+\placeholder{Conclusion.}
+% The original unfinished MGF theorem (E[exp(theta tau)] = ???) is retained
+% here as an unresolved author note, not presented as an established result.
+
+\FloatBarrier
+\begingroup
+\begin{thebibliography}{99}
+\raggedright
+
+\bibitem[Daw(2024)]{daw2023conditional} Daw A (2024) Conditional uniformity and Hawkes processes. \emph{Mathematics of Operations Research} 49(1):40--57.
+
+\bibitem[Daw and Yom-Tov(2024)]{daw2024asymmetries} Daw A, Yom-Tov GB (2024) Asymmetries of service: Interdependence and synchronicity. \emph{arXiv preprint arXiv:2402.15533}.
+
+\bibitem[Hawkes(1971)]{hawkes1971spectra} Hawkes AG (1971) Spectra of some self-exciting and mutually exciting point processes. \emph{Biometrika} 58(1):83--90.
+
+\bibitem[Hawkes and Oakes(1974)]{hawkes1974cluster} Hawkes AG, Oakes D (1974) A cluster process representation of a self-exciting process. \emph{Journal of Applied Probability} 11(3):493--503.
+
+\bibitem[Janson(2012)]{janson2012simply} Janson S (2012) Simply generated trees, conditioned Galton--Watson trees, random allocations and condensation. \emph{Probability Surveys} 9:103--252.
+
+\bibitem[Kenyon and Yin(2023)]{kenyon2023parking} Kenyon R, Yin M (2023) Parking functions: From combinatorics to probability. \emph{Methodology and Computing in Applied Probability} 25(1):32.
+
+\bibitem[Latouche and Ramaswami(1999)]{latouche1999introduction} Latouche G, Ramaswami V (1999) \emph{Introduction to Matrix Analytic Methods in Stochastic Modeling} (SIAM).
+
+\bibitem[M{\o}ller and Rasmussen(2005)]{moller2005perfect} M{\o}ller J, Rasmussen JG (2005) Perfect simulation of Hawkes processes. \emph{Advances in Applied Probability} 37(3):629--646.
+
+\bibitem[Oakes(1975)]{oakes1975markovian} Oakes D (1975) The Markovian self-exciting process. \emph{Journal of Applied Probability} 12(1):69--77.
+
+\bibitem[Stanley and Pitman(2002)]{stanley2002polytope} Stanley RP, Pitman J (2002) A polytope related to empirical distributions, plane trees, parking functions, and the associahedron. \emph{Discrete \& Computational Geometry} 27(4). % Page range omitted: source lists 603--602; verify before submission.
+
+\bibitem[Yan(2015)]{yan2015parking} Yan CH (2015) Parking functions. \emph{Handbook of Enumerative Combinatorics}, 859--918 (Chapman and Hall/CRC).
+\end{thebibliography}
+\endgroup
+\end{document}

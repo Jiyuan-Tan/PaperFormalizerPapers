@@ -1,0 +1,959 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Management Science (mnsc) for articles with e-companion (EC)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[msom,blindrev]{informs3_no_remark} 
+%\documentclass[nonblindrev]{informs3_no_remark} 
+\documentclass[opre,nonblindrev]{informs3_no_remark} 
+% current default for manuscript submission
+%\documentclass[opre,nonblindrev]{informs3}
+
+\OneAndAHalfSpacedXI % current default line spacing
+%\OneAndAHalfSpacedXII 
+%\DoubleSpacedXII
+%%\DoubleSpacedXI
+
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentstyle. For example
+%\documentclass[dvips,mnsc]{informs3}      % if dvips is used
+%\documentclass[dvipsone,mnsc]{informs3}   % if dvipsone is used, etc.
+
+% Private macros here (check that there is no clash with the style)
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+
+ \usepackage{mathtools}
+ \usepackage{tikz,calc}
+ \usetikzlibrary{decorations.markings}
+ \usepackage{soul}
+ \setul{}{0.75pt}
+ \setuloverlap{1.5pt}
+
+
+\usepackage{subfigure}
+%\usepackage{subcaption}
+\usepackage{mwe}
+\usepackage{lscape,booktabs,longtable}
+\usepackage{amsmath}
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,citecolor=blue,pdfstartview=FitH]{hyperref}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[graphicx]{realboxes}
+
+\newcommand{\modone}{\mod_{\hspace{-.04in}1\hspace{.04in}}}
+
+\newcommand{\tr}{\textcolor{red}}
+\newcommand{\tb}{\textcolor{blue}}
+\newcommand{\tg}{\textcolor{mygreen}}
+
+\newcommand{\E}[1]{{\mathrm{E}\left[#1\right]}}
+\newcommand{\f}[1]{{\text{f}\left(#1\right)}}
+\newcommand{\ind}[1]{{\,\mathbf{1}\hspace{-.025in}\left\{#1\right\}}}
+\newcommand{\PP}[1]{\mathrm{P}\left( #1 \right)}
+\newcommand{\Var}[1]{{\mathrm{Var}\left(#1\right)}}
+\newcommand{\Cov}[1]{{\mathrm{Cov}[#1]}}
+\newcommand{\T}{{\mathrm{T}}}
+
+%%%% Water Mark
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Under Review}
+%\SetWatermarkScale{0.5}
+
+
+%\newtheorem{hypothesis}[theorem]{Hypothesis}
+%\newtheorem{hypothesis}{Hypothesis}
+
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+\ECRepeatTheorems
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% For new submissions, leave this number blank.
+% For revisions, input the manuscript number assigned by the on-line
+% system along with a suffix ".Rx" where x is the revision number.
+%\MANUSCRIPTNO{OPRE-2020-04-226}
+
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+% Outcomment only when entries are known. Otherwise leave as is and
+%   default values will be used.
+%\setcounter{page}{1}
+%\VOLUME{00}%
+%\NO{0}%
+%\MONTH{Xxxxx}% (month or a similar seasonal id)
+%\YEAR{0000}% e.g., 2005
+%\FIRSTPAGE{000}%
+%\LASTPAGE{000}%
+%\SHORTYEAR{00}% shortened year (two-digit)
+%\ISSUE{0000} %
+%\LONGFIRSTPAGE{0001} %
+%\DOI{10.1287/xxxx.0000.0000}%
+
+% Author's names for the running heads
+% Sample depending on the number of authors;
+% \RUNAUTHOR{Jones}
+% \RUNAUTHOR{Jones and Wilson}
+% \RUNAUTHOR{Jones, Miller, and Wilson}
+% \RUNAUTHOR{Jones et al.} % for four or more authors
+% Enter authors following the given pattern:
+\RUNAUTHOR{Daw and Goel}
+
+% Title or shortened title suitable for running heads. Sample:
+% \RUNTITLE{Bundling Information Goods of Decreasing Value}
+% Enter the (shortened) title:
+\RUNTITLE{The Duration of Markovian Hawkes Clusters}
+
+% Full title. Sample:
+% \TITLE{Bundling Information Goods of Decreasing Value}
+% Enter the full title:
+\TITLE{\textsf{On the Cluster Duration Distribution of the Markovian Hawkes Process}
+%Other title ideas:
+}
+% Block of authors and their affiliations starts here:
+% NOTE: Authors with same affiliation, if the order of authors allows,
+%   should be entered in ONE field, separated by a comma.
+%   \EMAIL field can be repeated if more than one author
+\ARTICLEAUTHORS{%
+\AUTHOR{Andrew Daw and Amer Goel}
+\AFF{Dept.~of Data Sciences and Operations, University of Southern California Marshall School of Business, Los Angeles, CA} 
+
+%\AUTHOR{Authors blinded for review}
+% Enter all authors
+} % end of the block
+
+%\tableofcontents
+%\newpage
+
+
+
+
+\ABSTRACT{%\tr{AD - probably will revisit. I think we want something more like: prior work has connected Hawkes processes and uniformly random parking functions; here we simplify that connection to random (but not uniform) Dyck paths (or whatever the right object is). With this clarified approach, ... (closed form mean). will update this last.} 
+%The Hawkes self-exciting point process is often studied as group of temporal clusters, each of which consists of one exogenous arrival and all of its endogenous offspring. However, the temporal structure of these clusters has largely evaded closed-form results, even for the Markovian Hawkes Cluster, which is thought to be the most tractable variant. In this paper, we use probabilistic combinatorics techniques, including uniformly-random parking functions and their induced Dyck paths, to find a closed-form expression for the mean of the cluster's duration, which is the continuous-time length of the interval from the first arrival to the last arrival. These techniques, in addition to establishing a closed-form result, reduce the size of the sample space from superexponential to Catalan in cluster size, therefore producing first-in-kind analytical results along with useful computational reductions.  Other Hawkes variations may be able to adapt our combinatorial framework for analytical results.
+The duration of a Hawkes process cluster, meaning the time from first point to last point in an entirely endogenously generated progeny stream, has been stubbornly resistant to analysis; even the mean has not been known in closed form.
+Recently, uniformly random parking functions have been found to be hidden spines of these history-driven clusters, offering a probabilistic combinatorial structure within self-excitement that has opened new avenues for analysis. Here, we leverage and refine this decomposition to provide a closed-form expression for the mean cluster duration in the case of an exponential excitation kernel. Specifically, we reduce from uniformly random parking functions to non-uniform preference counts. This change of probabilistic combinatorial structure in the decomposition leads us to both a Borel-based identity and an explicit integral-based expression for the mean duration.
+}
+% Fill in data. If unknown, outcomment the field
+\KEYWORDS{Hawkes process, cluster duration, end-state conditioning, generalized parking functions, preference counts} 
+%\HISTORY{}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Samples of sectioning (and labeling) in MNSC
+% NOTE: (1) \section and \subsection do NOT end with a period
+%       (2) \subsubsection and lower need end punctuation
+%       (3) capitalization is as shown (title style).
+%
+%\section{Introduction.}\label{intro} %%1.
+%\subsection{Duality and the Classical EOQ Problem.}\label{class-EOQ} %% 1.1.
+%\subsection{Outline.}\label{outline1} %% 1.2.
+%\subsubsection{Cyclic Schedules for the General Deterministic SMDP.}
+%  \label{cyclic-schedules} %% 1.2.1
+%\section{Problem Description.}\label{problemdescription} %% 2.
+
+% Text of your paper here
+
+\vspace{-0.12in}
+
+
+\section{Introduction}
+\label{sec: intro}
+
+
+% \tr{maybe we actually give the classic Hawkes definition right from the top? and then the one in section 2 (maybe moved to the end) is the combinatorial version, like what is in the asymmetries paper? something to think about}
+
+Originally introduced in \citet{hawkes1971spectra}, the Hawkes point process is a \emph{self-exciting} model, in which the history of points so far is an endogenous driver of future points to come. This history-driven process has enjoyed myriad applications over the past half-century, ranging from seismology to neurology, from financial trading to risk, and from pricing to public health \citep[e.g.,][]{bacry2015hawkes,brown2002time,liao2026tides,ogata1988statistical,xu2014path,yuan2026dynamic}. Much of the fundamental understanding of this model comes from the seminal \citet{hawkes1974cluster} decomposition, which distills the model into two separate streams: exogenous Poisson arrivals and exclusively endogenous clusters that descend as self-excited progeny from the exogenous points. Hence,  we can isolate the self-excitement to a purely history-driven \emph{Hawkes cluster model} which has the stochastic intensity and counting process pair $(\lambda_t, N_t)$ governed by
+\begin{align}
+\lambda_t
+&=
+\int_0^t g(t-u)\mathrm{d}N_u
+=
+\sum_{i=0}^{N_t-1}
+g(t-\tau_i)
+,
+\label{intensityDefEq}
+\end{align}
+where $g : \mathbb{R}_+ \to \mathbb{R}_+$ is the \emph{excitation kernel} and $0 = \tau_0 < \tau_1 < \tau_2 < \dots$ are the \emph{cluster points}. If we specify $g(\cdot)$ to be $g(t) = \rho e^{-t}$ for some $\rho \in \mathbb{R}_+$, then we receive the cluster model for the \textit{Markovian Hawkes process}, which is likely the most widely used and well-studied form of self-excitement \citep{oakes1975markovian}. 
+%This paper aims to join the literature of study on this popular exponential-kernel setting.  
+%Letting $\rho \coloneqq \int_0^\infty g(t) \mathrm{d}t$, we standardize time and set $g(t) = \rho e^{-t}$ without loss of generality.
+
+\noindent\textit{Remark (notation).} The excitation kernel is a function $g:\mathbb{R}_+\to\mathbb{R}_+$. In Theorem~\ref{meanIdThm1}, Corollary~\ref{corIdThm1}: The kernel is $g(t)=\rho e^{-t}$ for $t\in\mathbb{R}_+$. The kernel parameter satisfies $\rho\in\mathbb{R}_+$ and $\rho<1$ throughout the analysis. The actual cluster points are indexed by $i\in\{0,\dots,N-1\}$, with $0=\tau_0<\cdots<\tau_{N-1}$; no further actual cluster points are required. The cluster duration is $\tau:=\tau_{N-1}$, with $\tau=0$ when $N=1$. In Theorem~\ref{meanIdThm1}, Corollary~\ref{corIdThm1}: For evaluating the duration law, $\tau$ also denotes the combinatorially constructed duration of Definition~\ref{def:combx-duration}: sample $N\sim\mathsf{Borel}(\rho)$; set $\tau=0$ if $N=1$; given $N=n+1$, sample the length-$n$ preference count $\kappa$ with the displayed law, then sample conditionally independent $Z_i\sim\mathrm{Exp}(\kappa_i^+-i+1)$ for $1\leq i\leq n$, and set $\tau=\sum_{i=1}^{N-1}Z_i$. This is a representation in distribution of the cluster duration. $i$ is a locally bound nonnegative-integer coordinate or summation index; preference-count coordinates have $1\leq i\leq n$, generalized parking-function order indices have $1\leq i\leq m$, and in $\mathsf{H}_j=\sum_{i=1}^j1/i$ it has $1\leq i\leq j$. In Lemma~\ref{kappaCPMF1}: In the prefix-count product $\prod_{i=1}^m {n-k_{i-1}^+\choose k_i}$, $i\in\{1,\dots,m\}$. In Corollary~\ref{meanRecurSolve1}: In the displayed finite correction sum, $i\in\{0,\dots,m\}$. In Theorem~\ref{meanIdThm1}: In the proof's triple sum, $0\leq i\leq m\leq n-1$; after summing over $m$, $0\leq i\leq n-1$; after exchanging the sums over $i$ and $n$, $i\geq0$ and $n\geq i+1$.
+
+
+
+One of the reasons that the \citet{hawkes1974cluster} decomposition has become such a foundational tool for studying self-excitement is that time-agnostic quantities become readily available. By connection to branching processes with Poisson-distributed offspring, a great deal can be known about the model at the count-level: if $\rho < 1$, then the cluster will have only finitely many points almost surely ($\PP{N < \infty} = 1$ for $N := \lim_{t \to \infty} N_t$); moreover, the distribution of the \emph{size} of the cluster is known in closed form ($N \sim \mathsf{Borel}(\rho)$). 
+Accordingly, we will assume $\rho < 1$ throughout our analysis.
+%From the same methods, one can additionally analyze related quantities such as the generations etc (finish?)
+However, for a model that is unarguably temporal, size only says so much. The corresponding first-order temporal quantity, the \emph{duration} of the cluster $\tau := \tau_{N-1}$, is undoubtedly at least as important in practice as the size, but, unfortunately, chronological understanding of Hawkes clusters has been much more elusive. As said by \citet[][pg.~631]{moller2005perfect}, the distribution of the cluster duration ``is unknown even for the simplest examples of Hawkes processes.''
+
+%The Hawkes Cluster Model has been widely studied, and results about time-agnostic metrics like cluster size, order of arrivals, and internal event-heritage have been established with connections to branching processes and combinatorics. For example, the arrival order and branching structure can be encoded into a parking function, and related Dyck paths can accumulate history, markovianize the arrival process, and produce sample paths, as shown in \cite{daw2023conditional} and \cite{daw2026asymmetries}. 
+%However, exact time-dependent information has remained largely unclear, despite concerted efforts.  One especially challenging aspect is the duration of a Hawkes cluster, which is the length of the continuous-time interval between the first arrival and the last. It was described as "unknown for even the simplest examples of Hawkes processes" in \cite{moller2005perfect}, and past efforts have not achieved explicit results.   
+
+The analytical elusiveness of the Hawkes cluster duration is not from a lack of effort. For instance, \citet{moller2005perfect} themselves provided an integral equation for $F(t) = \PP{\tau \leq t}$ \citep[Prop. 2 therein, which the authors describe as a generalization of Theorem 5 from][]{hawkes1974cluster}. Sticking with the simple case that $g(t) = \rho e^{-t}$, this integral equation can be seen to be equivalent to the ordinary differential equation (ODE) $F'(t) = F(t)\left(\rho F(t) - \rho - \log(F(t))\right)$ with initial condition $F(0) = \PP{N = 1} = e^{-\rho}$; as noted in Example 4 of \citet{moller2005perfect}, this ODE is not analytically solvable. Building on \citet{moller2005perfect}, \citet{graham2021regenerative} showed that $\E{\tau} \leq 1/(1-\rho)$ and that, moreover, $\tau$ is stochastically dominated by an $\mathsf{Exp}(1-\rho)$ random variable. As another example of the techniques  derived from \citet{hawkes1974cluster}, \citet{chen2021perfect} constructed an almost sure bound on $\tau$ through the ``total birth time,'' which, for $g(t) = \rho e^{-t}$, is equivalent to the sum of a $\mathsf{Borel}(\rho)$-distributed number of mutually independent $\mathsf{Exp}(1)$-distributed random variables. (This random sum yields a similar mean bound, $\E{\tau} \leq \rho/(1-\rho)$.) 
+These examples are meant to be representative but not exhaustive, and additional bounds on the mean or the tail of the duration have been provided by works such as \citet{bremaud2002rate,chen2020perfect,costa2020renewal,reynaud2007some}. 
+Recently, and quite relevantly for this paper's pursuit, there has been progress on understanding the conditional distribution of $\tau$ given $N$. Via an extension of the random time change theorem, \citet{daw2023conditional} showed that, for $g(t) = \rho e^{-t}$, $\tau$ is equivalent in distribution to a sum of conditionally independent (but not identical) exponential random variables with rates determined by certain probabilistic combinatorial objects, and these conditional connections were subsequently refined in \citet{daw2026asymmetries}.
+Nevertheless, to the best of our knowledge, understanding of the unconditional distribution remains lacking: even the simplest performance metric, $\E{\tau}$, is not known in closed form for even the simplest excitation kernel, $g(t) = \rho e^{-t}$.
+
+
+
+%In their original study of the  Hawkes cluster, \cite{hawkes1974cluster} described a bound on the mean duration, but noted that it could only be solved numerically. Subsequent studies by \cite{moller2005perfect} found that the duration distribution could be approximated with a system of ordinary differential equations that have no closed form solution. Since then, the duration has been bounded by \cite{graham2021regenerative}, its non-asymptotic tail has been bounded by \cite{reynaud2007some} and the cluster has been exactly simulated in \cite{chen2020perfect}, but none has achieved explicit analytical results on the duration's distribution or moments.  This suggests the need for closed-form expressions wherever they are available, and new tools to understand and interpret the temporal structure of a Hawkes Cluster model.
+
+\textbf{In this paper,  we explicitly characterize the mean cluster duration of the Markovian Hawkes process by simplifying the underlying probabilistic combinatorics that have been recently uncovered}. Specifically, we prove that the mean duration is equal to a certain expectation of a $\mathsf{Borel}(\rho)$ random variable (Theorem~\ref{meanIdThm1}), and, by consequence, we obtain an exact expression for the mean duration  (Corollary~\ref{corIdThm1}). 
+
+%This offers direct progress on our first objective and a possible way forward on our second.  For notation, we denote the time of the $i$th arrival by $\tau_i$, the number of arrivals up to time $t\ge 0$ by $N_t \coloneqq \{i \in \mathbb{N} : \tau_i \le t\}$, and the total number of arrivals by $N \coloneqq \lim_{t\ \to \infty} N_t$.   From branching process literature, we know that if $\rho<1$ then $N \sim \mathrm{Borel}(\rho)$, and thus the duration $\tau \coloneqq \tau_{N-1}$ is well defined. If we further assume that $\int_0^\infty t g(t) \mathrm{d}t < \infty$, then we also have that $\E{\tau} < \infty$.  Our main results are as follows. 
+
+% \tr{branching process connection means that we understand size and other time-agnostic metrics, but chronology is hard!}
+
+
+% The Hawkes point process has been studied for over half a century, and has been widely applied in operations, finance, communications, epidemiology, and even seismology [cites]. It is a  stochastic process which consists of an exogenous Poisson process and endogenous offspring generated by each exogenous arrival \cite{hawkes1971spectra}, modeling self-exciting arrival processes. The most common Hawkes process model is the \textit{Markovian Hawkes} process, which arises from an exponential self-excitation kernel \cite{oakes1975markovian}, and is both tractable and expressive. \tr{AD - I think rather than phrasing around the applications of the cluster, I think we should lead with the \citet{hawkes1974cluster} decomposition. I'll update later.} In many modeling applications, the Hawkes Process and its Markovian variant are decomposed into \textit{clusters}, which is the subprocess consisting of a single exogenous arrival and all of its offspring. However, despite the usual tractability of the Markovian Hawkes process and importance of these clusters, they remain largely enigmatic, especially regarding their internal temporal structure [cites]. 
+
+% \tr{probably also want to drum up that the cluster is exactly where the endogeneity lives in the model}
+
+% A particularly challenging problem is characterizing the \textit{duration} of such a Markovian Hawkes cluster; that is, the continuous-time duration from the first arrival to the last arrival (which always exists under a mild regularity assumption, idk how to put this right). As said by \cite{moller2005perfect}, the distribution of the cluster duration distribution is ''unknown for even the simplest examples of Hawkes processes."  From \cite{daw2023conditional} and \cite{daw2026asymmetries}, we know the distribution to be conditionally Phase-Type. We can characterize the generator matrix explicitly by considering an auxiliary arrival process which is a continuous-time Markov Chain, and we know that the initial-arrival distribution is Poisson. However,  further characterizations of the Phase-Type and unconditional results remained unknown. 
+
+% \tr{probably can reduce the discussion of phase-type here. again, I think for this audience, sum of exponentials $\equiv$ phase-type is reliably front of mind.}
+
+
+
+% \tr{I think we should try to introduce $\tau$ (just as notation for the concept, not full formal definition) by this point in the paper. or, if we do the definition right at the top, then we give $\tau$ right after that}
+
+% \tr{from moller and rasmussen (and should also cite carl graham's paper), we can get an ODE for the CDF of the duration (which we should state), but we know that there is no closed form solution to this ODE. Even the mean is not known in closed form. Lots of prior work have provided bounds on the mean (or on the distribution, which in turn bounds the mean), which we should cite and briefly explain (several examples in the CU paper). the composite of this literature thus suggests two desiderata: explicit expressions, wherever they can be had, and, wherever explicit expressions are not available, conceptual understanding of the distribution.}
+
+% \tr{In this paper, we offer direct progress on the former and a possible way forward on the latter. Specifically, we (closed-form mean cluster duration of the Markovian Hawkes and simplification of the probabilistic combinatorial underpinnings that have recently been identified for the model)}
+
+% \textbf{The main results are a closed-form characterization of the mean of the duration}, which was not known before, \textbf{as well as a compact integral representation of the mean}. Letting $\tau$ represent the duration of a Markovian Hawkes Cluster with average excitation $\rho$ (not sure how to write this @andrew), 
+
+\begin{theorem}\label{meanIdThm1}
+Let $B \sim \mathsf{Borel}(\rho)$. Then, the mean duration of the Markovian Hawkes cluster is such that
+\begin{align}
+\E{\tau}
+&=
+\left(1-\rho\right)
+\E{B \cdot \mathsf{H}_B}
+-
+1
+,
+\end{align}
+where $\mathsf{H}_j = \sum_{i=1}^j 1/i$ is the $j$th Harmonic number for each $j \in \mathbb{Z}_+$.
+\end{theorem}
+
+\noindent\textit{Remark.} $N_t=\sum_{i=0}^{N-1}\mathbf{1}\{\tau_i\leq t\}$, and the integral in \eqref{intensityDefEq} is against the cluster point measure on $[0,t]$; for $g(t)=\rho e^{-t}$, the displayed $\lambda_t$ is the right-continuous post-jump version, whose predictable intensity is $\lambda_{t-}$ for $t>0$.
+
+
+\begin{corollary} \label{corIdThm1}
+The mean duration of the Markovian Hawkes cluster is given by
+\begin{align}
+\E{\tau}
+&=
+\int_0^\rho
+\frac{e^{-u} - e^{-\rho}}{\rho e^{-\rho} - u e^{-u}}\mathrm{d}u
+.
+\end{align}
+\end{corollary}
+
+\noindent\textit{Remark.} The integrand $\frac{e^{-u}-e^{-\rho}}{\rho e^{-\rho}-u e^{-u}}$ is interpreted by its continuous extension at $u=\rho$, with value $1/(1-\rho)$.
+
+
+%In this paper, we first define the combinatorial tools used in past work to understand the duration. We then prove some probabilistic combinatorial lemmas that we use in our final proofs of the above two mean-duration results. 
+\noindent The remainder of this note is devoted to proving this pair. 
+In \S\ref{modelSec}, we recast the model via probabilistic combinatorics; in \S\ref{lemmaSec}, we establish associated technical lemmas; in \S\ref{proofSec}, we prove our main results accordingly.
+%Then, in Section~\ref{lemmaSec}, we accordingly establish two technical lemmas
+%focused on the random combinatorial objects, and, in Section~\ref{proofSec}, we leverage that understanding to prove our two main results. Finally, we conclude with a brief discussion in Section~\ref{concSec}.
+
+\section{Model Definitions}\label{modelSec}
+
+% \subsection{The Hawkes Cluster and Related Definitions}
+
+
+
+% \tr{we should put this into a formal Definition}
+
+% \tr{take $\beta = 1$ wlog}
+
+% \subsection{Combinatorial Tools}
+
+% \tr{I don't think we want to say this here:}
+% A conditional distribution of the Markovian Hawkes Cluster was given in \cite{daw2023conditional}, which used parking function combinatorics to consider individual sample paths. 
+
+
+
+\subsection{Background Combinatorial Objects}
+
+%It will be useful for us to employ a well-known generalization of parking functions \citep[see, e.g.,][]{stanley2002polytope,yan2015parking,kenyon2023parking}. 
+
+We begin with a detour. Let us first introduce a pair of (deterministic) combinatorial objects, starting with a well-known extension of parking functions \citep[see, e.g.,][]{stanley2002polytope,yan2015parking}.
+
+\begin{definition}[Generalized Parking Function]\label{gpfDef1}
+For $m, n \in \mathbb{Z}_+$ with $m \leq n$, $\pi \in \mathbb{Z}_+^m$ is a \emph{generalized parking function} of length $m$ over $n$ preferences if and only if it is such that, when sorted such that $\pi_{(1)} \leq \dots \leq \pi_{(m)}$, each $\pi_{(i)} \leq n - m + i$ for $i \in \{1, \dots, m\}$.\hfill \Halmos 
+\end{definition}
+
+\noindent\textit{Remark (notation).} $n\in\mathbb{Z}_+$ is the number of available preferences in a generalized parking function and the common length of a classic parking function and its preference-count vectors. In Lemma~\ref{kappaCPMF1}, Lemma~\ref{meanRecur1}, Corollary~\ref{meanRecurSolve1}: $n$ is a fixed positive integer specifying the length of the preference-count vector. In Theorem~\ref{meanIdThm1}: In the proof, $n$ is a dummy index for conditioning on $N=n+1$: the initial sum ranges over $n\geq0$, its $n=0$ term is dropped, and subsequent length-$n$ preference-count terms have $n\geq1$. After exchanging summations, the inner sum has $n\geq i+1$. $m$ is an integer parameter whose role and admissible range depend on whether it denotes a parking-function length or a preference-count index; as a parking-function length it satisfies $1\leq m\leq n$. In Lemma~\ref{kappaCPMF1}: $m$ indexes the observed prefix $(\kappa_1,\dots,\kappa_m)$ for $1\leq m<n$; the distribution of $\kappa_1$ is supplied separately. In Lemma~\ref{meanRecur1}, Corollary~\ref{meanRecurSolve1}: $m\in\{0,1,\dots,n-1\}$ is the preference-count index, including the initial index zero. In Theorem~\ref{meanIdThm1}: $m$ is a summation index ranging from $0$ to $n-1$ for each $n\geq1$. $\pi$ denotes a preference vector in $\mathbb{Z}_+^m$; it is a generalized parking function over $n$ preferences precisely when its sorted coordinates satisfy $\pi_{(i)}\leq n-m+i$ for $1\leq i\leq m$. In Lemma~\ref{kappaCPMF1}, Lemma~\ref{meanRecur1}: $\pi$ is a classic length-$n$ parking function, so its length is $n$ and its associated counts satisfy $\kappa_i(\pi)=|\{\ell:\pi_\ell=i\}|$.
+
+
+The intuition for generalized parking functions is exactly as the name suggests: for any $m \leq n$, the collection of $\pi \in \mathbb{Z}_+^m$ satisfying Definition~\ref{gpfDef1} contains all the preferences by $m$ drivers over $n$ parking spaces such that, if each driver $i \in \{1, \dots, m\}$ successively proceeds from space 1 to $n$ and takes either space $\pi_i$ or the first available after it, all cars are able to park.
+A ``classic'' parking function is obtained when $m = n$. 
+
+%Here, we will use the generalized form to enumerate the possible parking functions that would produce certain values for the counts.
+
+%\cite{daw2026asymmetries} showed how to characterize the cluster distribution using a uniformly random function $\pi$. The core contribution here is (1) derive closed-form distributional information of the cluster duration and (2) to do it with probabilistic combinatorics objects derived from $\pi$, which reduce the  sample space from $(n+1)^{n-1}$ to Catalan-in-$n$, where $n+1$ is the total number of arrivals, clarifying the new combinatorial perspective on this duration problem. The specific objects we use are denoted $\kappa(\pi)$ and $\kappa^+(\pi)$, and are respectively called the \textit{preference-count} and \textit{cumulative-preference count} vectors. 
+
+In either generalized or classic form, a parking function is inherently ordered by the sequence in which cars arrive, but, as evidenced by the sorting-based condition in Definition~\ref{gpfDef1}, the ability of all drivers to find parking is the same under any ordering of the preferences. This equivalence suggests a possible reduction of information simply to the count of preferences, which we give now for the classic $m = n$ setting.
+
+
+\begin{definition}[Preference Counts; Cumulative Preference Counts] \label{def:prefs}
+For $n \in \mathbb{Z}_+$, $\kappa \in \mathbb{N}^n$ is a vector of \emph{preference counts} if and only if $\sum_{i=1}^n \kappa_i = n$ and $\sum_{j=1}^i \kappa_j \ge i$ for $i \in \{1, \dots, n\}$. Likewise, $\kappa^+ \in \mathbb{Z}^n$ is a vector of \emph{cumulative preference counts} if and only if $1 \leq \kappa_1^+ \leq \dots \leq \kappa_n^+ \leq n$ and $\kappa^+_i \geq i$ for $i \in \{1, \dots, n\}$, where the bijection $\kappa_i^+ = \sum_{j=1}^i \kappa_j$ for $i \in \{1,\dots,n\}$ connects the two concepts.
+\hfill \Halmos 
+\end{definition}
+
+\noindent\textit{Remark.} $\mathbb{N}=\{0,1,2,\dots\}$ in the domain $\kappa\in\mathbb{N}^n$ of Definition~\ref{def:prefs}. $\mathbb{N}=\{0,1,2,\dots\}$ in the definition of preference counts.
+
+\noindent\textit{Remark (notation).} $\kappa^+$ is the cumulative vector associated with $\kappa$, with $\kappa_i^+=\sum_{j=1}^i\kappa_j$ for $1\leq i\leq n$. In Lemma~\ref{meanRecur1}: The cumulative coordinates are extended to index zero by $\kappa_0^+=0$ almost surely.
+
+
+% \tr{maybe we just do response counts and cumulative response-counts? and then we don't need a Dyck path formally defined? we can think more about this. but the kappa's do encode a response-count. Maybe we find a different Catalan object to point out that the kappa's are, and point out that these are bijective with Dyck paths}
+
+Definition~\ref{def:prefs} can be readily generalized to the $m < n$ setting, but the classic $m=n$ case is sufficient for our remaining pursuit. These preference counts do indeed match the setting of equally enumerated cars and spaces, as the vector defined component-wise by $\kappa_i(\pi) = |\{\ell : \pi_\ell = i \}|$ is a length-$n$ preference count for any length-$n$ parking function $\pi$. Connections beyond parking functions abound: the cumulative preference counts can be quickly recognized as equivalent to Dyck paths on the upper-diagonal half of the $n \times n$ lattice, which are Catalan-numbered. Hence, there are $C_n = (2n)!/(n+1)!n!$ length-$n$ preference counts, by comparison to the $(n+1)^{n-1}$ length-$n$ parking functions.
+The non-cumulative preference counts can similarly be thought of in Catalan context as encoding the descendant structure in planar trees, which is a connection we will leverage further in the Hawkes cluster context. 
+
+\noindent\textit{Remark (notation).} $\ell$ is a positive-integer dummy index, local to the preference-count map or summation in which it occurs. In Lemma~\ref{kappaCPMF1}, Lemma~\ref{meanRecur1}, Theorem~\ref{meanIdThm1}: In $\kappa_i(\pi)=|\{\ell:\pi_\ell=i\}|$, the index ranges over $\ell\in\{1,\dots,n\}$, the coordinates of $\pi$. In Theorem~\ref{meanIdThm1}: In the reindexed inner summation in the proof, $\ell=n-i$ ranges over $\{1,2,\dots\}$ because the preceding summation has $n\geq i+1$.
+
+
+%In this simplified form, we can recognize many connections. First, notice that the 
+
+%\tr{cumulative preference counts can quickly be recognized to be equivalent to Dyck paths on the upper-diagonal half of $n$-step lattice}
+
+%\tr{non-cumulative preference counts can also be thought of as trees}
+
+ %Note that the histogram defined componentwise by $\kappa_i = |\{\ell : \pi_\ell = i \}|$ is a preference count vector for any parking function $\pi$. Moreover, preference count vectors are Dyck paths, and therefore are enumerated by the $n$th Catalan number, where $n$ is the length of the vector. As a result, they are in bijection with other Catalan-numbered objects, including ordered plane trees. 
+ 
+ %In the Hawkes Process context, a parking function specifies the branching-process-tree structure of a Hawkes cluster, for which there are $(n+1)^{n-1}$ alternatives. Taking a histogram of parking functions partitions those trees into equivalence classes that can each be represented combinatorially by one ordered plane tree, reducing the distinct histogram configurations to Catalan-in-$n$. 
+
+
+%\tr{sorted parking functions are Dyck paths} \textcolor{cyan}{thoughts?}
+
+%\tr{tree intuition}
+
+
+
+
+\subsection{Probabilistic Combinatorics Perspectives on the Hawkes Cluster}
+
+% \tr{we need to make this more precise. maybe state as a lemma or something. I'll think about it}'
+
+%\tr{probably need to talk more about end-state conditioning} \textcolor{cyan}{what do u think}
+
+Recently, parking functions have been studied in probabilistic contexts, where these combinatorial objects are sampled uniformly from the set of those with the same length \citep[see, e.g.,][]{diaconis2017probabilizing,kenyon2023parking}. Even more recently, these same objects have been seen to be hidden within Hawkes clusters. \citet{daw2023conditional} first proved that, given the cluster size, the compensator-transformed cluster points are conditionally uniform on a certain polytope that can be parsimoniously partitioned by uniformly random parking functions, and \citet{daw2026asymmetries} then found that uniformly random parking functions also appear in the cluster's original temporal space through the same conditioning on the cluster size.  
+%(though the two parking functions need not be the same on each sample path). 
+%in distributional equivalence between the parking function's preference count and the cluster's self-excited progeny tree of which points were generated in direct response to which predecessors. 
+In this \emph{end-state conditioning}, the Hawkes cluster model is constructed in opposite order from time: first the total size, then the tree of which points respond to which, and then finally the time between points. In Definition~\ref{def:combx-duration}, we give this construction in its simplest form here for this study of the Hawkes process with its simplest kernel.
+
+%With the above combinatorial tools, we can construct an equivalent definition of the Markovian Hawkes Cluster duration around preference-count vectors. A key step is \textit{end-state conditioning}, conditioning on the total number of arrivals $N$. Then the parking functions $\pi$ that describe branching-sample-paths become uniform, as proved in \cite{daw2023conditional}.
+
+\begin{definition}[Combinatorial Cluster Duration] \label{def:combx-duration}
+Let $\tau \geq 0$ be constructed as follows:
+\begin{enumerate}[i)]
+    \item Sample $N \sim \mathrm{Borel}(\rho)$ as the \emph{size} of the cluster. If $N=1$, then $\tau = 0$.
+    \item Given $N = n + 1$ for $n \in \mathbb{Z}_+$, sample a length-$n$ preference count $\kappa$ according to the distribution 
+    \begin{align}
+\PP{\kappa_1 = k_1, \dots, \kappa_n = k_n}
+&=
+\frac{1}{(n+1)^{n-1}}{n \choose k_1, \dots, k_n}
+=
+\frac{n!}{(n+1)^{n-1}\prod_{i=1}^n k_i !}
+.
+\label{kappaDist}
+\end{align}
+    \item Given $\kappa$ with cumulative form $\kappa^+$, sample $Z_i \sim \mathrm{Exp}(\kappa^+_i -i  + 1)$ independently for each $i \in \{1, \dots, n\}$.
+\end{enumerate}
+Then, let $\tau := \sum_{i=1}^{N-1} Z_i$ be the \emph{combinatorially constructed cluster duration}.   
+\hfill \Halmos
+\end{definition}
+
+\noindent\textit{Remark.} The $\tau$ constructed in Definition~\ref{def:combx-duration} has the same distribution as the cluster duration $\tau:=\tau_{N-1}$ defined from \eqref{intensityDefEq}.
+
+\noindent\textit{Remark (notation).} $k_i$, for $i\in\{1,\dots,n\}$, is a fixed nonnegative-integer value of $\kappa_i$; admissible full vectors satisfy $\sum_{i=1}^n k_i=n$ and $\sum_{j=1}^i k_j\geq i$ for every $1\leq i\leq n$. In Lemma~\ref{kappaCPMF1}: In the conditional PMF, $k_1,\dots,k_m$ specify the conditioning prefix on its positive-probability support, and $k_{m+1}$ is the candidate next count, with $0\leq k_{m+1}\leq n-k_m^+$ and $k_m^++k_{m+1}\geq m+1$. For $N=n+1\geq2$, the variables $(Z_i)_{i=1}^n$ are independent conditional on $\kappa$ and $N$, with conditional exponential rates $\kappa_i^+-i+1$; no $Z_i$ is required when $N=1$. $k$ is the dummy integer summation index ranging over $\{0,\dots,n-\kappa_m^+\}$ when evaluating the conditional expectation given $\kappa_1,\dots,\kappa_m$.
+
+
+By Theorem 1 of \citet{daw2026asymmetries} (or Theorem 6 therein for the most specific case), the duration $\tau$ constructed in Definition~\ref{def:combx-duration} is equivalent to the $\tau$ defined by the intensity-based model construction from \eqref{intensityDefEq}. Accordingly, we will base from this construction of $\tau$ in the proofs of our main results. By comparison to \citet{daw2023conditional} or \citet{daw2026asymmetries}, Definition~\ref{def:combx-duration} skips over the dependence on a random parking function $\pi$ and proceeds straight to a random preference count $\kappa$, rather than having the latter being determined by the former. In doing so, we focus on the interpretability of the model via the tree given by $\kappa$, and the distribution of $\kappa$ in \eqref{kappaDist} follows directly from $\kappa_i(\pi) = |\{\ell : \pi_\ell = i \}|$ for a uniformly random $\pi$.
+
+%\tr{Theorem 1 for the general result, and Theorem 6 most specifically}
+
+%As shown in Theorem 5 of \cite{daw2026asymmetries}, the Combinatorial Cluster Duration is distributionally equivalent to the intensity-baded duration $\tau$ defined in \ref{sec: intro}.  In fact, the entire chronology of arrival times can be constructed by the memorylessness property of the exponential distribution, which implies that the $i$th interarrival time is described by $Z_i$, but in this paper, we are concerned primarily with the final arrival time. The core idea we leverage is that, when given a subset of values of a parking function, the remainder of values must be a generalized parking function on the remainder of spaces, which helps us find the distribution of $\kappa(\pi)$. Then, from $\kappa$, we can derive an unconditional expression for the mean of $\tau$.
+
+
+\section{Two Technical Lemmas for Random Preference Counts}\label{lemmaSec}
+
+To leverage this $\kappa$-first construction in Definition~\ref{def:combx-duration}, let us develop two distributional results for the random preference count. The first is a distribution of the next component of $\kappa$ given the preceding components.
+
+\begin{lemma}\label{kappaCPMF1}
+For $n \in \mathbb{Z}_+$, let $\kappa$ be a length-$n$ preference count with distribution given by~\eqref{kappaDist}. Then, the conditional distribution of $\kappa_{m+1}$ given $\kappa_1$ through $\kappa_m$ has probability mass function (PMF) given by
+\begin{align}
+\PP{\kappa_{m+1} = k_{m+1} \mid \kappa_1 = k_1, \dots, \kappa_m = k_m}
+&=
+\frac{k_{m+1}^+ - m}{k_m^+ - m + 1}
+{n - k_m^+ \choose k_{m+1}}
+\frac{\left(n-m\right)^{n-k_{m+1}^+-1}}{(n-m+1)^{n-k_m^+-1}}
+,
+\end{align}
+for each $m < n$, meaning that $\kappa_{m+1} | (\kappa_1, \dots, \kappa_m) \stackrel{\mathsf{D}}{=} X_m + Y_m$, where, given $\kappa_m^+$,
+\begin{align}
+X_m | Y_m
+\sim 
+\mathsf{Bin}\left(
+n - \kappa_m^+ - Y_m
+,
+\frac{1}{n-m+1}
+\right)
+\qquad
+\text{ and }
+\qquad
+Y_m \sim 
+\mathsf{Bern}\left(\frac{n-\kappa_m^+}{(n-m)(\kappa_m^+ - m + 1)} \right)
+,
+\end{align}
+with $(\kappa_1 - 1) \sim \mathsf{Bin}\left(n-1, 1/(n+1)\right)$.
+\end{lemma}
+
+\noindent\textit{Remark (notation).} $Y_m$ has its stated Bernoulli law conditional on $\kappa_m^+$ and is the component on which the conditional binomial law of $X_m$ depends. $X_m$ is an auxiliary count whose binomial law is conditional on both $\kappa_m^+$ and $Y_m$, with support $\{0,\dots,n-\kappa_m^+-Y_m\}$.
+
+\proof{Proof.}
+To start, let us first find the probability of the event that $\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m$. 
+Consider the underlying parking function $\pi$ which gives $\kappa = \kappa(\pi)$.
+Thinking first of $\kappa_1 = k_1$, there are ${n \choose k_1}$ ways to arrange these $k_1$ occurrences of the value $1$ within $\pi$. Moving on, this leaves ${n - k_1 \choose k_2}$ ways to have $\kappa_2 = k_2$, ${n - k_1 - k_2 \choose k_3}$ ways to have $\kappa_3 = k_3$, and so on, for $\prod_{i=1}^m {n - k_{i-1}^+ \choose k_i}$ ways to place the corresponding amounts of the values 1 through $m$ in the vector of length $n$, where we take $k_0^+ = 0$. Then, there remain $n - k_m^+$ unassigned coordinates within the length-$n$ parking function on which the $n-m$ remaining values must be placed. Hence, this remainder constitutes a generalized parking function of length $n - k_m^+$ over $n-m$ preferences. By, e.g., Theorem 2.3 of \citet{kenyon2023parking}, there are $(k_m^+-m+1)(n-m+1)^{n - k_m^+-1}$ such generalized parking functions. Hence, because $\pi$ is uniformly random and because there are $(n+1)^{n-1}$ parking functions of length $n$, we thus have
+\begin{align}
+\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m}
+&=
+(k_m^+-m+1)
+\frac{(n-m+1)^{n - k_m^+-1}}{(n+1)^{n-1}}
+\prod_{i=1}^m {n - k_{i-1}^+ \choose k_i}
+.
+\end{align}
+Then, by conditioning and simplifying, we now find
+\begin{align}
+\PP{\kappa_{m+1} = k_{m+1} \mid \kappa_1 = k_1, \dots, \kappa_m = k_m}
+%&=
+%\frac{\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m, \kappa_{m+1} = k_{m+1}}}{\PP{\kappa_1 = k_1, \kappa_2 = k_2, \dots, \kappa_m = k_m}}
+%\\
+&=
+\frac{
+(k_{m+1}^+-m)
+(n-m)^{n - k_{m+1}^+-1}
+}
+{
+(k_m^+-m+1)
+(n-m+1)^{n - k_m^+-1}
+}
+{n - k_{m}^+ \choose k_{m+1}}
+,
+\end{align}
+which achieves the stated conditional PMF of $\kappa_{m+1}$ given $\kappa_1$ through $\kappa_m$.
+Finally, one can quickly verify that $X_m + Y_m$ satisfies the same conditional PMF given $\kappa_m^+$, and this check completes the proof.
+%To complete the proof, let us now show that the sum of $X_m$ and $Z_m$ has the same PMF. From the definitions of $X_m$ and $Z_m$, we have that, given $\kappa_m^+ = k_m^+$, we can further condition across the two possibilities for $Z_m$ and find through simplifying that
+%\begin{align}
+%\PP{X_m + Z_m = k \mid \kappa_m^+ = k_m^+}
+%&=
+%\PP{X_m = k - 1 \mid \kappa_m^+ = k_m^+, Z_m = 1}\PP{Z_m = 1 \mid \kappa_m^+ = k_m^+}
+%\nonumber
+%\\
+%&
+%\quad
+%+
+%\PP{X_m = k \mid \kappa_m^+ = k_m^+, Z_m = 0}\PP{Z_m = 0 \mid \kappa_m^+ = k_m^+}
+%\\
+%&=
+%{n - k_m^+ - 1 \choose k-1}\frac{(n-m)^{n-k_m^+-k}}{(n-m+1)^{n-k_m^+-1}}
+%\left(\frac{n-k_m^+}{(n-m)(k_m^+ - m + 1)} \right)
+%\nonumber
+%\\
+%&
+%\quad
+%+
+%{n - k_m^+ \choose k}\frac{(n-m)^{n-k_m^+-k}}{(n-m+1)^{n-k_m^+}}
+%\left(1- \frac{n-k_m^+}{(n-m)(k_m^+ - m + 1)} \right)
+%\\
+%%%%%%%%%%%%%%%%%%%%
+%&=
+%{n - k_m^+ \choose k}\frac{(n-m)^{n-k_m^+-k-1}}{(n-m+1)^{n-k_m^+-1}}
+%\left(
+%\frac{k
+%+
+%k_m^+
+%- 
+%m }{k_m^+-m+1}
+%\right)
+%,
+%\end{align}
+%and, at $k = k_{m+1}$, this expression matches the stated conditional PMF for $\kappa_{m+1}^+$.
+\hfill\Halmos\endproof
+
+Now, for our second technical lemma, let us use the conditional distribution from Lemma~\ref{kappaCPMF1} to find the expected value of $1/(\kappa_{m+1}^+ - m)$ as a recurrence relation indexed by $m$.
+
+%The second lemma characterizes an important intermediate step in the calculation of the mean. Given $N = n+1$, Definition~\ref{def:combx-duration}  implies that
+%\begin{align*}
+%\E{\tau \mid N = n + 1}
+%&=
+%\sum_{i=0}^{n-1}\E{Z_i}
+%=
+%\sum_{i=0}^{n-1}\E{\frac{1}{\kappa_{i+1}^+ - i}}
+%,
+%\end{align*}
+%where we here have suppressed the dependence of $\kappa$ on $\pi$. 
+
+
+
+\begin{lemma}\label{meanRecur1}
+For $n \in \mathbb{Z}_+$, let $\kappa$ be a length-$n$ preference count with distribution given by~\eqref{kappaDist}. Then, for each $m \in \{0, 1, \dots, n - 1\}$,
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+&=
+\left(1 + \frac{1}{n-m}\right)\E{\frac{1}{\kappa_m^+ - m + 1}}
+-
+{n \choose m}\frac{(m+1)^{m-1}}{(n+1)^{n-1}}(n-m)^{n-m-1}
+,
+\end{align}
+where $\PP{\kappa_0^+ = 0} = 1$.
+\end{lemma}
+\proof{Proof.} Let us start by first proving the following conditional statement:
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+  - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}
+&=
+\frac{1}{\kappa_m^+ - m + 1}\left(1 + \frac{1}{n-m}\right)
+-
+\left(\frac{n-m}{n-m+1}\right)^{n-m-1}\mathbf{1}\left\{ \kappa_m^+ = m\right\}
+\label{condMeanEq1}
+.
+\end{align}
+From the conditional distribution of $\kappa_{m+1}$ in Lemma~\ref{kappaCPMF1}, we can recognize that $\kappa_{m+1}$ only has a positive probability of being equal to 0 if $\kappa_m^+ > m$; otherwise, if $\kappa_m^+ = m$, then $\kappa_{m+1} \geq 1$. Furthermore, by definition, we have that $\kappa_{m+1} \leq n - \kappa_m^+$. Hence, we can write the conditional expectation of $1/(\kappa_{m+1} + \kappa_m^+ - m)$ as
+\begin{align}
+%\E{\frac{1}{\kappa_{m+1} + \kappa_m^+ - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}
+%&=
+\sum_{k=0}^{n-\kappa_m^+}
+\frac{1}{\kappa_m^+ - m + 1}
+{n - \kappa_m^+ \choose k}
+\frac{\left(n-m\right)^{n-k-\kappa_{m}^+-1}}{(n-m+1)^{n-k_m^+-1}}
+\nonumber
+%\\
+%&
+%\quad
+-
+\frac{\left(n-m\right)^{n-m-1}}{(n-m+1)^{n-m-1}}
+\mathsf{1}\{\kappa_m^+ = m\}
+.
+\end{align}
+Seeing as the shift term is precisely the lattermost quantity in the stated result, let us now focus on evaluating the sum. Moving forward terms which do not depend on $k$, we can apply the binomial theorem and find
+\begin{align*}
+\frac{1}{(n-m)(\kappa_m^+ - m + 1)(n-m+1)^{n-\kappa_m^+-1}}
+\sum_{k=0}^{n-\kappa_m^+}
+{n - \kappa_m^+ \choose k}
+\left(n-m\right)^{n-\kappa_{m}^+-k}
+&=
+\frac{n-m+1}{(n-m)(\kappa_m^+ - m + 1)}
+,
+\end{align*}
+and, together with the shift term, this now simplifies to the stated expression in \eqref{condMeanEq1}.
+
+We can now apply total probability to complete the proof of the original statement. Naturally, \eqref{condMeanEq1} yields
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+%&=
+%\E{\E{\frac{1}{\kappa_{m+1} + \kappa_m^+ - m} ~\bigg|~ \kappa_1, \dots, \kappa_m}}
+%\\
+&=
+\left(1 + \frac{1}{n-m}\right)\E{\frac{1}{\kappa_m^+ - m + 1}}
+-
+\left(\frac{n-m}{n-m+1}\right)^{n-m-1}\PP{\kappa_m^+ = m}
+,
+\end{align}
+and thus all that is left to evaluate is $\PP{\kappa_m^+ = m}$. For this, we can simply observe that, for $\kappa_m^+$ to be equal to $m$, then the underlying parking function can actually be split into two different smaller parking functions: one of length $m$, which contains the values 1 through $m$, and one of length $n - m$, which contains the values $m+1$ through $n$. Because there are $(m+1)^{m-1}$ parking functions of length $m$, $(n-m+1)^{n-m-1}$ parking functions of length $n-m$, and ${n \choose m}$ ways to arrange the two  smaller parking functions into one parking function of length $n$, we have that
+$
+\PP{\kappa_m^+ = m}
+=
+{n \choose m}\frac{(m+1)^{m-1}}{(n+1)^{n-1}}(n-m+1)^{n-m-1}
+$,
+and, with this expression, now we can simplify to the stated result.
+\hfill\Halmos\endproof
+
+The recurrence relation of the expectations in Lemma~\ref{meanRecur1} now immediately yields the following solution.
+
+
+
+\begin{corollary}\label{meanRecurSolve1}
+For $m < n$, let $\kappa$ be a length-$n$ preference count with distribution given by~\eqref{kappaDist}. Then,
+\begin{align}
+\E{\frac{1}{\kappa_{m+1}^+ - m} }
+&=
+\frac{n+1}{n-m}
+-
+\frac{1}{n-m}
+\sum_{i=0}^m
+{n \choose i}
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}
+.
+\end{align}
+\end{corollary}
+
+\noindent\textit{Remark.} $n\in\mathbb{Z}_+$ and $m\in\{0,\dots,n-1\}$.
+
+
+
+%\proof{Proof.} Follows by the telescoping that occurrs when summing differences over $i \in [m]$. \hfill\Halmos\endproof
+
+% \begingroup\color{blue}
+% Conditional on $N=n+1$, let $a_m=\E{1/(\kappa_{m+1}^+-m)}$, with $a_{-1}=1$. Multiplying the recurrence in Lemma~\ref{meanRecur1} by $n-m$ yields
+% \begin{equation*}
+% (n-m)a_m=(n-m+1)a_{m-1}
+% -\binom{n}{m}
+% \left(\frac{m+1}{n+1}\right)^{m-1}
+% \left(\frac{n-m}{n+1}\right)^{n-m}.
+% \end{equation*}
+% Summing the differences over $i=0,\ldots,m$ telescopes: for $0\leq i<m$, the term $(n-i)a_i$ cancels the negative term at index $i+1$, leaving
+% \begin{align*}
+% (n-m)a_m-(n+1)a_{-1}
+% &=\sum_{i=0}^{m}\bigl[(n-i)a_i-(n-i+1)a_{i-1}\bigr]\\
+% &=-\sum_{i=0}^{m}\binom{n}{i}
+% \left(\frac{i+1}{n+1}\right)^{i-1}
+% \left(\frac{n-i}{n+1}\right)^{n-i}.
+% \end{align*}
+% Substituting $a_{-1}=1$ and dividing by $n-m$ gives the stated formula.
+% \endgroup
+% \hfill\Halmos\endproof
+
+\section{Proofs of Main Results}\label{proofSec}
+
+With this knowledge of $\kappa$ in hand, we can now prove our main results, Theorem \ref{meanIdThm1} and Corollary \ref{corIdThm1}. 
+
+\subsection{Proof of Theorem \ref{meanIdThm1}}
+
+\proof{Proof.}Let us start the analysis of the mean of $\tau$ through end-state conditioning on the cluster's size:
+\begin{align}
+\E{\tau}
+=
+\sum_{n=0}^\infty \E{\tau \mid N = n+1}\PP{N=n+1}
+=
+\sum_{n=1}^\infty \sum_{m=0}^{n-1} \E{\frac{1}{\kappa_{m+1}^+-m}}  (n+1)^{n-1} \frac{\rho^n e^{-\rho(n+1)}}{n!} 
+,
+\label{thisOne}
+\end{align}
+where one should notice that we have dropped the $n=0$ index from the summation as $\E{\tau \mid N = 1} = 0$ by definition. We can now see that Corollary~\ref{meanRecurSolve1} contains exactly the means of the exponential random variables in step (iii) of Definition~\ref{def:combx-duration}, which are the only remaining expectations in \eqref{thisOne}. By applying Corollary~\ref{meanRecurSolve1} and canceling like terms, we can now split this expression into two separate sums,
+\begin{align}
+\E{\tau}
+&=
+\sum_{n=1}^\infty 
+\sum_{m=0}^{n-1}
+\left(
+\frac{n+1}{n-m}
+-
+\frac{1}{n-m}
+\sum_{i=0}^m
+{n \choose i}
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}
+\right)
+(n+1)^{n-1} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+%%%%%%%%%%%%%%
+\\
+&=
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+-
+\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ .
+ \label{twoSumEq1}
+\end{align}
+Let us analyze each sum separately. 
+
+Starting with the latter, we can first quickly recognize that by exchanging the order of the summations indexed by $m$ and by $i$, we obtain another Harmonic number, $\mathsf{H}_{n-i}$. Then, we next exchange the order of summations over $i$ and over $n$, and, after doing so, we can extract terms that depend on $i$ alone so that the innermost summation is universally a function of the difference between $n$ and $i$. Together, this yields
+\begin{align*}
+\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ \nonumber
+ &=
+ \sum_{n=1}^\infty
+\sum_{i=0}^{n-1}
+\mathsf{H}_{n-i}
+\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+ \\
+  &=
+ \sum_{i=0}^\infty
+ \frac{\left(\rho({i+1})\right)^{i} }{(i+1)!}
+ \rho e^{-\rho(i+1)}
+\sum_{n=i+1}^{\infty}
+\mathsf{H}_{n-i}
+ \frac{\left(\rho(n-i)\right)^{n-i} e^{-\rho(n-i)}}{\rho(n-i)!}
+ ,
+\end{align*}
+and at this point we can recognize that we have two autonomous sums. By re-indexing the right summation to be in terms of $\ell = n - i$, we find that it is equivalent to
+\begin{align}
+\sum_{\ell=1}^{\infty}
+\mathsf{H}_{\ell}
+ \frac{\left(\rho\ell\right)^{\ell} e^{-\rho\ell}}{\rho \ell!}
+ &=
+ \sum_{\ell=1}^{\infty}
+\ell \mathsf{H}_{\ell}
+ \frac{\left(\rho\ell\right)^{\ell-1} e^{-\rho\ell}}{ \ell!}
+ =
+ \E{B \mathsf{H}_B}
+ ,
+\end{align}
+for $B \sim \mathsf{Borel}(\rho)$. Then, the left summation can similarly be observed to be 
+\begin{align}
+ \sum_{i=0}^\infty
+ \frac{\left(\rho({i+1})\right)^{i} }{(i+1)!}
+ \rho e^{-\rho(i+1)}
+ &=
+ \rho
+  \sum_{j=1}^\infty
+ \frac{\left(\rho j\right)^{j-1} }{j!}
+ e^{-\rho j}
+ =
+ \rho
+ .
+\end{align}
+Hence, the latter sum in \eqref{twoSumEq1} simplifies to $\rho \E{B \mathsf{H}_B}$.
+
+Now, for the former sum in \eqref{twoSumEq1}, we can again identify an expectation of a function of $B$ after some quick manipulation. By multiplying and dividing by $n+1$, we can recognize that this is the truncated expectation of $B \mathsf{H}_{B-1}$ when $B$ is restricted to being at least 2:
+\begin{align}
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+&=
+\sum_{n=1}^\infty 
+(n+1)\mathsf{H}_n  \frac{\left(\rho(n+1)\right)^n e^{-\rho(n+1)}}{(n+1)!}
+=
+\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}}
+.
+\end{align}
+Hence, \eqref{twoSumEq1} now simplifies to
+\begin{align}
+\E{\tau}
+&=
+\sum_{n=1}^\infty 
+\mathsf{H}_n (n+1)^{n} \frac{\rho^n e^{-\rho(n+1)}}{n!}
+-
+\sum_{n=1}^\infty
+\sum_{m=0}^{n-1}
+\sum_{i=0}^m
+\frac{\left({i+1}\right)^{i-1}
+\left({n-i}\right)^{n-i}}{n-m}
+ \frac{\rho^n e^{-\rho(n+1)}}{i!(n-i)!}
+\\
+&=
+\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}}
+-
+\rho \E{B \mathsf{H}_{B}}
+.
+\end{align}
+Finally, let us now recognize that, at $B = 1$, then
+$
+B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}
+=
+-
+\rho
+$,
+whereas for any $B \geq 2$, we instead find that
+$
+B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}
+=
+B (\mathsf{H}_{B-1} - \mathsf{H}_B)
++
+(1-\rho) B \mathsf{H}_{B}
+=
+-1
++
+(1-\rho) B \mathsf{H}_{B}
+$.
+Thus, we have by linearity of expectation that
+$\E{B \mathsf{H}_{B-1} \mathbf{1}\{B \geq 2\}
+-
+\rho B \mathsf{H}_{B}}
+=
+(1-\rho)\E{B \mathsf{H}_\mathsf{B}}
+-
+1$.
+\hfill\Halmos\endproof
+
+
+\subsection{Proof of Corollary \ref{corIdThm1}}
+
+%The following corollary simplifies the above expression to an easily computable integral by using the Eulerian identity of Harmonic numbers [cite].
+
+
+\proof{Proof.} First, by the Eulerian representation of the $j$th Harmonic number as $\mathsf{H}_j = \int_0^1 (1-x^j)/(1-x) \mathrm{d}x$ \citep[e.g.,][sec. 2.2]{lagarias2013euler}, Theorem~\ref{meanIdThm1} can be re-expressed as
+\begin{align}
+\E{\tau}
+&=
+(1-\rho)\E{B \mathsf{H}_B} - 1
+=
+(1-\rho)\int_0^1\frac{\E{B} - \E{B x^B}}{1-x}\mathrm{d}x
+-
+1
+%=
+%(1-\rho)\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} - \E{B x^B} \right)\mathrm{d}x
+.
+\end{align}
+%Now, $\E{B} = 1/(1-\rho)$, and $\E{B x^B}$ is equal to the first derivative of the probability generating function (PGF) of $B$ multiplied by $x$. 
+By leveraging the fact that the PGF of the Borel distribution can be expressed through the principal branch of the Lambert-W function ($\mathsf{W}_0(\cdot)$) \citep[e.g.,][eq. 3.1]{corless1996lambert}, we can write
+\begin{align}
+\E{B x^B}
+&=
+x \frac{\partial}{\partial x}
+\left(
+\E{x^B}
+\right)
+=
+x \frac{\partial}{\partial x}
+\left(
+-\frac{1}{\rho}\mathsf{W}_0\left(-x \rho e^{-\rho}\right)
+\right)
+=
+-
+\frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)
+;
+\end{align}
+hence the integral may be equivalently written as
+\begin{align}
+\int_0^1\frac{\E{B} - \E{B x^B}}{1-x}\mathrm{d}x
+&=
+\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} +  \frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)\right)\mathrm{d}x
+.
+\end{align}
+
+To further simplify this integral, let us apply a change of variable. Let $u = - \mathsf{W}_0(-x\rho e^{-\rho})$. Then, at $x=0$, $u = -\mathsf{W}_0(0) = 0$, and at $x=1$, $u = -\mathsf{W}_0(-\rho e^{-\rho}) = \rho$. Moreover, by the defining property of the Lambert-W, $\mathsf{W}_0(z) e^{\mathsf{W}_0(z)} = z$, we can express $x$ in terms of $u$ via $-u e^{-u} = \mathsf{W}_0(-x\rho e^{-\rho}) e^{\mathsf{W}_0(-x\rho e^{-\rho})} = - x \rho e^{-\rho}$ implying that $x = u e^{-u} / (\rho e^{-\rho})$. By consequence, we also have that $\mathrm{d}x = \mathrm{d}u (e^{-u} - u e^{-u})/(\rho e^{-\rho})$. Thus, the integral over $x$ is equivalent to
+\begin{align}
+\int_0^1\frac{1}{1-x}\left(\frac{1}{1-\rho} +  \frac{1}{\rho}
+\left(
+\frac{\mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+{1 + \mathsf{W}_0\left(-x \rho e^{-\rho}\right)}
+\right)\right)\mathrm{d}x
+&=
+\int_0^\rho
+\frac{e^{-u} - u e^{-u}}{\rho e^{-\rho} - u e^{-u}}
+\left(
+\frac{1}{1-\rho}
+-
+\frac{u}{\rho(1-u)}
+\right)
+\mathrm{d}u
+\\
+&=
+\frac{1}{\rho(1-\rho)}
+\int_0^\rho
+\frac{\rho e^{-u} - u e^{-u}}{\rho e^{-\rho} - u e^{-u}} \mathrm{d}u
+.
+\end{align}
+Returning to the expression for the mean duration, we now have
+\begin{align}
+\E{\tau}
+&=
+\frac{1}{\rho}
+\int_0^\rho
+\frac{\rho e^{-u} - u e^{-u}}{\rho e^{-\rho} - u e^{-u}} 
+\mathrm{d}u
+-
+1
+=
+\frac{1}{\rho}
+\int_0^\rho
+\frac{\rho e^{-u} - \rho e^{-\rho}}{\rho e^{-\rho} - u e^{-u}} 
+\mathrm{d}u
+,
+\end{align}
+and this immediately simplifies to the stated result.
+\hfill\Halmos\endproof
+
+\section{Discussion}\label{concSec}
+
+
+%We have provided closed-form expressions for the mean duration of the Markovian Hawkes Cluster, and clarified the probabilistic combinatorics needed to achieve it. The use of end-state conditioning and conditional uniformity of the underlying branching-process objects, like parking functions and preference-count vectors led us to a broader distributional understanding, and allowed us to connect the internal discrete structure with a more complex sum-of-exponential continuous time structure, pointing to similar methods for other Hawkes kernels. It also naturally extends to an exact sampling scheme, using the fact that the size $N$ can be sampled from a $\mathrm{Borel}(\rho)$ distribution, the response-counts can be conditionally constructed as the unique rotation of a uniform-multinomial sample as shown in  \cite{janson2012simply}, and the duration can be constructed as the sum of exponential random variables from Definition \ref{def:combx-duration}. The new understanding is especially apparent when we look at different ways to characterize the cluster length. Previously, the best way to characterize it was by the discrete size $N$ with mean $\frac{1}{1-\rho}$, but now we newly understand the continuous duration $\tau$ with mean $
+%\int_0^\rho
+%\frac{e^{-u} - e^{-\rho}}{\rho e^{-\rho} - u e^{-u}}\mathrm{d}u
+%$.   We see that the mean of $\tau$ increases logarithmically in the mean of $N$, suggesting that in operational settings like finance, service, or advertising, even a large increase in new events will not increase the time of the process proportionally.  
+
+
+
+% In this paper we used probabilistic combinatorics to reduce the sample-size from exponential-in-$n$ parking functions to Catalan-numbered Dyck paths, allowing us to simultaneously forget the original order of the parking function and derive a closed-form expression for the Markovian Hawkes Cluster duration mean. This naturally leads to an exact sampling scheme, using the fact that the size $N$ can be sampled from a $\mathrm{Borel}(\rho)$ distribution, the response-counts can be conditionally constructed as the unique rotation of a uniform-multinomial sample as shown in  \cite{janson2012simply}, and the duration can be constructed as the sum of exponential random variables from Definition \ref{def:combx-duration}. 
+
+Methodologically, let us note that there may be other proof techniques that could produce these results: for instance, the \citet{moller2005perfect} ODE for $F$ could possibly be used to obtain Corollary~\ref{corIdThm1}, and the $\mathsf{Borel}(\rho)$ identity in Theorem~\ref{meanIdThm1} could then likely be reverse-engineered from the proof of Corollary~\ref{corIdThm1} here. However, we believe that one advantage of the presented end-state conditioning approach is that it preserves interpretability for as long as possible, and we hope that this perspective could potentially provide a way forward for other kernels or other performance metrics. One hurdle for non-exponential kernels will be the lack of memorylessness, which is what allows step (iii) of Definition~\ref{def:combx-duration} to simply depend on the cumulative preference counts. Nevertheless, even in this special and simple setting, Theorem~\ref{meanIdThm1} and Corollary~\ref{corIdThm1} can provide insight. For instance, using either result, one can show that $\E{\tau}/2\log\E{N} \to 1$ as $\rho \to 1$, which demonstrates how much more extreme the growth of the expected cluster size is relative to the growth of its expected duration, and $\E{\tau} \sim -2\log(1-\rho)$ may be a useful asymptotic understanding on its own.
+
+%\tb{likely could prove corollary via moller rasmussen ODE}
+
+%\tr{only a little bit too long! things to point towards for the future:}
+
+%\tr{idea of end state conditioning for broader distributional understanding}
+
+%\tr{mean for other kernels}
+
+%\tr{could be nice to have a size vs duration contrast of $1/(1-\rho)$ vs Cor 1, especially if we tie it to a few of the recent OM/OR applications of the Hawkes.} \textcolor{cyan}{thoughts?}
+
+
+
+
+\newpage
+
+\section*{Acknowledgments}
+
+(\textit{Funding information blinded for peer review.})
+
+%We gratefully acknowledge the support of this research from the National Science Foundation (NSF) though grants CMMI-2441387 (AD and AG) and DGE-1842487 (AG). 
+
+\section*{Disclosure of AI Usage}
+
+
+
+Generative AI has been used for coding support (such as to enumerate the combinatorial objects while developing conjectures and validating results), for reference searches (such as finding a proper citation for the Eulerian Harmonic identity), and for a pre-submission review. 
+%Notably, the AI-based pre-submission review included the generation of a Lean formalization, which is also available.
+All exposition, statements, and proofs are solely by the authors. Moreover, the authors take responsibility for the correctness of all contents of the paper.
+
+
+\bibliographystyle{informs2014} 
+\bibliography{Bibliography} 
+
+
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%
+

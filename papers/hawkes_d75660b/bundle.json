@@ -1,0 +1,55 @@
+{
+  "slug": "hawkes_d75660b",
+  "dir": "bundle",
+  "paper": {
+    "dir": "corrected_paper",
+    "main": "main.tex",
+    "pdf": "main.pdf",
+    "pages": 13,
+    "compile": {
+      "status": "passed",
+      "tool": "pdflatex",
+      "reason": ""
+    }
+  },
+  "todo": {
+    "total": 0,
+    "blocking": 0
+  },
+  "lean": {
+    "files": 33,
+    "toolkit_modules": [],
+    "requires": [
+      {
+        "name": "mathlib",
+        "form": "git",
+        "git": "https://github.com/leanprover-community/mathlib4",
+        "rev": "db584cd6d46c92f209a44c0f1c829460d327499d"
+      }
+    ],
+    "toolchain": "leanprover/lean4:v4.33.0",
+    "manifest": false,
+    "check": "Check.lean",
+    "self_contained": {
+      "ok": true,
+      "problems": []
+    },
+    "base": [],
+    "warnings": [],
+    "notes": []
+  },
+  "page": "page/page.json",
+  "f4_seal": {
+    "code": "d6bcaddc2400fadb5c9340a8fefdc71f938cb96cb2d4539d63bfc0d587ee5189",
+    "problems": [],
+    "reviews": "f4_reviews.log"
+  },
+  "names": {
+    "thm:meanidthm1": "Theorem 1",
+    "thm:coridthm1": "Corollary 1",
+    "lem:kappacpmf1": "Lemma 1",
+    "lem:meanrecur1": "Lemma 2",
+    "thm:meanrecursolve1": "Corollary 2"
+  },
+  "todo_items": []
+}
