@@ -1,0 +1,335 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Management Science (mnsc) for articles with e-companion (EC)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[msom,blindrev]{informs3_no_remark} 
+%\documentclass[nonblindrev]{informs3_no_remark} 
+\documentclass[opre,nonblindrev]{informs4} 
+% current default for manuscript submission
+%\documentclass[opre,nonblindrev]{informs3}
+
+\OneAndAHalfSpacedXI % current default line spacing
+%\OneAndAHalfSpacedXII 
+%\DoubleSpacedXII
+%%\DoubleSpacedXI
+
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentstyle. For example
+%\documentclass[dvips,mnsc]{informs3}      % if dvips is used
+%\documentclass[dvipsone,mnsc]{informs3}   % if dvipsone is used, etc.
+
+% Private macros here (check that there is no clash with the style)
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+ 
+ \usepackage{tikz,calc}
+ \usetikzlibrary{decorations.markings}
+ \usepackage{soul}
+ \setul{}{0.75pt}
+ \setuloverlap{1.5pt}
+
+
+\usepackage{subfigure}
+%\usepackage{subcaption}
+\usepackage{mwe}
+\usepackage{lscape,booktabs,longtable}
+\usepackage{amsmath}
+\usepackage[pdftex,colorlinks=true,urlcolor=blue,citecolor=blue,pdfstartview=FitH]{hyperref}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[graphicx]{realboxes}
+
+\newcommand{\modone}{\mod_{\hspace{-.04in}1\hspace{.04in}}}
+
+\newcommand{\tr}{\textcolor{red}}
+\newcommand{\tb}{\textcolor{blue}}
+\newcommand{\tg}{\textcolor{mygreen}}
+
+\newcommand{\E}[1]{{\mathrm{E}\left[#1\right]}}
+\newcommand{\f}[1]{{\text{f}\left(#1\right)}}
+\newcommand{\ind}[1]{{\,\mathbf{1}\hspace{-.025in}\left\{#1\right\}}}
+\newcommand{\PP}[1]{\mathrm{P}\left( #1 \right)}
+\newcommand{\Var}[1]{{\mathrm{Var}\left(#1\right)}}
+\newcommand{\Cov}[1]{{\mathrm{Cov}[#1]}}
+\newcommand{\T}{{\mathrm{T}}}
+
+%%%% Water Mark
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Under Review}
+%\SetWatermarkScale{0.5}
+
+
+%\newtheorem{hypothesis}[theorem]{Hypothesis}
+%\newtheorem{hypothesis}{Hypothesis}
+
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+\ECRepeatTheorems
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% For new submissions, leave this number blank.
+% For revisions, input the manuscript number assigned by the on-line
+% system along with a suffix ".Rx" where x is the revision number.
+%\MANUSCRIPTNO{OPRE-2020-04-226}
+
+
+
+\begin{document}
+
+
+% For amer: \(\sum_{n=1}^\infty (\prod_{\ell=0}^{i-1}) \frac{\kappa_{\ell+1}^+ - \ell}{\kappa_{\ell+1}^+ - \ell + s} (n+1)^{n-1} \frac{\rho^n e^{-\rho(n+1)}}{n!}\)
+
+\textcolor{red}{Amer Note: $\tau_N$ denotes the \textit{last} point in the Hawkes Process, i.e. the \textit{duration}.}
+
+\begin{theorem}
+
+\[
+\mathbb{E}\left[e^{-s\tau_N}\right]
+= \mathbb{E}\left[\mathsf{G_B( s)}\right] - e^{-\rho} \mathsf{G_1( s)}
+\quad \text{where } \quad
+\mathsf{G_B(s)} = \prod_{\ell=0}^{B-1} \left(1 + \frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}, B \sim \mathrm{Borel}(\rho)
+\]
+
+\end{theorem}
+
+\proof{Proof.}
+
+By the Law of Total Expectation,  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{n=1}^{\infty} \underbrace{\mathbb{P}(N=n+1)}_{\textcircled{1}}
+\, \underbrace{\mathbb{E}\!\left[e^{-s\tau_N}\mid N=n+1\right]}_{\textcircled{2}}.
+\]
+
+\textcircled{1} We know, following the proof of Theorem 1, that  
+\[
+\mathbb{P}(N=n+1) = (n+1)^{n-1}\frac{\rho^{n} e^{-\rho(n+1)}}{n!}
+\]
+
+\textcircled{2} We know from the theory of LSTs that if \(X \overset{d}{=} Y\), then
+\(\mathbb{E}[e^{-sX}] = \mathbb{E}[e^{-sY}]\).
+
+From Daw and Yom-Tov (2024, Thm 6), we know that  
+\[
+\tau_N \overset{d}{=} \sum_{\ell=0}^{N-1} Z_{\pi_\ell,\ell}
+\quad \text{conditioned on } N=n+1.
+\]
+
+Then  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\mid N=n+1\right]
+= \mathbb{E}\!\left[e^{-s\sum_{\ell=0}^{n} Z_{\pi_\ell,\ell}}\right]
+= \prod_{\ell=0}^{n} \mathbb{E}\!\left[e^{-sZ_{\pi_\ell,\ell}}\right],
+\]
+since the LST of a sum of random variables is the product of their individual LSTs.
+
+Since $\exp(\lambda)$ has a well-known LST $\frac{\lambda}{\lambda-s}$ and \(Z_{\pi,\ell} \sim \exp(\kappa_{\ell+1}^+ - \ell)\) $$,  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\mid N=n+1\right]
+= \prod_{\ell=0}^{n}
+\frac{\kappa_{\ell+1}^+ - \ell}{\kappa_{\ell+1}^+ - \ell + s}.
+\]
+
+Overall,  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{n=1}^{\infty}
+(n+1)^{n-1}\frac{\rho^{n} e^{-\rho(n+1)}}{n!}
+\prod_{\ell=0}^{n}
+\frac{\kappa_{\ell+1}^+ - \ell}{\kappa_{\ell+1}^+ - \ell + s}.
+\]
+
+This can be written as  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{n=1}^{\infty}
+\frac{(\rho(n+1))^{n} e^{-\rho(n+1)}}{(n+1)!}
+\prod_{\ell=0}^{n}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}.
+\]
+
+Changing indices (\(j = n+1\)) gives  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{j=2}^{\infty}
+\frac{(\rho j)^{j-1} e^{-\rho j}}{j!}
+\prod_{\ell=0}^{j-1}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}.
+\]
+
+This can be expressed equivalently as  
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{j=2}^{\infty}
+\mathbb{P}(B=j)
+\prod_{\ell=0}^{B-1}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}.
+\]
+
+Where $B \sim \mathrm{Borel}(\rho)$
+
+Finally, adding back the \(j=1\) case and subtracting it explicitly,
+\[
+\mathbb{E}\!\left[e^{-s\tau_N}\right]
+= \sum_{j=1}^{\infty}
+\mathbb{P}(B=j)
+\prod_{\ell=0}^{B-1}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}
+- \mathbb{P}(B=1)
+\prod_{\ell=0}^{0}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1}.
+\]
+
+Now, letting 
+\[
+\mathsf{G_x(s)}=\prod_{\ell=0}^{x-1}
+\left(1+\frac{s}{\kappa_{\ell+1}^+ - \ell}\right)^{-1} 
+\]
+
+We retrieve
+\[E[e^{-s\tau_N}]= \sum\limits_{j=1}^\infty \mathbb{P}(B=j) \mathsf{G_B( s)} - \mathbb{P}(B=1) \mathsf{G_1( s)} =  \mathbb{E}\!\left[\mathsf{G_B( s)}\right]
+- e^{-\rho}\mathsf{G_1( s)} \]  $\square$
+
+
+\textcolor{red}{Amer: Seems nice! following the style of thm 1, I tried to isolate the randomness here to \textit{just} the Borel random variable. I tried following your notation for $H_B$, showing that this is a expression depending on $B$ (but it also depends on $s$ since it's an LST which uses $s$). Also note $G_B(s)$ is monotonic in $s$, which hopefully makes it easier to approximate or think about. Also, ideally products like this play nicely with probabilities/set intersections/bounds. See what you think!}
+
+\textcolor{red}{I had ChatGPT plot a quick example of the LST where $\kappa_{\ell+1}^+ = \ell + 2$ and $\rho=0.5$ as a sanity check. Monotonic in $s$!}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\linewidth]{amers/LST_graph.png}
+\end{figure}
+
+
+help!
+
+\[ \mathbb{P} ({\tau < t}) = \sum_n^\infty (\mathbb{P}( \tau < t | N=n)) \underbrace{(\mathbb{P}(N=n))}_{\text{Borel}} \]
+
+\[ \mathbb{P} ({\tau < t}) = \sum_n^\infty \sum_{h \in H_n} (\mathbb{P} \sum_{j=1}^n \sum_{i=1}^{h_j} \text{Exp(j)} \mid h, N=n)\underbrace{(\mathbb{P}(h))}_{\text{number of d in h / total d}}\underbrace{(\mathbb{P}(N=n))}_{\text{Borel}} \]
+
+\[ \mathbb{P} ({\tau < t}) = \sum_n^\infty \sum_{h \in H_n} (\mathbb{P} \sum_{j=1}^n \Gamma(h_j, j) \mid h, N=n)\underbrace{(\mathbb{P}(h))}_{\text{number of d in h / total d}}\underbrace{(\mathbb{P}(N=n))}_{\text{Borel}} \]
+
+Notes:
+
+\begin{enumerate}
+    \item All Gammas are \textit{conditionally} independent given $h,n$
+    \item pdf of sum of independent gammas is known (?) in explicit form (\hyperlink{https://www-personal.umd.umich.edu/~fmassey/gammaRV/}{here}). 
+    \begin{enumerate}
+        \item Note that the shape $h_j$ is FIXED (not random) because it is inside the $h$-conditioning. 
+        \item Additionally, the rate $i$ is a deterministic index, not random.
+    \end{enumerate}
+    I.E. these gammas are deterministic, the pdf should be expressable in closed form.
+    \item $h \in H_n$ is \textit{deterministically and exhaustively} identified by all feasible integer lattice points within the polytope:
+    \begin{enumerate}
+        \item $1 \le h_i^+ \le n$
+        \item $ h_i^+ \ge \min(h_{i-1}^+ +1, n)$
+    \end{enumerate}
+    Which is affinely isomorphic (geniunely just a translation up) to the $n-1$ dimensional simplex $\Delta_n$. Moreover, $H_n = \bigsqcup_{m=1}^n H_m$ where $H_m$ can be deterministically characterized by the integer lattice points inside the polytope (translation) of $\Delta_m$ given by 
+    \begin{enumerate}
+        \item $1 < h_i$
+        \item $ n = \sum_{i=1}^m h_i $ 
+    \end{enumerate}
+\end{enumerate}
+
+
+\section*{Acknowledgements} 
+
+
+\tb{we can't forget to thank the NSF!}
+
+\begin{proposition}[Multinomial rotation representation]
+Conditional on $N=n+1$, let
+\[
+(X_1,\ldots,X_{n+1})
+\sim
+\operatorname{Multinomial}
+\left(n;\frac{1}{n+1},\ldots,\frac{1}{n+1}\right).
+\]
+Define
+\[
+S_0=0,
+\qquad
+S_j=\sum_{i=1}^{j}(X_i-1),
+\quad 1\leq j\leq n,
+\]
+and let $r$ be the first index at which $S_0,\ldots,S_n$
+attains its minimum. Rotate the vector so that it begins immediately
+after $r$. The final coordinate of the rotated vector is zero, and,
+after deleting it, the remaining vector has the distribution of
+$\boldsymbol{\kappa}\mid N=n+1$.
+\end{proposition}
+
+\begin{proof}
+There are $n$ balls distributed among $n+1$ coordinates, so
+\[
+\sum_{i=1}^{n+1}(X_i-1)=-1.
+\]
+The cycle lemma states that a sequence of integers, each at least
+$-1$ and with total sum $-1$, has a unique cyclic rotation whose
+proper partial sums are all nonnegative. This rotation is obtained
+by beginning immediately after the first minimum of the original
+partial sums; see \cite[Corollary~14.4]{janson2012simply}. Therefore,
+if $(Y_1,\ldots,Y_{n+1})$ denotes the rotated vector, then
+\[
+\sum_{i=1}^{j}Y_i\geq j,
+\qquad 1\leq j\leq n.
+\]
+Because the total sum is $n$, the last coordinate must be $Y_{n+1}=0$.
+Thus, after deleting this coordinate, the vector
+$\mathbf{k}=(Y_1,\ldots,Y_n)$ satisfies
+\[
+k_i^+=\sum_{j=1}^{i}k_j\geq i,
+\qquad 1\leq i\leq n,
+\]
+which is exactly the feasibility condition for the response-count
+vector.
+
+Every feasible vector $\mathbf{k}$ arises from each of the $n+1$
+cyclic rotations of $(\mathbf{k},0)$. Each such multinomial vector
+has probability
+\[
+\frac{n!}{(n+1)^n\prod_{i=1}^{n}k_i!}.
+\]
+It follows that
+\[
+\Pr(\boldsymbol{\kappa}=\mathbf{k}\mid N=n+1)
+=
+(n+1)\frac{n!}{(n+1)^n\prod_{i=1}^{n}k_i!}
+=
+\frac{n!}{(n+1)^{n-1}\prod_{i=1}^{n}k_i!},
+\]
+which is the conditional distribution of $\boldsymbol{\kappa}$.
+\end{proof}
+
+% BIB:
+\bibliographystyle{informs2014} 
+\bibliography{Bibliography.bib} 
+
+
+
+
+
+%\begin{APPENDIX}{}
+%
+%\end{APPENDIX}
+
+
+
+
+\end{document}

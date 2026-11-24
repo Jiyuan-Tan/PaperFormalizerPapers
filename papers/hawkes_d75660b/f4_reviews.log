@@ -1,0 +1,603 @@
+===== reviewer convergence/dual :: medium :: batch[ass:prefs-prefix,ass:prefs-cumulative-order,ass:prefs-cumulative-prefix,ass:classic-parking-square,ass:kappacpmf1-index] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:prefs-prefix",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: prefixCount sums exactly the first i coordinates under zero-based Fin indexing, and the quantified bounds select precisely 1 ≤ i ≤ n."
+    },
+    {
+      "obj_id": "ass:prefs-cumulative-order",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: integer coordinates bounded between 1 and n together with Monotone c express exactly the stated nondecreasing chain."
+    },
+    {
+      "obj_id": "ass:prefs-cumulative-prefix",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: a.val + 1 translates each Fin n coordinate to its paper index in {1, …, n}, with the same lower bound."
+    },
+    {
+      "obj_id": "ass:classic-parking-square",
+      "verdict": "faithful-refinement",
+      "note": "The Lean predicate is exactly m = n."
+    },
+    {
+      "obj_id": "ass:kappacpmf1-index",
+      "verdict": "faithful-refinement",
+      "note": "A natural number satisfying 0 < n is exactly a positive integer index."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:prefs-prefix",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: identifying κ_j with κ at zero-based index j−1, prefixCount κ i sums exactly the first i coordinates, and the quantifiers cover precisely 1 ≤ i ≤ n."
+    },
+    {
+      "obj_id": "ass:prefs-cumulative-order",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: Monotone uses the natural index order on Fin n; nondecreasing coordinates individually bounded between 1 and n are exactly the stated chain."
+    },
+    {
+      "obj_id": "ass:prefs-cumulative-prefix",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: a.val + 1 ranges over exactly the paper's indices 1 through n, and the integer inequality states κ⁺_i ≥ i."
+    },
+    {
+      "obj_id": "ass:classic-parking-square",
+      "verdict": "faithful-refinement",
+      "note": "Exactly the stated equality m = n for natural-number lengths."
+    },
+    {
+      "obj_id": "ass:kappacpmf1-index",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent: a natural number n satisfying 0 < n is precisely a positive integer."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:kappacpmf1-law,ass:meanrecur1-index,ass:meanrecur1-law,ass:meanrecursolve1-index,ass:meanrecursolve1-law] =====
+--- codex stdout ---
+{"statement_verdicts":[],"assumption_verdicts":[{"obj_id":"ass:kappacpmf1-law","verdict":"faithful-refinement","note":"HasLaw specifies the full distribution: the displayed factorial mass on exactly the preference-count support and zero elsewhere; finite Dirac enumeration includes every supported vector since each coordinate is at most n."},{"obj_id":"ass:meanrecur1-index","verdict":"faithful-refinement","note":"For n : ℕ, 0 < n is exactly n ∈ ℤ₊."},{"obj_id":"ass:meanrecur1-law","verdict":"faithful-refinement","note":"HasLaw is equivalent to the specified preference-count distribution: nonnegative integer coordinates, total n, prefix sums at least their lengths, and the displayed factorial masses."},{"obj_id":"ass:meanrecursolve1-index","verdict":"faithful-refinement","note":"For natural n and m, 0 < n ∧ m < n exactly realizes pin-3: n ∈ ℤ₊ and m ∈ {0,…,n−1}."},{"obj_id":"ass:meanrecursolve1-law","verdict":"faithful-refinement","note":"The pushforward law has exactly the frozen factorial masses on the preference-count class; the bounded enumeration loses no supported vector and assigns zero mass off that class."}],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:kappacpmf1-law",
+      "verdict": "faithful-refinement",
+      "note": "HasLaw gives exactly the prescribed distribution: preferenceCountMass equals kappaDist on vectors satisfying the total and prefix constraints and vanishes elsewhere; those constraints imply every coordinate is at most n, so the finite Dirac enumeration loses no support. A.e. measurability expresses the intrinsic random-variable requirement."
+    },
+    {
+      "obj_id": "ass:meanrecur1-index",
+      "verdict": "faithful-refinement",
+      "note": "For n : ℕ, 0 < n is equivalent to n belonging to the positive integers."
+    },
+    {
+      "obj_id": "ass:meanrecur1-law",
+      "verdict": "faithful-refinement",
+      "note": "The unfolded law has exactly the kappaDist factorial masses on preference counts and zero mass elsewhere; the finite enumeration includes every supported vector because nonnegative coordinates summing to n are each at most n."
+    },
+    {
+      "obj_id": "ass:meanrecursolve1-index",
+      "verdict": "faithful-refinement",
+      "note": "With natural-number binders, 0 < n ∧ m < n is exactly pinned reading ass:pin-3: n is positive and m belongs to {0,…,n−1}."
+    },
+    {
+      "obj_id": "ass:meanrecursolve1-law",
+      "verdict": "faithful-refinement",
+      "note": "HasLaw specifies precisely kappaDist on the nonnegative preference-count vectors defined by total n and the prefix inequalities; truncating the Dirac enumeration at coordinate n removes only vectors whose prescribed mass is zero."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:subcritical,ass:meanidthm1-borel,ass:gpfdef1-parameters,ass:gpfdef1-order,ass:prefs-total] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:subcritical",
+      "verdict": "faithful-refinement",
+      "note": "Exactly ρ < 1 on the nonnegative parameter domain."
+    },
+    {
+      "obj_id": "ass:meanidthm1-borel",
+      "verdict": "faithful-refinement",
+      "note": "HasLaw specifies an a.e. measurable B with pushforward equal to the Borel law: zero mass at 0 and mass exp(-ρj)(ρj)^(j-1)/j! at j ≥ 1, including the degenerate law at ρ = 0."
+    },
+    {
+      "obj_id": "ass:gpfdef1-parameters",
+      "verdict": "faithful-refinement",
+      "note": "Positive natural m and n together with m ≤ n are exactly the stated positive-integer parameter restrictions."
+    },
+    {
+      "obj_id": "ass:gpfdef1-order",
+      "verdict": "faithful-refinement",
+      "note": "Sorting preserves all m positive coordinates and multiplicities, so every Fin m lookup is valid; a.val + 1 gives precisely indices 1 through m, and under m ≤ n natural subtraction agrees with the stated bound."
+    },
+    {
+      "obj_id": "ass:prefs-total",
+      "verdict": "faithful-refinement",
+      "note": "The sum over Fin n is exactly the sum of the n nonnegative integer count coordinates, equated to n."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:subcritical",
+      "verdict": "faithful-refinement",
+      "note": "Exactly ρ < 1 on the nonnegative parameter domain."
+    },
+    {
+      "obj_id": "ass:meanidthm1-borel",
+      "verdict": "faithful-refinement",
+      "note": "HasLaw requires a.e. measurability and equality of the pushforward with the Borel law: mass zero at 0 and exp(-ρj)(ρj)^(j-1)/j! at j ≥ 1, including the degenerate parameter-zero case."
+    },
+    {
+      "obj_id": "ass:gpfdef1-parameters",
+      "verdict": "faithful-refinement",
+      "note": "Positive natural m and n with m ≤ n are exactly the stated positive-integer parameter domain."
+    },
+    {
+      "obj_id": "ass:gpfdef1-order",
+      "verdict": "faithful-refinement",
+      "note": "Sorting preserves all m positive entries and their multiplicities, so every indexed lookup is valid; a.val + 1 gives precisely i = 1,…,m, and under m ≤ n natural subtraction equals the stated integer subtraction."
+    },
+    {
+      "obj_id": "ass:prefs-total",
+      "verdict": "faithful-refinement",
+      "note": "The sum over Fin n contains exactly the n nonnegative integer count coordinates required by the pinned readings, with total n."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: lemma-batch[lem:kappacpmf1,lem:meanrecur1] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:kappacpmf1",
+      "verdict": "matched",
+      "note": "The finite law matches kappaDist on preference counts; the prefix event, transition mass, and Bernoulli–conditional-binomial representation agree exactly. Positive-event conditioning and support bounds are intrinsic; the initial shifted-binomial law recovers the m=0 case."
+    },
+    {
+      "obj_id": "lem:meanrecur1",
+      "verdict": "matched",
+      "note": "Both expectations, the coefficient, and all signed exponents match under zero-based coordinate indexing; prefixCount at zero is identically zero, realizing the stated zeroth-prefix convention. The two convention premises are universally true."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "lem:kappacpmf1",
+      "verdict": "matched",
+      "note": "The unfolded law, transition mass, Bernoulli parameter and conditional binomial law match. Positive-probability prefixes give m ≤ s ≤ n, so the support restrictions omit only zero masses; the initial shifted-binomial law also recovers m = 0. Canonical auxiliary-pair packaging preserves the stated distributional assertion."
+    },
+    {
+      "obj_id": "lem:meanrecur1",
+      "verdict": "matched",
+      "note": "The expectations, coefficients, signed integer exponents and range 0 ≤ m < n match exactly. The unfolded preference-count law supplies the stated distribution; prefixCount at zero is identically zero, realizing the zeroth-count convention, and both domain-convention hypotheses are universally true."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:pin-1,ass:pin-2,ass:pin-3,ass:pin-4,ass:pin-5] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "Under the standing 0 ≤ ρ < 1 setting, the quotient is continuous on [0,ρ), with endpoint limit 1/(1−ρ); the piecewise definition and continuity clause express exactly the stipulated extension."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "The image of Lean naturals in the integers is exactly the nonnegative integers, faithfully expressing that zero is allowed in preference counts."
+    },
+    {
+      "obj_id": "ass:pin-3",
+      "verdict": "faithful-refinement",
+      "note": "For natural-number binders, 0 < n ∧ m < n is equivalent to positive integer n and m ∈ {0,…,n−1}."
+    },
+    {
+      "obj_id": "ass:pin-4",
+      "verdict": "faithful-refinement",
+      "note": "The finite sums and point measure include the root and endpoint; the continuity and strict-past limits specify the stated versions. In the standing Hawkes setting, predictable intensity equivalently gives the compensated non-root martingale; subcritical Borel cluster size ensures its integrability, and the random epoch configuration supplies measurability."
+    },
+    {
+      "obj_id": "ass:pin-5",
+      "verdict": "faithful-refinement",
+      "note": "The range equality identifies natural counts with precisely {0,1,2,…}, including zero as required."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-1",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent in the standing subcritical setting: the quotient is continuous below ρ, its endpoint limit is 1/(1−ρ), and durationIntegrand assigns precisely that value."
+    },
+    {
+      "obj_id": "ass:pin-2",
+      "verdict": "faithful-refinement",
+      "note": "The range of Int.ofNat is exactly the nonnegative integers, expressing precisely the zero-inclusive natural-number domain."
+    },
+    {
+      "obj_id": "ass:pin-3",
+      "verdict": "faithful-refinement",
+      "note": "With n,m : ℕ, 0 < n ∧ m < n is equivalent to positive integer n and m ∈ {0,…,n−1}."
+    },
+    {
+      "obj_id": "ass:pin-4",
+      "verdict": "faithful-refinement",
+      "note": "Equivalent in the standing Hawkes setting: the finite sums and point measure include the root, the strict sum is the predictable left version, and the compensated non-root count expresses its intensity; subcritical Borel cluster size ensures the stated integrability."
+    },
+    {
+      "obj_id": "ass:pin-5",
+      "verdict": "faithful-refinement",
+      "note": "The range equality states exactly that preference counts use nonnegative integers, including zero."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[ass:pin-6,def:intensitydefeq,def:markovian-kernel,def:cluster-size,def:cluster-duration] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:intensitydefeq",
+      "verdict": "matched",
+      "note": "The finite sum includes exactly the epochs at or before t, equaling the point-measure integral on [0,t] under the pinned post-jump reading."
+    },
+    {
+      "obj_id": "def:markovian-kernel",
+      "verdict": "matched",
+      "note": "Since exp(-t) is positive, conversion to NNReal preserves its value; the kernel is exactly ρ exp(-t)."
+    },
+    {
+      "obj_id": "def:cluster-size",
+      "verdict": "matched",
+      "note": "The configuration contains exactly n+1 epochs; the pinned counting process eventually equals n+1, so its limit is clusterSize."
+    },
+    {
+      "obj_id": "def:cluster-duration",
+      "verdict": "matched",
+      "note": "Fin.last n selects index n=N-1, giving exactly the last actual epoch, including duration zero for a root-only cluster."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-6",
+      "verdict": "faithful-refinement",
+      "note": "IdentDistrib states equality of the two duration laws, with intrinsic random-variable measurability; the constructed law uses the specified Borel size, preference-count masses, independent exponential gaps, and gap sum."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:intensitydefeq",
+      "verdict": "matched",
+      "note": "The finite sum includes exactly the epochs at or before t, matching the pinned root-inclusive count and point-measure integral on [0,t]; subtraction agrees with elapsed time on every included term."
+    },
+    {
+      "obj_id": "def:markovian-kernel",
+      "verdict": "matched",
+      "note": "Exactly g(t)=ρ exp(-t) on nonnegative parameters and times; Real.toNNReal preserves the positive exponential."
+    },
+    {
+      "obj_id": "def:cluster-size",
+      "verdict": "matched",
+      "note": "For each finite configuration, the pinned counting process eventually equals its number of epochs, n+1, so this value is exactly its limit at infinity."
+    },
+    {
+      "obj_id": "def:cluster-duration",
+      "verdict": "matched",
+      "note": "Fin.last n indexes n=N-1 in the configuration of N=n+1 actual epochs, giving exactly the last epoch, including zero for a singleton cluster."
+    }
+  ],
+  "assumption_verdicts": [
+    {
+      "obj_id": "ass:pin-6",
+      "verdict": "faithful-refinement",
+      "note": "IdentDistrib states equality of the two duration laws with their intrinsic a.e. measurability; the constructed measure samples the specified Borel size, preference-count mass, and independent exponential gaps, then sums those gaps."
+    }
+  ],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[def:meanidthm1-harmonic,def:gpfdef1,def:prefs,def:prefs-cumulative,def:prefs-cumulative-map] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:meanidthm1-harmonic","verdict":"matched","note":"The rational sum of reciprocals, cast to ℝ, equals the stated harmonic sum for every positive j; H₀ adds an extension outside the stated domain."},{"obj_id":"def:gpfdef1","verdict":"matched","note":"The parameters enforce positive m,n and m ≤ n; multiplicity-preserving sorting has length m, so each lookup gives precisely the stated ordered preference and bound."},{"obj_id":"def:prefs","verdict":"matched","note":"On the stated positive-n domain, natural coordinates include zero, the total is n, and prefixCount gives exactly each required prefix sum."},{"obj_id":"def:prefs-cumulative","verdict":"matched","note":"Coordinate bounds, monotonicity, and the one-based index lower bounds give exactly the stated cumulative-count class; successive differences recover preference counts."},{"obj_id":"def:prefs-cumulative-map","verdict":"matched","note":"Coordinate a sums precisely the first a.val + 1 entries and casts to ℤ, realizing the stated map; on the supported classes its inverse is successive differences."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:meanidthm1-harmonic",
+      "verdict": "matched",
+      "note": "Unfolding harmonic gives the rational sum of reciprocals of 1 through j; casting to ℝ yields exactly the paper's sum on its stated positive-index domain."
+    },
+    {
+      "obj_id": "def:gpfdef1",
+      "verdict": "matched",
+      "note": "The fields impose precisely positive m,n with m ≤ n and the sorted-coordinate inequalities; sorting preserves multiplicity and length m, so getD's default is unreachable, and natural subtraction equals n−m under the parameter constraint."
+    },
+    {
+      "obj_id": "def:prefs",
+      "verdict": "matched",
+      "note": "On the stated positive-n domain, natural-valued coordinates include zero as pinned, the total is n, and prefixCount sums exactly coordinates 1 through i; both defining conditions agree in both directions."
+    },
+    {
+      "obj_id": "def:prefs-cumulative",
+      "verdict": "matched",
+      "note": "On the stated positive-n domain, integer coordinates bounded between 1 and n together with Monotone express exactly the displayed chain, and cumulativePrefix imposes precisely c_i ≥ i."
+    },
+    {
+      "obj_id": "def:prefs-cumulative-map",
+      "verdict": "matched",
+      "note": "Coordinate a is exactly the integer cast of the first a.val+1 counts; on the specified classes this is bijective, with inverse κ₁=c₁ and κ_i=c_i−c_{i−1}, whose nonnegativity, total n, and prefix inequalities follow from the cumulative conditions."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: sym-batch[sym:\tau,sym:m,sym:Z_i,sym:Y_m,sym:x] =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\tau","verdict":"matched","note":"Cluster.lean:68 and Duration.lean:50 compute nonnegative durations in ℝ≥0: the last actual epoch and the sum of all gaps, respectively."},{"obj_id":"sym:m","verdict":"matched","note":"Basic.lean:57 gives m : ℕ; the tagged predicates and ConditionalCounts.lean:24 impose precisely their stated context-specific length and stage bounds."},{"obj_id":"sym:Z_i","verdict":"matched","note":"Duration.lean:23 defines GapVector n = Fin n → ℝ≥0, allowing every nonnegative coordinate vector and no coordinates when n = 0."},{"obj_id":"sym:Y_m","verdict":"matched","note":"ConditionalCountsBase.lean:45 constructs the second coordinate from bernoulliNat, a weighted sum of Dirac measures at 1 and 0; mapping x to (x,y) preserves this binary support."},{"obj_id":"sym:x","verdict":"matched","note":"GeneratingFunction.lean:25 binds x : unitInterval, which unfolds to the subtype of real numbers in Set.Icc 0 1."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\tau",
+      "verdict": "matched",
+      "note": "Both tagged definitions return ℝ≥0 by construction: clusterDuration selects the last actual epoch, and combinatorialDuration sums the nonnegative gaps, with empty sum zero."
+    },
+    {
+      "obj_id": "sym:m",
+      "verdict": "matched",
+      "note": "The tagged carrier is ℕ; the parameter predicates and conditional-law binders impose precisely the indicated context-specific length and stage bounds."
+    },
+    {
+      "obj_id": "sym:Z_i",
+      "verdict": "matched",
+      "note": "GapVector n unfolds to Fin n → {r : ℝ // 0 ≤ r}, allowing exactly nonnegative coordinates and no coordinates when n = 0."
+    },
+    {
+      "obj_id": "sym:Y_m",
+      "verdict": "matched",
+      "note": "auxiliaryCountLaw constructs its second coordinate from bernoulliNat, a weighted sum of Dirac measures at 1 and 0; thus its law is supported on exactly the required binary space without consumer assumptions."
+    },
+    {
+      "obj_id": "sym:x",
+      "verdict": "matched",
+      "note": "borelPGF binds x : unitInterval, which unfolds to the subtype of real numbers in Set.Icc 0 1."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: medium :: batch[def:classic-parking-function,def:preference-count-map,def:combx-duration,def:kappa-dist,def:meanrecur1-zero] =====
+--- codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:classic-parking-function",
+      "verdict": "derived",
+      "note": "Paper membership implies Lean membership, but the converse fails at m=n=0: the empty preference vector satisfies order and square, whereas the inherited generalized-parking domain requires positive m,n. Add generalizedParkingParameters m n."
+    },
+    {
+      "obj_id": "def:preference-count-map",
+      "verdict": "matched",
+      "note": "The filtered cardinality counts exactly the positions with preference i=a.val+1, retaining multiplicities and allowing zero counts."
+    },
+    {
+      "obj_id": "def:combx-duration",
+      "verdict": "matched",
+      "note": "The sum coordinate under combinatorialMeasure realizes the Borel size mixture, supported factorial count masses, and independent exponential gaps with rates prefixCount κ i−i+1; the size-one sum is zero. durationRepresentation records the pinned distributional equality."
+    },
+    {
+      "obj_id": "def:kappa-dist",
+      "verdict": "matched",
+      "note": "On the stated positive-length domain, the factorial formula agrees exactly on count vectors with total n and prefix sums at least their lengths; zero mass elsewhere expresses the specified support."
+    },
+    {
+      "obj_id": "def:meanrecur1-zero",
+      "verdict": "matched",
+      "note": "Unfolding prefixCount at zero gives an identically zero coordinate, realizing the zeroth cumulative-count convention and hence its probability-one assertion."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:classic-parking-function",
+    "reason": "ClassicParkingFunction omits the inherited positive-length domain and admits the empty vector at m=n=0; include generalizedParkingParameters m n.",
+    "unpinned": null,
+    "witness": null
+  }
+}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:classic-parking-function",
+      "verdict": "derived",
+      "note": "Paper ⇒ Lean, but not conversely: def:gpfdef1 requires positive m,n, whereas the empty vector satisfies ClassicParkingFunction at m=n=0; retain the inherited positivity condition alongside order and square."
+    },
+    {
+      "obj_id": "def:preference-count-map",
+      "verdict": "matched",
+      "note": "The filtered cardinality counts exactly the positions whose preference equals i, with Fin coordinates translated by i=a.val+1."
+    },
+    {
+      "obj_id": "def:combx-duration",
+      "verdict": "matched",
+      "note": "The sum coordinate under combinatorialMeasure realizes the Borel-size, supported count-mass, and independent exponential-gap mixture, including the empty sum; durationRepresentation retains pin-6 in its consumers."
+    },
+    {
+      "obj_id": "def:kappa-dist",
+      "verdict": "matched",
+      "note": "On the stated positive-n domain, preferenceTotal and preferencePrefix give exactly the preference-count support, with the displayed factorial mass there and zero elsewhere."
+    },
+    {
+      "obj_id": "def:meanrecur1-zero",
+      "verdict": "matched",
+      "note": "At prefix length zero every summand vanishes, so the zeroth cumulative count is identically zero and consequently has probability one."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": {
+    "kind": "scaffold-mismatch",
+    "obj_id": "def:classic-parking-function",
+    "reason": "ClassicParkingFunction omits the positive-length domain inherited from def:gpfdef1 and admits the empty m=n=0 object; add positivity.",
+    "witness": null
+  }
+}
+
+===== reviewer convergence/dual :: high :: sym:\mathsf{W}_0 =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:\\mathsf{W}_0","verdict":"matched","note":"GeneratingFunction.lean:30–31 restricts the input exactly to [-exp(-1),∞); its inverse fiber is a singleton for every such input, so its supremum is the unique principal-branch value ≥ -1. The declared domain and range hold by construction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:\\mathsf{W}_0",
+      "verdict": "matched",
+      "note": "Helpers/GeneratingFunction.lean:30–31 restricts the input to [-exp(-1),∞) and defines the supremum of the inverse fiber with w≥-1; this fiber is a nonempty singleton throughout that domain, so the formula realizes precisely the principal branch with range [-1,∞)."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: thm:meanrecursolve1 =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:meanrecursolve1","verdict":"matched","note":"The unfolded law gives exactly the stated factorial masses on preference counts; prefixCount realizes κ⁺_{m+1}. Both sides match, including the integer exponent i−1 and summation from 0 through m. The convention hypotheses are universally true or repeat the pinned index restriction, so add no restriction."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:meanrecursolve1",
+      "verdict": "matched",
+      "note": "Equivalent in both directions: the law uses the stated factorial mass on exactly the preference-count support; prefixCount gives κ⁺_{m+1}; the correction sum includes precisely 0 through m, with integer exponent i−1. The additional convention hypotheses are universal truths or duplicates of the pinned index condition."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: thm:meanidthm1 =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:meanidthm1","verdict":"matched","note":"The integrals express exactly the stated expectations, with the correct Borel law, harmonic numbers, coefficient and subtraction; the counting/intensity and duration-representation hypotheses realize pins 4 and 6 within the standing Hawkes setting."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:meanidthm1",
+      "verdict": "matched",
+      "note": "The integrals express exactly the stated expectations, with the Borel mass and harmonic sum unchanged; durationRepresentation realizes pin-6, and clusterCountingConvention realizes pin-4 and the standing stochastic-intensity model. Its compensator integrability follows from the subcritical Borel cluster size, so it adds no model restriction."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: thm:coridthm1 =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"thm:coridthm1","verdict":"matched","note":"The expectation of the last actual epoch and the integral match, including pin-1's continuous endpoint value. The additional premises express the standing auxiliary Borel law, pin-4's stochastic-intensity convention, and the distributional equivalence explicitly included in the typed core's sampling model for this corollary."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "thm:coridthm1",
+      "verdict": "matched",
+      "note": "The expectation of the last epoch equals the stated integral, with pin-1's endpoint value. The additional premises express the standing auxiliary Borel law, pin-4's stochastic-intensity convention, and pin-6's equality in distribution with the specified count/exponential-gap construction; the typed core explicitly supplies these."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: sym:m =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"sym:m","verdict":"matched","note":"Every listed declaration types m as ℕ, exactly realizing {0,1,2,…}; the parking, square, recurrence, and conditional-prefix members enforce their stated contextual bounds."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "sym:m",
+      "verdict": "matched",
+      "note": "Verified every listed tag: Basic.lean:57 declares m : ℕ, exactly the stated space; parking predicates impose contextual positivity, upper bounds, and square equality, meanRecurrenceSolutionIndex permits stages 0 ≤ m < n, and conditionalPreferenceCountLaw quantifies natural prefixes with 1 ≤ m < n."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}
+
+===== reviewer convergence/dual :: high :: def:classic-parking-function =====
+--- codex stdout ---
+{"statement_verdicts":[{"obj_id":"def:classic-parking-function","verdict":"matched","note":"Exactly the generalized parking-function definition specialized to m = n: positive parameters and preferences, with multiplicity-preserving sorted entries satisfying π_(i) ≤ i; getD never defaults because the sorted list has length m. Both directions hold."}],"assumption_verdicts":[],"substrate_gates":[],"escalate":null}
+--- second codex stdout ---
+{
+  "statement_verdicts": [
+    {
+      "obj_id": "def:classic-parking-function",
+      "verdict": "matched",
+      "note": "Equivalent in both directions: positive generalized parking parameters and the sorted-coordinate inequalities are retained, with m = n imposed; sorting preserves length and multiplicity, so every indexed lookup is valid and the bounds reduce to π_(i) ≤ i."
+    }
+  ],
+  "assumption_verdicts": [],
+  "substrate_gates": [],
+  "escalate": null
+}

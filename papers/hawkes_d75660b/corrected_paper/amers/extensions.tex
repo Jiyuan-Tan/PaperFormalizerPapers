@@ -1,0 +1,382 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\E}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\PP}[1]{\mathrm{P}\left(#1\right)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\setlength{\parskip}{3pt}
+\setlength{\abovedisplayskip}{7pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{7pt plus 2pt minus 2pt}
+\begin{document}
+
+\begin{center}
+{\large\bfseries An Explicit Representation of the Cluster Duration}\\[3pt]
+{Response counts, Dyck paths, and cyclic shifts}
+\end{center}
+
+Let $g(t)=\alpha e^{-\beta t}$ and $\rho=\alpha/\beta\in(0,1)$.
+As in the main manuscript, $N$ includes the initiating point and
+$\tau=\tau_{N-1}$ is the cluster duration. We prove an explicit
+unconditional representation of $(N-1,\tau)$ as a compound Poisson
+vector. The only new ingredient beyond the manuscript's conditional
+representation is a weighted cyclic argument for response-count paths.
+
+\paragraph{Response counts as Dyck paths.}
+For a response-count vector $\mathbf k=(k_1,\ldots,k_n)$, write
+$k_i^+=\sum_{j=1}^i k_j$ and $k_0^+=0$. Such a vector is the count
+vector of a parking function of length $n$ exactly when
+\begin{equation}\label{feasible}
+k_n^+=n,\qquad k_i^+\ge i\quad(1\le i\le n).
+\end{equation}
+There are $n!/\prod_i k_i!$ parking functions with these counts, so
+the uniform parking-function law in the main manuscript gives
+\begin{equation}\label{countLaw}
+\PP{\kappa=\mathbf k\mid N=n+1}
+=\frac{n!}{(n+1)^{n-1}\prod_i k_i!}
+\end{equation}
+for every $\mathbf k$ satisfying \eqref{feasible}.
+
+Draw $k_i$ up-steps followed by one down-step for each $i$. The height
+after down-step $i$ is $k_i^+-i$, so \eqref{feasible} describes a Dyck
+path. Its descendant schedule is $\Delta_i=k_i^+-i+1$. The conditional
+independent-exponential representation in the main manuscript therefore
+implies
+\begin{equation}\label{conditionalLST}
+\E{e^{-\theta\tau}\mid\kappa=\mathbf k,N=n+1}
+=\prod_{i=1}^n
+\frac{\beta(k_{i-1}^+-i+2)}{\beta(k_{i-1}^+-i+2)+\theta},
+\qquad\theta\ge0.
+\end{equation}
+Indeed, the lists $(k_i^+-i)_{i=1}^n$ and
+$(k_{i-1}^+-i+1)_{i=1}^n$ contain the same heights: they differ only
+by replacing the final zero by the initial zero. Thus the rate
+histogram $H$ is unchanged.
+
+\paragraph{The weighted cyclic argument.}
+For any nonnegative vector whose entries sum to $n$, write
+\[
+s_i=k_i^+-i,\qquad s_0=0,\qquad s_*=\min_{0\le r<n}s_r.
+\]
+Thus $s_i$ is the path height, and a vector is feasible exactly when
+$s_i\ge0$, in which case $s_*=0$. For a feasible $\mathbf k$, define
+\begin{equation}\label{weight}
+w(\mathbf k)=z^n\prod_{i=1}^n
+\frac{e^{-\rho}\rho^{k_i}}{k_i!}
+\frac{\beta(k_{i-1}^+-i+2)}{\beta(k_{i-1}^+-i+2)+\theta},
+\qquad 0\le z\le1,
+\end{equation}
+and let $h(\mathbf k)$ be the number of returns of its Dyck path to
+zero, including the final return.
+
+\begin{lemma}[Weighted cyclic counting]\label{cyclicLemma}
+For every $n\ge1$,
+\begin{equation}\label{cyclicEq}
+\sum_{\substack{k_n^+=n\\k_i^+\ge i}}
+\frac{w(\mathbf k)}{h(\mathbf k)}
+=\frac{z^n}{n}
+\sum_{\substack{k_1+\cdots+k_n=n\\k_i\ge0}}
+\prod_{i=1}^n\frac{e^{-\rho}\rho^{k_i}}{k_i!}
+\frac{\beta(1+s_{i-1}-s_*)}
+{\beta(1+s_{i-1}-s_*)+\theta}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Fix a nonnegative vector whose entries sum to $n$. Its increments
+$k_i-1$ sum to zero. A cyclic shift beginning after position $r$ is a
+Dyck path exactly when $s_r=s_*$. If this minimum occurs $h$ times, exactly $h$
+of the $n$ starting positions give Dyck paths, each with $h$ returns
+to zero.
+
+Cyclic shifts preserve $\prod_i(e^{-\rho}\rho^{k_i}/k_i!)$.
+They also cyclically permute the path heights after their common
+minimum has been subtracted, and hence preserve the product of the
+Laplace-transform factors in \eqref{cyclicEq}. Therefore averaging
+over all $n$ starting positions contributes $(h/n)(1/h)=1/n$ for
+each unrestricted vector, proving \eqref{cyclicEq}. Starting positions
+are counted separately even when two shifts are identical, so periodic
+vectors cause no exception.
+\end{proof}
+
+\begin{theorem}[Joint compound Poisson representation]\label{jointDecomp}
+Let $B\sim\mathsf{Borel}(\rho)$. Conditional on $B=n$, let
+\[
+(K_1,\ldots,K_n)\sim\mathsf{Multinomial}(n;1/n,\ldots,1/n),
+\qquad K_i^+=\sum_{j=1}^iK_j,\quad K_0^+=0,
+\]
+and let $E_1,E_2,\ldots$ be independent $\mathsf{Exp}(1)$ variables,
+independent of $B$ and the counts. Define
+\begin{equation}\label{markDef}
+J=\frac1\beta\sum_{i=1}^B
+\frac{E_i}{K_{i-1}^+-i+2-\min_{0\le r<B}(K_r^+-r)},
+\end{equation}
+where an empty sum is zero. If $M\sim\mathsf{Poisson}(\rho)$ and
+$(B_\ell,J_\ell)$ are independent copies of $(B,J)$, independent of
+$M$, then
+\begin{equation}\label{jointDecompEq}
+(N-1,\tau)\stackrel{\mathsf D}{=}
+\sum_{\ell=1}^M(B_\ell,J_\ell).
+\end{equation}
+The sum is $(0,0)$ when $M=0$.
+\end{theorem}
+
+Here is how to read the four distributions in the theorem. The outer
+Poisson variable $M$ comes from taking the logarithm of the Dyck-path
+generating function: the logarithm isolates the cyclic pieces, and
+exponentiating their transform produces a Poisson sum. A piece of
+length $n$ receives the coefficient
+$n^{-1}\PP{\mathsf{Poisson}(n\rho)=n}$, which is exactly
+$\rho\PP{B=n}$; this is why its size is Borel. Before the cyclic shift,
+the $n$ entries are independent $\mathsf{Poisson}(\rho)$ response
+counts conditioned to sum to $n$. Equal Poisson means make their
+conditional law $\mathsf{Multinomial}(n;1/n,\ldots,1/n)$, which
+explains the count mixture. Finally, after shifting the count path at
+its minimum, its positive heights are the numbers of pending responses.
+Exponential memorylessness makes the waiting time at height $j$ an
+$\mathsf{Exp}(\beta j)$ variable. Thus $J$ is the corresponding sum of
+independent exponential waiting times. In this order, the construction is
+\[
+\begin{gathered}
+\text{Poisson number of pieces}
+\;\longrightarrow\;\text{Borel size of each piece}\\
+\longrightarrow\;\text{multinomial response counts}
+\;\longrightarrow\;\text{exponential waiting times}.
+\end{gathered}
+\]
+This description explains the mixture; it does not identify the pieces
+with physical descendant subclusters.
+
+\begin{proof}
+Let $F(z,\theta)=\E{z^{N-1}e^{-\theta\tau}}$. Multiplying
+\eqref{countLaw} by the Borel probability of $N=n+1$ and using
+\eqref{conditionalLST} gives
+\[
+F(z,\theta)=e^{-\rho}
+\left(1+\sum_{n\ge1}\sum_{\substack{k_n^+=n\\k_i^+\ge i}}
+w(\mathbf k)\right).
+\]
+Every Dyck path splits uniquely at its returns to zero into an ordered
+sequence of nonempty paths with no intermediate return. The weight in
+\eqref{weight} factors over this sequence because each piece restarts
+at height zero. If $R$ is the total weight of one such piece, then
+\[
+F(z,\theta)=\frac{e^{-\rho}}{1-R},
+\qquad
+\log F(z,\theta)=-\rho+\sum_{h\ge1}\frac{R^h}{h}.
+\]
+At $z=1$ and $\theta=0$, $R=1-e^{-\rho}<1$; elsewhere in the stated
+domain the nonnegative weights are no larger. Hence rearrangement is
+valid. The term $R^h/h$ assigns $w(\mathbf k)/h(\mathbf k)$ to each
+path. Lemma~\ref{cyclicLemma} therefore removes the path restrictions:
+\begin{align}\label{logF}
+\log F(z,\theta)
+&=-\rho+\sum_{n\ge1}\frac{z^n}{n}
+\sum_{\substack{k_1+\cdots+k_n=n\\k_i\ge0}}
+\prod_{i=1}^n\frac{e^{-\rho}\rho^{k_i}}{k_i!}\nonumber\\[-2pt]
+&\hspace{28mm}\times
+\prod_{i=1}^n
+\frac{\beta(1+s_{i-1}-s_*)}
+{\beta(1+s_{i-1}-s_*)+\theta}.
+\end{align}
+The first product is the joint probability of $n$ independent
+$\mathsf{Poisson}(\rho)$ variables. Conditional on their sum being
+$n$, they have the multinomial law in the theorem; the second product
+is the conditional Laplace transform of $J$. Finally,
+\[
+\frac1n\PP{\mathsf{Poisson}(n\rho)=n}
+=\frac{e^{-n\rho}(n\rho)^n}{n\,n!}
+=\rho\,\PP{B=n}.
+\]
+Substitution in \eqref{logF} yields
+\[
+F(z,\theta)=
+\exp\left\{\rho\left(\E{z^B e^{-\theta J}}-1\right)\right\},
+\]
+the joint transform of the Poisson sum in \eqref{jointDecompEq}.
+Uniqueness of the transform proves the result.
+\end{proof}
+
+\begin{corollary}\label{durationDecomp}
+The duration is compound Poisson:
+\[
+\tau\stackrel{\mathsf D}{=}\sum_{\ell=1}^M J_\ell,
+\qquad M\sim\mathsf{Poisson}(\rho),
+\]
+with the explicit mark law \eqref{markDef}. In particular,
+$\PP{\tau=0}=e^{-\rho}$.
+\end{corollary}
+\begin{proof}
+Take the second coordinate of \eqref{jointDecompEq}. Since every
+denominator in \eqref{markDef} is a positive integer, $J>0$ almost
+surely, so the sum is zero exactly when $M=0$.
+\end{proof}
+
+Corollary~\ref{durationDecomp} is an unconditional generative
+description of the duration. First draw $M$, the number of independent
+contributions. For each contribution, draw its number $B$ of exponential
+terms; the Borel law appears because the coefficient of a cyclic piece
+of length $n$ is $\rho\PP{B=n}$. Given that length, distribute $n$
+responses among its $n$ positions according to the multinomial law.
+Shift the resulting count path at a minimum so that all pending-response
+counts are positive, and then draw one exponential waiting time at each
+height. Their sum is $J$. Adding the $M$ independent values of $J$
+produces $\tau$ in distribution.
+
+This makes several features immediate. The duration is infinitely
+divisible and has an atom of size $e^{-\rho}$ at zero, corresponding to
+no contribution. Conditional on the multinomial counts, repeated visits
+to height $j$ may be grouped into a gamma variable with shape $H_j$ and
+rate $\beta j$, exactly as in the descendant-schedule representation in
+the main manuscript. The Borel variable determines how many waiting
+times occur, the multinomial vector determines their rates, and the
+exponential variables determine their realized lengths. The construction
+is an exact sampling recipe even though it does not give an elementary
+closed-form density or CDF.
+
+\paragraph{Recovery of the conditional mean.}
+We next verify explicitly that the representation reproduces the mean
+identities in the main manuscript. Throughout this paragraph condition
+on $N=n+1$. Differentiating \eqref{conditionalLST} at $\theta=0$ gives
+\begin{equation}\label{conditionalMean}
+\beta\E{\tau\mid N=n+1}
+=\sum_{m=0}^{n-1}\E{\frac1{\kappa_{m+1}^+-m}\,\bigg|\,N=n+1}.
+\end{equation}
+The generalized parking-function count used in the manuscript gives,
+for $c=\kappa_m^+$,
+\begin{align}\label{nextCount}
+&\PP{\kappa_{m+1}=k\mid
+\kappa_1,\ldots,\kappa_m,N=n+1}\nonumber\\[-2pt]
+&\quad=
+\frac{c+k-m}{c-m+1}\binom{n-c}{k}
+\frac{(n-m)^{n-c-k-1}}{(n-m+1)^{n-c-1}}.
+\end{align}
+Divide \eqref{nextCount} by $c+k-m$ and sum over $k$. The linear
+factor cancels, and the binomial theorem gives
+\begin{align}\label{innerMean}
+&\E{\frac1{\kappa_{m+1}^+-m}\,\bigg|
+\kappa_1,\ldots,\kappa_m,N=n+1}\nonumber\\[-2pt]
+&\quad=
+\frac{n-m+1}{(n-m)(\kappa_m^+-m+1)}
+-\left(\frac{n-m}{n-m+1}\right)^{n-m-1}
+\mathbf1\{\kappa_m^+=m\}.
+\end{align}
+The subtracted term is exactly the inadmissible $k=0$ term when
+$c=m$: with no response pending, the next count must be positive.
+
+For completeness, the event $\kappa_m^+=m$ splits the parking function
+at $m$. Choose the $m$ coordinates occupied by values at most $m$,
+then choose an ordinary parking function on each side. Since there are
+$(r+1)^{r-1}$ parking functions of length $r$,
+\begin{equation}\label{returnProbability}
+\PP{\kappa_m^+=m\mid N=n+1}
+=\binom nm\frac{(m+1)^{m-1}(n-m+1)^{n-m-1}}
+{(n+1)^{n-1}}.
+\end{equation}
+Taking expectations in \eqref{innerMean} and substituting
+\eqref{returnProbability} recovers the manuscript's recurrence
+\begin{align}\label{meanRecurrence}
+\E{\frac1{\kappa_{m+1}^+-m}\,\bigg|N=n+1}
+&=\frac{n-m+1}{n-m}
+\E{\frac1{\kappa_m^+-m+1}\,\bigg|N=n+1}\nonumber\\[-2pt]
+&\quad-
+\binom nm\frac{(m+1)^{m-1}(n-m)^{n-m-1}}
+{(n+1)^{n-1}}.
+\end{align}
+Here $\kappa_0^+=0$. Multiplying by $n-m$ and iterating from $m=0$
+shows explicitly that
+\begin{align}\label{meanRecurrenceSolution}
+\E{\frac1{\kappa_{m+1}^+-m}\,\bigg|N=n+1}
+&=\frac{n+1}{n-m}\nonumber\\[-2pt]
+&\quad-\frac1{n-m}\sum_{i=0}^m\binom ni
+\left(\frac{i+1}{n+1}\right)^{i-1}
+\left(\frac{n-i}{n+1}\right)^{n-i}.
+\end{align}
+Indeed, substituting $m-1$ into \eqref{meanRecurrenceSolution} and
+then applying \eqref{meanRecurrence} adds precisely the $i=m$ term.
+Equations \eqref{conditionalMean} and \eqref{meanRecurrenceSolution}
+are the conditional mean formula in the main manuscript.
+
+\paragraph{Recovery of the Borel mean identity.}
+Now remove the conditioning. Since
+\[
+\PP{N=n+1}=\frac{e^{-\rho(n+1)}(\rho(n+1))^n}{(n+1)!},
+\]
+substituting \eqref{meanRecurrenceSolution} into
+\eqref{conditionalMean}, multiplying by this probability, and summing
+over $n\ge1$ produces two terms. The first is
+\begin{align}
+\sum_{n\ge1}(n+1)\mathsf H_n
+\frac{e^{-\rho(n+1)}(\rho(n+1))^n}{(n+1)!}
+=\E{B\mathsf H_{B-1}\mathbf1\{B\ge2\}},
+\label{firstMeanTerm}
+\end{align}
+where $B\sim\mathsf{Borel}(\rho)$ and
+$\mathsf H_j=\sum_{r=1}^j1/r$. For the second term, interchange the
+$m$- and $i$-sums, so that
+$\sum_{m=i}^{n-1}1/(n-m)=\mathsf H_{n-i}$, and then set
+$j=i+1$ and $\ell=n-i$. It factors as
+\begin{align}
+&\sum_{i\ge0}
+\rho\frac{e^{-\rho(i+1)}(\rho(i+1))^i}{(i+1)!}
+\sum_{\ell\ge1}\ell\mathsf H_\ell
+\frac{e^{-\rho\ell}(\rho\ell)^{\ell-1}}{\ell!}\nonumber\\[-2pt]
+&\qquad=\rho\,\E{B\mathsf H_B},
+\label{secondMeanTerm}
+\end{align}
+because the first sum after the factor $\rho$ is the total Borel
+probability. Therefore \eqref{firstMeanTerm}--\eqref{secondMeanTerm}
+give
+\begin{align*}
+\beta\E{\tau}
+&=\E{B\mathsf H_{B-1}\mathbf1\{B\ge2\}}
+-\rho\E{B\mathsf H_B}\\
+&=(1-\rho)\E{B\mathsf H_B}-1.
+\end{align*}
+The last equality uses $B\mathsf H_{B-1}=B\mathsf H_B-1$ for
+$B\ge2$ and checks $B=1$ separately. Finally, Theorem~\ref{jointDecomp}
+also gives $\E{\tau}=\rho\E{J}$, so the new decomposition recovers
+the equivalent mark identity
+\begin{equation}\label{markMean}
+\beta\rho\E{J}=(1-\rho)\E{B\mathsf H_B}-1.
+\end{equation}
+
+The integral form follows from the same identity without another
+combinatorial calculation. Let $b(x)=\E{x^B}$. The Borel generating
+function satisfies $b(x)=x\exp\{\rho(b(x)-1)\}$, and differentiation
+gives
+\[
+xb'(x)=\frac{b(x)}{1-\rho b(x)},
+\qquad \E{B}=b'(1)=\frac1{1-\rho}.
+\]
+Using $\mathsf H_n=\int_0^1(1-x^n)/(1-x)\,\mathrm dx$ in the Borel
+mean identity gives
+\begin{align*}
+\beta\E{\tau}
+&=(1-\rho)\int_0^1
+\frac{\E{B}-\E{Bx^B}}{1-x}\,\mathrm dx-1\\
+&=\int_0^1\frac{1-(1-\rho)xb'(x)}{1-x}\,\mathrm dx-1.
+\end{align*}
+Set $u=\rho b(x)$. The defining equation for $b$ implies
+\[
+x=\frac{ue^{-u}}{\rho e^{-\rho}},
+\qquad
+\mathrm dx=\frac{(1-u)e^{-u}}{\rho e^{-\rho}}\,\mathrm du,
+\]
+and $x=0,1$ correspond to $u=0,\rho$. Direct substitution yields
+\begin{align*}
+\beta\E{\tau}
+&=\frac1\rho\int_0^\rho
+\frac{(\rho-u)e^{-u}}{\rho e^{-\rho}-ue^{-u}}\,\mathrm du-1\\
+&=\int_0^\rho
+\frac{e^{-u}-e^{-\rho}}{\rho e^{-\rho}-ue^{-u}}\,\mathrm du.
+\end{align*}
+At $u=\rho$ the integrand is understood by continuity. This recovers
+the integral identity in the main manuscript as well as its Borel form.
+Setting $\theta=0$ in the joint transform also recovers
+$\E{z^N}=\E{z^B}$, while
+$J\le\beta^{-1}\sum_{i=1}^B E_i$ confirms that the displayed mean is
+finite.
+
+\end{document}
